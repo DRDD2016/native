@@ -24,6 +24,9 @@
     "remote-redux-devtools": "^0.5.7"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/@exponent//ex-navigation"
+    ]
   }
 }

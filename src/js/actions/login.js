@@ -1,34 +1,27 @@
-export const UPDATE_TEXT_INPUT = 'UPDATE_TEXT_INPUT';
-export const AUTHENTICATE_USER_REQUEST = 'AUTHENTICATE_USER_REQUEST';
-export const AUTHENTICATE_USER_SUCCESS = 'AUTHENTICATE_USER_SUCCESS';
-export const AUTHENTICATE_USER_FAILURE = 'AUTHENTICATE_USER_FAILURE';
+export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST';
+export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
+export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
 export const LOGOUT = 'LOGOUT';
 
-export const updateTextInput = (data, inputType) => ({
-  type: UPDATE_TEXT_INPUT,
-  data,
-  inputType
+
+export const loginUserRequest = () => ({
+  type: LOGIN_USER_REQUEST
 });
 
-export const authenticateUserRequest = () => ({
-  type: AUTHENTICATE_USER_REQUEST
-});
-
-export const authenticateUserSuccess = data => ({
-  type: AUTHENTICATE_USER_SUCCESS,
+export const loginUserSuccess = data => ({
+  type: LOGIN_USER_SUCCESS,
   data
 });
 
-export const authenticateUserFailure = error => ({
-  type: AUTHENTICATE_USER_FAILURE,
+export const loginUserFailure = error => ({
+  type: LOGIN_USER_FAILURE,
   error
 });
 
-
-export function authenticateUser (email, password) { //eslint-disable-line
+export function loginUser (email, password) {
 
   return (dispatch) => {
-    dispatch(authenticateUserRequest());
+    dispatch(loginUserRequest());
   };
 }
 

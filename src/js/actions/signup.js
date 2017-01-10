@@ -39,7 +39,7 @@ export function signupUser (firstname, surname, email, password) {
           dispatch(signupUserSuccess({
             firstname: data.firstname,
             surname: data.surname,
-            email: data.email
+            email: data.email.toLowerCase()
           }));
           // save token somewhere
           // const navigatorUID = store.getState().navigation.currentNavigatorUID;
