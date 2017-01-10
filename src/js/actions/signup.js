@@ -45,7 +45,7 @@ export function signupUser (firstname, surname, email, password) {
           if (data.token) {
             storeToken(data.token);
             const navigatorUID = store.getState().navigation.currentNavigatorUID;
-            dispatch(NavigationActions.push(navigatorUID, Router.getRoute('navbar')));
+            dispatch(NavigationActions.push(navigatorUID, Router.getRoute('uploadPhoto')));
           } else {
             dispatch(signupUserFailure(data.error));
           }
