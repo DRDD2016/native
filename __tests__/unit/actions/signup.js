@@ -1,55 +1,43 @@
-/*
-import test from 'tape';
 import * as actions from '../../../src/js/actions/signup';
 
-test.skip('signupUser async action creator returns expected action', (t) => {
-  t.plan(1);
+describe('`signupUserRequest` action creator', () => {
 
-  let actual;
-  // const { dispatch, queue } = createThunk();
-  // dispatch(actions.signupUser());
+  it('returns expected action', () => {
 
-  // [{ ...actual }] = queue;
+    const expected = {
+      type: actions.SIGNUP_USER_REQUEST
+    };
 
-  const expected = {
-    type: actions.SIGNUP_USER_REQUEST
-  };
-  t.deepEqual(actual, expected);
+    const actual = actions.signupUserRequest();
+    expect(actual).toEqual(expected);
+  });
 });
 
-test('signupUserRequest creates the correct action', (t) => {
-  t.plan(1);
+describe('`signupUserSuccess` action creator', () => {
 
-  const expected = {
-    type: actions.SIGNUP_USER_REQUEST
-  };
+  it('returns expected action', () => {
+    const data = { email: 'donald@spark.com' };
 
-  const actual = actions.signupUserRequest();
-  t.deepEqual(actual, expected);
+    const expected = {
+      type: actions.SIGNUP_USER_SUCCESS,
+      data
+    };
+
+    const actual = actions.signupUserSuccess(data);
+    expect(actual).toEqual(expected);
+  });
 });
 
-test('signupUserSuccess creates the correct action', (t) => {
-  t.plan(1);
+describe('`signupUserFailure` action creator', () => {
 
-  const data = true;
-  const expected = {
-    type: actions.SIGNUP_USER_SUCCESS,
-    data
-  };
+  it('returns expected action', () => {
+    const error = new Error();
+    const expected = {
+      type: actions.SIGNUP_USER_FAILURE,
+      error
+    };
+    const actual = actions.signupUserFailure(error);
 
-  const actual = actions.signupUserSuccess(data);
-  t.deepEqual(actual, expected);
+    expect(actual).toEqual(expected);
+  });
 });
-
-test('signupUserFailure creates the correct action', (t) => {
-  t.plan(1);
-
-  const error = new Error();
-  const expected = {
-    type: actions.SIGNUP_USER_FAILURE,
-    error
-  };
-  const actual = actions.signupUserFailure(error);
-  t.deepEqual(actual, expected);
-});
-*/

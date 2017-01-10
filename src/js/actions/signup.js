@@ -1,7 +1,7 @@
 import { NavigationActions } from '@exponent/ex-navigation';
 import { store } from '../init-store';
 import Router from '../router';
-import saveToken from '../lib/store-token';
+import storeToken from '../lib/store-token';
 
 export const SIGNUP_USER_REQUEST = 'SIGNUP_USER_REQUEST';
 export const SIGNUP_USER_SUCCESS = 'SIGNUP_USER_SUCCESS';

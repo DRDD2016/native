@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { createNavigationEnabledStore } from '@exponent/ex-navigation';
 import thunkMiddleware from 'redux-thunk';
 import devTools from 'remote-redux-devtools';
-import rootReducer from './reducers/index';
+import rootReducer from './reducers/';
 
 const createStoreWithNavigation = createNavigationEnabledStore({
   createStore,
