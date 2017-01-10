@@ -7,7 +7,7 @@ import styles from '../../../styles';
 export default function Index ({ navigator }) {
 
   const goToLogin = () => {
-    navigator.push(Router.getRoute('login'));
+    navigator.push(Router.getRoute('navbar'));
   };
 
   const goToSignup = () => {
