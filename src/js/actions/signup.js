@@ -1,7 +1,7 @@
-import { AsyncStorage } from 'react-native';
 import { NavigationActions } from '@exponent/ex-navigation';
 import { store } from '../init-store';
 import Router from '../router';
+import saveToken from '../lib/store-token';
 
 export const SIGNUP_USER_REQUEST = 'SIGNUP_USER_REQUEST';
 export const SIGNUP_USER_SUCCESS = 'SIGNUP_USER_SUCCESS';
@@ -40,7 +40,7 @@ export function signupUser (firstname, surname, email, password) {
           dispatch(signupUserSuccess({
             firstname: data.firstname,
             surname: data.surname,
-            email: data.email.toLowerCase()
+            email: data.email
           }));
           if (data.token) {
             storeToken(data.token);
@@ -55,12 +55,4 @@ export function signupUser (firstname, surname, email, password) {
       dispatch(signupUserFailure(error));
     });
   };
-}
-
-function storeToken (token) {
-  try {
-    AsyncStorage.setItem('spark_token', token);
-  } catch (e) {
-    console.error(e);
-  }
 }
