@@ -15,7 +15,9 @@ const When = ({ name, description, data, addInput, removeInput, handleDate, hand
 
   const inputs = data.map((value, i) => {
     return (
-      <View>
+      <View
+        key={ value.date }
+      >
         <DatePickerIOS
           date={ value.date }
           mode="date"

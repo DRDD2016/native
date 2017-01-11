@@ -8,9 +8,6 @@ import styles from '../../../styles';
 import Button from '../common/Button';
 
 export default function Confirm ({ data, name, description, note, where, saveEvent, navigation }) { // eslint-disable-line
-  console.log('data', data);
-  const whereArr = ['home', 'school'];
-  // const eventWhatObj =  { name, description };
 
   // const nextPage = () => {
   //   navigation.performAction(({ tabs, stacks }) => {
@@ -18,6 +15,7 @@ export default function Confirm ({ data, name, description, note, where, saveEve
   //     stacks('confirm').immediatelyResetStack([Router.getRoute('feed')], 0);
   //   });
   // };
+  
   const url = 'whatsapp://send?text=Hello%20from%20Spark!';
   const openWhatsapp = () => {
     Linking.canOpenURL(url).then((supported) => {
@@ -38,10 +36,8 @@ export default function Confirm ({ data, name, description, note, where, saveEve
           </Text>
 
           <ConfirmEventWhat eventWhat={{ name, description }} />
-          <ConfirmEventWhere eventWhere={whereArr} />
-
+          <ConfirmEventWhere eventWhere={ where } />
           <ConfirmEventWhen eventWhen={ data } />
-
 
           <View style={styles.rowCentered}>
             <Button

@@ -14,11 +14,11 @@ const Where = ({ name, description, data, addInput, removeInput, handleChange, n
   };
 
   const inputs = data.map((value, i) => {
-    console.log('data', data);
+    
     return (
       <Input
         key={ i }
-        handleChange={ () => handleChange(i) }
+        handleChange={ handleChange }
         inputKey={ i }
         inputCount={ data.length }
         value={ value }
@@ -28,7 +28,7 @@ const Where = ({ name, description, data, addInput, removeInput, handleChange, n
     );
   });
 
-  const hideNext = data[0].placeName === '';
+  const hideNext = data[0] === '';
 
   return (
     <View>
