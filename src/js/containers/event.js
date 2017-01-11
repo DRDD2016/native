@@ -31,56 +31,56 @@ const mapStateToProps = () => ({
 
 const mapDispatchToProps = dispatch => ({
 
-  fetchEvent: (eventID) => {
+  fetchEvent: (event_id) => {
 
-    dispatch(getEvent(eventID));
+    dispatch(getEvent(event_id));
   },
   toggleSelection: (eventType, index) => {
 
     dispatch(updatePoll(eventType, index));
   },
-  handlePollConfirmation: (poll, eventID) => {
+  handlePollConfirmation: (poll, event_id) => {
 
-    dispatch(confirmPoll(poll, eventID));
+    dispatch(confirmPoll(poll, event_id));
   },
   handleHostEventChoices: (eventType, value, index) => {
 
     dispatch(addHostEventChoice(eventType, value, index));
   },
-  handleConfirmEvent: (hostEventChoices, eventID) => {
+  handleConfirmEvent: (hostEventChoices, event_id) => {
 
-    dispatch(confirmEvent(hostEventChoices, eventID));
+    dispatch(confirmEvent(hostEventChoices, event_id));
   },
-  handleDeleteEvent: (eventID) => {
+  handleDeleteEvent: (event_id) => {
 
-    dispatch(deleteEvent(eventID));
+    dispatch(deleteEvent(event_id));
   },
   handleEdit: (event) => {
 
     dispatch(hydrateCreateEvent(event));
   },
-  RSVPToEvent: (status, eventID) => {
+  RSVPToEvent: (status, event_id) => {
 
-    dispatch(updateRSVP(status, eventID));
+    dispatch(updateRSVP(status, event_id));
   },
-  handleUploadPhoto: (file, eventID) => {
+  handleUploadPhoto: (file, event_id) => {
     listenForS3URL(store);
     listenForSavePhotoURL(store);
-    dispatch(getS3URL(file.name, file.type, eventID));
+    dispatch(getS3URL(file.name, file.type, event_id));
   },
-  handleDeletePhoto: (eventID) => {
+  handleDeletePhoto: (event_id) => {
 
     const selectedPhoto = store.getState().photos.selectedPhoto;
-    dispatch(deletePhoto(selectedPhoto, eventID));
+    dispatch(deletePhoto(selectedPhoto, event_id));
   },
   handleSharePhoto: () => {
 
     const selectedPhoto = store.getState().photos.selectedPhoto;
     dispatch(sharePhoto(selectedPhoto));
   },
-  getSelectedPhoto: (photoURL) => {
+  getSelectedPhoto: (photo_url) => {
 
-    dispatch(selectPhoto(photoURL));
+    dispatch(selectPhoto(photo_url));
   },
   handleSetFile: (file) => {
 

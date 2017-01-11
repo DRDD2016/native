@@ -37,10 +37,10 @@ export const SAVE_EDITED_EVENT_REQUEST = 'SAVE_EDITED_EVENT_REQUEST';
 export const SAVE_EDITED_EVENT_SUCCESS = 'SAVE_EDITED_EVENT_SUCCESS';
 export const SAVE_EDITED_EVENT_FAILURE = 'SAVE_EDITED_EVENT_FAILURE';
 
-export const UPDATE_NOTIFICATION = 'UPDATE_NOTIFICATION';
-export const UPDATE_NOTIFICATION_REQUEST = 'UPDATE_NOTIFICATION_REQUEST';
-export const UPDATE_NOTIFICATION_SUCCESS = 'UPDATE_NOTIFICATION_SUCCESS';
-export const UPDATE_NOTIFICATION_FAILURE = 'UPDATE_NOTIFICATION_FAILURE';
+export const UPDATE_FEED = 'UPDATE_FEED';
+export const UPDATE_FEED_REQUEST = 'UPDATE_FEED_REQUEST';
+export const UPDATE_FEED_SUCCESS = 'UPDATE_FEED_SUCCESS';
+export const UPDATE_FEED_FAILURE = 'UPDATE_FEED_FAILURE';
 
 export const RESET_EVENT_STATE = 'RESET_EVENT_STATE';
 
@@ -49,11 +49,11 @@ export const RESET_EVENT_STATE = 'RESET_EVENT_STATE';
 GET EVENT ACTIONS
 ********/
 
-export function getEvent (eventID) { //eslint-disable-line
+export function getEvent (event_id) { //eslint-disable-line
   return (dispatch) => {
     dispatch(getEventRequest());
 
-    // axios.get(`/get-event?eventID=${eventID}&userID=${getUserID()}`)
+    // axios.get(`/get-event?event_id=${event_id}&user_id=${getUserID()}`)
     //   .then((response) => {
     //     dispatch(getEventSuccess(response.data));
     //     dispatch(getPhotos(response.data.photos));
@@ -100,12 +100,12 @@ export function updatePoll (eventType, index) {
 * CONFIRM POLL ACTIONS
 ********/
 
-export function confirmPoll (poll, eventID) {
+export function confirmPoll (poll, event_id) {
   return (dispatch) => {
     const payload = {
       poll,
-      eventID,
-      userID: getUserID()
+      event_id,
+      user_id: getUserID()
     };
 
     dispatch(confirmPollRequest());
@@ -113,7 +113,7 @@ export function confirmPoll (poll, eventID) {
     // axios.post('/confirm-poll', payload)
     //   .then((response) => {
     //     dispatch(confirmPollSuccess(response.data));
-    //     dispatch(getEvent(eventID));
+    //     dispatch(getEvent(event_id));
     //   })
     //   .catch((error) => {
     //     dispatch(confirmPollFailure(error));
@@ -154,11 +154,11 @@ export function addHostEventChoice (eventType, value, index) {
 * CONFIRM EVENT ACTIONS
 ********/
 
-export function confirmEvent (hostEventChoices, eventID) {
+export function confirmEvent (hostEventChoices, event_id) {
   return (dispatch) => {
     const payload = {
       hostEventChoices,
-      eventID
+      event_id
     };
 
     dispatch(confirmEventRequest());
@@ -197,11 +197,11 @@ export function confirmEventFailure () {
 UPDATE RSVP ACTIONS
 ********/
 
-export function updateRSVP (RSVPStatus, eventID) {
+export function updateRSVP (RSVPStatus, event_id) {
   return (dispatch) => {
     const payload = {
-      userID: getUserID(),
-      eventID,
+      user_id: getUserID(),
+      event_id,
       RSVPStatus
     };
 
@@ -246,11 +246,11 @@ DELETE EVENT ACTIONS
 ********/
 
 
-export function deleteEvent (eventID) {
+export function deleteEvent (event_id) {
   return (dispatch) => {
     dispatch(deleteEventRequest());
 
-    // axios.get(`/delete-event?eventID=${eventID}`)
+    // axios.get(`/delete-event?event_id=${event_id}`)
     //   .then((response) => {
     //     dispatch(deleteEventSuccess(response.data));
     //   })
@@ -286,17 +286,17 @@ export function deleteEventFailure (error) {
 * SAVE_EDITED_EVENT ACTIONS
 ********/
 
-export function saveEditedEvent (eventName, eventDescription, eventNote, eventWhat, eventWhere, eventWhen, eventID) { //eslint-disable-line
+export function saveEditedEvent (eventName, eventDescription, eventNote, eventWhat, eventWhere, eventWhen, event_id) { //eslint-disable-line
   return (dispatch) => {
     const payload = {
-      eventID,
+      event_id,
       eventName,
       eventDescription,
       eventNote,
       eventWhat,
       eventWhere,
       eventWhen,
-      userID: getUserID()
+      user_id: getUserID()
     };
 
     dispatch(saveEditedEventRequest());
@@ -335,40 +335,40 @@ export function saveEditedEventFailure (error) {
 }
 
 /********
-* UPDATE NOTIFICATIONS ACTIONS
+* UPDATE FEEDS ACTIONS
 ********/
-export function updateNotification (index) {
+export function updateFeedItem (index) {
   return (dispatch) => {
-    dispatch(updateNotificationRequest());
+    dispatch(updateFeedItemRequest());
 
-    // axios.get(`/update-notification?index=${index}&userID=${getUserID()}`)
+    // axios.get(`/update-feedItem?index=${index}&user_id=${getUserID()}`)
     //   .then(() => {
-    //     dispatch(updateNotificationSuccess());
+    //     dispatch(updateFeedItemSuccess());
     //   })
     //   .catch((error) => {
-    //     dispatch(updateNotificationFailure(error));
+    //     dispatch(updateFeedItemFailure(error));
     //   });
   };
 }
 
-export function updateNotificationRequest () {
+export function updateFeedItemRequest () {
   return {
-    type: UPDATE_NOTIFICATION_REQUEST,
-    updateNotification: true
+    type: UPDATE_FEED_REQUEST,
+    updateFeedItem: true
   };
 }
 
-export function updateNotificationSuccess () {
+export function updateFeedItemSuccess () {
   return {
-    type: UPDATE_NOTIFICATION_SUCCESS,
-    updateNotification: false
+    type: UPDATE_FEED_SUCCESS,
+    updateFeedItem: false
   };
 }
 
-export function updateNotificationFailure (error) {
+export function updateFeedItemFailure (error) {
   return {
-    type: UPDATE_NOTIFICATION_FAILURE,
-    updateNotification: false,
+    type: UPDATE_FEED_FAILURE,
+    updateFeedItem: false,
     error
   };
 }

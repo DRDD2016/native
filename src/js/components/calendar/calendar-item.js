@@ -8,7 +8,7 @@ import styles from '../../../styles';
 
 /***
 * CalendarItem is used in calendar and album views. Plays equivalent role
-to Notification.jsx for feed view
+to FeedItem.jsx for feed view
 ***/
 
 const CalendarItem = ({ eventName, eventWhere, eventWhen,
@@ -63,7 +63,7 @@ const CalendarItem = ({ eventName, eventWhere, eventWhen,
 
             <Image
               style={styles.coverImage}
-              source={coverPhoto ? { uri: coverPhoto.photoURL } : require('../../../img/placeholder.png')}
+              source={coverPhoto ? { uri: coverPhoto.photo_url } : require('../../../img/placeholder.png')}
             />
 
           </View>

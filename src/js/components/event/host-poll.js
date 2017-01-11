@@ -8,7 +8,7 @@ import Button from '../common/Button';
 import styles from '../../../styles';
 
 const HostPoll = ({ event, tally, hostEventChoices, //eslint-disable-line
-  handleHostEventChoices, handleConfirmEvent, eventID  }) => { //eslint-disable-line
+  handleHostEventChoices, handleConfirmEvent, event_id  }) => { //eslint-disable-line
   const eventWhat = createVoteSection(event, tally, 'eventWhat', EventWhatSection, handleHostEventChoices, hostEventChoices);
   const eventWhere = createVoteSection(event, tally, 'eventWhere', EventWhereSection, handleHostEventChoices, hostEventChoices);
   const eventWhen = createVoteSection(event, tally, 'eventWhen', EventWhenSection, handleHostEventChoices, hostEventChoices);
@@ -45,7 +45,7 @@ const HostPoll = ({ event, tally, hostEventChoices, //eslint-disable-line
       <HostCreateEventButton
         hostEventChoices={ hostEventChoices }
         handleConfirmEvent={ handleConfirmEvent }
-        eventID={ eventID }
+        event_id={ event_id }
       />
 
     </View>

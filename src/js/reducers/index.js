@@ -2,10 +2,10 @@ import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
 import { NavigationReducer } from '@exponent/ex-navigation';
 // import auth from './auth';
-import user from './user';
+import profile from './profile';
 import calendar from './calendar';
-import { event } from './event';
-import notifications from './notifications';
+import event from './event';
+import feed from './feed';
 import create from './create';
 import photos from './photos';
 import signup from './signup';
@@ -14,10 +14,10 @@ import login from './login';
 
 export default combineReducers({
   navigation: NavigationReducer,
-  user,
+  profile,
   calendar,
   event,
-  notifications,
+  feed,
   create,
   photos,
   signup,

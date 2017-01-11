@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import Button from '../common/Button';
 import styles from '../../../styles';
 
-const PollButton = ({ poll, handlePollConfirmation, eventID, voteButtonText }) => {
+const PollButton = ({ poll, handlePollConfirmation, event_id, voteButtonText }) => {
 
   const userHasCompletedPoll = Object.keys(poll).map((categoryName) => {
 
@@ -16,8 +16,8 @@ const PollButton = ({ poll, handlePollConfirmation, eventID, voteButtonText }) =
     return category === true;
   });
 
-  function handleSelection (poll, eventID) { // eslint-disable-line no-shadow
-    handlePollConfirmation(poll, eventID);
+  function handleSelection (poll, event_id) { // eslint-disable-line no-shadow
+    handlePollConfirmation(poll, event_id);
     console.log('go to feed');
   }
 
@@ -29,7 +29,7 @@ const PollButton = ({ poll, handlePollConfirmation, eventID, voteButtonText }) =
       { (userHasCompletedPoll) &&
         <Button
           buttonStyle={styles.buttonStyle}
-          onClick={ () => handleSelection(poll, eventID) }
+          onClick={ () => handleSelection(poll, event_id) }
         >
           { voteButtonText }
         </Button>

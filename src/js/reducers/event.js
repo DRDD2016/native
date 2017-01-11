@@ -5,7 +5,7 @@ import { GET_EVENT_REQUEST, GET_EVENT_SUCCESS, GET_EVENT_FAILURE, UPDATE_POLL,
          UPDATE_RSVP_REQUEST, UPDATE_RSVP_SUCCESS, UPDATE_RSVP_FAILURE,
          DELETE_EVENT_REQUEST, DELETE_EVENT_SUCCESS, DELETE_EVENT_FAILURE,
          SAVE_EDITED_EVENT_REQUEST, SAVE_EDITED_EVENT_SUCCESS, SAVE_EDITED_EVENT_FAILURE,
-         UPDATE_NOTIFICATION_REQUEST, UPDATE_NOTIFICATION_SUCCESS, UPDATE_NOTIFICATION_FAILURE,
+         UPDATE_FEED_REQUEST, UPDATE_FEED_SUCCESS, UPDATE_FEED_FAILURE,
          RESET_EVENT_STATE } from '../actions/event';
 
 export const initialState = {
@@ -18,10 +18,10 @@ export const initialState = {
   invitees: undefined,
   RSVPs: undefined,
   hasVoted: undefined,
-  updateNotification: false
+  updateFeedItem: false
 };
 
-export function event (state = initialState, action) {
+export default function event (state = initialState, action) {
 
   switch (action.type) {
 
@@ -53,11 +53,11 @@ export function event (state = initialState, action) {
     case UPDATE_RSVP_FAILURE:
       return handleFailure(state, action);
 
-    case UPDATE_NOTIFICATION_REQUEST:
-    case UPDATE_NOTIFICATION_SUCCESS:
-      return handleUpdateNotification(state, action);
-    case UPDATE_NOTIFICATION_FAILURE:
-      return handleUpdateNotificationFailure(state, action);
+    case UPDATE_FEED_REQUEST:
+    case UPDATE_FEED_SUCCESS:
+      return handleUpdateFeedItem(state, action);
+    case UPDATE_FEED_FAILURE:
+      return handleUpdateFeedItemFailure(state, action);
 
     case UPDATE_POLL:
       return updatePoll(state, action);
@@ -139,18 +139,18 @@ function addHostEventChoice (state, action) {
   return newState;
 }
 
-function handleUpdateNotification (state, action) {
+function handleUpdateFeedItem (state, action) {
 
   const newState = update(state, {
-    updateNotification: { $set: action.updateNotification }
+    updateFeedItem: { $set: action.updateFeedItem }
   });
   return newState;
 }
 
-function handleUpdateNotificationFailure (state, action) {
+function handleUpdateFeedItemFailure (state, action) {
 
   const newState = update(state, {
-    updateNotification: { $set: action.updateNotification },
+    updateFeedItem: { $set: action.updateFeedItem },
     error: { $set: action.error }
   });
   return newState;

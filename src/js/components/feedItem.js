@@ -11,32 +11,32 @@ import styles from '../../styles';
 
 moment.locale('en-gb');
 
-const Notification = ({ eventID, timestamp, firstName, lastName, photoURL,
+const FeedItem = ({ event_id, timestamp, firstname, surname, photo_url,
   eventWhere, eventWhen, userIsHost, isPoll, subjectID,
-  index, handleUpdateNotification, viewed, inviteesNumber, eventName, hasEdited }) => {
+  index, handleUpdateFeedItem, viewed, inviteesNumber, eventName, hasEdited }) => {
 
   const userIsSubject = subjectID === getUserID();
 
-  const viewedNotification = viewed === true;
+  const viewedFeedItem = viewed === true;
 // ADD THE OnClick button to Link! --<
   return (
-    <Card style={[styles.cardStyle, viewedNotification && styles.viewedNotificationStyle]}>
-      <CardSection style={styles.cardSectionNotification}>
+    <Card style={[styles.cardStyle, viewedFeedItem && styles.viewedFeedItemStyle]}>
+      <CardSection style={styles.cardSectionFeedItem}>
         <TouchableOpacity
           style={styles.cardButtonStyle}
-          onPress={ () => handleUpdateNotification(index) }
-          to={ `event/${eventID}` }
+          onPress={ () => handleUpdateFeedItem(index) }
+          to={ `event/${event_id}` }
         >
 
           <View style={styles.leftColumn}>
-            <Image style={styles.uiProfilePhotoCircularImage} source={{ uri: photoURL }} />
+            <Image style={styles.uiProfilePhotoCircularImage} source={{ uri: photo_url }} />
           </View>
           <View style={styles.middleColumn}>
             <Text style={styles.timestamp}> { moment(timestamp).startOf().fromNow() } </Text>
             <Text>
               <Text style={styles.subjectName}>
                 { userIsSubject && 'You'}
-                { !userIsSubject && `${firstName}  ${lastName}` }
+                { !userIsSubject && `${firstname}  ${surname}` }
               </Text>
               <Text style={styles.subjectAction}>
                 { userIsSubject && isPoll && ' have created a poll ' }
@@ -89,4 +89,4 @@ const Notification = ({ eventID, timestamp, firstName, lastName, photoURL,
   );
 };
 
-export default Notification;
+export default FeedItem;

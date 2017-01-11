@@ -1,5 +1,3 @@
-import getUserID from '../lib/getUserID';
-
 export const SET_FILE = 'SET_FILE';
 
 export const GET_PHOTOS = 'GET_PHOTOS';
@@ -20,19 +18,6 @@ export const SAVE_PHOTO_URL_SUCCESS = 'SAVE_PHOTO_URL_SUCCESS';
 export const SAVE_PHOTO_URL_FAILURE = 'SAVE_PHOTO_URL_FAILURE';
 
 export const SELECT_PHOTO = 'SELECT_PHOTO';
-
-export const GET_DELETED_PHOTOS = 'GET_DELETED_PHOTOS';
-
-export const DELETE_PHOTO = 'DELETE_PHOTO';
-export const DELETE_PHOTO_REQUEST = 'DELETE_PHOTO_REQUEST';
-export const DELETE_PHOTO_SUCCESS = 'DELETE_PHOTO_SUCCESS';
-export const DELETE_PHOTO_FAILURE = 'DELETE_PHOTO_FAILURE';
-
-export const SHARE_PHOTO = 'SHARE_PHOTO';
-export const SHARE_PHOTO_REQUEST = 'SHARE_PHOTO_REQUEST';
-export const SHARE_PHOTO_SUCCESS = 'SHARE_PHOTO_SUCCESS';
-export const SHARE_PHOTO_FAILURE = 'SHARE_PHOTO_FAILURE';
-
 
 /********
 * SET PHOTO ACTION
@@ -63,11 +48,11 @@ export function getPhotos (photos) {
 ********/
 
 
-export function getS3URL (filename, filetype, eventID) { //eslint-disable-line
+export function getS3URL (filename, filetype, event_id) { //eslint-disable-line
   return (dispatch) => {
     dispatch(getS3URLRequest());
 
-    // axios.get(`/get-s3-url?filename=${filename}&filetype=${filetype}&eventID=${eventID}`)
+    // axios.get(`/get-s3-url?filename=${filename}&filetype=${filetype}&event_id=${event_id}`)
     //   .then((response) => {
     //     dispatch(getS3URLSuccess(response.data));
     //   })
@@ -118,8 +103,8 @@ export function uploadPhoto (url, photo) {
     // axios.put(url, photo, config)
     //
     //   .then((response) => {
-    //     const photoURL = response.config.url.match(/\S+(?=\?)/)[0];
-    //     dispatch(uploadPhotoSuccess(photoURL));
+    //     const photo_url = response.config.url.match(/\S+(?=\?)/)[0];
+    //     dispatch(uploadPhotoSuccess(photo_url));
     //   })
     //   .catch((error) => {
     //     dispatch(uploadPhotoFailure(error));
@@ -155,14 +140,15 @@ export function uploadPhotoFailure (error) {
 * SAVE PHOTO URL ACTIONS
 ********/
 
-export function savePhotoURL (url, eventID) {
+export function savePhotoURL (url, event_id) {
+  let user_id;
   return (dispatch) => {
     dispatch(savePhotoURLRequest());
 
     const payload = { //eslint-disable-line
-      photoURL: url,
-      userID: getUserID(),
-      eventID
+      photo_url: url,
+      user_id,
+      event_id
     };
 
     // axios.post('/save-photo', payload)
@@ -208,106 +194,5 @@ export function selectPhoto (url) {
   return {
     type: SELECT_PHOTO,
     url
-  };
-}
-
-/********
-* GET DELETED PHOTOS ACTION
-********/
-
-export function getDeletedPhotos (photos) {
-  return {
-    type: GET_DELETED_PHOTOS,
-    data: photos
-  };
-}
-
-
-/********
-* DELETE PHOTO ACTION
-********/
-
-export function deletePhoto (photo, eventID) {
-  return (dispatch) => {
-    dispatch(deletePhotoRequest());
-    const payload = { //eslint-disable-line
-      photo,
-      eventID,
-      userID: getUserID()
-    };
-    // axios.post('/delete-photo', payload)
-    // .then((response) => {
-    //   dispatch(deletePhotoSuccess());
-    //   dispatch(getDeletedPhotos(response.data));
-    // })
-    // .catch((error) => {
-    //   dispatch(deletePhotoFailure(error));
-    // });
-  };
-}
-
-export function deletePhotoRequest () {
-  return {
-    type: DELETE_PHOTO_REQUEST,
-    isFetching: true
-  };
-}
-
-export function deletePhotoSuccess () {
-  return {
-    type: DELETE_PHOTO_SUCCESS,
-    isFetching: false
-  };
-}
-
-export function deletePhotoFailure (error) {
-  return {
-    type: DELETE_PHOTO_FAILURE,
-    isFetching: false,
-    error
-  };
-}
-
-/********
-* SHARE PHOTO ACTION
-********/
-
-export function sharePhoto (photoURL) {
-  return (dispatch) => {
-    dispatch(sharePhotoRequest());
-    const payload = { //eslint-disable-line
-      photoURL,
-      userID: getUserID()
-    };
-
-    // axios.post('/share-photo', payload)
-    // .then(() => {
-    //   dispatch(sharePhotoSuccess());
-    // })
-    // .catch((error) => {
-    //   dispatch(sharePhotoFailure(error));
-    // });
-  };
-}
-
-export function sharePhotoRequest () {
-  return {
-    type: SHARE_PHOTO_REQUEST,
-    isFetching: true
-  };
-}
-
-export function sharePhotoSuccess () {
-  return {
-    type: SHARE_PHOTO_SUCCESS,
-    isFetching: false
-  };
-}
-
-export function sharePhotoFailure (error) {
-  return {
-    type: SHARE_PHOTO_FAILURE,
-    isFetching: false,
-    error
   };
 }
