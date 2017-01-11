@@ -2,15 +2,7 @@
 /* eslint-disable import/no-duplicates */
 
 import update from 'immutability-helper';
-import { SET_FILE } from '../actions/photos';
-import { GET_PHOTOS } from '../actions/photos';
-import { GET_S3_URL_REQUEST, GET_S3_URL_SUCCESS, GET_S3_URL_FAILURE } from '../actions/photos';
-import { UPLOAD_PHOTO_REQUEST, UPLOAD_PHOTO_SUCCESS, UPLOAD_PHOTO_FAILURE } from '../actions/photos';
-import { SAVE_PHOTO_URL_REQUEST, SAVE_PHOTO_URL_SUCCESS, SAVE_PHOTO_URL_FAILURE } from '../actions/photos';
-import { SELECT_PHOTO } from '../actions/photos';
-import { GET_DELETED_PHOTOS } from '../actions/photos';
-import { DELETE_PHOTO_REQUEST, DELETE_PHOTO_SUCCESS, DELETE_PHOTO_FAILURE } from '../actions/photos';
-import { SHARE_PHOTO_REQUEST, SHARE_PHOTO_SUCCESS, SHARE_PHOTO_FAILURE } from '../actions/photos';
+import * as actions from '../actions/photos';
 
 
 const initialState = {
@@ -29,43 +21,34 @@ export default function photos (state = initialState, action) {
 
   switch (action.type) {
 
-    case GET_PHOTOS:
+    case actions.GET_PHOTOS:
       return handleGetPhotos(state, action);
 
-    case SET_FILE:
+    case actions.SET_FILE:
       return handleSetFile(state, action);
 
-    case GET_DELETED_PHOTOS:
-      return handleGetDeletedPhotos(state, action);
-
-    case UPLOAD_PHOTO_REQUEST:
-    case SAVE_PHOTO_URL_REQUEST:
-    case DELETE_PHOTO_REQUEST:
-    case DELETE_PHOTO_SUCCESS:
-    case SHARE_PHOTO_REQUEST:
-    case SHARE_PHOTO_SUCCESS:
+    case actions.UPLOAD_PHOTO_REQUEST:
+    case actions.SAVE_PHOTO_URL_REQUEST:
       return handleRequest(state, action);
 
-    case GET_S3_URL_REQUEST:
+    case actions.GET_S3_URL_REQUEST:
       return handleS3URLRequest(state, action);
 
-    case SAVE_PHOTO_URL_SUCCESS:
+    case actions.SAVE_PHOTO_URL_SUCCESS:
       return handleSavePhotoURLSuccess(state, action);
 
-    case UPLOAD_PHOTO_SUCCESS:
+    case actions.UPLOAD_PHOTO_SUCCESS:
       return handleUploadPhotoSuccess(state, action);
 
-    case UPLOAD_PHOTO_FAILURE:
-    case GET_S3_URL_FAILURE:
-    case SAVE_PHOTO_URL_FAILURE:
-    case DELETE_PHOTO_FAILURE:
-    case SHARE_PHOTO_FAILURE:
+    case actions.UPLOAD_PHOTO_FAILURE:
+    case actions.GET_S3_URL_FAILURE:
+    case actions.SAVE_PHOTO_URL_FAILURE:
       return handleFailure(state, action);
 
-    case GET_S3_URL_SUCCESS:
+    case actions.GET_S3_URL_SUCCESS:
       return handleGetS3URLSuccess(state, action);
 
-    case SELECT_PHOTO:
+    case actions.SELECT_PHOTO:
       return handleSelectPhoto(state, action);
 
     default:
@@ -86,13 +69,6 @@ function handleSetFile (state, action) {
 
   const newState = update(state, {
     file: { $set: action.data }
-  });
-  return newState;
-}
-
-function handleGetDeletedPhotos (state, action) {
-  const newState = update(state, {
-    deletedPhotos: { $set: action.data || [] }
   });
   return newState;
 }

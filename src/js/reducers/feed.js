@@ -1,10 +1,10 @@
 import update from 'immutability-helper';
-import { GET_NOTIFICATIONS_REQUEST,
-  GET_NOTIFICATIONS_SUCCESS,
-  GET_NOTIFICATIONS_FAILURE,
+import { GET_FEED_REQUEST,
+  GET_FEED_SUCCESS,
+  GET_FEED_FAILURE,
   APPLY_FILTER,
   CLEAR_FILTER
-} from '../actions/notifications';
+} from '../actions/feed';
 
 const initialState = {
   data: [],
@@ -14,18 +14,18 @@ const initialState = {
   filter: false
 };
 
-export default function notifications (state = initialState, action) {
+export default function feed (state = initialState, action) {
 
   switch (action.type) {
 
-    case GET_NOTIFICATIONS_REQUEST:
-      return handleGetNotificationsRequest(state, action);
+    case GET_FEED_REQUEST:
+      return handleGetFeedRequest(state, action);
 
-    case GET_NOTIFICATIONS_SUCCESS:
-      return handleGetNotificationsSuccess(state, action);
+    case GET_FEED_SUCCESS:
+      return handleGetFeedSuccess(state, action);
 
-    case GET_NOTIFICATIONS_FAILURE:
-      return handleGetNotificationsFailure(state, action);
+    case GET_FEED_FAILURE:
+      return handleGetFeedFailure(state, action);
 
     case APPLY_FILTER:
     case CLEAR_FILTER:
@@ -36,7 +36,7 @@ export default function notifications (state = initialState, action) {
   }
 }
 
-function handleGetNotificationsRequest (state, action) {
+function handleGetFeedRequest (state, action) {
 
   const newState = update(state, {
     isFetching: { $set: action.isFetching }
@@ -44,7 +44,7 @@ function handleGetNotificationsRequest (state, action) {
   return newState;
 }
 
-function handleGetNotificationsSuccess (state, action) {
+function handleGetFeedSuccess (state, action) {
 
   const newState = update(state, {
     isFetching: { $set: action.isFetching },
@@ -53,7 +53,7 @@ function handleGetNotificationsSuccess (state, action) {
   return newState;
 }
 
-function handleGetNotificationsFailure (state, action) {
+function handleGetFeedFailure (state, action) {
 
   const newState = update(state, {
     isFetching: { $set: action.isFetching },

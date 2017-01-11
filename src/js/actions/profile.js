@@ -1,9 +1,9 @@
-import getUserID from '../lib/getUserID';
+import getProfileID from '../lib/getProfileID';
 // import { feedSocket } from '../socket';
-export const GET_USER = 'GET_USER';
-export const GET_USER_REQUEST = 'GET_USER_REQUEST';
-export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
-export const GET_USER_FAILURE = 'GET_USER_FAILURE';
+export const GET_PROFILE = 'GET_PROFILE';
+export const GET_PROFILE_REQUEST = 'GET_PROFILE_REQUEST';
+export const GET_PROFILE_SUCCESS = 'GET_PROFILE_SUCCESS';
+export const GET_PROFILE_FAILURE = 'GET_PROFILE_FAILURE';
 
 export const EDIT_NAME = 'EDIT_NAME';
 export const EDIT_NAME_REQUEST = 'EDIT_NAME_REQUEST';
@@ -13,42 +13,41 @@ export const EDIT_NAME_FAILURE = 'EDIT_NAME_FAILURE';
 export const CHANGE_NAME = 'CHANGE_NAME';
 
 /*
-* GET USER ACTIONS
+* GET PROFILE ACTIONS
 */
 
-export function getUser () {
-  const id = getUserID(); //eslint-disable-line
+export function getProfile () {
   return (dispatch) => {
-    dispatch(getUserRequest());
+    dispatch(getProfileRequest());
 
     // axios.get(`${HOME_URL}/get-user?userID=${id}`)
     // .then((response) => {
-    //   dispatch(getUserSuccess(response.data));
+    //   dispatch(getProfileSuccess(response.data));
     // })
     // .catch((error) => {
-    //   dispatch(getUserFailure(error));
+    //   dispatch(getProfileFailure(error));
     // });
   };
 }
 
-export function getUserRequest () {
+export function getProfileRequest () {
   return {
-    type: GET_USER_REQUEST,
+    type: GET_PROFILE_REQUEST,
     isFetching: true
   };
 }
 
-export function getUserSuccess (data) {
+export function getProfileSuccess (data) {
   return {
-    type: GET_USER_SUCCESS,
+    type: GET_PROFILE_SUCCESS,
     isFetching: false,
     data
   };
 }
 
-export function getUserFailure (error) {
+export function getProfileFailure (error) {
   return {
-    type: GET_USER_FAILURE,
+    type: GET_PROFILE_FAILURE,
     isFetching: false,
     error
   };
@@ -74,7 +73,7 @@ export function editName (firstName, lastName) {
   const payload = { //eslint-disable-line
     firstName,
     lastName,
-    userID: getUserID()
+    userID: getProfileID()
   };
 
   return (dispatch) => {
