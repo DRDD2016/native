@@ -1,6 +1,5 @@
 import getUserID from '../lib/getUserID';
 
-export const GET_CALENDAR = 'GET_CALENDAR';
 export const GET_CALENDAR_REQUEST = 'GET_CALENDAR_REQUEST';
 export const GET_CALENDAR_SUCCESS = 'GET_CALENDAR_SUCCESS';
 export const GET_CALENDAR_FAILURE = 'GET_CALENDAR_FAILURE';

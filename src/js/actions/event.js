@@ -3,12 +3,10 @@ import getUserID from '../lib/getUserID';
 // import { clearCreateEvent } from './create';
 // import { getPhotos, getDeletedPhotos } from './photos';
 
-export const UPDATE_RSVP = 'UPDATE_RSVP';
 export const UPDATE_RSVP_REQUEST = 'UPDATE_RSVP_REQUEST';
 export const UPDATE_RSVP_SUCCESS = 'UPDATE_RSVP_SUCCESS';
 export const UPDATE_RSVP_FAILURE = 'UPDATE_RSVP_FAILURE';
 
-export const DELETE_EVENT = 'DELETE_EVENT';
 export const DELETE_EVENT_REQUEST = 'DELETE_EVENT_REQUEST';
 export const DELETE_EVENT_SUCCESS = 'DELETE_EVENT_SUCCESS';
 export const DELETE_EVENT_FAILURE = 'DELETE_EVENT_FAILURE';
@@ -18,7 +16,6 @@ export const SAVE_EDITED_EVENT_REQUEST = 'SAVE_EDITED_EVENT_REQUEST';
 export const SAVE_EDITED_EVENT_SUCCESS = 'SAVE_EDITED_EVENT_SUCCESS';
 export const SAVE_EDITED_EVENT_FAILURE = 'SAVE_EDITED_EVENT_FAILURE';
 
-export const UPDATE_FEED = 'UPDATE_FEED';
 export const UPDATE_FEED_REQUEST = 'UPDATE_FEED_REQUEST';
 export const UPDATE_FEED_SUCCESS = 'UPDATE_FEED_SUCCESS';
 export const UPDATE_FEED_FAILURE = 'UPDATE_FEED_FAILURE';
