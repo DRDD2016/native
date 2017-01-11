@@ -57,7 +57,7 @@ const Calendar = ({ allEvents, filteredEvents, isFetching,
                   eventWhere={ item.eventWhere }
                   eventWhen={ item.eventWhen }
                   coverPhoto={ item.coverPhoto }
-                  eventID={ item.eventID }
+                  event_id={ item.event_id }
                 />
               );
             })

@@ -6,7 +6,7 @@ const initialState = {
   firstname: '',
   surname: '',
   email: '',
-  photoURL: '',
+  photo_url: '',
   id: '',
   error: undefined
 };
@@ -46,9 +46,9 @@ function handleGetProfileSuccess (state, action) {
 
   return update(state, {
     isFetching: { $set: false },
-    firstName: { $set: action.data.firstname },
-    lastName: { $set: action.data.surname },
-    photoURL: { $set: action.data.photoURL },
+    firstname: { $set: action.data.firstname },
+    surname: { $set: action.data.surname },
+    photo_url: { $set: action.data.photo_url },
     id: { $set: action.data.id }
   });
 }
@@ -64,13 +64,13 @@ function handleFailure (state, action) {
 function handleChangeName (state, action) {
   if (action.inputType === 'firstname') {
     const newState = update(state, {
-      firstName: { $set: action.value }
+      firstname: { $set: action.value }
     });
     return newState;
   }
   if (action.inputType === 'surname') {
     const newState = update(state, {
-      lastName: { $set: action.value }
+      surname: { $set: action.value }
     });
     return newState;
   }

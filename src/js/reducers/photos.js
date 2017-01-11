@@ -5,7 +5,7 @@ const initialState = {
   isFetching: false,
   error: undefined,
   signedURL: undefined,
-  photoURL: undefined,
+  photo_url: undefined,
   file: undefined,
   photos: [],
   selectedPhoto: undefined,
@@ -72,7 +72,7 @@ function handleSetFile (state, action) {
 function handleUploadPhotoSuccess (state, action) {
 
   const newState = update(state, {
-    photoURL: { $set: action.data },
+    photo_url: { $set: action.data },
     isFetching: { $set: action.isFetching },
     signedURL: { $set: undefined }
   });
@@ -83,7 +83,7 @@ function handleSavePhotoURLSuccess (state, action) {
 
   const newState = update(state, {
     isFetching: { $set: action.isFetching },
-    photoURL: { $set: undefined },
+    photo_url: { $set: undefined },
     hasPhotoLoaded: { $set: true },
     file: { $set: undefined }
   });
@@ -103,7 +103,7 @@ function handleFailure (state, action) {
   const newState = update(state, {
     isFetching: { $set: action.isFetching },
     error: { $set: action.error },
-    photoURL: { $set: undefined },
+    photo_url: { $set: undefined },
     signedURL: { $set: undefined }
   });
   return newState;

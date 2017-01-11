@@ -25,7 +25,7 @@ class Event extends React.Component {
   }
 
   handleDeleteEvent () {
-    this.props.handleDeleteEvent(this.props.params.eventID);
+    this.props.handleDeleteEvent(this.props.params.event_id);
     this.handleCloseModal();
   }
 
@@ -37,13 +37,13 @@ class Event extends React.Component {
   renderView () {
 
     if (this.props.userIsHost && this.props.isPoll) {
-      // changed from this.props.params.eventID
+      // changed from this.props.params.event_id
       return (
         <View>
           <HostPoll
             tally={ this.props.tally }
             event={ this.props.event }
-            eventID={ this.props.event.eventID }
+            event_id={ this.props.event.event_id }
             handleHostEventChoices={ this.props.handleHostEventChoices }
             hostEventChoices={ this.props.hostEventChoices }
             handleConfirmEvent={ this.props.handleConfirmEvent }
@@ -59,7 +59,7 @@ class Event extends React.Component {
               toggleSelection={ this.props.toggleSelection }
               poll={ this.props.poll }
               handlePollConfirmation={ this.props.handlePollConfirmation }
-              eventID={ this.props.params.eventID }
+              event_id={ this.props.params.event_id }
               isHost={ this.props.userIsHost }
               hasVoted={ this.props.hasVoted }
             />
@@ -72,7 +72,7 @@ class Event extends React.Component {
           <View style={styles.container}>
             <ConfirmedEvent
               event={ this.props.event }
-              eventID={ this.props.params.eventID }
+              event_id={ this.props.params.event_id }
               userIsHost={ this.props.userIsHost }
               RSVPs={ this.props.RSVPs }
               RSVPToEvent={ this.props.RSVPToEvent }
@@ -110,7 +110,7 @@ class Event extends React.Component {
 
 
             <TopBar
-              eventID={ this.props.event.eventID }
+              event_id={ this.props.event.event_id }
               userIsHost={ this.props.userIsHost }
               isPoll={ this.props.event.isPoll }
               handleEdit={ this.props.handleEdit }
@@ -125,7 +125,7 @@ class Event extends React.Component {
               eventName={ this.props.event.eventName }
               eventDescription={ this.props.event.eventDescription }
               hostPhotoURL={ this.props.event.hostPhotoURL }
-              eventID={ this.props.event.eventID }
+              event_id={ this.props.event.event_id }
               isPoll={ this.props.event.isPoll }
               userIsHost={ this.props.event.isHost }
             />

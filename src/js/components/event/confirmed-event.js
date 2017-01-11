@@ -9,7 +9,7 @@ import formatDate from '../../lib/formatDate';
 import styles from '../../../styles';
 
 
-const ConfirmedEvent = ({ event, eventID, RSVPs, invitees, userIsHost,
+const ConfirmedEvent = ({ event, event_id, RSVPs, invitees, userIsHost,
   RSVPToEvent, handleUploadPhoto, photos, deletedPhotos, handleDeletePhoto,
   handleSharePhoto, file, handleSetFile, getSelectedPhoto, hasPhotoLoaded }) => {
 
@@ -28,9 +28,9 @@ const ConfirmedEvent = ({ event, eventID, RSVPs, invitees, userIsHost,
     return notResponded.map((user) => {
       return (
         <View style={styles.item} key={ user.id }>
-          <Image style={styles.uiAvatarImage} source={{ uri: user.photoURL }} />
+          <Image style={styles.uiAvatarImage} source={{ uri: user.photo_url }} />
           <View style={styles.content}>
-            <Text style={styles.headerRsvpListItems}>{ user.firstName }</Text>
+            <Text style={styles.headerRsvpListItems}>{ user.firstname }</Text>
           </View>
         </View>
       );
@@ -83,7 +83,7 @@ const ConfirmedEvent = ({ event, eventID, RSVPs, invitees, userIsHost,
         </View>
 
         <RSVPsArea
-          eventID={ eventID }
+          event_id={ event_id }
           respondedList={ respondedList }
           notRespondedList={ notRespondedList }
           invitees={ invitees }

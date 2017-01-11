@@ -11,7 +11,7 @@ import styles from '../../styles';
 
 moment.locale('en-gb');
 
-const FeedItem = ({ eventID, timestamp, firstName, lastName, photoURL,
+const FeedItem = ({ event_id, timestamp, firstname, surname, photo_url,
   eventWhere, eventWhen, userIsHost, isPoll, subjectID,
   index, handleUpdateFeedItem, viewed, inviteesNumber, eventName, hasEdited }) => {
 
@@ -25,18 +25,18 @@ const FeedItem = ({ eventID, timestamp, firstName, lastName, photoURL,
         <TouchableOpacity
           style={styles.cardButtonStyle}
           onPress={ () => handleUpdateFeedItem(index) }
-          to={ `event/${eventID}` }
+          to={ `event/${event_id}` }
         >
 
           <View style={styles.leftColumn}>
-            <Image style={styles.uiProfilePhotoCircularImage} source={{ uri: photoURL }} />
+            <Image style={styles.uiProfilePhotoCircularImage} source={{ uri: photo_url }} />
           </View>
           <View style={styles.middleColumn}>
             <Text style={styles.timestamp}> { moment(timestamp).startOf().fromNow() } </Text>
             <Text>
               <Text style={styles.subjectName}>
                 { userIsSubject && 'You'}
-                { !userIsSubject && `${firstName}  ${lastName}` }
+                { !userIsSubject && `${firstname}  ${surname}` }
               </Text>
               <Text style={styles.subjectAction}>
                 { userIsSubject && isPoll && ' have created a poll ' }

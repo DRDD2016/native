@@ -48,11 +48,11 @@ export function getPhotos (photos) {
 ********/
 
 
-export function getS3URL (filename, filetype, eventID) { //eslint-disable-line
+export function getS3URL (filename, filetype, event_id) { //eslint-disable-line
   return (dispatch) => {
     dispatch(getS3URLRequest());
 
-    // axios.get(`/get-s3-url?filename=${filename}&filetype=${filetype}&eventID=${eventID}`)
+    // axios.get(`/get-s3-url?filename=${filename}&filetype=${filetype}&event_id=${event_id}`)
     //   .then((response) => {
     //     dispatch(getS3URLSuccess(response.data));
     //   })
@@ -103,8 +103,8 @@ export function uploadPhoto (url, photo) {
     // axios.put(url, photo, config)
     //
     //   .then((response) => {
-    //     const photoURL = response.config.url.match(/\S+(?=\?)/)[0];
-    //     dispatch(uploadPhotoSuccess(photoURL));
+    //     const photo_url = response.config.url.match(/\S+(?=\?)/)[0];
+    //     dispatch(uploadPhotoSuccess(photo_url));
     //   })
     //   .catch((error) => {
     //     dispatch(uploadPhotoFailure(error));
@@ -140,15 +140,15 @@ export function uploadPhotoFailure (error) {
 * SAVE PHOTO URL ACTIONS
 ********/
 
-export function savePhotoURL (url, eventID) {
-  let userID;
+export function savePhotoURL (url, event_id) {
+  let user_id;
   return (dispatch) => {
     dispatch(savePhotoURLRequest());
 
     const payload = { //eslint-disable-line
-      photoURL: url,
-      userID,
-      eventID
+      photo_url: url,
+      user_id,
+      event_id
     };
 
     // axios.post('/save-photo', payload)

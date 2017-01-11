@@ -24,7 +24,7 @@ const Profile = ({ user, firstname, surname, handleLogOut, handleChangeName, han
         </View>
 
         <View style={styles.row}>
-          <Image style={styles.uiProfilePagePhotoCircularImage} source={{ uri: user.photoURL }} />
+          <Image style={styles.uiProfilePagePhotoCircularImage} source={{ uri: user.photo_url }} />
         </View>
 
         <View style={styles.row}>

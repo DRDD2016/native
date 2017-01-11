@@ -12,13 +12,13 @@
 // import { store } from '../init-store.js';
 //
 //
-// export function getFeed (userID) {
+// export function getFeed (user_id) {
 //
 //     return (dispatch) => {
 //
 //         dispatch(getFeedRequest());
 //
-//         feedSocket.on('feed:' + userID, (data) => {
+//         feedSocket.on('feed:' + user_id, (data) => {
 //
 //             store.dispatch(getFeedSuccess(data));
 //         });

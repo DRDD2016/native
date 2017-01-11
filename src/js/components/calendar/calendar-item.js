@@ -63,7 +63,7 @@ const CalendarItem = ({ eventName, eventWhere, eventWhen,
 
             <Image
               style={styles.coverImage}
-              source={coverPhoto ? { uri: coverPhoto.photoURL } : require('../../../img/placeholder.png')}
+              source={coverPhoto ? { uri: coverPhoto.photo_url } : require('../../../img/placeholder.png')}
             />
 
           </View>

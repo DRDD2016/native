@@ -19,7 +19,7 @@ export function getProfile () {
   return (dispatch) => {
     dispatch(getProfileRequest());
 
-    // axios.get(`${HOME_URL}/get-user?userID=${id}`)
+    // axios.get(`${HOME_URL}/get-user?user_id=${id}`)
     // .then((response) => {
     //   dispatch(getProfileSuccess(response.data));
     // })
@@ -68,11 +68,10 @@ export function changeName (value, inputType) {
 EDIT NAME ACTIONS
 */
 
-export function editName (firstName, lastName) {
+export function editName (firstname, surname) {
   const payload = { //eslint-disable-line
-    firstName,
-    lastName,
-    userID: getProfileID()
+    firstname,
+    surname
   };
 
   return (dispatch) => {

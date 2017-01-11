@@ -11,21 +11,21 @@ export default function listenForSavePhotoURL (store) {
     if (status) {
 
       unsubscribe();
-      const eventID = getEventIDFromStore(store.getState());
-      const photoURL = getPhotoURLFromStore(store.getState());
-      store.dispatch(savePhotoURL(photoURL, eventID));
+      const event_id = getEventIDFromStore(store.getState());
+      const photo_url = getPhotoURLFromStore(store.getState());
+      store.dispatch(savePhotoURL(photo_url, event_id));
     }
   }
 
   function getPhotoURLFromStore (state) {
-    return state.photos.photoURL;
+    return state.photos.photo_url;
   }
 
   function getEventIDFromStore (state) {
-    return state.event.data.eventID;
+    return state.event.data.event_id;
   }
 
   function getPhotoURLStatus (state) {
-    return state.photos.photoURL;
+    return state.photos.photo_url;
   }
 }
