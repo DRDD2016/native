@@ -4,7 +4,7 @@ import Confirm from '../../components/create/confirm';
 import { store } from '../../init-store';
 // import jsonState from '../../testState/jsonStateCreate.json';
 
-const mapStateToProps = (state) => { //eslint-disable-line
+// const mapStateToProps = (state) => {
 
   // const sortedDates = jsonState.createEvent.eventWhen.sort((a, b) => {
   //   return (a.date + a.time) > (b.date + b.time);
@@ -20,9 +20,19 @@ const mapStateToProps = (state) => { //eslint-disable-line
   //   invitees: jsonState.createEvent.invitees
   // };
 
-  return {
+  // return {
     // data: cleanEventData(data),
     // eventDetails: jsonState.createEvent.eventDetails
+//   };
+// };
+
+const mapStateToProps = ({ create }) => {
+  return {
+    data: create._when,
+    where: create._where,
+    name: create.name,
+    description: create.description,
+    note: create.note
   };
 };
 
@@ -41,7 +51,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const ConfirmContainer = connect(
-    mapDispatchToProps
+  mapStateToProps, mapDispatchToProps
 )(Confirm);
 
 export default ConfirmContainer;

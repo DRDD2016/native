@@ -73,7 +73,7 @@ export default function Navbar () {
         <StackNavigation
           id="create"
           navigatorUID="create"
-          initialRoute={ Router.getRoute('navbar') }
+          initialRoute={ Router.getRoute('details') }
         />
       </TabItem>
     </TabNavigation>
