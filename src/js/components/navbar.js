@@ -1,11 +1,6 @@
 import React from 'react';
-import { Text } from 'react-native';
-import {
-  StackNavigation,
-  TabNavigation,
-  TabNavigationItem as TabItem
-} from '@exponent/ex-navigation';
-// import Icon from 'react-native-vector-icons/FontAwesome';
+import { StackNavigation, TabNavigation, TabNavigationItem as TabItem } from '@exponent/ex-navigation';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Router from '../router';
 import { tabBarSelectedItemStyle } from '../../styles';
 import colours from '../../styles/colours';
@@ -21,7 +16,7 @@ export default function Navbar () {
         id="albums"
         title="Albums"
         selectedStyle={ tabBarSelectedItemStyle }
-        renderIcon={ isSelected => <Text style={isSelected ? colours.blue : colours.gray}>A</Text> }
+        renderIcon={ isSelected => <Icon name="camera" size={ 28 } color={ isSelected ? colours.blue : colours.gray } /> }
       >
         <StackNavigation
           id="albums"
@@ -34,7 +29,7 @@ export default function Navbar () {
         id="calendar"
         title="Calendar"
         selectedStyle={ tabBarSelectedItemStyle }
-        renderIcon={ isSelected => <Text style={isSelected ? colours.blue : colours.gray}>C</Text> }
+        renderIcon={ isSelected => <Icon name="calendar" size={ 28 } color={ isSelected ? colours.blue : colours.gray} /> }
       >
         <StackNavigation
           id="calendar"
@@ -47,7 +42,7 @@ export default function Navbar () {
         id="feed"
         title="Feed"
         selectedStyle={ tabBarSelectedItemStyle }
-        renderIcon={ isSelected => <Text style={isSelected ? colours.blue : colours.gray}>F</Text>}
+        renderIcon={ isSelected => <Icon name="globe" size={ 28 } color={ isSelected ? colours.blue : colours.gray } /> }
       >
         <StackNavigation
           id="feed"
@@ -60,7 +55,7 @@ export default function Navbar () {
         id="profile"
         title="Profile"
         selectedStyle={ tabBarSelectedItemStyle }
-        renderIcon={ isSelected => <Text style={isSelected ? colours.blue : colours.gray}>P</Text> }
+        renderIcon={ isSelected => <Icon name="user" size={ 28 } color={ isSelected ? colours.blue : colours.gray} /> }
       >
         <StackNavigation
           id="profile"
@@ -73,7 +68,7 @@ export default function Navbar () {
         id="create"
         title="Create"
         selectedStyle={ tabBarSelectedItemStyle }
-        renderIcon={ isSelected => <Text style={isSelected ? colours.blue : colours.gray}>C</Text> }
+        renderIcon={ isSelected => <Icon name="pencil" size={ 28 } color={ isSelected ? colours.blue : colours.gray } /> }
       >
         <StackNavigation
           id="create"

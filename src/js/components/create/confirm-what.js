@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import { View, Text } from 'react-native';
-// import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../common/Button';
 import styles from '../../../styles';
 
@@ -32,7 +32,7 @@ const ConfirmEventWhat = ({ eventWhat }) => {
         >
           <View style={styles.rowSpaced}>
             <Button buttonStyle={styles.optionSelectedWhat} textStyle={styles.optionTextSelected}>
-              <Text>s</Text>
+              <Icon name="star" size={18} color="white" />
               {'  '}
               { eventWhat[data] || 'TBC' }
             </Button>

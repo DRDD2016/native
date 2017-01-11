@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import { View, Text } from 'react-native';
-// import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../common/Button';
 import formatDate from '../../lib/formatDate';
 import styles from '../../../styles';
@@ -30,11 +30,11 @@ const ConfirmEventWhen = ({ eventWhen }) => { // eslint-disable-line react/prop-
         <View style={styles.columnMiddle}>
           <View style={styles.rowSpaced}>
             <Button buttonStyle={styles.optionSelectedWhen} textStyle={styles.optionTextSelected}>
-              <Text>cal</Text>
+              <Icon name="calendar" size={18} color="white" />
               {'  '}
               { formatDate(data.date, true) || 'TBC' }
               {'  '}
-              <Text>c</Text>
+              <Icon name="clock-o" size={18} color="white" />
               {'  '}
               { data.time || 'TBC' }
             </Button>

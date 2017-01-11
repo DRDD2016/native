@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-// import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../common/Button';
 import styles from '../../../styles';
 
@@ -10,7 +10,7 @@ const CancelConfirmedEventModal = ({ handleDeleteEvent, handleCloseModal }) => {
     <View style={styles.basicModal}>
       <View>
         <View>
-          <Text>c</Text>
+          <Icon name="warning circle icon" size={18} />
         </View>
       </View>
       <View style={styles.header}>
@@ -19,13 +19,13 @@ const CancelConfirmedEventModal = ({ handleDeleteEvent, handleCloseModal }) => {
       <View>
         <View>
           <Button onClick={ handleCloseModal }>
-            <Text>c</Text>
+            <Icon name="remove icon" size={14} color={'red'} />
             <Text>
               No
             </Text>
           </Button>
           <Button onClick={ handleDeleteEvent }>
-            <Text>c</Text>
+            <Icon name="checkmark icon" size={14} color={'green'} />
             <Text>
               Yes
             </Text>
