@@ -2,15 +2,14 @@ import React from 'react';
 import { View, Text, ScrollView, Linking } from 'react-native';
 // import Router from '../../router';
 import ConfirmEventWhat from './confirm-what';
-// import ConfirmEventWhere from './confirm-where';
-// import ConfirmEventWhen from './confirm-when';
+import ConfirmEventWhere from './confirm-where';
+import ConfirmEventWhen from './confirm-when';
 import styles from '../../../styles';
 import Button from '../common/Button';
 
 export default function Confirm ({ data, name, description, note, where, saveEvent, navigation }) { // eslint-disable-line
   console.log('data', data);
-  console.log('name', name);
-  console.log('description', description);
+  const whereArr = ['home', 'school'];
   // const eventWhatObj =  { name, description };
 
   // const nextPage = () => {
@@ -39,6 +38,10 @@ export default function Confirm ({ data, name, description, note, where, saveEve
           </Text>
 
           <ConfirmEventWhat eventWhat={{ name, description }} />
+          <ConfirmEventWhere eventWhere={whereArr} />
+
+          <ConfirmEventWhen eventWhen={ data } />
+
 
           <View style={styles.rowCentered}>
             <Button
