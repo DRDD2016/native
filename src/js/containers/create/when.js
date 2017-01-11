@@ -3,7 +3,6 @@ import { setWhen, addInput, removeInput, clearCreateEvent } from '../../actions/
 import When from '../../components/create/when';
 
 const mapStateToProps = ({ create }) => {
-  console.log(create._when);
   return {
     data: create._when,
     name: create.name,

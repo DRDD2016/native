@@ -46,7 +46,7 @@ export function loginUser (email, password) {
           if (data.token) {
             storeToken(data.token);
             const navigatorUID = store.getState().navigation.currentNavigatorUID;
-            dispatch(NavigationActions.push(navigatorUID, Router.getRoute('navbar')));
+            dispatch(NavigationActions.immediatelyResetStack(navigatorUID, [Router.getRoute('navbar')], 0));
           } else {
             dispatch(loginUserFailure(data.error));
           }

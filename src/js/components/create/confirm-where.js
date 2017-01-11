@@ -33,8 +33,7 @@ const ConfirmEventWhere = ({ eventWhere }) => { // eslint-disable-line react/pro
             <Button buttonStyle={styles.optionSelectedWhere} textStyle={styles.optionTextSelected}>
               <Icon name="map-marker" size={18} color="white" />
               {'  '}
-              { data.placeName || 'TBC' }
-              { data.placeAddress }
+              { data || 'TBC' }
             </Button>
           </View>
         </View>
