@@ -11,23 +11,18 @@ import jsonState from '../testState/jsonStateEvent.json';
 import { store } from '../init-store';
 
 
-const mapStateToProps = state => ({
-
-  isPoll: state.event.data.is_poll,
-  event: state.event.data,
-  poll: state.event.poll,
-  hasVoted: state.event.hasVoted,
-  tally: state.event.tally,
-  RSVPs: state.event.RSVPs,
-  invitees: state.event.invitees,
-  hostEventChoices: state.event.hostEventChoices,
-  isFetching: state.event.isFetching,
-  userIsHost: state.event.data.hostID === getUserID(),
-  photos: state.photos.photos,
-  deletedPhotos: state.photos.deletedPhotos,
-  file: state.photos.file,
-  hasPhotoLoaded: state.photos.hasPhotoLoaded
-});
+const mapStateToProps = ({ event }) => {
+  console.log(event);
+  return {
+    isPoll: event.data.is_poll,
+    event: event.data,
+    poll: event.poll,
+    RSVPs: event.RSVPs, // host
+    finalChoices: event.poll.finalChoices,
+    isFetching: event.data.isFetching,
+    userIsHost: true
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
 
@@ -39,11 +34,11 @@ const mapDispatchToProps = dispatch => ({
 
     dispatch(updatePoll(eventType, index));
   },
-  handlePollConfirmation: (poll, event_id) => {
+  handleVote: (poll, event_id) => {
 
     dispatch(vote(poll, event_id));
   },
-  handleHostEventChoices: (eventType, value, index) => {
+  handleHostEventChoices: (eventType, value, index) => { // redux form?
 
     dispatch(addHostEventChoice(eventType, value, index));
   },

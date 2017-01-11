@@ -7,7 +7,7 @@ import { EventWhatSection, EventWhereSection, EventWhenSection } from './poll-se
 import Button from '../common/Button';
 import styles from '../../../styles';
 
-const InviteePoll = ({ event, toggleSelection, poll, handlePollConfirmation, //eslint-disable-line
+const InviteePoll = ({ event, toggleSelection, poll, handleVote, //eslint-disable-line
   event_id, isHost, hasVoted }) => { //eslint-disable-line
 
   const eventWhat = createPollSelections(event, toggleSelection, poll, 'eventWhat', EventWhatSection);
@@ -44,7 +44,7 @@ const InviteePoll = ({ event, toggleSelection, poll, handlePollConfirmation, //e
 
       <PollButton
         poll={ poll }
-        handlePollConfirmation={ handlePollConfirmation }
+        handleVote={ handleVote }
         event_id={ event_id }
         voteButtonText={ voteButtonText }
       />

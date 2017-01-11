@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import Button from '../common/Button';
 import styles from '../../../styles';
 
-const PollButton = ({ poll, handlePollConfirmation, event_id, voteButtonText }) => {
+const PollButton = ({ poll, handleVote, event_id, voteButtonText }) => {
 
   const userHasCompletedPoll = Object.keys(poll).map((categoryName) => {
 
@@ -17,7 +17,7 @@ const PollButton = ({ poll, handlePollConfirmation, event_id, voteButtonText }) 
   });
 
   function handleSelection (poll, event_id) { // eslint-disable-line no-shadow
-    handlePollConfirmation(poll, event_id);
+    handleVote(poll, event_id);
     console.log('go to feed');
   }
 

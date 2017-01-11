@@ -2,8 +2,9 @@ import update from 'immutability-helper';
 import * as actions from '../../actions/event/poll';
 
 const initialState = {
-  finalChoices: {},
-  isSavingVote: false
+  finalChoices: {}, // redux form?
+  isSavingVote: false,
+  rsvps: []
 };
 
 export default function poll (state = initialState, action) {
