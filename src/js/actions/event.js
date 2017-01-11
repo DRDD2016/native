@@ -37,10 +37,10 @@ export const SAVE_EDITED_EVENT_REQUEST = 'SAVE_EDITED_EVENT_REQUEST';
 export const SAVE_EDITED_EVENT_SUCCESS = 'SAVE_EDITED_EVENT_SUCCESS';
 export const SAVE_EDITED_EVENT_FAILURE = 'SAVE_EDITED_EVENT_FAILURE';
 
-export const UPDATE_NOTIFICATION = 'UPDATE_NOTIFICATION';
-export const UPDATE_NOTIFICATION_REQUEST = 'UPDATE_NOTIFICATION_REQUEST';
-export const UPDATE_NOTIFICATION_SUCCESS = 'UPDATE_NOTIFICATION_SUCCESS';
-export const UPDATE_NOTIFICATION_FAILURE = 'UPDATE_NOTIFICATION_FAILURE';
+export const UPDATE_FEED = 'UPDATE_FEED';
+export const UPDATE_FEED_REQUEST = 'UPDATE_FEED_REQUEST';
+export const UPDATE_FEED_SUCCESS = 'UPDATE_FEED_SUCCESS';
+export const UPDATE_FEED_FAILURE = 'UPDATE_FEED_FAILURE';
 
 export const RESET_EVENT_STATE = 'RESET_EVENT_STATE';
 
@@ -335,7 +335,7 @@ export function saveEditedEventFailure (error) {
 }
 
 /********
-* UPDATE NOTIFICATIONS ACTIONS
+* UPDATE FEEDS ACTIONS
 ********/
 export function updateFeedItem (index) {
   return (dispatch) => {
@@ -353,21 +353,21 @@ export function updateFeedItem (index) {
 
 export function updateFeedItemRequest () {
   return {
-    type: UPDATE_NOTIFICATION_REQUEST,
+    type: UPDATE_FEED_REQUEST,
     updateFeedItem: true
   };
 }
 
 export function updateFeedItemSuccess () {
   return {
-    type: UPDATE_NOTIFICATION_SUCCESS,
+    type: UPDATE_FEED_SUCCESS,
     updateFeedItem: false
   };
 }
 
 export function updateFeedItemFailure (error) {
   return {
-    type: UPDATE_NOTIFICATION_FAILURE,
+    type: UPDATE_FEED_FAILURE,
     updateFeedItem: false,
     error
   };

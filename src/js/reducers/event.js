@@ -5,7 +5,7 @@ import { GET_EVENT_REQUEST, GET_EVENT_SUCCESS, GET_EVENT_FAILURE, UPDATE_POLL,
          UPDATE_RSVP_REQUEST, UPDATE_RSVP_SUCCESS, UPDATE_RSVP_FAILURE,
          DELETE_EVENT_REQUEST, DELETE_EVENT_SUCCESS, DELETE_EVENT_FAILURE,
          SAVE_EDITED_EVENT_REQUEST, SAVE_EDITED_EVENT_SUCCESS, SAVE_EDITED_EVENT_FAILURE,
-         UPDATE_NOTIFICATION_REQUEST, UPDATE_NOTIFICATION_SUCCESS, UPDATE_NOTIFICATION_FAILURE,
+         UPDATE_FEED_REQUEST, UPDATE_FEED_SUCCESS, UPDATE_FEED_FAILURE,
          RESET_EVENT_STATE } from '../actions/event';
 
 export const initialState = {
@@ -53,10 +53,10 @@ export default function event (state = initialState, action) {
     case UPDATE_RSVP_FAILURE:
       return handleFailure(state, action);
 
-    case UPDATE_NOTIFICATION_REQUEST:
-    case UPDATE_NOTIFICATION_SUCCESS:
+    case UPDATE_FEED_REQUEST:
+    case UPDATE_FEED_SUCCESS:
       return handleUpdateFeedItem(state, action);
-    case UPDATE_NOTIFICATION_FAILURE:
+    case UPDATE_FEED_FAILURE:
       return handleUpdateFeedItemFailure(state, action);
 
     case UPDATE_POLL:
