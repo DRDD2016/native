@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-// import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../../lib/formatDate';
 import Button from '../common/Button';
 import styles from '../../../styles';
@@ -23,7 +23,7 @@ export const EventWhatSection = ({ text, tally, choiceClasses, labelClasses }) =
         <View style={styles.columnMiddlePoll}>
           <View style={styles.rowSpaced}>
             <Button buttonStyle={styles.optionDeselectedWhat} textStyle={styles.optionTextDeselectedWhat}>
-              <Text>s</Text>
+              <Icon name="star" size={16} color={colours.what} />
               {' '}
               { text || 'TBC' }
             </Button>
@@ -34,7 +34,7 @@ export const EventWhatSection = ({ text, tally, choiceClasses, labelClasses }) =
         <View style={styles.columnMiddlePoll}>
           <View style={styles.rowSpaced}>
             <Button buttonStyle={styles.optionSelectedWhat} textStyle={styles.optionTextSelected}>
-              <Text>s</Text>
+              <Icon name="star" size={16} color="white" />
               {' '}
               { text || 'TBC' }
             </Button>
@@ -79,7 +79,7 @@ export const EventWhereSection = ({ text, tally, choiceClasses, labelClasses }) 
         <View style={styles.columnMiddlePoll}>
           <View style={styles.rowSpaced}>
             <Button buttonStyle={styles.optionDeselectedWhere} textStyle={styles.optionTextDeselectedWhere}>
-              <Text>s</Text>
+              <Icon name="map-marker" size={16} color={colours.where} />
               {' '}
               { (!placeNameLong) &&
                 <Text style={styles.placeNameShort}>
@@ -106,7 +106,7 @@ export const EventWhereSection = ({ text, tally, choiceClasses, labelClasses }) 
         <View style={styles.columnMiddlePoll}>
           <View style={styles.rowSpaced}>
             <Button buttonStyle={styles.optionSelectedWhere} textStyle={styles.optionTextSelected}>
-              <Text>s</Text>
+              <Icon name="map-marker" size={16} color="white" />
               {' '}
               { (!placeNameLong) &&
                 <Text style={styles.placeNameShort}>
@@ -165,11 +165,11 @@ export const EventWhenSection = ({ text, tally, choiceClasses, labelClasses }) =
         <View style={styles.columnMiddlePoll}>
           <View style={styles.rowSpaced}>
             <Button buttonStyle={styles.optionDeselectedWhen} textStyle={styles.optionTextDeselectedWhen}>
-              <Text>s</Text>
+              <Icon name="calendar" size={16} color={colours.when} />
               {' '}
               { formatDate(text.date, 'half') || 'TBC' }
               {'  '}
-              <Text>s</Text>
+              <Icon name="clock-o" size={16} color={colours.when} />
               {' '}
               { text.time || 'TBC' }
             </Button>
@@ -180,11 +180,11 @@ export const EventWhenSection = ({ text, tally, choiceClasses, labelClasses }) =
         <View style={styles.columnMiddlePoll}>
           <View style={styles.rowSpaced}>
             <Button buttonStyle={styles.optionSelectedWhen} textStyle={styles.optionTextSelected}>
-              <Text>s</Text>
+              <Icon name="calendar" size={16} color="white" />
               {' '}
               { formatDate(text.date, 'half') || 'TBC' }
               {'  '}
-              <Text>s</Text>
+              <Icon name="clock-o" size={16} color="white" />
               {' '}
               { text.time || 'TBC' }
             </Button>

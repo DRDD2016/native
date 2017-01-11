@@ -49,9 +49,6 @@ const Feed = ({ navigator, allEvents, notifications, isFetching,
         !isFetching &&
         <View>
           <TopBar location="feed" />
-          <Button onPress={ () => navigator.pop() }>
-            BACK (test navigation stack)
-          </Button>
         </View>
       }
       <View style={styles.filterPanelContainer}>

@@ -1,8 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
-// import { Actions } from 'react-native-router-flux';
-// import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import getUserID from '../lib/getUserID';
 import formatDate from '../lib/formatDate';
 // import Button from './common/Button';
@@ -67,7 +66,7 @@ const Notification = ({ eventID, timestamp, firstName, lastName, photoURL,
           <View style={styles.rightColumnFeed}>
 
             <Text style={styles.date}>
-              <Text>c</Text>
+              <Icon name="calendar-o" size={14} color="gray" />
               {
                 (eventWhen.length > 1 && 'VOTE') ||
                 (eventWhen.length === 1 && eventWhen[0].date === '' && 'TBC') ||
@@ -75,7 +74,7 @@ const Notification = ({ eventID, timestamp, firstName, lastName, photoURL,
               }
             </Text>
             <Text style={styles.placeName}>
-              <Text>c</Text>
+              <Icon name="map-marker" size={14} color="gray" />
               {
                 (eventWhere.length > 1 && 'VOTE') ||
                 (eventWhere.length === 1 && eventWhere[0].placeName === '' && 'TBC') ||
