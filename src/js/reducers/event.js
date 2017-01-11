@@ -18,10 +18,10 @@ export const initialState = {
   invitees: undefined,
   RSVPs: undefined,
   hasVoted: undefined,
-  updateNotification: false
+  updateFeedItem: false
 };
 
-export function event (state = initialState, action) {
+export default function event (state = initialState, action) {
 
   switch (action.type) {
 
@@ -55,9 +55,9 @@ export function event (state = initialState, action) {
 
     case UPDATE_NOTIFICATION_REQUEST:
     case UPDATE_NOTIFICATION_SUCCESS:
-      return handleUpdateNotification(state, action);
+      return handleUpdateFeedItem(state, action);
     case UPDATE_NOTIFICATION_FAILURE:
-      return handleUpdateNotificationFailure(state, action);
+      return handleUpdateFeedItemFailure(state, action);
 
     case UPDATE_POLL:
       return updatePoll(state, action);
@@ -139,18 +139,18 @@ function addHostEventChoice (state, action) {
   return newState;
 }
 
-function handleUpdateNotification (state, action) {
+function handleUpdateFeedItem (state, action) {
 
   const newState = update(state, {
-    updateNotification: { $set: action.updateNotification }
+    updateFeedItem: { $set: action.updateFeedItem }
   });
   return newState;
 }
 
-function handleUpdateNotificationFailure (state, action) {
+function handleUpdateFeedItemFailure (state, action) {
 
   const newState = update(state, {
-    updateNotification: { $set: action.updateNotification },
+    updateFeedItem: { $set: action.updateFeedItem },
     error: { $set: action.error }
   });
   return newState;

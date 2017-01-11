@@ -8,7 +8,7 @@ import styles from '../../../styles';
 
 /***
 * CalendarItem is used in calendar and album views. Plays equivalent role
-to Notification.jsx for feed view
+to FeedItem.jsx for feed view
 ***/
 
 const CalendarItem = ({ eventName, eventWhere, eventWhen,

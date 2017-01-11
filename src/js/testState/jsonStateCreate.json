@@ -17,9 +17,9 @@
   event: {
     data: {},
     isFetching: false,
-    updateNotification: false
+    updateFeedItem: false
   },
-  notifications: {
+  feed: {
     data: [
       {
         eventID: 'event:112',

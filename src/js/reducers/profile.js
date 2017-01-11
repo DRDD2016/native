@@ -1,7 +1,6 @@
 import update from 'immutability-helper';
 import * as actions from '../actions/profile';
 
-
 const initialState = {
   isFetching: false,
   firstname: '',

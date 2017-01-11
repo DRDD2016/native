@@ -1,9 +1,5 @@
-/* eslint-disable no-duplicate-imports */
-/* eslint-disable import/no-duplicates */
-
 import update from 'immutability-helper';
 import * as actions from '../actions/photos';
-
 
 const initialState = {
   isFetching: false,
