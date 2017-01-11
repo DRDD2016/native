@@ -500,7 +500,7 @@ const styles = {
     alignItems: 'center',
     flex: 1
   },
-  // notification
+  // feedItem
 
   cardStyle: {
     borderWidth: 1,
@@ -534,7 +534,7 @@ const styles = {
     borderColor: '#ddd',
     position: 'relative'
   },
-  cardSectionNotification: {
+  cardSectionFeedItem: {
 
   },
   cardButtonStyle: {
@@ -547,7 +547,7 @@ const styles = {
     justifyContent: 'space-around',
     alignItems: 'center'
   },
-  viewedNotificationStyle: {
+  viewedFeedItemStyle: {
     backgroundColor: 'red'
   },
   leftColumn: {

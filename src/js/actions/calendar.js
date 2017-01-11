@@ -12,7 +12,7 @@ export function getCalendar () {
   return (dispatch) => {
     dispatch(getCalendarRequest());
 
-    // axios.get(`/get-calendar?userID=${id}`)
+    // axios.get(`/get-calendar?user_id=${id}`)
     //   .then((response) => {
     //     dispatch(getCalendarSuccess(response.data));
     //   })

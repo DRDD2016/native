@@ -4,13 +4,12 @@ import TopBar from './event/top-bar';
 import Button from './common/Button';
 import styles from '../../styles';
 
-const Profile = ({ user, firstName, lastName, handleLogOut, handleChangeName, handleEditName }) => {
+const Profile = ({ user, firstname, surname, handleLogOut, handleChangeName, handleEditName }) => {
 
-  const hideEditButton = (firstName === '' ? styles.hideEditButton : [styles.buttonStyle, { backgroundColor: 'green' }]);
+  const hideEditButton = (firstname === '' ? styles.hideEditButton : [styles.buttonStyle, { backgroundColor: 'green' }]);
 
-  function changeName (firstName, lastName) { // eslint-disable-line no-shadow
-    handleEditName(firstName, lastName);
-    // Actions.feed({ type: 'reset' });
+  function changeName (firstname, surname) { // eslint-disable-line no-shadow
+    handleEditName(firstname, surname);
   }
   // <TopBar location={ location } />
 
@@ -21,11 +20,11 @@ const Profile = ({ user, firstName, lastName, handleLogOut, handleChangeName, ha
       <View style={styles.container}>
 
         <View style={styles.row}>
-          <Text style={styles.userName}> { `${firstName} ${lastName}` } </Text>
+          <Text style={styles.userName}> { `${firstname} ${surname}` } </Text>
         </View>
 
         <View style={styles.row}>
-          <Image style={styles.uiProfilePagePhotoCircularImage} source={{ uri: user.photoURL }} />
+          <Image style={styles.uiProfilePagePhotoCircularImage} source={{ uri: user.photo_url }} />
         </View>
 
         <View style={styles.row}>
@@ -34,18 +33,18 @@ const Profile = ({ user, firstName, lastName, handleLogOut, handleChangeName, ha
 
         <View style={styles.row}>
           <TextInput
-            value={ firstName }
+            value={ firstname }
             placeholder="First name"
-            onChangeText={ e => handleChangeName('firstName', e) }
+            onChangeText={ e => handleChangeName('firstname', e) }
             style={styles.inputStyle}
           />
         </View>
 
         <View style={styles.row}>
           <TextInput
-            value={ lastName }
+            value={ surname }
             placeholder="Surname"
-            onChangeText={ e => handleChangeName('lastName', e)}
+            onChangeText={ e => handleChangeName('surname', e)}
             style={styles.inputStyle}
           />
         </View>
@@ -55,7 +54,7 @@ const Profile = ({ user, firstName, lastName, handleLogOut, handleChangeName, ha
           <Button
             buttonStyle={ hideEditButton }
             textStyle={[styles.buttonTextStyle, { color: 'white' }]}
-            onPress={ () => changeName(firstName, lastName) }
+            onPress={ () => changeName(firstname, surname) }
           >
             Change Name
           </Button>

@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch) => {
     saveEvent: (data) => {
       const state = store.getState();
       data.hostID = state.user.id;
-      data.hostPhotoURL = state.user.photoURL;
+      data.hostPhotoURL = state.user.photo_url;
       dispatch(newEvent(data));
     },
     discardEvent: () => {

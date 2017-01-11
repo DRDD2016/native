@@ -8,8 +8,8 @@ export function RSVPUserList (RSVPs, invitees, status) {
     return (
       <div className="twelve columns">
         <div className="ui image label" key={ usersWithRSVP[0].id }>
-          <img alt={`${usersWithRSVP[0].firstName}`} src={ usersWithRSVP[0].photoURL } />
-          { usersWithRSVP[0].firstName }
+          <img alt={`${usersWithRSVP[0].firstname}`} src={ usersWithRSVP[0].photo_url } />
+          { usersWithRSVP[0].firstname }
         </div>
       </div>
     );

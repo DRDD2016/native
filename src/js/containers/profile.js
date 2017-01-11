@@ -1,14 +1,13 @@
 import { connect } from 'react-redux';
 import Profile from '../components/profile';
-// import removeCookie from '../lib/removeCookie';
-import { changeName, editName } from '../actions/user';
+import { changeName, editName } from '../actions/profile';
 import jsonState from '../testState/jsonState.json';
 
 const mapStateToProps = () => {
   return {
-    user: jsonState.user,
-    firstName: jsonState.user.firstName,
-    lastName: jsonState.user.lastName
+    user: jsonState.profile,
+    firstname: jsonState.profile.firstname,
+    surname: jsonState.profile.surname
   };
 };
 
@@ -21,8 +20,8 @@ const mapDispatchToProps = (dispatch) => {
     handleChangeName: (inputType, e) => {
       dispatch(changeName(e.target.value, inputType));
     },
-    handleEditName: (firstName, lastName) => {
-      dispatch(editName(firstName, lastName));
+    handleEditName: (firstname, surname) => {
+      dispatch(editName(firstname, surname));
     }
   };
 };

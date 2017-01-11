@@ -3,7 +3,7 @@ import { View, Text, Image } from 'react-native';
 import Button from '../../common/Button';
 import styles from '../../../../styles';
 
-const RSVPsArea = ({ eventID, invitees, RSVPs, respondedList, notRespondedList, handleClick }) => {
+const RSVPsArea = ({ event_id, invitees, RSVPs, respondedList, notRespondedList, handleClick }) => {
 
   function RSVPUserList (RSVPs, invitees, status) { // eslint-disable-line
 
@@ -12,9 +12,9 @@ const RSVPsArea = ({ eventID, invitees, RSVPs, respondedList, notRespondedList, 
 
       return (
         <View style={styles.item} key={ index }>
-          <Image style={styles.uiAvatarImage} source={{ uri: usersWithRSVP[0].photoURL }} />
+          <Image style={styles.uiAvatarImage} source={{ uri: usersWithRSVP[0].photo_url }} />
           <View style={styles.content}>
-            <View style={styles.headerRsvpListItems}>{ usersWithRSVP[0].firstName }</View>
+            <View style={styles.headerRsvpListItems}>{ usersWithRSVP[0].firstname }</View>
           </View>
         </View>
       );
@@ -27,21 +27,21 @@ const RSVPsArea = ({ eventID, invitees, RSVPs, respondedList, notRespondedList, 
 
       <View style={styles.row}>
         <View>
-          <Button buttonStyle={styles.RSVPButtonGoing} onPress={ () => handleClick('going', eventID) }> Going </Button>
+          <Button buttonStyle={styles.RSVPButtonGoing} onPress={ () => handleClick('going', event_id) }> Going </Button>
           <View style={styles.uiBigHorizontalList}>
             { RSVPUserList(RSVPs, invitees, 'going') }
           </View>
         </View>
 
         <View>
-          <Button buttonStyle={styles.RSVPButtonMaybe} onPress={ () => handleClick('maybe', eventID) }> Maybe </Button>
+          <Button buttonStyle={styles.RSVPButtonMaybe} onPress={ () => handleClick('maybe', event_id) }> Maybe </Button>
           <View style={styles.uiBigHorizontalList}>
             { RSVPUserList(RSVPs, invitees, 'maybe') }
           </View>
         </View>
 
         <View>
-          <Button buttonStyle={styles.RSVPButtonNotGoing} onPress={ () => handleClick('notGoing', eventID) }> Not Going </Button>
+          <Button buttonStyle={styles.RSVPButtonNotGoing} onPress={ () => handleClick('notGoing', event_id) }> Not Going </Button>
           <View style={styles.uiBigHorizontalList}>
             { RSVPUserList(RSVPs, invitees, 'notGoing') }
           </View>

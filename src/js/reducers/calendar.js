@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import { GET_CALENDAR_REQUEST, GET_CALENDAR_SUCCESS, GET_CALENDAR_FAILURE, APPLY_FILTER, CLEAR_FILTER } from '../actions/calendar';
+import * as actions from '../actions/calendar';
 
 const initialState = {
   data: [],
@@ -13,17 +13,17 @@ export default function calendar (state = initialState, action) {
 
   switch (action.type) {
 
-    case GET_CALENDAR_REQUEST:
+    case actions.GET_CALENDAR_REQUEST:
       return handleCalendarRequest(state, action);
 
-    case GET_CALENDAR_SUCCESS:
+    case actions.GET_CALENDAR_SUCCESS:
       return handleCalendarSuccess(state, action);
 
-    case GET_CALENDAR_FAILURE:
+    case actions.GET_CALENDAR_FAILURE:
       return handleCalendarFailure(state, action);
 
-    case APPLY_FILTER:
-    case CLEAR_FILTER:
+    case actions.APPLY_FILTER:
+    case actions.CLEAR_FILTER:
       return handleFilter(state, action);
 
     default:

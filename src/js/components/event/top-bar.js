@@ -17,14 +17,14 @@ class TopBar extends Component {
       <View style={ styles.topBarContainer }>
         {
           /* feed */
-          !this.props.eventID && primaryPath === 'feed' && //eslint-disable-line
+          !this.props.event_id && primaryPath === 'feed' && //eslint-disable-line
           <View style={ styles.rowCentered }>
             <Text style={ styles.title1 }>Feed</Text>
           </View>
         }
         {
         /* /create-event */
-        !this.props.eventID && primaryPath === 'eventdetails' && //eslint-disable-line
+        !this.props.event_id && primaryPath === 'eventdetails' && //eslint-disable-line
           <View style={ styles.rowSpaced }>
             <Button
               textStyle={ styles.topBarButtonText }
@@ -41,7 +41,7 @@ class TopBar extends Component {
         }
         {
             /* /invite-friends */
-          !this.props.eventID && primaryPath === 'inviteFriends' &&
+          !this.props.event_id && primaryPath === 'inviteFriends' &&
           <View style={styles.rowSpaced}>
             <Button textStyle={styles.topBarButtonText} onClick={ () => { console.log('back'); } }>
               Back
@@ -56,7 +56,7 @@ class TopBar extends Component {
         }
         {
             /* /confirm-event */
-          !this.props.eventID && primaryPath === 'confirm' &&
+          !this.props.event_id && primaryPath === 'confirm' &&
           <View style={styles.rowSpaced}>
             <Button textStyle={styles.topBarButtonText} onClick={ () => { console.log('back'); }}>
               Back
@@ -71,7 +71,7 @@ class TopBar extends Component {
         }
         {
             /* /calendar */
-          !this.props.eventID && primaryPath === 'albums' &&
+          !this.props.event_id && primaryPath === 'albums' &&
 
           <View style={styles.rowCentered}>
             <Text style={styles.title1}>
@@ -81,7 +81,7 @@ class TopBar extends Component {
         }
         {
             /* /calendar */
-          !this.props.eventID && primaryPath === 'calendar' &&
+          !this.props.event_id && primaryPath === 'calendar' &&
 
           <View style={styles.rowCentered}>
             <Text style={styles.title1}>
@@ -92,38 +92,38 @@ class TopBar extends Component {
         }
 
         {
-          !this.props.eventID && primaryPath === 'profile' &&
+          !this.props.event_id && primaryPath === 'profile' &&
           <View style={styles.rowCentered}>
             <Text style={styles.title1}>Profile</Text>
           </View>
         }
         {
-          this.props.eventID && this.props.userIsHost && this.props.isPoll &&
+          this.props.event_id && this.props.userIsHost && this.props.isPoll &&
           <View style={styles.rowSpaced}>
             <Text style={styles.title1}>Poll</Text>
           </View>
         }
         {
-          this.props.eventID && !this.props.userIsHost && !this.props.isPoll &&
+          this.props.event_id && !this.props.userIsHost && !this.props.isPoll &&
           <View style={styles.rowSpaced}>
             <Text style={styles.title1}>Event</Text>
           </View>
         }
         {
           // User is Invitee and its a Poll
-          this.props.eventID && !this.props.userIsHost && this.props.isPoll &&
+          this.props.event_id && !this.props.userIsHost && this.props.isPoll &&
           <View style={ styles.rowSpaced }>
             <Text style={ styles.title1 }>Poll</Text>
           </View>
         }
         {
           // User is Host and its an Event
-          this.props.eventID && this.props.userIsHost && !this.props.isPoll &&
+          this.props.event_id && this.props.userIsHost && !this.props.isPoll &&
           <View style={styles.rowSpaced}>
             <Button
               textStyle={styles.topBarButtonText}
               onClick={ () => { this.props.handleEdit(this.props.event); } }
-              to={ `edit/ ${this.props.eventID}` }
+              to={ `edit/ ${this.props.event_id}` }
             >
               Edit
             </Button>
