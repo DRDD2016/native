@@ -10,13 +10,17 @@ const mapStateToProps = ({ create }) => ({
 
 const mapDispatchToProps = dispatch => ({
 
-  handleChange: (inputKey, placeName, placeAddress) => {
-    const address = {
-      placeName,
-      placeAddress: placeAddress || ''
-    };
-    dispatch(setWhere(address, inputKey));
+  handleChange: (text, inputKey) => {
+    dispatch(setWhere(text, inputKey));
   },
+
+  // handleChange: (inputKey, placeName, placeAddress) => {
+  //   const address = {
+  //     placeName,
+  //     placeAddress: placeAddress || ''
+  //   };
+  //   dispatch(setWhere(address, inputKey));
+  // },
 
   addInput: (nextInputKey) => {
     dispatch(addInput(nextInputKey, 'eventWhere'));

@@ -6,7 +6,6 @@ import Button from '../common/Button';
 import styles from '../../../styles';
 
 const ConfirmEventWhat = ({ eventWhat }) => {
-
   const layout = Object.keys(eventWhat).map((data, i) => {
 
     const hideTitle = i > 0;
