@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import { View, Text } from 'react-native';
-// import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../common/Button';
 import styles from '../../../styles';
 
@@ -31,7 +31,7 @@ const ConfirmEventWhere = ({ eventWhere }) => { // eslint-disable-line react/pro
         >
           <View style={styles.rowSpaced}>
             <Button buttonStyle={styles.optionSelectedWhere} textStyle={styles.optionTextSelected}>
-              <Text>Map marker icon</Text>
+              <Icon name="map-marker" size={18} color="white" />
               {'  '}
               { data.placeName || 'TBC' }
               { data.placeAddress }

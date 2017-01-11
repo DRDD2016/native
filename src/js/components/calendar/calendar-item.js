@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-// import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../../lib/formatDate';
 import CardSection from '../common/CardSection';
 import Card from '../common/Card';
@@ -24,16 +24,16 @@ const CalendarItem = ({ eventName, eventWhere, eventWhen,
 
               <View>
                 {(userIsHost || RSVPstatus === 'going') &&
-                  <Text>Going</Text>
+                  <Icon name="check-circle" size={20} color="green" />
                 }
                 {!userIsHost && RSVPstatus === 'maybe' &&
-                  <Text>Maybe</Text>
+                  <Icon name="question-circle" size={20} color="orange" />
                 }
                 {!userIsHost && RSVPstatus === 'notGoing' &&
-                  <Text>notGoing</Text>
+                  <Icon name="times-circle" size={20} color="red" />
                 }
                 {!userIsHost && RSVPstatus === null &&
-                  <Text>null</Text>
+                  <Icon name="exclamation-circle" size={20} color="gray" />
                 }
               </View>
 
@@ -46,12 +46,12 @@ const CalendarItem = ({ eventName, eventWhere, eventWhen,
             <View style={styles.cardMiddleRow}>
 
               <Text style={styles.date}>
-                <Text>calendar icon</Text>
+                <Icon name="calendar-o" size={14} color="gray" />
                 { ` ${formatDate(eventWhen[0].date).toUpperCase() || 'TBC'}` }
               </Text>
 
               <Text style={styles.placeName}>
-                <Text>map-marker icon</Text>
+                <Icon name="map-marker" size={14} color="gray" />
                 { ` ${eventWhere[0].placeName || 'TBC'} ${eventWhere[0].placeAddress}` }
               </Text>
 

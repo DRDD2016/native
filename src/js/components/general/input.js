@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextInput, View } from 'react-native';
-// import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../common/Button';
 import styles from '../../../styles';
 
@@ -23,7 +23,7 @@ const Input = ({ handleChange, value, placeholder, removeInput, inputKey }) => {
         }
         { (inputKey !== 0) &&
           <Button buttonStyle={styles.smallButtonStyle} onPress={ () => removeInput(inputKey) }>
-            <Text>i</Text>
+            <Icon name="times" size={14} color="gray" />
           </Button>
         }
       </View>
