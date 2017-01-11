@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, ScrollView, Linking } from 'react-native';
+import { View, Linking, ScrollView } from 'react-native';
 // import Router from '../../router';
 import ConfirmEventWhat from './confirm-what';
 import ConfirmEventWhere from './confirm-where';
 import ConfirmEventWhen from './confirm-when';
+import EventDetailsHeader from '../general/event-details-header';
 import styles from '../../../styles';
 import Button from '../common/Button';
 
@@ -15,7 +16,7 @@ export default function Confirm ({ data, name, description, note, where, saveEve
   //     stacks('confirm').immediatelyResetStack([Router.getRoute('feed')], 0);
   //   });
   // };
-  
+
   const url = 'whatsapp://send?text=Hello%20from%20Spark!';
   const openWhatsapp = () => {
     Linking.canOpenURL(url).then((supported) => {
@@ -27,27 +28,26 @@ export default function Confirm ({ data, name, description, note, where, saveEve
   };
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <ScrollView>
-        <View>
-
-          <Text style={styles.invitedTitle}>
-            Invited friends
-          </Text>
-
-          <ConfirmEventWhat eventWhat={{ name, description }} />
-          <ConfirmEventWhere eventWhere={ where } />
-          <ConfirmEventWhen eventWhen={ data } />
-
-          <View style={styles.rowCentered}>
-            <Button
-              buttonStyle={styles.confirmButton}
-              textStyle={styles.confirmButtonText}
-              onPress={ openWhatsapp }
-            >
-              Invite friends
-            </Button>
-          </View>
+        <View style={styles.rowEventDetailsHeader}>
+          <EventDetailsHeader
+            location="Enter details"
+            name={ name }
+            description={ description }
+          />
+        </View>
+        <ConfirmEventWhat eventWhat={{ name, description }} />
+        <ConfirmEventWhere eventWhere={ where } />
+        <ConfirmEventWhen eventWhen={ data } />
+        <View style={styles.rowCentered}>
+          <Button
+            buttonStyle={styles.confirmButton}
+            textStyle={styles.confirmButtonText}
+            onPress={ openWhatsapp }
+          >
+            Invite friends
+          </Button>
         </View>
       </ScrollView>
     </View>
