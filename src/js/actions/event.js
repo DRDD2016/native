@@ -3,25 +3,6 @@ import getUserID from '../lib/getUserID';
 // import { clearCreateEvent } from './create';
 // import { getPhotos, getDeletedPhotos } from './photos';
 
-export const GET_EVENT = 'GET_EVENT';
-export const GET_EVENT_REQUEST = 'GET_EVENT_REQUEST';
-export const GET_EVENT_SUCCESS = 'GET_EVENT_SUCCESS';
-export const GET_EVENT_FAILURE = 'GET_EVENT_FAILURE';
-
-export const UPDATE_POLL = 'UPDATE_POLL';
-
-export const CONFIRM_POLL = 'CONFIRM_POLL';
-export const CONFIRM_POLL_REQUEST = 'CONFIRM_POLL_REQUEST';
-export const CONFIRM_POLL_SUCCESS = 'CONFIRM_POLL_SUCCESS';
-export const CONFIRM_POLL_FAILURE = 'CONFIRM_POLL_FAILURE';
-
-export const ADD_HOST_EVENT_CHOICE = 'ADD_HOST_EVENT_CHOICE';
-
-export const CONFIRM_EVENT = 'CONFIRM_EVENT';
-export const CONFIRM_EVENT_REQUEST = 'CONFIRM_EVENT_REQUEST';
-export const CONFIRM_EVENT_SUCCESS = 'CONFIRM_EVENT_SUCCESS';
-export const CONFIRM_EVENT_FAILURE = 'CONFIRM_EVENT_FAILURE';
-
 export const UPDATE_RSVP = 'UPDATE_RSVP';
 export const UPDATE_RSVP_REQUEST = 'UPDATE_RSVP_REQUEST';
 export const UPDATE_RSVP_SUCCESS = 'UPDATE_RSVP_SUCCESS';
@@ -45,154 +26,7 @@ export const UPDATE_FEED_FAILURE = 'UPDATE_FEED_FAILURE';
 export const RESET_EVENT_STATE = 'RESET_EVENT_STATE';
 
 
-/********
-GET EVENT ACTIONS
-********/
-
-export function getEvent (event_id) { //eslint-disable-line
-  return (dispatch) => {
-    dispatch(getEventRequest());
-
-    // axios.get(`/get-event?event_id=${event_id}&user_id=${getUserID()}`)
-    //   .then((response) => {
-    //     dispatch(getEventSuccess(response.data));
-    //     dispatch(getPhotos(response.data.photos));
-    //     dispatch(getDeletedPhotos(response.data.deletedPhotos));
-    //   })
-    //   .catch((error) => {
-    //     dispatch(getEventFailure(error));
-    //   });
-  };
-}
-
-export function getEventRequest () {
-  return {
-    type: GET_EVENT_REQUEST,
-    isFetching: true
-  };
-}
-
-export function getEventSuccess (event) {
-  return {
-    type: GET_EVENT_SUCCESS,
-    isFetching: false,
-    data: event
-  };
-}
-
-export function getEventFailure (error) {
-  return {
-    type: GET_EVENT_FAILURE,
-    isFetching: false,
-    error
-  };
-}
-
-export function updatePoll (eventType, index) {
-  return {
-    type: UPDATE_POLL,
-    eventType,
-    index
-  };
-}
-
-/********
-* CONFIRM POLL ACTIONS
-********/
-
-export function confirmPoll (poll, event_id) {
-  return (dispatch) => {
-    const payload = {
-      poll,
-      event_id,
-      user_id: getUserID()
-    };
-
-    dispatch(confirmPollRequest());
-
-    // axios.post('/confirm-poll', payload)
-    //   .then((response) => {
-    //     dispatch(confirmPollSuccess(response.data));
-    //     dispatch(getEvent(event_id));
-    //   })
-    //   .catch((error) => {
-    //     dispatch(confirmPollFailure(error));
-    //   });
-  };
-}
-
-export function confirmPollRequest () {
-  return {
-    type: CONFIRM_POLL_REQUEST,
-    isFetching: true
-  };
-}
-
-export function confirmPollSuccess () {
-  return {
-    type: CONFIRM_POLL_SUCCESS,
-    isFetching: false
-  };
-}
-export function confirmPollFailure () {
-  return {
-    type: CONFIRM_POLL_FAILURE,
-    isFetching: false
-  };
-}
-
-export function addHostEventChoice (eventType, value, index) {
-  return {
-    type: ADD_HOST_EVENT_CHOICE,
-    eventType,
-    value,
-    index
-  };
-}
-
-/********
-* CONFIRM EVENT ACTIONS
-********/
-
-export function confirmEvent (hostEventChoices, event_id) {
-  return (dispatch) => {
-    const payload = {
-      hostEventChoices,
-      event_id
-    };
-
-    dispatch(confirmEventRequest());
-
-    // axios.post('/confirm-event', payload)
-    //   .then(() => {
-    //     dispatch(confirmEventSuccess());
-    //   })
-    //   .catch(() => {
-    //     dispatch(confirmEventFailure());
-    //   });
-  };
-}
-
-export function confirmEventRequest () {
-  return {
-    type: CONFIRM_EVENT_REQUEST,
-    isFetching: true
-  };
-}
-
-export function confirmEventSuccess () {
-  return {
-    type: CONFIRM_EVENT_SUCCESS,
-    isFetching: false
-  };
-}
-export function confirmEventFailure () {
-  return {
-    type: CONFIRM_EVENT_FAILURE,
-    isFetching: false
-  };
-}
-
+let user_id;
 /********
 UPDATE RSVP ACTIONS
 ********/
@@ -200,7 +34,7 @@ UPDATE RSVP ACTIONS
 export function updateRSVP (RSVPStatus, event_id) {
   return (dispatch) => {
     const payload = {
-      user_id: getUserID(),
+      user_id,
       event_id,
       RSVPStatus
     };
@@ -296,7 +130,7 @@ export function saveEditedEvent (eventName, eventDescription, eventNote, eventWh
       eventWhat,
       eventWhere,
       eventWhen,
-      user_id: getUserID()
+      user_id
     };
 
     dispatch(saveEditedEventRequest());

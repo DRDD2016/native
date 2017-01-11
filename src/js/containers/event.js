@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Event from '../components/event';
 import getUserID from '../lib/getUserID';
-import { getEvent, updatePoll, confirmPoll, addHostEventChoice, confirmEvent, deleteEvent, updateRSVP } from '../actions/event';
+import { getEvent, updatePoll, vote, addHostEventChoice, confirmEvent, deleteEvent, updateRSVP } from '../actions/event';
 import { setFile, selectPhoto, getS3URL, deletePhoto, sharePhoto } from '../actions/photos';
 import { hydrateCreateEvent, clearCreateEvent } from '../actions/create';
 import listenForS3URL from '../lib/action-listeners';
@@ -11,22 +11,22 @@ import jsonState from '../testState/jsonStateEvent.json';
 import { store } from '../init-store';
 
 
-const mapStateToProps = () => ({
+const mapStateToProps = state => ({
 
-  isPoll: jsonState.event.data.isPoll,
-  event: jsonState.event.data,
-  poll: jsonState.event.poll,
-  hasVoted: jsonState.event.hasVoted,
-  tally: jsonState.event.tally,
-  RSVPs: jsonState.event.RSVPs,
-  invitees: jsonState.event.invitees,
-  hostEventChoices: jsonState.event.hostEventChoices,
-  isFetching: jsonState.event.isFetching,
-  userIsHost: jsonState.event.data.hostID === getUserID(),
-  photos: jsonState.photos.photos,
-  deletedPhotos: jsonState.photos.deletedPhotos,
-  file: jsonState.photos.file,
-  hasPhotoLoaded: jsonState.photos.hasPhotoLoaded
+  isPoll: state.event.data.is_poll,
+  event: state.event.data,
+  poll: state.event.poll,
+  hasVoted: state.event.hasVoted,
+  tally: state.event.tally,
+  RSVPs: state.event.RSVPs,
+  invitees: state.event.invitees,
+  hostEventChoices: state.event.hostEventChoices,
+  isFetching: state.event.isFetching,
+  userIsHost: state.event.data.hostID === getUserID(),
+  photos: state.photos.photos,
+  deletedPhotos: state.photos.deletedPhotos,
+  file: state.photos.file,
+  hasPhotoLoaded: state.photos.hasPhotoLoaded
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -41,7 +41,7 @@ const mapDispatchToProps = dispatch => ({
   },
   handlePollConfirmation: (poll, event_id) => {
 
-    dispatch(confirmPoll(poll, event_id));
+    dispatch(vote(poll, event_id));
   },
   handleHostEventChoices: (eventType, value, index) => {
 
