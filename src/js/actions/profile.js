@@ -1,4 +1,3 @@
-import getProfileID from '../lib/getProfileID';
 // import { feedSocket } from '../socket';
 export const GET_PROFILE = 'GET_PROFILE';
 export const GET_PROFILE_REQUEST = 'GET_PROFILE_REQUEST';

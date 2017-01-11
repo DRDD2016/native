@@ -337,38 +337,38 @@ export function saveEditedEventFailure (error) {
 /********
 * UPDATE NOTIFICATIONS ACTIONS
 ********/
-export function updateNotification (index) {
+export function updateFeedItem (index) {
   return (dispatch) => {
-    dispatch(updateNotificationRequest());
+    dispatch(updateFeedItemRequest());
 
-    // axios.get(`/update-notification?index=${index}&userID=${getUserID()}`)
+    // axios.get(`/update-feedItem?index=${index}&userID=${getUserID()}`)
     //   .then(() => {
-    //     dispatch(updateNotificationSuccess());
+    //     dispatch(updateFeedItemSuccess());
     //   })
     //   .catch((error) => {
-    //     dispatch(updateNotificationFailure(error));
+    //     dispatch(updateFeedItemFailure(error));
     //   });
   };
 }
 
-export function updateNotificationRequest () {
+export function updateFeedItemRequest () {
   return {
     type: UPDATE_NOTIFICATION_REQUEST,
-    updateNotification: true
+    updateFeedItem: true
   };
 }
 
-export function updateNotificationSuccess () {
+export function updateFeedItemSuccess () {
   return {
     type: UPDATE_NOTIFICATION_SUCCESS,
-    updateNotification: false
+    updateFeedItem: false
   };
 }
 
-export function updateNotificationFailure (error) {
+export function updateFeedItemFailure (error) {
   return {
     type: UPDATE_NOTIFICATION_FAILURE,
-    updateNotification: false,
+    updateFeedItem: false,
     error
   };
 }

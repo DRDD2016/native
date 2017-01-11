@@ -2,10 +2,10 @@
   auth: {
     isAuthenticated: false
   },
-  user: {
+  profile: {
     isFetching: false,
-    firstName: 'Dave',
-    lastName: 'Rickard',
+    firstname: 'Dave',
+    surname: 'Rickard',
     photoURL: 'https://scontent.xx.fbcdn.net/v/t1.0-1/p320x320/1010535_10152958307150251_1106767454_n.jpg?oh=39609ba001601e7ff5dd1bdede8bb0da&oe=58CEA14F',
     id: '10156727442325251'
   },
@@ -3375,9 +3375,9 @@
   event: {
     data: {},
     isFetching: false,
-    updateNotification: false
+    updateFeedItem: false
   },
-  notifications: {
+  feed: {
     data: [
       {
         eventID: 'event:112',

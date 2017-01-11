@@ -1,10 +1,5 @@
 import update from 'immutability-helper';
-import { GET_FEED_REQUEST,
-  GET_FEED_SUCCESS,
-  GET_FEED_FAILURE,
-  APPLY_FILTER,
-  CLEAR_FILTER
-} from '../actions/feed';
+import * as actions from '../actions/feed';
 
 const initialState = {
   data: [],
@@ -18,17 +13,17 @@ export default function feed (state = initialState, action) {
 
   switch (action.type) {
 
-    case GET_FEED_REQUEST:
+    case actions.GET_FEED_REQUEST:
       return handleGetFeedRequest(state, action);
 
-    case GET_FEED_SUCCESS:
+    case actions.GET_FEED_SUCCESS:
       return handleGetFeedSuccess(state, action);
 
-    case GET_FEED_FAILURE:
+    case actions.GET_FEED_FAILURE:
       return handleGetFeedFailure(state, action);
 
-    case APPLY_FILTER:
-    case CLEAR_FILTER:
+    case actions.APPLY_FILTER:
+    case actions.CLEAR_FILTER:
       return handleFilter(state, action);
 
     default:

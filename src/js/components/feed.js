@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import Notification from './notification';
+import FeedItem from './feedItem';
 import getUserID from '../lib/getUserID';
 import TopBar from './event/top-bar';
 import FilterPanel from './general/filter-panel';
@@ -10,12 +10,12 @@ import Spinner from './common/Spinner';
 // import Navbar from './general/navbar';
 import styles from '../../styles';
 
-const Feed = ({ navigator, allEvents, notifications, isFetching,
-  handleUpdateNotification, displaySome, displayAll, feedIsFiltered, isShowHosting }) => {
+const Feed = ({ navigator, allEvents, feed, isFetching,
+  handleUpdateFeedItem, displaySome, displayAll, feedIsFiltered, isShowHosting }) => {
 
-  const mappedNotifications = notifications.map((data, i) => {
+  const mappedFeed = feed.map((data, i) => {
     return (
-      <Notification
+      <FeedItem
         key={ i }
         index={ i }
         viewed={ data.viewed }
@@ -31,7 +31,7 @@ const Feed = ({ navigator, allEvents, notifications, isFetching,
         userIsHost={ data.hostID === getUserID() }
         hostID={ data.hostID }
         subjectID={ data.subjectID }
-        handleUpdateNotification={ handleUpdateNotification }
+        handleUpdateFeedItem={ handleUpdateFeedItem }
         inviteesNumber={ data.inviteesNumber }
         eventName={ data.eventName }
         hasEdited={ data.hasEdited }
@@ -77,20 +77,20 @@ const Feed = ({ navigator, allEvents, notifications, isFetching,
             </Text>
           }
           {
-            notifications.length === 0 && isShowHosting &&
+            feed.length === 0 && isShowHosting &&
               <Text style={styles.smallMessageText}>
                 You are not hosting any events.
                 (Why not create some?)
             </Text>
           }
           {
-            notifications.length === 0 && isShowHosting === false &&
+            feed.length === 0 && isShowHosting === false &&
               <Text style={styles.smallMessageText}>
                 You have not been invited to any events.
               </Text>
           }
           {
-            !isFetching && mappedNotifications
+            !isFetching && mappedFeed
           }
         </View>
       </ScrollView>

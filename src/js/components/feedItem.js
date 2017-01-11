@@ -12,20 +12,20 @@ import styles from '../../styles';
 
 moment.locale('en-gb');
 
-const Notification = ({ eventID, timestamp, firstName, lastName, photoURL,
+const FeedItem = ({ eventID, timestamp, firstName, lastName, photoURL,
   eventWhere, eventWhen, userIsHost, isPoll, subjectID,
-  index, handleUpdateNotification, viewed, inviteesNumber, eventName, hasEdited }) => {
+  index, handleUpdateFeedItem, viewed, inviteesNumber, eventName, hasEdited }) => {
 
   const userIsSubject = subjectID === getUserID();
 
-  const viewedNotification = viewed === true;
+  const viewedFeedItem = viewed === true;
 // ADD THE OnClick button to Link! --<
   return (
-    <Card style={[styles.cardStyle, viewedNotification && styles.viewedNotificationStyle]}>
-      <CardSection style={styles.cardSectionNotification}>
+    <Card style={[styles.cardStyle, viewedFeedItem && styles.viewedFeedItemStyle]}>
+      <CardSection style={styles.cardSectionFeedItem}>
         <TouchableOpacity
           style={styles.cardButtonStyle}
-          onPress={ () => handleUpdateNotification(index) }
+          onPress={ () => handleUpdateFeedItem(index) }
           to={ `event/${eventID}` }
         >
 
@@ -90,4 +90,4 @@ const Notification = ({ eventID, timestamp, firstName, lastName, photoURL,
   );
 };
 
-export default Notification;
+export default FeedItem;
