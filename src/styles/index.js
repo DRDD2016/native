@@ -562,8 +562,8 @@ const styles = {
     borderRadius: 15
   },
   numberOfInvites: {
-    fontSize: 10,
-    fontWeight: '300',
+    // fontSize: 10,
+    // fontWeight: '300',
     color: 'lightgray'
   },
   middleColumn: {
@@ -571,8 +571,8 @@ const styles = {
     paddingBottom: 5
   },
   timestamp: {
-    fontSize: 10,
-    fontWeight: '300',
+    // fontSize: 10,
+    // fontWeight: '300',
     color: 'lightgray'
   },
   subjectName: {
@@ -580,12 +580,12 @@ const styles = {
     fontWeight: 'bold'
   },
   subjectAction: {
-    fontSize: 10,
+    // fontSize: 10,
     color: 'gray'
   },
   eventName: {
-    fontSize: 12,
-    fontWeight: 'bold',
+    // fontSize: 12,
+    // fontWeight: 'bold',
     color: 'gray'
   },
   rightColumnFeed: {
@@ -594,12 +594,12 @@ const styles = {
     alignItems: 'center'
   },
   date: {
-    fontSize: 12,
-    fontWeight: '100'
+    // fontSize: 12,
+    // fontWeight: '100'
   },
   placeName: {
-    fontSize: 12,
-    fontWeight: '100'
+    // fontSize: 12,
+    // fontWeight: '100'
   },
 
   // calendarItem

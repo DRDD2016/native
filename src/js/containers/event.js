@@ -1,15 +1,10 @@
 import { connect } from 'react-redux';
 import Event from '../components/event';
-import getUserID from '../lib/getUserID';
 import { getEvent, updatePoll, vote, addHostEventChoice, confirmEvent, deleteEvent, updateRSVP } from '../actions/event';
-import { setFile, selectPhoto, getS3URL, deletePhoto, sharePhoto } from '../actions/photos';
 import { hydrateCreateEvent, clearCreateEvent } from '../actions/create';
-import listenForS3URL from '../lib/action-listeners';
-import listenForSavePhotoURL from '../lib/save-photo-url-helper';
-import jsonState from '../testState/jsonStateEvent.json';
 
-import { store } from '../init-store';
 
+const user_id = 1;
 
 const mapStateToProps = ({ event }) => {
   console.log(event);
@@ -17,10 +12,11 @@ const mapStateToProps = ({ event }) => {
     isPoll: event.data.is_poll,
     event: event.data,
     poll: event.poll,
-    RSVPs: event.RSVPs, // host
+    rsvps: event.data._rsvps, // host
     finalChoices: event.poll.finalChoices,
+    hasMadeChoice: false,
     isFetching: event.data.isFetching,
-    userIsHost: true
+    userIsHost: user_id === event.data.host_user_id
   };
 };
 
@@ -57,29 +53,6 @@ const mapDispatchToProps = dispatch => ({
   RSVPToEvent: (status, event_id) => {
 
     dispatch(updateRSVP(status, event_id));
-  },
-  handleUploadPhoto: (file, event_id) => {
-    listenForS3URL(store);
-    listenForSavePhotoURL(store);
-    dispatch(getS3URL(file.name, file.type, event_id));
-  },
-  handleDeletePhoto: (event_id) => {
-
-    const selectedPhoto = store.getState().photos.selectedPhoto;
-    dispatch(deletePhoto(selectedPhoto, event_id));
-  },
-  handleSharePhoto: () => {
-
-    const selectedPhoto = store.getState().photos.selectedPhoto;
-    dispatch(sharePhoto(selectedPhoto));
-  },
-  getSelectedPhoto: (photo_url) => {
-
-    dispatch(selectPhoto(photo_url));
-  },
-  handleSetFile: (file) => {
-
-    dispatch(setFile(file));
   },
   discardEvent: () => {
     dispatch(clearCreateEvent());

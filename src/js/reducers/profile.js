@@ -7,7 +7,7 @@ const initialState = {
   surname: '',
   email: '',
   photo_url: '',
-  id: '',
+  user_id: '',
   error: undefined
 };
 

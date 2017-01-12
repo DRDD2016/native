@@ -3,97 +3,62 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { View, Image, Text } from 'react-native';
-import RSVPsArea from './confirmed-event/RSVPs-area';
+import rsvpsArea from './confirmed-event/rsvps-area';
 import { eventNote } from '../../lib/confirmed-event-helpers';
 import formatDate from '../../lib/formatDate';
 import styles from '../../../styles';
 
-
-const ConfirmedEvent = ({ event, event_id, RSVPs, invitees, userIsHost,
-  RSVPToEvent, handleUploadPhoto, photos, deletedPhotos, handleDeletePhoto,
-  handleSharePhoto, file, handleSetFile, getSelectedPhoto, hasPhotoLoaded }) => {
-
+const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, RSVPToEvent }) => {
 
   const handleClick = !userIsHost ? RSVPToEvent : '';
 
-  const going = RSVPs.going;
-  const notGoing = RSVPs.notGoing;
-  const maybe = RSVPs.maybe;
+  const going = rsvps.going;
+  const notGoing = rsvps.not_going;
+  const maybe = rsvps.maybe;
   const respondedList = going.concat(maybe, notGoing);
 
-  const notRespondedList = (responded, invitees) => {
 
-    const notResponded = invitees.filter(invitedUser => responded.indexOf(invitedUser.id) === -1);
-
-    return notResponded.map((user) => {
-      return (
-        <View style={styles.item} key={ user.id }>
-          <Image style={styles.uiAvatarImage} source={{ uri: user.photo_url }} />
-          <View style={styles.content}>
-            <Text style={styles.headerRsvpListItems}>{ user.firstname }</Text>
-          </View>
-        </View>
-      );
-    });
-  };
-
-  const placeNameLong = (event.eventWhere[0] && event.eventWhere[0].placeName > 18);
+  const placeNameLong = (event._where[0] && event._where[0].placeName > 18);
 
   return (
     <View>
-      <View>
-        { eventNote(event) }
-        <View style={styles.row}>
-          <Text>
-            What
-          </Text>
-          <View>
-            { event.eventWhat[0] || 'TBC' }
+      <Text>Event note</Text>
+      <View style={styles.row}>
+        <Text>
+          What
+        </Text>
+        <View>
+          <Text>{ event._what[0] || 'TBC' }</Text>
+        </View>
+      </View>
+
+      <View style={styles.row}>
+        <Text>
+          Where
+        </Text>
+        <View>
+          { (!placeNameLong) &&
+            <Text style={styles.placeNameShort}>{ event._where[0].placeName || 'TBC' }</Text>
+          }
+          { (placeNameLong) &&
+            <Text style={styles.placeNameLong}>{ event._where[0].placeName || 'TBC' }</Text>
+          }
+          <Text>{ event._where[0].placeAddress }</Text>
+        </View>
+      </View>
+
+      <View style={styles.row}>
+        <Text>
+          When
+        </Text>
+        <View>
+          <View style={styles.date}>
+            <Text>{ 'TBC' }</Text>
+          </View>
+          <View style={styles.time}>
+            <Text>{ 'TBC' }</Text>
           </View>
         </View>
-
-        <View style={styles.row}>
-          <Text>
-            Where
-          </Text>
-          <View>
-            { (!placeNameLong) &&
-              <Text style={styles.placeNameShort}>{ event.eventWhere[0].placeName || 'TBC' }</Text>
-            }
-            { (placeNameLong) &&
-              <Text style={styles.placeNameLong}>{ event.eventWhere[0].placeName || 'TBC' }</Text>
-            }
-            <Text>{ event.eventWhere[0].placeAddress }</Text>
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <Text>
-            When
-          </Text>
-
-          <View>
-            <View style={styles.date}>
-              { formatDate(event.eventWhen[0].date, true) || 'TBC' }
-            </View>
-            <View style={styles.time}>
-              { event.eventWhen[0].time || 'TBC' }
-            </View>
-          </View>
-        </View>
-
-        <RSVPsArea
-          event_id={ event_id }
-          respondedList={ respondedList }
-          notRespondedList={ notRespondedList }
-          invitees={ invitees }
-          handleClick={ handleClick }
-          RSVPs={ RSVPs }
-        />
-
-        <Text>Upload panel goes here</Text>
-        <Text>Photo stream goes here</Text>
-
       </View>
 
     </View>

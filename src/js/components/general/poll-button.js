@@ -5,16 +5,7 @@ import styles from '../../../styles';
 
 const PollButton = ({ poll, handleVote, event_id, voteButtonText }) => {
 
-  const userHasCompletedPoll = Object.keys(poll).map((categoryName) => {
-
-    return poll[categoryName].some((value) => {
-
-      return value === true;
-    });
-  }).every((category) => {
-
-    return category === true;
-  });
+  const userHasCompletedPoll = true;
 
   function handleSelection (poll, event_id) { // eslint-disable-line no-shadow
     handleVote(poll, event_id);

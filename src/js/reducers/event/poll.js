@@ -3,8 +3,7 @@ import * as actions from '../../actions/event/poll';
 
 const initialState = {
   finalChoices: {}, // redux form?
-  isSavingVote: false,
-  rsvps: []
+  isSavingVote: false
 };
 
 export default function poll (state = initialState, action) {

@@ -59,9 +59,9 @@ class Event extends React.Component {
               toggleSelection={ this.props.toggleSelection }
               poll={ this.props.poll }
               handleVote={ this.props.handleVote }
-              event_id={ this.props.params.event_id }
+              event_id={ this.props.event.event_id }
               isHost={ this.props.userIsHost }
-              hasVoted={ this.props.hasVoted }
+              hasMadeChoice={ this.props.hasMadeChoice }
             />
           </View>
         </View>
@@ -72,20 +72,11 @@ class Event extends React.Component {
           <View style={styles.container}>
             <ConfirmedEvent
               event={ this.props.event }
-              event_id={ this.props.params.event_id }
+              event_id={ this.props.event_id }
               userIsHost={ this.props.userIsHost }
-              RSVPs={ this.props.RSVPs }
+              rsvps={ this.props.rsvps }
               RSVPToEvent={ this.props.RSVPToEvent }
               invitees={ this.props.invitees }
-              handleUploadPhoto={ this.props.handleUploadPhoto }
-              photos={ this.props.photos }
-              deletedPhotos={ this.props.deletedPhotos }
-              handleDeletePhoto={ this.props.handleDeletePhoto }
-              handleSharePhoto={ this.props.handleSharePhoto }
-              file={ this.props.file }
-              handleSetFile={ this.props.handleSetFile }
-              getSelectedPhoto={ this.props.getSelectedPhoto }
-              hasPhotoLoaded={ this.props.hasPhotoLoaded }
             />
           </View>
         </View>
