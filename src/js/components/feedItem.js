@@ -11,9 +11,9 @@ import styles from '../../styles';
 
 moment.locale('en-gb');
 
-const FeedItem = ({ event_id, timestamp, firstname, surname, photo_url,
-  eventWhere, eventWhen, userIsHost, isPoll, subjectID,
-  index, handleUpdateFeedItem, viewed, inviteesNumber, eventName, hasEdited }) => {
+const FeedItem = ({ event_id, timestamp, firstname, surname,
+  photo_url, eventWhere, eventWhen, userIsHost, isPoll, subjectID,
+  handleSelection, viewed, inviteesNumber, eventName, hasEdited }) => {
 
   const userIsSubject = subjectID === getUserID();
 
@@ -24,8 +24,7 @@ const FeedItem = ({ event_id, timestamp, firstname, surname, photo_url,
       <CardSection style={styles.cardSectionFeedItem}>
         <TouchableOpacity
           style={styles.cardButtonStyle}
-          onPress={ () => handleUpdateFeedItem(index) }
-          to={ `event/${event_id}` }
+          onPress={ () => handleSelection(event_id) }
         >
 
           <View style={styles.leftColumn}>

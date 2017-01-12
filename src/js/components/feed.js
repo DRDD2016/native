@@ -11,7 +11,7 @@ import Spinner from './common/Spinner';
 import styles from '../../styles';
 
 const Feed = ({ navigator, allEvents, feed, isFetching,
-  handleUpdateFeedItem, displaySome, displayAll, feedIsFiltered, isShowHosting }) => {
+  handleSelection, displaySome, displayAll, feedIsFiltered, isShowHosting }) => {
 
   const mappedFeed = feed.map((data, i) => {
     return (
@@ -31,7 +31,7 @@ const Feed = ({ navigator, allEvents, feed, isFetching,
         userIsHost={ data.hostID === getUserID() }
         hostID={ data.hostID }
         subjectID={ data.subjectID }
-        handleUpdateFeedItem={ handleUpdateFeedItem }
+        handleSelection={ handleSelection }
         inviteesNumber={ data.inviteesNumber }
         eventName={ data.eventName }
         hasEdited={ data.hasEdited }

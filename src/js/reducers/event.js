@@ -1,6 +1,6 @@
 import update from 'immutability-helper';
 import { GET_EVENT_REQUEST, GET_EVENT_SUCCESS, GET_EVENT_FAILURE, UPDATE_POLL,
-         CONFIRM_POLL_REQUEST, CONFIRM_POLL_SUCCESS, CONFIRM_POLL_FAILURE, ADD_HOST_EVENT_CHOICE,
+         VOTE_REQUEST, VOTE_SUCCESS, VOTE_FAILURE, ADD_HOST_EVENT_CHOICE,
          CONFIRM_EVENT_REQUEST, CONFIRM_EVENT_SUCCESS, CONFIRM_EVENT_FAILURE,
          UPDATE_RSVP_REQUEST, UPDATE_RSVP_SUCCESS, UPDATE_RSVP_FAILURE,
          DELETE_EVENT_REQUEST, DELETE_EVENT_SUCCESS, DELETE_EVENT_FAILURE,
@@ -9,16 +9,16 @@ import { GET_EVENT_REQUEST, GET_EVENT_SUCCESS, GET_EVENT_FAILURE, UPDATE_POLL,
          RESET_EVENT_STATE } from '../actions/event';
 
 export const initialState = {
-  data: {},
-  isFetching: false,
-  error: undefined,
-  poll: undefined,
-  tally: undefined,
-  hostEventChoices: undefined,
-  invitees: undefined,
-  RSVPs: undefined,
-  hasVoted: undefined,
-  updateFeedItem: false
+  event_id: undefined,
+  host_user_id: undefined,
+  name: undefined,
+  description: undefined,
+  is_poll: undefined,
+  _invitees: [],
+  _what: [],
+  _where: [],
+  _when: [],
+  poll: {}
 };
 
 export default function event (state = initialState, action) {
@@ -26,7 +26,7 @@ export default function event (state = initialState, action) {
   switch (action.type) {
 
     case GET_EVENT_REQUEST:
-    case CONFIRM_POLL_REQUEST:
+    case VOTE_REQUEST:
     case CONFIRM_EVENT_REQUEST:
     case DELETE_EVENT_REQUEST:
     case SAVE_EDITED_EVENT_REQUEST:
@@ -36,7 +36,7 @@ export default function event (state = initialState, action) {
     case GET_EVENT_SUCCESS:
       return handleGetEventSuccess(state, action);
 
-    case CONFIRM_POLL_SUCCESS:
+    case VOTE_SUCCESS:
     case CONFIRM_EVENT_SUCCESS:
     case DELETE_EVENT_SUCCESS:
     case SAVE_EDITED_EVENT_SUCCESS:
@@ -46,7 +46,7 @@ export default function event (state = initialState, action) {
       return handleRSVPSuccess(state, action);
 
     case GET_EVENT_FAILURE:
-    case CONFIRM_POLL_FAILURE:
+    case VOTE_FAILURE:
     case CONFIRM_EVENT_FAILURE:
     case DELETE_EVENT_FAILURE:
     case SAVE_EDITED_EVENT_FAILURE:

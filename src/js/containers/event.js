@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Event from '../components/event';
 import getUserID from '../lib/getUserID';
-import { getEvent, updatePoll, confirmPoll, addHostEventChoice, confirmEvent, deleteEvent, updateRSVP } from '../actions/event';
+import { getEvent, updatePoll, vote, addHostEventChoice, confirmEvent, deleteEvent, updateRSVP } from '../actions/event';
 import { setFile, selectPhoto, getS3URL, deletePhoto, sharePhoto } from '../actions/photos';
 import { hydrateCreateEvent, clearCreateEvent } from '../actions/create';
 import listenForS3URL from '../lib/action-listeners';
@@ -11,23 +11,18 @@ import jsonState from '../testState/jsonStateEvent.json';
 import { store } from '../init-store';
 
 
-const mapStateToProps = () => ({
-
-  isPoll: jsonState.event.data.isPoll,
-  event: jsonState.event.data,
-  poll: jsonState.event.poll,
-  hasVoted: jsonState.event.hasVoted,
-  tally: jsonState.event.tally,
-  RSVPs: jsonState.event.RSVPs,
-  invitees: jsonState.event.invitees,
-  hostEventChoices: jsonState.event.hostEventChoices,
-  isFetching: jsonState.event.isFetching,
-  userIsHost: jsonState.event.data.hostID === getUserID(),
-  photos: jsonState.photos.photos,
-  deletedPhotos: jsonState.photos.deletedPhotos,
-  file: jsonState.photos.file,
-  hasPhotoLoaded: jsonState.photos.hasPhotoLoaded
-});
+const mapStateToProps = ({ event }) => {
+  console.log(event);
+  return {
+    isPoll: event.data.is_poll,
+    event: event.data,
+    poll: event.poll,
+    RSVPs: event.RSVPs, // host
+    finalChoices: event.poll.finalChoices,
+    isFetching: event.data.isFetching,
+    userIsHost: true
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
 
@@ -39,11 +34,11 @@ const mapDispatchToProps = dispatch => ({
 
     dispatch(updatePoll(eventType, index));
   },
-  handlePollConfirmation: (poll, event_id) => {
+  handleVote: (poll, event_id) => {
 
-    dispatch(confirmPoll(poll, event_id));
+    dispatch(vote(poll, event_id));
   },
-  handleHostEventChoices: (eventType, value, index) => {
+  handleHostEventChoices: (eventType, value, index) => { // redux form?
 
     dispatch(addHostEventChoice(eventType, value, index));
   },

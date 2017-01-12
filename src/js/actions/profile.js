@@ -1,10 +1,8 @@
 // import { feedSocket } from '../socket';
-export const GET_PROFILE = 'GET_PROFILE';
 export const GET_PROFILE_REQUEST = 'GET_PROFILE_REQUEST';
 export const GET_PROFILE_SUCCESS = 'GET_PROFILE_SUCCESS';
 export const GET_PROFILE_FAILURE = 'GET_PROFILE_FAILURE';
 
-export const EDIT_NAME = 'EDIT_NAME';
 export const EDIT_NAME_REQUEST = 'EDIT_NAME_REQUEST';
 export const EDIT_NAME_SUCCESS = 'EDIT_NAME_SUCCESS';
 export const EDIT_NAME_FAILURE = 'EDIT_NAME_FAILURE';

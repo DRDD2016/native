@@ -3,9 +3,9 @@ import { View } from 'react-native';
 import Button from '../common/Button';
 import styles from '../../../styles';
 
-const HostCreateEventButton = ({ hostEventChoices, handleConfirmEvent, event_id }) => { //eslint-disable-line
+const HostCreateEventButton = ({ finalChoices, handleConfirmEvent, event_id }) => { //eslint-disable-line
   const hostHasSelectedEventOptions =
-  Object.keys(hostEventChoices).every(categoryName => hostEventChoices[categoryName] !== '');
+  Object.keys(finalChoices).every(categoryName => finalChoices[categoryName] !== '');
 
   const hideButton = !hostHasSelectedEventOptions;
 
@@ -18,7 +18,7 @@ const HostCreateEventButton = ({ hostEventChoices, handleConfirmEvent, event_id 
         <Button
           buttonStyle={styles.confirmButton}
           textStyle={styles.confirmButtonText}
-          onClick={ () => { handleConfirmEvent(hostEventChoices, event_id); }}
+          onClick={ () => { handleConfirmEvent(finalChoices, event_id); }}
         > CONFIRM & SEND INVITES </Button>
       }
     </View>

@@ -5,7 +5,6 @@ export const SET_WHAT = 'SET_WHAT';
 export const SET_WHERE = 'SET_WHERE';
 export const SET_WHEN = 'SET_WHEN';
 
-export const SAVE_EVENT = 'SAVE_EVENT';
 export const SAVE_EVENT_REQUEST = 'SAVE_EVENT_REQUEST';
 export const SAVE_EVENT_SUCCESS = 'SAVE_EVENT_SUCCESS';
 export const SAVE_EVENT_FAILURE = 'SAVE_EVENT_FAILURE';

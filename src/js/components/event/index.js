@@ -44,7 +44,7 @@ class Event extends React.Component {
             tally={ this.props.tally }
             event={ this.props.event }
             event_id={ this.props.event.event_id }
-            handleHostEventChoices={ this.props.handleHostEventChoices }
+            finalChoices={ this.props.finalChoices }
             hostEventChoices={ this.props.hostEventChoices }
             handleConfirmEvent={ this.props.handleConfirmEvent }
           />
@@ -58,7 +58,7 @@ class Event extends React.Component {
               event={ this.props.event }
               toggleSelection={ this.props.toggleSelection }
               poll={ this.props.poll }
-              handlePollConfirmation={ this.props.handlePollConfirmation }
+              handleVote={ this.props.handleVote }
               event_id={ this.props.params.event_id }
               isHost={ this.props.userIsHost }
               hasVoted={ this.props.hasVoted }

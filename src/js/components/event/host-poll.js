@@ -7,11 +7,11 @@ import HostCreateEventButton from './host-create-event-button';
 import Button from '../common/Button';
 import styles from '../../../styles';
 
-const HostPoll = ({ event, tally, hostEventChoices, //eslint-disable-line
+const HostPoll = ({ event, tally, finalChoices, //eslint-disable-line
   handleHostEventChoices, handleConfirmEvent, event_id  }) => { //eslint-disable-line
-  const eventWhat = createVoteSection(event, tally, 'eventWhat', EventWhatSection, handleHostEventChoices, hostEventChoices);
-  const eventWhere = createVoteSection(event, tally, 'eventWhere', EventWhereSection, handleHostEventChoices, hostEventChoices);
-  const eventWhen = createVoteSection(event, tally, 'eventWhen', EventWhenSection, handleHostEventChoices, hostEventChoices);
+  // const what = createVoteSection(event, tally, '_what', EventWhatSection, handleHostEventChoices, finalChoices);
+  // const where = createVoteSection(event, tally, '_where', EventWhereSection, handleHostEventChoices, finalChoices);
+  // const when = createVoteSection(event, tally, '_when', EventWhenSection, handleHostEventChoices, finalChoices);
 
   function eventNote (event) {
 
@@ -33,17 +33,17 @@ const HostPoll = ({ event, tally, hostEventChoices, //eslint-disable-line
       <View>{ eventNote(event) }</View>
 
       <View style={styles.row}>
-        <View>{ eventWhat }</View>
+        <View><Text>WHAT</Text></View>
       </View>
       <View style={styles.row}>
-        <View>{ eventWhere }</View>
+        <View><Text>WHERE</Text></View>
       </View>
       <View style={styles.row}>
-        <View>{ eventWhen }</View>
+        <View><Text>WHEN</Text></View>
       </View>
 
       <HostCreateEventButton
-        hostEventChoices={ hostEventChoices }
+        finalChoices={ finalChoices }
         handleConfirmEvent={ handleConfirmEvent }
         event_id={ event_id }
       />
@@ -51,51 +51,5 @@ const HostPoll = ({ event, tally, hostEventChoices, //eslint-disable-line
     </View>
   );
 };
-
-function createVoteSection (event, tally, eventType, EventTypeComponent,
-  handleHostEventChoices, hostEventChoices) {
-
-  return event[eventType].map((choice, i) => {
-
-    const selectedClasses =
-    (hostEventChoices[eventType] === i || hostEventChoices[eventType] === undefined);
-    const hideClasses = i > 0;
-
-    const tallyCount = tally[eventType] ? tally[eventType][i] : '';
-
-    if (tally[eventType]) {
-      // console.log(choice);
-      // console.log(tallyCount);
-      // console.log(selectedClasses);
-      // console.log(hideClasses);
-
-      return (
-        <Button
-          onClick={ () => handleHostEventChoices(eventType, choice, i) }
-          key={ `${eventType}-${i}` }
-        >
-          <EventTypeComponent
-            text={ choice }
-            tally={ tallyCount }
-            choiceClasses={ selectedClasses }
-            labelClasses={ hideClasses }
-          />
-        </Button>
-      );
-    } else {
-
-      return (
-        <View key={ `${eventType}-${i}` }>
-          <EventTypeComponent
-            text={ choice }
-            tally={ tallyCount }
-            choiceClasses={ selectedClasses }
-            labelClasses={ hideClasses }
-          />
-        </View>
-      );
-    }
-  });
-}
 
 export default HostPoll;
