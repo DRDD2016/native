@@ -13,7 +13,7 @@ const event1 = {
   _invitees: [2],
   _what: ['dancing', 'skydiving'],
   _where: ['Forest', 'Camping'],
-  _when: ['2017-01-03T00:00:00.000Z', '2017-02-14T00:00:00.000Z']
+  _when: [{ date: '01-01-2017', time: '12:00:00' }, { date: '03-01-2017', time: '15:00:00' }]
 };
 
 export function getEvent (event_id) { //eslint-disable-line
