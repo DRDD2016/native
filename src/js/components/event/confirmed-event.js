@@ -9,7 +9,13 @@ import formatDate from '../../lib/formatDate';
 import styles from '../../../styles';
 
 
+<<<<<<< HEAD
 const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, RSVPToEvent }) => {
+=======
+const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost,
+  RSVPToEvent, handleUploadPhoto, photos, deletedPhotos, handleDeletePhoto,
+  handleSharePhoto, file, handleSetFile, getSelectedPhoto, hasPhotoLoaded }) => {
+>>>>>>> 91b9d729be052e8b81b67a42e778914ec4a7afd6
 
 
   const handleClick = !userIsHost ? RSVPToEvent : '';
@@ -53,7 +59,6 @@ const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, RSVPToEv
         <Text>
           When
         </Text>
-
         <View>
           <View style={styles.date}>
             <Text>{ 'TBC' }</Text>
@@ -63,6 +68,7 @@ const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, RSVPToEv
           </View>
         </View>
       </View>
+
     </View>
   );
 
