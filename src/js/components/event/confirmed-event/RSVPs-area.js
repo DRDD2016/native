@@ -3,11 +3,11 @@ import { View, Text, Image } from 'react-native';
 import Button from '../../common/Button';
 import styles from '../../../../styles';
 
-const RSVPsArea = ({ event_id, invitees, RSVPs, respondedList, notRespondedList, handleClick }) => {
+const rsvpsArea = ({ event_id, invitees, rsvps, respondedList, notRespondedList, handleClick }) => {
 
-  function RSVPUserList (RSVPs, invitees, status) { // eslint-disable-line
+  function RSVPUserList (rsvps, invitees, status) { // eslint-disable-line
 
-    return RSVPs[status].map((id, index) => {
+    return rsvps[status].map((id, index) => {
       const usersWithRSVP = invitees.filter(userObject => id === userObject.id);
 
       return (
@@ -23,27 +23,27 @@ const RSVPsArea = ({ event_id, invitees, RSVPs, respondedList, notRespondedList,
 
   return (
     <View>
-      <Text>RSVPs</Text>
+      <Text>rsvps</Text>
 
       <View style={styles.row}>
         <View>
           <Button buttonStyle={styles.RSVPButtonGoing} onPress={ () => handleClick('going', event_id) }> Going </Button>
           <View style={styles.uiBigHorizontalList}>
-            { RSVPUserList(RSVPs, invitees, 'going') }
+            { RSVPUserList(rsvps, invitees, 'going') }
           </View>
         </View>
 
         <View>
           <Button buttonStyle={styles.RSVPButtonMaybe} onPress={ () => handleClick('maybe', event_id) }> Maybe </Button>
           <View style={styles.uiBigHorizontalList}>
-            { RSVPUserList(RSVPs, invitees, 'maybe') }
+            { RSVPUserList(rsvps, invitees, 'maybe') }
           </View>
         </View>
 
         <View>
           <Button buttonStyle={styles.RSVPButtonNotGoing} onPress={ () => handleClick('notGoing', event_id) }> Not Going </Button>
           <View style={styles.uiBigHorizontalList}>
-            { RSVPUserList(RSVPs, invitees, 'notGoing') }
+            { RSVPUserList(rsvps, invitees, 'notGoing') }
           </View>
         </View>
       </View>
@@ -69,4 +69,4 @@ const RSVPsArea = ({ event_id, invitees, RSVPs, respondedList, notRespondedList,
   );
 };
 
-export default RSVPsArea;
+export default rsvpsArea;

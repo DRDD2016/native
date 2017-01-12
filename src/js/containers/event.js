@@ -10,6 +10,7 @@ import jsonState from '../testState/jsonStateEvent.json';
 
 import { store } from '../init-store';
 
+const user_id = 1;
 
 const mapStateToProps = ({ event }) => {
   console.log(event);
@@ -17,11 +18,11 @@ const mapStateToProps = ({ event }) => {
     isPoll: event.data.is_poll,
     event: event.data,
     poll: event.poll,
-    RSVPs: event.RSVPs, // host
+    rsvps: event.data._rsvps, // host
     finalChoices: event.poll.finalChoices,
     hasMadeChoice: false,
     isFetching: event.data.isFetching,
-    userIsHost: false
+    userIsHost: user_id === event.data.host_user_id
   };
 };
 

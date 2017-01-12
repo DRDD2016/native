@@ -1,8 +1,8 @@
 import React from 'react';
 
-export function RSVPUserList (RSVPs, invitees, status) {
+export function RSVPUserList (rsvps, invitees, status) {
 
-  return RSVPs[status].map((id) => {
+  return rsvps[status].map((id) => {
     const usersWithRSVP = invitees.filter(userObject => id === userObject.id);
 
     return (

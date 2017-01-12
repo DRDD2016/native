@@ -12,7 +12,7 @@ to FeedItem.jsx for feed view
 ***/
 
 const CalendarItem = ({ eventName, eventWhere, eventWhen,
- coverPhoto, RSVPstatus, userIsHost }) => {
+ coverPhoto, rsvpStatus, userIsHost }) => {
   // need to add onPress handler for Button.
   return (
     <Card style={styles.cardStyle}>
@@ -23,16 +23,16 @@ const CalendarItem = ({ eventName, eventWhere, eventWhen,
             <View style={styles.cardTopRow}>
 
               <View>
-                {(userIsHost || RSVPstatus === 'going') &&
+                {(userIsHost || rsvpStatus === 'going') &&
                   <Icon name="check-circle" size={20} color="green" />
                 }
-                {!userIsHost && RSVPstatus === 'maybe' &&
+                {!userIsHost && rsvpStatus === 'maybe' &&
                   <Icon name="question-circle" size={20} color="orange" />
                 }
-                {!userIsHost && RSVPstatus === 'notGoing' &&
+                {!userIsHost && rsvpStatus === 'notGoing' &&
                   <Icon name="times-circle" size={20} color="red" />
                 }
-                {!userIsHost && RSVPstatus === null &&
+                {!userIsHost && rsvpStatus === null &&
                   <Icon name="exclamation-circle" size={20} color="gray" />
                 }
               </View>

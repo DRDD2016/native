@@ -94,7 +94,7 @@ function handleRSVPSuccess (state, action) {
 
   const newState = update(state, {
     isFetching: { $set: action.isFetching },
-    RSVPs: { $set: action.data }
+    rsvps: { $set: action.data }
   });
   return newState;
 }
@@ -115,7 +115,7 @@ function handleGetEventSuccess (state, action) {
     tally: { $set: action.data.tally },
     poll: { $set: action.data.poll },
     hostEventChoices: { $set: hostEventChoices },
-    RSVPs: { $set: action.data.RSVPs },
+    rsvps: { $set: action.data.rsvps },
     invitees: { $set: action.data.invitees },
     hasVoted: { $set: action.data.hasVoted }
   });
