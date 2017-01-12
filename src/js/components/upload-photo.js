@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Platform, PixelRatio, TouchableOpacity, Image } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import Router from '../router';
 import Button from './common/Button';
 
 const styles = {
@@ -87,7 +88,7 @@ export default class UploadPhoto extends Component {
   }
 
   nextPage () {
-    this.props.navigator.push('navbar');
+    this.props.navigator.immediatelyResetStack([Router.getRoute('navbar')], 0);
   }
 
   render () {
