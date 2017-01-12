@@ -55,11 +55,11 @@ export function updateRSVPRequest () {
   };
 }
 
-export function updateRSVPSuccess (RSVPs) {
+export function updateRSVPSuccess (rsvps) {
   return {
     type: UPDATE_RSVP_SUCCESS,
     isFetching: false,
-    data: RSVPs
+    data: rsvps
   };
 }
 

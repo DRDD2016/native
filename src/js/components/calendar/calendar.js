@@ -51,7 +51,7 @@ const Calendar = ({ allEvents, filteredEvents, isFetching,
                 <CalendarItem
                   key={ i }
                   userIsHost={ item.hostID === getUserID() }
-                  RSVPstatus={ item.RSVP }
+                  rsvpStatus={ item.RSVP }
                   eventName={ item.eventName }
                   eventWhat={ item.eventWhat }
                   eventWhere={ item.eventWhere }

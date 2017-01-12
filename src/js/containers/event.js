@@ -17,11 +17,11 @@ const mapStateToProps = ({ event }) => {
     isPoll: event.data.is_poll,
     event: event.data,
     poll: event.poll,
-    RSVPs: event.RSVPs, // host
+    rsvps: event.data._rsvps, // host
     finalChoices: event.poll.finalChoices,
     hasMadeChoice: false,
     isFetching: event.data.isFetching,
-    userIsHost: false
+    userIsHost: true
   };
 };
 

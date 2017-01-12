@@ -72,9 +72,9 @@ class Event extends React.Component {
           <View style={styles.container}>
             <ConfirmedEvent
               event={ this.props.event }
-              event_id={ this.props.params.event_id }
+              event_id={ this.props.event_id }
               userIsHost={ this.props.userIsHost }
-              RSVPs={ this.props.RSVPs }
+              rsvps={ this.props.rsvps }
               RSVPToEvent={ this.props.RSVPToEvent }
               invitees={ this.props.invitees }
               handleUploadPhoto={ this.props.handleUploadPhoto }
