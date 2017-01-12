@@ -9,9 +9,7 @@ import formatDate from '../../lib/formatDate';
 import styles from '../../../styles';
 
 
-const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost,
-  RSVPToEvent, handleUploadPhoto, photos, deletedPhotos, handleDeletePhoto,
-  handleSharePhoto, file, handleSetFile, getSelectedPhoto, hasPhotoLoaded }) => {
+const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, RSVPToEvent }) => {
 
 
   const handleClick = !userIsHost ? RSVPToEvent : '';
@@ -65,11 +63,6 @@ const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost,
           </View>
         </View>
       </View>
-
-      <Text>Upload panel goes here</Text>
-      <Text>Photo stream goes here</Text>
-
-
     </View>
   );
 

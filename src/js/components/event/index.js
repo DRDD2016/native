@@ -77,15 +77,6 @@ class Event extends React.Component {
               rsvps={ this.props.rsvps }
               RSVPToEvent={ this.props.RSVPToEvent }
               invitees={ this.props.invitees }
-              handleUploadPhoto={ this.props.handleUploadPhoto }
-              photos={ this.props.photos }
-              deletedPhotos={ this.props.deletedPhotos }
-              handleDeletePhoto={ this.props.handleDeletePhoto }
-              handleSharePhoto={ this.props.handleSharePhoto }
-              file={ this.props.file }
-              handleSetFile={ this.props.handleSetFile }
-              getSelectedPhoto={ this.props.getSelectedPhoto }
-              hasPhotoLoaded={ this.props.hasPhotoLoaded }
             />
           </View>
         </View>
