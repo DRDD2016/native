@@ -8,56 +8,62 @@ import colours from '../../../styles/colours';
 import BarChart from '../../components/event/bar-chart';
 import jsonState from '../../testState/jsonStateEvent.json';
 
-export const EventWhatSection = ({ text, tally, choiceClasses, labelClasses }) => { //eslint-disable-line
+export const EventWhatSection = ({ text, tally, choiceClasses, labelClasses, toggleSelection, isOption, index, type }) => { //eslint-disable-line
   return (
-    <View style={styles.pollSection}>
-      { (labelClasses) &&
-        <View style={styles.columnLeft} />
-      }
-      { (!labelClasses) &&
-        <View style={styles.columnLeft}>
-          <Text style={styles.optionTitleWhat}>What</Text>
-        </View>
-      }
-      { (!choiceClasses) &&
-        <View style={styles.columnMiddlePoll}>
-          <View style={styles.rowSpaced}>
-            <Button buttonStyle={styles.optionDeselectedWhat} textStyle={styles.optionTextDeselectedWhat}>
-              <Icon name="star" size={16} color={colours.what} />
-              {' '}
-              { text || 'TBC' }
-            </Button>
-          </View>
-        </View>
-      }
-      { (choiceClasses) &&
-        <View style={styles.columnMiddlePoll}>
-          <View style={styles.rowSpaced}>
-            <Button buttonStyle={styles.optionSelectedWhat} textStyle={styles.optionTextSelected}>
-              <Icon name="star" size={16} color="white" />
-              {' '}
-              { text || 'TBC' }
-            </Button>
-          </View>
-        </View>
-      }
-      <View style={styles.columnRight}>
-        <View style={styles.chartRow}>
-          <View
-            style={{
-              width: 1,
-              backgroundColor: colours.what,
-              marginLeft: 10 }}
-          />
+    <View>
+      <Button
+        onClick={ isOption ? () => toggleSelection(type, index) : null }
+      >
+        <View style={styles.pollSection}>
+          { (labelClasses) &&
+            <View style={styles.columnLeft} />
+          }
+          { (!labelClasses) &&
+            <View style={styles.columnLeft}>
+              <Text style={styles.optionTitleWhat}>What</Text>
+            </View>
+          }
+          { (!choiceClasses) &&
+            <View style={styles.columnMiddlePoll}>
+              <View style={styles.rowSpaced}>
+                <Button buttonStyle={styles.optionDeselectedWhat} textStyle={styles.optionTextDeselectedWhat}>
+                  <Icon name="star" size={16} color={colours.what} />
+                  {' '}
+                  { text || 'TBC' }
+                </Button>
+              </View>
+            </View>
+          }
+          { (choiceClasses) &&
+            <View style={styles.columnMiddlePoll}>
+              <View style={styles.rowSpaced}>
+                <Button buttonStyle={styles.optionSelectedWhat} textStyle={styles.optionTextSelected}>
+                  <Icon name="star" size={16} color="white" />
+                  {' '}
+                  { text || 'TBC' }
+                </Button>
+              </View>
+            </View>
+          }
+          <View style={styles.columnRight}>
+            <View style={styles.chartRow}>
+              <View
+                style={{
+                  width: 1,
+                  backgroundColor: colours.what,
+                  marginLeft: 10 }}
+              />
 
-          <View style={styles.columnFlexStart}>
-            <Text style={styles.msg4}>
-              {(tally !== 0) && `  ${tally} votes`}
-            </Text>
-            <BarChart tally={tally} allData={jsonState.event.tally.eventWhat} chartColor={colours.what} />
+              <View style={styles.columnFlexStart}>
+                <Text style={styles.msg4}>
+                  {(tally !== 0) && `  ${tally} votes`}
+                </Text>
+                <BarChart tally={tally} allData={jsonState.event.tally.eventWhat} chartColor={colours.what} />
+              </View>
+            </View>
           </View>
         </View>
-      </View>
+      </Button>
     </View>
   );
 };

@@ -59,9 +59,9 @@ class Event extends React.Component {
               toggleSelection={ this.props.toggleSelection }
               poll={ this.props.poll }
               handleVote={ this.props.handleVote }
-              event_id={ this.props.params.event_id }
+              event_id={ this.props.event.event_id }
               isHost={ this.props.userIsHost }
-              hasVoted={ this.props.hasVoted }
+              hasMadeChoice={ this.props.hasMadeChoice }
             />
           </View>
         </View>
