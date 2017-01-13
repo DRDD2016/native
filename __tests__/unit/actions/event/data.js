@@ -15,7 +15,7 @@ import * as actions from '../../../../src/js/actions/event/data';
 // };
 
 
-describe.only('event data actions', () => {
+describe('GET_EVENT actions', () => {
 
   describe('`getEventRequest` action creator', () => {
 

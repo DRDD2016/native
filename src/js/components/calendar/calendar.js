@@ -4,16 +4,17 @@ import CalendarItem from './calendar-item';
 import FilterPanel from '../general/filter-panel';
 import Spinner from '../common/Spinner';
 import TopBar from '../event/top-bar';
-import getUserID from '../../lib/getUserID';
 import styles from '../../../styles';
 
+const user_id = 1;
+
 const Calendar = ({ allEvents, filteredEvents, isFetching,
-  displaySome, displayAll, calendarIsFiltered, isShowHosting }) => {
+  displaySome, displayAll, calendarIsFiltered }) => {
 
   const sortedData = filteredEvents.sort((a, b) => {
     /* eslint-disable no-param-reassign */
-    a = a.eventWhen[0].date;
-    b = b.eventWhen[0].date;
+    a = a._when[0].date;
+    b = b._when[0].date;
 
     return new Date(a).getTime() > new Date(b).getTime();
   });
@@ -31,7 +32,7 @@ const Calendar = ({ allEvents, filteredEvents, isFetching,
             displaySome={ displaySome }
             displayAll={ displayAll }
             dataIsFiltered={ calendarIsFiltered }
-            isShowHosting={ isShowHosting }
+            isShowHosting={ '1' == 1 }
           />
         }
       </View>
@@ -50,13 +51,12 @@ const Calendar = ({ allEvents, filteredEvents, isFetching,
               return (
                 <CalendarItem
                   key={ i }
-                  userIsHost={ item.hostID === getUserID() }
+                  userIsHost={ item.host_id === user_id }
                   rsvpStatus={ item.RSVP }
-                  eventName={ item.eventName }
-                  eventWhat={ item.eventWhat }
-                  eventWhere={ item.eventWhere }
-                  eventWhen={ item.eventWhen }
-                  coverPhoto={ item.coverPhoto }
+                  name={ item.name }
+                  what={ item._what }
+                  where={ item._where }
+                  when={ item._when }
                   event_id={ item.event_id }
                 />
               );

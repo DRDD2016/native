@@ -1,17 +1,16 @@
-import * as actions from '../../../src/js/actions/signup';
+import * as actions from '../../../src/js/actions/calendar';
 
+describe('GET_CALENDAR actions', () => {
 
-describe('SIGNUP_USER actions', () => {
-
-  describe('`signupUserRequest` action creator', () => {
+  describe('`getCalendarRequest` action creator', () => {
 
     it('returns expected action', () => {
 
       const expected = {
-        type: actions.SIGNUP_USER_REQUEST
+        type: actions.GET_CALENDAR_REQUEST
       };
 
-      const actual = actions.signupUserRequest();
+      const actual = actions.getCalendarRequest();
       expect(actual).toEqual(expected);
     });
   });
@@ -22,7 +21,7 @@ describe('SIGNUP_USER actions', () => {
       const data = { email: 'donald@spark.com' };
 
       const expected = {
-        type: actions.SIGNUP_USER_SUCCESS,
+        type: actions.GET_CALENDAR_SUCCESS,
         data
       };
 
@@ -36,7 +35,7 @@ describe('SIGNUP_USER actions', () => {
     it('returns expected action', () => {
       const error = new Error();
       const expected = {
-        type: actions.SIGNUP_USER_FAILURE,
+        type: actions.GET_CALENDAR_FAILURE,
         error
       };
       const actual = actions.signupUserFailure(error);
@@ -44,5 +43,4 @@ describe('SIGNUP_USER actions', () => {
       expect(actual).toEqual(expected);
     });
   });
-
 });

@@ -1,37 +1,27 @@
-import getUserID from '../lib/getUserID';
-
+/* eslint-disable max-len */
 export const GET_CALENDAR_REQUEST = 'GET_CALENDAR_REQUEST';
 export const GET_CALENDAR_SUCCESS = 'GET_CALENDAR_SUCCESS';
 export const GET_CALENDAR_FAILURE = 'GET_CALENDAR_FAILURE';
 export const APPLY_FILTER = 'APPLY_FILTER';
 export const CLEAR_FILTER = 'CLEAR_FILTER';
 
+
 export function getCalendar () {
-  const id = getUserID(); //eslint-disable-line
   return (dispatch) => {
     dispatch(getCalendarRequest());
-
-    // axios.get(`/get-calendar?user_id=${id}`)
-    //   .then((response) => {
-    //     dispatch(getCalendarSuccess(response.data));
-    //   })
-    // .catch((error) => {
-    //   dispatch(getCalendarFailure(error));
-    // });
+    dispatch(getCalendarSuccess(true));
   };
 }
 
 export function getCalendarRequest () {
   return {
-    type: GET_CALENDAR_REQUEST,
-    isFetching: true
+    type: GET_CALENDAR_REQUEST
   };
 }
 
 export function getCalendarSuccess (data) {
   return {
     type: GET_CALENDAR_SUCCESS,
-    isFetching: false,
     data
   };
 }
@@ -39,7 +29,6 @@ export function getCalendarSuccess (data) {
 export function getCalendarFailure (error) {
   return {
     type: GET_CALENDAR_FAILURE,
-    isFetching: false,
     error
   };
 }
