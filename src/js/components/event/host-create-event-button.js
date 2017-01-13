@@ -19,7 +19,9 @@ const HostCreateEventButton = ({ finalChoices, handleConfirmEvent, event_id }) =
           buttonStyle={styles.confirmButton}
           textStyle={styles.confirmButtonText}
           onClick={ () => { handleConfirmEvent(finalChoices, event_id); }}
-        > CONFIRM & SEND INVITES </Button>
+        >
+          CONFIRM & SEND INVITES
+        </Button>
       }
     </View>
   );
