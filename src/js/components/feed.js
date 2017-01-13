@@ -1,10 +1,8 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import FeedItem from './feedItem';
 import getUserID from '../lib/getUserID';
 import FilterPanel from './general/filter-panel';
-import Button from './common/Button';
 import Spinner from './common/Spinner';
 import styles from '../../styles';
 import colours from '../../styles/colours';
@@ -24,7 +22,7 @@ export default class Feed extends Component {
     const mappedFeed = feed.map((data, i) => {
       return (
         <FeedItem
-          key={ i }
+          key={ data.timestamp }
           index={ i }
           viewed={ data.viewed }
           event_id={ data.event_id }
