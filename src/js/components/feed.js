@@ -21,19 +21,19 @@ const Feed = ({ navigator, allEvents, feed, isFetching,
         viewed={ data.viewed }
         event_id={ data.event_id }
         timestamp={ data.timestamp }
-        isPoll={ data.isPoll }
+        is_poll={ data.is_poll }
         firstname={ data.firstname }
         surname={ data.surname }
         photo_url={ data.photo_url }
-        eventWhat={ data.eventWhat }
-        eventWhere={ data.eventWhere }
-        eventWhen={ data.eventWhen }
-        userIsHost={ data.hostID === getUserID() }
-        hostID={ data.hostID }
-        subjectID={ data.subjectID }
+        what={ data._what }
+        where={ data._where }
+        when={ data._when }
+        userIsHost={ data.host_user_id === 1 }
+        hostID={ data.host_user_id }
+        subjectID={ data.subject_user_id }
         handleSelection={ handleSelection }
         inviteesNumber={ data.inviteesNumber }
-        eventName={ data.eventName }
+        eventName={ data.name }
         hasEdited={ data.hasEdited }
       />
     );

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { View, Text, Image, TextInput } from 'react-native';
 import TopBar from './event/top-bar';
 import Button from './common/Button';
 import styles from '../../styles';
 
-const Profile = ({ user, firstname, surname, handleLogOut, handleChangeName, handleEditName }) => {
+const Profile = ({ email, photo_url, firstname, surname, handleLogOut, handleChangeName, handleEditName }) => {
 
   const hideEditButton = (firstname === '' ? styles.hideEditButton : [styles.buttonStyle, { backgroundColor: 'green' }]);
 
@@ -24,7 +24,7 @@ const Profile = ({ user, firstname, surname, handleLogOut, handleChangeName, han
         </View>
 
         <View style={styles.row}>
-          <Image style={styles.uiProfilePagePhotoCircularImage} source={{ uri: user.photo_url }} />
+          <Image style={styles.uiProfilePagePhotoCircularImage} source={{ uri: photo_url }} />
         </View>
 
         <View style={styles.row}>
@@ -85,6 +85,16 @@ const Profile = ({ user, firstname, surname, handleLogOut, handleChangeName, han
       </View>
     </View>
   );
+};
+
+Profile.propTypes = {
+  email: PropTypes.string.isRequired,
+  firstname: PropTypes.string.isRequired,
+  surname: PropTypes.string.isRequired,
+  photo_url: PropTypes.string.isRequired,
+  handleLogOut: PropTypes.func.isRequired,
+  handleEditName: PropTypes.func.isRequired,
+  handleChangeName: PropTypes.func.isRequired
 };
 
 export default Profile;

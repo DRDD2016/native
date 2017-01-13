@@ -5,21 +5,18 @@ import { getEvent } from '../actions/event/data';
 import { updateFeedItem } from '../actions/event';
 import filterFeed from '../lib/filterFeed';
 import Router from '../router';
-import jsonState from '../testState/jsonState.json';
 
-const mapStateToProps = () => {
+const mapStateToProps = ({ feed }) => {
 
-  const data = jsonState.feed.data;
-  const feedIsFiltered = jsonState.feed.filter;
-  const isShowHosting = jsonState.feed.showHosting;
-  const feed = filterFeed(data, feedIsFiltered, isShowHosting);
+  const data = feed.data;
+  const feedIsFiltered = feed.filter;
+  const isShowHosting = feed.showHosting;
+  const feedData = filterFeed(data, feedIsFiltered, isShowHosting);
 
   return {
     allEvents: data,
-    user: jsonState.user,
-    feed,
-    isFetching: jsonState.feed.isFetching,
-    updateFeedItem: jsonState.event.updateFeedItem,
+    feed: feedData,
+    isFetching: feed.isFetching,
     feedIsFiltered,
     isShowHosting
   };

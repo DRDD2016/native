@@ -11,7 +11,7 @@ import styles from '../../../styles';
 to FeedItem.jsx for feed view
 ***/
 
-const CalendarItem = ({ eventName, eventWhere, eventWhen,
+const CalendarItem = ({ what, where, when,
  coverPhoto, rsvpStatus, userIsHost }) => {
   // need to add onPress handler for Button.
   return (
@@ -38,7 +38,7 @@ const CalendarItem = ({ eventName, eventWhere, eventWhen,
               </View>
 
               <Text style={styles.calendarTitle}>
-                { eventName }
+                { what }
               </Text>
 
             </View>
@@ -47,12 +47,12 @@ const CalendarItem = ({ eventName, eventWhere, eventWhen,
 
               <Text style={styles.date}>
                 <Icon name="calendar-o" size={14} color="gray" />
-                { ` ${formatDate(eventWhen[0].date).toUpperCase() || 'TBC'}` }
+                { ` ${formatDate(when[0].date).toUpperCase() || 'TBC'}` }
               </Text>
 
               <Text style={styles.placeName}>
                 <Icon name="map-marker" size={14} color="gray" />
-                { ` ${eventWhere[0].placeName || 'TBC'} ${eventWhere[0].placeAddress}` }
+                { ` ${where[0].placeName || 'TBC'} ${where[0].placeAddress}` }
               </Text>
 
             </View>
