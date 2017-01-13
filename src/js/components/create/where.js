@@ -19,12 +19,12 @@ export default class Where extends Component {
     }
   }
 
-  nextPage = () => {
-    this.props.navigator.push(Router.getRoute('when'));
+  nextPage = (name) => {
+    this.props.navigator.push(Router.getRoute('when', { name }));
   };
 
   render () {
-    const { data, description, addInput, removeInput, handleChange } = this.props;
+    const { data, name, addInput, removeInput, handleChange } = this.props;
     const inputCount = data.length;
     const inputs = data.map((value, i) => {
       return (
@@ -63,7 +63,7 @@ export default class Where extends Component {
             { (!hideNext) &&
               <Button
                 buttonStyle={ styles.buttonStyle }
-                onPress={ this.nextPage }
+                onPress={ () => this.nextPage(name) }
               >
                 Next
               </Button>

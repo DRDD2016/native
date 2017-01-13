@@ -4,8 +4,7 @@ import Where from '../../components/create/where';
 
 const mapStateToProps = ({ create }) => ({
   data: create._where,
-  name: create.name,
-  description: create.description
+  name: create.name
 });
 
 const mapDispatchToProps = dispatch => ({
