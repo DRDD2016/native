@@ -6,7 +6,6 @@ import FilterPanel from '../general/filter-panel';
 import Spinner from '../common/Spinner';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
-import store from '../../init-store';
 
 const user_id = 1;
 export default class Calendar extends Component {
