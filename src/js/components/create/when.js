@@ -18,8 +18,8 @@ export default class When extends Component {
     }
   }
 
-  nextPage = () => {
-    this.props.navigator.push(Router.getRoute('confirm'));
+  nextPage = (name) => {
+    this.props.navigator.push(Router.getRoute('confirm', { name }));
   };
 
   render () {
@@ -71,7 +71,7 @@ export default class When extends Component {
               { (!hideNext) &&
                 <Button
                   buttonStyle={styles.buttonStyle}
-                  onPress={ () => nextPage(name) }
+                  onPress={ () => this.nextPage(name) }
                 >
                   Next
                 </Button>
