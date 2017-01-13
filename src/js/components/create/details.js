@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import Router from '../../router';
-import EventDetailsHeader from '../general/event-details-header';
 import Button from '../common/Button';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';

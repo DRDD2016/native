@@ -3,7 +3,6 @@ import { View, Text } from 'react-native';
 import Input from '../general/input';
 import Router from '../../router';
 import AddInput from '../general/add-input';
-import EventDetailsHeader from '../general/event-details-header';
 import Button from '../common/Button';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
@@ -20,12 +19,12 @@ export default class What extends Component {
     }
   }
 
-  nextPage = () => {
-    this.props.navigator.push(Router.getRoute('where'));
+  nextPage = (name) => {
+    this.props.navigator.push(Router.getRoute('where', { name }));
   }
 
   render () {
-    const { data, name, description, addInput, removeInput, handleChange } = this.props;
+    const { data, name, addInput, removeInput, handleChange } = this.props;
     const inputCount = data.length;
 
     const inputs = data.map((value, i) => {
@@ -66,7 +65,7 @@ export default class What extends Component {
             }
             { (!hideNext) &&
               <Button
-                onPress={ this.nextPage }
+                onPress={ () => this.nextPage(name) }
                 buttonStyle={ styles.buttonStyle }
                 buttonTextStyle={ styles.buttonTextStyle }
               >
