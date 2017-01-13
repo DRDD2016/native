@@ -26,23 +26,20 @@ export function getEvent (event_id) { //eslint-disable-line
 
 export function getEventRequest () {
   return {
-    type: GET_EVENT_REQUEST,
-    isFetching: true
+    type: GET_EVENT_REQUEST
   };
 }
 
-export function getEventSuccess (event) {
+export function getEventSuccess (data) {
   return {
     type: GET_EVENT_SUCCESS,
-    isFetching: false,
-    data: event
+    data
   };
 }
 
 export function getEventFailure (error) {
   return {
     type: GET_EVENT_FAILURE,
-    isFetching: false,
     error
   };
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { View, Text, Image, TextInput } from 'react-native';
 import Button from './common/Button';
 import styles from '../../styles';
@@ -19,7 +19,7 @@ export default class Profile extends Component {
   }
 
   render () {
-    const { user, firstname, surname, handleLogOut, handleChangeName } = this.props;
+    const { photo_url, firstname, surname, handleLogOut, handleChangeName } = this.props;
     const hideEditButton = (firstname === '' ? styles.hideEditButton : [styles.buttonStyle, { backgroundColor: 'green' }]);
     return (
       <View style={styles.profilePage}>
@@ -30,7 +30,7 @@ export default class Profile extends Component {
           </View>
 
           <View style={styles.row}>
-            <Image style={styles.uiProfilePagePhotoCircularImage} source={{ uri: user.photo_url }} />
+            <Image style={styles.uiProfilePagePhotoCircularImage} source={{ uri: photo_url }} />
           </View>
 
           <View style={styles.row}>
@@ -80,3 +80,12 @@ export default class Profile extends Component {
     );
   }
 }
+
+Profile.propTypes = {
+  firstname: PropTypes.string.isRequired,
+  surname: PropTypes.string.isRequired,
+  photo_url: PropTypes.string.isRequired,
+  handleLogOut: PropTypes.func.isRequired,
+  handleEditName: PropTypes.func.isRequired,
+  handleChangeName: PropTypes.func.isRequired
+};

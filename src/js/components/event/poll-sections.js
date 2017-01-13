@@ -6,9 +6,26 @@ import Button from '../common/Button';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import BarChart from '../../components/event/bar-chart';
-import jsonState from '../../testState/jsonStateEvent.json';
 
-export const EventWhatSection = ({ text, tally, choiceClasses, labelClasses, toggleSelection, isOption, index, type }) => { //eslint-disable-line
+const tally = {
+  what: [
+    0,
+    0,
+    0
+  ],
+  where: [
+    0,
+    0,
+    0
+  ],
+  when: [
+    0,
+    0,
+    0
+  ]
+};
+
+export const WhatSection = ({ text, choiceClasses, labelClasses, toggleSelection, isOption, index, type }) => { //eslint-disable-line
   return (
     <View>
       <Button
@@ -58,7 +75,7 @@ export const EventWhatSection = ({ text, tally, choiceClasses, labelClasses, tog
                 <Text style={styles.msg4}>
                   {(tally !== 0) && `  ${tally} votes`}
                 </Text>
-                <BarChart tally={tally} allData={jsonState.event.tally.eventWhat} chartColor={colours.what} />
+                <BarChart tally={tally} allData={tally.what} chartColor={colours.what} />
               </View>
             </View>
           </View>
@@ -68,7 +85,7 @@ export const EventWhatSection = ({ text, tally, choiceClasses, labelClasses, tog
   );
 };
 
-export const EventWhereSection = ({ text, tally, choiceClasses, labelClasses }) => { //eslint-disable-line
+export const WhereSection = ({ text, tally, choiceClasses, labelClasses }) => { //eslint-disable-line
 
   const placeNameLong = text.placeName.length > 18;
   return (
@@ -148,7 +165,7 @@ export const EventWhereSection = ({ text, tally, choiceClasses, labelClasses }) 
             <Text style={styles.msg4}>
               {(tally !== 0) && `  ${tally} votes`}
             </Text>
-            <BarChart tally={tally} allData={jsonState.event.tally.eventWhere} chartColor={colours.where} />
+            <BarChart tally={tally} allData={tally.where} chartColor={colours.where} />
           </View>
         </View>
       </View>
@@ -156,7 +173,7 @@ export const EventWhereSection = ({ text, tally, choiceClasses, labelClasses }) 
   );
 };
 
-export const EventWhenSection = ({ text, tally, choiceClasses, labelClasses }) => { //eslint-disable-line
+export const WhenSection = ({ text, tally, choiceClasses, labelClasses }) => { //eslint-disable-line
   return (
     <View style={styles.pollSection}>
       { (labelClasses) &&
@@ -210,7 +227,7 @@ export const EventWhenSection = ({ text, tally, choiceClasses, labelClasses }) =
             <Text style={styles.msg4}>
               {(tally !== 0) && `  ${tally} votes`}
             </Text>
-            <BarChart tally={tally} allData={jsonState.event.tally.eventWhen} chartColor={colours.when} />
+            <BarChart tally={tally} allData={tally.when} chartColor={colours.when} />
           </View>
         </View>
       </View>

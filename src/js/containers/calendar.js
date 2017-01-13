@@ -3,26 +3,26 @@ import Calendar from '../components/calendar/calendar';
 import { applyFilter, clearFilter } from '../actions/calendar';
 import filterFeed from '../lib/filterFeed';
 import getFutureEvents from '../lib/getFutureEvents';
-import jsonState from '../testState/jsonState.json';
 
 
-const mapStateToProps = () => {
+const mapStateToProps = ({ calendar }) => {
 
-  const futureEvents = jsonState.calendar.data.filter(getFutureEvents);
-  const data = jsonState.calendar.data;
-  const calendarIsFiltered = jsonState.calendar.filter;
-  const isShowHosting = jsonState.calendar.showHosting;
+  const futureEvents = calendar.data.filter(getFutureEvents);
+  const data = calendar.data;
+  const calendarIsFiltered = calendar.filter;
+  const isShowHosting = calendar.showHosting;
 
   const filteredEvents = filterFeed(futureEvents, calendarIsFiltered, isShowHosting);
 
   return {
     allEvents: data,
     filteredEvents,
-    isFetching: jsonState.calendar.isFetching,
+    isFetching: calendar.isFetching,
     calendarIsFiltered,
     isShowHosting
   };
 };
+
 
 const mapDispatchToProps = dispatch => ({
 

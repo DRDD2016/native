@@ -2,20 +2,20 @@ import React from 'react';
 import moment from 'moment';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import getUserID from '../lib/getUserID';
 import formatDate from '../lib/formatDate';
 // import Button from './common/Button';
 import CardSection from './common/CardSection';
 import Card from './common/Card';
 import styles from '../../styles';
 
+const user_id = 1;
 moment.locale('en-gb');
 
 const FeedItem = ({ event_id, timestamp, firstname, surname,
-  photo_url, eventWhere, eventWhen, userIsHost, isPoll, subjectID,
-  handleSelection, viewed, inviteesNumber, eventName, hasEdited }) => {
+  photo_url, where, when, userIsHost, is_poll, subject_user_id,
+  handleSelection, viewed, inviteesNumber, name, hasEdited }) => {
 
-  const userIsSubject = subjectID === getUserID();
+  const userIsSubject = subject_user_id === user_id;
 
   const viewedFeedItem = viewed === true;
 // ADD THE OnClick button to Link! --<
@@ -38,21 +38,21 @@ const FeedItem = ({ event_id, timestamp, firstname, surname,
                 { !userIsSubject && `${firstname}  ${surname}` }
               </Text>
               <Text style={styles.subjectAction}>
-                { userIsSubject && isPoll && ' have created a poll ' }
-                { userIsSubject && !isPoll && !hasEdited && ' have created an event ' }
-                { userIsSubject && !isPoll && hasEdited && ' have edited an event' }
+                { userIsSubject && is_poll && ' have created a poll ' }
+                { userIsSubject && !is_poll && !hasEdited && ' have created an event ' }
+                { userIsSubject && !is_poll && hasEdited && ' have edited an event' }
 
-                { !userIsSubject && userIsHost && isPoll && ' has voted on your poll' }
-                { !userIsSubject && userIsHost && !isPoll && ' has responded to your event' }
+                { !userIsSubject && userIsHost && is_poll && ' has voted on your poll' }
+                { !userIsSubject && userIsHost && !is_poll && ' has responded to your event' }
 
-                { !userIsSubject && !userIsHost && isPoll && ' wants you to vote on their poll' }
-                { !userIsSubject && !userIsHost && !isPoll && !hasEdited && ' has invited you to their event' }
-                { !userIsSubject && !userIsHost && !isPoll && hasEdited && ' has edited an event' }
+                { !userIsSubject && !userIsHost && is_poll && ' wants you to vote on their poll' }
+                { !userIsSubject && !userIsHost && !is_poll && !hasEdited && ' has invited you to their event' }
+                { !userIsSubject && !userIsHost && !is_poll && hasEdited && ' has edited an event' }
 
               </Text>
             </Text>
-            <Text style={styles.eventName}>
-              { eventName }
+            <Text style={styles.name}>
+              { name }
             </Text>
 
             <View>
@@ -67,17 +67,17 @@ const FeedItem = ({ event_id, timestamp, firstname, surname,
             <Text style={styles.date}>
               <Icon name="calendar-o" size={14} color="gray" />
               {
-                (eventWhen.length > 1 && 'VOTE') ||
-                (eventWhen.length === 1 && eventWhen[0].date === '' && 'TBC') ||
-                formatDate(eventWhen[0].date).toUpperCase()
+                (when.length > 1 && 'VOTE') ||
+                (when.length === 1 && when[0].date === '' && 'TBC') ||
+                formatDate(when[0].date).toUpperCase()
               }
             </Text>
             <Text style={styles.placeName}>
               <Icon name="map-marker" size={14} color="gray" />
               {
-                (eventWhere.length > 1 && 'VOTE') ||
-                (eventWhere.length === 1 && eventWhere[0].placeName === '' && 'TBC') ||
-                eventWhere[0].placeName
+                (where.length > 1 && 'VOTE') ||
+                (where.length === 1 && where[0].placeName === '' && 'TBC') ||
+                where[0].placeName
               }
             </Text>
           </View>

@@ -1,17 +1,21 @@
+/* eslint-disable*/
 import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import CalendarItem from './calendar-item';
 import FilterPanel from '../general/filter-panel';
 import Spinner from '../common/Spinner';
-import getUserID from '../../lib/getUserID';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
+import store from '../../init-store';
 
+const user_id = 1;
 export default class Calendar extends Component {
 
   static route = {
     navigationBar: {
-      title: 'Calendar',
+      title (params) {
+        return params.title;
+      },
       backgroundColor: colours.blue,
       tintColor: colours.white
     }
@@ -19,8 +23,8 @@ export default class Calendar extends Component {
 
   sortedData = this.props.filteredEvents.sort((a, b) => {
     /* eslint-disable no-param-reassign */
-    a = a.eventWhen[0].date;
-    b = b.eventWhen[0].date;
+    a = a._when[0].date;
+    b = b._when[0].date;
 
     return new Date(a).getTime() > new Date(b).getTime();
   });
@@ -30,7 +34,7 @@ export default class Calendar extends Component {
     return (
       <View>
         {
-            isFetching && <Spinner />
+          isFetching && <Spinner />
         }
         <View style={styles.filterPanelContainer}>
           {
@@ -38,7 +42,7 @@ export default class Calendar extends Component {
               displaySome={ displaySome }
               displayAll={ displayAll }
               dataIsFiltered={ calendarIsFiltered }
-              isShowHosting={ isShowHosting }
+              isShowHosting={ '1' == 1 }
             />
           }
         </View>
@@ -57,13 +61,12 @@ export default class Calendar extends Component {
                 return (
                   <CalendarItem
                     key={ item.event_id }
-                    userIsHost={ item.hostID === getUserID() }
+                    userIsHost={ item.host_id === user_id }
                     rsvpStatus={ item.RSVP }
-                    eventName={ item.eventName }
-                    eventWhat={ item.eventWhat }
-                    eventWhere={ item.eventWhere }
-                    eventWhen={ item.eventWhen }
-                    coverPhoto={ item.coverPhoto }
+                    name={ item.name }
+                    what={ item._what }
+                    where={ item._where }
+                    when={ item._when }
                     event_id={ item.event_id }
                   />
                 );
@@ -74,5 +77,4 @@ export default class Calendar extends Component {
       </View>
     );
   }
-
 }
