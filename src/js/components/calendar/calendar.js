@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import CalendarItem from './calendar-item';
 import FilterPanel from '../general/filter-panel';
 import Spinner from '../common/Spinner';
-import TopBar from '../event/top-bar';
 import getUserID from '../../lib/getUserID';
 import styles from '../../../styles';
+import colours from '../../../styles/colours';
 
-const Calendar = ({ allEvents, filteredEvents, isFetching,
-  displaySome, displayAll, calendarIsFiltered, isShowHosting }) => {
+export default class Calendar extends Component {
 
-  const sortedData = filteredEvents.sort((a, b) => {
+  static route = {
+    navigationBar: {
+      title: 'Calendar',
+      backgroundColor: colours.blue,
+      tintColor: colours.white
+    }
+  }
+
+  sortedData = this.props.filteredEvents.sort((a, b) => {
     /* eslint-disable no-param-reassign */
     a = a.eventWhen[0].date;
     b = b.eventWhen[0].date;
@@ -18,55 +25,54 @@ const Calendar = ({ allEvents, filteredEvents, isFetching,
     return new Date(a).getTime() > new Date(b).getTime();
   });
 
-  return (
-
-    <View>
-      {
-          isFetching && <Spinner />
-      }
-      <TopBar location="calendar" />
-      <View style={styles.filterPanelContainer}>
+  render () {
+    const { allEvents, isFetching, displaySome, displayAll, calendarIsFiltered, isShowHosting } = this.props;
+    return (
+      <View>
         {
-          !isFetching && allEvents.length > 0 && <FilterPanel
-            displaySome={ displaySome }
-            displayAll={ displayAll }
-            dataIsFiltered={ calendarIsFiltered }
-            isShowHosting={ isShowHosting }
-          />
+            isFetching && <Spinner />
         }
-      </View>
-
-      <ScrollView>
-        <View style={styles.containerFeed}>
+        <View style={styles.filterPanelContainer}>
           {
-            sortedData.length === 0 && !isFetching &&
-              <Text style={styles.smallMessageText}>
-                You have no past or upcoming events events.
-              </Text>
-          }
-          {
-            !isFetching && sortedData.map((item, i) => {
-
-              return (
-                <CalendarItem
-                  key={ i }
-                  userIsHost={ item.hostID === getUserID() }
-                  rsvpStatus={ item.RSVP }
-                  eventName={ item.eventName }
-                  eventWhat={ item.eventWhat }
-                  eventWhere={ item.eventWhere }
-                  eventWhen={ item.eventWhen }
-                  coverPhoto={ item.coverPhoto }
-                  event_id={ item.event_id }
-                />
-              );
-            })
+            !isFetching && allEvents.length > 0 && <FilterPanel
+              displaySome={ displaySome }
+              displayAll={ displayAll }
+              dataIsFiltered={ calendarIsFiltered }
+              isShowHosting={ isShowHosting }
+            />
           }
         </View>
-      </ScrollView>
 
-    </View>
-  );
-};
+        <ScrollView>
+          <View style={styles.containerFeed}>
+            {
+              this.sortedData.length === 0 && !isFetching &&
+                <Text style={styles.smallMessageText}>
+                  You have no past or upcoming events events.
+                </Text>
+            }
+            {
+              !isFetching && this.sortedData.map((item) => {
 
-export default Calendar;
+                return (
+                  <CalendarItem
+                    key={ item.event_id }
+                    userIsHost={ item.hostID === getUserID() }
+                    rsvpStatus={ item.RSVP }
+                    eventName={ item.eventName }
+                    eventWhat={ item.eventWhat }
+                    eventWhere={ item.eventWhere }
+                    eventWhen={ item.eventWhen }
+                    coverPhoto={ item.coverPhoto }
+                    event_id={ item.event_id }
+                  />
+                );
+              })
+            }
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
+
+}
