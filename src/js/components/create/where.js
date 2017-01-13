@@ -1,74 +1,76 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import Input from '../general/input';
 import Router from '../../router';
 import AddInput from '../general/add-input';
-import EventDetailsHeader from '../general/event-details-header';
 import Button from '../common/Button';
 import styles from '../../../styles';
+import colours from '../../../styles/colours';
 
-const Where = ({ name, description, data, addInput, removeInput, handleChange, navigator }) => { // eslint-disable-line react/prop-types
+export default class Where extends Component {
 
-  const nextPage = () => {
-    navigator.push(Router.getRoute('when'));
+  static route = {
+    navigationBar: {
+      title (params) {
+        return params.name;
+      },
+      tintColor: colours.white,
+      backgroundColor: colours.blue,
+    }
+  }
+
+  nextPage = (name) => {
+    this.props.navigator.push(Router.getRoute('when', { name }));
   };
 
-  const inputs = data.map((value, i) => {
-    
-    return (
-      <Input
-        key={ i }
-        handleChange={ handleChange }
-        inputKey={ i }
-        inputCount={ data.length }
-        value={ value }
-        placeholder="Where?"
-        removeInput={ removeInput }
-      />
-    );
-  });
-
-  const hideNext = data[0] === '';
-
-  return (
-    <View>
-      <View style={styles.rowEventDetailsHeader}>
-
-        <EventDetailsHeader
-          location="Enter details"
-          name={ name }
-          description={ description }
+  render () {
+    const { data, name, addInput, removeInput, handleChange } = this.props;
+    const inputCount = data.length;
+    const inputs = data.map((value, i) => {
+      return (
+        <Input
+          key={ i }
+          handleChange={ handleChange }
+          inputKey={ i }
+          inputCount={ inputCount }
+          value={ value }
+          placeholder="Where?"
+          removeInput={ removeInput }
         />
+      );
+    });
 
-      </View>
-      <View style={ styles.container }>
-        <Text style={ styles.smallMessageText} >
-          Enter where the event will take place (or leave blank to decide it later).
-        </Text>
-        <Text style={ styles.smallMessageText }>
-          You can add more than one option to create a poll.
-        </Text>
+    const hideNext = data[0] === '';
 
-        { inputs }
+    return (
+      <View>
+        <View style={ styles.container }>
+          <Text style={ styles.smallMessageText} >
+            Enter where the event will take place (or leave blank to decide it later).
+          </Text>
+          <Text style={ styles.smallMessageText }>
+            You can add more than one option to create a poll.
+          </Text>
 
-        <AddInput data={ data } handler={ addInput } />
+          { inputs }
 
-        <View style={ styles.row }>
-          { (hideNext) &&
-            <View />
-          }
-          { (!hideNext) &&
-            <Button
-              buttonStyle={ styles.buttonStyle }
-              onPress={ () => nextPage() }
-            >
-              Next
-            </Button>
-          }
+          <AddInput data={ data } handler={ addInput } />
+
+          <View style={ styles.row }>
+            { (hideNext) &&
+              <View />
+            }
+            { (!hideNext) &&
+              <Button
+                buttonStyle={ styles.buttonStyle }
+                onPress={ () => this.nextPage(name) }
+              >
+                Next
+              </Button>
+            }
+          </View>
         </View>
       </View>
-    </View>
-  );
+    );
+  }
 };
-
-export default Where;
