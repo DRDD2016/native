@@ -6,6 +6,7 @@ import { View, Image, Text } from 'react-native';
 import rsvpsArea from './confirmed-event/rsvps-area';
 import { eventNote } from '../../lib/confirmed-event-helpers';
 import formatDate from '../../lib/formatDate';
+import Button from '../common/Button';
 import styles from '../../../styles';
 
 const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, RSVPToEvent }) => {
@@ -22,6 +23,7 @@ const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, RSVPToEv
 
   return (
     <View>
+      <Text>CONFIRMED EVENT</Text>
       <Text>Event note</Text>
       <View style={styles.row}>
         <Text>
@@ -59,6 +61,30 @@ const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, RSVPToEv
             <Text>{ 'TBC' }</Text>
           </View>
         </View>
+      </View>
+
+      <View>
+        {
+          userIsHost &&
+          <Button
+            buttonStyle={styles.confirmButton}
+            textStyle={styles.confirmButtonText}
+          >
+            <Text>Edit event details</Text>
+          </Button>
+        }
+      </View>
+
+      <View>
+        {
+          !userIsHost &&
+          <Button
+            buttonStyle={styles.confirmButton}
+            textStyle={styles.confirmButtonText}
+          >
+            <Text>RSVP to this event</Text>
+          </Button>
+        }
       </View>
 
     </View>

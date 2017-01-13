@@ -30,6 +30,7 @@ const HostPoll = ({ event, tally, finalChoices, //eslint-disable-line
   return (
 
     <View>
+      <Text>POLL (HOST VIEW)</Text>
       <View>{ eventNote(event) }</View>
 
       <View style={styles.row}>
