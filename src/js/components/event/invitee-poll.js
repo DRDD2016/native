@@ -3,7 +3,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import PollButton from '../general/poll-button';
-import { EventWhatSection, EventWhereSection, EventWhenSection } from './poll-sections';
+// import { WhatSection, WhereSection, WhenSection } from './poll-sections';
 import Button from '../common/Button';
 import styles from '../../../styles';
 

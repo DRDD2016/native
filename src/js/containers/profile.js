@@ -25,6 +25,7 @@ const mapDispatchToProps = dispatch => ({
 
 const ProfileContainer = connect(
     mapStateToProps,
-    mapDispatchToProps)(Profile);
+    mapDispatchToProps
+  )(Profile);
 
 export default ProfileContainer;

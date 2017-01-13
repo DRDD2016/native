@@ -17,7 +17,7 @@ import * as actions from '../../../src/js/actions/login';
 //     expect(actual).toEqual(expected);
 //   });
 // });
-describe('LOGIN_USER' actions, () => {
+describe('LOGIN_USER actions', () => {
 
   describe('`loginUserRequest` action creator', () => {
 

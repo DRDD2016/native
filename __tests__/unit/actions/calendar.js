@@ -15,7 +15,7 @@ describe('GET_CALENDAR actions', () => {
     });
   });
 
-  describe('`signupUserSuccess` action creator', () => {
+  describe('`getCalendarSuccess` action creator', () => {
 
     it('returns expected action', () => {
       const data = { email: 'donald@spark.com' };
@@ -25,12 +25,12 @@ describe('GET_CALENDAR actions', () => {
         data
       };
 
-      const actual = actions.signupUserSuccess(data);
+      const actual = actions.getCalendarSuccess(data);
       expect(actual).toEqual(expected);
     });
   });
 
-  describe('`signupUserFailure` action creator', () => {
+  describe('`getCalendarFailure` action creator', () => {
 
     it('returns expected action', () => {
       const error = new Error();
@@ -38,7 +38,7 @@ describe('GET_CALENDAR actions', () => {
         type: actions.GET_CALENDAR_FAILURE,
         error
       };
-      const actual = actions.signupUserFailure(error);
+      const actual = actions.getCalendarFailure(error);
 
       expect(actual).toEqual(expected);
     });
