@@ -4,8 +4,7 @@ import What from '../../components/create/what';
 
 const mapStateToProps = ({ create }) => ({
   data: create._what,
-  name: create.name,
-  description: create.description
+  name: create.name
 });
 
 const mapDispatchToProps = dispatch => ({

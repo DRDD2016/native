@@ -5,8 +5,7 @@ import When from '../../components/create/when';
 const mapStateToProps = ({ create }) => {
   return {
     data: create._when,
-    name: create.name,
-    description: create.description
+    name: create.name
   };
 };
 
