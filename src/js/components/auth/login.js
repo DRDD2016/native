@@ -35,6 +35,12 @@ function Login ({ handleSubmit, handleSubmitForm, navigator }) {
             <Text>LOGIN</Text>
           </Button>
         </View>
+        <Text
+          style={{ alignSelf: 'center' }}
+          onPress={() => navigator.push('resetEmail')}
+        >
+          Forgot your password?
+        </Text>
       </View>
     </View>
   );
