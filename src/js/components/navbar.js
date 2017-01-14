@@ -21,7 +21,7 @@ export default function Navbar () {
         <StackNavigation
           id="albums"
           navigatorUID="albums"
-          initialRoute={ Router.getRoute('albums') }
+          initialRoute={ Router.getRoute('albums', { title: 'Albums' }) }
         />
       </TabItem>
 
@@ -34,7 +34,7 @@ export default function Navbar () {
         <StackNavigation
           id="calendar"
           navigatorUID="calendar"
-          initialRoute={ Router.getRoute('calendar') }
+          initialRoute={ Router.getRoute('calendar', { title: 'Calendar' }) }
         />
       </TabItem>
 

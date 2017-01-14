@@ -6,8 +6,7 @@ const mapStateToProps = ({ profile }) => ({
   photo_url: profile.photo_url,
   user_id: profile.user_id,
   firstname: profile.firstname,
-  surname: profile.surname,
-  email: profile.email
+  surname: profile.surname
 });
 
 const mapDispatchToProps = dispatch => ({
