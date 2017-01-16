@@ -103,5 +103,31 @@ function createPollSelections (event, toggleSelection, poll, eventType, EventTyp
   });
 }
 
+if (category === 'when') {
+  return (
+    <View key={JSON.stringify(datum)}>
+      {
+        i === 0 &&
+        <View style={styles.columnLeft}>
+          <Text style={styles.optionTitleWhen}>{ categoryTitle }</Text>
+        </View>
+      }
+      <View style={styles.columnMiddlePoll}>
+        <View style={styles.rowSpaced}>
+          <Button
+            buttonStyle={styles.optionDeselectedWhen}
+            textStyle={styles.optionTextDeselectedWhen}
+          >
+            <Icon name={icons[category]} size={16} color={colours[category]} />
+            { datum.date }
+            { datum.time || 'TBC' }
+          </Button>
+        </View>
+      </View>
+
+
+    </View>
+  );
+}
 
 export default InviteePoll;

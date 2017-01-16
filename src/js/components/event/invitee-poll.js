@@ -3,6 +3,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import PollButton from '../general/poll-button';
+import CategoryDetails from './category-details';
 // import { WhatSection, WhereSection, WhenSection } from './poll-sections';
 import Button from '../common/Button';
 import styles from '../../../styles';
@@ -26,18 +27,18 @@ const InviteePoll = ({ event, toggleSelection, poll, handleVote, //eslint-disabl
   }
 
   return (
-    <View style={styles.Poll}>
+    <View style={{flex:1}}>
       <Text>POLL (INVITEE VIEW)</Text>
 
-      <View style={styles.eventWhat}>
-        <Text>WHAT</Text>
-      </View>
-      <View style={styles.eventWhere}>
-        <Text>WHERE</Text>
-      </View>
-      <View style={styles.eventWhen}>
-        <Text>WHEN</Text>
-      </View>
+      <CategoryDetails
+        category={'what'}
+        data={event._what}
+      />
+
+      <CategoryDetails
+        category={'where'}
+        data={event._where}
+      />
 
       <PollButton
         poll={ poll }
@@ -45,7 +46,6 @@ const InviteePoll = ({ event, toggleSelection, poll, handleVote, //eslint-disabl
         event_id={ event_id }
         voteButtonText={ voteButtonText }
       />
-
     </View>
   );
 };
