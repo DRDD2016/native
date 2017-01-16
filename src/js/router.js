@@ -14,8 +14,8 @@ import ConfirmContainer from './containers/create/confirm';
 import EventContainer from './containers/event';
 import Navbar from './components/navbar';
 import UploadPhoto from './components/upload-photo';
-import ConfirmEmail from './components/auth/confirm-email';
-import NewPassword from './components/auth/new-password';
+import ConfirmEmailContainer from './containers/auth/confirm-email';
+import ResetPasswordContainer from './containers/auth/reset-password';
 
 const Router = createRouter(() => ({
   auth: () => Index,
@@ -33,8 +33,8 @@ const Router = createRouter(() => ({
   confirm: () => ConfirmContainer,
   event: () => EventContainer,
   uploadPhoto: () => UploadPhoto,
-  confirmEmail: () => ConfirmEmail,
-  newPassword: () => NewPassword
+  confirmEmail: () => ConfirmEmailContainer,
+  resetPassword: () => ResetPasswordContainer
 }));
 
 export default Router;

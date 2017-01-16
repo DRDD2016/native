@@ -57,3 +57,21 @@ export function emailValidator ({ email }) {
 
   return errors;
 }
+
+export function passwordValidator ({ password, confirmPassword }) {
+  const errors = {};
+
+  if (!password) {
+    errors.password = 'Password is required';
+  } else if (password.length < 5) {
+    errors.password = 'Password is too short';
+  }
+  if (!confirmPassword) {
+    errors.confirmPassword = 'Please confirm your password';
+  }
+  if (password !== confirmPassword) {
+    errors.confirmPassword = 'Passwords must match';
+  }
+
+  return errors;
+}
