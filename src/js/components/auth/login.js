@@ -1,39 +1,47 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import hoistNonReactStatic from 'hoist-non-react-statics';
 import { FormTextInput, FormPasswordInput } from './form-components';
 import { loginValidator as validate } from './form-validation';
-import styles from '../../../styles';
 import Button from '../common/Button';
+import styles from '../../../styles';
+import colours from '../../../styles/colours';
 
-function Login ({ handleSubmit, handleSubmitForm, navigator }) {
+class Login extends Component {
 
-  return (
-    <View style={{ marginTop: 25, flex: 1 }}>
-      <Button
-        onPress={ () => { navigator.pop(); }}
-      >
-        <Icon name="chevron-left" size={ 28 } color="#525459" />
-      </Button>
-      <View style={{ marginTop: 50 }}>
-        <Text style={{ paddingLeft: 5 }}>Email</Text>
-        <View style={ styles.row }>
-          <Field name="email" component={ FormTextInput } />
-        </View>
+  static route = {
+    navigationBar: {
+      title: 'Login',
+      tintColor: colours.white,
+      backgroundColor: colours.blue
+    }
+  }
 
-        <Text style={{ paddingLeft: 5 }}>Password</Text>
-        <View style={ styles.row }>
-          <Field name="password" component={ FormPasswordInput } />
-        </View>
-        <View style={ styles.row }>
-          <Button
-            buttonStyle={{ backgroundColor: '#578de5', padding: 10, flex: 1, borderRadius: 5 }}
-            textStyle={{ alignSelf: 'center', color: '#fff' }}
-            onPress={handleSubmit(handleSubmitForm)}
-          >
-            <Text>LOGIN</Text>
-          </Button>
+  render () {
+    const { handleSubmit, handleSubmitForm } = this.props;
+
+    return (
+      <View style={{ flex: 1 }}>
+        <View style={{ marginTop: 50 }}>
+          <Text style={{ paddingLeft: 5 }}>Email</Text>
+          <View style={ styles.row }>
+            <Field name="email" component={ FormTextInput } />
+          </View>
+
+          <Text style={{ paddingLeft: 5 }}>Password</Text>
+          <View style={ styles.row }>
+            <Field name="password" component={ FormPasswordInput } />
+          </View>
+          <View style={ styles.row }>
+            <Button
+              buttonStyle={{ backgroundColor: '#578de5', padding: 10, flex: 1, borderRadius: 5 }}
+              textStyle={{ alignSelf: 'center', color: '#fff' }}
+              onPress={handleSubmit(handleSubmitForm)}
+            >
+              <Text>LOGIN</Text>
+            </Button>
+          </View>
         </View>
         <Text
           style={{ alignSelf: 'center' }}
@@ -42,8 +50,9 @@ function Login ({ handleSubmit, handleSubmitForm, navigator }) {
           Forgot your password?
         </Text>
       </View>
-    </View>
-  );
+    );
+  }
 }
 
-export default reduxForm({ form: 'login', validate })(Login);
+const decoratedComponent = reduxForm({ form: 'login', validate })(Login);
+export default hoistNonReactStatic(decoratedComponent, Login);
