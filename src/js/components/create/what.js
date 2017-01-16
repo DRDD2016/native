@@ -15,7 +15,7 @@ export default class What extends Component {
         return params.name;
       },
       tintColor: colours.white,
-      backgroundColor: colours.blue,
+      backgroundColor: colours.blue
     }
   }
 
@@ -77,4 +77,4 @@ export default class What extends Component {
       </View>
     );
   }
-};
+}
