@@ -3,7 +3,7 @@ import ResetPassword from '../../components/auth/reset-password';
 import { newPassword } from '../../actions/reset-password';
 
 const mapStateToProps = ({ reset }) => ({
-  isReseting: reset.isReseting
+  isResetting: reset.isResetting
 });
 
 const mapDispatchToProps = () => ({

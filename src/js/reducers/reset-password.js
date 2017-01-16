@@ -2,7 +2,7 @@ import update from 'immutability-helper';
 import * as actions from '../actions/reset-password';
 
 export const initialState = {
-  isReseting: false,
+  isResetting: false,
   error: undefined
 };
 
@@ -11,7 +11,7 @@ export default function reset (state = initialState, action) {
 
     case actions.RESET_PASSWORD_REQUEST:
       return update(state, {
-        isReseting: { $set: true }
+        isResetting: { $set: true }
       });
 
     case actions.RESET_PASSWORD_SUCCESS:
@@ -19,7 +19,7 @@ export default function reset (state = initialState, action) {
 
     case actions.RESET_PASSWORD_FAILURE:
       return update(state, {
-        isReseting: { $set: false },
+        isResetting: { $set: false },
         error: { $set: action.error }
       });
 

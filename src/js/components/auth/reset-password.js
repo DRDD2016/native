@@ -37,8 +37,8 @@ class ResetPassword extends Component {
   }
 
   renderButton = () => {
-    const { handleSubmit, handleSubmitForm, isReseting } = this.props;
-    if (isReseting) {
+    const { handleSubmit, handleSubmitForm, isResetting } = this.props;
+    if (isResetting) {
       return <Spinner size="large" />;
     }
     return (
