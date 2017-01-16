@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text } from 'react-native';
+import { Field, reduxForm } from 'redux-form';
+import hoistNonReactStatic from 'hoist-non-react-statics';
+import { emailValidator as validate } from './form-validation';
+import { FormTextInput } from './form-components';
 import Button from '../common/Button';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
@@ -21,7 +25,7 @@ const inlineStyle = {
   }
 };
 
-export default class ConfirmEmail extends Component {
+class ConfirmEmail extends Component {
 
   static route = {
     navigationBar: {
@@ -32,28 +36,26 @@ export default class ConfirmEmail extends Component {
   }
 
   render () {
+    const { handleSubmit, handleSubmitForm } = this.props;
     return (
       <View style={ styles.container }>
-        <Text style={ inlineStyle.labelStyle }>Email</Text>
+        <Text style={inlineStyle.labelStyle}>Email</Text>
         <View style={ styles.row }>
-          <TextInput
-            style={ styles.inputStyle }
-            onChangeText={ () => console.log('onchange') }
-            value=""
-            type="text"
-          />
+          <Field name="email" component={ FormTextInput } />
         </View>
         <View style={ styles.row }>
           <Button
-            buttonStyle={ inlineStyle.buttonStyle }
-            textStyle={ inlineStyle.textStyle }
-            onPress={() => console.log('handle submit') }
+            buttonStyle={inlineStyle.buttonStyle}
+            textStyle={inlineStyle.textStyle}
+            onPress={handleSubmit(handleSubmitForm)}
           >
-            <Text>Reset</Text>
+            <Text>SUBMIT</Text>
           </Button>
         </View>
       </View>
     );
   }
-
 }
+
+const decoratedComponent = reduxForm({ form: 'confirmEmail', validate })(ConfirmEmail);
+export default hoistNonReactStatic(decoratedComponent, ConfirmEmail);

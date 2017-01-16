@@ -1,18 +1,18 @@
-export const SEND_EMAIL_REQUEST = 'SEND_EMAIL_REQUEST';
-export const SEND_EMAIL_SUCCESS = 'SEND_EMAIL_SUCCESS';
-export const SEND_EMAIL_FAILURE = 'SEND_EMAIL_FAILURE';
+export const CONFIRM_EMAIL_REQUEST = 'CONFIRM_EMAIL_REQUEST';
+export const CONFRIM_EMAIL_SUCCESS = 'CONFRIM_EMAIL_SUCCESS';
+export const CONFRIM_EMAIL_FAILURE = 'CONFRIM_EMAIL_FAILURE';
 
 export const sendEmailRequest = () => ({
-  type: SEND_EMAIL_REQUEST
+  type: CONFIRM_EMAIL_REQUEST
 });
 
 export const sendEmailSuccess = data => ({
-  type: SEND_EMAIL_SUCCESS,
+  type: CONFRIM_EMAIL_SUCCESS,
   data
 });
 
 export const sendEmailFailure = error => ({
-  type: SEND_EMAIL_FAILURE,
+  type: CONFRIM_EMAIL_FAILURE,
   error
 });
 
