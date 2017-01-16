@@ -16,31 +16,6 @@ export const resetPasswordFailure = error => ({
   error
 });
 
-export function confirmEmail (email) {
-
-  return (dispatch) => {
-    dispatch(resetPasswordRequest());
-    // fetch('http://localhost:3000/email', {
-    //   method: 'POST',
-    //   headers: {
-    //     Accept: 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({ email })
-    // })
-    // .then((response) => {
-    //   response.json()
-    //     .then((data) => {
-    //       dispatch(resetPasswordSuccess({
-    //         message: 'Ok user is in database?'
-    //       }));
-    //     });
-    // })
-    // .catch((error) => {
-    //   dispatch(resetPasswordFailure(error));
-    // });
-  };
-}
 
 export function newPassword (password) {
 

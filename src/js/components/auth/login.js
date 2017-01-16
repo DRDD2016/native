@@ -19,7 +19,7 @@ class Login extends Component {
   }
 
   render () {
-    const { handleSubmit, handleSubmitForm } = this.props;
+    const { handleSubmit, handleSubmitForm, navigator } = this.props;
 
     return (
       <View style={{ flex: 1 }}>
@@ -45,7 +45,7 @@ class Login extends Component {
         </View>
         <Text
           style={{ alignSelf: 'center' }}
-          onPress={() => navigator.push('resetEmail')}
+          onPress={() => navigator.push('confirmEmail')}
         >
           Forgot your password?
         </Text>

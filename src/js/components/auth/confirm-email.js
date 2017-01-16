@@ -21,7 +21,7 @@ const inlineStyle = {
   }
 };
 
-export default class ResetEmail extends Component {
+export default class ConfirmEmail extends Component {
 
   static route = {
     navigationBar: {
