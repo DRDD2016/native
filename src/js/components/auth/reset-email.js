@@ -25,7 +25,7 @@ export default class ResetEmail extends Component {
 
   static route = {
     navigationBar: {
-      title: 'Forgot yout password?',
+      title: 'Forgot your password?',
       backgroundColor: colours.blue,
       tintColor: colours.white
     }
