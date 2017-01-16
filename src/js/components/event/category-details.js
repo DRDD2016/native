@@ -2,15 +2,16 @@ import React, { PropTypes } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../common/Button';
-import BarChart from '../../components/event/bar-chart';
+// import BarChart from '../../components/event/bar-chart';
 import colours from '../../../styles/colours';
 // import styles from '../../../styles';
 
 const CategoryDetails = ({ category, data }) => {
 
   const categoryTitle = `W${category.substring(1)}`;
-  const tally = 4;
-  console.log("DATA", data);
+  console.log('CATEGORY TITLE', categoryTitle);
+  // const tally = 4;
+  console.log('Data', data);
 
   const icons = {
     what: 'star',
@@ -27,13 +28,13 @@ const CategoryDetails = ({ category, data }) => {
       paddingTop: 10
     },
     left: {
-      flex: 1.2,
+      // flex: 1.2,
       flexDirection: 'column',
       justifyContent: 'flex-start',
       alignItems: 'flex-start'
     },
     centre: {
-      flex: 3.8,
+      // flex: 3.8,
       flexDirection: 'column',
       justifyContent: 'flex-start',
       alignItems: 'flex-start',
@@ -121,26 +122,19 @@ const CategoryDetails = ({ category, data }) => {
             );
           }
           return (
-            <View key={JSON.stringify(datum)}>
-              {
-                i === 0 &&
-                <View style={styles.left}>
-                  <Text style={styles.title}>{ categoryTitle }</Text>
-                </View>
-              }
-              <View style={styles.centre}>
-                <View style={styles.row}>
-                  <TouchableOpacity
-                    style={styles.button.selected.component}
-                  >
-                    <Icon name={icons[category]} size={16} color={colours[category]} />
+            <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
 
-                    <Text style={styles.button.selected.text}>{ datum || 'TBC' }</Text>
-                  </TouchableOpacity>
-                </View>
+              <View style={{ width: 150 }}>
+                <Text style={{ alignSelf: 'center' }}>{ i === 0 && categoryTitle }</Text>
               </View>
 
-
+              <View>
+                <View>
+                  <Icon.Button name={icons[category]} size={16} color={colours[category]} backgroundColor="#efefef" onPress={() => {}}>
+                    { datum || 'TBC' }
+                  </Icon.Button>
+                </View>
+              </View>
             </View>
           );
         })

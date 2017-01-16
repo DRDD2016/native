@@ -1,11 +1,10 @@
-/* eslint-disable*/
+
 /* eslint-disable no-else-return */
 import React from 'react';
 import { Text, View } from 'react-native';
 import PollButton from '../general/poll-button';
 import CategoryDetails from './category-details';
 // import { WhatSection, WhereSection, WhenSection } from './poll-sections';
-import Button from '../common/Button';
 import styles from '../../../styles';
 
 const InviteePoll = ({ event, toggleSelection, poll, handleVote, //eslint-disable-line
@@ -27,9 +26,8 @@ const InviteePoll = ({ event, toggleSelection, poll, handleVote, //eslint-disabl
   }
 
   return (
-    <View style={{flex:1}}>
+    <View>
       <Text>POLL (INVITEE VIEW)</Text>
-
       <CategoryDetails
         category={'what'}
         data={event._what}
