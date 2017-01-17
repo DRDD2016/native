@@ -4,61 +4,56 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import PollButton from '../general/poll-button';
 import CategoryDetails from './category-details';
-// import { WhatSection, WhereSection, WhenSection } from './poll-sections';
-import styles from '../../../styles';
 
-export class InviteePoll extends Component {
+export default class InviteePoll extends Component {
 
   constructor () {
     super();
 
-    this.state = {};
-
+    this.state = {
+      what: [],
+      where: [],
+      when: []
+    };
     this.toggleSelection = this.toggleSelection.bind(this);
   }
 
-  toggleSelection (category, selection, nodeIndex) {
-    if (!this.state[category].includes(selection)) { // if this hasn't been selected already
+  toggleSelection (category, selection) {
+    if (!this.state[category].includes(selection)) {
 
       this.setState({
-        [category]: this.state[category].concat([selection]),
-        selectedNodes: this.state.selectedNodes.concat([nodeIndex])
+        [category]: this.state[category].concat([selection])
       }, () => {
         console.table(this.state);
       });
     } else {
-      const selectionLocation = this.state[category].indexOf(selection);
-      const nodeIndexLocation = this.state.selectedNodes.indexOf(nodeIndex);
+      const selectionIndex = this.state[category].indexOf(selection);
       const newSelection = [...this.state[category]];
-      newSelection.splice(selectionLocation, 1);
-      const newNodes = [...this.state.selectedNodes];
-      newNodes.splice(nodeIndexLocation, 1);
-      console.log('OLD', this.state[category], 'NEW', newSelection);
+      newSelection.splice(selectionIndex, 1);
+
       this.setState({
-        [category]: newSelection,
-        selectedNodes: newNodes
+        [category]: newSelection
       }, () => {
         console.table(this.state);
       });
     }
   }
 
-  // voteButtonText = this.props.hasMadeChoice ? 'VOTE AGAIN' : 'VOTE';
-
   render () {
-    const { event, toggleSelection, poll, handleVote, //eslint-disable-line
-      event_id } = this.props;
+    const { event, poll, handleVote, event_id } = this.props;
     return (
       <View>
         <Text>POLL (INVITEE VIEW)</Text>
         <CategoryDetails
           category={'what'}
           data={event._what}
+          toggleSelection={this.toggleSelection}
         />
 
         <CategoryDetails
           category={'where'}
           data={event._where}
+          toggleSelection={this.toggleSelection}
         />
 
         <PollButton
@@ -71,6 +66,3 @@ export class InviteePoll extends Component {
     );
   }
 }
-
-
-export default InviteePoll;

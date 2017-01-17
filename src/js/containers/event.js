@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Event from '../components/event';
-import { getEvent, updatePoll, vote, addHostEventChoice, confirmEvent, deleteEvent, updateRSVP } from '../actions/event';
+import { getEvent, vote, addHostEventChoice, confirmEvent, deleteEvent, updateRSVP } from '../actions/event';
 import { hydrateCreateEvent, clearCreateEvent } from '../actions/create';
 
 
@@ -25,10 +25,6 @@ const mapDispatchToProps = dispatch => ({
   fetchEvent: (event_id) => {
 
     dispatch(getEvent(event_id));
-  },
-  toggleSelection: (eventType, index) => {
-
-    dispatch(updatePoll(eventType, index));
   },
   handleVote: (poll, event_id) => {
 

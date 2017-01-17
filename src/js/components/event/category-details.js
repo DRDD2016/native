@@ -9,7 +9,6 @@ export default class CategoryDetails extends Component {
 
   constructor (props) {
     super(props);
-    console.log('PROPS', props);
     this.state = {
       selectedNodes: new Array(props.data.length).fill(false)
     };
@@ -18,7 +17,7 @@ export default class CategoryDetails extends Component {
   }
 
   _handleOnPress (category, selection, index) {
-    // this.props.toggleSelection(category, selection);
+    this.props.toggleSelection(category, selection);
     this.toggleHighlight(index);
   }
 
@@ -27,7 +26,7 @@ export default class CategoryDetails extends Component {
     newNodes[index] = !newNodes[index];
     this.setState({
       selectedNodes: newNodes
-    }, () => console.table(this.state));
+    });
   }
 
   icons = {
@@ -132,7 +131,7 @@ export default class CategoryDetails extends Component {
                         name={this.icons[category]}
                         size={16} color={this.state.selectedNodes[index] ? '#efefef' : colours[category]}
                         backgroundColor={this.state.selectedNodes[index] ? colours[category] : '#efefef'}
-                        onPress={() => {}}
+                        onPress={() => this._handleOnPress(category, { date: datum.date, time: datum.time }, index)}
                       >
                         { datum.date }
                         { datum.time || 'TBC' }
