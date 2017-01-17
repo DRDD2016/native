@@ -2,8 +2,9 @@
 /* eslint-disable no-else-return */
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import PollButton from '../general/poll-button';
 import CategoryDetails from './category-details';
+import Button from '../common/Button';
+import styles from '../../../styles';
 
 export default class InviteePoll extends Component {
 
@@ -41,6 +42,10 @@ export default class InviteePoll extends Component {
 
   render () {
     const { event, poll, handleVote, event_id } = this.props;
+
+    const somethingIsSelected = Object.keys(this.state).some((category) => {
+      return this.state[category].length > 0;
+    });
     return (
       <View>
         <Text>POLL (INVITEE VIEW)</Text>
@@ -55,13 +60,15 @@ export default class InviteePoll extends Component {
           data={event._where}
           toggleSelection={this.toggleSelection}
         />
-
-        <PollButton
-          poll={ poll }
-          handleVote={ handleVote }
-          event_id={ event_id }
-          voteButtonText={ 'VOTE' }
-        />
+        {
+          somethingIsSelected &&
+          <Button
+            buttonStyle={styles.buttonStyle}
+            onClick={ () => handleVote(poll, event_id) }
+          >
+            VOTE
+          </Button>
+        }
       </View>
     );
   }
