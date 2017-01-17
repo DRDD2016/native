@@ -1,10 +1,28 @@
 import React, { Component } from 'react';
 import { View, Text, DatePickerIOS, ScrollView } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Router from '../../router';
 import AddInput from '../general/add-input';
 import Button from '../common/Button';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
+
+const inlineStyle = {
+  dateContainer: {
+    height: 200
+  },
+  timeContainer: {
+    height: 200
+  },
+  timeContainerHidden: {
+    height: 0,
+    overflow: 'hidden'
+  },
+  dateContainerHidden: {
+    height: 0,
+    overflow: 'hidden'
+  }
+};
 
 export default class When extends Component {
 
@@ -14,32 +32,80 @@ export default class When extends Component {
         return params.name;
       },
       tintColor: colours.white,
-      backgroundColor: colours.blue,
+      backgroundColor: colours.blue
     }
+  }
+
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      expandedTime: false,
+      expandedDate: false
+    };
+
+    this.toggleTime = this.toggleTime.bind(this);
+    this.toggleDate = this.toggleDate.bind(this);
+  }
+
+  toggleTime () {
+    this.setState({
+      expandedTime: !this.state.expandedTime
+    });
+  }
+
+  toggleDate () {
+    this.setState({
+      expandedDate: !this.state.expandedDate
+    });
   }
 
   nextPage = (name) => {
     this.props.navigator.push(Router.getRoute('confirm', { name }));
   };
 
+  onHandleDate = (date, i) => {
+    this.props.handleDate(date, i);
+    this.setState({
+      expandedDate: !this.state.expandedDate
+    });
+  }
+
   render () {
     const { name, data, addInput, removeInput, handleDate, handleTime } = this.props;
     const inputs = data.map((value, i) => {
       return (
-        <View
-          key={ value.date }
-        >
-          <DatePickerIOS
-            date={ value.date }
-            mode="date"
-            onDateChange={ date => handleDate(date, i) }
-          />
-          <DatePickerIOS
-            date={ value.time }
-            mode="time"
-            onDateChange={ time => handleTime(time, i) }
-            minuteInterval={ 10 }
-          />
+        <View key={ i }>
+
+          <View key={ 100 } style={{ margin: 10 }}>
+            <Icon.Button name="calendar" backgroundColor="#3b5998" onPress={this.toggleDate}>
+              Pick the date
+            </Icon.Button>
+          </View>
+
+          <View key={ i } style={ this.state.expandedDate ? inlineStyle.dateContainer : inlineStyle.dateContainerHidden }>
+            <DatePickerIOS
+              date={ value.date }
+              mode="date"
+              onDateChange={ date => this.onHandleDate(date, i) }
+            />
+          </View>
+
+          <View key={ value.date } style={{ margin: 10 }}>
+            <Icon.Button name="clock-o" backgroundColor="#3b5998" onPress={this.toggleTime}>
+              Pick the time
+            </Icon.Button>
+          </View>
+
+          <View key={ 4 } style={ this.state.expandedTime ? inlineStyle.timeContainer : inlineStyle.timeContainerHidden }>
+            <DatePickerIOS
+              date={ value.time }
+              mode="time"
+              onDateChange={ time => handleTime(time, i) }
+              minuteInterval={ 10 }
+            />
+          </View>
+
         </View>
       );
     });
