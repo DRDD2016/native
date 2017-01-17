@@ -15,17 +15,29 @@ export default class CategoryDetails extends Component {
       selectedNodes: []
     };
 
-    this.makeSelection = this.makeSelection.bind(this);
+    this.toggleSelection = this.toggleSelection.bind(this);
   }
 
-  makeSelection (category, selection, index) {
-    if (!this.state.selectedNodes.includes(selection)) { // if this hasn't been selected already
-      const selections = this.state[category].concat([selection]);
-      const selectedNodeIndicies = this.state.selectedNodes.concat([index]);
-      console.log('selections', selections, 'nodes', selectedNodeIndicies);
+  toggleSelection (category, selection, nodeIndex) {
+    if (!this.state[category].includes(selection)) { // if this hasn't been selected already
+
       this.setState({
-        [category]: selections,
-        selectedNodes: selectedNodeIndicies
+        [category]: this.state[category].concat([selection]),
+        selectedNodes: this.state.selectedNodes.concat([nodeIndex])
+      }, () => {
+        console.table(this.state);
+      });
+    } else {
+      const selectionLocation = this.state[category].indexOf(selection);
+      const nodeIndexLocation = this.state.selectedNodes.indexOf(nodeIndex);
+      const newSelection = [...this.state[category]];
+      newSelection.splice(selectionLocation, 1);
+      const newNodes = [...this.state.selectedNodes];
+      newNodes.splice(nodeIndexLocation, 1);
+      console.log('OLD', this.state[category], 'NEW', newSelection);
+      this.setState({
+        [category]: newSelection,
+        selectedNodes: newNodes
       }, () => {
         console.table(this.state);
       });
@@ -113,7 +125,6 @@ export default class CategoryDetails extends Component {
 
   render () {
     const { category, data } = this.props;
-    console.log('data', data);
     const categoryTitle = `W${category.substring(1)}`;
 
     return (
@@ -158,7 +169,7 @@ export default class CategoryDetails extends Component {
                       name={this.icons[category]}
                       size={16} color={colours[category]}
                       backgroundColor="#efefef"
-                      onPress={() => this.makeSelection(category, data[index], index)}
+                      onPress={() => this.toggleSelection(category, data[index], index)}
                     >
                       { datum || 'TBC' }
                     </Icon.Button>
