@@ -9,39 +9,25 @@ export default class CategoryDetails extends Component {
 
   constructor (props) {
     super(props);
-
+    console.log('PROPS', props);
     this.state = {
-      [props.category]: [],
-      selectedNodes: []
+      selectedNodes: new Array(props.data.length).fill(false)
     };
-
-    this.toggleSelection = this.toggleSelection.bind(this);
+    this._handleOnPress = this._handleOnPress.bind(this);
+    this.toggleHighlight = this.toggleHighlight.bind(this);
   }
 
-  toggleSelection (category, selection, nodeIndex) {
-    if (!this.state[category].includes(selection)) { // if this hasn't been selected already
+  _handleOnPress (category, selection, index) {
+    // this.props.toggleSelection(category, selection);
+    this.toggleHighlight(index);
+  }
 
-      this.setState({
-        [category]: this.state[category].concat([selection]),
-        selectedNodes: this.state.selectedNodes.concat([nodeIndex])
-      }, () => {
-        console.table(this.state);
-      });
-    } else {
-      const selectionLocation = this.state[category].indexOf(selection);
-      const nodeIndexLocation = this.state.selectedNodes.indexOf(nodeIndex);
-      const newSelection = [...this.state[category]];
-      newSelection.splice(selectionLocation, 1);
-      const newNodes = [...this.state.selectedNodes];
-      newNodes.splice(nodeIndexLocation, 1);
-      console.log('OLD', this.state[category], 'NEW', newSelection);
-      this.setState({
-        [category]: newSelection,
-        selectedNodes: newNodes
-      }, () => {
-        console.table(this.state);
-      });
-    }
+  toggleHighlight (index) {
+    const newNodes = [...this.state.selectedNodes];
+    newNodes[index] = !newNodes[index];
+    this.setState({
+      selectedNodes: newNodes
+    }, () => console.table(this.state));
   }
 
   icons = {
@@ -144,8 +130,8 @@ export default class CategoryDetails extends Component {
                     <View>
                       <Icon.Button
                         name={this.icons[category]}
-                        size={16} color={colours[category]}
-                        backgroundColor="#efefef"
+                        size={16} color={this.state.selectedNodes[index] ? '#efefef' : colours[category]}
+                        backgroundColor={this.state.selectedNodes[index] ? colours[category] : '#efefef'}
                         onPress={() => {}}
                       >
                         { datum.date }
@@ -167,9 +153,9 @@ export default class CategoryDetails extends Component {
                   <View>
                     <Icon.Button
                       name={this.icons[category]}
-                      size={16} color={colours[category]}
-                      backgroundColor="#efefef"
-                      onPress={() => this.toggleSelection(category, data[index], index)}
+                      size={16} color={this.state.selectedNodes[index] ? '#efefef' : colours[category]}
+                      backgroundColor={this.state.selectedNodes[index] ? colours[category] : '#efefef'}
+                      onPress={() => this._handleOnPress(category, datum, index)}
                     >
                       { datum || 'TBC' }
                     </Icon.Button>
