@@ -64,13 +64,6 @@ export default class When extends Component {
     this.props.navigator.push(Router.getRoute('confirm', { name }));
   };
 
-  onHandleDate = (date, i) => {
-    this.props.handleDate(date, i);
-    this.setState({
-      expandedDate: !this.state.expandedDate
-    });
-  }
-
   render () {
     const { name, data, addInput, removeInput, handleDate, handleTime } = this.props;
     const inputs = data.map((value, i) => {
@@ -78,7 +71,7 @@ export default class When extends Component {
         <View key={ i }>
 
           <View key={ 100 } style={{ margin: 10 }}>
-            <Icon.Button name="calendar" backgroundColor="#3b5998" onPress={this.toggleDate}>
+            <Icon.Button name={ this.state.expandedDate ? 'window-close' : 'calendar'} backgroundColor="#3b5998" onPress={this.toggleDate}>
               Pick the date
             </Icon.Button>
           </View>
@@ -87,12 +80,12 @@ export default class When extends Component {
             <DatePickerIOS
               date={ value.date }
               mode="date"
-              onDateChange={ date => this.onHandleDate(date, i) }
+              onDateChange={ date => handleDate(date, i) }
             />
           </View>
 
           <View key={ value.date } style={{ margin: 10 }}>
-            <Icon.Button name="clock-o" backgroundColor="#3b5998" onPress={this.toggleTime}>
+            <Icon.Button name={ this.state.expandedTime ? 'window-close' : 'clock-o'} backgroundColor="#3b5998" onPress={this.toggleTime}>
               Pick the time
             </Icon.Button>
           </View>
