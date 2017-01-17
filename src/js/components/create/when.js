@@ -40,23 +40,27 @@ export default class When extends Component {
     super(props);
 
     this.state = {
-      expandedTime: false,
-      expandedDate: false
+      expandedTime: [false],
+      expandedDate: [false]
     };
 
     this.toggleTime = this.toggleTime.bind(this);
     this.toggleDate = this.toggleDate.bind(this);
   }
 
-  toggleTime () {
+  toggleTime (index) {
+    const copyOfArray = [...this.state.expandedTime];
+    copyOfArray.splice(index, 1, !copyOfArray[index]);
     this.setState({
-      expandedTime: !this.state.expandedTime
+      expandedTime: copyOfArray
     });
   }
 
-  toggleDate () {
+  toggleDate (index) {
+    const copyOfArray = [...this.state.expandedDate];
+    copyOfArray.splice(index, 1, !copyOfArray[index]);
     this.setState({
-      expandedDate: !this.state.expandedDate
+      expandedDate: copyOfArray
     });
   }
 
@@ -65,18 +69,18 @@ export default class When extends Component {
   };
 
   render () {
-    const { name, data, addInput, removeInput, handleDate, handleTime } = this.props;
+    const { name, data, addInput, handleDate, handleTime } = this.props;
     const inputs = data.map((value, i) => {
       return (
         <View key={ i }>
 
-          <View key={ 100 } style={{ margin: 10 }}>
-            <Icon.Button name={ this.state.expandedDate ? 'window-close' : 'calendar'} backgroundColor="#3b5998" onPress={this.toggleDate}>
+          <View style={{ margin: 10 }}>
+            <Icon.Button name={ this.state.expandedDate[i] ? 'window-close' : 'calendar'} backgroundColor="#3b5998" onPress={() => this.toggleDate(i)}>
               Pick the date
             </Icon.Button>
           </View>
 
-          <View key={ i } style={ this.state.expandedDate ? inlineStyle.dateContainer : inlineStyle.dateContainerHidden }>
+          <View style={ this.state.expandedDate[i] ? inlineStyle.dateContainer : inlineStyle.dateContainerHidden }>
             <DatePickerIOS
               date={ value.date }
               mode="date"
@@ -84,13 +88,13 @@ export default class When extends Component {
             />
           </View>
 
-          <View key={ value.date } style={{ margin: 10 }}>
-            <Icon.Button name={ this.state.expandedTime ? 'window-close' : 'clock-o'} backgroundColor="#3b5998" onPress={this.toggleTime}>
+          <View style={{ margin: 10 }}>
+            <Icon.Button name={ this.state.expandedTime[i] ? 'window-close' : 'clock-o'} backgroundColor="#3b5998" onPress={() => this.toggleTime(i)}>
               Pick the time
             </Icon.Button>
           </View>
 
-          <View key={ 4 } style={ this.state.expandedTime ? inlineStyle.timeContainer : inlineStyle.timeContainerHidden }>
+          <View style={ this.state.expandedTime[i] ? inlineStyle.timeContainer : inlineStyle.timeContainerHidden }>
             <DatePickerIOS
               date={ value.time }
               mode="time"
