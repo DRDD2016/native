@@ -3,10 +3,8 @@ import { View } from 'react-native';
 import InviteePoll from './invitee-poll';
 import HostPoll from './host-poll';
 import Spinner from '../common/Spinner';
-import EventDetailsHeader from '../general/event-details-header';
 import ConfirmedEvent from './confirmed-event';
 // import Modal from '../general/modal';
-import TopBar from './top-bar';
 import DeletedEvent from './deleted-event';
 import styles from '../../../styles';
 
@@ -39,47 +37,37 @@ class Event extends React.Component {
     if (this.props.userIsHost && this.props.isPoll) {
       // changed from this.props.params.event_id
       return (
-        <View>
-          <HostPoll
-            tally={ this.props.tally }
-            event={ this.props.event }
-            event_id={ this.props.event.event_id }
-            finalChoices={ this.props.finalChoices }
-            hostEventChoices={ this.props.hostEventChoices }
-            handleConfirmEvent={ this.props.handleConfirmEvent }
-          />
-        </View>
+        <HostPoll
+          tally={ this.props.tally }
+          event={ this.props.event }
+          event_id={ this.props.event.event_id }
+          finalChoices={ this.props.finalChoices }
+          hostEventChoices={ this.props.hostEventChoices }
+          handleConfirmEvent={ this.props.handleConfirmEvent }
+        />
       );
-    } else if (!this.props.userIsHost && this.props.isPoll) {
+    } else if (true) {
       return (
-        <View>
-          <View style={styles.container}>
-            <InviteePoll
-              event={ this.props.event }
-              toggleSelection={ this.props.toggleSelection }
-              poll={ this.props.poll }
-              handleVote={ this.props.handleVote }
-              event_id={ this.props.event.event_id }
-              isHost={ this.props.userIsHost }
-              hasMadeChoice={ this.props.hasMadeChoice }
-            />
-          </View>
-        </View>
+        <InviteePoll
+          event={ this.props.event }
+          toggleSelection={ this.props.toggleSelection }
+          poll={ this.props.poll }
+          handleVote={ this.props.handleVote }
+          event_id={ this.props.event.event_id }
+          isHost={ this.props.userIsHost }
+          hasMadeChoice={ this.props.hasMadeChoice }
+        />
       );
     } else { // eslint-disable-line no-else-return
       return (
-        <View>
-          <View style={styles.container}>
-            <ConfirmedEvent
-              event={ this.props.event }
-              event_id={ this.props.event_id }
-              userIsHost={ this.props.userIsHost }
-              rsvps={ this.props.rsvps }
-              RSVPToEvent={ this.props.RSVPToEvent }
-              invitees={ this.props.invitees }
-            />
-          </View>
-        </View>
+        <ConfirmedEvent
+          event={ this.props.event }
+          event_id={ this.props.event_id }
+          userIsHost={ this.props.userIsHost }
+          rsvps={ this.props.rsvps }
+          RSVPToEvent={ this.props.RSVPToEvent }
+          invitees={ this.props.invitees }
+        />
       );
     }
   }
@@ -91,36 +79,8 @@ class Event extends React.Component {
         {
           this.props.isFetching && <Spinner />
         }
-
         {
           !this.props.isFetching && (this.props.event === false) && <DeletedEvent />
-        }
-        {
-          !this.props.isFetching && this.props.event &&
-          <View>
-
-
-            <TopBar
-              event_id={ this.props.event.event_id }
-              userIsHost={ this.props.userIsHost }
-              isPoll={ this.props.event.isPoll }
-              handleEdit={ this.props.handleEdit }
-              location={ this.props.sceneKey }
-              displayCancelModal={ this.cancelEventConfirmationModal }
-              event={ this.props.event }
-            />
-
-
-            <EventDetailsHeader
-              location="Event"
-              eventName={ this.props.event.eventName }
-              eventDescription={ this.props.event.eventDescription }
-              hostPhotoURL={ this.props.event.hostPhotoURL }
-              event_id={ this.props.event.event_id }
-              isPoll={ this.props.event.isPoll }
-              userIsHost={ this.props.event.isHost }
-            />
-          </View>
         }
         {
           !this.props.isFetching && this.props.event && this.renderView()

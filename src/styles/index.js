@@ -325,6 +325,7 @@ const styles = {
     marginTop: 20
   },
   container: {
+    // flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     margin: 5

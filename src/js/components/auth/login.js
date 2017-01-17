@@ -26,7 +26,7 @@ class Login extends Component {
         <View style={{ marginTop: 50 }}>
           <Text style={{ paddingLeft: 5 }}>Email</Text>
           <View style={ styles.row }>
-            <Field name="email" component={ FormTextInput } />
+            <Field name="email" component={ FormTextInput } isEmail />
           </View>
 
           <Text style={{ paddingLeft: 5 }}>Password</Text>
