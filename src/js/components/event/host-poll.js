@@ -9,13 +9,14 @@ import styles from '../../../styles';
 
 export default class HostPoll extends Component {
 
-  constructor () {
-    super();
-
+  constructor (props) {
+    super(props);
+    
+    const { _what: what, _where: where, _when: when } = this.props.event;
     this.state = {
-      what: [],
-      where: [],
-      when: []
+      what: what.length === 1 ? what : [],
+      where: where.length === 1 ? where : [],
+      when: when.length === 1 ? when : []
     };
     this.toggleSelection = this.toggleSelection.bind(this);
   }
@@ -38,10 +39,13 @@ export default class HostPoll extends Component {
 
   render () {
 
-    const { event, tally, handleConfirmEvent, event_id  } = this.props;
-    console.table("TALLY", tally);
-    return (
+    const { event, vote_count, handleConfirmEvent } = this.props;
 
+    const allCategoriesSelected = Object.keys(this.state)
+      .map(category => this.state[category].length)
+      .every(length => length === 1);
+
+    return (
       <View>
         <Text>POLL (HOST VIEW)</Text>
 
@@ -54,20 +58,31 @@ export default class HostPoll extends Component {
           />
         </View>
         <View style={styles.row}>
-        <View><Text>WHERE</Text></View>
+          <CategoryDetails
+            category={'where'}
+            data={event._where}
+            toggleSelection={this.toggleSelection}
+            userIsHost
+          />
         </View>
         <View style={styles.row}>
-        <View><Text>WHEN</Text></View>
+          <CategoryDetails
+            category={'when'}
+            data={event._when}
+            toggleSelection={this.toggleSelection}
+            userIsHost
+          />
         </View>
-
-        <Button
-          buttonStyle={styles.confirmButton}
-          textStyle={styles.confirmButtonText}
-          onClick={ () => handleConfirmEvent(finalChoices, event_id) }
-        >
-          CONFIRM & SEND INVITES
-        </Button>
-
+        {
+          allCategoriesSelected &&
+            <Button
+              buttonStyle={styles.confirmButton}
+              textStyle={styles.confirmButtonText}
+              onClick={ () => handleConfirmEvent(finalChoices, event_id) }
+            >
+              CONFIRM EVENT DETAILS
+            </Button>
+        }
       </View>
     );
   }

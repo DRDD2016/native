@@ -10,10 +10,8 @@ const mapStateToProps = ({ event }) => {
   return {
     isPoll: event.data.is_poll,
     event: event.data,
-    poll: event.poll,
-    rsvps: event.data._rsvps, // host
-    finalChoices: event.poll.finalChoices,
-    hasMadeChoice: false,
+    vote_count: event.vote_count,
+    rsvps: event.data.rsvps, // host
     isFetching: event.data.isFetching,
     userIsHost: user_id === event.data.host_user_id
   };

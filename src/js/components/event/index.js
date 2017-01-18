@@ -34,13 +34,11 @@ class Event extends React.Component {
 
   renderView () {
 
-    if (true) /* this.props.userIsHost && this.props.isPoll */ {
-      // changed from this.props.params.event_id
+    if (this.props.userIsHost && this.props.isPoll) {
       return (
         <HostPoll
-          tally={ this.props.tally }
+          vote_count={ this.props.vote_count }
           event={ this.props.event }
-          event_id={ this.props.event.event_id }
           handleConfirmEvent={ this.props.handleConfirmEvent }
         />
       );
@@ -48,10 +46,7 @@ class Event extends React.Component {
       return (
         <InviteePoll
           event={ this.props.event }
-          poll={ this.props.poll }
           handleVote={ this.props.handleVote }
-          event_id={ this.props.event.event_id }
-          isHost={ this.props.userIsHost }
           hasMadeChoice={ this.props.hasMadeChoice }
         />
       );
