@@ -6,5 +6,5 @@ export default function formatTime (time) {
   if (time === '') {
     return time;
   }
-  return moment(time).format('HH:mm:ss');
+  return moment(time, 'HH:mm').format('HH:mm');
 }

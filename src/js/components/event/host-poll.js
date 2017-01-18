@@ -38,8 +38,8 @@ export default class HostPoll extends Component {
 
   render () {
 
-    const { event, tally, handleConfirmEvent, event_id  } = this.props;
-    console.table("TALLY", tally);
+    const { event, vote_count, handleConfirmEvent } = this.props;
+    console.log("event", event);
     return (
 
       <View>
@@ -54,10 +54,20 @@ export default class HostPoll extends Component {
           />
         </View>
         <View style={styles.row}>
-        <View><Text>WHERE</Text></View>
+          <CategoryDetails
+            category={'where'}
+            data={event._where}
+            toggleSelection={this.toggleSelection}
+            userIsHost
+          />
         </View>
         <View style={styles.row}>
-        <View><Text>WHEN</Text></View>
+          <CategoryDetails
+            category={'when'}
+            data={event._when}
+            toggleSelection={this.toggleSelection}
+            userIsHost
+          />
         </View>
 
         <Button

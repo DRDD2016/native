@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import formatDate from '../lib/formatDate';
+import formatDate from '../lib/format-date';
 // import Button from './common/Button';
 import CardSection from './common/CardSection';
 import Card from './common/Card';

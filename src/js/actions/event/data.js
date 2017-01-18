@@ -5,7 +5,7 @@ export const GET_EVENT_FAILURE = 'GET_EVENT_FAILURE';
 
 const event1 = {
   event_id: 1,
-  host_user_id: 5,
+  host_user_id: 1,
   name: 'Lounge party',
   description: 'Celebrating life',
   is_poll: true,
@@ -14,7 +14,12 @@ const event1 = {
   _what: ['dancing', 'skydiving'],
   _where: ['Forest', 'Camping'],
   _when: [{ date: '01-01-2017', time: '12:00:00' }, { date: '03-01-2017', time: '15:00:00' }],
-  _rsvps: { going: [], not_going: [], maybe: [] }
+  rsvps: { going: [], not_going: [], maybe: [] },
+  vote_count: {
+    what: [2, 2],
+    where: [3, 0],
+    when: [1, 2]
+  }
 };
 
 export function getEvent (event_id) { //eslint-disable-line

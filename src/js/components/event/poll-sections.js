@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import formatDate from '../../lib/formatDate';
+import formatDate from '../../lib/format-date';
 import Button from '../common/Button';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';

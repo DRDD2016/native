@@ -5,7 +5,7 @@ import React from 'react';
 import { View, Image, Text } from 'react-native';
 import rsvpsArea from './confirmed-event/rsvps-area';
 import { eventNote } from '../../lib/confirmed-event-helpers';
-import formatDate from '../../lib/formatDate';
+import formatDate from '../../lib/format-date';
 import styles from '../../../styles';
 
 

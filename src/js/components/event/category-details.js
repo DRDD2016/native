@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import formatDate from '../../lib/format-date';
+import formatTime from '../../lib/format-time';
 // import BarChart from '../../components/event/bar-chart';
 import colours from '../../../styles/colours';
 
@@ -67,8 +69,7 @@ export default class CategoryDetails extends Component {
                         backgroundColor={this.state.selectedNodes[index] ? colours[category] : '#efefef'}
                         onPress={() => this._handleOnPress(category, { date: datum.date, time: datum.time }, index)}
                       >
-                        { datum.date }
-                        { datum.time || 'TBC' }
+                        { `${formatDate(datum.date, 'half')}, ${formatTime(datum.time) || 'TBC'}` }
                       </Icon.Button>
                     </View>
                   </View>

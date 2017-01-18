@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import formatDate from '../../lib/formatDate';
+import formatDate from '../../lib/format-date';
 import CardSection from '../common/CardSection';
 import Card from '../common/Card';
 import styles from '../../../styles';
