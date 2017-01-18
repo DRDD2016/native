@@ -5,14 +5,14 @@ export const GET_EVENT_FAILURE = 'GET_EVENT_FAILURE';
 
 const event1 = {
   event_id: 1,
-  host_user_id: 1,
+  host_user_id: 4,
   name: 'Lounge party',
   description: 'Celebrating life',
   is_poll: true,
   is_edited: false,
   _invitees: [2],
   _what: ['dancing', 'skydiving'],
-  _where: ['Forest', 'Camping'],
+  _where: ['Forest'],
   _when: [{ date: '01-01-2017', time: '12:00:00' }, { date: '03-01-2017', time: '15:00:00' }],
   rsvps: { going: [], not_going: [], maybe: [] },
   vote_count: {
