@@ -34,19 +34,17 @@ class Event extends React.Component {
 
   renderView () {
 
-    if (this.props.userIsHost && this.props.isPoll) {
+    if (true) /* this.props.userIsHost && this.props.isPoll */ {
       // changed from this.props.params.event_id
       return (
         <HostPoll
           tally={ this.props.tally }
           event={ this.props.event }
           event_id={ this.props.event.event_id }
-          finalChoices={ this.props.finalChoices }
-          hostEventChoices={ this.props.hostEventChoices }
           handleConfirmEvent={ this.props.handleConfirmEvent }
         />
       );
-    } else if (true) {
+    } else if (!this.props.userIsHost && this.props.isPoll) {
       return (
         <InviteePoll
           event={ this.props.event }

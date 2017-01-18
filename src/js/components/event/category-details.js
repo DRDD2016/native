@@ -3,7 +3,6 @@ import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 // import BarChart from '../../components/event/bar-chart';
 import colours from '../../../styles/colours';
-// import styles from '../../../styles';
 
 export default class CategoryDetails extends Component {
 
@@ -18,12 +17,21 @@ export default class CategoryDetails extends Component {
 
   _handleOnPress (category, selection, index) {
     this.props.toggleSelection(category, selection);
-    this.toggleHighlight(index);
+    this.toggleHighlight(this.props.userIsHost, index);
   }
 
-  toggleHighlight (index) {
-    const newNodes = [...this.state.selectedNodes];
-    newNodes[index] = !newNodes[index];
+  toggleHighlight (userIsHost, index) {
+    let newNodes;
+    if (userIsHost) { // host must select ONE option per category
+      newNodes = new Array(this.props.data.length).fill(false);
+      if (this.state.selectedNodes[index] === false) { // if toggling on
+        newNodes[index] = !newNodes[index];
+      }
+    } else { // invitees can select multiple options per category
+      newNodes = [...this.state.selectedNodes];
+      newNodes[index] = !newNodes[index];
+    }
+
     this.setState({
       selectedNodes: newNodes
     });
@@ -35,83 +43,9 @@ export default class CategoryDetails extends Component {
     when: 'calendar'
   }
 
-  // const styles = {
-  //   title: {
-  //     flex: 1,
-  //     fontSize: 12,
-  //     fontWeight: 'bold',
-  //     color: colours[category],
-  //     paddingTop: 10
-  //   },
-  //   left: {
-  //     // flex: 1.2,
-  //     flexDirection: 'column',
-  //     justifyContent: 'flex-start',
-  //     alignItems: 'flex-start'
-  //   },
-  //   centre: {
-  //     // flex: 3.8,
-  //     flexDirection: 'column',
-  //     justifyContent: 'flex-start',
-  //     alignItems: 'flex-start',
-  //     marginRight: 0
-  //   },
-  //   right: {
-  //
-  //   },
-  //   row: {
-  //     flex: 1,
-  //     flexDirection: 'row',
-  //     justifyContent: 'space-between',
-  //     alignItems: 'center'
-  //   },
-  //   button: {
-  //     deselected: {
-  //       component: {
-  //         flex: 1,
-  //         backgroundColor: colours.white,
-  //         borderColor: colours[category],
-  //         borderWidth: 1,
-  //         borderRadius: 100,
-  //         paddingTop: 8,
-  //         paddingBottom: 8,
-  //         paddingLeft: 15,
-  //         paddingRight: 15,
-  //         marginBottom: 2
-  //       },
-  //       text: {
-  //         flex: 1,
-  //         fontSize: 12,
-  //         color: colours[category]
-  //       }
-  //     },
-  //     selected: {
-  //       component: {
-  //         flex: 1,
-  //         backgroundColor: colours[category],
-  //         borderColor: colours[category],
-  //         borderWidth: 1,
-  //         borderRadius: 100,
-  //         paddingTop: 8,
-  //         paddingBottom: 8,
-  //         paddingLeft: 15,
-  //         paddingRight: 15,
-  //         marginBottom: 2
-  //       }
-  //     },
-  //     text: {
-  //       flex: 1,
-  //       fontSize: 12,
-  //       color: colours.white,
-  //       justifyContent: 'space-around'
-  //     }
-  //   }
-  // };
-
   render () {
     const { category, data } = this.props;
     const categoryTitle = `W${category.substring(1)}`;
-
     return (
       <View style={ { paddingTop: 80 } }>
         {

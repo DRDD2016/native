@@ -1,56 +1,74 @@
 /* eslint-disable */
 /* eslint-disable no-else-return */
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { EventWhatSection, EventWhereSection, EventWhenSection } from './poll-sections';
+import CategoryDetails from './category-details';
 import HostCreateEventButton from './host-create-event-button';
 import Button from '../common/Button';
 import styles from '../../../styles';
 
-const HostPoll = ({ event, tally, finalChoices, //eslint-disable-line
-  handleHostEventChoices, handleConfirmEvent, event_id  }) => { //eslint-disable-line
-  // const what = createVoteSection(event, tally, '_what', EventWhatSection, handleHostEventChoices, finalChoices);
-  // const where = createVoteSection(event, tally, '_where', EventWhereSection, handleHostEventChoices, finalChoices);
-  // const when = createVoteSection(event, tally, '_when', EventWhenSection, handleHostEventChoices, finalChoices);
+export default class HostPoll extends Component {
 
-  function eventNote (event) {
+  constructor () {
+    super();
 
-    if (event.eventNote !== '') {
+    this.state = {
+      what: [],
+      where: [],
+      when: []
+    };
+    this.toggleSelection = this.toggleSelection.bind(this);
+  }
 
-      return (
-        <View style={styles.eventNote}>
-          <Text style={styles.msg2}>
-            { event.eventNote }
-          </Text>
-        </View>
-      );
+  toggleSelection (category, selection) {
+    if (!this.state[category].includes(selection)) {
+      this.setState({
+        [category]: [selection]
+      }, () => {
+        console.table(this.state);
+      });
+    } else {
+      this.setState({
+        [category]: []
+      }, () => {
+        console.table(this.state);
+      });
     }
   }
 
-  return (
+  render () {
 
-    <View>
-      <Text>POLL (HOST VIEW)</Text>
-      <View>{ eventNote(event) }</View>
+    const { event, tally, handleConfirmEvent, event_id  } = this.props;
+    console.table("TALLY", tally);
+    return (
 
-      <View style={styles.row}>
-        <View><Text>WHAT</Text></View>
-      </View>
-      <View style={styles.row}>
+      <View>
+        <Text>POLL (HOST VIEW)</Text>
+
+        <View style={styles.row}>
+          <CategoryDetails
+            category={'what'}
+            data={event._what}
+            toggleSelection={this.toggleSelection}
+            userIsHost
+          />
+        </View>
+        <View style={styles.row}>
         <View><Text>WHERE</Text></View>
-      </View>
-      <View style={styles.row}>
+        </View>
+        <View style={styles.row}>
         <View><Text>WHEN</Text></View>
+        </View>
+
+        <Button
+          buttonStyle={styles.confirmButton}
+          textStyle={styles.confirmButtonText}
+          onClick={ () => handleConfirmEvent(finalChoices, event_id) }
+        >
+          CONFIRM & SEND INVITES
+        </Button>
+
       </View>
-
-      <HostCreateEventButton
-        finalChoices={ finalChoices }
-        handleConfirmEvent={ handleConfirmEvent }
-        event_id={ event_id }
-      />
-
-    </View>
-  );
-};
-
-export default HostPoll;
+    );
+  }
+}
