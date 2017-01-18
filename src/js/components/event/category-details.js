@@ -1,23 +1,32 @@
 import React, { PropTypes, Component } from 'react';
 import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import formatDate from '../../lib/format-date';
+import formatTime from '../../lib/format-time';
 // import BarChart from '../../components/event/bar-chart';
 import colours from '../../../styles/colours';
+
+const OFF_WHITE = '#efefef';
 
 export default class CategoryDetails extends Component {
 
   constructor (props) {
     super(props);
     this.state = {
-      selectedNodes: new Array(props.data.length).fill(false)
+      selectedNodes: new Array(props.data.length).fill(false),
+      isToggleable: props.data.length !== 1
     };
     this._handleOnPress = this._handleOnPress.bind(this);
     this.toggleHighlight = this.toggleHighlight.bind(this);
   }
 
   _handleOnPress (category, selection, index) {
-    this.props.toggleSelection(category, selection);
-    this.toggleHighlight(this.props.userIsHost, index);
+    console.log('isToggleable', this.state.isToggleable);
+    if (this.state.isToggleable) {
+
+      this.props.toggleSelection(category, selection);
+      this.toggleHighlight(this.props.userIsHost, index);
+    }
   }
 
   toggleHighlight (userIsHost, index) {
@@ -63,12 +72,12 @@ export default class CategoryDetails extends Component {
                     <View>
                       <Icon.Button
                         name={this.icons[category]}
-                        size={16} color={this.state.selectedNodes[index] ? '#efefef' : colours[category]}
-                        backgroundColor={this.state.selectedNodes[index] ? colours[category] : '#efefef'}
+                        size={16}
+                        color={(!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category]}
+                        backgroundColor={(!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index] ? colours[category] : OFF_WHITE}
                         onPress={() => this._handleOnPress(category, { date: datum.date, time: datum.time }, index)}
                       >
-                        { datum.date }
-                        { datum.time || 'TBC' }
+                        { `${formatDate(datum.date, 'half')}, ${formatTime(datum.time) || 'TBC'}` }
                       </Icon.Button>
                     </View>
                   </View>
@@ -86,8 +95,9 @@ export default class CategoryDetails extends Component {
                   <View>
                     <Icon.Button
                       name={this.icons[category]}
-                      size={16} color={this.state.selectedNodes[index] ? '#efefef' : colours[category]}
-                      backgroundColor={this.state.selectedNodes[index] ? colours[category] : '#efefef'}
+                      size={16}
+                      color={(!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category]}
+                      backgroundColor={(!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index] ? colours[category] : OFF_WHITE}
                       onPress={() => this._handleOnPress(category, datum, index)}
                     >
                       { datum || 'TBC' }

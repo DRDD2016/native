@@ -8,13 +8,14 @@ import styles from '../../../styles';
 
 export default class InviteePoll extends Component {
 
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
 
+    const { _what: what, _where: where, _when: when } = this.props.event;
     this.state = {
-      what: [],
-      where: [],
-      when: []
+      what: what.length === 1 ? what : [],
+      where: where.length === 1 ? where : [],
+      when: when.length === 1 ? when : []
     };
     this.toggleSelection = this.toggleSelection.bind(this);
   }
@@ -43,9 +44,10 @@ export default class InviteePoll extends Component {
   render () {
     const { event, poll, handleVote, event_id } = this.props;
 
-    const somethingIsSelected = Object.keys(this.state).some((category) => {
-      return this.state[category].length > 0;
-    });
+    const allCategoriesSelected = Object.keys(this.state)
+      .map(category => this.state[category].length)
+      .every(length => length >= 1);
+      
     return (
       <View>
         <Text>POLL (INVITEE VIEW)</Text>
@@ -60,8 +62,14 @@ export default class InviteePoll extends Component {
           data={event._where}
           toggleSelection={this.toggleSelection}
         />
+
+        <CategoryDetails
+          category={'when'}
+          data={event._when}
+          toggleSelection={this.toggleSelection}
+        />
         {
-          somethingIsSelected &&
+          allCategoriesSelected &&
           <Button
             buttonStyle={styles.buttonStyle}
             onClick={ () => handleVote(poll, event_id) }
