@@ -53,7 +53,6 @@ export default class CategoryDetails extends Component {
   }
 
   render () {
-    console.log(this.state);
     const { category, data } = this.props;
     const categoryTitle = `W${category.substring(1)}`;
     return (
