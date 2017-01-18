@@ -60,6 +60,12 @@ export default class InviteePoll extends Component {
           data={event._where}
           toggleSelection={this.toggleSelection}
         />
+
+        <CategoryDetails
+          category={'when'}
+          data={event._when}
+          toggleSelection={this.toggleSelection}
+        />
         {
           somethingIsSelected &&
           <Button

@@ -5,7 +5,7 @@ export const GET_EVENT_FAILURE = 'GET_EVENT_FAILURE';
 
 const event1 = {
   event_id: 1,
-  host_user_id: 4,
+  host_user_id: 1,
   name: 'Lounge party',
   description: 'Celebrating life',
   is_poll: true,

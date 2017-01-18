@@ -9,13 +9,14 @@ import styles from '../../../styles';
 
 export default class HostPoll extends Component {
 
-  constructor () {
-    super();
-
+  constructor (props) {
+    super(props);
+    
+    const { _what: what, _where: where, _when: when } = this.props.event;
     this.state = {
-      what: [],
-      where: [],
-      when: []
+      what: what.length === 1 ? what : [],
+      where: where.length === 1 ? where : [],
+      when: when.length === 1 ? when : []
     };
     this.toggleSelection = this.toggleSelection.bind(this);
   }
@@ -39,9 +40,12 @@ export default class HostPoll extends Component {
   render () {
 
     const { event, vote_count, handleConfirmEvent } = this.props;
-    console.log("event", event);
-    return (
 
+    const allCategoriesSelected = Object.keys(this.state)
+      .map(category => this.state[category].length)
+      .every(length => length === 1);
+
+    return (
       <View>
         <Text>POLL (HOST VIEW)</Text>
 
@@ -69,15 +73,16 @@ export default class HostPoll extends Component {
             userIsHost
           />
         </View>
-
-        <Button
-          buttonStyle={styles.confirmButton}
-          textStyle={styles.confirmButtonText}
-          onClick={ () => handleConfirmEvent(finalChoices, event_id) }
-        >
-          CONFIRM & SEND INVITES
-        </Button>
-
+        {
+          allCategoriesSelected &&
+            <Button
+              buttonStyle={styles.confirmButton}
+              textStyle={styles.confirmButtonText}
+              onClick={ () => handleConfirmEvent(finalChoices, event_id) }
+            >
+              CONFIRM EVENT DETAILS
+            </Button>
+        }
       </View>
     );
   }
