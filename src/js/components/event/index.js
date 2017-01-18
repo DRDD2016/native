@@ -50,7 +50,6 @@ class Event extends React.Component {
       return (
         <InviteePoll
           event={ this.props.event }
-          toggleSelection={ this.props.toggleSelection }
           poll={ this.props.poll }
           handleVote={ this.props.handleVote }
           event_id={ this.props.event.event_id }

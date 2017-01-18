@@ -1,5 +1,3 @@
-export const UPDATE_POLL = 'UPDATE_POLL'; // redux form?
-
 export const VOTE_REQUEST = 'VOTE_REQUEST';
 export const VOTE_SUCCESS = 'VOTE_SUCCESS';
 export const VOTE_FAILURE = 'VOTE_FAILURE';
@@ -10,13 +8,6 @@ export const CONFIRM_EVENT_REQUEST = 'CONFIRM_EVENT_REQUEST';
 export const CONFIRM_EVENT_SUCCESS = 'CONFIRM_EVENT_SUCCESS';
 export const CONFIRM_EVENT_FAILURE = 'CONFIRM_EVENT_FAILURE';
 
-export function updatePoll (eventType, index) {
-  return {
-    type: UPDATE_POLL,
-    eventType,
-    index
-  };
-}
 
 /********
 * CONFIRM POLL ACTIONS

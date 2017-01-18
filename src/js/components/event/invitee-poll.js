@@ -1,52 +1,75 @@
 
 /* eslint-disable no-else-return */
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import PollButton from '../general/poll-button';
 import CategoryDetails from './category-details';
-// import { WhatSection, WhereSection, WhenSection } from './poll-sections';
+import Button from '../common/Button';
 import styles from '../../../styles';
 
-const InviteePoll = ({ event, toggleSelection, poll, handleVote, //eslint-disable-line
-  event_id, isHost, hasMadeChoice }) => { //eslint-disable-line
+export default class InviteePoll extends Component {
 
+  constructor () {
+    super();
 
-  const voteButtonText = hasMadeChoice ? 'VOTE AGAIN' : 'VOTE';
+    this.state = {
+      what: [],
+      where: [],
+      when: []
+    };
+    this.toggleSelection = this.toggleSelection.bind(this);
+  }
 
-  function eventNote (event) {
+  toggleSelection (category, selection) {
+    if (!this.state[category].includes(selection)) {
 
-    if (event.eventNote !== '') {
-      return (
-        <View style={styles.eventNote}>
-          { event.eventNote }
+      this.setState({
+        [category]: this.state[category].concat([selection])
+      }, () => {
+        console.table(this.state);
+      });
+    } else {
+      const selectionIndex = this.state[category].indexOf(selection);
+      const newSelection = [...this.state[category]];
+      newSelection.splice(selectionIndex, 1);
 
-        </View>
-      );
+      this.setState({
+        [category]: newSelection
+      }, () => {
+        console.table(this.state);
+      });
     }
   }
 
-  return (
-    <View>
-      <Text>POLL (INVITEE VIEW)</Text>
-      <CategoryDetails
-        category={'what'}
-        data={event._what}
-      />
+  render () {
+    const { event, poll, handleVote, event_id } = this.props;
 
-      <CategoryDetails
-        category={'where'}
-        data={event._where}
-      />
+    const somethingIsSelected = Object.keys(this.state).some((category) => {
+      return this.state[category].length > 0;
+    });
+    return (
+      <View>
+        <Text>POLL (INVITEE VIEW)</Text>
+        <CategoryDetails
+          category={'what'}
+          data={event._what}
+          toggleSelection={this.toggleSelection}
+        />
 
-      <PollButton
-        poll={ poll }
-        handleVote={ handleVote }
-        event_id={ event_id }
-        voteButtonText={ voteButtonText }
-      />
-    </View>
-  );
-};
-
-
-export default InviteePoll;
+        <CategoryDetails
+          category={'where'}
+          data={event._where}
+          toggleSelection={this.toggleSelection}
+        />
+        {
+          somethingIsSelected &&
+          <Button
+            buttonStyle={styles.buttonStyle}
+            onClick={ () => handleVote(poll, event_id) }
+          >
+            VOTE
+          </Button>
+        }
+      </View>
+    );
+  }
+}

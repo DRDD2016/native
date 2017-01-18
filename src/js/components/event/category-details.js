@@ -1,19 +1,39 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 // import BarChart from '../../components/event/bar-chart';
 import colours from '../../../styles/colours';
 // import styles from '../../../styles';
 
-const CategoryDetails = ({ category, data }) => {
+export default class CategoryDetails extends Component {
 
-  const categoryTitle = `W${category.substring(1)}`;
+  constructor (props) {
+    super(props);
+    this.state = {
+      selectedNodes: new Array(props.data.length).fill(false)
+    };
+    this._handleOnPress = this._handleOnPress.bind(this);
+    this.toggleHighlight = this.toggleHighlight.bind(this);
+  }
 
-  const icons = {
+  _handleOnPress (category, selection, index) {
+    this.props.toggleSelection(category, selection);
+    this.toggleHighlight(index);
+  }
+
+  toggleHighlight (index) {
+    const newNodes = [...this.state.selectedNodes];
+    newNodes[index] = !newNodes[index];
+    this.setState({
+      selectedNodes: newNodes
+    });
+  }
+
+  icons = {
     what: 'star',
     where: 'map-marker',
     when: 'calendar'
-  };
+  }
 
   // const styles = {
   //   title: {
@@ -88,53 +108,66 @@ const CategoryDetails = ({ category, data }) => {
   //   }
   // };
 
-  return (
-    <View style={ { paddingTop: 80 } }>
-      {
-        data.map((datum, i) => {
+  render () {
+    const { category, data } = this.props;
+    const categoryTitle = `W${category.substring(1)}`;
 
-          if (category === 'when') {
+    return (
+      <View style={ { paddingTop: 80 } }>
+        {
+          data.map((datum, index) => {
+
+            if (category === 'when') {
+              return (
+                <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
+
+                  <View style={{ width: 150 }}>
+                    <Text style={{ alignSelf: 'center' }}>{ index === 0 && categoryTitle }</Text>
+                  </View>
+
+                  <View>
+                    <View>
+                      <Icon.Button
+                        name={this.icons[category]}
+                        size={16} color={this.state.selectedNodes[index] ? '#efefef' : colours[category]}
+                        backgroundColor={this.state.selectedNodes[index] ? colours[category] : '#efefef'}
+                        onPress={() => this._handleOnPress(category, { date: datum.date, time: datum.time }, index)}
+                      >
+                        { datum.date }
+                        { datum.time || 'TBC' }
+                      </Icon.Button>
+                    </View>
+                  </View>
+                </View>
+              );
+            }
             return (
               <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
 
                 <View style={{ width: 150 }}>
-                  <Text style={{ alignSelf: 'center' }}>{ i === 0 && categoryTitle }</Text>
+                  <Text style={{ alignSelf: 'center' }}>{ index === 0 && categoryTitle }</Text>
                 </View>
 
                 <View>
                   <View>
-                    <Icon.Button name={icons[category]} size={16} color={colours[category]} backgroundColor="#efefef" onPress={() => {}}>
-                      { datum.date }
-                      { datum.time || 'TBC' }
+                    <Icon.Button
+                      name={this.icons[category]}
+                      size={16} color={this.state.selectedNodes[index] ? '#efefef' : colours[category]}
+                      backgroundColor={this.state.selectedNodes[index] ? colours[category] : '#efefef'}
+                      onPress={() => this._handleOnPress(category, datum, index)}
+                    >
+                      { datum || 'TBC' }
                     </Icon.Button>
                   </View>
                 </View>
               </View>
             );
-          }
-          return (
-            <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
-
-              <View style={{ width: 150 }}>
-                <Text style={{ alignSelf: 'center' }}>{ i === 0 && categoryTitle }</Text>
-              </View>
-
-              <View>
-                <View>
-                  <Icon.Button name={icons[category]} size={16} color={colours[category]} backgroundColor="#efefef" onPress={() => {}}>
-                    { datum || 'TBC' }
-                  </Icon.Button>
-                </View>
-              </View>
-            </View>
-          );
-        })
-      }
-    </View>
-  );
-};
-
-export default CategoryDetails;
+          })
+        }
+      </View>
+    );
+  }
+}
 
 CategoryDetails.propTypes = {
   data: PropTypes.arrayOf(
