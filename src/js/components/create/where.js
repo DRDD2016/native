@@ -37,7 +37,7 @@ export default class Where extends Component {
     const inputs = datum.map((value, i) => {
       return (
         <GooglePlacesAutocomplete
-          key={ value }
+          key={ i }
           enablePoweredByContainer={false}
           placeholder="Where"
           minLength={2}
