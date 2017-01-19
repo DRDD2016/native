@@ -24,7 +24,7 @@ export default class Where extends Component {
   }
 
   onPlaceSearch = (data, details, i) => {
-    const place = `${data.structured_formatting.main_text} ${data.structured_formatting.secondary_text}`;
+    const place = details.website ? `${details.name} ${details.formatted_address}` : `${details.formatted_address}`;
     this.props.handleChange(place, i);
   }
 
@@ -37,7 +37,7 @@ export default class Where extends Component {
     const inputs = datum.map((value, i) => {
       return (
         <GooglePlacesAutocomplete
-          key={ i }
+          key={ value }
           enablePoweredByContainer={false}
           placeholder="Where"
           minLength={2}

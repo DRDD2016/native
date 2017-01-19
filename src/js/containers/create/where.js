@@ -13,14 +13,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setWhere(text, inputKey));
   },
 
-  // handleChange: (inputKey, placeName, placeAddress) => {
-  //   const address = {
-  //     placeName,
-  //     placeAddress: placeAddress || ''
-  //   };
-  //   dispatch(setWhere(address, inputKey));
-  // },
-
   addInput: (nextInputKey) => {
     dispatch(addInput(nextInputKey, '_where'));
   },
