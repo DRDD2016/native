@@ -107,6 +107,7 @@ function addInput (state, action) {
   } else {
     initialValue = '';
   }
+  
   const newState = update(state, {
     [action.eventType]: { $push: [initialValue] }
   });

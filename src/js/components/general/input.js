@@ -5,7 +5,7 @@ import Button from '../common/Button';
 import styles from '../../../styles';
 
 const Input = ({ handleChange, value, placeholder, removeInput, inputKey }) => {
-
+  
   return (
     <View style={ styles.row }>
 
