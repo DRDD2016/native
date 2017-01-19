@@ -2,13 +2,11 @@ import React from 'react';
 import { Text, TextInput, View } from 'react-native';
 import styles from '../../../styles';
 
-
 export function FormTextInput ({ isEmail, input: { value, onChange }, meta: { touched, error } }) {
-  console.log(isEmail);
   return (
     <View style={{ flex: 1 }}>
       <TextInput
-        style={ styles.inputStyle }
+        style={ [styles.inputStyle, { borderRadius: 0, fontSize: 19 }] }
         onChangeText={ text => onChange(text) }
         value={ value }
         type="text"
@@ -16,7 +14,7 @@ export function FormTextInput ({ isEmail, input: { value, onChange }, meta: { to
         autoCorrect={ false }
       />
       {
-        touched && error && <Text>{error}</Text>
+        touched && error && <Text style={{ color: '#ec3811' }}>{error}</Text>
       }
     </View>
   );
@@ -26,14 +24,14 @@ export function FormPasswordInput ({ input: { value, onChange }, meta: { touched
   return (
     <View style={{ flex: 1 }}>
       <TextInput
-        style={ styles.inputStyle }
+        style={ [styles.inputStyle, { borderRadius: 0, fontSize: 19 }] }
         onChangeText={ text => onChange(text) }
         value={ value }
         type="password"
         secureTextEntry
       />
       {
-        touched && error && <Text>{error}</Text>
+        touched && error && <Text style={{ color: '#ec3811' }}>{error}</Text>
       }
     </View>
   );

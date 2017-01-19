@@ -29,14 +29,14 @@ export default function Index ({ navigator }) {
       <View style={{ flexDirection: 'row', position: 'absolute', bottom: 0 }}>
         <Button
           buttonStyle={{ flex: 1, height: 50, backgroundColor: '#1984f0', justifyContent: 'center' }}
-          textStyle={{ alignSelf: 'center', color: '#fff', fontWeight: 'bold', fontSize: 20 }}
+          textStyle={{ alignSelf: 'center', color: '#fff', fontWeight: '300', fontSize: 20 }}
           onPress={ goToLogin }
         >
           LOG IN
         </Button>
         <Button
           buttonStyle={{ flex: 1, height: 50, backgroundColor: '#ee7433', justifyContent: 'center' }}
-          textStyle={{ alignSelf: 'center', color: '#fff', fontWeight: 'bold', fontSize: 20 }}
+          textStyle={{ alignSelf: 'center', color: '#fff', fontWeight: '300', fontSize: 20 }}
           onPress={ goToSignup }
         >
           SIGN UP
