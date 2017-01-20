@@ -6,7 +6,6 @@ import AddInput from '../general/add-input';
 import Button from '../common/Button';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
-import GOOGLE_PLACES_API_KEY from '../../keys';
 
 const windowSize = Dimensions.get('window');
 const deviceHeight = windowSize.height;
@@ -46,7 +45,7 @@ export default class Where extends Component {
           onPress={(data, details, index = i) => this.onPlaceSearch(data, details, index)}
           query={{
             types: ['establishment', 'geocode'],
-            key: process.env.GOOGLE_PLACES_API_KEY || GOOGLE_PLACES_API_KEY,
+            key: process.env.GOOGLE_PLACES_API_KEY || require('../../keys').GOOGLE_PLACES_API_KEY,
             language: 'en'
           }}
           styles={{
