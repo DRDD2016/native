@@ -46,7 +46,7 @@ export default class Where extends Component {
           onPress={(data, details, index = i) => this.onPlaceSearch(data, details, index)}
           query={{
             types: ['establishment', 'geocode'],
-            key: GOOGLE_PLACES_API_KEY,
+            key: process.env.GOOGLE_PLACES_API_KEY || GOOGLE_PLACES_API_KEY,
             language: 'en'
           }}
           styles={{
