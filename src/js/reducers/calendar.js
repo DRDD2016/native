@@ -2,7 +2,7 @@ import update from 'immutability-helper';
 import * as actions from '../actions/calendar';
 
 const calendarData = [{
-  _when: [
+  when: [
     {
       date: '2017-07-23',
       time: ''
@@ -13,10 +13,10 @@ const calendarData = [{
   has_edited: 'true',
   host_photo_url: 'https://scontent.xx.fbcdn.net/v/t1.0-1/p320x320/1010535_10152958307150251_1106767454_n.jpg?oh=98cef4fe7d50e0dfdea162b4db7cad6a&oe=58306D4F',
   note: '',
-  _what: [
+  what: [
     'Camp'
   ],
-  _where: [
+  where: [
     {
       placeName: 'Glastonbury',
       placeAddress: ''

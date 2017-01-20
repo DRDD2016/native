@@ -22,8 +22,8 @@ export default class Calendar extends Component {
 
   sortedData = this.props.filteredEvents.sort((a, b) => {
     /* eslint-disable no-param-reassign */
-    a = a._when[0].date;
-    b = b._when[0].date;
+    a = a.when[0].date;
+    b = b.when[0].date;
 
     return new Date(a).getTime() > new Date(b).getTime();
   });
@@ -63,9 +63,9 @@ export default class Calendar extends Component {
                     userIsHost={ item.host_id === user_id }
                     rsvpStatus={ item.RSVP }
                     name={ item.name }
-                    what={ item._what }
-                    where={ item._where }
-                    when={ item._when }
+                    what={ item.what }
+                    where={ item.where }
+                    when={ item.when }
                     event_id={ item.event_id }
                   />
                 );

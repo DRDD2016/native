@@ -15,9 +15,9 @@ export const initialState = {
   description: undefined,
   is_poll: undefined,
   _invitees: [],
-  _what: [],
-  _where: [],
-  _when: [],
+  what: [],
+  where: [],
+  when: [],
   poll: {}
 };
 

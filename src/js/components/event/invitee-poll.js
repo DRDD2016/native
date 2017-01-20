@@ -11,7 +11,7 @@ export default class InviteePoll extends Component {
   constructor (props) {
     super(props);
 
-    const { _what: what, _where: where, _when: when } = this.props.event;
+    const { what, where, when } = this.props.event;
     this.state = {
       what: what.length === 1 ? what : [],
       where: where.length === 1 ? where : [],
@@ -47,25 +47,25 @@ export default class InviteePoll extends Component {
     const allCategoriesSelected = Object.keys(this.state)
       .map(category => this.state[category].length)
       .every(length => length >= 1);
-      
+
     return (
       <View>
         <Text>POLL (INVITEE VIEW)</Text>
         <CategoryDetails
           category={'what'}
-          data={event._what}
+          data={event.what}
           toggleSelection={this.toggleSelection}
         />
 
         <CategoryDetails
           category={'where'}
-          data={event._where}
+          data={event.where}
           toggleSelection={this.toggleSelection}
         />
 
         <CategoryDetails
           category={'when'}
-          data={event._when}
+          data={event.when}
           toggleSelection={this.toggleSelection}
         />
         {

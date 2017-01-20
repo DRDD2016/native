@@ -2,37 +2,16 @@ import { connect } from 'react-redux';
 import { newEvent, clearCreateEvent } from '../../actions/create';
 import Confirm from '../../components/create/confirm';
 import { store } from '../../init-store';
-// import jsonState from '../../testState/jsonStateCreate.json';
 
-// const mapStateToProps = (state) => {
-
-  // const sortedDates = jsonState.createEvent.eventWhen.sort((a, b) => {
-  //   return (a.date + a.time) > (b.date + b.time);
-  // });
-
-  // const data = {
-  //   eventName: jsonState.createEvent.eventDetails.eventName,
-  //   eventDescription: jsonState.createEvent.eventDetails.eventDescription,
-  //   eventNote: jsonState.createEvent.eventDetails.eventNote,
-  //   eventWhat: jsonState.createEvent.eventWhat,
-  //   eventWhere: jsonState.createEvent.eventWhere,
-  //   eventWhen: sortedDates,
-  //   invitees: jsonState.createEvent.invitees
-  // };
-
-  // return {
-    // data: cleanEventData(data),
-    // eventDetails: jsonState.createEvent.eventDetails
-//   };
-// };
 
 const mapStateToProps = ({ create }) => {
   return {
-    data: create._when,
-    where: create._where,
     name: create.name,
     description: create.description,
-    note: create.note
+    note: create.note,
+    what: create.what,
+    where: create.where,
+    when: create.when
   };
 };
 

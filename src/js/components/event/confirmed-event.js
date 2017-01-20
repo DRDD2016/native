@@ -4,8 +4,11 @@
 import React from 'react';
 import { View, Image, Text } from 'react-native';
 import rsvpsArea from './confirmed-event/rsvps-area';
-import { eventNote } from '../../lib/confirmed-event-helpers';
+import ConfirmWhat from '../create/confirm-what';
+import ConfirmWhere from '../create/confirm-where';
+import ConfirmWhen from '../create/confirm-when';
 import formatDate from '../../lib/format-date';
+import formatTime from '../../lib/format-time';
 import Button from '../common/Button';
 import styles from '../../../styles';
 
@@ -19,48 +22,21 @@ const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, RSVPToEv
   const respondedList = going.concat(maybe, notGoing);
 
 
-  const placeNameLong = (event._where[0] && event._where[0].placeName > 18);
+  const placeNameLong = (event.where[0] && event.where[0].placeName > 18);
 
   return (
     <View>
       <Text>CONFIRMED EVENT</Text>
-      <Text>Event note</Text>
       <View style={styles.row}>
-        <Text>
-          What
-        </Text>
-        <View>
-          <Text>{ event._what[0] || 'TBC' }</Text>
-        </View>
+        <ConfirmWhat data={ event.what } />
       </View>
 
       <View style={styles.row}>
-        <Text>
-          Where
-        </Text>
-        <View>
-          { (!placeNameLong) &&
-            <Text style={styles.placeNameShort}>{ event._where[0].placeName || 'TBC' }</Text>
-          }
-          { (placeNameLong) &&
-            <Text style={styles.placeNameLong}>{ event._where[0].placeName || 'TBC' }</Text>
-          }
-          <Text>{ event._where[0].placeAddress }</Text>
-        </View>
+        <ConfirmWhere data={ event.where } />
       </View>
 
       <View style={styles.row}>
-        <Text>
-          When
-        </Text>
-        <View>
-          <View style={styles.date}>
-            <Text>{ 'TBC' }</Text>
-          </View>
-          <View style={styles.time}>
-            <Text>{ 'TBC' }</Text>
-          </View>
-        </View>
+        <ConfirmWhen data={ event.when } />
       </View>
 
       <View>

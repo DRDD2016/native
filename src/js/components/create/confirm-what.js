@@ -5,8 +5,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../common/Button';
 import styles from '../../../styles';
 
-const ConfirmEventWhat = ({ eventWhat }) => {
-  const layout = Object.keys(eventWhat).map((data, i) => {
+const ConfirmWhat = ({ data }) => {
+
+  const layout = data.map((datum, i) => {
 
     const hideTitle = i > 0;
 
@@ -33,7 +34,7 @@ const ConfirmEventWhat = ({ eventWhat }) => {
             <Button buttonStyle={styles.optionSelectedWhat} textStyle={styles.optionTextSelected}>
               <Icon name="star" size={18} color="white" />
               {'  '}
-              { eventWhat[data] || 'TBC' }
+              { datum || 'TBC' }
             </Button>
           </View>
         </View>
@@ -49,4 +50,4 @@ const ConfirmEventWhat = ({ eventWhat }) => {
   );
 };
 
-export default ConfirmEventWhat;
+export default ConfirmWhat;

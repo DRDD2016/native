@@ -5,9 +5,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../common/Button';
 import styles from '../../../styles';
 
-const ConfirmEventWhere = ({ eventWhere }) => { // eslint-disable-line react/prop-types
+const ConfirmWhere = ({ data }) => { // eslint-disable-line react/prop-types
 
-  const layout = eventWhere.map((data, i) => {
+  const layout = data.map((datum, i) => {
 
     const hideTitle = i > 0;
 
@@ -33,7 +33,7 @@ const ConfirmEventWhere = ({ eventWhere }) => { // eslint-disable-line react/pro
             <Button buttonStyle={styles.optionSelectedWhere} textStyle={styles.optionTextSelected}>
               <Icon name="map-marker" size={18} color="white" />
               {'  '}
-              { data || 'TBC' }
+              { datum || 'TBC' }
             </Button>
           </View>
         </View>
@@ -50,4 +50,4 @@ const ConfirmEventWhere = ({ eventWhere }) => { // eslint-disable-line react/pro
   );
 };
 
-export default ConfirmEventWhere;
+export default ConfirmWhere;

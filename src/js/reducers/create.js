@@ -5,9 +5,9 @@ export const initialState = {
   name: '',
   description: '',
   note: '',
-  _what: [''],
-  _where: [''],
-  _when: [
+  what: [''],
+  where: [''],
+  when: [
     { date: new Date(), time: new Date() }
   ],
   _invitees: [],
@@ -26,12 +26,12 @@ export default function create (state = initialState, action) {
 
     case actions.SET_WHAT:
       return update(state, {
-        _what: { $splice: [[action.inputKey, 1, action.data]] }
+        what: { $splice: [[action.inputKey, 1, action.data]] }
       });
 
     case actions.SET_WHERE:
       return update(state, {
-        _where: { $splice: [[action.inputKey, 1, action.data]] }
+        where: { $splice: [[action.inputKey, 1, action.data]] }
       });
 
     case actions.SET_WHEN:
@@ -77,12 +77,12 @@ function setDetails (state, action) {
 
 function setWhen (state, action) {
 
-  const oldValue = state._when[action.inputKey];
+  const oldValue = state.when[action.inputKey];
   const newValue = update(oldValue, {
     [action.format]: { $set: action.data }
   });
   return update(state, {
-    _when: { $splice: [[action.inputKey, 1, newValue]] }
+    when: { $splice: [[action.inputKey, 1, newValue]] }
   });
 }
 
@@ -92,8 +92,8 @@ function addInput (state, action) {
   if (action.category === 'when') {
 
     initialValue = {
-      date: state._when[action.nextInputKey - 1].date,
-      time: state._when[action.nextInputKey - 1].time
+      date: state.when[action.nextInputKey - 1].date,
+      time: state.when[action.nextInputKey - 1].time
     };
   } else {
     initialValue = '';

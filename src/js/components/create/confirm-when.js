@@ -7,10 +7,11 @@ import formatDate from '../../lib/format-date';
 import formatTime from '../../lib/format-time';
 import styles from '../../../styles';
 
-const ConfirmEventWhen = ({ eventWhen }) => { // eslint-disable-line react/prop-types
-  const layout = eventWhen.map((data, i) => {
-    const hideTitle = i > 0;
+const ConfirmWhen = ({ data }) => {
 
+  const layout = data.map((datum, i) => {
+    const hideTitle = i > 0;
+    console.log(datum);
     return (
       <View
         style={styles.pollSection}
@@ -31,11 +32,11 @@ const ConfirmEventWhen = ({ eventWhen }) => { // eslint-disable-line react/prop-
             <Button buttonStyle={styles.optionSelectedWhen} textStyle={styles.optionTextSelected}>
               <Icon name="calendar" size={18} color="white" />
               {'  '}
-              { formatDate(data.date) || 'TBC' }
+              { formatDate(datum.date) || 'TBC' }
               {'  '}
               <Icon name="clock-o" size={18} color="white" />
               {'  '}
-              { formatTime(data.time) || 'TBC' }
+              { formatTime(datum.time) || 'TBC' }
             </Button>
           </View>
         </View>
@@ -52,4 +53,4 @@ const ConfirmEventWhen = ({ eventWhen }) => { // eslint-disable-line react/prop-
   );
 };
 
-export default ConfirmEventWhen;
+export default ConfirmWhen;
