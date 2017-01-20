@@ -54,11 +54,11 @@ export function getProfileFailure (error) {
 CHANGE NAME ACTIONS
 */
 
-export function changeName (value, inputType) {
+export function changeName (value, category) {
   return {
     type: CHANGE_NAME,
     value,
-    inputType
+    category
   };
 }
 

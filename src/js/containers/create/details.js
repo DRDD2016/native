@@ -13,8 +13,8 @@ const mapStateToProps = ({ create }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleChange: (text, inputType) => {
-      dispatch(setDetails(text, inputType));
+    handleChange: (text, category) => {
+      dispatch(setDetails(text, category));
     },
     discardEvent: () => {
       dispatch(clearCreateEvent());

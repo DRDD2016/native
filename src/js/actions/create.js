@@ -13,17 +13,15 @@ export const CLEAR_CREATE_EVENT = 'CLEAR_CREATE_EVENT';
 export const ADD_INPUT = 'ADD_INPUT';
 export const REMOVE_INPUT = 'REMOVE_INPUT';
 
-export const HYDRATE_CREATE_EVENT = 'HYDRATE_CREATE_EVENT';
-
 /********
 SET EVENT ACTIONS
 ********/
 
-export function setDetails (data, inputType) {
+export function setDetails (data, field) {
   return {
     type: SET_DETAILS,
     data,
-    inputType
+    field
   };
 }
 
@@ -73,25 +71,20 @@ export function saveEvent (eventData) { //eslint-disable-line
 
 export function saveEventRequest () {
   return {
-    type: SAVE_EVENT_REQUEST,
-    isFetching: true
+    type: SAVE_EVENT_REQUEST
   };
 }
 
 export function saveEventSuccess () {
   return {
-    type: SAVE_EVENT_SUCCESS,
-    isFetching: false,
-    didSave: true
+    type: SAVE_EVENT_SUCCESS
   };
 }
 
 export function saveEventFailure (error) {
   return {
     type: SAVE_EVENT_FAILURE,
-    isFetching: false,
-    error,
-    didSave: false
+    error
   };
 }
 
@@ -105,29 +98,18 @@ export function clearCreateEvent () {
 * INPUT ACTIONS
 ********/
 
-export function addInput (nextInputKey, eventType) {
+export function addInput (nextInputKey, category) {
   return {
     type: ADD_INPUT,
     nextInputKey,
-    eventType
+    category
   };
 }
 
-export function removeInput (inputKey, eventType) {
+export function removeInput (inputKey, category) {
   return {
     type: REMOVE_INPUT,
     inputKey,
-    eventType
-  };
-}
-
-/********
-* HYDRATE EDIT EVENT ACTIONS
-********/
-
-export function hydrateCreateEvent (event) {
-  return {
-    type: HYDRATE_CREATE_EVENT,
-    data: event
+    category
   };
 }

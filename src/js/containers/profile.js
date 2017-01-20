@@ -13,8 +13,8 @@ const mapDispatchToProps = dispatch => ({
   handleLogOut: () => {
     console.log('log out');
   },
-  handleChangeName: (inputType, e) => {
-    dispatch(changeName(e.target.value, inputType));
+  handleChangeName: (category, e) => {
+    dispatch(changeName(e.target.value, category));
   },
   handleEditName: (firstname, surname) => {
     dispatch(editName(firstname, surname));

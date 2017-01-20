@@ -2,16 +2,16 @@ export const CONFIRM_EMAIL_REQUEST = 'CONFIRM_EMAIL_REQUEST';
 export const CONFRIM_EMAIL_SUCCESS = 'CONFRIM_EMAIL_SUCCESS';
 export const CONFRIM_EMAIL_FAILURE = 'CONFRIM_EMAIL_FAILURE';
 
-export const sendEmailRequest = () => ({
+export const confirmEmailRequest = () => ({
   type: CONFIRM_EMAIL_REQUEST
 });
 
-export const sendEmailSuccess = data => ({
+export const confirmEmailSuccess = data => ({
   type: CONFRIM_EMAIL_SUCCESS,
   data
 });
 
-export const sendEmailFailure = error => ({
+export const confirmEmailFailure = error => ({
   type: CONFRIM_EMAIL_FAILURE,
   error
 });
@@ -19,7 +19,7 @@ export const sendEmailFailure = error => ({
 export function confirmEmail (email) {
 
   return (dispatch) => {
-    dispatch(sendEmailRequest());
+    dispatch(confirmEmailRequest());
     // fetch('http://localhost:3000/email', {
     //   method: 'POST',
     //   headers: {
