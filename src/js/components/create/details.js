@@ -36,6 +36,7 @@ export default class Details extends Component {
               value={ name }
               type="text"
               placeholder="Event name"
+              autoCorrect
             />
           </View>
           <View style={ styles.row }>
@@ -45,6 +46,7 @@ export default class Details extends Component {
               value={ description }
               type="text"
               placeholder="Event description"
+              autoCorrect
             />
           </View>
           <View style={ styles.row }>
@@ -53,6 +55,7 @@ export default class Details extends Component {
               onChangeText={ text => handleChange(text, 'note') }
               value={ note }
               placeholder="Leave a note to your friends (optional)"
+              autoCorrect
             />
           </View>
           <View style={ styles.row }>
