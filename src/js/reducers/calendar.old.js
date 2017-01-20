@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import * as actions from '../actions/calendar';
+import * as actions from '../actions/calendar.old';
 
 const calendarData = [{
   when: [

@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import * as actions from '../actions/profile';
+import * as actions from '../actions/profile.old';
 /* eslint-disable max-len */
 const tempState = {
   isFetching: false,

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Feed from '../components/feed';
-import { applyFilter, clearFilter } from '../actions/feed';
+import { applyFilter, clearFilter } from '../actions/feed.old';
 import { getEvent } from '../actions/event/data';
 import filterFeed from '../lib/filterFeed';
 import Router from '../router';

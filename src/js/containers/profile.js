@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Profile from '../components/profile';
-import { changeName, editName } from '../actions/profile';
+import { changeName, editName } from '../actions/profile.old';
 
 const mapStateToProps = ({ profile }) => ({
   photo_url: profile.photo_url,
