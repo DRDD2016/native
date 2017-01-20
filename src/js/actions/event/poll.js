@@ -2,24 +2,22 @@ export const VOTE_REQUEST = 'VOTE_REQUEST';
 export const VOTE_SUCCESS = 'VOTE_SUCCESS';
 export const VOTE_FAILURE = 'VOTE_FAILURE';
 
-export const ADD_HOST_EVENT_CHOICE = 'ADD_HOST_EVENT_CHOICE'; // redux form?
-
 export const CONFIRM_EVENT_REQUEST = 'CONFIRM_EVENT_REQUEST';
 export const CONFIRM_EVENT_SUCCESS = 'CONFIRM_EVENT_SUCCESS';
 export const CONFIRM_EVENT_FAILURE = 'CONFIRM_EVENT_FAILURE';
 
 
 /********
-* CONFIRM POLL ACTIONS
+* VOTE ACTIONS
 ********/
 
-export function vote (poll, event_id) {
+export function vote (poll, event_id) { // eslint-disable-line
   return (dispatch) => {
-    const payload = {
-      poll,
-      event_id,
-      user_id
-    };
+    // const payload = {
+    //   poll,
+    //   event_id,
+    //   user_id
+    // };
 
     dispatch(voteRequest());
 
@@ -36,38 +34,28 @@ export function vote (poll, event_id) {
 
 export function voteRequest () {
   return {
-    type: VOTE_REQUEST,
-    isFetching: true
+    type: VOTE_REQUEST
   };
 }
 
 export function voteSuccess () {
   return {
-    type: VOTE_SUCCESS,
-    isFetching: false
+    type: VOTE_SUCCESS
   };
 }
-export function voteFailure () {
+export function voteFailure (error) {
   return {
     type: VOTE_FAILURE,
-    isFetching: false
+    error
   };
 }
 
-export function addHostEventChoice (eventType, value, index) {
-  return {
-    type: ADD_HOST_EVENT_CHOICE,
-    eventType,
-    value,
-    index
-  };
-}
 
 /********
 * CONFIRM EVENT ACTIONS
 ********/
 
-export function confirmEvent (hostEventChoices, event_id) {
+export function confirmEvent (hostEventChoices, event_id) { // eslint-disable-line
   return (dispatch) => {
     // const payload = {
     //   hostEventChoices,
@@ -88,20 +76,18 @@ export function confirmEvent (hostEventChoices, event_id) {
 
 export function confirmEventRequest () {
   return {
-    type: CONFIRM_EVENT_REQUEST,
-    isFetching: true
+    type: CONFIRM_EVENT_REQUEST
   };
 }
 
 export function confirmEventSuccess () {
   return {
-    type: CONFIRM_EVENT_SUCCESS,
-    isFetching: false
+    type: CONFIRM_EVENT_SUCCESS
   };
 }
-export function confirmEventFailure () {
+export function confirmEventFailure (error) {
   return {
     type: CONFIRM_EVENT_FAILURE,
-    isFetching: false
+    error
   };
 }
