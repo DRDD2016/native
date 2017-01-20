@@ -10,11 +10,11 @@ import styles from '../../../styles';
 
 
 const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost,
-  RSVPToEvent, handleUploadPhoto, photos, deletedPhotos, handleDeletePhoto,
+  rsvpToEvent, handleUploadPhoto, photos, deletedPhotos, handleDeletePhoto,
   handleSharePhoto, file, handleSetFile, getSelectedPhoto, hasPhotoLoaded }) => {
 
 
-  const handleClick = !userIsHost ? RSVPToEvent : '';
+  const handleClick = !userIsHost ? rsvpToEvent : '';
 
   const going = rsvps.going;
   const notGoing = rsvps.not_going;

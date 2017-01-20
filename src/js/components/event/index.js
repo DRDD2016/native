@@ -47,7 +47,6 @@ export default class Event extends React.Component {
           navigator={this.props.navigator}
           event={ this.props.event }
           handleVote={ this.props.handleVote }
-          hasMadeChoice={ this.props.hasMadeChoice }
         />
       );
     } else { // eslint-disable-line no-else-return
@@ -58,7 +57,7 @@ export default class Event extends React.Component {
           event_id={ this.props.event_id }
           userIsHost={ this.props.userIsHost }
           rsvps={ this.props.rsvps }
-          RSVPToEvent={ this.props.RSVPToEvent }
+          rsvpToEvent={ this.props.rsvpToEvent }
           invitees={ this.props.invitees }
         />
       );

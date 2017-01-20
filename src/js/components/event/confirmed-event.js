@@ -12,9 +12,9 @@ import formatTime from '../../lib/format-time';
 import Button from '../common/Button';
 import styles from '../../../styles';
 
-const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, RSVPToEvent }) => {
+const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, rsvpToEvent }) => {
 
-  const handleClick = !userIsHost ? RSVPToEvent : '';
+  const handleClick = !userIsHost ? rsvpToEvent : '';
 
   const going = rsvps.going;
   const notGoing = rsvps.not_going;
