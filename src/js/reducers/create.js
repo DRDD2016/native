@@ -10,7 +10,7 @@ export const initialState = {
   when: [
     { date: new Date(), time: new Date() }
   ],
-  _invitees: [],
+  invitees: [],
   is_poll: undefined,
   isFetching: false,
   error: undefined,
