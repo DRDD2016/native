@@ -1,12 +1,52 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import hoistNonReactStatic from 'hoist-non-react-statics';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { FormTextInput, FormPasswordInput } from './form-components';
 import { loginValidator as validate } from './form-validation';
-import Button from '../common/Button';
-import styles from '../../../styles';
 import colours from '../../../styles/colours';
+
+const styles = {
+  container: {
+    flex: 1
+  },
+  wrapper: {
+    paddingHorizontal: 15
+  },
+  inputWrap: {
+    flexDirection: 'row',
+    marginVertical: 10,
+    height: 40,
+    backgroundColor: 'transparent'
+  },
+  input: {
+    flex: 1,
+    paddingHorizontal: 10,
+    backgroundColor: '#FFF'
+  },
+  iconWrap: {
+    width: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#1984f0'
+  },
+  button: {
+    backgroundColor: '#1984f0',
+    paddingVertical: 15,
+    marginVertical: 15,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 18
+  },
+  forgotPasswordText: {
+    color: '#000',
+    textAlign: 'center'
+  }
+};
 
 class Login extends Component {
 
@@ -23,32 +63,32 @@ class Login extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <View style={{ marginTop: 50 }}>
-          <Text style={{ paddingLeft: 5 }}>Email</Text>
-          <View style={ styles.row }>
-            <Field name="email" component={ FormTextInput } isEmail />
+        <View style={styles.container} />
+        <View style={styles.wrapper}>
+          <View style={styles.inputWrap}>
+            <View style={styles.iconWrap}>
+              <Icon name="envelope-o" size={15} color="rgba(255, 255, 255, 0.76)" />
+            </View>
+            <Field style={styles.input} name="email" component={ FormTextInput } isEmail />
           </View>
-
-          <Text style={{ paddingLeft: 5 }}>Password</Text>
-          <View style={ styles.row }>
-            <Field name="password" component={ FormPasswordInput } />
+          <View style={styles.inputWrap}>
+            <View style={styles.iconWrap}>
+              <Icon name="lock" size={20} color="rgba(255, 255, 255, 0.76)" />
+            </View>
+            <Field style={styles.input} name="password" component={ FormPasswordInput } />
           </View>
-          <View style={ styles.row }>
-            <Button
-              buttonStyle={{ backgroundColor: '#578de5', padding: 10, flex: 1, borderRadius: 5 }}
-              textStyle={{ alignSelf: 'center', color: '#fff' }}
-              onPress={handleSubmit(handleSubmitForm)}
-            >
-              <Text>LOGIN</Text>
-            </Button>
-          </View>
+          <TouchableOpacity activeOpacity={ 0.5 } onPress={handleSubmit(handleSubmitForm)}>
+            <View style={styles.button}>
+              <Text style={styles.buttonText}>LOG IN</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={ 0.5 } onPress={() => navigator.push('confirmEmail')}>
+            <View>
+              <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+            </View>
+          </TouchableOpacity>
         </View>
-        <Text
-          style={{ alignSelf: 'center' }}
-          onPress={() => navigator.push('confirmEmail')}
-        >
-          Forgot your password?
-        </Text>
+        <View style={styles.container} />
       </View>
     );
   }
