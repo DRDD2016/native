@@ -3,7 +3,7 @@ import { setWhere, addInput, removeInput, clearCreateEvent } from '../../actions
 import Where from '../../components/create/where';
 
 const mapStateToProps = ({ create }) => ({
-  data: create._where,
+  datum: create._where,
   name: create.name
 });
 
@@ -13,20 +13,12 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setWhere(text, inputKey));
   },
 
-  // handleChange: (inputKey, placeName, placeAddress) => {
-  //   const address = {
-  //     placeName,
-  //     placeAddress: placeAddress || ''
-  //   };
-  //   dispatch(setWhere(address, inputKey));
-  // },
-
   addInput: (nextInputKey) => {
-    dispatch(addInput(nextInputKey, 'eventWhere'));
+    dispatch(addInput(nextInputKey, '_where'));
   },
 
   removeInput: (lastInputKey) => {
-    dispatch(removeInput(lastInputKey, 'eventWhere'));
+    dispatch(removeInput(lastInputKey, '_where'));
   },
 
   discardEvent: () => {

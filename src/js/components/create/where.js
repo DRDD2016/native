@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import Input from '../general/input';
+import { View, Text, Dimensions } from 'react-native';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Router from '../../router';
 import AddInput from '../general/add-input';
 import Button from '../common/Button';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
+import GOOGLE_PLACES_API_KEY from '../../keys';
+
+const windowSize = Dimensions.get('window');
+const deviceHeight = windowSize.height;
 
 export default class Where extends Component {
 
@@ -15,36 +19,77 @@ export default class Where extends Component {
         return params.name;
       },
       tintColor: colours.white,
-      backgroundColor: colours.blue,
+      backgroundColor: colours.blue
     }
+  }
+
+  onPlaceSearch = (data, details, i) => {
+    const place = details.website ? `${details.name} ${details.formatted_address}` : `${details.formatted_address}`;
+    this.props.handleChange(place, i);
   }
 
   nextPage = (name) => {
     this.props.navigator.push(Router.getRoute('when', { name }));
-  };
+  }
 
   render () {
-    const { data, name, addInput, removeInput, handleChange } = this.props;
-    const inputCount = data.length;
-    const inputs = data.map((value, i) => {
+    const { datum, name, addInput, removeInput } = this.props;
+    const inputs = datum.map((value, i) => {
       return (
-        <Input
+        <GooglePlacesAutocomplete
           key={ i }
-          handleChange={ handleChange }
-          inputKey={ i }
-          inputCount={ inputCount }
-          value={ value }
-          placeholder="Where?"
-          removeInput={ removeInput }
+          enablePoweredByContainer={false}
+          placeholder="Where"
+          minLength={2}
+          autoFocus={false}
+          fetchDetails
+          onPress={(data, details, index = i) => this.onPlaceSearch(data, details, index)}
+          query={{
+            types: ['establishment', 'geocode'],
+            key: GOOGLE_PLACES_API_KEY,
+            language: 'en'
+          }}
+          styles={{
+            textInputContainer: {
+              backgroundColor: '#fff',
+              borderRadius: 5,
+              marginHorizontal: 10,
+              height: 40,
+              borderTopColor: '#7e7e7e',
+              borderBottomColor: '#b5b5b5',
+              borderTopWidth: 1,
+              borderBottomWidth: 1,
+              borderLeftWidth: 1,
+              borderRightWidth: 1,
+              borderLeftColor: '#7e7e7e',
+              borderRightColor: '#7e7e7e'
+            },
+            listView: {
+              height: deviceHeight,
+              position: 'absolute',
+              left: 10,
+              right: 10,
+              top: 40,
+              backgroundColor: '#fff'
+            },
+            container: {
+              marginTop: 10,
+              marginBottom: 50,
+              backgroundColor: '#fff',
+              zIndex: 999999
+            }
+          }}
+          nearbyPlacesAPI={'GooglePlacesSearch'}
+          filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
         />
       );
     });
 
-    const hideNext = data[0] === '';
+    const hideNext = datum[0] === '';
 
     return (
       <View>
-        <View style={ styles.container }>
+        <View style={{ marginHorizontal: 10 }}>
           <Text style={ styles.smallMessageText} >
             Enter where the event will take place (or leave blank to decide it later).
           </Text>
@@ -54,7 +99,7 @@ export default class Where extends Component {
 
           { inputs }
 
-          <AddInput data={ data } handler={ addInput } />
+          <AddInput data={ datum } handler={ addInput } />
 
           <View style={ styles.row }>
             { (hideNext) &&
@@ -69,8 +114,9 @@ export default class Where extends Component {
               </Button>
             }
           </View>
+
         </View>
       </View>
     );
   }
-};
+}
