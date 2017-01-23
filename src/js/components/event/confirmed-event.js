@@ -25,7 +25,7 @@ const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, rsvpToEv
 
   return (
     <View>
-      <Text>CONFIRMED EVENT</Text>
+      <Text>CONFIRMED EVENT !!!</Text>
       <View style={styles.row}>
         <ConfirmWhat data={ event.what } />
       </View>
