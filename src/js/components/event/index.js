@@ -2,41 +2,40 @@ import React from 'react';
 import { View } from 'react-native';
 import InviteePoll from './invitee-poll';
 import HostPoll from './host-poll';
-import Spinner from '../common/Spinner';
 import ConfirmedEvent from './confirmed-event';
-// import Modal from '../general/modal';
+import Spinner from '../common/Spinner';
 import DeletedEvent from './deleted-event';
-import styles from '../../../styles';
+import colours from '../../../styles/colours';
 
+export default class Event extends React.Component {
 
-class Event extends React.Component {
-
-  constructor (props) {
-    super(props);
-    this.handleDeleteEvent = this.handleDeleteEvent.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
+  static route = {
+    navigationBar: {
+      title (params) {
+        if (params.name === undefined) {
+          return '';
+        }
+        return params.name;
+      },
+      backgroundColor: colours.blue,
+      tintColor: colours.white
+    }
   }
 
-  cancelEventConfirmationModal () {
-    document.getElementsByClassName('modal-container')[0] // eslint-disable-line no-undef
-    .style.display = 'flex';
+  componentDidMount () {
+    setTimeout(() => {
+      this.props.navigator.updateCurrentRouteParams({
+        name: this.props.event.name
+      });
+    }, 300);
   }
 
-  handleDeleteEvent () {
-    this.props.handleDeleteEvent(this.props.params.event_id);
-    this.handleCloseModal();
-  }
-
-  handleCloseModal () {
-    document.getElementsByClassName('modal-container')[0] // eslint-disable-line no-undef
-      .style.display = 'none';
-  }
-
-  renderView () {
+  eventRouter () {
 
     if (this.props.userIsHost && this.props.isPoll) {
       return (
         <HostPoll
+          navigator={this.props.navigator}
           vote_count={ this.props.vote_count }
           event={ this.props.event }
           handleConfirmEvent={ this.props.handleConfirmEvent }
@@ -45,29 +44,29 @@ class Event extends React.Component {
     } else if (!this.props.userIsHost && this.props.isPoll) {
       return (
         <InviteePoll
+          navigator={this.props.navigator}
           event={ this.props.event }
           handleVote={ this.props.handleVote }
-          hasMadeChoice={ this.props.hasMadeChoice }
         />
       );
     } else { // eslint-disable-line no-else-return
       return (
         <ConfirmedEvent
+          navigator={this.props.navigator}
           event={ this.props.event }
           event_id={ this.props.event_id }
           userIsHost={ this.props.userIsHost }
           rsvps={ this.props.rsvps }
-          RSVPToEvent={ this.props.RSVPToEvent }
+          rsvpToEvent={ this.props.rsvpToEvent }
           invitees={ this.props.invitees }
         />
       );
     }
   }
 
-
   render () {
     return (
-      <View>
+      <View style={{ padding: 10 }}>
         {
           this.props.isFetching && <Spinner />
         }
@@ -75,16 +74,9 @@ class Event extends React.Component {
           !this.props.isFetching && (this.props.event === false) && <DeletedEvent />
         }
         {
-          !this.props.isFetching && this.props.event && this.renderView()
+          !this.props.isFetching && this.props.event && this.eventRouter()
         }
       </View>
     );
-
   }
 }
-
-
-export default Event;
-
-// <Modal deleteEvent={ this.handleDeleteEvent }
-//       closeModal={ this.handleCloseModal } />

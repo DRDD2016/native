@@ -30,9 +30,9 @@ export default class Feed extends Component {
           firstname={ data.firstname }
           surname={ data.surname }
           photo_url={ data.photo_url }
-          what={ data._what }
-          where={ data._where }
-          when={ data._when }
+          what={ data.what }
+          where={ data.where }
+          when={ data.when }
           userIsHost={ data.host_user_id === 1 }
           hostID={ data.host_user_id }
           subjectID={ data.subject_user_id }
@@ -51,7 +51,7 @@ export default class Feed extends Component {
           isFetching && <Spinner />
         }
 
-        <View style={styles.filterPanelContainer}>
+
           {
             !isFetching && allEvents.length > 0 &&
             <FilterPanel
@@ -61,7 +61,7 @@ export default class Feed extends Component {
               isShowHosting={ isShowHosting }
             />
           }
-        </View>
+        
 
         <ScrollView>
           <View style={styles.containerFeed}>

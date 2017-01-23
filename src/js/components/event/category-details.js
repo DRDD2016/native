@@ -21,7 +21,6 @@ export default class CategoryDetails extends Component {
   }
 
   _handleOnPress (category, selection, index) {
-    console.log('isToggleable', this.state.isToggleable);
     if (this.state.isToggleable) {
 
       this.props.toggleSelection(category, selection);
@@ -56,7 +55,7 @@ export default class CategoryDetails extends Component {
     const { category, data } = this.props;
     const categoryTitle = `W${category.substring(1)}`;
     return (
-      <View style={ { paddingTop: 80 } }>
+      <View>
         {
           data.map((datum, index) => {
 

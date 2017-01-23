@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, Linking, ScrollView } from 'react-native';
+import { View, Linking, ScrollView, Text } from 'react-native';
 // import Router from '../../router';
-import ConfirmEventWhat from './confirm-what';
-import ConfirmEventWhere from './confirm-where';
-import ConfirmEventWhen from './confirm-when';
+import ConfirmWhat from './confirm-what';
+import ConfirmWhere from './confirm-where';
+import ConfirmWhen from './confirm-when';
 import Button from '../common/Button';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
@@ -22,7 +22,7 @@ export default class Confirm extends Component {
         return params.name;
       },
       tintColor: colours.white,
-      backgroundColor: colours.blue,
+      backgroundColor: colours.blue
     }
   }
 
@@ -37,13 +37,15 @@ export default class Confirm extends Component {
   };
 
   render () {
-    const { data, name, description, note, where, saveEvent } = this.props;
+    const { what, where, when, description, note, saveEvent } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <ScrollView>
-          <ConfirmEventWhat eventWhat={{ name, description }} />
-          <ConfirmEventWhere eventWhere={ where } />
-          <ConfirmEventWhen eventWhen={ data } />
+          <Text>{ description }</Text>
+          <Text>{ note }</Text>
+          <ConfirmWhat data={what} />
+          <ConfirmWhere data={where} />
+          <ConfirmWhen data={when} />
           <View style={styles.rowCentered}>
             <Button
               buttonStyle={styles.confirmButton}

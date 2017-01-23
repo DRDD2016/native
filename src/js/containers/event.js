@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars  */
 import { connect } from 'react-redux';
 import Event from '../components/event';
-import { getEvent, vote, addHostEventChoice, confirmEvent, deleteEvent, updateRSVP } from '../actions/event';
-import { hydrateCreateEvent, clearCreateEvent } from '../actions/create';
+import { getEvent } from '../actions/event/data';
+import { vote } from '../actions/event/poll';
+import { clearCreateEvent } from '../actions/create';
 
 
 const user_id = 1;
@@ -27,25 +29,21 @@ const mapDispatchToProps = dispatch => ({
 
     dispatch(vote(poll, event_id));
   },
-  handleHostEventChoices: (eventType, value, index) => { // redux form?
-
-    dispatch(addHostEventChoice(eventType, value, index));
-  },
   handleConfirmEvent: (hostEventChoices, event_id) => {
 
-    dispatch(confirmEvent(hostEventChoices, event_id));
+    // confirm event (convert from poll to confirmed event)
   },
   handleDeleteEvent: (event_id) => {
 
-    dispatch(deleteEvent(event_id));
+    // delete event
   },
   handleEdit: (event) => {
 
-    dispatch(hydrateCreateEvent(event));
+    // get event?
   },
-  RSVPToEvent: (status, event_id) => {
+  rsvpToEvent: (status, event_id) => {
 
-    dispatch(updateRSVP(status, event_id));
+    // update rsvp
   },
   discardEvent: () => {
     dispatch(clearCreateEvent());

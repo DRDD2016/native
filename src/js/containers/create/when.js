@@ -4,7 +4,7 @@ import When from '../../components/create/when';
 
 const mapStateToProps = ({ create }) => {
   return {
-    data: create._when,
+    data: create.when,
     name: create.name
   };
 };
@@ -20,11 +20,11 @@ const mapDispatchToProps = dispatch => ({
   },
 
   addInput: (nextInputKey) => {
-    dispatch(addInput(nextInputKey, '_when'));
+    dispatch(addInput(nextInputKey, 'when'));
   },
 
   removeInput: (lastInputKey) => {
-    dispatch(removeInput(lastInputKey, '_when'));
+    dispatch(removeInput(lastInputKey, 'when'));
   },
 
   discardEvent: () => {

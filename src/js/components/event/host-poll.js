@@ -1,18 +1,16 @@
-/* eslint-disable */
-/* eslint-disable no-else-return */
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import CategoryDetails from './category-details';
-import HostCreateEventButton from './host-create-event-button';
 import Button from '../common/Button';
 import styles from '../../../styles';
+
 
 export default class HostPoll extends Component {
 
   constructor (props) {
     super(props);
-    
-    const { _what: what, _where: where, _when: when } = this.props.event;
+
+    const { what, where, when } = this.props.event;
     this.state = {
       what: what.length === 1 ? what : [],
       where: where.length === 1 ? where : [],
@@ -52,24 +50,27 @@ export default class HostPoll extends Component {
         <View style={styles.row}>
           <CategoryDetails
             category={'what'}
-            data={event._what}
+            data={event.what}
             toggleSelection={this.toggleSelection}
+            vote_count={vote_count}
             userIsHost
           />
         </View>
         <View style={styles.row}>
           <CategoryDetails
             category={'where'}
-            data={event._where}
+            data={event.where}
             toggleSelection={this.toggleSelection}
+            vote_count={vote_count}
             userIsHost
           />
         </View>
         <View style={styles.row}>
           <CategoryDetails
             category={'when'}
-            data={event._when}
+            data={event.when}
             toggleSelection={this.toggleSelection}
+            vote_count={vote_count}
             userIsHost
           />
         </View>
@@ -78,7 +79,7 @@ export default class HostPoll extends Component {
             <Button
               buttonStyle={styles.confirmButton}
               textStyle={styles.confirmButtonText}
-              onClick={ () => handleConfirmEvent(finalChoices, event_id) }
+              onClick={ () => handleConfirmEvent(this.state, event.event_id) }
             >
               CONFIRM EVENT DETAILS
             </Button>

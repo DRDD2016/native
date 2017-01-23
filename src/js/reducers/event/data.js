@@ -7,10 +7,12 @@ export const initialState = {
   name: undefined,
   description: undefined,
   is_poll: undefined,
-  _invitees: [],
-  _what: [],
-  _where: [],
-  _when: [],
+  vote_count: undefined,
+  what: [],
+  where: [],
+  when: [],
+  invitees: [],
+  rsvps: [],
   isFetching: false
 };
 

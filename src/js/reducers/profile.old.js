@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import * as actions from '../actions/profile';
+import * as actions from '../actions/profile.old';
 /* eslint-disable max-len */
 const tempState = {
   isFetching: false,
@@ -71,13 +71,13 @@ function handleFailure (state, action) {
 }
 
 function handleChangeName (state, action) {
-  if (action.inputType === 'firstname') {
+  if (action.category === 'firstname') {
     const newState = update(state, {
       firstname: { $set: action.value }
     });
     return newState;
   }
-  if (action.inputType === 'surname') {
+  if (action.category === 'surname') {
     const newState = update(state, {
       surname: { $set: action.value }
     });

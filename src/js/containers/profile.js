@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Profile from '../components/profile';
-import { changeName, editName } from '../actions/profile';
+import { changeName, editName } from '../actions/profile.old';
 
 const mapStateToProps = ({ profile }) => ({
   photo_url: profile.photo_url,
@@ -13,8 +13,8 @@ const mapDispatchToProps = dispatch => ({
   handleLogOut: () => {
     console.log('log out');
   },
-  handleChangeName: (inputType, e) => {
-    dispatch(changeName(e.target.value, inputType));
+  handleChangeName: (category, e) => {
+    dispatch(changeName(e.target.value, category));
   },
   handleEditName: (firstname, surname) => {
     dispatch(editName(firstname, surname));

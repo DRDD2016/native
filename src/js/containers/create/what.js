@@ -3,7 +3,7 @@ import { setWhat, addInput, removeInput, clearCreateEvent } from '../../actions/
 import What from '../../components/create/what';
 
 const mapStateToProps = ({ create }) => ({
-  data: create._what,
+  data: create.what,
   name: create.name
 });
 
@@ -14,11 +14,11 @@ const mapDispatchToProps = dispatch => ({
   },
 
   addInput: (nextInputKey) => {
-    dispatch(addInput(nextInputKey, '_what'));
+    dispatch(addInput(nextInputKey, 'what'));
   },
 
   removeInput: (inputIndex) => {
-    dispatch(removeInput(inputIndex, '_what'));
+    dispatch(removeInput(inputIndex, 'what'));
   },
 
   discardEvent: () => {

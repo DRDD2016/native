@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest --runInBand",
+    "lint": "node_modules/eslint/bin/eslint.js 'src/**/*.js' '__tests__/**/*.js'"
   },
   "dependencies": {
     "@exponent/ex-navigation": "^2.7.1",
