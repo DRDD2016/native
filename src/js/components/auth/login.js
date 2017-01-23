@@ -29,14 +29,15 @@ const styles = {
     width: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#1984f0'
+    backgroundColor: colours.blue
   },
   button: {
-    backgroundColor: '#1984f0',
+    backgroundColor: colours.blue,
     paddingVertical: 15,
     marginVertical: 15,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderRadius: 5
   },
   buttonText: {
     color: '#FFF',

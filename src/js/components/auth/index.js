@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 import Button from '../common/Button';
 import Router from '../../router';
+import colours from '../../../styles/colours';
 
 const logo = require('../../../img/sparkLoginLogo.png');
 
@@ -28,7 +29,7 @@ export default function Index ({ navigator }) {
       </View>
       <View style={{ flexDirection: 'row', position: 'absolute', bottom: 0 }}>
         <Button
-          buttonStyle={{ flex: 1, height: 50, backgroundColor: '#1984f0', justifyContent: 'center' }}
+          buttonStyle={{ flex: 1, height: 50, backgroundColor: colours.blue, justifyContent: 'center' }}
           textStyle={{ alignSelf: 'center', color: '#fff', fontWeight: '300', fontSize: 20 }}
           onPress={ goToLogin }
         >
