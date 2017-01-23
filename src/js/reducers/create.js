@@ -1,4 +1,5 @@
 import update from 'immutability-helper';
+import moment from 'moment';
 import * as actions from '../actions/create';
 
 export const initialState = {
@@ -8,7 +9,7 @@ export const initialState = {
   what: [''],
   where: [''],
   when: [
-    { date: new Date(), time: new Date() }
+    { date: moment(), time: moment() }
   ],
   invitees: [],
   is_poll: undefined,
@@ -98,7 +99,7 @@ function addInput (state, action) {
   } else {
     initialValue = '';
   }
-  
+
   const newState = update(state, {
     [action.category]: { $push: [initialValue] }
   });

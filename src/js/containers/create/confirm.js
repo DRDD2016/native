@@ -21,6 +21,7 @@ const mapDispatchToProps = (dispatch) => {
       const state = store.getState();
       // data.hostID = state.user.id;
       // data.hostPhotoURL = state.user.photo_url;
+      // getISOstring
       dispatch(newEvent(data));
     },
     discardEvent: () => {
