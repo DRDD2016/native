@@ -2,7 +2,7 @@
 /* eslint-disable no-else-return */
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text, ScrollView } from 'react-native';
 import ConfirmWhat from '../create/confirm-what';
 import ConfirmWhere from '../create/confirm-where';
 import ConfirmWhen from '../create/confirm-when';
@@ -12,7 +12,6 @@ import Button from '../common/Button';
 import styles from '../../../styles';
 
 const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, rsvpToEvent }) => {
-
   const handleClick = !userIsHost ? rsvpToEvent : '';
 
   const going = rsvps.going;
@@ -25,43 +24,31 @@ const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, rsvpToEv
 
   return (
     <View>
-      <Text>CONFIRMED EVENT !!!</Text>
-      <View style={styles.row}>
+      <ScrollView>
+        <View style={{ flexDirection: 'row' }}>
+          <View style={{ alignSelf: 'flex-start' }}>
+            <Image source={require('../../../img/avatar.png')} style={{ width: 60, height: 60, resizeMode: 'contain' }} />
+          </View>
+          <View style={{ alignSelf: 'center', marginHorizontal: 10 }}>
+            <Text>{event.description}</Text>
+            <Text>{ event.note && event.note }</Text>
+          </View>
+        </View>
         <ConfirmWhat data={ event.what } />
-      </View>
-
-      <View style={styles.row}>
         <ConfirmWhere data={ event.where } />
-      </View>
-
-      <View style={styles.row}>
         <ConfirmWhen data={ event.when } />
-      </View>
-
-      <View>
-        {
-          userIsHost &&
-          <Button
-            buttonStyle={styles.confirmButton}
-            textStyle={styles.confirmButtonText}
-          >
-            <Text>Edit event details</Text>
-          </Button>
-        }
-      </View>
-
-      <View>
-        {
-          !userIsHost &&
-          <Button
-            buttonStyle={styles.confirmButton}
-            textStyle={styles.confirmButtonText}
-          >
-            <Text>RSVP to this event</Text>
-          </Button>
-        }
-      </View>
-
+        <View>
+          {
+            !userIsHost &&
+            <Button
+              buttonStyle={styles.confirmButton}
+              textStyle={styles.confirmButtonText}
+            >
+              <Text>RSVP to this event</Text>
+            </Button>
+          }
+        </View>
+      </ScrollView>
     </View>
   );
 

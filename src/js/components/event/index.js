@@ -85,7 +85,7 @@ export default class Event extends React.Component {
 
   render () {
     return (
-      <View style={{ padding: 10 }}>
+      <View style={{ flex: 1 }}>
         {
           this.props.isFetching && <Spinner />
         }
