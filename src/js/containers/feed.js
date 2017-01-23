@@ -29,10 +29,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       ownProps.navigator.push(Router.getRoute('event'));
     },
     displaySome: (filterChoice) => {
-      dispatch(applyFilter(filterChoice));
+      // dispatch(applyFilter(filterChoice));
+      console.log('dispatch action');
     },
     displayAll: () => {
-      dispatch(clearFilter());
+      // dispatch(clearFilter());
+      console.log('dispatch action');
     }
   };
 };
