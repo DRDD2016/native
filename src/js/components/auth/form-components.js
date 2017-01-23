@@ -6,7 +6,7 @@ export function FormTextInput ({ isEmail, input: { value, onChange, onBlur }, me
   return (
     <View style={{ flex: 1 }}>
       <TextInput
-        style={ [styles.inputStyle, { borderRadius: 0, fontSize: 19 }] }
+        style={ [styles.inputStyle, { fontSize: 19 }] }
         onChangeText={ text => onChange(text) }
         onBlur={ text => onBlur(text) }
         value={ value }
@@ -25,7 +25,7 @@ export function FormPasswordInput ({ input: { value, onChange, onBlur }, meta: {
   return (
     <View style={{ flex: 1 }}>
       <TextInput
-        style={ [styles.inputStyle, { borderRadius: 0, fontSize: 19 }] }
+        style={ [styles.inputStyle, { fontSize: 19 }] }
         onChangeText={ text => onChange(text) }
         onBlur={ text => onBlur(text) }
         value={ value }

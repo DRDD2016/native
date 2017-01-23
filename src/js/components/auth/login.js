@@ -36,7 +36,8 @@ const styles = {
     paddingVertical: 15,
     marginVertical: 15,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderRadius: 5
   },
   buttonText: {
     color: '#FFF',
