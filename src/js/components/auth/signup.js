@@ -26,7 +26,7 @@ class Signup extends Component {
     return (
       <View style={ styles.row }>
         <Button
-          buttonStyle={{ backgroundColor: '#578de5', padding: 10, flex: 1, borderRadius: 5 }}
+          buttonStyle={{ backgroundColor: colours.blue, padding: 10, flex: 1, borderRadius: 5, paddingVertical: 15, marginVertical: 15 }}
           textStyle={{ alignSelf: 'center', color: '#fff' }}
           onPress={handleSubmit(handleSubmitForm)}
         >
@@ -39,7 +39,7 @@ class Signup extends Component {
   render () {
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, justifyContent: 'center' }}>
         <View style={{ marginTop: 50 }}>
           <Text style={{ paddingLeft: 5 }}>First name</Text>
           <View style={ styles.row }>

@@ -3,6 +3,7 @@ import { View, Text, Platform, PixelRatio, TouchableOpacity, Image } from 'react
 import ImagePicker from 'react-native-image-picker';
 import Router from '../router';
 import Button from './common/Button';
+import colours from '../../styles/colours';
 
 const styles = {
   uploadContainer: {
@@ -32,14 +33,17 @@ const styles = {
     right: 0
   },
   skipButtonStyle: {
-    backgroundColor: '#578de5',
+    backgroundColor: colours.blue,
     padding: 10,
     flex: 1,
-    borderRadius: 5
+    height: 50,
+    justifyContent: 'center'
   },
   skipButtonTextStyle: {
     alignSelf: 'center',
-    color: '#fff'
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '600'
   }
 };
 
@@ -110,7 +114,7 @@ export default class UploadPhoto extends Component {
             textStyle={ styles.skipButtonTextStyle }
             onPress={ this.nextPage }
           >
-            Skip
+            SKIP
           </Button>
         </View>
       </View>

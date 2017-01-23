@@ -1,11 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import InviteePoll from './invitee-poll';
 import HostPoll from './host-poll';
 import ConfirmedEvent from './confirmed-event';
 import Spinner from '../common/Spinner';
 import DeletedEvent from './deleted-event';
 import colours from '../../../styles/colours';
+import Button from '../common/Button';
 
 export default class Event extends React.Component {
 
@@ -17,6 +18,16 @@ export default class Event extends React.Component {
         }
         return params.name;
       },
+      renderRight: (route) => {
+        return route.params.userIsHost
+          ? <Button
+            onPress={ () => route.params.navigator.push('edit')}
+            buttonStyle={{ margin: 15 }}
+            textStyle={{ color: colours.white, fontWeight: '600' }}
+          >
+            <Text>Edit</Text></Button>
+          : null;
+      },
       backgroundColor: colours.blue,
       tintColor: colours.white
     }
@@ -24,9 +35,17 @@ export default class Event extends React.Component {
 
   componentDidMount () {
     setTimeout(() => {
-      this.props.navigator.updateCurrentRouteParams({
-        name: this.props.event.name
-      });
+      if (this.props.userIsHost) {
+        this.props.navigator.updateCurrentRouteParams({
+          name: this.props.event.name,
+          userIsHost: this.props.userIsHost,
+          navigator: this.props.navigator
+        });
+      } else {
+        this.props.navigator.updateCurrentRouteParams({
+          name: this.props.event.name
+        });
+      }
     }, 300);
   }
 
@@ -66,7 +85,7 @@ export default class Event extends React.Component {
 
   render () {
     return (
-      <View style={{ padding: 10 }}>
+      <View style={{ flex: 1 }}>
         {
           this.props.isFetching && <Spinner />
         }

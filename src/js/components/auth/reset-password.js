@@ -11,10 +11,12 @@ import colours from '../../../styles/colours';
 
 const inlineStyle = {
   buttonStyle: {
-    backgroundColor: '#578de5',
+    backgroundColor: colours.blue,
     padding: 10,
     flex: 1,
-    borderRadius: 5
+    borderRadius: 5,
+    paddingVertical: 15,
+    marginVertical: 15
   },
   labelStyle: {
     alignSelf: 'flex-start',
@@ -56,16 +58,21 @@ class ResetPassword extends Component {
 
   render () {
     return (
-      <View style={ styles.container }>
-        <Text style={ inlineStyle.labelStyle }>New password</Text>
-        <View style={ styles.row }>
-          <Field name="password" component={ FormPasswordInput } />
+      <View style={{ flex: 1 }}>
+        <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 70 }}>
+          <Text>Explanation text</Text>
         </View>
-        <Text style={ inlineStyle.labelStyle }>Confirm password</Text>
-        <View style={ styles.row }>
-          <Field name="confirmPassword" component={ FormPasswordInput } />
+        <View style={ styles.container }>
+          <Text style={ inlineStyle.labelStyle }>New password</Text>
+          <View style={ styles.row }>
+            <Field name="password" component={ FormPasswordInput } />
+          </View>
+          <Text style={ inlineStyle.labelStyle }>Confirm password</Text>
+          <View style={ styles.row }>
+            <Field name="confirmPassword" component={ FormPasswordInput } />
+          </View>
+          { this.renderButton() }
         </View>
-        { this.renderButton() }
       </View>
     );
   }

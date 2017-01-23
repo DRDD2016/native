@@ -6,6 +6,7 @@ export const initialState = {
   host_user_id: undefined,
   name: undefined,
   description: undefined,
+  note: undefined,
   is_poll: undefined,
   vote_count: undefined,
   what: [],
