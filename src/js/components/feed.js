@@ -52,16 +52,16 @@ export default class Feed extends Component {
         }
 
 
-          {
-            !isFetching && allEvents.length > 0 &&
-            <FilterPanel
-              displayAll={ displayAll }
-              displaySome={ displaySome }
-              dataIsFiltered={ feedIsFiltered }
-              isShowHosting={ isShowHosting }
-            />
-          }
-        
+        {
+          !isFetching && allEvents.length > 0 &&
+          <FilterPanel
+            displayAll={ displayAll }
+            displaySome={ displaySome }
+            dataIsFiltered={ feedIsFiltered }
+            isShowHosting={ isShowHosting }
+          />
+        }
+
 
         <ScrollView>
           <View style={styles.containerFeed}>

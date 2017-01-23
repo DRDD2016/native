@@ -2,6 +2,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import Button from '../common/Button';
+import colours from '../../../styles/colours';
 
 const FilterPanel = ({ displaySome, displayAll, dataIsFiltered, isShowHosting }) => {
 
@@ -17,13 +18,22 @@ const FilterPanel = ({ displaySome, displayAll, dataIsFiltered, isShowHosting })
   return (
     <View style={styles.rowFilterPanel}>
 
-      <Button buttonStyle={allButtonButton} textStyle={allButtonText} onPress={ displayAll }>
+      <Button
+        buttonStyle={ [allButtonButton, { borderTopRightRadius: 0, borderBottomRightRadius: 0 }]}
+        textStyle={allButtonText} onPress={ displayAll }
+      >
         All
       </Button>
-      <Button buttonStyle={ receivedButtonButton } textStyle={receivedButtonText} onPress={ () => displaySome(false) } >
+      <Button
+        buttonStyle={ [receivedButtonButton, { borderRadius: 0 }] }
+        textStyle={receivedButtonText} onPress={ () => displaySome(false) }
+      >
         Received
       </Button>
-      <Button buttonStyle={ hostingButtonButton } textStyle={hostingButtonText} onPress={ () => displaySome(true) } >
+      <Button
+        buttonStyle={ [hostingButtonButton, { borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }] }
+        textStyle={hostingButtonText} onPress={ () => displaySome(true) }
+      >
         Hosting
       </Button>
 
@@ -34,12 +44,9 @@ const FilterPanel = ({ displaySome, displayAll, dataIsFiltered, isShowHosting })
 const styles = {
   rowFilterPanel: {
     marginTop: 20,
-    flex: 1,
+    marginBottom: 10,
     flexDirection: 'row',
-    justifyContent: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
-    maxHeight: 30
+    height: 30
   },
   filterButton: {
     backgroundColor: 'white',
@@ -56,20 +63,20 @@ const styles = {
   },
   buttonText: {
     fontSize: 12,
-    color: 'blue',
-    fontWeight: '300',
+    color: colours.blue,
+    fontWeight: '600',
     paddingTop: 5,
     paddingBottom: 5
   },
   buttonTextSelected: {
     fontSize: 12,
     color: 'white',
-    fontWeight: '300',
+    fontWeight: '600',
     paddingTop: 5,
     paddingBottom: 5
   },
   filterButtonSelected: {
-    backgroundColor: 'blue',
+    backgroundColor: colours.blue,
     borderRadius: 18,
     borderWidth: 1,
     borderColor: 'lightgray',

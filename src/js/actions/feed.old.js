@@ -4,7 +4,7 @@
 // export const GET_FEED_REQUEST = "GET_FEED_REQUEST";
 // export const GET_FEED_SUCCESS = "GET_FEED_SUCCESS";
 // export const GET_FEED_FAILURE = "GET_FEED_FAILURE";
-// export const APPLY_FILTER = "APPLY_FILTER";
+// export const APPLY_FILTER = 'APPLY_FILTER';
 // export const CLEAR_FILTER = "CLEAR_FILTER";
 //
 // import { feedSocket } from '../socket.js';
