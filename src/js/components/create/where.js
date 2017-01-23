@@ -11,6 +11,8 @@ import colours from '../../../styles/colours';
 const windowSize = Dimensions.get('window');
 const deviceHeight = windowSize.height;
 
+// import GOOGLE_PLACES_API_KEY from '../../keys';
+
 export default class Where extends Component {
 
   static route = {

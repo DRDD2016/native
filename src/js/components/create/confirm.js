@@ -41,8 +41,10 @@ export default class Confirm extends Component {
     return (
       <View style={{ flex: 1 }}>
         <ScrollView>
-          <Text>{ description }</Text>
-          <Text>{ note }</Text>
+          <View style={{ margin: 10, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>{ description }</Text>
+            <Text>{ note }</Text>
+          </View>
           <ConfirmWhat data={what} />
           <ConfirmWhere data={where} />
           <ConfirmWhen data={when} />
