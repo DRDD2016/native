@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, DatePickerIOS, ScrollView } from 'react-native';
+import moment from 'moment';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Router from '../../router';
 import AddInput from '../general/add-input';
@@ -82,7 +83,7 @@ export default class When extends Component {
 
           <View style={ this.state.expandedDate[i] ? inlineStyle.dateContainer : inlineStyle.dateContainerHidden }>
             <DatePickerIOS
-              date={ value.date }
+              date={ value.date.toDate() }
               mode="date"
               onDateChange={ date => handleDate(date, i) }
             />
@@ -96,7 +97,7 @@ export default class When extends Component {
 
           <View style={ this.state.expandedTime[i] ? inlineStyle.timeContainer : inlineStyle.timeContainerHidden }>
             <DatePickerIOS
-              date={ value.time }
+              date={ value.time.toDate() }
               mode="time"
               onDateChange={ time => handleTime(time, i) }
               minuteInterval={ 10 }

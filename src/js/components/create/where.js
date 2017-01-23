@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Dimensions } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Router from '../../router';
 import AddInput from '../general/add-input';
 import Button from '../common/Button';
@@ -32,59 +33,66 @@ export default class Where extends Component {
   }
 
   render () {
-    const { datum, name, addInput, removeInput } = this.props;
-    const inputs = datum.map((value, i) => {
+    const { data, name, addInput, removeInput } = this.props;
+    console.log(data);
+    const inputs = data.map((value, inputKey) => {
       return (
-        <GooglePlacesAutocomplete
-          key={ i }
-          enablePoweredByContainer={false}
-          placeholder="Where"
-          minLength={2}
-          autoFocus={false}
-          fetchDetails
-          onPress={(data, details, index = i) => this.onPlaceSearch(data, details, index)}
-          query={{
-            types: ['establishment', 'geocode'],
-            key: process.env.GOOGLE_PLACES_API_KEY || require('../../keys').GOOGLE_PLACES_API_KEY,
-            language: 'en'
-          }}
-          styles={{
-            textInputContainer: {
-              backgroundColor: '#fff',
-              borderRadius: 5,
-              marginHorizontal: 10,
-              height: 40,
-              borderTopColor: '#7e7e7e',
-              borderBottomColor: '#b5b5b5',
-              borderTopWidth: 1,
-              borderBottomWidth: 1,
-              borderLeftWidth: 1,
-              borderRightWidth: 1,
-              borderLeftColor: '#7e7e7e',
-              borderRightColor: '#7e7e7e'
-            },
-            listView: {
-              height: deviceHeight,
-              position: 'absolute',
-              left: 10,
-              right: 10,
-              top: 40,
-              backgroundColor: '#fff'
-            },
-            container: {
-              marginTop: 10,
-              marginBottom: 50,
-              backgroundColor: '#fff',
-              zIndex: 999999
-            }
-          }}
-          nearbyPlacesAPI={'GooglePlacesSearch'}
-          filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
-        />
+        <View key={ inputKey }>
+          <GooglePlacesAutocomplete
+            enablePoweredByContainer={false}
+            placeholder="Where"
+            minLength={2}
+            autoFocus={false}
+            fetchDetails
+            onPress={(searchData, details, index = inputKey) => this.onPlaceSearch(searchData, details, index)}
+            query={{
+              types: ['establishment', 'geocode'],
+              key: process.env.GOOGLE_PLACES_API_KEY || require('../../keys').GOOGLE_PLACES_API_KEY,
+              language: 'en'
+            }}
+            styles={{
+              textInputContainer: {
+                backgroundColor: '#fff',
+                borderRadius: 5,
+                marginHorizontal: 10,
+                height: 40,
+                borderTopColor: '#7e7e7e',
+                borderBottomColor: '#b5b5b5',
+                borderTopWidth: 1,
+                borderBottomWidth: 1,
+                borderLeftWidth: 1,
+                borderRightWidth: 1,
+                borderLeftColor: '#7e7e7e',
+                borderRightColor: '#7e7e7e',
+                maxWidth: windowSize.width - (windowSize.width / 5)
+              },
+              listView: {
+                height: deviceHeight,
+                position: 'absolute',
+                left: 10,
+                right: 10,
+                top: 40,
+                backgroundColor: '#fff'
+              },
+              container: {
+                marginTop: 10,
+                marginBottom: 50,
+                backgroundColor: '#fff',
+                zIndex: 999999
+              }
+            }}
+            nearbyPlacesAPI={'GooglePlacesSearch'}
+            filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
+          >
+
+            <Text>Remove</Text>
+
+          </GooglePlacesAutocomplete>
+        </View>
       );
     });
 
-    const hideNext = datum[0] === '';
+    const hideNext = data[0] === '';
 
     return (
       <View>
@@ -98,7 +106,7 @@ export default class Where extends Component {
 
           { inputs }
 
-          <AddInput data={ datum } handler={ addInput } />
+          <AddInput data={ data } handler={ addInput } />
 
           <View style={ styles.row }>
             { (hideNext) &&
