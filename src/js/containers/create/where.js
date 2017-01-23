@@ -3,7 +3,7 @@ import { setWhere, addInput, removeInput, clearCreateEvent } from '../../actions
 import Where from '../../components/create/where';
 
 const mapStateToProps = ({ create }) => ({
-  datum: create.where,
+  data: create.where,
   name: create.name
 });
 
