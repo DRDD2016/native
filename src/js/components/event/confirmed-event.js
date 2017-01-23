@@ -37,17 +37,34 @@ const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, rsvpToEv
         <ConfirmWhat data={ event.what } />
         <ConfirmWhere data={ event.where } />
         <ConfirmWhen data={ event.when } />
-        <View>
-          {
-            !userIsHost &&
-            <Button
-              buttonStyle={styles.confirmButton}
-              textStyle={styles.confirmButtonText}
-            >
-              <Text>RSVP to this event</Text>
-            </Button>
-          }
-        </View>
+        {
+          userIsHost &&
+          <View style={{ marginTop: 10 }}>
+            <Text>RSVPs</Text>
+            <View style={{ flexDirection: 'row' }}>
+              <Button
+                buttonStyle={styles.confirmButton}
+                textStyle={styles.confirmButtonText}
+              >
+                <Text>Going</Text>
+              </Button>
+
+              <Button
+                buttonStyle={styles.confirmButton}
+                textStyle={styles.confirmButtonText}
+              >
+                <Text>Maybe</Text>
+              </Button>
+
+              <Button
+                buttonStyle={styles.confirmButton}
+                textStyle={styles.confirmButtonText}
+              >
+                <Text>Not Going</Text>
+              </Button>
+            </View>
+          </View>
+        }
       </ScrollView>
     </View>
   );
