@@ -1,5 +1,3 @@
-// import getUserID from '../lib/getUserID';
-
 export const SET_DETAILS = 'SET_DETAILS';
 export const SET_WHAT = 'SET_WHAT';
 export const SET_WHERE = 'SET_WHERE';
@@ -55,8 +53,9 @@ export function setWhen (data, inputKey, format) {
 ********/
 
 export function saveEvent (eventData) { //eslint-disable-line
+  console.log("SAVING", eventData);
   return function (dispatch) {
-    dispatch(saveEventRequest());
+    // dispatch(saveEventRequest());
 
     // return axios.post('http://localhost:3000/events', eventData)
     //   .then(() => {

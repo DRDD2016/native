@@ -30,7 +30,7 @@ export default class Confirm extends Component {
     const url = 'whatsapp://send?text=Hello%20from%20Spark!';
     Linking.canOpenURL(url).then((supported) => {
       if (!supported) {
-        console.log(`Can't handle url: ${url}`);
+        console.error(`Can't handle url: ${url}`);
       }
       return Linking.openURL(url);
     }).catch(err => console.error('An error occurred', err));
@@ -52,7 +52,7 @@ export default class Confirm extends Component {
             <Button
               buttonStyle={styles.confirmButton}
               textStyle={styles.confirmButtonText}
-              onPress={ this.openWhatsapp }
+              onPress={ saveEvent }
             >
               Invite friends
             </Button>
