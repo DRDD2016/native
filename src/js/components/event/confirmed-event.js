@@ -23,7 +23,7 @@ const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, rsvpToEv
   const placeNameLong = (event.where[0] && event.where[0].placeName > 18);
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <ScrollView>
         <View style={{ flexDirection: 'row' }}>
           <View style={{ alignSelf: 'flex-start' }}>

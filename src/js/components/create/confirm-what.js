@@ -13,25 +13,25 @@ const ConfirmWhat = ({ data }) => {
 
     return (
       <View
-        style={styles.pollSection}
+        style={{ flexDirection: 'row', alignItems: 'center' }}
         key={ i }
       >
         { (hideTitle) &&
-          <View style={styles.columnLeft} />
+          <View style={{ flexBasis: 60, marginHorizontal: 5 }} />
         }
         { (!hideTitle) &&
-          <View style={styles.columnLeft}>
+          <View style={{ flexBasis: 60, marginHorizontal: 5 }}>
             <Text style={styles.optionTitleWhat}>
               What
             </Text>
           </View>
         }
         <View
-          style={styles.columnMiddle}
+          style={{ flexBasis: 300 }}
           key={ i }
         >
-          <View style={styles.rowSpaced}>
-            <Button buttonStyle={styles.optionSelectedWhat} textStyle={styles.optionTextSelected}>
+          <View style={{}}>
+            <Button buttonStyle={styles.optionSelectedWhat} textStyle={[styles.optionTextSelected, {lineHeight: 20}]}>
               <Icon name="star" size={18} color="white" />
               {'  '}
               { datum || 'TBC' }
@@ -44,7 +44,7 @@ const ConfirmWhat = ({ data }) => {
   });
 
   return (
-    <View>
+    <View style={{ marginVertical: 10 }}>
       { layout }
     </View>
   );
