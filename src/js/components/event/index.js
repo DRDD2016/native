@@ -60,7 +60,7 @@ export default class Event extends React.Component {
           handleConfirmEvent={ this.props.handleConfirmEvent }
         />
       );
-    } else if (!this.props.userIsHost && this.props.isPoll) {
+    } else if (true) {
       return (
         <InviteePoll
           navigator={this.props.navigator}
