@@ -23,16 +23,17 @@ const styles = {
   input: {
     flex: 1,
     paddingHorizontal: 10,
-    backgroundColor: '#FFF'
+    backgroundColor: '#FFF',
+    height: 40
   },
   iconWrap: {
     width: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#1984f0'
+    backgroundColor: colours.blue
   },
   button: {
-    backgroundColor: '#1984f0',
+    backgroundColor: colours.blue,
     paddingVertical: 15,
     marginVertical: 15,
     alignItems: 'center',
