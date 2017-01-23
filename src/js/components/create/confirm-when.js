@@ -11,24 +11,25 @@ const ConfirmWhen = ({ data }) => {
 
   const layout = data.map((datum, i) => {
     const hideTitle = i > 0;
+
     return (
       <View
-        style={styles.pollSection}
+        style={{ flexDirection: 'row', alignItems: 'center' }}
         key={ i }
       >
         { (hideTitle) &&
-          <View style={styles.columnLeft} />
+          <View style={{ flexBasis: 60, marginHorizontal: 5 }} />
         }
         { (!hideTitle) &&
-          <View style={styles.columnLeft}>
-            <Text style={styles.optionTitleWhen}>
+          <View style={{ flexBasis: 60, marginHorizontal: 5 }}>
+            <Text style={styles.optionTitleWhat}>
               When
             </Text>
           </View>
         }
-        <View style={styles.columnMiddle}>
-          <View style={styles.rowSpaced}>
-            <Button buttonStyle={styles.optionSelectedWhen} textStyle={styles.optionTextSelected}>
+        <View style={{ flexBasis: 300 }}>
+          <View style={{}}>
+            <Button buttonStyle={styles.optionSelectedWhen} textStyle={[styles.optionTextSelected, {lineHeight: 20}]}>
               <Icon name="calendar" size={18} color="white" />
               {'  '}
               { formatDate(datum.date) || 'TBC' }
@@ -44,9 +45,7 @@ const ConfirmWhen = ({ data }) => {
   });
 
   return (
-    <View
-      style={styles.confirmList}
-    >
+    <View style={{ marginVertical: 10 }}>
       { layout }
     </View>
   );

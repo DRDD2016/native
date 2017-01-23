@@ -51,32 +51,38 @@ export default class InviteePoll extends Component {
     return (
       <View>
         <Text>POLL (INVITEE VIEW)</Text>
-        <CategoryDetails
-          category={'what'}
-          data={event.what}
-          toggleSelection={this.toggleSelection}
-        />
+        <View style={styles.row}>
+          <CategoryDetails
+            category={'what'}
+            data={event.what}
+            toggleSelection={this.toggleSelection}
+          />
+        </View>
 
-        <CategoryDetails
-          category={'where'}
-          data={event.where}
-          toggleSelection={this.toggleSelection}
-        />
+        <View style={styles.row}>
+          <CategoryDetails
+            category={'where'}
+            data={event.where}
+            toggleSelection={this.toggleSelection}
+          />
+        </View>
 
-        <CategoryDetails
-          category={'when'}
-          data={event.when}
-          toggleSelection={this.toggleSelection}
-        />
-        {
-          allCategoriesSelected &&
-          <Button
-            buttonStyle={styles.buttonStyle}
-            onClick={ () => handleVote(poll, event_id) }
-          >
-            VOTE
-          </Button>
-        }
+        <View style={styles.row}>
+          <CategoryDetails
+            category={'when'}
+            data={event.when}
+            toggleSelection={this.toggleSelection}
+          />
+          {
+            allCategoriesSelected &&
+            <Button
+              buttonStyle={styles.buttonStyle}
+              onClick={ () => handleVote(poll, event_id) }
+            >
+              VOTE
+            </Button>
+          }
+        </View>
       </View>
     );
   }

@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../../lib/format-date';
 import formatTime from '../../lib/format-time';
 // import BarChart from '../../components/event/bar-chart';
+import styles from '../../../styles';
 import colours from '../../../styles/colours';
 
 const OFF_WHITE = '#efefef';
@@ -63,15 +64,16 @@ export default class CategoryDetails extends Component {
               return (
                 <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
 
-                  <View style={{ width: 150 }}>
-                    <Text style={{ alignSelf: 'center' }}>{ index === 0 && categoryTitle }</Text>
+                  <View style={{ flexBasis: 60 }}>
+                    <Text style={styles.optionTitleWhat}>{ index === 0 && categoryTitle }</Text>
                   </View>
 
-                  <View>
+                  <View style={{ flexBasis: 300 }}>
                     <View>
                       <Icon.Button
                         name={this.icons[category]}
                         size={16}
+                        borderRadius={100}
                         color={(!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category]}
                         backgroundColor={(!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index] ? colours[category] : OFF_WHITE}
                         onPress={() => this._handleOnPress(category, { date: datum.date, time: datum.time }, index)}
@@ -86,15 +88,16 @@ export default class CategoryDetails extends Component {
             return (
               <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
 
-                <View style={{ width: 150 }}>
-                  <Text style={{ alignSelf: 'center' }}>{ index === 0 && categoryTitle }</Text>
+                <View style={{ flexBasis: 60 }}>
+                  <Text style={styles.optionTitleWhat}>{ index === 0 && categoryTitle }</Text>
                 </View>
 
-                <View>
+                <View style={{ flexBasis: 300 }}>
                   <View>
                     <Icon.Button
                       name={this.icons[category]}
                       size={16}
+                      borderRadius={100}
                       color={(!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category]}
                       backgroundColor={(!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index] ? colours[category] : OFF_WHITE}
                       onPress={() => this._handleOnPress(category, datum, index)}

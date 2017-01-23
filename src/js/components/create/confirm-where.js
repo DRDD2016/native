@@ -13,24 +13,24 @@ const ConfirmWhere = ({ data }) => { // eslint-disable-line react/prop-types
 
     return (
       <View
-        style={styles.pollSection}
+        style={{ flexDirection: 'row', alignItems: 'center' }}
         key={ i }
       >
         { (hideTitle) &&
-          <View style={styles.columnLeft} />
+          <View style={{ flexBasis: 60, marginHorizontal: 5 }} />
         }
         { (!hideTitle) &&
-          <View style={styles.columnLeft}>
+          <View style={{ flexBasis: 60, marginHorizontal: 5 }}>
             <Text style={styles.optionTitleWhere}>
               Where
             </Text>
           </View>
         }
         <View
-          style={styles.columnMiddle}
+          style={{ flexBasis: 300 }}
         >
-          <View style={styles.rowSpaced}>
-            <Button buttonStyle={styles.optionSelectedWhere} textStyle={styles.optionTextSelected}>
+          <View style={{ }}>
+            <Button buttonStyle={styles.optionSelectedWhere} textStyle={[styles.optionTextSelected, {lineHeight: 20}]}>
               <Icon name="map-marker" size={18} color="white" />
               {'  '}
               { datum || 'TBC' }
@@ -42,9 +42,7 @@ const ConfirmWhere = ({ data }) => { // eslint-disable-line react/prop-types
   });
 
   return (
-    <View
-      style={styles.confirmList}
-    >
+    <View style={{ marginVertical: 10 }}>
       { layout }
     </View>
   );
