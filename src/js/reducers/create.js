@@ -11,11 +11,9 @@ export const initialState = {
   when: [
     { date: moment(), time: moment() }
   ],
-  invitees: [],
   is_poll: undefined,
   isFetching: false,
-  error: undefined,
-  didSave: undefined
+  error: undefined
 };
 
 export default function create (state = initialState, action) {
@@ -23,7 +21,9 @@ export default function create (state = initialState, action) {
   switch (action.type) {
 
     case actions.SET_DETAILS:
-      return setDetails(state, action);
+      return update(state, {
+        [action.field]: { $set: action.data }
+      });
 
     case actions.SET_WHAT:
       return update(state, {
@@ -35,8 +35,15 @@ export default function create (state = initialState, action) {
         where: { $splice: [[action.inputKey, 1, action.data]] }
       });
 
-    case actions.SET_WHEN:
-      return setWhen(state, action);
+    case actions.SET_WHEN: {
+      const oldValue = state.when[action.inputKey];
+      const newValue = update(oldValue, {
+        [action.format]: { $set: action.data }
+      });
+      return update(state, {
+        when: { $splice: [[action.inputKey, 1, newValue]] }
+      });
+    }
 
     case actions.ADD_INPUT:
       return addInput(state, action);
@@ -70,22 +77,6 @@ export default function create (state = initialState, action) {
   }
 }
 
-function setDetails (state, action) {
-  return update(state, {
-    [action.field]: { $set: action.data }
-  });
-}
-
-function setWhen (state, action) {
-
-  const oldValue = state.when[action.inputKey];
-  const newValue = update(oldValue, {
-    [action.format]: { $set: action.data }
-  });
-  return update(state, {
-    when: { $splice: [[action.inputKey, 1, newValue]] }
-  });
-}
 
 function addInput (state, action) {
   let initialValue;

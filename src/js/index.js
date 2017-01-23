@@ -22,7 +22,7 @@ class App extends Component {
     return (
       <Provider store={ store }>
         <NavigationProvider context={ navigationContext }>
-          <StackNavigation initialRoute={ Router.getRoute('when') } />
+          <StackNavigation initialRoute={ Router.getRoute('navbar') } />
         </NavigationProvider>
       </Provider>
     );

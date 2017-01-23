@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
-import { newEvent, clearCreateEvent } from '../../actions/create';
+import { saveEvent, clearCreateEvent } from '../../actions/create';
 import Confirm from '../../components/create/confirm';
+import mapToISOString from '../../lib/map-to-iso-string';
 import { store } from '../../init-store';
 
 
@@ -17,12 +18,18 @@ const mapStateToProps = ({ create }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveEvent: (data) => {
-      const state = store.getState();
-      // data.hostID = state.user.id;
-      // data.hostPhotoURL = state.user.photo_url;
-      // getISOstring
-      dispatch(newEvent(data));
+    saveEvent: () => {
+      const event = store.getState().create;
+      // TODO:
+      // add host user id
+      // add host photo url
+      const data = Object.assign({}, event,
+        { when: mapToISOString(event.when) },
+        { is_poll: event.what.concat(event.where, event.when).length > 3 }
+      );
+      delete data.error;
+      delete data.isFetching;
+      dispatch(saveEvent(data));
     },
     discardEvent: () => {
       dispatch(clearCreateEvent());

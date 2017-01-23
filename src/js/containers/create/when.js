@@ -13,16 +13,12 @@ const mapStateToProps = ({ create }) => {
 const mapDispatchToProps = dispatch => ({
 
   handleDate: (date, inputKey) => {
-    date.setHours(0, 0, 0, 0);
-    console.log(date.toISOString());
-    dispatch(setWhen(date, inputKey, 'date'));
+    const chosenDate = moment(date.setHours(0, 0, 0, 0));
+    dispatch(setWhen(chosenDate, inputKey, 'date'));
   },
 
   handleTime: (time, inputKey) => {
-    // today minus selected
     const chosenTime = moment(time);
-
-    const timeAsArray = `${chosenTime.hour()}:${chosenTime.minute()}`.split(':');
     dispatch(setWhen(chosenTime, inputKey, 'time'));
   },
 

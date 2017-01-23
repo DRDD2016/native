@@ -11,7 +11,6 @@ const ConfirmWhen = ({ data }) => {
 
   const layout = data.map((datum, i) => {
     const hideTitle = i > 0;
-    console.log(datum);
     return (
       <View
         style={styles.pollSection}
