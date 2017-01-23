@@ -23,8 +23,7 @@ const styles = {
   input: {
     flex: 1,
     paddingHorizontal: 10,
-    backgroundColor: '#FFF',
-    height: 40
+    backgroundColor: '#FFF'
   },
   iconWrap: {
     width: 40,
