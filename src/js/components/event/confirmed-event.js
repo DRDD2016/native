@@ -10,6 +10,29 @@ import formatDate from '../../lib/format-date';
 import formatTime from '../../lib/format-time';
 import Button from '../common/Button';
 import styles from '../../../styles';
+import colours from '../../../styles/colours';
+
+const inslineStyle = {
+  greenButton: {
+    flexBasis: 100,
+    fontSize: 16,
+    paddingHorizontal: 8
+  },
+  orangeButton: {
+    flexBasis: 100,
+    fontSize: 16,
+    paddingHorizontal: 8,
+    backgroundColor: colours.orange,
+    borderColor: colours.orange
+  },
+  redButton: {
+    flexBasis: 100,
+    fontSize: 16,
+    paddingHorizontal: 8,
+    backgroundColor: colours.red,
+    borderColor: colours.red
+  }
+};
 
 const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, rsvpToEvent }) => {
   const handleClick = !userIsHost ? rsvpToEvent : '';
@@ -37,17 +60,37 @@ const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, rsvpToEv
         <ConfirmWhat data={ event.what } />
         <ConfirmWhere data={ event.where } />
         <ConfirmWhen data={ event.when } />
-        <View>
-          {
-            !userIsHost &&
-            <Button
-              buttonStyle={styles.confirmButton}
-              textStyle={styles.confirmButtonText}
-            >
-              <Text>RSVP to this event</Text>
-            </Button>
-          }
-        </View>
+        {
+          !userIsHost &&
+          <View style={{ marginTop: 10, borderTopColor: '#efefef', borderTopWidth: 1 }}>
+            <Text style={{ margin: 10 }}>RSVPs</Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+              <Button
+                buttonStyle={[styles.confirmButton, inslineStyle.greenButton]}
+                textStyle={styles.confirmButtonText}
+                onPress={ () => handleClick('going', event_id) }
+              >
+                <Text>Going</Text>
+              </Button>
+
+              <Button
+                buttonStyle={[styles.confirmButton, inslineStyle.orangeButton]}
+                textStyle={styles.confirmButtonText}
+                onPress={ () => handleClick('maybe', event_id) }
+              >
+                <Text>Maybe</Text>
+              </Button>
+
+              <Button
+                buttonStyle={[styles.confirmButton, inslineStyle.redButton]}
+                textStyle={styles.confirmButtonText}
+                onPress={ () => handleClick('notGoing', event_id) }
+              >
+                <Text>Not Going</Text>
+              </Button>
+            </View>
+          </View>
+        }
       </ScrollView>
     </View>
   );
