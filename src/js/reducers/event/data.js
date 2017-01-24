@@ -3,6 +3,7 @@ import * as actions from '../../actions/event/data';
 
 export const initialState = {
   event_id: undefined,
+  code: undefined,
   host_user_id: undefined,
   name: undefined,
   description: undefined,

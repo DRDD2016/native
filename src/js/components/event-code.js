@@ -54,7 +54,7 @@ class Code extends Component {
               textStyle={inlineStyle.textStyle}
               onPress={handleSubmit(handleSubmitForm)}
             >
-              <Text>SUBMIT</Text>
+              <Text>JOIN EVENT</Text>
             </Button>
           </View>
         </View>
