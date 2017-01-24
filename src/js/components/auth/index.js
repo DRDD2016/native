@@ -36,7 +36,7 @@ export default function Index ({ navigator }) {
           LOG IN
         </Button>
         <Button
-          buttonStyle={{ flex: 1, height: 50, backgroundColor: '#ee7433', justifyContent: 'center' }}
+          buttonStyle={{ flex: 1, height: 50, backgroundColor: colours.orange, justifyContent: 'center' }}
           textStyle={{ alignSelf: 'center', color: '#fff', fontWeight: '300', fontSize: 20 }}
           onPress={ goToSignup }
         >

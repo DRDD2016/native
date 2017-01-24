@@ -7,6 +7,7 @@ export const PATCH_EVENT_FAILURE = 'PATCH_EVENT_FAILURE';
 
 const event1 = {
   event_id: 1,
+  code: 'abcd',
   host_user_id: 1,
   name: 'Lounge party',
   description: 'Celebrating life',
@@ -43,6 +44,15 @@ export function getEvent (event_id) { //eslint-disable-line
     dispatch(getEventSuccess(event1));
   };
 }
+
+export function submitCode (code) { //eslint-disable-line
+  return (dispatch) => {
+    dispatch(getEventRequest());
+    // fetch
+    dispatch(getEventSuccess(event1));
+  };
+}
+
 
 export const patchEventRequest = () => ({
   type: PATCH_EVENT_REQUEST

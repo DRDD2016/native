@@ -13,6 +13,19 @@ export default function Navbar () {
       initialTab="feed"
     >
       <TabItem
+        id="code"
+        title="Code"
+        selectedStyle={ tabBarSelectedItemStyle }
+        renderIcon={ isSelected => <Icon name="barcode" size={ 28 } color={ isSelected ? colours.blue : colours.gray } /> }
+      >
+        <StackNavigation
+          id="code"
+          navigatorUID="code"
+          initialRoute={ Router.getRoute('code', { title: 'Code' }) }
+        />
+      </TabItem>
+
+      <TabItem
         id="albums"
         title="Albums"
         selectedStyle={ tabBarSelectedItemStyle }

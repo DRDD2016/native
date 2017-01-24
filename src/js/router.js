@@ -17,6 +17,7 @@ import UploadPhoto from './components/upload-photo';
 import ConfirmEmailContainer from './containers/auth/confirm-email';
 import ResetPasswordContainer from './containers/auth/reset-password';
 import Edit from './components/event/edit';
+import Code from './containers/event-code';
 
 const Router = createRouter(() => ({
   auth: () => Index,
@@ -36,7 +37,8 @@ const Router = createRouter(() => ({
   uploadPhoto: () => UploadPhoto,
   confirmEmail: () => ConfirmEmailContainer,
   resetPassword: () => ResetPasswordContainer,
-  edit: () => Edit
+  edit: () => Edit,
+  code: () => Code
 }));
 
 export default Router;
