@@ -7,6 +7,7 @@ import {
 } from '@exponent/ex-navigation';
 import { store } from './init-store';
 import Router from './router';
+import socket from './socket-router';
 
 // disable remote debugger warning in a simulator
 console.disableYellowBox = true;
