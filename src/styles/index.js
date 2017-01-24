@@ -278,10 +278,8 @@ const styles = {
     borderColor: colours.confirm,
     borderWidth: 1,
     borderRadius: 100,
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingLeft: 30,
-    paddingRight: 30
+    paddingVertical: 8,
+    paddingHorizontal: 30
   },
   confirmButtonText: {
     fontSize: 18,
