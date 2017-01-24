@@ -68,6 +68,7 @@ const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, rsvpToEv
               <Button
                 buttonStyle={[styles.confirmButton, inslineStyle.greenButton]}
                 textStyle={styles.confirmButtonText}
+                onPress={ () => handleClick('going', event_id) }
               >
                 <Text>Going</Text>
               </Button>
@@ -75,6 +76,7 @@ const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, rsvpToEv
               <Button
                 buttonStyle={[styles.confirmButton, inslineStyle.orangeButton]}
                 textStyle={styles.confirmButtonText}
+                onPress={ () => handleClick('maybe', event_id) }
               >
                 <Text>Maybe</Text>
               </Button>
@@ -82,6 +84,7 @@ const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, rsvpToEv
               <Button
                 buttonStyle={[styles.confirmButton, inslineStyle.redButton]}
                 textStyle={styles.confirmButtonText}
+                onPress={ () => handleClick('notGoing', event_id) }
               >
                 <Text>Not Going</Text>
               </Button>
