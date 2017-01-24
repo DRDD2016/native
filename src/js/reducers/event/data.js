@@ -22,21 +22,22 @@ export default function data (state = initialState, action) {
   switch (action.type) {
 
     case actions.GET_EVENT_REQUEST:
+    case actions.PATCH_EVENT_REQUEST:
       return update(state, {
         isFetching: { $set: true }
       });
 
     case actions.GET_EVENT_SUCCESS:
-      return Object.assign({},
-        state,
-        { ...action.data },
-        { isFetching: false }
-      );
+    case actions.PATCH_EVENT_SUCCESS:
+      return update(state, {
+        isFetching: { $set: false }
+      });
 
     case actions.GET_EVENT_FAILURE:
+    case actions.PATCH_EVENT_FAILURE:
       return update(state, {
-        isFetching: false,
-        error: action.error
+        isFetching: { $set: false },
+        error: { $set: action.error }
       });
 
     default:
