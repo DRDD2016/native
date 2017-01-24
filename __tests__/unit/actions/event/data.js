@@ -59,5 +59,49 @@ describe('GET_EVENT actions', () => {
       expect(actual).toEqual(expected);
     });
   });
+});
 
+describe('PATCH_EVENT actions', () => {
+
+  describe('`patchEventRequest` action creator', () => {
+
+    it('returns expected action', () => {
+
+      const expected = {
+        type: actions.PATCH_EVENT_REQUEST
+      };
+
+      const actual = actions.patchEventRequest();
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('`patchEventSuccess` action creator', () => {
+
+    it('returns expected action', () => {
+
+      const data = true;
+      const expected = {
+        type: actions.PATCH_EVENT_SUCCESS
+      };
+
+      const actual = actions.patchEventSuccess(data);
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('`patchEventFailure` action creator', () => {
+
+    it('returns expected action', () => {
+
+      const error = new Error();
+      const expected = {
+        type: actions.PATCH_EVENT_FAILURE,
+        error
+      };
+
+      const actual = actions.patchEventFailure(error);
+      expect(actual).toEqual(expected);
+    });
+  });
 });

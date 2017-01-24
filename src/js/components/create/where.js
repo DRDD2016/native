@@ -99,7 +99,7 @@ export default class Where extends Component {
     return (
       <View>
         <View style={{ marginHorizontal: 10 }}>
-          <Text style={ styles.smallMessageText} >
+          <Text style={ styles.smallMessageText } >
             Enter where the event will take place (or leave blank to decide it later).
           </Text>
           <Text style={ styles.smallMessageText }>

@@ -1,6 +1,9 @@
 export const GET_EVENT_REQUEST = 'GET_EVENT_REQUEST';
 export const GET_EVENT_SUCCESS = 'GET_EVENT_SUCCESS';
 export const GET_EVENT_FAILURE = 'GET_EVENT_FAILURE';
+export const PATCH_EVENT_REQUEST = 'PATCH_EVENT_REQUEST';
+export const PATCH_EVENT_SUCCESS = 'PATCH_EVENT_SUCCESS';
+export const PATCH_EVENT_FAILURE = 'PATCH_EVENT_FAILURE';
 
 const event1 = {
   event_id: 1,
@@ -20,6 +23,20 @@ const event1 = {
   rsvps: { going: [], not_going: [], maybe: [] }
 };
 
+export const getEventRequest = () => ({
+  type: GET_EVENT_REQUEST
+});
+
+export const getEventSuccess = data => ({
+  type: GET_EVENT_SUCCESS,
+  data
+});
+
+export const getEventFailure = error => ({
+  type: GET_EVENT_FAILURE,
+  error
+});
+
 export function getEvent (event_id) { //eslint-disable-line
   return (dispatch) => {
     dispatch(getEventRequest());
@@ -27,22 +44,24 @@ export function getEvent (event_id) { //eslint-disable-line
   };
 }
 
-export function getEventRequest () {
-  return {
-    type: GET_EVENT_REQUEST
-  };
-}
+export const patchEventRequest = () => ({
+  type: PATCH_EVENT_REQUEST
+});
 
-export function getEventSuccess (data) {
-  return {
-    type: GET_EVENT_SUCCESS,
-    data
-  };
-}
+export const patchEventSuccess = () => ({
+  type: PATCH_EVENT_SUCCESS
+});
 
-export function getEventFailure (error) {
-  return {
-    type: GET_EVENT_FAILURE,
-    error
+export const patchEventFailure = error => ({
+  type: PATCH_EVENT_FAILURE,
+  error
+});
+
+export function patchEvent (data) { //eslint-disable-line
+  return (dispatch) => {
+
+    dispatch(patchEventRequest());
+
+    // fetch
   };
 }
