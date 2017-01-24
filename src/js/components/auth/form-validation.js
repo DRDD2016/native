@@ -75,3 +75,13 @@ export function passwordValidator ({ password, confirmPassword }) {
 
   return errors;
 }
+
+export function codeValidator ({ code }) {
+  const errors = {};
+
+  if (!code) {
+    errors.code = 'Required field';
+  }
+  
+  return errors;
+}
