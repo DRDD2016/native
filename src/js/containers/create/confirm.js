@@ -3,7 +3,7 @@ import { saveEvent, clearCreateEvent } from '../../actions/create';
 import Confirm from '../../components/create/confirm';
 import mapToISOString from '../../lib/map-to-iso-string';
 import { store } from '../../init-store';
-
+import { getToken } from '../../lib/token';
 
 const mapStateToProps = ({ create }) => {
   return {
@@ -20,8 +20,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     saveEvent: () => {
       const event = store.getState().create;
-      // TODO:
-      // add host user id
+      // TODO
       // add host photo url
       const data = Object.assign({}, event,
         { when: mapToISOString(event.when) },
@@ -29,6 +28,7 @@ const mapDispatchToProps = (dispatch) => {
       );
       delete data.error;
       delete data.isFetching;
+      data.token = getToken();
       dispatch(saveEvent(data));
     },
     discardEvent: () => {
