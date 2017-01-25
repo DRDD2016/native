@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import Signup from '../../components/auth/signup';
 import { signupUser } from '../../actions/signup';
 
-const mapStateToProps = ({ signup }) => ({
-  isSigningUp: signup.isSigningUp
+const mapStateToProps = ({ user }) => ({
+  isSigningUp: user.isSigningUp
 });
 
 const mapDispatchToProps = () => ({
