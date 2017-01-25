@@ -1,3 +1,4 @@
+import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { saveEvent, clearCreateEvent } from '../../actions/create';
 import Confirm from '../../components/create/confirm';
@@ -28,8 +29,13 @@ const mapDispatchToProps = (dispatch) => {
       );
       delete data.error;
       delete data.isFetching;
-      data.token = getToken();
-      dispatch(saveEvent(data));
+      AsyncStorage.getItem('spark_token')
+      .then((token) => {
+        if (token) {
+          dispatch(saveEvent(token, data));
+        }
+      })
+      .catch((error) => console.error(error));
     },
     discardEvent: () => {
       dispatch(clearCreateEvent());

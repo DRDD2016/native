@@ -52,15 +52,15 @@ export function setWhen (data, inputKey, format) {
 * SAVE EVENT ACTIONS
 ********/
 
-export function saveEvent (eventData) { //eslint-disable-line
+export function saveEvent (token, eventData) { //eslint-disable-line
 
   return function (dispatch) {
     dispatch(saveEventRequest());
-
     fetch('http://localhost:3000/events', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
+        authorization: token,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(eventData)
@@ -68,11 +68,13 @@ export function saveEvent (eventData) { //eslint-disable-line
     .then((response) => {
       response.json()
       .then((data) => {
+        dispatch(saveEventSuccess());
         console.log('CODE', data);
       });
     })
     .catch((error) => {
-      console.log('error', error);
+      console.error('error', error);
+      dispatch(saveEventFailure(error));
     });
   };
 }
