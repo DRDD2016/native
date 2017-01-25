@@ -11,8 +11,6 @@ import colours from '../../../styles/colours';
 const windowSize = Dimensions.get('window');
 const deviceHeight = windowSize.height;
 
-// import GOOGLE_PLACES_API_KEY from '../../keys';
-
 export default class Where extends Component {
 
   static route = {
@@ -36,7 +34,6 @@ export default class Where extends Component {
 
   render () {
     const { data, name, addInput, removeInput } = this.props;
-    console.log(data);
     const inputs = data.map((value, inputKey) => {
       return (
         <View key={ inputKey }>

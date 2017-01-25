@@ -53,18 +53,27 @@ export function setWhen (data, inputKey, format) {
 ********/
 
 export function saveEvent (eventData) { //eslint-disable-line
-  console.log("SAVING", eventData);
-  return function (dispatch) {
-    // dispatch(saveEventRequest());
 
-    // return axios.post('http://localhost:3000/events', eventData)
-    //   .then(() => {
-    //     dispatch(saveEventSuccess());
-    //     dispatch(clearCreateEvent());
-    //   })
-    //   .catch((error) => {
-    //     dispatch(saveEventFailure(error));
-    //   });
+  return function (dispatch) {
+    dispatch(saveEventRequest());
+
+    fetch('http://localhost:3000/events', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(eventData)
+    })
+    .then((response) => {
+      response.json()
+      .then((data) => {
+        console.log('CODE', data);
+      });
+    })
+    .catch((error) => {
+      console.log('error', error);
+    });
   };
 }
 
