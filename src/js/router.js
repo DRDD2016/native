@@ -13,7 +13,7 @@ import WhenContainer from './containers/create/when';
 import ConfirmContainer from './containers/create/confirm';
 import EventContainer from './containers/event';
 import Navbar from './components/navbar';
-import UploadPhoto from './components/upload-photo';
+import UploadPhoto from './containers/upload-photo';
 import ConfirmEmailContainer from './containers/auth/confirm-email';
 import ResetPasswordContainer from './containers/auth/reset-password';
 import Edit from './components/event/edit';

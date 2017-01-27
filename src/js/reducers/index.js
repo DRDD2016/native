@@ -7,8 +7,7 @@ import calendar from './calendar.old';
 import event from './event/index';
 import feed from './feed.old';
 import create from './create';
-import signup from './signup';
-import login from './login';
+import user from './user';
 import reset from './reset-password';
 import confirmEmail from './confirm-email';
 
@@ -20,8 +19,7 @@ export default combineReducers({
   event,
   feed,
   create,
-  signup,
-  login,
+  user,
   reset,
   confirmEmail,
   form
