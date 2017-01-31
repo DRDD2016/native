@@ -12,6 +12,7 @@ export const CONFIRM_EVENT_FAILURE = 'CONFIRM_EVENT_FAILURE';
 ********/
 
 export function vote (poll, event_id) { // eslint-disable-line
+  console.log('action poll', poll, event_id);
   return (dispatch) => {
     // const payload = {
     //   poll,

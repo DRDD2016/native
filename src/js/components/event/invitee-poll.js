@@ -1,9 +1,8 @@
 
 /* eslint-disable no-else-return */
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableHighlight } from 'react-native';
 import CategoryDetails from './category-details';
-import Button from '../common/Button';
 import styles from '../../../styles';
 
 export default class InviteePoll extends Component {
@@ -25,8 +24,6 @@ export default class InviteePoll extends Component {
 
       this.setState({
         [category]: this.state[category].concat([selection])
-      }, () => {
-        console.table(this.state);
       });
     } else {
       const selectionIndex = this.state[category].indexOf(selection);
@@ -35,14 +32,12 @@ export default class InviteePoll extends Component {
 
       this.setState({
         [category]: newSelection
-      }, () => {
-        console.table(this.state);
       });
     }
   }
 
   render () {
-    const { event, poll, handleVote, event_id } = this.props;
+    const { event, handleVote } = this.props;
 
     const allCategoriesSelected = Object.keys(this.state)
       .map(category => this.state[category].length)
@@ -73,16 +68,16 @@ export default class InviteePoll extends Component {
             data={event.when}
             toggleSelection={this.toggleSelection}
           />
-          {
-            allCategoriesSelected &&
-            <Button
-              buttonStyle={styles.buttonStyle}
-              onClick={ () => handleVote(poll, event_id) }
-            >
-              VOTE
-            </Button>
-          }
         </View>
+        {
+          allCategoriesSelected &&
+          <TouchableHighlight
+            style={styles.buttonStyle}
+            onPress={ () => handleVote(this.state, event.event_id) }
+          >
+            <Text>VOTE</Text>
+          </TouchableHighlight>
+        }
       </View>
     );
   }

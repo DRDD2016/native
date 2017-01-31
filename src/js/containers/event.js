@@ -26,11 +26,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch(getEvent(event_id));
   },
   handleVote: (poll, event_id) => {
-
     dispatch(vote(poll, event_id));
   },
   handleConfirmEvent: (hostEventChoices, event_id) => {
-
+    console.log('something');
     // confirm event (convert from poll to confirmed event)
   },
   handleDeleteEvent: (event_id) => {
