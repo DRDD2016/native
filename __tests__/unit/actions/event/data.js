@@ -82,7 +82,8 @@ describe('PATCH_EVENT actions', () => {
 
       const data = true;
       const expected = {
-        type: actions.PATCH_EVENT_SUCCESS
+        type: actions.PATCH_EVENT_SUCCESS,
+        data
       };
 
       const actual = actions.patchEventSuccess(data);
