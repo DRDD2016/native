@@ -4,6 +4,7 @@ import Event from '../components/event';
 import { getEvent } from '../actions/event/data';
 import { vote } from '../actions/event/poll';
 import { clearCreateEvent } from '../actions/create';
+import normalisePollData from '../lib/normalise-poll-data';
 
 
 const user_id = 3;
@@ -26,7 +27,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(getEvent(event_id));
   },
   handleVote: (poll, event_id) => {
-    dispatch(vote(poll, event_id));
+    dispatch(vote(normalisePollData(poll), event_id));
   },
   handleConfirmEvent: (hostEventChoices, event_id) => {
     console.log('something');
