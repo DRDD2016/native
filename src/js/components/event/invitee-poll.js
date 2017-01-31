@@ -12,37 +12,27 @@ export default class InviteePoll extends Component {
 
     const { what, where, when } = this.props.event;
     this.state = {
-      what: what.length === 1 ? what : [],
-      where: where.length === 1 ? where : [],
-      when: when.length === 1 ? when : []
+      what: what.length > 1 ? new Array(what.length).fill(0) : [1],
+      where: where.length > 1 ? new Array(where.length).fill(0) : [1],
+      when: when.length > 1 ? new Array(when.length).fill(0) : [1]
     };
     this.toggleSelection = this.toggleSelection.bind(this);
   }
 
-  toggleSelection (category, selection) {
-    if (!this.state[category].includes(selection)) {
-
-      this.setState({
-        [category]: this.state[category].concat([selection])
-      });
-    } else {
-      const selectionIndex = this.state[category].indexOf(selection);
-      const newSelection = [...this.state[category]];
-      newSelection.splice(selectionIndex, 1);
-
-      this.setState({
-        [category]: newSelection
-      });
-    }
+  toggleSelection (category, index) {
+    const newArray = this.state[category];
+    newArray[index] = parseInt(this.state[category][index], 10) ? 0 : 1;
+    this.setState({
+      [category]: newArray
+    }, () => console.log(this.state));
   }
 
   render () {
     const { event, handleVote } = this.props;
 
     const allCategoriesSelected = Object.keys(this.state)
-      .map(category => this.state[category].length)
-      .every(length => length >= 1);
-
+      .every(category => this.state[category].includes(1));
+      console.log(allCategoriesSelected);
     return (
       <View>
         <Text>POLL (INVITEE VIEW)</Text>

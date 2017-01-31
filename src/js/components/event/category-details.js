@@ -24,7 +24,7 @@ export default class CategoryDetails extends Component {
   _handleOnPress (category, selection, index) {
     if (this.state.isToggleable) {
 
-      this.props.toggleSelection(category, selection);
+      this.props.toggleSelection(category, index);
       this.toggleHighlight(this.props.userIsHost, index);
     }
   }

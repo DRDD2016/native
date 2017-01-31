@@ -6,7 +6,7 @@ import { vote } from '../actions/event/poll';
 import { clearCreateEvent } from '../actions/create';
 
 
-const user_id = 1;
+const user_id = 3;
 
 const mapStateToProps = ({ event }) => {
   return {
