@@ -30,9 +30,7 @@ export default function data (state = initialState, action) {
 
     case actions.GET_EVENT_SUCCESS:
     case actions.PATCH_EVENT_SUCCESS:
-      return update(state, {
-        isFetching: { $set: false }
-      });
+      return { ...state, ...action.data, isFetching: false };
 
     case actions.GET_EVENT_FAILURE:
     case actions.PATCH_EVENT_FAILURE:

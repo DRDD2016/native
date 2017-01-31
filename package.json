@@ -5,7 +5,10 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest --runInBand",
-    "lint": "node_modules/eslint/bin/eslint.js 'src/**/*.js' '__tests__/**/*.js'"
+    "lint": "node_modules/eslint/bin/eslint.js 'src/**/*.js' '__tests__/**/*.js'",
+    "precommit": "npm run lint",
+    "prepush": "npm test coverage",
+    "postmerge": "npm install"
   },
   "dependencies": {
     "@exponent/ex-navigation": "^2.7.1",
@@ -31,6 +34,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
+    "husky": "^0.13.1",
     "jest": "18.1.0",
     "react-test-renderer": "15.4.2",
     "remote-redux-devtools": "^0.5.7"
