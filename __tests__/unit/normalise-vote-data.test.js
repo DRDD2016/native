@@ -1,9 +1,9 @@
-import normalisePollData from '../../src/js/lib/normalise-poll-data';
+import normaliseVoteData from '../../src/js/lib/normalise-vote-data';
 
-describe('`normalisePollData`', () => {
+describe('`normaliseVoteData`', () => {
   it('removes unused object keys', () => {
 
-    const pollData = {
+    const voteData = {
       what: [0, 1],
       where: [1, 1],
       when: [1]
@@ -12,7 +12,7 @@ describe('`normalisePollData`', () => {
       what: [0, 1],
       where: [1, 1]
     };
-    const result = normalisePollData(pollData);
+    const result = normaliseVoteData(voteData);
     expect(result).toEqual(expected);
   });
 });

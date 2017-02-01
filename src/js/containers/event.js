@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars  */
+import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Event from '../components/event';
 import { getEvent } from '../actions/event/data';
-import { vote } from '../actions/event/poll';
+import { postVote } from '../actions/event/poll';
 import { clearCreateEvent } from '../actions/create';
-import normalisePollData from '../lib/normalise-poll-data';
+import normaliseVoteData from '../lib/normalise-vote-data';
 
 
 const user_id = 3;
@@ -26,8 +27,13 @@ const mapDispatchToProps = dispatch => ({
 
     dispatch(getEvent(event_id));
   },
-  handleVote: (poll, event_id) => {
-    dispatch(vote(normalisePollData(poll), event_id));
+  handleVote: (vote, event_id) => {
+    AsyncStorage.getItem('spark_token')
+    .then((token) => {
+      if (token) {
+        dispatch(postVote(token, normaliseVoteData(vote), event_id));
+      }
+    });
   },
   handleConfirmEvent: (hostEventChoices, event_id) => {
     console.log('something');

@@ -1,45 +1,45 @@
 import * as actions from '../../../../src/js/actions/event/poll';
 
 
-describe('VOTE actions', () => {
+describe('POST_VOTE actions', () => {
 
-  describe('`voteRequest` action creator', () => {
-
-    it('returns expected action', () => {
-
-      const expected = {
-        type: actions.VOTE_REQUEST
-      };
-
-      const actual = actions.voteRequest();
-      expect(actual).toEqual(expected);
-    });
-  });
-
-  describe('`voteSuccess` action creator', () => {
+  describe('`postVoteRequest` action creator', () => {
 
     it('returns expected action', () => {
 
       const expected = {
-        type: actions.VOTE_SUCCESS
+        type: actions.POST_VOTE_REQUEST
       };
 
-      const actual = actions.voteSuccess();
+      const actual = actions.postVoteRequest();
       expect(actual).toEqual(expected);
     });
   });
 
-  describe('`voteFailure` action creator', () => {
+  describe('`postVoteSuccess` action creator', () => {
+
+    it('returns expected action', () => {
+
+      const expected = {
+        type: actions.POST_VOTE_SUCCESS
+      };
+
+      const actual = actions.postVoteSuccess();
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('`postVoteFailure` action creator', () => {
 
     it('returns expected action', () => {
 
       const error = new Error();
       const expected = {
-        type: actions.VOTE_FAILURE,
+        type: actions.POST_VOTE_FAILURE,
         error
       };
 
-      const actual = actions.voteFailure(error);
+      const actual = actions.postVoteFailure(error);
       expect(actual).toEqual(expected);
     });
   });
