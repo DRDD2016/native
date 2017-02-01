@@ -24,7 +24,7 @@ export default class CategoryDetails extends Component {
   _handleOnPress (category, selection, index) {
     if (this.state.isToggleable) {
 
-      this.props.toggleSelection(category, selection);
+      this.props.toggleSelection(category, index);
       this.toggleHighlight(this.props.userIsHost, index);
     }
   }
@@ -76,9 +76,9 @@ export default class CategoryDetails extends Component {
                         borderRadius={100}
                         color={(!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category]}
                         backgroundColor={(!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index] ? colours[category] : OFF_WHITE}
-                        onPress={() => this._handleOnPress(category, { date: datum.date, time: datum.time }, index)}
+                        onPress={() => this._handleOnPress(category, datum, index)}
                       >
-                        { `${formatDate(datum.date, 'half')}, ${formatTime(datum.time) || 'TBC'}` }
+                        { `${formatDate(datum, 'half')}, ${formatTime(datum) || 'TBC'}` }
                       </Icon.Button>
                     </View>
                   </View>

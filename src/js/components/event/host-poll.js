@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import CategoryDetails from './category-details';
-import Button from '../common/Button';
 import styles from '../../../styles';
 
 
@@ -23,14 +22,10 @@ export default class HostPoll extends Component {
     if (!this.state[category].includes(selection)) {
       this.setState({
         [category]: [selection]
-      }, () => {
-        console.table(this.state);
       });
     } else {
       this.setState({
         [category]: []
-      }, () => {
-        console.table(this.state);
       });
     }
   }
@@ -76,13 +71,12 @@ export default class HostPoll extends Component {
         </View>
         {
           allCategoriesSelected &&
-            <Button
-              buttonStyle={styles.confirmButton}
-              textStyle={styles.confirmButtonText}
-              onClick={ () => handleConfirmEvent(this.state, event.event_id) }
-            >
-              CONFIRM EVENT DETAILS
-            </Button>
+          <TouchableOpacity
+            style={{ backgroundColor: 'green' }}
+            onPress={ () => handleConfirmEvent(this.state, event.event_id) }
+          >
+            <Text style={styles.confirmButtonText}>CONFIRM EVENT DETAILS</Text>
+          </TouchableOpacity>
         }
       </View>
     );
