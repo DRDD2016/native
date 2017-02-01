@@ -1,7 +1,8 @@
 import * as actions from '../../actions/event/poll';
 
 const initialState = {
-  isSavingVote: false
+  isSavingVote: false,
+  voteSaved: false
 };
 
 export default function poll (state = initialState, action) {
@@ -13,6 +14,8 @@ export default function poll (state = initialState, action) {
       return { ...state, isSavingVote: true };
 
     case actions.POST_VOTE_SUCCESS:
+      return { ...state, isSavingVote: false, voteSaved: true };
+
     case actions.CONFIRM_EVENT_SUCCESS:
       return { ...state, isSavingVote: false };
 

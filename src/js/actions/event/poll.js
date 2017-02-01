@@ -1,3 +1,7 @@
+import { NavigationActions } from '@exponent/ex-navigation';
+import Router from '../../router';
+import { store } from '../../init-store';
+
 export const POST_VOTE_REQUEST = 'POST_VOTE_REQUEST';
 export const POST_VOTE_SUCCESS = 'POST_VOTE_SUCCESS';
 export const POST_VOTE_FAILURE = 'POST_VOTE_FAILURE';
@@ -25,11 +29,17 @@ export function postVote (token, vote, event_id) { // eslint-disable-line
       body: JSON.stringify({ vote, event_id })
     })
     .then((res) => {
-      console.log(res);
-      dispatch(postVoteSuccess());
+      if (res.status === 201) {
+        dispatch(postVoteSuccess());
+        setTimeout(() => {
+          const navigatorUID = store.getState().navigation.currentNavigatorUID;
+          dispatch(NavigationActions.immediatelyResetStack(navigatorUID, [Router.getRoute('feed')], 0));
+        }, 3000);
+      } else {
+        dispatch(postVoteFailure(new Error('Something went wrong')));
+      }
     })
     .catch((err) => {
-      console.error(err);
       dispatch(postVoteFailure(err));
     });
   };

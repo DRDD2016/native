@@ -65,6 +65,7 @@ export default class Event extends React.Component {
         <InviteePoll
           navigator={this.props.navigator}
           event={ this.props.event }
+          voteSaved={this.props.voteSaved}
           handleVote={ this.props.handleVote }
         />
       );

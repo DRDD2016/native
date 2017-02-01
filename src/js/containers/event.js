@@ -17,7 +17,8 @@ const mapStateToProps = ({ event }) => {
     vote_count: event.vote_count,
     rsvps: event.data.rsvps, // host
     isFetching: event.data.isFetching,
-    userIsHost: user_id === event.data.host_user_id
+    userIsHost: user_id === event.data.host_user_id,
+    voteSaved: event.poll.voteSaved
   };
 };
 
