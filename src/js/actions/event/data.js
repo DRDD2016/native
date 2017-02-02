@@ -83,11 +83,11 @@ export function submitCode (token, code) { //eslint-disable-line
         } else {
           // redirect
           const navigatorUID = store.getState().navigation.currentNavigatorUID;
-          dispatch(patchEventSuccess(JSON.parse(data)));
+          dispatch(patchEventSuccess(data));
           dispatch(NavigationActions.immediatelyResetStack(navigatorUID, [Router.getRoute('event')], 0));
         }
       })
-      .catch(err => console.error(err));
+      .catch(err => dispatch(patchEventFailure(err)));
     })
     .catch(err => dispatch(patchEventFailure(err)));
   };

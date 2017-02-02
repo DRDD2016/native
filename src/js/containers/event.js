@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Event from '../components/event';
 import { getEvent } from '../actions/event/data';
-import { postVote } from '../actions/event/poll';
+import { postVote, confirmEvent } from '../actions/event/poll';
 import { clearCreateEvent } from '../actions/create';
 import normaliseVoteData from '../lib/normalise-vote-data';
 
@@ -18,7 +18,8 @@ const mapStateToProps = ({ event }) => {
     rsvps: event.data.rsvps, // host
     isFetching: event.data.isFetching,
     userIsHost: user_id === event.data.host_user_id,
-    voteSaved: event.poll.voteSaved
+    voteSaved: event.poll.voteSaved,
+    finalChoices: event.poll.finalChoices
   };
 };
 
@@ -37,8 +38,12 @@ const mapDispatchToProps = dispatch => ({
     });
   },
   handleConfirmEvent: (hostEventChoices, event_id) => {
-    console.log('something', hostEventChoices, event_id);
-    // confirm event (convert from poll to confirmed event)
+    AsyncStorage.getItem('spark_token')
+    .then((token) => {
+      if (token) {
+        dispatch(confirmEvent(token, hostEventChoices, event_id));
+      }
+    });
   },
   handleDeleteEvent: (event_id) => {
 

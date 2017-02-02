@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import CategoryDetails from './category-details';
 import styles from '../../../styles';
-
+import formatDate from '../../lib/format-date';
+import formatTime from '../../lib/format-time';
 
 export default class HostPoll extends Component {
 
@@ -32,8 +33,8 @@ export default class HostPoll extends Component {
 
   render () {
 
-    const { event, vote_count, handleConfirmEvent } = this.props;
-
+    const { event, vote_count, handleConfirmEvent, finalChoices } = this.props;
+    console.log('finalChoice', finalChoices);
     const allCategoriesSelected = Object.keys(this.state)
       .map(category => this.state[category].length)
       .every(length => length === 1);
@@ -77,6 +78,15 @@ export default class HostPoll extends Component {
           >
             <Text style={styles.confirmButtonText}>CONFIRM EVENT DETAILS</Text>
           </TouchableOpacity>
+        }
+        {
+          finalChoices &&
+          <View>
+            <Text>Your event is now finalised!</Text>
+            <Text>What: {finalChoices.what}</Text>
+            <Text>Where: {finalChoices.where}</Text>
+            <Text>When: {formatDate(finalChoices.when[0])} {formatTime(finalChoices.when[0])}</Text>
+          </View>
         }
       </View>
     );

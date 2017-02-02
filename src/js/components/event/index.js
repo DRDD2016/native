@@ -57,6 +57,7 @@ export default class Event extends React.Component {
           navigator={this.props.navigator}
           vote_count={ this.props.vote_count }
           event={ this.props.event }
+          finalChoices={ this.props.finalChoices }
           handleConfirmEvent={ this.props.handleConfirmEvent }
         />
       );

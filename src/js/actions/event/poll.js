@@ -68,22 +68,26 @@ export function postVoteFailure (error) {
 * CONFIRM EVENT ACTIONS
 ********/
 
-export function confirmEvent (hostEventChoices, event_id) { // eslint-disable-line
+export function confirmEvent (token, hostEventChoices, event_id) { // eslint-disable-line
   return (dispatch) => {
-    // const payload = {
-    //   hostEventChoices,
-    //   event_id
-    // };
-
     dispatch(confirmEventRequest());
-
-    // axios.post('/confirm-event', payload)
-    //   .then(() => {
-    //     dispatch(confirmEventSuccess());
-    //   })
-    //   .catch(() => {
-    //     dispatch(confirmEventFailure());
-    //   });
+    fetch(`http://localhost:3000/events/${event_id}`, {
+      method: 'PATCH',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        authorization: token
+      },
+      body: JSON.stringify(hostEventChoices)
+    })
+    .then((res) => {
+      res.json()
+      .then((data) => {
+        dispatch(confirmEventSuccess(data));
+      })
+      .catch(err => dispatch(confirmEventFailure(err)));
+    })
+    .catch(err => dispatch(confirmEventFailure(err)));
   };
 }
 
@@ -93,9 +97,10 @@ export function confirmEventRequest () {
   };
 }
 
-export function confirmEventSuccess () {
+export function confirmEventSuccess (data) {
   return {
-    type: CONFIRM_EVENT_SUCCESS
+    type: CONFIRM_EVENT_SUCCESS,
+    data
   };
 }
 export function confirmEventFailure (error) {

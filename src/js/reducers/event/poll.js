@@ -2,7 +2,9 @@ import * as actions from '../../actions/event/poll';
 
 const initialState = {
   isSavingVote: false,
-  voteSaved: false
+  voteSaved: false,
+  finalChoices: undefined,
+  error: undefined
 };
 
 export default function poll (state = initialState, action) {
@@ -17,7 +19,7 @@ export default function poll (state = initialState, action) {
       return { ...state, isSavingVote: false, voteSaved: true };
 
     case actions.CONFIRM_EVENT_SUCCESS:
-      return { ...state, isSavingVote: false };
+      return { ...state, isSavingVote: false, finalChoices: action.data };
 
     case actions.POST_VOTE_FAILURE:
     case actions.CONFIRM_EVENT_FAILURE:
