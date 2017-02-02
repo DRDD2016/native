@@ -8,7 +8,7 @@ import { clearCreateEvent } from '../actions/create';
 import normaliseVoteData from '../lib/normalise-vote-data';
 
 
-const user_id = 3;
+const user_id = 1;
 
 const mapStateToProps = ({ event }) => {
   return {
@@ -37,7 +37,7 @@ const mapDispatchToProps = dispatch => ({
     });
   },
   handleConfirmEvent: (hostEventChoices, event_id) => {
-    console.log('something');
+    console.log('something', hostEventChoices, event_id);
     // confirm event (convert from poll to confirmed event)
   },
   handleDeleteEvent: (event_id) => {
