@@ -24,15 +24,14 @@ export default class InviteePoll extends Component {
     newArray[index] = parseInt(this.state[category][index], 10) ? 0 : 1;
     this.setState({
       [category]: newArray
-    }, () => console.log(this.state));
+    });
   }
 
   render () {
-    const { event, handleVote } = this.props;
+    const { event, handleVote, voteSaved } = this.props;
 
     const allCategoriesSelected = Object.keys(this.state)
       .every(category => this.state[category].includes(1));
-      console.log(allCategoriesSelected);
     return (
       <View>
         <Text>POLL (INVITEE VIEW)</Text>
@@ -67,6 +66,11 @@ export default class InviteePoll extends Component {
           >
             <Text>VOTE</Text>
           </TouchableHighlight>
+        }
+
+        {
+          voteSaved &&
+          <Text>Thanks for voting!</Text>
         }
       </View>
     );
