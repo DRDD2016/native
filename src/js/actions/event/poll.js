@@ -19,14 +19,14 @@ export function postVote (token, vote, event_id) { // eslint-disable-line
   return (dispatch) => {
     dispatch(postVoteRequest());
 
-    fetch('http://localhost:3000/votes', {
+    fetch(`http://localhost:3000/votes/${event_id}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         authorization: token
       },
-      body: JSON.stringify({ vote, event_id })
+      body: JSON.stringify({ vote })
     })
     .then((res) => {
       if (res.status === 201) {

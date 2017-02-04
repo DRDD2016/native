@@ -66,8 +66,8 @@ export const patchEventFailure = error => ({
 export function submitCode (token, code) { //eslint-disable-line
   return (dispatch) => {
     dispatch(patchEventRequest());
-    fetch('http://localhost:3000/events/invitees', {
-      method: 'PATCH',
+    fetch('http://localhost:3000/events/rsvps', {
+      method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
