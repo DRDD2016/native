@@ -11,6 +11,14 @@ import colours from '../../../styles/colours';
 const windowSize = Dimensions.get('window');
 const deviceHeight = windowSize.height;
 
+const inlineStyle = {
+  inputContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#fff',
+    zIndex: 999999
+  }
+};
 export default class Where extends Component {
 
   static route = {
@@ -36,7 +44,7 @@ export default class Where extends Component {
     const { data, name, addInput, removeInput } = this.props;
     const inputs = data.map((value, inputKey) => {
       return (
-        <View key={ inputKey }>
+        <View key={inputKey} style={inlineStyle.inputContainer}>
           <GooglePlacesAutocomplete
             enablePoweredByContainer={false}
             placeholder="Where"
@@ -53,40 +61,46 @@ export default class Where extends Component {
               textInputContainer: {
                 backgroundColor: '#fff',
                 borderRadius: 5,
-                marginHorizontal: 10,
-                height: 40,
-                borderTopColor: '#7e7e7e',
-                borderBottomColor: '#b5b5b5',
+                marginHorizontal: 5,
+                height: 38,
+                borderTopColor: '#D3D3D3',
+                borderBottomColor: '#D3D3D3',
                 borderTopWidth: 1,
                 borderBottomWidth: 1,
                 borderLeftWidth: 1,
                 borderRightWidth: 1,
-                borderLeftColor: '#7e7e7e',
-                borderRightColor: '#7e7e7e',
+                borderLeftColor: '#D3D3D3',
+                borderRightColor: '#D3D3D3',
                 maxWidth: windowSize.width - (windowSize.width / 5)
+              },
+              textInput: {
+                marginTop: 4,
+                padding: 4
               },
               listView: {
                 height: deviceHeight,
                 position: 'absolute',
-                left: 10,
-                right: 10,
+                left: 5,
+                right: 5,
                 top: 40,
                 backgroundColor: '#fff'
               },
               container: {
                 marginTop: 10,
-                marginBottom: 50,
                 backgroundColor: '#fff',
                 zIndex: 999999
               }
             }}
             nearbyPlacesAPI={'GooglePlacesSearch'}
             filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
-          >
-
-            <Text>Remove</Text>
-
-          </GooglePlacesAutocomplete>
+          />
+          <Icon
+            name="remove"
+            size={20}
+            color={colours.blue}
+            style={{ alignSelf: 'center', marginRight: 15, marginTop: 10 }}
+            onPress={ removeInput }
+          />
         </View>
       );
     });
