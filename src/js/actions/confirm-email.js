@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars*/
 export const CONFIRM_EMAIL_REQUEST = 'CONFIRM_EMAIL_REQUEST';
 export const CONFIRM_EMAIL_SUCCESS = 'CONFIRM_EMAIL_SUCCESS';
 export const CONFIRM_EMAIL_FAILURE = 'CONFIRM_EMAIL_FAILURE';

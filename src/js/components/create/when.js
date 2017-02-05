@@ -1,6 +1,6 @@
+/* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
 import { View, Text, DatePickerIOS, ScrollView } from 'react-native';
-import moment from 'moment';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Router from '../../router';
 import AddInput from '../general/add-input';
@@ -76,7 +76,10 @@ export default class When extends Component {
         <View key={ i }>
 
           <View style={{ margin: 10 }}>
-            <Icon.Button name={ this.state.expandedDate[i] ? 'window-close' : 'calendar'} backgroundColor="#3b5998" onPress={() => this.toggleDate(i)}>
+            <Icon.Button
+              name={ this.state.expandedDate[i] ? 'window-close' : 'calendar'}
+              backgroundColor="#3b5998" onPress={() => this.toggleDate(i)}
+            >
               Pick the date
             </Icon.Button>
           </View>

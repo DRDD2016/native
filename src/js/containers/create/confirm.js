@@ -4,7 +4,6 @@ import { saveEvent, clearCreateEvent } from '../../actions/create';
 import Confirm from '../../components/create/confirm';
 import mapToISOString from '../../lib/map-to-iso-string';
 import { store } from '../../init-store';
-import { getToken } from '../../lib/token';
 
 const mapStateToProps = ({ create }) => {
   return {
@@ -35,7 +34,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(saveEvent(token, data));
         }
       })
-      .catch((error) => console.error(error));
+      .catch(error => console.error(error));
     },
     discardEvent: () => {
       dispatch(clearCreateEvent());

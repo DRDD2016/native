@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { connect } from 'react-redux';
 import Feed from '../components/feed';
 import { applyFilter, clearFilter } from '../actions/feed.old';

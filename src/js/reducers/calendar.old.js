@@ -1,3 +1,4 @@
+/* eslint-disable */
 import update from 'immutability-helper';
 import * as actions from '../actions/calendar.old';
 
