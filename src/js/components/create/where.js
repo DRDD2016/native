@@ -95,13 +95,15 @@ export default class Where extends Component {
             nearbyPlacesAPI={'GooglePlacesSearch'}
             filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
           />
-          <Icon
-            name="remove"
-            size={20}
-            color={colours.blue}
-            style={{ alignSelf: 'center', marginRight: 15, marginTop: 10 }}
-            onPress={ removeInput }
-          />
+          { inputKey !== 0 &&
+            <Icon
+              name="remove"
+              size={14}
+              color="gray"
+              style={{ alignSelf: 'center', marginRight: 15, marginTop: 15 }}
+              onPress={ removeInput }
+            />
+          }
         </View>
       );
     });
