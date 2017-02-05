@@ -1,7 +1,7 @@
 import update from 'immutability-helper';
 import * as signup from '../actions/signup';
 import * as login from '../actions/login';
-import { LOGIN_USER_REQUEST } from '../actions/login';
+// import { LOGIN_USER_REQUEST } from '../actions/login';
 
 export const initialState = {
   isSigningUp: false,
