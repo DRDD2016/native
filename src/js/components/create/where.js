@@ -15,7 +15,6 @@ const deviceHeight = windowSize.height;
 const inlineStyle = {
   inputContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     backgroundColor: '#fff',
     zIndex: 999999
   }
@@ -62,7 +61,6 @@ export default class Where extends Component {
               textInputContainer: {
                 backgroundColor: '#fff',
                 borderRadius: 5,
-                marginHorizontal: 5,
                 height: 38,
                 borderTopColor: '#D3D3D3',
                 borderBottomColor: '#D3D3D3',
@@ -100,7 +98,7 @@ export default class Where extends Component {
               name="remove"
               size={14}
               color="gray"
-              style={{ alignSelf: 'center', marginRight: 15, marginTop: 15 }}
+              style={{ alignSelf: 'center', marginRight: 25, marginTop: 15 }}
               onPress={ removeInput }
             />
           }
@@ -112,7 +110,7 @@ export default class Where extends Component {
 
     return (
       <View>
-        <View style={{ marginHorizontal: 10 }}>
+        <View style={ [styles.container, { marginHorizontal: 10 }] }>
           <Text style={ styles.smallMessageText } >
             Enter where the event will take place (or leave blank to decide it later).
           </Text>
