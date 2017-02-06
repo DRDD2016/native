@@ -19,14 +19,15 @@ export default class Event extends React.Component {
         return params.name;
       },
       renderRight: (route) => {
-        return route.params.userIsHost
-          ? <Button
-            onPress={ () => route.params.navigator.push('edit')}
+        return route.params.userIsHost ?
+          <Button
+            onPress={ () => route.params.handleEdit(route.params.event) }
             buttonStyle={{ margin: 15 }}
             textStyle={{ color: colours.white, fontWeight: '600' }}
           >
-            <Text>Edit</Text></Button>
-          : null;
+            <Text>Edit</Text>
+          </Button> :
+          null;
       },
       backgroundColor: colours.blue,
       tintColor: colours.white
@@ -39,7 +40,9 @@ export default class Event extends React.Component {
         this.props.navigator.updateCurrentRouteParams({
           name: this.props.event.name,
           userIsHost: this.props.userIsHost,
-          navigator: this.props.navigator
+          navigator: this.props.navigator,
+          event: this.props.event,
+          handleEdit: this.props.handleEdit
         });
       } else {
         this.props.navigator.updateCurrentRouteParams({

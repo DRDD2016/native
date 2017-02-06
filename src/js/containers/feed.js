@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Feed from '../components/feed';
 import { applyFilter, clearFilter } from '../actions/feed.old';
@@ -22,11 +23,15 @@ const mapStateToProps = ({ feed }) => {
   };
 };
 const mapDispatchToProps = (dispatch, ownProps) => {
-  const event_id = 1;
   return {
-    handleSelection: (index) => {
+    handleSelection: (event_id) => {
       // need to tell server this feed item was touched
-      dispatch(getEvent(event_id));
+      AsyncStorage.getItem('spark_token')
+      .then((token) => {
+        if (token) {
+          dispatch(getEvent(token, event_id));
+        }
+      })
       ownProps.navigator.push(Router.getRoute('event'));
     },
     displaySome: (filterChoice) => {

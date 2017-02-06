@@ -1,14 +1,17 @@
 /* eslint-disable no-unused-vars  */
 import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
+import { NavigationActions } from '@exponent/ex-navigation';
+import { store } from '../init-store';
+import Router from '../router';
 import Event from '../components/event';
 import { getEvent } from '../actions/event/data';
 import { postVote, confirmEvent } from '../actions/event/poll';
-import { clearCreateEvent } from '../actions/create';
+import { hydrateCreateEvent, clearCreateEvent } from '../actions/create';
 import normaliseVoteData from '../lib/normalise-vote-data';
 
 
-const user_id = 1;
+const user_id = 3;
 
 const mapStateToProps = ({ event }) => {
   return {
@@ -50,7 +53,9 @@ const mapDispatchToProps = dispatch => ({
     // delete event
   },
   handleEdit: (event) => {
-
+    dispatch(hydrateCreateEvent(event));
+    const navigatorUID = store.getState().navigation.currentNavigatorUID;
+    dispatch(NavigationActions.push(navigatorUID, Router.getRoute('edit')));
     // get event?
   },
   rsvpToEvent: (status, event_id) => {

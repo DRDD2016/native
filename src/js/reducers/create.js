@@ -69,6 +69,22 @@ export default function create (state = initialState, action) {
         error: { $set: action.error }
       });
 
+    case actions.HYDRATE_CREATE_EVENT: {
+      const dateTime = {
+        date: moment(action.data.when[0]),
+        time: moment(action.data.when[0])
+      };
+
+      return update(state, {
+        name: { $set: action.data.name },
+        description: { $set: action.data.description },
+        note: { $set: action.data.note },
+        what: { $splice: [[0, 1, action.data.what[0]]] },
+        where: { $splice: [[0, 1, action.data.where[0]]] },
+        when: { $splice: [[0, 1, dateTime]] }
+      });
+    }
+
     case actions.CLEAR_CREATE_EVENT:
       return initialState;
 

@@ -6,6 +6,8 @@ export const SET_WHEN = 'SET_WHEN';
 export const SAVE_EVENT_REQUEST = 'SAVE_EVENT_REQUEST';
 export const SAVE_EVENT_SUCCESS = 'SAVE_EVENT_SUCCESS';
 export const SAVE_EVENT_FAILURE = 'SAVE_EVENT_FAILURE';
+
+export const HYDRATE_CREATE_EVENT = 'HYDRATE_CREATE_EVENT';
 export const CLEAR_CREATE_EVENT = 'CLEAR_CREATE_EVENT';
 
 export const ADD_INPUT = 'ADD_INPUT';
@@ -95,6 +97,13 @@ export function saveEventFailure (error) {
   return {
     type: SAVE_EVENT_FAILURE,
     error
+  };
+}
+
+export function hydrateCreateEvent (data) {
+  return {
+    type: HYDRATE_CREATE_EVENT,
+    data
   };
 }
 

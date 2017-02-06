@@ -34,15 +34,13 @@ const inslineStyle = {
   }
 };
 
-const ConfirmedEvent = ({ event, event_id, rsvps, invitees, userIsHost, rsvpToEvent }) => {
+const ConfirmedEvent = ({ event, event_id, invitees, userIsHost, rsvpToEvent }) => {
   const handleClick = !userIsHost ? rsvpToEvent : '';
 
-  const going = rsvps.going;
-  const notGoing = rsvps.not_going;
-  const maybe = rsvps.maybe;
-  const respondedList = going.concat(maybe, notGoing);
-
-
+  // const going = rsvps.going;
+  // const notGoing = rsvps.not_going;
+  // const maybe = rsvps.maybe;
+  // const respondedList = going.concat(maybe, notGoing);
   const placeNameLong = (event.where[0] && event.where[0].placeName > 18);
 
   return (

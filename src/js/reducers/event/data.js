@@ -13,8 +13,7 @@ export const initialState = {
   what: [],
   where: [],
   when: [],
-  invitees: [],
-  rsvps: [],
+  eventEdited: false,
   isFetching: false
 };
 
