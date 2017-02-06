@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import Input from '../general/input';
