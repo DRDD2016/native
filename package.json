@@ -7,7 +7,7 @@
     "test": "jest --runInBand",
     "lint": "node_modules/eslint/bin/eslint.js 'src/**/*.js' '__tests__/**/*.js'",
     "precommit": "npm run lint",
-    "prepush": "npm test coverage",
+    "prepush": "npm test",
     "postmerge": "npm install"
   },
   "dependencies": {
