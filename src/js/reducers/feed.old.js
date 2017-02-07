@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import update from 'immutability-helper';
-import * as actions from '../actions/feed.old';
+import * as actions from '../actions/feed';
 
 const data = [
   {
