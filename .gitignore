@@ -53,3 +53,4 @@ fastlane/Preview.html
 fastlane/screenshots
 
 src/js/keys.js
+coverage/

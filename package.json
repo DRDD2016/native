@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest --runInBand --forceExit",
+    "test": "jest --runInBand --forceExit --coverage",
     "lint": "node_modules/eslint/bin/eslint.js 'src/**/*.js' '__tests__/**/*.js'",
     "precommit": "npm run lint",
     "prepush": "npm test",
