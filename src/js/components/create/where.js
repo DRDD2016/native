@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
 import { View, Text, Dimensions } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -11,8 +12,13 @@ import colours from '../../../styles/colours';
 const windowSize = Dimensions.get('window');
 const deviceHeight = windowSize.height;
 
-// import GOOGLE_PLACES_API_KEY from '../../keys';
-
+const inlineStyle = {
+  inputContainer: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    zIndex: 999999
+  }
+};
 export default class Where extends Component {
 
   static route = {
@@ -36,10 +42,9 @@ export default class Where extends Component {
 
   render () {
     const { data, name, addInput, removeInput } = this.props;
-    console.log(data);
     const inputs = data.map((value, inputKey) => {
       return (
-        <View key={ inputKey }>
+        <View key={inputKey} style={inlineStyle.inputContainer}>
           <GooglePlacesAutocomplete
             enablePoweredByContainer={false}
             placeholder="Where"
@@ -56,40 +61,47 @@ export default class Where extends Component {
               textInputContainer: {
                 backgroundColor: '#fff',
                 borderRadius: 5,
-                marginHorizontal: 10,
-                height: 40,
-                borderTopColor: '#7e7e7e',
-                borderBottomColor: '#b5b5b5',
+                height: 38,
+                borderTopColor: '#D3D3D3',
+                borderBottomColor: '#D3D3D3',
                 borderTopWidth: 1,
                 borderBottomWidth: 1,
                 borderLeftWidth: 1,
                 borderRightWidth: 1,
-                borderLeftColor: '#7e7e7e',
-                borderRightColor: '#7e7e7e',
+                borderLeftColor: '#D3D3D3',
+                borderRightColor: '#D3D3D3',
                 maxWidth: windowSize.width - (windowSize.width / 5)
+              },
+              textInput: {
+                marginTop: 4,
+                padding: 4
               },
               listView: {
                 height: deviceHeight,
                 position: 'absolute',
-                left: 10,
-                right: 10,
+                left: 5,
+                right: 5,
                 top: 40,
                 backgroundColor: '#fff'
               },
               container: {
                 marginTop: 10,
-                marginBottom: 50,
                 backgroundColor: '#fff',
                 zIndex: 999999
               }
             }}
             nearbyPlacesAPI={'GooglePlacesSearch'}
             filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
-          >
-
-            <Text>Remove</Text>
-
-          </GooglePlacesAutocomplete>
+          />
+          { inputKey !== 0 &&
+            <Icon
+              name="remove"
+              size={14}
+              color="gray"
+              style={{ alignSelf: 'center', marginRight: 25, marginTop: 15 }}
+              onPress={ removeInput }
+            />
+          }
         </View>
       );
     });
@@ -98,7 +110,7 @@ export default class Where extends Component {
 
     return (
       <View>
-        <View style={{ marginHorizontal: 10 }}>
+        <View style={ [styles.container, { marginHorizontal: 10 }] }>
           <Text style={ styles.smallMessageText } >
             Enter where the event will take place (or leave blank to decide it later).
           </Text>

@@ -3,7 +3,7 @@ import Login from '../../components/auth/login';
 import { loginUser } from '../../actions/login';
 
 const mapDispatchToProps = () => ({
-  handleSubmitForm: ({ email, password }, dispatch, props) => {
+  handleSubmitForm: ({ email, password }, dispatch, props) => { //eslint-disable-line
     dispatch(loginUser(email.toLowerCase(), password));
   }
 });

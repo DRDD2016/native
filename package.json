@@ -5,17 +5,21 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest --runInBand",
-    "lint": "node_modules/eslint/bin/eslint.js 'src/**/*.js' '__tests__/**/*.js'"
+    "lint": "node_modules/eslint/bin/eslint.js 'src/**/*.js' '__tests__/**/*.js'",
+    "precommit": "npm run lint",
+    "prepush": "npm test",
+    "postmerge": "npm install"
   },
   "dependencies": {
-    "@exponent/ex-navigation": "^2.7.1",
+    "@exponent/ex-navigation": "^2.8.0",
     "babel-preset-react-native-stage-0": "^1.0.1",
+    "eslint": "^3.15.0",
     "hoist-non-react-statics": "^1.2.0",
     "immutability-helper": "^2.1.1",
     "moment": "^2.17.1",
     "react": "15.4.2",
     "react-native": "0.40.0",
-    "react-native-google-places-autocomplete": "^1.2.6",
+    "react-native-google-places-autocomplete": "^1.2.7",
     "react-native-image-picker": "^0.25.1",
     "react-native-vector-icons": "^4.0.0",
     "redux": "^3.6.0",
@@ -32,6 +36,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
+    "husky": "^0.13.1",
     "jest": "18.1.0",
     "react-test-renderer": "15.4.2",
     "remote-redux-devtools": "^0.5.7"

@@ -96,6 +96,7 @@ export default class UploadPhoto extends Component {
   }
 
   render () {
+    console.log('props', this.props);
     return (
       <View style={{ flex: 1 }}>
         <Text style={ styles.titleText }>Upload Photo</Text>

@@ -1,6 +1,10 @@
-export const VOTE_REQUEST = 'VOTE_REQUEST';
-export const VOTE_SUCCESS = 'VOTE_SUCCESS';
-export const VOTE_FAILURE = 'VOTE_FAILURE';
+import { NavigationActions } from '@exponent/ex-navigation';
+import Router from '../../router';
+import { store } from '../../init-store';
+
+export const POST_VOTE_REQUEST = 'POST_VOTE_REQUEST';
+export const POST_VOTE_SUCCESS = 'POST_VOTE_SUCCESS';
+export const POST_VOTE_FAILURE = 'POST_VOTE_FAILURE';
 
 export const CONFIRM_EVENT_REQUEST = 'CONFIRM_EVENT_REQUEST';
 export const CONFIRM_EVENT_SUCCESS = 'CONFIRM_EVENT_SUCCESS';
@@ -11,41 +15,50 @@ export const CONFIRM_EVENT_FAILURE = 'CONFIRM_EVENT_FAILURE';
 * VOTE ACTIONS
 ********/
 
-export function vote (poll, event_id) { // eslint-disable-line
+export function postVote (token, vote, event_id) { // eslint-disable-line
   return (dispatch) => {
-    // const payload = {
-    //   poll,
-    //   event_id,
-    //   user_id
-    // };
+    dispatch(postVoteRequest());
 
-    dispatch(voteRequest());
-
-    // axios.post('/confirm-poll', payload)
-    //   .then((response) => {
-    //     dispatch(voteSuccess(response.data));
-    //     dispatch(getEvent(event_id));
-    //   })
-    //   .catch((error) => {
-    //     dispatch(voteFailure(error));
-    //   });
+    fetch(`http://localhost:3000/votes/${event_id}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        authorization: token
+      },
+      body: JSON.stringify({ vote })
+    })
+    .then((res) => {
+      if (res.status === 201) {
+        dispatch(postVoteSuccess());
+        setTimeout(() => {
+          const navigatorUID = store.getState().navigation.currentNavigatorUID;
+          dispatch(NavigationActions.immediatelyResetStack(navigatorUID, [Router.getRoute('feed')], 0));
+        }, 3000);
+      } else {
+        dispatch(postVoteFailure(new Error('Something went wrong')));
+      }
+    })
+    .catch((err) => {
+      dispatch(postVoteFailure(err));
+    });
   };
 }
 
-export function voteRequest () {
+export function postVoteRequest () {
   return {
-    type: VOTE_REQUEST
+    type: POST_VOTE_REQUEST
   };
 }
 
-export function voteSuccess () {
+export function postVoteSuccess () {
   return {
-    type: VOTE_SUCCESS
+    type: POST_VOTE_SUCCESS
   };
 }
-export function voteFailure (error) {
+export function postVoteFailure (error) {
   return {
-    type: VOTE_FAILURE,
+    type: POST_VOTE_FAILURE,
     error
   };
 }
@@ -55,22 +68,26 @@ export function voteFailure (error) {
 * CONFIRM EVENT ACTIONS
 ********/
 
-export function confirmEvent (hostEventChoices, event_id) { // eslint-disable-line
+export function confirmEvent (token, hostEventChoices, event_id) { // eslint-disable-line
   return (dispatch) => {
-    // const payload = {
-    //   hostEventChoices,
-    //   event_id
-    // };
-
     dispatch(confirmEventRequest());
-
-    // axios.post('/confirm-event', payload)
-    //   .then(() => {
-    //     dispatch(confirmEventSuccess());
-    //   })
-    //   .catch(() => {
-    //     dispatch(confirmEventFailure());
-    //   });
+    fetch(`http://localhost:3000/events/${event_id}`, {
+      method: 'PATCH',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        authorization: token
+      },
+      body: JSON.stringify(hostEventChoices)
+    })
+    .then((res) => {
+      res.json()
+      .then((data) => {
+        dispatch(confirmEventSuccess(data));
+      })
+      .catch(err => dispatch(confirmEventFailure(err)));
+    })
+    .catch(err => dispatch(confirmEventFailure(err)));
   };
 }
 
@@ -80,9 +97,10 @@ export function confirmEventRequest () {
   };
 }
 
-export function confirmEventSuccess () {
+export function confirmEventSuccess (data) {
   return {
-    type: CONFIRM_EVENT_SUCCESS
+    type: CONFIRM_EVENT_SUCCESS,
+    data
   };
 }
 export function confirmEventFailure (error) {

@@ -1,3 +1,4 @@
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import {
@@ -23,7 +24,7 @@ class App extends Component {
     return (
       <Provider store={ store }>
         <NavigationProvider context={ navigationContext }>
-          <StackNavigation initialRoute={ Router.getRoute('navbar') } />
+          <StackNavigation initialRoute={ Router.getRoute('auth') } />
         </NavigationProvider>
       </Provider>
     );

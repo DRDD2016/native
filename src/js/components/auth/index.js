@@ -13,7 +13,7 @@ export default function Index ({ navigator }) {
   };
 
   const goToSignup = () => {
-    navigator.push(Router.getRoute('navbar'));
+    navigator.push(Router.getRoute('signup'));
   };
 
   return (

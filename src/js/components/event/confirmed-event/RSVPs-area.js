@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import Button from '../../common/Button';

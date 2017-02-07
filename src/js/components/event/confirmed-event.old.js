@@ -3,7 +3,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { View, Image, Text } from 'react-native';
-import rsvpsArea from './confirmed-event/rsvps-area';
+import rsvpsArea from './confirmed-event/RSVPs-area';
 import { eventNote } from '../../lib/confirmed-event-helpers';
 import formatDate from '../../lib/format-date';
 import styles from '../../../styles';
