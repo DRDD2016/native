@@ -18,28 +18,28 @@ export default class Feed extends Component {
 
   render () {
     const { allEvents, feed, isFetching, handleSelection, displaySome, displayAll, feedIsFiltered, isShowHosting } = this.props;
-    const mappedFeed = feed.map((data, i) => {
+    const mappedFeed = feed.reverse().map((data, i) => {
       return (
         <FeedItem
-          key={ data.timestamp }
+          key={ Math.random() }
           index={ i }
-          viewed={ data.viewed }
           event_id={ data.event_id }
           timestamp={ data.timestamp }
+          name={ data.name }
           is_poll={ data.is_poll }
-          firstname={ data.firstname }
-          surname={ data.surname }
-          photo_url={ data.photo_url }
           what={ data.what }
           where={ data.where }
           when={ data.when }
+          inviteesNumber={ 5 }
           userIsHost={ data.host_user_id === 1 }
           hostID={ data.host_user_id }
-          subjectID={ data.subject_user_id }
+          firstname={ data.firstname }
+          surname={ data.surname }
+          photo_url={ data.photo_url }
+          subject_user_id={ data.subject_user_id }
+          viewed={ data.viewed }
+          edited={ data.edited }
           handleSelection={ handleSelection }
-          inviteesNumber={ data.inviteesNumber }
-          eventName={ data.name }
-          hasEdited={ data.hasEdited }
         />
       );
     });

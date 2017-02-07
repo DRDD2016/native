@@ -10,11 +10,10 @@ const INIT_FEED = 'INIT_FEED';
 socket.on('connected', () => {
   console.info('Server connection initialised.');
   socket.emit(INIT_FEED, token);
-  // store.dispatch(getFeedRequest())
+  store.dispatch(getFeedRequest());
   // need access to user's id or token
   socket.on(`feed: ${token}`, (data) => {
-    console.log(`GOT DATA ${new Date()}`, data);
-    // store.dispatch(getFeedSuccess(data));
+    store.dispatch(getFeedSuccess(data));
   });
 
   socket.on('failure', (error) => {
