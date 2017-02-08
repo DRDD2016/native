@@ -16,7 +16,7 @@ import Navbar from './components/navbar';
 import UploadPhoto from './containers/upload-photo';
 import ConfirmEmailContainer from './containers/auth/confirm-email';
 import ResetPasswordContainer from './containers/auth/reset-password';
-import Edit from './components/event/edit';
+import EditContainer from './containers/edit';
 import Code from './containers/code';
 
 const Router = createRouter(() => ({
@@ -37,7 +37,7 @@ const Router = createRouter(() => ({
   uploadPhoto: () => UploadPhoto,
   confirmEmail: () => ConfirmEmailContainer,
   resetPassword: () => ResetPasswordContainer,
-  edit: () => Edit,
+  edit: () => EditContainer,
   code: () => Code
 }));
 

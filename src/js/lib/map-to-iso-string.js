@@ -1,17 +1,17 @@
+import moment from 'moment';
 /**
  * mapToISOString maps moment.js date/time objects to ISO 8601 timestamps
  * @param  {array} array an array of objects
- *                       @param {object} date moment.js object representing a date at midnight
- *                       @param {object} time a moment.js object representing today at a given time
+ *                       @param {string} date string representing a date DD MM YYYY
+ *                       @param {string} time string representing a given time HH:mm
  * @return {array}       An array of ISO 8601 timestamps
  */
-
 export default function mapToISOString (array) {
 
   return array.map((obj) => {
-    const chosenTimeHours = obj.time.hour();
-    const chosenTimeMins = obj.time.minute();
-    const comboDate = obj.date.hour(chosenTimeHours).minute(chosenTimeMins);
+    const chosenTimeHours = moment(obj.time, 'HH mm').hour();
+    const chosenTimeMins = moment(obj.time, 'HH mm').minute();
+    const comboDate = moment(obj.date, 'DD MM YYYY').hour(chosenTimeHours).minute(chosenTimeMins);
     return comboDate.toISOString();
   });
 }

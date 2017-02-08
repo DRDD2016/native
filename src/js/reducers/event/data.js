@@ -13,8 +13,7 @@ export const initialState = {
   what: [],
   where: [],
   when: [],
-  invitees: [],
-  rsvps: [],
+  eventEdited: false,
   isFetching: false
 };
 
@@ -23,16 +22,19 @@ export default function data (state = initialState, action) {
   switch (action.type) {
 
     case actions.GET_EVENT_REQUEST:
+    case actions.EDIT_EVENT_REQUEST:
     case actions.PATCH_EVENT_REQUEST:
       return update(state, {
         isFetching: { $set: true }
       });
 
     case actions.GET_EVENT_SUCCESS:
+    case actions.EDIT_EVENT_SUCCESS:
     case actions.PATCH_EVENT_SUCCESS:
       return { ...state, ...action.data, isFetching: false };
 
     case actions.GET_EVENT_FAILURE:
+    case actions.EDIT_EVENT_FAILURE:
     case actions.PATCH_EVENT_FAILURE:
       return update(state, {
         isFetching: { $set: false },

@@ -9,7 +9,7 @@ export const initialState = {
   what: [''],
   where: [''],
   when: [
-    { date: moment(), time: moment() }
+    { date: moment().format('DD MM YYYY'), time: moment().format('HH:mm') }
   ],
   is_poll: undefined,
   isFetching: false,
@@ -68,6 +68,21 @@ export default function create (state = initialState, action) {
         isFetching: { $set: false },
         error: { $set: action.error }
       });
+
+    case actions.HYDRATE_CREATE_EVENT: {
+      const dateTime = {
+        date: moment(action.data.when[0]).format('DD MM YYYY'),
+        time: moment(action.data.when[0]).format('HH:mm')
+      };
+      return update(state, {
+        name: { $set: action.data.name },
+        description: { $set: action.data.description },
+        note: { $set: action.data.note },
+        what: { $splice: [[0, 1, action.data.what[0]]] },
+        where: { $splice: [[0, 1, action.data.where[0]]] },
+        when: { $splice: [[0, 1, dateTime]] }
+      });
+    }
 
     case actions.CLEAR_CREATE_EVENT:
       return initialState;
