@@ -28,8 +28,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setWhere(text, inputKey));
   },
   handleDateChange: (date, inputKey) => {
-    const chosenDate = moment(date.setHours(0, 0, 0, 0));
-    dispatch(setWhen(chosenDate, inputKey, 'date'));
+    dispatch(setWhen(date, inputKey, 'date'));
   },
   handleTimeChange: (time, inputKey) => {
     const chosenTime = moment(time);

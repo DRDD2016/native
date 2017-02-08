@@ -9,7 +9,7 @@ export const initialState = {
   what: [''],
   where: [''],
   when: [
-    { date: moment(), time: moment() }
+    { date: moment().format('DD MM YYYY'), time: moment().format('HH:mm') }
   ],
   is_poll: undefined,
   isFetching: false,
@@ -71,8 +71,8 @@ export default function create (state = initialState, action) {
 
     case actions.HYDRATE_CREATE_EVENT: {
       const dateTime = {
-        date: moment(action.data.when[0]),
-        time: moment(action.data.when[0])
+        date: moment(action.data.when[0]).format('DD MM YYYY'),
+        time: moment(action.data.when[0]).format('HH:mm')
       };
 
       return update(state, {
