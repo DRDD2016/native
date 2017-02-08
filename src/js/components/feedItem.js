@@ -69,14 +69,14 @@ const FeedItem = ({ event_id, timestamp, firstname, surname,
               {
                 (when.length > 1 && 'VOTE') ||
                 (when.length === 1 && when[0].date === '' && 'TBC') ||
-                formatDate(when[0].placeName).toUpperCase()
+                formatDate(when[0]).toUpperCase()
               }
             </Text>
             <Text style={styles.placeName}>
               <Icon name="map-marker" size={14} color="gray" />
               {
                 (where.length > 1 && 'VOTE') ||
-                (where.length === 1 && where[0] === '' && 'TBC') ||
+                (where.length === 1 && where[0].placeName === '' && 'TBC') ||
                 where[0].placeName
               }
             </Text>
