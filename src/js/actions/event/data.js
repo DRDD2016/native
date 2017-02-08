@@ -54,7 +54,6 @@ export function getEvent (token, event_id) {
     .then((res) => {
       res.json()
       .then((data) => {
-        console.log(data);
         dispatch(getEventSuccess(data));
       })
       .catch(err => dispatch(getEventFailure(err)));
@@ -64,6 +63,7 @@ export function getEvent (token, event_id) {
 }
 
 export function editEvent (token, event, event_id) {
+
   return (dispatch) => {
     dispatch(editEventRequest());
     fetch(`http://localhost:3000/events/${event_id}`, {
@@ -72,12 +72,12 @@ export function editEvent (token, event, event_id) {
         'Content-Type': 'application/json',
         Accept: 'application/json',
         authorization: token
-      }
+      },
+      body: JSON.stringify({ event })
     })
     .then((res) => {
       res.json()
       .then((data) => {
-        console.log(data);
         dispatch(editEventSuccess(data));
       })
       .catch(err => dispatch(editEventFailure(err)));

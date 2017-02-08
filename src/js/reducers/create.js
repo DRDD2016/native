@@ -74,7 +74,6 @@ export default function create (state = initialState, action) {
         date: moment(action.data.when[0]).format('DD MM YYYY'),
         time: moment(action.data.when[0]).format('HH:mm')
       };
-
       return update(state, {
         name: { $set: action.data.name },
         description: { $set: action.data.description },

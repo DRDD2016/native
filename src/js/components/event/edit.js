@@ -18,8 +18,9 @@ export default class Edit extends Component {
 
   render () {
     const { event, handleDetailsChange, handleWhatChange,
-      handleWhereChange, handleDateChange, handleEditEvent } = this.props;
+      handleWhereChange, handleDateChange, handleTimeChange, handleEditEvent, event_id } = this.props;
     const { name, description, note, what, where, when } = event;
+
     return (
       <View style={{ flex: 1 }}>
         <ScrollView>
@@ -93,12 +94,36 @@ export default class Edit extends Component {
                 onDateChange={date => handleDateChange(date, 0)}
               />
             </View>
+            <View>
+              <DatePicker
+                style={{ width: 200 }}
+                date={ when[0].time }
+                mode="time"
+                placeholder="select time"
+                format="HH:mm"
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+                minuteInterval={10}
+                customStyles={{
+                  dateIcon: {
+                    position: 'absolute',
+                    left: 0,
+                    top: 4,
+                    marginLeft: 0
+                  },
+                  dateInput: {
+                    marginLeft: 36
+                  }
+                }}
+                onDateChange={time => handleTimeChange(time, 0)}
+              />
+            </View>
           </View>
 
           <View>
             <Button
               buttonStyle={styles.buttonStyle}
-              onPress={ () => handleEditEvent(event) }
+              onPress={ () => handleEditEvent(event, event_id) }
             >
               Update
             </Button>
