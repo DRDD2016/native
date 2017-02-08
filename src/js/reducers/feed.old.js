@@ -1,11 +1,11 @@
 /* eslint-disable max-len */
 import update from 'immutability-helper';
-import * as actions from '../actions/feed.old';
+import * as actions from '../actions/feed';
 
 const data = [
   {
     event_id: 'event:112',
-    timestamp: 1477565056943,
+    timestamp: new Date().toISOString(),
     firstname: 'Dave',
     surname: 'Rickard',
     photo_url: 'https://scontent.xx.fbcdn.net/v/t1.0-1/p320x320/1010535_10152958307150251_1106767454_n.jpg?oh=66677ddeb0114051b89f333f14369332&oe=58A7144F',
@@ -19,10 +19,7 @@ const data = [
       }
     ],
     when: [
-      {
-        date: '2016-09-18',
-        time: ''
-      }
+      new Date().toISOString()
     ],
     is_poll: false,
     host_user_id: '10156727442325251',
@@ -30,11 +27,11 @@ const data = [
     viewed: true,
     inviteesNumber: 24,
     name: 'Day trip',
-    has_edited: undefined
+    edited: undefined
   },
   {
     event_id: 'event:112',
-    timestamp: 1477082516842,
+    timestamp: new Date().toISOString(),
     firstname: 'Marah',
     surname: 'Barden',
     photo_url: 'https://scontent.xx.fbcdn.net/v/t1.0-1/p320x320/12279210_10156252155200506_7792104208279318965_n.jpg?oh=f52c8b1712fd11aea00ce928bf1a0dc6&oe=589881E8',
@@ -50,18 +47,9 @@ const data = [
       }
     ],
     when: [
-      {
-        date: '2016-09-11',
-        time: ''
-      },
-      {
-        date: '2016-09-18',
-        time: ''
-      },
-      {
-        date: '2016-09-24',
-        time: ''
-      }
+      new Date().toISOString(),
+      new Date().toISOString(),
+      new Date().toISOString()
     ],
     is_poll: true,
     host_user_id: '10156727442325251',
@@ -69,11 +57,11 @@ const data = [
     viewed: true,
     inviteesNumber: 24,
     name: 'Day trip',
-    has_edited: undefined
+    edited: undefined
   },
   {
     event_id: 'event:113',
-    timestamp: 1477082468789,
+    timestamp: new Date().toISOString(),
     firstname: 'Marah',
     surname: 'Barden',
     photo_url: 'https://scontent.xx.fbcdn.net/v/t1.0-1/p320x320/12279210_10156252155200506_7792104208279318965_n.jpg?oh=f52c8b1712fd11aea00ce928bf1a0dc6&oe=589881E8',
@@ -87,10 +75,7 @@ const data = [
       }
     ],
     when: [
-      {
-        date: '2016-09-14',
-        time: '19:45'
-      }
+      new Date().toISOString()
     ],
     is_poll: false,
     host_user_id: '10156727442325251',
@@ -98,11 +83,11 @@ const data = [
     viewed: true,
     inviteesNumber: 25,
     name: 'Spurs vs Monaco',
-    has_edited: undefined
+    edited: undefined
   },
   {
     event_id: 'event:114',
-    timestamp: 1474930947717,
+    timestamp: new Date().toISOString(),
     firstname: 'Dameo',
     surname: 'Deare',
     photo_url: 'https://scontent.xx.fbcdn.net/v/t1.0-1/c85.0.320.320/p320x320/14068028_10157338054715483_2448905112098811988_n.jpg?oh=cfaa12a8ef7f0b7a16a20f0f564401fe&oe=5869C835',
@@ -116,10 +101,7 @@ const data = [
       }
     ],
     when: [
-      {
-        date: '2016-11-02',
-        time: '19:45'
-      }
+      new Date().toISOString()
     ],
     is_poll: false,
     host_user_id: '10156727442325251',
@@ -127,11 +109,11 @@ const data = [
     viewed: false,
     inviteesNumber: 5,
     name: 'Spurs v Bayer Leverkusen',
-    has_edited: undefined
+    edited: undefined
   },
   {
     event_id: 'event:114',
-    timestamp: 1474575827891,
+    timestamp: new Date().toISOString(),
     firstname: 'Dave',
     surname: 'Rickard',
     photo_url: 'https://scontent.xx.fbcdn.net/v/t1.0-1/p320x320/1010535_10152958307150251_1106767454_n.jpg?oh=ddb28b27195193edb4ff74a25e212825&oe=587F874F',
@@ -145,17 +127,15 @@ const data = [
       }
     ],
     when: [
-      {
-        date: '2016-11-02',
-        time: '19:45'
-      }
+      new Date().toISOString()
     ],
     is_poll: false,
     host_user_id: '10156727442325251',
     subject_user_id: '10156727442325251',
     viewed: true,
     inviteesNumber: 5,
-    name: 'Spurs v Bayer Leverkusen'
+    name: 'Spurs v Bayer Leverkusen',
+    edited: undefined
   }
 ];
 
@@ -198,10 +178,9 @@ function handleGetFeedRequest (state, action) {
 }
 
 function handleGetFeedSuccess (state, action) {
-
   const newState = update(state, {
     isFetching: { $set: action.isFetching },
-    data: { $set: action.data }
+    data: { $set: state.data.concat(action.data) }
   });
   return newState;
 }

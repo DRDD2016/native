@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest --runInBand",
+    "test": "jest --runInBand --forceExit --coverage",
     "lint": "node_modules/eslint/bin/eslint.js 'src/**/*.js' '__tests__/**/*.js'",
     "precommit": "npm run lint",
     "prepush": "npm test",
@@ -24,7 +24,8 @@
     "react-native-vector-icons": "^4.0.0",
     "redux": "^3.6.0",
     "redux-form": "^6.4.3",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "socket.io-client": "^1.5.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",

@@ -8,6 +8,7 @@ import {
 } from '@exponent/ex-navigation';
 import { store } from './init-store';
 import Router from './router';
+import socket from './socket-router'; // eslint-disable-line no-unused-vars
 
 // disable remote debugger warning in a simulator
 console.disableYellowBox = true;
@@ -23,7 +24,7 @@ class App extends Component {
     return (
       <Provider store={ store }>
         <NavigationProvider context={ navigationContext }>
-          <StackNavigation initialRoute={ Router.getRoute('auth') } />
+          <StackNavigation initialRoute={ Router.getRoute('navbar') } />
         </NavigationProvider>
       </Provider>
     );
