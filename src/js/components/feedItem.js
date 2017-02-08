@@ -1,9 +1,10 @@
-import React from 'react';
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/require-default-props */
+import React, { PropTypes } from 'react';
 import moment from 'moment';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../lib/format-date';
-// import Button from './common/Button';
 import CardSection from './common/CardSection';
 import Card from './common/Card';
 import styles from '../../styles';
@@ -13,13 +14,13 @@ moment.locale('en-gb');
 
 const FeedItem = ({ event_id, timestamp, firstname, surname,
   photo_url, where, when, userIsHost, is_poll, subject_user_id,
-  handleSelection, viewed, inviteesNumber, name, hasEdited }) => {
+  handleSelection, viewed, inviteesNumber, name, edited }) => {
 
   const userIsSubject = subject_user_id === user_id;
-
   const viewedFeedItem = viewed === true;
   event_id = 3; // eslint-disable-line no-param-reassign
 // ADD THE OnClick button to Link! --<
+
   return (
     <Card style={[styles.cardStyle, viewedFeedItem && styles.viewedFeedItemStyle]}>
       <CardSection style={styles.cardSectionFeedItem}>
@@ -40,15 +41,15 @@ const FeedItem = ({ event_id, timestamp, firstname, surname,
               </Text>
               <Text style={styles.subjectAction}>
                 { userIsSubject && is_poll && ' have created a poll ' }
-                { userIsSubject && !is_poll && !hasEdited && ' have created an event ' }
-                { userIsSubject && !is_poll && hasEdited && ' have edited an event' }
+                { userIsSubject && !is_poll && !edited && ' have created an event ' }
+                { userIsSubject && !is_poll && edited && ' have edited an event' }
 
                 { !userIsSubject && userIsHost && is_poll && ' has voted on your poll' }
                 { !userIsSubject && userIsHost && !is_poll && ' has responded to your event' }
 
                 { !userIsSubject && !userIsHost && is_poll && ' wants you to vote on their poll' }
-                { !userIsSubject && !userIsHost && !is_poll && !hasEdited && ' has invited you to their event' }
-                { !userIsSubject && !userIsHost && !is_poll && hasEdited && ' has edited an event' }
+                { !userIsSubject && !userIsHost && !is_poll && !edited && ' has invited you to their event' }
+                { !userIsSubject && !userIsHost && !is_poll && edited && ' has edited an event' }
 
               </Text>
             </Text>
@@ -70,7 +71,7 @@ const FeedItem = ({ event_id, timestamp, firstname, surname,
               {
                 (when.length > 1 && 'VOTE') ||
                 (when.length === 1 && when[0].date === '' && 'TBC') ||
-                formatDate(when[0].date).toUpperCase()
+                formatDate(when[0]).toUpperCase()
               }
             </Text>
             <Text style={styles.placeName}>
@@ -87,6 +88,26 @@ const FeedItem = ({ event_id, timestamp, firstname, surname,
       </CardSection>
     </Card>
   );
+};
+FeedItem.propTypes = {
+  event_id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]).isRequired,
+  timestamp: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  where: PropTypes.array.isRequired,
+  when: PropTypes.array.isRequired,
+  userIsHost: PropTypes.bool.isRequired,
+  is_poll: PropTypes.bool.isRequired,
+  subject_user_id: PropTypes.string.isRequired,
+  firstname: PropTypes.string.isRequired,
+  surname: PropTypes.string.isRequired,
+  photo_url: PropTypes.string.isRequired,
+  handleSelection: PropTypes.func.isRequired,
+  edited: PropTypes.bool,
+  viewed: PropTypes.bool,
+  inviteesNumber: PropTypes.number
 };
 
 export default FeedItem;
