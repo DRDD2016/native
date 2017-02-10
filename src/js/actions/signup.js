@@ -1,7 +1,7 @@
 import { NavigationActions } from '@exponent/ex-navigation';
 import { store } from '../init-store';
 import Router from '../router';
-import { storeToken } from '../lib/token';
+import { storeToken, storeUserId } from '../lib/credentials';
 
 export const SIGNUP_USER_REQUEST = 'SIGNUP_USER_REQUEST';
 export const SIGNUP_USER_SUCCESS = 'SIGNUP_USER_SUCCESS';
@@ -42,8 +42,9 @@ export function signupUser (firstname, surname, email, password) {
             surname: data.surname,
             email: data.email
           }));
-          if (data.token) {
+          if (data.token && data.user_id) {
             storeToken(data.token);
+            storeUserId(data.user_id);
             const navigatorUID = store.getState().navigation.currentNavigatorUID;
             dispatch(NavigationActions.immediatelyResetStack(navigatorUID, [Router.getRoute('uploadPhoto')], 0));
           } else {

@@ -1,7 +1,7 @@
 import { NavigationActions } from '@exponent/ex-navigation';
 import { store } from '../init-store';
 import Router from '../router';
-import { storeToken } from '../lib/token';
+import { storeToken, storeUserId } from '../lib/credentials';
 
 export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
@@ -43,8 +43,9 @@ export function loginUser (email, password) {
             surname: data.surname,
             email: data.email
           }));
-          if (data.token) {
+          if (data.token && data.user_id) {
             storeToken(data.token);
+            storeUserId(data.user_id);
             const navigatorUID = store.getState().navigation.currentNavigatorUID;
             dispatch(NavigationActions.immediatelyResetStack(navigatorUID, [Router.getRoute('navbar')], 0));
           } else {

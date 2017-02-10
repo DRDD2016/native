@@ -1,4 +1,5 @@
 import io from 'socket.io-client';
+import { AsyncStorage } from 'react-native';
 import { store } from './init-store';
 import { getFeedRequest, getFeedSuccess, getFeedFailure } from './actions/feed'; // eslint-disable-line no-unused-vars
 
@@ -6,18 +7,22 @@ const location = 'http://localhost:3000'; // will be something different when se
 const socket = io(`${location}/feed`, { transports: ['websocket'] });
 const INIT_FEED = 'INIT_FEED';
 
-socket.on('connected', (socketId) => {
+socket.on('connected', () => {
   // clients emits to the server (client emits INIT_FEED )
-  socket.emit(INIT_FEED);
-  store.dispatch(getFeedRequest()); // spinner
+  AsyncStorage.getItem('spark_user_id')
+  .then((user_id) => {
+    if (user_id) {
+      socket.emit(INIT_FEED, user_id);
+      store.dispatch(getFeedRequest()); // spinner
 
-  // server emits the 'uniqueID' - data- array of feed items
-  socket.on(socketId, (data) => {
-    store.dispatch(getFeedSuccess(data));
-  });
+      socket.on(`feed:${user_id}`, (data) => {
+        store.dispatch(getFeedSuccess(data));
+      });
 
-  socket.on('failure', (error) => {
-    store.dispatch(getFeedFailure(error));
+      // socket.on('failure', (error) => {
+      //   store.dispatch(getFeedFailure(error));
+      // });
+    }
   });
 });
 
