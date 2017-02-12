@@ -18,7 +18,10 @@ export default class Feed extends Component {
 
   render () {
     const { allEvents, feed, isFetching, handleSelection, displaySome, displayAll, feedIsFiltered, isShowHosting } = this.props;
-    const mappedFeed = feed.reverse().map((data, i) => {
+    if (isFetching) {
+      return <Spinner />;
+    }
+    const mappedFeed = [].concat(feed).reverse().map((data, i) => {
       return (
         <FeedItem
           key={ Math.random() }
