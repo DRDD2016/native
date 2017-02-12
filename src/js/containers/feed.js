@@ -2,7 +2,7 @@
 import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Feed from '../components/feed';
-import { applyFilter, clearFilter } from '../actions/feed.old';
+import { applyFilter, clearFilter } from '../actions/feed';
 import { getEvent } from '../actions/event/data';
 import filterFeed from '../lib/filterFeed';
 import Router from '../router';
@@ -10,16 +10,16 @@ import Router from '../router';
 const mapStateToProps = ({ feed }) => {
 
   const data = feed.data;
-  const feedIsFiltered = feed.filter;
-  const isShowHosting = feed.showHosting;
-  const feedData = filterFeed(data, feedIsFiltered, isShowHosting);
+  const filterActive = feed.filterActive;
+  const selectedFilter = feed.selectedFilter;
+  const feedData = filterFeed(data, filterActive, selectedFilter);
 
   return {
     allEvents: data,
     feed: feedData,
     isFetching: feed.isFetching,
-    feedIsFiltered,
-    isShowHosting
+    filterActive,
+    selectedFilter
   };
 };
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -34,12 +34,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       })
       ownProps.navigator.push(Router.getRoute('event'));
     },
-    displaySome: (filterChoice) => {
-      // dispatch(applyFilter(filterChoice));
+    displaySome: (selectedFilter) => {
+      dispatch(applyFilter(selectedFilter));
       console.log('dispatch action');
     },
     displayAll: () => {
-      // dispatch(clearFilter());
+      dispatch(clearFilter());
       console.log('dispatch action');
     }
   };

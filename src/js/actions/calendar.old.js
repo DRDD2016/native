@@ -33,19 +33,12 @@ export function getCalendarFailure (error) {
   };
 }
 
-export function applyFilter (filter) {
-  return {
-    type: APPLY_FILTER,
-    filter: true,
-    showHosting: filter
-  };
-}
+export const applyFilter = selectedFilter => ({
+  type: APPLY_FILTER,
+  selectedFilter
+});
 
 
-export function clearFilter () {
-  return {
-    type: CLEAR_FILTER,
-    filter: false,
-    showHosting: undefined
-  };
-}
+export const clearFilter = () => ({
+  type: CLEAR_FILTER
+});

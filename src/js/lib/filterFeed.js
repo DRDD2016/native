@@ -1,15 +1,12 @@
-import getUserID from './getUserID';
 
-export default function filterFeed (feed, calendarIsFiltered, isHosting) {
+const user_id = 1;
+export default function filterFeed (feed, filterActive, selectedFilter) {
 
-  const currentUserID = getUserID();
-
-  if (!calendarIsFiltered) {
+  if (!filterActive) {
     return feed;
   }
   return feed.filter((feedItem) => {
-
-    const hostID = feedItem.hostID;
-    return isHosting ? (hostID === currentUserID) : (hostID !== currentUserID);
+    const host_user_id = parseInt(feedItem.host_user_id, 10);
+    return selectedFilter === 'hosting' ? (host_user_id === user_id) : (host_user_id !== user_id);
   });
 }

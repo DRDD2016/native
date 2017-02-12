@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-import update from 'immutability-helper';
 import * as actions from '../actions/feed';
 
 const data = [
@@ -22,7 +21,7 @@ const data = [
       new Date().toISOString()
     ],
     is_poll: false,
-    host_user_id: '10156727442325251',
+    host_user_id: '1',
     subject_user_id: '10156727442325251',
     viewed: true,
     inviteesNumber: 24,
@@ -65,8 +64,8 @@ const initialState = {
   data,
   isFetching: false,
   error: undefined,
-  showHosting: undefined,
-  filter: false
+  selectedFilter: undefined,
+  filterActive: false
 };
 
 export default function feed (state = initialState, action) {
@@ -94,19 +93,12 @@ export default function feed (state = initialState, action) {
       };
 
     case actions.APPLY_FILTER:
+      return { ...state, filterActive: true, selectedFilter: action.selectedFilter };
+
     case actions.CLEAR_FILTER:
-      return handleFilter(state, action);
+      return { ...state, filterActive: false, selectedFilter: undefined };
 
     default:
       return state;
   }
-}
-
-function handleFilter (state, action) {
-
-  const newState = update(state, {
-    filter: { $set: action.filter },
-    showHosting: { $set: action.showHosting }
-  });
-  return newState;
 }
