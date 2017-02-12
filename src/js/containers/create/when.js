@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { connect } from 'react-redux';
 import { setWhen, addInput, removeInput, clearCreateEvent } from '../../actions/create';
 import When from '../../components/create/when';
@@ -13,13 +12,11 @@ const mapStateToProps = ({ create }) => {
 const mapDispatchToProps = dispatch => ({
 
   handleDate: (date, inputKey) => {
-    const chosenDate = moment(date.setHours(0, 0, 0, 0));
-    dispatch(setWhen(chosenDate, inputKey, 'date'));
+    dispatch(setWhen(date, inputKey, 'date'));
   },
 
   handleTime: (time, inputKey) => {
-    const chosenTime = moment(time);
-    dispatch(setWhen(chosenTime, inputKey, 'time'));
+    dispatch(setWhen(time, inputKey, 'time'));
   },
 
   addInput: (nextInputKey) => {
