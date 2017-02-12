@@ -1,5 +1,5 @@
 import moment from 'moment';
-import getEndTime from './getEndTime';
+import getEndTime from './get-end-time';
 
 /**
  * getFutureEvents determines if an event's date is in the future
