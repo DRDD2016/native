@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import CalendarItem from './calendar-item';
-import FilterPanel from '../general/filter-panel';
-import Spinner from '../common/Spinner';
-import styles from '../../../styles';
-import colours from '../../../styles/colours';
+import FilterPanel from './general/filter-panel';
+import Spinner from './common/Spinner';
+import styles from '../../styles';
+import colours from '../../styles/colours';
 
 const user_id = 1;
 export default class Calendar extends Component {
@@ -20,16 +20,12 @@ export default class Calendar extends Component {
     }
   }
 
-  sortedData = this.props.filteredEvents.sort((a, b) => {
-    /* eslint-disable no-param-reassign */
-    a = a.when[0].date;
-    b = b.when[0].date;
-
-    return new Date(a).getTime() > new Date(b).getTime();
-  });
-
   render () {
-    const { allEvents, isFetching, displaySome, displayAll, calendarIsFiltered, isShowHosting } = this.props;
+    const { allEvents, isFetching, displaySome, displayAll, filterActive, selectedFilter } = this.props;
+    const sortedData = this.props.filteredEvents.sort((a, b) => {
+      return a.when[0] > b.when[0];
+    });
+
     return (
       <View>
         {
@@ -37,11 +33,12 @@ export default class Calendar extends Component {
         }
         <View style={styles.filterPanelContainer}>
           {
-            !isFetching && allEvents.length > 0 && <FilterPanel
+            !isFetching && allEvents.length > 0 &&
+            <FilterPanel
               displaySome={ displaySome }
               displayAll={ displayAll }
-              dataIsFiltered={ calendarIsFiltered }
-              isShowHosting={ '1' == 1 }
+              filterActive={ filterActive }
+              selectedFilter={ selectedFilter }
             />
           }
         </View>
@@ -49,13 +46,13 @@ export default class Calendar extends Component {
         <ScrollView>
           <View style={styles.containerFeed}>
             {
-              this.sortedData.length === 0 && !isFetching &&
+              this.props.filteredEvents.length === 0 && !isFetching &&
                 <Text style={styles.smallMessageText}>
                   You have no past or upcoming events events.
                 </Text>
             }
             {
-              !isFetching && this.sortedData.map((item) => {
+              !isFetching && sortedData.map((item) => {
 
                 return (
                   <CalendarItem

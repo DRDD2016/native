@@ -1,25 +1,24 @@
 import { connect } from 'react-redux';
-import Calendar from '../components/calendar/calendar';
+import Calendar from '../components/calendar';
 import { applyFilter, clearFilter } from '../actions/calendar.old';
-import filterFeed from '../lib/filterFeed';
-import getFutureEvents from '../lib/getFutureEvents';
+import filterFeed from '../lib/filter-feed';
+import getFutureEvents from '../lib/get-future-events';
 
 
 const mapStateToProps = ({ calendar }) => {
 
   const futureEvents = calendar.data.filter(getFutureEvents);
   const data = calendar.data;
-  const calendarIsFiltered = calendar.filter;
-  const isShowHosting = calendar.showHosting;
+  const filterActive = calendar.filterActive;
+  const selectedFilter = calendar.selectedFilter;
 
-  const filteredEvents = filterFeed(futureEvents, calendarIsFiltered, isShowHosting);
-
+  const filteredEvents = filterFeed(futureEvents, filterActive, selectedFilter);
   return {
     allEvents: data,
     filteredEvents,
     isFetching: calendar.isFetching,
-    calendarIsFiltered,
-    isShowHosting
+    filterActive,
+    selectedFilter
   };
 };
 

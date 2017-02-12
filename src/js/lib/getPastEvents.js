@@ -1,4 +1,4 @@
-import getEndTime from './getEndTime';
+import getEndTime from './get-end-time';
 
 export default function getPastEvents (event) {
 

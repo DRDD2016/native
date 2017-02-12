@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import FeedItem from './feedItem';
+import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
 import styles from '../../styles';
@@ -17,7 +17,7 @@ export default class Feed extends Component {
   }
 
   render () {
-    const { allEvents, feed, isFetching, handleSelection, displaySome, displayAll, feedIsFiltered, isShowHosting } = this.props;
+    const { allEvents, feed, isFetching, handleSelection, displaySome, displayAll, filterActive, selectedFilter } = this.props;
     if (isFetching) {
       return <Spinner />;
     }
@@ -60,8 +60,8 @@ export default class Feed extends Component {
           <FilterPanel
             displayAll={ displayAll }
             displaySome={ displaySome }
-            dataIsFiltered={ feedIsFiltered }
-            isShowHosting={ isShowHosting }
+            filterActive={ filterActive }
+            selectedFilter={ selectedFilter }
           />
         }
 
@@ -77,14 +77,14 @@ export default class Feed extends Component {
               </Text>
             }
             {
-              feed.length === 0 && isShowHosting &&
+              feed.length === 0 && selectedFilter === 'hosting' &&
                 <Text style={styles.smallMessageText}>
                   You are not hosting any events.
                   (Why not create some?)
               </Text>
             }
             {
-              feed.length === 0 && isShowHosting === false &&
+              feed.length === 0 && selectedFilter === 'received' &&
                 <Text style={styles.smallMessageText}>
                   You have not been invited to any events.
                 </Text>

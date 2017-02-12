@@ -1,13 +1,9 @@
-/* eslint-disable */
-import update from 'immutability-helper';
+/* eslint-disable max-len */
 import * as actions from '../actions/calendar.old';
 
 const calendarData = [{
   when: [
-    {
-      date: '2017-07-23',
-      time: ''
-    }
+    new Date().toISOString()
   ],
   name: 'Glastonbury Festival',
   is_poll: false,
@@ -47,8 +43,8 @@ const initialState = {
   data: calendarData,
   isFetching: false,
   error: undefined,
-  showHosting: undefined,
-  filter: false
+  selectedFilter: undefined,
+  filterActive: false
 };
 
 export default function calendar (state = initialState, action) {
@@ -56,54 +52,21 @@ export default function calendar (state = initialState, action) {
   switch (action.type) {
 
     case actions.GET_CALENDAR_REQUEST:
-      return handleCalendarRequest(state, action);
+      return { ...state, isFetching: true };
 
     case actions.GET_CALENDAR_SUCCESS:
-      return handleCalendarSuccess(state, action);
+      return { ...state, isFetching: false, data: action.data };
 
     case actions.GET_CALENDAR_FAILURE:
-      return handleCalendarFailure(state, action);
+      return { ...state, isFetching: false, error: action.error };
 
     case actions.APPLY_FILTER:
+      return { ...state, filterActive: true, selectedFilter: action.selectedFilter };
+
     case actions.CLEAR_FILTER:
-      return handleFilter(state, action);
+      return { ...state, filterActive: false, selectedFilter: undefined };
 
     default:
       return state;
   }
-}
-
-function handleCalendarRequest (state, action) {
-
-  const newState = update(state, {
-    isFetching: { $set: action.isFetching }
-  });
-  return newState;
-}
-
-function handleCalendarSuccess (state, action) {
-
-  const newState = update(state, {
-    isFetching: { $set: action.isFetching },
-    data: { $set: action.data }
-  });
-  return newState;
-}
-
-function handleCalendarFailure (state, action) {
-
-  const newState = update(state, {
-    isFetching: { $set: action.isFetching },
-    error: { $set: action.error }
-  });
-  return newState;
-}
-
-function handleFilter (state, action) {
-
-  const newState = update(state, {
-    filter: { $set: action.filter },
-    showHosting: { $set: action.showHosting }
-  });
-  return newState;
 }

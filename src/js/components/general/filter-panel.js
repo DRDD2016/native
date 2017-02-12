@@ -4,16 +4,16 @@ import { View } from 'react-native';
 import Button from '../common/Button';
 import colours from '../../../styles/colours';
 
-const FilterPanel = ({ displaySome, displayAll, dataIsFiltered, isShowHosting }) => {
+const FilterPanel = ({ displaySome, displayAll, filterActive, selectedFilter }) => {
 
-  const allButtonButton = (!dataIsFiltered ? styles.filterButtonSelected : styles.filterButton);
-  const allButtonText = (!dataIsFiltered ? styles.buttonTextSelected : styles.buttonText);
+  const allButtonButton = (!filterActive ? styles.filterButtonSelected : styles.filterButton);
+  const allButtonText = (!filterActive ? styles.buttonTextSelected : styles.buttonText);
 
-  const receivedButtonButton = (dataIsFiltered && !isShowHosting ? styles.filterButtonSelected : styles.filterButton);
-  const receivedButtonText = (dataIsFiltered && !isShowHosting ? styles.buttonTextSelected : styles.buttonText);
+  const receivedButtonButton = (filterActive && selectedFilter === 'received' ? styles.filterButtonSelected : styles.filterButton);
+  const receivedButtonText = (filterActive && selectedFilter === 'received' ? styles.buttonTextSelected : styles.buttonText);
 
-  const hostingButtonButton = (dataIsFiltered && isShowHosting ? styles.filterButtonSelected : styles.filterButton);
-  const hostingButtonText = (dataIsFiltered && isShowHosting ? styles.buttonTextSelected : styles.buttonText);
+  const hostingButtonButton = (filterActive && selectedFilter === 'hosting' ? styles.filterButtonSelected : styles.filterButton);
+  const hostingButtonText = (filterActive && selectedFilter === 'hosting' ? styles.buttonTextSelected : styles.buttonText);
 
   return (
     <View style={styles.rowFilterPanel}>
@@ -26,13 +26,13 @@ const FilterPanel = ({ displaySome, displayAll, dataIsFiltered, isShowHosting })
       </Button>
       <Button
         buttonStyle={ [receivedButtonButton, { borderRadius: 0 }] }
-        textStyle={receivedButtonText} onPress={ () => displaySome(false) }
+        textStyle={receivedButtonText} onPress={ () => displaySome('received') }
       >
         Received
       </Button>
       <Button
         buttonStyle={ [hostingButtonButton, { borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }] }
-        textStyle={hostingButtonText} onPress={ () => displaySome(true) }
+        textStyle={hostingButtonText} onPress={ () => displaySome('hosting') }
       >
         Hosting
       </Button>
