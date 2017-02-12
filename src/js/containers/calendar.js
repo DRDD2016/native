@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Calendar from '../components/calendar/calendar';
+import Calendar from '../components/calendar';
 import { applyFilter, clearFilter } from '../actions/calendar.old';
 import filterFeed from '../lib/filterFeed';
 import getFutureEvents from '../lib/getFutureEvents';

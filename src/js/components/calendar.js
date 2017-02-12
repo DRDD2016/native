@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import CalendarItem from './calendar-item';
-import FilterPanel from '../general/filter-panel';
-import Spinner from '../common/Spinner';
-import styles from '../../../styles';
-import colours from '../../../styles/colours';
+import FilterPanel from './general/filter-panel';
+import Spinner from './common/Spinner';
+import styles from '../../styles';
+import colours from '../../styles/colours';
 
 const user_id = 1;
 export default class Calendar extends Component {
