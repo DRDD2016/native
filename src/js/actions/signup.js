@@ -40,7 +40,8 @@ export function signupUser (firstname, surname, email, password) {
           dispatch(signupUserSuccess({
             firstname: data.firstname,
             surname: data.surname,
-            email: data.email
+            email: data.email,
+            photo_url: data.photo_url
           }));
           if (data.token && data.user_id) {
             storeToken(data.token);
