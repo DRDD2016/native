@@ -3,7 +3,7 @@ import * as actions from '../actions/feed';
 
 const data = [
   {
-    event_id: 'event:112',
+    event_id: 3, // !is_poll
     timestamp: new Date().toISOString(),
     firstname: 'Dave',
     surname: 'Rickard',
@@ -26,10 +26,10 @@ const data = [
     viewed: true,
     inviteesNumber: 24,
     name: 'Day trip',
-    edited: undefined
+    edited: true
   },
   {
-    event_id: 'event:112',
+    event_id: 2,  // is_poll
     timestamp: new Date().toISOString(),
     firstname: 'Marah',
     surname: 'Barden',
@@ -56,7 +56,7 @@ const data = [
     viewed: true,
     inviteesNumber: 24,
     name: 'Day trip',
-    edited: undefined
+    edited: false
   }
 ];
 

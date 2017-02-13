@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
-import Spinner from './common/Spinner';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 
@@ -18,9 +17,7 @@ export default class Feed extends Component {
 
   render () {
     const { allEvents, feed, isFetching, handleSelection, displaySome, displayAll, filterActive, selectedFilter } = this.props;
-    if (isFetching) {
-      return <Spinner />;
-    }
+
     const mappedFeed = [].concat(feed).reverse().map((data, i) => {
       return (
         <FeedItem
@@ -49,12 +46,6 @@ export default class Feed extends Component {
 
     return (
       <View>
-
-        {
-          isFetching && <Spinner />
-        }
-
-
         {
           !isFetching && allEvents.length > 0 &&
           <FilterPanel

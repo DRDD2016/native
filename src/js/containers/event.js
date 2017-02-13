@@ -22,7 +22,8 @@ const mapStateToProps = ({ event }) => {
     isFetching: event.data.isFetching,
     userIsHost: user_id === event.data.host_user_id,
     voteSaved: event.poll.voteSaved,
-    finalChoices: event.poll.finalChoices
+    finalChoices: event.poll.finalChoices,
+    error: event.data.error
   };
 };
 

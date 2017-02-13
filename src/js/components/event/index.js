@@ -53,8 +53,13 @@ export default class Event extends React.Component {
   }
 
   eventRouter () {
-
-    if (this.props.userIsHost && this.props.isPoll) {
+    if (this.props.error) {
+      return (
+        <View>
+          <Text>Whoops!  Something went wrong...</Text>
+        </View>
+      );
+    } else if (this.props.userIsHost && this.props.isPoll) {
       return (
         <HostPoll
           navigator={this.props.navigator}

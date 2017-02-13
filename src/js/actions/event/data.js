@@ -43,6 +43,7 @@ export const editEventFailure = error => ({
 export function getEvent (token, event_id) {
   return (dispatch) => {
     dispatch(getEventRequest());
+    console.log('event_id to server', event_id);
     fetch(`http://localhost:3000/events/${event_id}`, {
       method: 'GET',
       headers: {
@@ -54,7 +55,9 @@ export function getEvent (token, event_id) {
     .then((res) => {
       res.json()
       .then((data) => {
+        console.log('FROM SERVER',data);
         dispatch(getEventSuccess(data));
+        NavigationActions.push(Router.getRoute('event'));
       })
       .catch(err => dispatch(getEventFailure(err)));
     })
