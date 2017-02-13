@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import InviteePoll from './invitee-poll';
 import HostPoll from './host-poll';
-import ConfirmedEvent from './confirmed-event';
+import FinalisedEvent from './finalised-event';
 import Spinner from '../common/Spinner';
 import DeletedEvent from './deleted-event';
 import colours from '../../../styles/colours';
@@ -80,7 +80,7 @@ export default class Event extends React.Component {
       );
     } else { // eslint-disable-line no-else-return
       return (
-        <ConfirmedEvent
+        <FinalisedEvent
           navigator={this.props.navigator}
           event={ this.props.event }
           event_id={ this.props.event_id }
