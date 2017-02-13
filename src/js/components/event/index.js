@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import InviteePoll from './invitee-poll';
 import HostPoll from './host-poll';
-import ConfirmedEvent from './confirmed-event';
+import FinalisedEvent from './finalised-event';
 import Spinner from '../common/Spinner';
 import DeletedEvent from './deleted-event';
 import colours from '../../../styles/colours';
@@ -53,8 +53,13 @@ export default class Event extends React.Component {
   }
 
   eventRouter () {
-
-    if (this.props.userIsHost && this.props.isPoll) {
+    if (this.props.error) {
+      return (
+        <View>
+          <Text>Whoops!  Something went wrong...</Text>
+        </View>
+      );
+    } else if (this.props.userIsHost && this.props.isPoll) {
       return (
         <HostPoll
           navigator={this.props.navigator}
@@ -75,7 +80,7 @@ export default class Event extends React.Component {
       );
     } else { // eslint-disable-line no-else-return
       return (
-        <ConfirmedEvent
+        <FinalisedEvent
           navigator={this.props.navigator}
           event={ this.props.event }
           event_id={ this.props.event_id }

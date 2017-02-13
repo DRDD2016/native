@@ -18,7 +18,7 @@ const FeedItem = ({ event_id, timestamp, firstname, surname,
 
   const userIsSubject = subject_user_id === user_id;
   const viewedFeedItem = viewed === true;
-  event_id = 3; // eslint-disable-line no-param-reassign
+  // event_id = 3; // eslint-disable-line no-param-reassign
 
   return (
     <Card style={[styles.cardStyle, viewedFeedItem && styles.viewedFeedItemStyle]}>

@@ -26,13 +26,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     handleSelection: (event_id) => {
       // need to tell server this feed item was touched
+      console.log('selection', event_id);
       AsyncStorage.getItem('spark_token')
       .then((token) => {
         if (token) {
           dispatch(getEvent(token, event_id));
         }
       })
-      ownProps.navigator.push(Router.getRoute('event'));
     },
     displaySome: (selectedFilter) => {
       dispatch(applyFilter(selectedFilter));

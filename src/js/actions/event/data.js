@@ -1,13 +1,11 @@
-import { NavigationActions } from '@exponent/ex-navigation';
-import Router from '../../router';
-import { store } from '../../init-store';
+import { pushTo, resetStackTo } from '../../lib/navigate';
 
 export const GET_EVENT_REQUEST = 'GET_EVENT_REQUEST';
 export const GET_EVENT_SUCCESS = 'GET_EVENT_SUCCESS';
 export const GET_EVENT_FAILURE = 'GET_EVENT_FAILURE';
-export const PATCH_EVENT_REQUEST = 'PATCH_EVENT_REQUEST';
-export const PATCH_EVENT_SUCCESS = 'PATCH_EVENT_SUCCESS';
-export const PATCH_EVENT_FAILURE = 'PATCH_EVENT_FAILURE';
+export const SUBMIT_CODE_REQUEST = 'SUBMIT_CODE_REQUEST';
+export const SUBMIT_CODE_SUCCESS = 'SUBMIT_CODE_SUCCESS';
+export const SUBMIT_CODE_FAILURE = 'SUBMIT_CODE_FAILURE';
 export const EDIT_EVENT_REQUEST = 'EDIT_EVENT_REQUEST';
 export const EDIT_EVENT_SUCCESS = 'EDIT_EVENT_SUCCESS';
 export const EDIT_EVENT_FAILURE = 'EDIT_EVENT_FAILURE';
@@ -43,6 +41,7 @@ export const editEventFailure = error => ({
 export function getEvent (token, event_id) {
   return (dispatch) => {
     dispatch(getEventRequest());
+    console.log('event_id to server', event_id);
     fetch(`http://localhost:3000/events/${event_id}`, {
       method: 'GET',
       headers: {
@@ -54,7 +53,9 @@ export function getEvent (token, event_id) {
     .then((res) => {
       res.json()
       .then((data) => {
+        console.log('FROM SERVER', data);
         dispatch(getEventSuccess(data));
+        pushTo('event');
       })
       .catch(err => dispatch(getEventFailure(err)));
     })
@@ -86,23 +87,23 @@ export function editEvent (token, event, event_id) {
   };
 }
 
-export const patchEventRequest = () => ({
-  type: PATCH_EVENT_REQUEST
+export const submitCodeRequest = () => ({
+  type: SUBMIT_CODE_REQUEST
 });
 
-export const patchEventSuccess = data => ({
-  type: PATCH_EVENT_SUCCESS,
+export const submitCodeSuccess = data => ({
+  type: SUBMIT_CODE_SUCCESS,
   data
 });
 
-export const patchEventFailure = error => ({
-  type: PATCH_EVENT_FAILURE,
+export const submitCodeFailure = error => ({
+  type: SUBMIT_CODE_FAILURE,
   error
 });
 
 export function submitCode (token, code) { //eslint-disable-line
   return (dispatch) => {
-    dispatch(patchEventRequest());
+    dispatch(submitCodeRequest());
     fetch('http://localhost:3000/events/rsvps', {
       method: 'POST',
       headers: {
@@ -116,16 +117,15 @@ export function submitCode (token, code) { //eslint-disable-line
       res.json()
       .then((data) => {
         if (data.error) {
-          dispatch(patchEventFailure(data.error));
+          dispatch(submitCodeFailure(data.error));
         } else {
           // redirect
-          const navigatorUID = store.getState().navigation.currentNavigatorUID;
-          dispatch(patchEventSuccess(data));
-          dispatch(NavigationActions.immediatelyResetStack(navigatorUID, [Router.getRoute('event')], 0));
+          dispatch(submitCodeSuccess(data));
+          resetStackTo('event');
         }
       })
-      .catch(err => dispatch(patchEventFailure(err)));
+      .catch(err => dispatch(submitCodeFailure(err)));
     })
-    .catch(err => dispatch(patchEventFailure(err)));
+    .catch(err => dispatch(submitCodeFailure(err)));
   };
 }

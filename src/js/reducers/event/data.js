@@ -23,19 +23,19 @@ export default function data (state = initialState, action) {
 
     case actions.GET_EVENT_REQUEST:
     case actions.EDIT_EVENT_REQUEST:
-    case actions.PATCH_EVENT_REQUEST:
+    case actions.SUBMIT_CODE_REQUEST:
       return update(state, {
         isFetching: { $set: true }
       });
 
     case actions.GET_EVENT_SUCCESS:
     case actions.EDIT_EVENT_SUCCESS:
-    case actions.PATCH_EVENT_SUCCESS:
+    case actions.SUBMIT_CODE_SUCCESS:
       return { ...state, ...action.data, isFetching: false };
 
     case actions.GET_EVENT_FAILURE:
     case actions.EDIT_EVENT_FAILURE:
-    case actions.PATCH_EVENT_FAILURE:
+    case actions.SUBMIT_CODE_FAILURE:
       return update(state, {
         isFetching: { $set: false },
         error: { $set: action.error }
