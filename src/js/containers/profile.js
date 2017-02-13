@@ -1,17 +1,19 @@
 import { connect } from 'react-redux';
+// import { AsyncStorage } from 'react-native';
 import Profile from '../components/profile';
 import { changeName, editName } from '../actions/profile.old';
 
-const mapStateToProps = ({ profile }) => ({
-  photo_url: profile.photo_url,
-  user_id: profile.user_id,
-  firstname: profile.firstname,
-  surname: profile.surname
+const mapStateToProps = ({ user }) => ({
+  photo_url: user.photo_url,
+  user_id: user.user_id,
+  email: user.email,
+  firstname: user.firstname,
+  surname: user.surname
 });
 
 const mapDispatchToProps = dispatch => ({
   handleLogOut: () => {
-    console.log('log out');
+    console.log('logout');
   },
   handleChangeName: (category, e) => {
     dispatch(changeName(e.target.value, category));
