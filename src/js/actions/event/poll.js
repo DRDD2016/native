@@ -6,9 +6,9 @@ export const POST_VOTE_REQUEST = 'POST_VOTE_REQUEST';
 export const POST_VOTE_SUCCESS = 'POST_VOTE_SUCCESS';
 export const POST_VOTE_FAILURE = 'POST_VOTE_FAILURE';
 
-export const CONFIRM_EVENT_REQUEST = 'CONFIRM_EVENT_REQUEST';
-export const CONFIRM_EVENT_SUCCESS = 'CONFIRM_EVENT_SUCCESS';
-export const CONFIRM_EVENT_FAILURE = 'CONFIRM_EVENT_FAILURE';
+export const FINALISE_EVENT_REQUEST = 'FINALISE_EVENT_REQUEST';
+export const FINALISE_EVENT_SUCCESS = 'FINALISE_EVENT_SUCCESS';
+export const FINALISE_EVENT_FAILURE = 'FINALISE_EVENT_FAILURE';
 
 
 /********
@@ -68,9 +68,9 @@ export function postVoteFailure (error) {
 * CONFIRM EVENT ACTIONS
 ********/
 
-export function confirmEvent (token, hostEventChoices, event_id) { // eslint-disable-line
+export function finaliseEvent (token, hostEventChoices, event_id) { // eslint-disable-line
   return (dispatch) => {
-    dispatch(confirmEventRequest());
+    dispatch(finaliseEventRequest());
     fetch(`http://localhost:3000/events/${event_id}`, {
       method: 'PATCH',
       headers: {
@@ -83,29 +83,29 @@ export function confirmEvent (token, hostEventChoices, event_id) { // eslint-dis
     .then((res) => {
       res.json()
       .then((data) => {
-        dispatch(confirmEventSuccess(data));
+        dispatch(finaliseEventSuccess(data));
       })
-      .catch(err => dispatch(confirmEventFailure(err)));
+      .catch(err => dispatch(finaliseEventFailure(err)));
     })
-    .catch(err => dispatch(confirmEventFailure(err)));
+    .catch(err => dispatch(finaliseEventFailure(err)));
   };
 }
 
-export function confirmEventRequest () {
+export function finaliseEventRequest () {
   return {
-    type: CONFIRM_EVENT_REQUEST
+    type: FINALISE_EVENT_REQUEST
   };
 }
 
-export function confirmEventSuccess (data) {
+export function finaliseEventSuccess (data) {
   return {
-    type: CONFIRM_EVENT_SUCCESS,
+    type: FINALISE_EVENT_SUCCESS,
     data
   };
 }
-export function confirmEventFailure (error) {
+export function finaliseEventFailure (error) {
   return {
-    type: CONFIRM_EVENT_FAILURE,
+    type: FINALISE_EVENT_FAILURE,
     error
   };
 }
