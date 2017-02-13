@@ -70,7 +70,7 @@ export default class Profile extends Component {
             <Button
               buttonStyle={[styles.buttonStyle, { backgroundColor: '#fff' }]}
               textStyle={[styles.buttonTextStyle, { color: 'lightgray' }]}
-              onPress={ handleLogOut }
+              onPress={ () => handleLogOut(this.props.navigation) }
             >
               Log Out
             </Button>

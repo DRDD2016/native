@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-// import { AsyncStorage } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import Profile from '../components/profile';
 import { changeName, editName } from '../actions/profile.old';
 
@@ -12,8 +12,12 @@ const mapStateToProps = ({ user }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleLogOut: () => {
-    console.log('logout');
+  handleLogOut: (nav) => {
+    AsyncStorage.removeItem('spark_token')
+    .then(() => {
+      const rootNavigator = nav.getNavigator('root');
+      rootNavigator.replace('auth');
+    });
   },
   handleChangeName: (category, e) => {
     dispatch(changeName(e.target.value, category));
