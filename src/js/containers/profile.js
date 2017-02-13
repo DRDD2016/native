@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { AsyncStorage } from 'react-native';
 import Profile from '../components/profile';
-import { changeName, editName } from '../actions/profile.old';
+import { changeName, editName } from '../actions/profile';
 
 const mapStateToProps = ({ user }) => ({
   photo_url: user.photo_url,
@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => ({
       rootNavigator.replace('auth');
     });
   },
-  handleChangeName: (category, text) => {
+  handleChangeName: (text, category) => {
     dispatch(changeName(text, category));
   },
   handleEditName: (firstname, surname) => {

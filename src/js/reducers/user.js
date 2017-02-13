@@ -1,6 +1,6 @@
 import * as signup from '../actions/signup';
 import * as login from '../actions/login';
-import * as profile from '../actions/profile.old';
+import * as profile from '../actions/profile';
 
 export const initialState = {
   isSigningUp: false,
