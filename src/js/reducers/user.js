@@ -1,17 +1,19 @@
 import update from 'immutability-helper';
 import * as signup from '../actions/signup';
 import * as login from '../actions/login';
+import * as profile from '../actions/profile.old';
 // import { LOGIN_USER_REQUEST } from '../actions/login';
 
 export const initialState = {
-  isSigningUp: false,
+  isSigningUp: false, // change that to isFetching
   isLoggingIn: false,
   error: undefined,
   firstname: '',
   surname: '',
   email: '',
   photo_url: '',
-  user_id: ''
+  user_id: '',
+  isFetching: false
 };
 
 export default function user (state = initialState, action) {
@@ -21,6 +23,14 @@ export default function user (state = initialState, action) {
       return update(state, {
         isLoggingIn: { $set: true }
       });
+    case profile.EDIT_NAME_REQUEST:
+      return {
+        ...state,
+        isFetching: true
+      };
+    case profile.CHANGE_NAME:
+      return handleChangeName(state, action);
+
     case signup.SIGNUP_USER_REQUEST:
       return update(state, {
         isSigningUp: { $set: true }
@@ -38,6 +48,13 @@ export default function user (state = initialState, action) {
         user_id: { $set: action.data.user_id }
       });
 
+    case profile.EDIT_NAME_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        firstname: action.data.firstname,
+        surname: action.data.surname
+      };
     case signup.SIGNUP_USER_FAILURE:
     case login.LOGIN_USER_FAILURE:
       return update(state, {
@@ -48,5 +65,20 @@ export default function user (state = initialState, action) {
 
     default:
       return state;
+  }
+}
+
+function handleChangeName (state, action) {
+  if (action.category === 'firstname') {
+    const newState = update(state, {
+      firstname: { $set: action.value }
+    });
+    return newState;
+  }
+  if (action.category === 'surname') {
+    const newState = update(state, {
+      surname: { $set: action.value }
+    });
+    return newState;
   }
 }

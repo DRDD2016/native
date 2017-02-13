@@ -41,7 +41,7 @@ export default class Profile extends Component {
             <TextInput
               value={ firstname }
               placeholder="First name"
-              onChangeText={ e => handleChangeName('firstname', e) }
+              onChangeText={ text => handleChangeName('firstname', text) }
               style={styles.inputStyle}
             />
           </View>
@@ -50,13 +50,12 @@ export default class Profile extends Component {
             <TextInput
               value={ surname }
               placeholder="Surname"
-              onChangeText={ e => handleChangeName('surname', e)}
+              onChangeText={ text => handleChangeName('surname', text)}
               style={styles.inputStyle}
             />
           </View>
 
           <View style={styles.row}>
-
             <Button
               buttonStyle={ hideEditButton }
               textStyle={[styles.buttonTextStyle, { color: 'white' }]}

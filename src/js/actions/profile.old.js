@@ -11,43 +11,47 @@ export function changeName (value, category) {
   };
 }
 
-export function editName (firstname, surname) {
-  const payload = { //eslint-disable-line
-    firstname,
-    surname
-  };
-
+export function editName (token, user_id, firstname, surname) {
   return (dispatch) => {
     dispatch(editNameRequest());
-
-    // axios.post('/edit-name', payload)
-    // .then(() => {
-    //   dispatch(editNameSuccess());
-    // })
-    // .catch((error) => {
-    //   dispatch(editNameFailure(error));
-    // });
+    fetch(`http://localhost:3000/users/${user_id}`, {
+      method: 'PATCH',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        authorization: token
+      },
+      body: JSON.stringify({ firstname, surname })
+    })
+    .then((res) => {
+      res.json()
+      .then((data) => {
+        dispatch(editNameSuccess(data));
+      })
+      .catch(err => dispatch(editNameFailure(err)));
+    })
+    .catch((err) => {
+      dispatch(editNameFailure(err));
+    });
   };
 }
 
 export function editNameRequest () {
   return {
-    type: EDIT_NAME_REQUEST,
-    isFetching: true
+    type: EDIT_NAME_REQUEST
   };
 }
 
-export function editNameSuccess () {
+export function editNameSuccess (data) {
   return {
     type: EDIT_NAME_SUCCESS,
-    isFetching: false
+    data
   };
 }
 
 export function editNameFailure (error) {
   return {
     type: EDIT_NAME_FAILURE,
-    isFetching: false,
     error
   };
 }

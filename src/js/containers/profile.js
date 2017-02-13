@@ -8,7 +8,8 @@ const mapStateToProps = ({ user }) => ({
   user_id: user.user_id,
   email: user.email,
   firstname: user.firstname,
-  surname: user.surname
+  surname: user.surname,
+  isFetching: user.isFetching
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -19,11 +20,19 @@ const mapDispatchToProps = dispatch => ({
       rootNavigator.replace('auth');
     });
   },
-  handleChangeName: (category, e) => {
-    dispatch(changeName(e.target.value, category));
+  handleChangeName: (category, text) => {
+    dispatch(changeName(text, category));
   },
   handleEditName: (firstname, surname) => {
-    dispatch(editName(firstname, surname));
+    AsyncStorage.getItem('spark_token')
+    .then((token) => {
+      AsyncStorage.getItem('spark_user_id')
+      .then((user_id) => {
+        if (token && user_id) {
+          dispatch(editName(token, user_id, firstname, surname));
+        }
+      });
+    });
   }
 });
 
