@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
 import { View, Text, Dimensions } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -43,7 +44,7 @@ export default class Where extends Component {
     const { data, name, addInput, removeInput } = this.props;
     const inputs = data.map((value, inputKey) => {
       return (
-        <View key={ Math.random() } style={inlineStyle.inputContainer}>
+        <View key={ inputKey } style={inlineStyle.inputContainer}>
           <GooglePlacesAutocomplete
             enablePoweredByContainer={false}
             placeholder="Where"
