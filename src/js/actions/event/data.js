@@ -1,6 +1,4 @@
-import { NavigationActions } from '@exponent/ex-navigation';
-import Router from '../../router';
-import { store } from '../../init-store';
+import { pushTo, resetStackTo } from '../../lib/navigate';
 
 export const GET_EVENT_REQUEST = 'GET_EVENT_REQUEST';
 export const GET_EVENT_SUCCESS = 'GET_EVENT_SUCCESS';
@@ -55,9 +53,9 @@ export function getEvent (token, event_id) {
     .then((res) => {
       res.json()
       .then((data) => {
-        console.log('FROM SERVER',data);
+        console.log('FROM SERVER', data);
         dispatch(getEventSuccess(data));
-        NavigationActions.push(Router.getRoute('event'));
+        pushTo('event');
       })
       .catch(err => dispatch(getEventFailure(err)));
     })
@@ -122,9 +120,8 @@ export function submitCode (token, code) { //eslint-disable-line
           dispatch(patchEventFailure(data.error));
         } else {
           // redirect
-          const navigatorUID = store.getState().navigation.currentNavigatorUID;
           dispatch(patchEventSuccess(data));
-          dispatch(NavigationActions.immediatelyResetStack(navigatorUID, [Router.getRoute('event')], 0));
+          resetStackTo('event');
         }
       })
       .catch(err => dispatch(patchEventFailure(err)));
