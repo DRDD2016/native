@@ -9,7 +9,8 @@ const mapStateToProps = ({ user }) => ({
   email: user.email,
   firstname: user.firstname,
   surname: user.surname,
-  isFetching: user.isFetching
+  isFetching: user.isFetching,
+  errorUpdate: user.errorUpdate
 });
 
 const mapDispatchToProps = dispatch => ({

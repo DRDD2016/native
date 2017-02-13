@@ -3,13 +3,25 @@ export const EDIT_NAME_SUCCESS = 'EDIT_NAME_SUCCESS';
 export const EDIT_NAME_FAILURE = 'EDIT_NAME_FAILURE';
 export const CHANGE_NAME = 'CHANGE_NAME';
 
-export function changeName (value, category) {
-  return {
-    type: CHANGE_NAME,
-    value,
-    category
-  };
-}
+export const changeName = (value, category) => ({
+  type: CHANGE_NAME,
+  value,
+  category
+});
+
+export const editNameRequest = () => ({
+  type: EDIT_NAME_REQUEST
+});
+
+export const editNameSuccess = data => ({
+  type: EDIT_NAME_SUCCESS,
+  data
+});
+
+export const editNameFailure = error => ({
+  type: EDIT_NAME_FAILURE,
+  error
+});
 
 export function editName (token, user_id, firstname, surname) {
   return (dispatch) => {
@@ -33,25 +45,5 @@ export function editName (token, user_id, firstname, surname) {
     .catch((err) => {
       dispatch(editNameFailure(err));
     });
-  };
-}
-
-export function editNameRequest () {
-  return {
-    type: EDIT_NAME_REQUEST
-  };
-}
-
-export function editNameSuccess (data) {
-  return {
-    type: EDIT_NAME_SUCCESS,
-    data
-  };
-}
-
-export function editNameFailure (error) {
-  return {
-    type: EDIT_NAME_FAILURE,
-    error
   };
 }
