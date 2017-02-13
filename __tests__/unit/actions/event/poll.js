@@ -45,45 +45,45 @@ describe('POST_VOTE actions', () => {
   });
 });
 
-describe('CONFIRM_EVENT actions', () => {
+describe('FINALISE_EVENT actions', () => {
 
-  describe('`confirmEventRequest` action creator', () => {
-
-    it('returns expected action', () => {
-
-      const expected = {
-        type: actions.CONFIRM_EVENT_REQUEST
-      };
-
-      const actual = actions.confirmEventRequest();
-      expect(actual).toEqual(expected);
-    });
-  });
-
-  describe('`confirmEventSuccess` action creator', () => {
+  describe('`finaliseEventRequest` action creator', () => {
 
     it('returns expected action', () => {
 
       const expected = {
-        type: actions.CONFIRM_EVENT_SUCCESS
+        type: actions.FINALISE_EVENT_REQUEST
       };
 
-      const actual = actions.confirmEventSuccess();
+      const actual = actions.finaliseEventRequest();
       expect(actual).toEqual(expected);
     });
   });
 
-  describe('`confirmEventFailure` action creator', () => {
+  describe('`finaliseEventSuccess` action creator', () => {
+
+    it('returns expected action', () => {
+
+      const expected = {
+        type: actions.FINALISE_EVENT_SUCCESS
+      };
+
+      const actual = actions.finaliseEventSuccess();
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('`finaliseEventFailure` action creator', () => {
 
     it('returns expected action', () => {
 
       const error = new Error();
       const expected = {
-        type: actions.CONFIRM_EVENT_FAILURE,
+        type: actions.FINALISE_EVENT_FAILURE,
         error
       };
 
-      const actual = actions.confirmEventFailure(error);
+      const actual = actions.finaliseEventFailure(error);
       expect(actual).toEqual(expected);
     });
   });

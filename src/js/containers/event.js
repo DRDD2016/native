@@ -6,7 +6,7 @@ import { store } from '../init-store';
 import Router from '../router';
 import Event from '../components/event';
 import { getEvent } from '../actions/event/data';
-import { postVote, confirmEvent } from '../actions/event/poll';
+import { postVote, finaliseEvent } from '../actions/event/poll';
 import { hydrateCreateEvent, clearCreateEvent } from '../actions/create';
 import normaliseVoteData from '../lib/normalise-vote-data';
 
@@ -22,7 +22,8 @@ const mapStateToProps = ({ event }) => {
     isFetching: event.data.isFetching,
     userIsHost: user_id === event.data.host_user_id,
     voteSaved: event.poll.voteSaved,
-    finalChoices: event.poll.finalChoices
+    finalChoices: event.poll.finalChoices,
+    error: event.data.error
   };
 };
 
@@ -44,7 +45,7 @@ const mapDispatchToProps = dispatch => ({
     AsyncStorage.getItem('spark_token')
     .then((token) => {
       if (token) {
-        dispatch(confirmEvent(token, hostEventChoices, event_id));
+        dispatch(finaliseEvent(token, hostEventChoices, event_id));
       }
     });
   },

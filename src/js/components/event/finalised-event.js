@@ -3,9 +3,9 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { View, Image, Text, ScrollView } from 'react-native';
-import ConfirmWhat from '../create/confirm-what';
-import ConfirmWhere from '../create/confirm-where';
-import ConfirmWhen from '../create/confirm-when';
+import FinaliseWhat from '../create/confirm-what';
+import FinaliseWhere from '../create/confirm-where';
+import FinaliseWhen from '../create/confirm-when';
 import formatDate from '../../lib/format-date';
 import formatTime from '../../lib/format-time';
 import Button from '../common/Button';
@@ -34,7 +34,7 @@ const inslineStyle = {
   }
 };
 
-const ConfirmedEvent = ({ event, event_id, invitees, userIsHost, rsvpToEvent }) => {
+const FinalisedEvent = ({ event, event_id, invitees, userIsHost, rsvpToEvent }) => {
   const handleClick = !userIsHost ? rsvpToEvent : '';
 
   // const going = rsvps.going;
@@ -55,9 +55,9 @@ const ConfirmedEvent = ({ event, event_id, invitees, userIsHost, rsvpToEvent }) 
             <Text>{ event.note && event.note }</Text>
           </View>
         </View>
-        <ConfirmWhat data={ event.what } />
-        <ConfirmWhere data={ event.where } />
-        <ConfirmWhen data={ event.when } />
+        <FinaliseWhat data={ event.what } />
+        <FinaliseWhere data={ event.where } />
+        <FinaliseWhen data={ event.when } />
         {
           !userIsHost &&
           <View style={{ marginTop: 10, borderTopColor: '#efefef', borderTopWidth: 1 }}>
@@ -95,4 +95,4 @@ const ConfirmedEvent = ({ event, event_id, invitees, userIsHost, rsvpToEvent }) 
 
 };
 
-export default ConfirmedEvent;
+export default FinalisedEvent;
