@@ -87,7 +87,6 @@ export default class Event extends React.Component {
           userIsHost={ this.props.userIsHost }
           rsvps={ this.props.rsvps }
           rsvpToEvent={ this.props.rsvpToEvent }
-          invitees={ this.props.invitees }
         />
       );
     }
