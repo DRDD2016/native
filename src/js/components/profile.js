@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { View, Text, Image, TextInput } from 'react-native';
 import Button from './common/Button';
+import Spinner from './common/Spinner';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 
@@ -41,7 +42,7 @@ export default class Profile extends Component {
             <TextInput
               value={ firstname }
               placeholder="First name"
-              onChangeText={ e => handleChangeName('firstname', e) }
+              onChangeText={ text => handleChangeName(text, 'firstname') }
               style={styles.inputStyle}
             />
           </View>
@@ -50,27 +51,28 @@ export default class Profile extends Component {
             <TextInput
               value={ surname }
               placeholder="Surname"
-              onChangeText={ e => handleChangeName('surname', e)}
+              onChangeText={ text => handleChangeName(text, 'surname')}
               style={styles.inputStyle}
             />
           </View>
 
           <View style={styles.row}>
-
+            { this.props.isFetching ? <Spinner /> :
             <Button
               buttonStyle={ hideEditButton }
               textStyle={[styles.buttonTextStyle, { color: 'white' }]}
               onPress={ () => this.changeName(firstname, surname) }
             >
               Change Name
-            </Button>
+            </Button>}
+
           </View>
 
           <View style={styles.row}>
             <Button
               buttonStyle={[styles.buttonStyle, { backgroundColor: '#fff' }]}
               textStyle={[styles.buttonTextStyle, { color: 'lightgray' }]}
-              onPress={ handleLogOut }
+              onPress={ () => handleLogOut(this.props.navigation) }
             >
               Log Out
             </Button>
