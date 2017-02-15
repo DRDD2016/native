@@ -67,7 +67,6 @@ export default class UploadPhoto extends Component {
     };
 
     ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response= ', response);
 
       if (response.didCancel) {
         console.log('User cancelled photo picker');
@@ -80,7 +79,6 @@ export default class UploadPhoto extends Component {
         if (Platform.OS === 'android') {
           source = { uri: response.uri };
         } else {
-          console.log('uri', response.uri.replace('file://', ''));
           source = { uri: response.uri.replace('file://', '') };
         }
 
@@ -96,7 +94,6 @@ export default class UploadPhoto extends Component {
   }
 
   render () {
-    console.log('props', this.props);
     return (
       <View style={{ flex: 1 }}>
         <Text style={ styles.titleText }>Upload Photo</Text>
@@ -109,7 +106,13 @@ export default class UploadPhoto extends Component {
             </View>
           </TouchableOpacity>
         </View>
+
         <View style={ styles.skipButtonContainer }>
+          <Button
+            onPress={ () => this.props.handleUpload(this.state.avatarSource) }
+          >
+            SAVE PHOTO
+          </Button>
           <Button
             buttonStyle={ styles.skipButtonStyle }
             textStyle={ styles.skipButtonTextStyle }
