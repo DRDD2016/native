@@ -80,7 +80,7 @@ export function uploadPhoto (token, formData) {
     .then((res) => {
       res.json()
       .then((data) => {
-        dispatch(uploadPhotoSuccess(data.photo_url));
+        dispatch(uploadPhotoSuccess(data));
       })
       .catch(err => dispatch(uploadPhotoFailure(err)));
     })

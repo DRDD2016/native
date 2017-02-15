@@ -53,7 +53,7 @@ export default function user (state = initialState, action) {
         firstname: action.data.firstname,
         surname: action.data.surname,
         email: action.data.email,
-        photo_url: action.data.photo_url || 'https://scontent.xx.fbcdn.net/v/t1.0-1/p320x320/1010535_10152958307150251_1106767454_n.jpg?oh=39609ba001601e7ff5dd1bdede8bb0da&oe=58CEA14F', // eslint-disable-line
+        photo_url: action.data.photo_url,
         user_id: action.data.user_id
       };
 
