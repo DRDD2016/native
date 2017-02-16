@@ -45,14 +45,9 @@ const inlineStyle = {
 const FinalisedEvent = ({ event, event_id, userIsHost, rsvpToEvent, rsvps }) => {
   const handleClick = !userIsHost ? rsvpToEvent : '';
 
-  const going = rsvps.going;
-  const notGoing = rsvps.not_going;
-  const maybe = rsvps.maybe;
-  const respondedList = going.concat(maybe, notGoing);
-  const placeNameLong = (event.where[0] && event.where[0].placeName > 18);
-
   return (
     <View style={{ flex: 1 }}>
+      { userIsHost ? <Text>Host view</Text> : <Text>Invitee view</Text> }
       <ScrollView>
 
         <View style={{ flexDirection: 'row' }}>
@@ -81,9 +76,9 @@ const FinalisedEvent = ({ event, event_id, userIsHost, rsvpToEvent, rsvps }) => 
                 <Text>Going</Text>
               </Button>
               {
-                going && going.map((user) => {
+                rsvps.going && rsvps.going.map((invitee) => {
                   return (
-                    <InviteeCard firstname={user.firstname} photo_url={user.photo_url} />
+                    <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
                   );
                 })
               }
@@ -97,9 +92,9 @@ const FinalisedEvent = ({ event, event_id, userIsHost, rsvpToEvent, rsvps }) => 
                 <Text>Maybe</Text>
               </Button>
               {
-                maybe && maybe.map((user) => {
+                rsvps.maybe && rsvps.maybe.map((invitee) => {
                   return (
-                    <InviteeCard firstname={user.firstname} photo_url={user.photo_url} />
+                    <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
                   );
                 })
               }
@@ -113,13 +108,26 @@ const FinalisedEvent = ({ event, event_id, userIsHost, rsvpToEvent, rsvps }) => 
                 <Text>Not Going</Text>
               </Button>
               {
-                notGoing && notGoing.map((user) => {
+                rsvps.not_going && rsvps.not_going.map((invitee) => {
                   return (
-                    <InviteeCard firstname={user.firstname} photo_url={user.photo_url} />
+                    <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
                   );
                 })
               }
             </View>
+          </View>
+          <Text>Not responded</Text>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+            {
+              rsvps.not_responded.map((invitee) => {
+                return (
+                  <InviteeCard
+                    firstname={ invitee.firstname }
+                    photo_url={ invitee.photo_url }
+                  />
+                );
+              })
+            }
           </View>
         </View>
 

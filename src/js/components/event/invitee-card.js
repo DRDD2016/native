@@ -11,7 +11,9 @@ const cardStyle = {
   backgroundColor: '#efefef',
   alignItems: 'center',
   flexDirection: 'row',
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
+  flex: 1,
+  maxWidth: 120
 };
 const imageStyle = {
   width: 30,
@@ -24,7 +26,6 @@ const textStyle = {
 };
 
 export default function InviteeCard ({ firstname, photo_url }) {
-  console.log(photo_url);
   return (
     <View style={cardStyle}>
       <Image source={{ uri: photo_url }} style={imageStyle} />
