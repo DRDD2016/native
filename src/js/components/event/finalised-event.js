@@ -134,7 +134,6 @@ const FinalisedEvent = ({ event, event_id, userIsHost, rsvpToEvent, rsvps }) => 
       </ScrollView>
     </View>
   );
-
 };
 
 export default FinalisedEvent;
