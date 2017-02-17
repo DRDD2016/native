@@ -8,7 +8,7 @@ import feed from './feed.old';
 import create from './create';
 import user from './user';
 import reset from './reset-password';
-import confirmEmail from './confirm-email';
+import confirmUserEmail from './confirm-email';
 
 
 export default combineReducers({
@@ -19,6 +19,6 @@ export default combineReducers({
   create,
   user,
   reset,
-  confirmEmail,
+  confirmUserEmail,
   form
 });

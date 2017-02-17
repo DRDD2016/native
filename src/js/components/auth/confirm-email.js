@@ -46,7 +46,7 @@ class ConfirmEmail extends Component {
         <View style={ styles.container }>
           <Text style={inlineStyle.labelStyle}>Email</Text>
           <View style={ styles.row }>
-            <Field name="email" component={ FormTextInput } />
+            <Field name="email" component={ FormTextInput } isEmail />
           </View>
           <View style={ styles.row }>
             <Button
