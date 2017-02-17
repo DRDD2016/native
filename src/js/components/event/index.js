@@ -3,7 +3,6 @@ import { View, Text } from 'react-native';
 import InviteePoll from './invitee-poll';
 import HostPoll from './host-poll';
 import FinalisedEvent from './finalised-event';
-import Spinner from '../common/Spinner';
 import DeletedEvent from './deleted-event';
 import colours from '../../../styles/colours';
 import Button from '../common/Button';
@@ -96,13 +95,10 @@ export default class Event extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         {
-          this.props.isFetching && <Spinner />
-        }
-        {
           !this.props.isFetching && (this.props.event === false) && <DeletedEvent />
         }
         {
-          !this.props.isFetching && this.props.event && this.eventRouter()
+          this.props.event && this.eventRouter()
         }
       </View>
     );

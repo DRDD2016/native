@@ -47,7 +47,6 @@ const inlineStyle = {
 };
 
 const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps }) => {
-  const handleClick = !userIsHost ? rsvpToEvent : '';
   return (
     <View style={{ flex: 1 }}>
       { userIsHost ? <Text>Host view</Text> : <Text>Invitee view</Text> }
