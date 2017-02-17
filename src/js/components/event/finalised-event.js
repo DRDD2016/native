@@ -14,6 +14,10 @@ import InviteeCard from './invitee-card';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 
+const STATUS_GOING = 'going';
+const STATUS_MAYBE = 'maybe';
+const STATUS_NOT_GOING = 'not_going';
+
 const inlineStyle = {
   button: {
     flexBasis: 100,
@@ -42,9 +46,8 @@ const inlineStyle = {
   }
 };
 
-const FinalisedEvent = ({ event, event_id, userIsHost, rsvpToEvent, rsvps }) => {
+const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps }) => {
   const handleClick = !userIsHost ? rsvpToEvent : '';
-
   return (
     <View style={{ flex: 1 }}>
       { userIsHost ? <Text>Host view</Text> : <Text>Invitee view</Text> }
@@ -71,7 +74,7 @@ const FinalisedEvent = ({ event, event_id, userIsHost, rsvpToEvent, rsvps }) => 
               <Button
                 buttonStyle={[styles.confirmButton, inlineStyle.button, inlineStyle.greenButton]}
                 textStyle={styles.confirmButtonText}
-                onPress={ () => handleClick('going', event_id) }
+                onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_GOING) }
               >
                 <Text>Going</Text>
               </Button>
@@ -87,7 +90,7 @@ const FinalisedEvent = ({ event, event_id, userIsHost, rsvpToEvent, rsvps }) => 
               <Button
                 buttonStyle={[styles.confirmButton, inlineStyle.button, inlineStyle.orangeButton]}
                 textStyle={styles.confirmButtonText}
-                onPress={ () => handleClick('maybe', event_id) }
+                onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_MAYBE) }
               >
                 <Text>Maybe</Text>
               </Button>
@@ -103,7 +106,7 @@ const FinalisedEvent = ({ event, event_id, userIsHost, rsvpToEvent, rsvps }) => 
               <Button
                 buttonStyle={[styles.confirmButton, inlineStyle.button, inlineStyle.redButton]}
                 textStyle={styles.confirmButtonText}
-                onPress={ () => handleClick('notGoing', event_id) }
+                onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_NOT_GOING) }
               >
                 <Text>Not Going</Text>
               </Button>

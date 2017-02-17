@@ -5,7 +5,7 @@ import { NavigationActions } from '@exponent/ex-navigation';
 import { store } from '../init-store';
 import Router from '../router';
 import Event from '../components/event';
-import { getEvent } from '../actions/event/data';
+import { getEvent, updateRsvp } from '../actions/event/data';
 import { postVote, finaliseEvent } from '../actions/event/poll';
 import { hydrateCreateEvent, clearCreateEvent } from '../actions/create';
 import normaliseVoteData from '../lib/normalise-vote-data';
@@ -59,9 +59,13 @@ const mapDispatchToProps = dispatch => ({
     dispatch(NavigationActions.push(navigatorUID, Router.getRoute('edit')));
     // get event?
   },
-  rsvpToEvent: (status, event_id) => {
-
-    // update rsvp
+  rsvpToEvent: (event_id, status) => {
+    AsyncStorage.getItem('spark_token')
+    .then((token) => {
+      if (token) {
+        dispatch(updateRsvp(token, event_id, status));
+      }
+    });
   },
   discardEvent: () => {
     dispatch(clearCreateEvent());
