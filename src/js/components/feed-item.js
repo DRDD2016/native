@@ -9,13 +9,12 @@ import CardSection from './common/CardSection';
 import Card from './common/Card';
 import styles from '../../styles';
 
-const user_id = 1;
 moment.locale('en-gb');
 
-const FeedItem = ({ event_id, timestamp, firstname, surname,
+const FeedItem = ({ user_id, event_id, timestamp, firstname, surname,
   photo_url, where, when, userIsHost, is_poll, subject_user_id,
   handleSelection, viewed, inviteesNumber, name, edited }) => {
-
+  console.log('user_id', user_id);
   const userIsSubject = subject_user_id === user_id;
   const viewedFeedItem = viewed === true;
   // event_id = 3; // eslint-disable-line no-param-reassign

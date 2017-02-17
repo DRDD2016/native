@@ -7,7 +7,7 @@ import { getEvent } from '../actions/event/data';
 import filterFeed from '../lib/filter-feed';
 import Router from '../router';
 
-const mapStateToProps = ({ feed }) => {
+const mapStateToProps = ({ feed, user }) => {
 
   const data = feed.data;
   const filterActive = feed.filterActive;
@@ -19,7 +19,8 @@ const mapStateToProps = ({ feed }) => {
     feed: feedData,
     isFetching: feed.isFetching,
     filterActive,
-    selectedFilter
+    selectedFilter,
+    user_id: user.user_id
   };
 };
 const mapDispatchToProps = (dispatch, ownProps) => {

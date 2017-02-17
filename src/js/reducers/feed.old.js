@@ -61,7 +61,7 @@ const data = [
 ];
 
 const initialState = {
-  data,
+  data: [],
   isFetching: false,
   error: undefined,
   selectedFilter: undefined,
