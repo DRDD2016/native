@@ -12,7 +12,9 @@ export const initialState = {
   photo_url: '',
   user_id: '',
   isFetching: false,
-  errorUpdate: undefined
+  isFetchingUpload: false,
+  errorUpdate: undefined,
+  errorUpload: undefined
 };
 
 export default function user (state = initialState, action) {
@@ -27,6 +29,11 @@ export default function user (state = initialState, action) {
       return {
         ...state,
         isFetching: true
+      };
+    case profile.UPLOAD_PHOTO_REQUEST:
+      return {
+        ...state,
+        isFetchingUpload: true
       };
     case profile.CHANGE_NAME:
       return handleChangeName(state, action);
@@ -46,10 +53,15 @@ export default function user (state = initialState, action) {
         firstname: action.data.firstname,
         surname: action.data.surname,
         email: action.data.email,
-        photo_url: action.data.photo_url || 'https://scontent.xx.fbcdn.net/v/t1.0-1/p320x320/1010535_10152958307150251_1106767454_n.jpg?oh=39609ba001601e7ff5dd1bdede8bb0da&oe=58CEA14F', // eslint-disable-line
+        photo_url: action.data.photo_url,
         user_id: action.data.user_id
       };
 
+    case profile.UPLOAD_PHOTO_SUCCESS:
+      return {
+        ...state,
+        photo_url: action.data.photo_url
+      };
     case profile.EDIT_NAME_SUCCESS:
       return {
         ...state,
@@ -70,6 +82,12 @@ export default function user (state = initialState, action) {
         ...state,
         isFetching: false,
         errorUpdate: action.error
+      };
+    case profile.UPLOAD_PHOTO_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        errorUpload: action.error
       };
     default:
       return state;
