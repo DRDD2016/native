@@ -36,18 +36,32 @@ class ConfirmEmail extends Component {
     }
   }
 
+  renderServerError = () => {
+    if (this.props.error) {
+      return <Text style={{ color: 'red' }}>{ this.props.error }</Text>;
+    }
+  }
+
+  renderServerMessage = () => {
+    if (this.props.message) {
+      return <Text style={{ color: 'green' }}>{ this.props.message }</Text>;
+    }
+  }
+
   render () {
     const { handleSubmit, handleSubmitForm } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 70 }}>
           <Text>Explanation text</Text>
+          { this.renderServerMessage() }
         </View>
         <View style={ styles.container }>
           <Text style={inlineStyle.labelStyle}>Email</Text>
           <View style={ styles.row }>
             <Field name="email" component={ FormTextInput } isEmail />
           </View>
+          { this.renderServerError() }
           <View style={ styles.row }>
             <Button
               buttonStyle={inlineStyle.buttonStyle}
