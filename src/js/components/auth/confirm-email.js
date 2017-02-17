@@ -51,7 +51,6 @@ class ConfirmEmail extends Component {
 
   renderButton = () => {
     const { handleSubmit, handleSubmitForm, isConfirming } = this.props;
-    console.log('isConfirming', isConfirming);
     if (isConfirming) {
       return <Spinner size="large" />;
     }
@@ -67,7 +66,6 @@ class ConfirmEmail extends Component {
   };
 
   render () {
-    // const { handleSubmit, handleSubmitForm } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 70 }}>
