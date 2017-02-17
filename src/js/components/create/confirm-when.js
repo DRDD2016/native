@@ -22,7 +22,7 @@ const ConfirmWhen = ({ data }) => {
         }
         { (!hideTitle) &&
           <View style={{ flexBasis: 60, marginHorizontal: 5 }}>
-            <Text style={styles.optionTitleWhat}>
+            <Text style={styles.optionTitleWhen}>
               When
             </Text>
           </View>

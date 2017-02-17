@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, Dimensions } from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
 
 const cardStyle = {
   height: 30,
@@ -11,7 +13,9 @@ const cardStyle = {
   backgroundColor: '#efefef',
   alignItems: 'center',
   flexDirection: 'row',
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
+  flex: 1,
+  maxWidth: windowWidth * 0.33
 };
 const imageStyle = {
   width: 30,
@@ -24,11 +28,10 @@ const textStyle = {
 };
 
 export default function InviteeCard ({ firstname, photo_url }) {
-  console.log(photo_url);
   return (
     <View style={cardStyle}>
       <Image source={{ uri: photo_url }} style={imageStyle} />
-      <Text style={textStyle}>{firstname}</Text>
+      <Text numberOfLines={1} style={textStyle}>{firstname}</Text>
     </View>
   );
 }

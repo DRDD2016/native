@@ -26,19 +26,6 @@ export default function Navbar () {
       </TabItem>
 
       <TabItem
-        id="albums"
-        title="Albums"
-        selectedStyle={ tabBarSelectedItemStyle }
-        renderIcon={ isSelected => <Icon name="camera" size={ 28 } color={ isSelected ? colours.blue : colours.gray } /> }
-      >
-        <StackNavigation
-          id="albums"
-          navigatorUID="albums"
-          initialRoute={ Router.getRoute('albums', { title: 'Albums' }) }
-        />
-      </TabItem>
-
-      <TabItem
         id="calendar"
         title="Calendar"
         selectedStyle={ tabBarSelectedItemStyle }

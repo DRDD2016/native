@@ -14,6 +14,10 @@ import InviteeCard from './invitee-card';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 
+const STATUS_GOING = 'going';
+const STATUS_MAYBE = 'maybe';
+const STATUS_NOT_GOING = 'not_going';
+
 const inlineStyle = {
   button: {
     flexBasis: 100,
@@ -42,17 +46,10 @@ const inlineStyle = {
   }
 };
 
-const FinalisedEvent = ({ event, event_id, userIsHost, rsvpToEvent, rsvps }) => {
-  const handleClick = !userIsHost ? rsvpToEvent : '';
-
-  const going = rsvps.going;
-  const notGoing = rsvps.not_going;
-  const maybe = rsvps.maybe;
-  const respondedList = going.concat(maybe, notGoing);
-  const placeNameLong = (event.where[0] && event.where[0].placeName > 18);
-
+const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps }) => {
   return (
     <View style={{ flex: 1 }}>
+      { userIsHost ? <Text>Host view</Text> : <Text>Invitee view</Text> }
       <ScrollView>
 
         <View style={{ flexDirection: 'row' }}>
@@ -76,14 +73,14 @@ const FinalisedEvent = ({ event, event_id, userIsHost, rsvpToEvent, rsvps }) => 
               <Button
                 buttonStyle={[styles.confirmButton, inlineStyle.button, inlineStyle.greenButton]}
                 textStyle={styles.confirmButtonText}
-                onPress={ () => handleClick('going', event_id) }
+                onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_GOING) }
               >
                 <Text>Going</Text>
               </Button>
               {
-                going && going.map((user) => {
+                rsvps.going && rsvps.going.map((invitee) => {
                   return (
-                    <InviteeCard firstname={user.firstname} photo_url={user.photo_url} />
+                    <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
                   );
                 })
               }
@@ -92,14 +89,14 @@ const FinalisedEvent = ({ event, event_id, userIsHost, rsvpToEvent, rsvps }) => 
               <Button
                 buttonStyle={[styles.confirmButton, inlineStyle.button, inlineStyle.orangeButton]}
                 textStyle={styles.confirmButtonText}
-                onPress={ () => handleClick('maybe', event_id) }
+                onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_MAYBE) }
               >
                 <Text>Maybe</Text>
               </Button>
               {
-                maybe && maybe.map((user) => {
+                rsvps.maybe && rsvps.maybe.map((invitee) => {
                   return (
-                    <InviteeCard firstname={user.firstname} photo_url={user.photo_url} />
+                    <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
                   );
                 })
               }
@@ -108,25 +105,37 @@ const FinalisedEvent = ({ event, event_id, userIsHost, rsvpToEvent, rsvps }) => 
               <Button
                 buttonStyle={[styles.confirmButton, inlineStyle.button, inlineStyle.redButton]}
                 textStyle={styles.confirmButtonText}
-                onPress={ () => handleClick('notGoing', event_id) }
+                onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_NOT_GOING) }
               >
                 <Text>Not Going</Text>
               </Button>
               {
-                notGoing && notGoing.map((user) => {
+                rsvps.not_going && rsvps.not_going.map((invitee) => {
                   return (
-                    <InviteeCard firstname={user.firstname} photo_url={user.photo_url} />
+                    <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
                   );
                 })
               }
             </View>
+          </View>
+          <Text>Not responded</Text>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+            {
+              rsvps.not_responded.map((invitee) => {
+                return (
+                  <InviteeCard
+                    firstname={ invitee.firstname }
+                    photo_url={ invitee.photo_url }
+                  />
+                );
+              })
+            }
           </View>
         </View>
 
       </ScrollView>
     </View>
   );
-
 };
 
 export default FinalisedEvent;

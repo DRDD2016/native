@@ -1,4 +1,3 @@
-import update from 'immutability-helper';
 import * as actions from '../../actions/event/data';
 
 export const initialState = {
@@ -13,8 +12,12 @@ export const initialState = {
   what: [],
   where: [],
   when: [],
-  rsvps: [],
-  eventEdited: false,
+  rsvps: {
+    going: [],
+    maybe: [],
+    not_going: [],
+    not_responded: []
+  },
   isFetching: false
 };
 
@@ -25,22 +28,20 @@ export default function data (state = initialState, action) {
     case actions.GET_EVENT_REQUEST:
     case actions.EDIT_EVENT_REQUEST:
     case actions.SUBMIT_CODE_REQUEST:
-      return update(state, {
-        isFetching: { $set: true }
-      });
+    case actions.UPDATE_RSVP_REQUEST:
+      return { ...state, isFetching: true };
 
     case actions.GET_EVENT_SUCCESS:
     case actions.EDIT_EVENT_SUCCESS:
     case actions.SUBMIT_CODE_SUCCESS:
+    case actions.UPDATE_RSVP_SUCCESS:
       return { ...state, ...action.data, isFetching: false };
 
     case actions.GET_EVENT_FAILURE:
     case actions.EDIT_EVENT_FAILURE:
     case actions.SUBMIT_CODE_FAILURE:
-      return update(state, {
-        isFetching: { $set: false },
-        error: { $set: action.error }
-      });
+    case actions.UPDATE_RSVP_FAILURE:
+      return { ...state, ...action.error, isFetching: false };
 
     default:
       return state;
