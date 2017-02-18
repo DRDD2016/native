@@ -53,7 +53,7 @@ class Signup extends Component {
 
           <Text style={{ paddingLeft: 5 }}>Email</Text>
           <View style={ styles.row }>
-            <Field name="email" component={ FormTextInput } />
+            <Field name="email" component={ FormTextInput } isEmail />
           </View>
 
           <Text style={{ paddingLeft: 5 }}>Password</Text>

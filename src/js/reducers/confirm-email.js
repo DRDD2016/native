@@ -1,27 +1,33 @@
-import update from 'immutability-helper';
 import * as actions from '../actions/confirm-email';
 
 export const initialState = {
+  message: '',
   isConfirming: false,
   error: undefined
 };
 
-export default function confirmEmail (state = initialState, action) {
+export default function confirmUserEmail (state = initialState, action) {
   switch (action.type) {
 
-    case actions.SEND_EMAIL_REQUEST:
-      return update(state, {
-        isConfirming: { $set: true }
-      });
+    case actions.CONFIRM_EMAIL_REQUEST:
+      return {
+        ...state,
+        isConfirming: true
+      };
 
-    case actions.SEND_EMAIL_SUCCESS:
-      return initialState;
+    case actions.CONFIRM_EMAIL_SUCCESS:
+      return {
+        ...state,
+        isConfirming: false,
+        message: action.data.message
+      };
 
-    case actions.SEND_EMAIL_FAILURE:
-      return update(state, {
-        isConfirming: { $set: false },
-        error: { $set: action.error }
-      });
+    case actions.CONFIRM_EMAIL_FAILURE:
+      return {
+        ...state,
+        isConfirming: false,
+        error: action.error
+      };
 
     default:
       return state;

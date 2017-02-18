@@ -5,6 +5,7 @@ import hoistNonReactStatic from 'hoist-non-react-statics';
 import { emailValidator as validate } from './form-validation';
 import { FormTextInput } from './form-components';
 import Button from '../common/Button';
+import Spinner from '../common/Spinner';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 
@@ -36,26 +37,49 @@ class ConfirmEmail extends Component {
     }
   }
 
+  renderServerError = () => {
+    if (this.props.error) {
+      return <Text style={{ color: 'red' }}>{ this.props.error }</Text>;
+    }
+  }
+
+  renderServerMessage = () => {
+    if (this.props.message) {
+      return <Text style={{ color: 'green' }}>{ this.props.message }</Text>;
+    }
+  }
+
+  renderButton = () => {
+    const { handleSubmit, handleSubmitForm, isConfirming } = this.props;
+    if (isConfirming) {
+      return <Spinner size="large" />;
+    }
+    return (
+      <Button
+        buttonStyle={inlineStyle.buttonStyle}
+        textStyle={inlineStyle.textStyle}
+        onPress={handleSubmit(handleSubmitForm)}
+      >
+        <Text>SUBMIT</Text>
+      </Button>
+    );
+  };
+
   render () {
-    const { handleSubmit, handleSubmitForm } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 70 }}>
           <Text>Explanation text</Text>
+          { this.renderServerMessage() }
         </View>
         <View style={ styles.container }>
           <Text style={inlineStyle.labelStyle}>Email</Text>
           <View style={ styles.row }>
-            <Field name="email" component={ FormTextInput } />
+            <Field name="email" component={ FormTextInput } isEmail />
           </View>
+          { this.renderServerError() }
           <View style={ styles.row }>
-            <Button
-              buttonStyle={inlineStyle.buttonStyle}
-              textStyle={inlineStyle.textStyle}
-              onPress={handleSubmit(handleSubmitForm)}
-            >
-              <Text>SUBMIT</Text>
-            </Button>
+            { this.renderButton() }
           </View>
         </View>
       </View>
