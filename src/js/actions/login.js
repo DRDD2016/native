@@ -41,7 +41,8 @@ export function loginUser (email, password) {
           dispatch(loginUserSuccess({
             firstname: data.firstname,
             surname: data.surname,
-            email: data.email
+            email: data.email,
+            user_id: data.user
           }));
           if (data.token && data.user_id) {
             storeToken(data.token);

@@ -47,6 +47,8 @@ const inlineStyle = {
 };
 
 const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps }) => {
+  console.log('EVENT OWNER', event.host_user_id, 'ID', event.event_id, 'HOST?', userIsHost);
+
   return (
     <View style={{ flex: 1 }}>
       { userIsHost ? <Text>Host view</Text> : <Text>Invitee view</Text> }

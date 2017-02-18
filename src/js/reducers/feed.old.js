@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import * as actions from '../actions/feed';
 
-const data = [
+const data = [ // eslint-disable-line no-unused-vars
   {
     event_id: 3, // !is_poll
     timestamp: new Date().toISOString(),
@@ -61,7 +61,7 @@ const data = [
 ];
 
 const initialState = {
-  data,
+  data: [],
   isFetching: false,
   error: undefined,
   selectedFilter: undefined,

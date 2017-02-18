@@ -16,11 +16,12 @@ export default class Feed extends Component {
   }
 
   render () {
-    const { allEvents, feed, isFetching, handleSelection, displaySome, displayAll, filterActive, selectedFilter } = this.props;
+    const { user_id, allEvents, feed, isFetching, handleSelection, displaySome, displayAll, filterActive, selectedFilter } = this.props;
 
     const mappedFeed = [].concat(feed).reverse().map((data, i) => {
       return (
         <FeedItem
+          user_id={ user_id }
           key={ Math.random() }
           index={ i }
           event_id={ data.event_id }
