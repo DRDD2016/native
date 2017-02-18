@@ -32,7 +32,7 @@ export default class Feed extends Component {
           where={ data.where }
           when={ data.when }
           inviteesNumber={ 5 }
-          userIsHost={ data.host_user_id === 1 }
+          userIsHost={ data.host_user_id === user_id }
           hostID={ data.host_user_id }
           firstname={ data.firstname }
           surname={ data.surname }

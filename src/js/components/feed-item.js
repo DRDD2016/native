@@ -16,11 +16,9 @@ const FeedItem = ({ user_id, event_id, timestamp, firstname, surname,
   handleSelection, viewed, inviteesNumber, name, edited }) => {
   console.log('user_id', user_id);
   const userIsSubject = subject_user_id === user_id;
-  const viewedFeedItem = viewed === true;
-  // event_id = 3; // eslint-disable-line no-param-reassign
-
+  console.log(userIsHost, 'HOST?');
   return (
-    <Card style={[styles.cardStyle, viewedFeedItem && styles.viewedFeedItemStyle]}>
+    <Card style={[styles.cardStyle, viewed && styles.viewedFeedItemStyle]}>
       <CardSection style={styles.cardSectionFeedItem}>
         <TouchableOpacity
           style={styles.cardButtonStyle}

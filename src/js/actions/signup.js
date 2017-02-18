@@ -41,7 +41,8 @@ export function signupUser (firstname, surname, email, password) {
             firstname: data.firstname,
             surname: data.surname,
             email: data.email,
-            photo_url: data.photo_url
+            photo_url: data.photo_url,
+            user_id: data.user_id
           }));
           if (data.token && data.user_id) {
             storeToken(data.token);
