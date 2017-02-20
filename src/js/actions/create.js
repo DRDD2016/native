@@ -65,12 +65,13 @@ export function saveEvent (token, eventData) { //eslint-disable-line
         authorization: token,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(eventData)
+      body: JSON.stringify({ event: eventData })
     })
     .then((response) => {
       response.json()
       .then((data) => {
         if (data.error) {
+          console.error('error', data.error);
           dispatch(saveEventFailure(data.error));
         } else {
 

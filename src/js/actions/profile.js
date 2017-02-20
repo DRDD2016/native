@@ -50,7 +50,7 @@ export function editName (token, user_id, firstname, surname) {
         'Content-Type': 'application/json',
         authorization: token
       },
-      body: JSON.stringify({ firstname, surname })
+      body: JSON.stringify({ user: { firstname, surname } })
     })
     .then((res) => {
       res.json()
