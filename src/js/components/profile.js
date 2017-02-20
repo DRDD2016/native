@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { View, Text, Image, TextInput } from 'react-native';
+import { View, Text, Image, TextInput, Platform } from 'react-native';
+import ImagePicker from 'react-native-image-picker';
 import Button from './common/Button';
 import Spinner from './common/Spinner';
 import styles from '../../styles';
@@ -15,9 +16,51 @@ export default class Profile extends Component {
     }
   }
 
-  changeName (firstname, surname) {
+  constructor (props) {
+    super(props);
+    this.state = { avatarSource: null };
+    this.selectPhotoTapped = this.selectPhotoTapped.bind(this);
+  }
+
+  saveChanges (firstname, surname) {
+    this.props.handleUpload(this.state.avatarSource);
     this.props.handleEditName(firstname, surname);
   }
+
+  selectPhotoTapped () {
+    const options = {
+      quality: 1.0,
+      maxWidth: 500,
+      maxheight: 500,
+      storageOptions: {
+        skipBackup: true
+      }
+    };
+
+    ImagePicker.showImagePicker(options, (response) => {
+
+      if (response.didCancel) {
+        console.log('User cancelled photo picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button ', response.customButton);
+      } else {
+        let source;
+        if (Platform.OS === 'android') {
+          source = { uri: response.uri };
+        } else {
+          console.log('rss', response);
+          source = { uri: response.uri.replace('file://', '') };
+        }
+
+        this.setState({
+          avatarSource: source
+        });
+      }
+    });
+  }
+
 
   render () {
     const { photo_url, firstname, surname, handleLogOut, handleChangeName } = this.props;
@@ -30,12 +73,17 @@ export default class Profile extends Component {
             <Text style={styles.userName}> { `${firstname} ${surname}` } </Text>
           </View>
 
-          <View style={styles.row}>
-            <Image style={styles.uiProfilePagePhotoCircularImage} source={{ uri: photo_url }} />
-          </View>
+          <View>
+            <Image style={styles.uiProfilePagePhotoCircularImage} source={ this.state.avatarSource || { uri: photo_url } } />
 
-          <View style={styles.row}>
-            <Text style={styles.editNameTitle}> Change Name </Text>
+            <Button
+              buttonStyle={ [hideEditButton, { marginTop: 10, alignSelf: 'center' }] }
+              textStyle={{ color: '#fff' }}
+              onPress={ this.selectPhotoTapped }
+            >
+              Change Photo
+            </Button>
+
           </View>
 
           <View style={styles.row}>
@@ -59,19 +107,19 @@ export default class Profile extends Component {
           <View style={styles.row}>
             { this.props.isFetching ? <Spinner /> :
             <Button
-              buttonStyle={ hideEditButton }
-              textStyle={[styles.buttonTextStyle, { color: 'white' }]}
-              onPress={ () => this.changeName(firstname, surname) }
+              buttonStyle={ [hideEditButton, { marginTop: 10, alignSelf: 'center' }] }
+              textStyle={{ color: '#fff' }}
+              onPress={ () => this.saveChanges(firstname, surname) }
             >
-              Change Name
+              Save changes
             </Button>}
 
           </View>
 
           <View style={styles.row}>
             <Button
-              buttonStyle={[styles.buttonStyle, { backgroundColor: '#fff' }]}
-              textStyle={[styles.buttonTextStyle, { color: 'lightgray' }]}
+              buttonStyle={ [hideEditButton, { marginTop: 10, alignSelf: 'center', backgroundColor: 'gray' }] }
+              textStyle={{ color: '#fff' }}
               onPress={ () => handleLogOut(this.props.navigation) }
             >
               Log Out
@@ -89,5 +137,6 @@ Profile.propTypes = {
   photo_url: PropTypes.string.isRequired,
   handleLogOut: PropTypes.func.isRequired,
   handleEditName: PropTypes.func.isRequired,
-  handleChangeName: PropTypes.func.isRequired
+  handleChangeName: PropTypes.func.isRequired,
+  handleUpload: PropTypes.func.isRequired
 };

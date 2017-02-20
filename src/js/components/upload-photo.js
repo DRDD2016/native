@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Platform, PixelRatio, TouchableOpacity, Image } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import { resetStackTo } from '../lib/navigate';
 import Router from '../router';
 import Button from './common/Button';
 import colours from '../../styles/colours';
@@ -24,7 +25,21 @@ const styles = {
   avatar: {
     borderRadius: 75,
     width: 150,
-    height: 150
+    height: 150,
+    backgroundColor: colours.blue
+  },
+  shadow: {
+    ...Platform.select({
+      ios: {
+        shadowColor: 'rgba(0,0,0, .4)',
+        shadowOffset: { height: 1, width: 1 },
+        shadowOpacity: 1,
+        shadowRadius: 3
+      },
+      android: {
+        elevation: 2
+      }
+    })
   },
   skipButtonContainer: {
     position: 'absolute',
@@ -44,10 +59,28 @@ const styles = {
     color: '#fff',
     fontSize: 18,
     fontWeight: '600'
+  },
+  saveButtonStyle: {
+    backgroundColor: colours.blue,
+    // height: 40,
+    borderRadius: 20,
+    padding: 10
+  },
+  saveButtonTextStyle: {
+    color: '#fff'
   }
 };
 
 export default class UploadPhoto extends Component {
+
+  static route = {
+    navigationBar: {
+      title: 'Upload Photo',
+      backgroundColor: colours.blue,
+      tintColor: colours.white,
+      renderRight: () => <Text style={{ margin: 15, color: '#fff' }} onPress={ () => resetStackTo('navbar') }>SKIP</Text>
+    }
+  }
 
   constructor (props) {
     super(props);
@@ -90,17 +123,17 @@ export default class UploadPhoto extends Component {
   }
 
   nextPage () {
+    this.props.handleUpload(this.state.avatarSource);
     this.props.navigator.immediatelyResetStack([Router.getRoute('navbar')], 0);
   }
 
   render () {
     return (
       <View style={{ flex: 1 }}>
-        <Text style={ styles.titleText }>Upload Photo</Text>
         <View style={ styles.uploadContainer }>
-          <TouchableOpacity onPress={ this.selectPhotoTapped }>
-            <View style={ [styles.avatar, styles.avatarContainer, { marginBottom: 20 }] }>
-              { this.state.avatarSource === null ? <Text>Select a Photo</Text> :
+          <TouchableOpacity onPress={ this.selectPhotoTapped } active={0.3}>
+            <View style={ [styles.avatar, styles.avatarContainer, styles.shadow, { marginBottom: 20 }] }>
+              { this.state.avatarSource === null ? <Text style={{ color: '#fff' }}>Select a Photo</Text> :
               <Image style={ styles.avatar } source={ this.state.avatarSource } />
               }
             </View>
@@ -109,16 +142,11 @@ export default class UploadPhoto extends Component {
 
         <View style={ styles.skipButtonContainer }>
           <Button
-            onPress={ () => this.props.handleUpload(this.state.avatarSource) }
-          >
-            SAVE PHOTO
-          </Button>
-          <Button
             buttonStyle={ styles.skipButtonStyle }
             textStyle={ styles.skipButtonTextStyle }
             onPress={ this.nextPage }
           >
-            SKIP
+            SAVE & NEXT
           </Button>
         </View>
       </View>
