@@ -55,7 +55,7 @@ const FeedItem = ({ user_id, event_id, timestamp, firstname, surname,
 
             <View>
               <Text style={styles.numberOfInvites}>
-                { userIsSubject && userIsHost && ` invitation sent to ${inviteesNumber} friends` }
+                { inviteesNumber && userIsSubject && userIsHost && ` invitation sent to ${inviteesNumber} friends` }
               </Text>
             </View>
           </View>

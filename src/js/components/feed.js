@@ -31,7 +31,7 @@ export default class Feed extends Component {
           what={ data.what }
           where={ data.where }
           when={ data.when }
-          inviteesNumber={ 5 }
+          inviteesNumber={ undefined }
           userIsHost={ data.host_user_id === user_id }
           hostID={ data.host_user_id }
           firstname={ data.firstname }
