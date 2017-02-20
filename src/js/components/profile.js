@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { View, Text, Image, TextInput } from 'react-native';
+import Router from '../router';
 import Button from './common/Button';
 import Spinner from './common/Spinner';
 import styles from '../../styles';
@@ -30,8 +31,17 @@ export default class Profile extends Component {
             <Text style={styles.userName}> { `${firstname} ${surname}` } </Text>
           </View>
 
-          <View style={styles.row}>
+          <View>
             <Image style={styles.uiProfilePagePhotoCircularImage} source={{ uri: photo_url }} />
+
+            <Button
+              buttonStyle={ [hideEditButton, { marginTop: 10, alignSelf: 'center' }] }
+              textStyle={{ color: '#fff' }}
+              onPress={ () => this.props.navigator.push(Router.getRoute('uploadPhoto')) }
+            >
+              Change Photo
+            </Button>
+
           </View>
 
           <View style={styles.row}>

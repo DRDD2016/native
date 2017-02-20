@@ -382,7 +382,8 @@ const styles = {
   uiProfilePagePhotoCircularImage: {
     height: 100,
     width: 100,
-    borderRadius: 15
+    borderRadius: 15,
+    alignSelf: 'center'
   },
   editNameTitle: {
     fontWeight: '200',

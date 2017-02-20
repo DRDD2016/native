@@ -105,20 +105,22 @@ export default class UploadPhoto extends Component {
               }
             </View>
           </TouchableOpacity>
-        </View>
-
-        <View style={ styles.skipButtonContainer }>
           <Button
+            buttonStyle={ styles.saveButtonStyle }
+            textStyle={ styles.saveButtonTextStyle }
             onPress={ () => this.props.handleUpload(this.state.avatarSource) }
           >
             SAVE PHOTO
           </Button>
+        </View>
+
+        <View style={ styles.skipButtonContainer }>
           <Button
             buttonStyle={ styles.skipButtonStyle }
             textStyle={ styles.skipButtonTextStyle }
             onPress={ this.nextPage }
           >
-            SKIP
+            NEXT
           </Button>
         </View>
       </View>
