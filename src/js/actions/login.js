@@ -42,7 +42,7 @@ export function loginUser (email, password) {
             firstname: data.firstname,
             surname: data.surname,
             email: data.email,
-            user_id: data.user,
+            user_id: data.user_id,
             photo_url: data.photo_url
           }));
           if (data.token && data.user_id) {

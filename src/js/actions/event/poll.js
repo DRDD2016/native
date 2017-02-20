@@ -78,7 +78,7 @@ export function finaliseEvent (token, hostEventChoices, event_id) { // eslint-di
         'Content-Type': 'application/json',
         authorization: token
       },
-      body: JSON.stringify(hostEventChoices)
+      body: JSON.stringify({ hostEventChoices })
     })
     .then((res) => {
       res.json()

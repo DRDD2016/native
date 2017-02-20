@@ -13,7 +13,6 @@ const mapStateToProps = ({ feed, user }) => {
   const filterActive = feed.filterActive;
   const selectedFilter = feed.selectedFilter;
   const feedData = filterFeed(data, filterActive, selectedFilter);
-
   return {
     allEvents: data,
     feed: feedData,

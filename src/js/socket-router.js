@@ -19,9 +19,9 @@ socket.on('connected', () => {
         store.dispatch(getFeedSuccess(data));
       });
 
-      // socket.on('failure', (error) => {
-      //   store.dispatch(getFeedFailure(error));
-      // });
+      socket.on(`failure:${user_id}`, (error) => {
+        store.dispatch(getFeedFailure(error));
+      });
     }
   });
 });
