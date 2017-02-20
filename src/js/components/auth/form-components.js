@@ -2,11 +2,11 @@ import React from 'react';
 import { Text, TextInput, View } from 'react-native';
 import styles from '../../../styles';
 
-export function FormTextInput ({ isEmail, input: { value, onChange, onBlur }, meta: { touched, error } }) {
+export function FormTextInput ({ isEmail, isLogin, input: { value, onChange, onBlur }, meta: { touched, error } }) {
   return (
     <View style={{ flex: 1 }}>
       <TextInput
-        style={ [styles.inputStyle, { fontSize: 19 }] }
+        style={ isLogin ? [styles.inputStyle, { fontSize: 19 }, { borderRadius: 0 }] : [styles.inputStyle, { fontSize: 19 }] }
         onChangeText={ text => onChange(text) }
         onBlur={ text => onBlur(text) }
         value={ value }
@@ -21,11 +21,11 @@ export function FormTextInput ({ isEmail, input: { value, onChange, onBlur }, me
   );
 }
 
-export function FormPasswordInput ({ input: { value, onChange, onBlur }, meta: { touched, error } }) {
+export function FormPasswordInput ({ isLogin, input: { value, onChange, onBlur }, meta: { touched, error } }) {
   return (
     <View style={{ flex: 1 }}>
       <TextInput
-        style={ [styles.inputStyle, { fontSize: 19 }] }
+        style={ isLogin ? [styles.inputStyle, { fontSize: 19 }, { borderRadius: 0 }] : [styles.inputStyle, { fontSize: 19 }] }
         onChangeText={ text => onChange(text) }
         onBlur={ text => onBlur(text) }
         value={ value }

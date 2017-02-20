@@ -23,7 +23,8 @@ const styles = {
   input: {
     flex: 1,
     paddingHorizontal: 10,
-    backgroundColor: '#FFF'
+    backgroundColor: '#FFF',
+    borderRadius: 20
   },
   iconWrap: {
     width: 40,
@@ -70,13 +71,13 @@ class Login extends Component {
             <View style={styles.iconWrap}>
               <Icon name="envelope-o" size={15} color="rgba(255, 255, 255, 0.76)" />
             </View>
-            <Field style={styles.input} name="email" component={ FormTextInput } isEmail />
+            <Field style={styles.input} name="email" component={ FormTextInput } isEmail isLogin />
           </View>
           <View style={styles.inputWrap}>
             <View style={styles.iconWrap}>
               <Icon name="lock" size={20} color="rgba(255, 255, 255, 0.76)" />
             </View>
-            <Field style={styles.input} name="password" component={ FormPasswordInput } />
+            <Field style={styles.input} name="password" component={ FormPasswordInput } isLogin />
           </View>
           <TouchableOpacity activeOpacity={ 0.5 } onPress={handleSubmit(handleSubmitForm)}>
             <View style={styles.button}>
