@@ -16,7 +16,6 @@ const FeedItem = ({ user_id, event_id, timestamp, firstname, surname,
   handleSelection, viewed, inviteesNumber, name, edited }) => {
   console.log('user_id', user_id);
   const userIsSubject = subject_user_id === user_id;
-  console.log(userIsHost, 'HOST?');
   return (
     <Card style={[styles.cardStyle, viewed && styles.viewedFeedItemStyle]}>
       <CardSection style={styles.cardSectionFeedItem}>

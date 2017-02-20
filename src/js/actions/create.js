@@ -55,7 +55,6 @@ export function setWhen (data, inputKey, format) {
 ********/
 
 export function saveEvent (token, eventData) { //eslint-disable-line
-  console.log(eventData);
   return function (dispatch) {
     dispatch(saveEventRequest());
     fetch('http://localhost:3000/events', {
