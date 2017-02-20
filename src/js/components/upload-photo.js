@@ -44,10 +44,27 @@ const styles = {
     color: '#fff',
     fontSize: 18,
     fontWeight: '600'
+  },
+  saveButtonStyle: {
+    backgroundColor: colours.blue,
+    // height: 40,
+    borderRadius: 20,
+    padding: 10
+  },
+  saveButtonTextStyle: {
+    color: '#fff'
   }
 };
 
 export default class UploadPhoto extends Component {
+
+  static route = {
+    navigationBar: {
+      title: 'Upload Photo',
+      backgroundColor: colours.blue,
+      tintColor: colours.white
+    }
+  }
 
   constructor (props) {
     super(props);
@@ -110,7 +127,7 @@ export default class UploadPhoto extends Component {
             textStyle={ styles.saveButtonTextStyle }
             onPress={ () => this.props.handleUpload(this.state.avatarSource) }
           >
-            SAVE PHOTO
+            Save Photo
           </Button>
         </View>
 

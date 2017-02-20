@@ -37,7 +37,7 @@ export default class Profile extends Component {
             <Button
               buttonStyle={ [hideEditButton, { marginTop: 10, alignSelf: 'center' }] }
               textStyle={{ color: '#fff' }}
-              onPress={ () => this.props.navigator.push(Router.getRoute('uploadPhoto')) }
+              onPress={ () => this.props.navigator.immediatelyResetStack([Router.getRoute('uploadPhoto')], 0) }
             >
               Change Photo
             </Button>
