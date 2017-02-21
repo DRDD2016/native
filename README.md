@@ -2,7 +2,7 @@
 
 ## Getting started - iOS
 
-**This project runs on Node v6.3.x**
+**This project runs on Node v6.9.x**
 
 ### Installing React Native
 If you do not have React Native, you will need to install it, along with a couple of other things.  Follow the [React Native Getting Started guide](https://facebook.github.io/react-native/docs/getting-started.html#content).
