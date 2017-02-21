@@ -1,9 +1,10 @@
+import Config from 'react-native-config';
 import io from 'socket.io-client';
 import { AsyncStorage } from 'react-native';
 import { store } from './init-store';
 import { getFeedRequest, getFeedSuccess, getFeedFailure } from './actions/feed'; // eslint-disable-line no-unused-vars
 
-const location = 'http://localhost:3000'; // will be something different when server is hosted!
+const location = `${Config.URI}`; // will be something different when server is hosted!
 const socket = io(`${location}/feed`, { transports: ['websocket'] });
 const INIT_FEED = 'INIT_FEED';
 

@@ -1,3 +1,5 @@
+import Config from 'react-native-config';
+
 export const SET_DETAILS = 'SET_DETAILS';
 export const SET_WHAT = 'SET_WHAT';
 export const SET_WHERE = 'SET_WHERE';
@@ -57,7 +59,7 @@ export function setWhen (data, inputKey, format) {
 export function saveEvent (token, eventData) { //eslint-disable-line
   return function (dispatch) {
     dispatch(saveEventRequest());
-    fetch('http://localhost:3000/events', {
+    fetch(`${Config.URI}/events`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

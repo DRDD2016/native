@@ -1,3 +1,5 @@
+import Config from 'react-native-config';
+
 export const EDIT_NAME_REQUEST = 'EDIT_NAME_REQUEST';
 export const EDIT_NAME_SUCCESS = 'EDIT_NAME_SUCCESS';
 export const EDIT_NAME_FAILURE = 'EDIT_NAME_FAILURE';
@@ -48,7 +50,7 @@ export const logout = () => ({
 export function editName (token, user_id, firstname, surname) {
   return (dispatch) => {
     dispatch(editNameRequest());
-    fetch(`http://localhost:3000/users/${user_id}`, {
+    fetch(`${Config.URI}/users/${user_id}`, {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',
@@ -73,7 +75,7 @@ export function editName (token, user_id, firstname, surname) {
 export function uploadPhoto (token, formData) {
   return (dispatch) => {
     dispatch(uploadPhotoRequest());
-    fetch('http://localhost:3000/upload', {
+    fetch(`${Config.URI}/upload`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

@@ -1,3 +1,5 @@
+import Config from 'react-native-config';
+
 export const CONFIRM_EMAIL_REQUEST = 'CONFIRM_EMAIL_REQUEST';
 export const CONFIRM_EMAIL_SUCCESS = 'CONFIRM_EMAIL_SUCCESS';
 export const CONFIRM_EMAIL_FAILURE = 'CONFIRM_EMAIL_FAILURE';
@@ -20,7 +22,7 @@ export function confirmEmail (email) {
   console.log('email', email);
   return (dispatch) => {
     dispatch(confirmEmailRequest());
-    fetch('http://localhost:3000/reset-password', {
+    fetch(`${Config.URI}/reset-password`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
