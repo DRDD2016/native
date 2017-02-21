@@ -14,14 +14,14 @@ moment.locale('en-gb');
 const FeedItem = ({ user_id, event_id, timestamp, firstname, surname,
   photo_url, where, when, userIsHost, is_poll, subject_user_id,
   handleSelection, viewed, inviteesNumber, name, edited }) => {
-  console.log('user_id', user_id);
+  console.log('viewed?', viewed, where);
   const userIsSubject = subject_user_id === user_id;
   return (
     <Card style={[styles.cardStyle, viewed && styles.viewedFeedItemStyle]}>
       <CardSection style={styles.cardSectionFeedItem}>
         <TouchableOpacity
           style={styles.cardButtonStyle}
-          onPress={ () => handleSelection(event_id) }
+          onPress={ () => handleSelection(event_id, viewed) }
         >
 
           <View style={styles.leftColumn}>
@@ -69,12 +69,12 @@ const FeedItem = ({ user_id, event_id, timestamp, firstname, surname,
                 formatDate(when[0]).toUpperCase()
               }
             </Text>
-            <Text style={styles.placeName}>
+            <Text numberOfLines={1} style={styles.placeName}>
               <Icon name="map-marker" size={14} color="gray" />
               {
                 (where.length > 1 && 'VOTE') ||
-                (where.length === 1 && where[0].placeName === '' && 'TBC') ||
-                where[0].placeName
+                (where.length === 1 && where[0] === '' && 'TBC') ||
+                where[0]
               }
             </Text>
           </View>
