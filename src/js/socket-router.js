@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native';
 import { store } from './init-store';
 import { getFeedRequest, getFeedSuccess, getFeedFailure } from './actions/feed'; // eslint-disable-line no-unused-vars
 
-const location = 'http://localhost:3000'; // will be something different when server is hosted!
+const location = `${process.env.HOST}:${process.env.PORT}`; // will be something different when server is hosted!
 const socket = io(`${location}/feed`, { transports: ['websocket'] });
 const INIT_FEED = 'INIT_FEED';
 

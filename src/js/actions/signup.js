@@ -26,7 +26,7 @@ export function signupUser (firstname, surname, email, password) {
 
   return (dispatch) => {
     dispatch(signupUserRequest());
-    fetch('http://localhost:3000/signup', {
+    fetch(`${process.env.HOST}:${process.env.PORT}/signup`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

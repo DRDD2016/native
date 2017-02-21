@@ -43,7 +43,7 @@ export const uploadPhotoFailure = error => ({
 export function editName (token, user_id, firstname, surname) {
   return (dispatch) => {
     dispatch(editNameRequest());
-    fetch(`http://localhost:3000/users/${user_id}`, {
+    fetch(`${process.env.HOST}:${process.env.PORT}/users/${user_id}`, {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',
@@ -68,7 +68,7 @@ export function editName (token, user_id, firstname, surname) {
 export function uploadPhoto (token, formData) {
   return (dispatch) => {
     dispatch(uploadPhotoRequest());
-    fetch('http://localhost:3000/upload', {
+    fetch(`${process.env.HOST}:${process.env.PORT}/upload`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

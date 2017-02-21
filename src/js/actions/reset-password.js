@@ -22,7 +22,7 @@ export function newPassword (password) {
 
   return (dispatch) => {
     dispatch(resetPasswordRequest());
-    // fetch('http://localhost:3000/resetPassword', {
+    // fetch(`${process.env.HOST}:${process.env.PORT}/resetPassword`, {
     //   method: 'POST',
     //   headers: {
     //     Accept: 'application/json',

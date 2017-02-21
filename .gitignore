@@ -54,3 +54,4 @@ fastlane/screenshots
 
 src/js/keys.js
 coverage/
+.env

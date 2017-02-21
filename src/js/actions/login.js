@@ -27,7 +27,7 @@ export function loginUser (email, password) {
 
   return (dispatch) => {
     dispatch(loginUserRequest());
-    fetch('http://localhost:3000/login', {
+    fetch(`${process.env.HOST}:${process.env.PORT}/login`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

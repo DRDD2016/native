@@ -20,7 +20,7 @@ export function confirmEmail (email) {
   console.log('email', email);
   return (dispatch) => {
     dispatch(confirmEmailRequest());
-    fetch('http://localhost:3000/reset-password', {
+    fetch(`${process.env.HOST}:${process.env.PORT}/reset-password`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
