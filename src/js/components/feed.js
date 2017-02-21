@@ -18,29 +18,31 @@ export default class Feed extends Component {
   render () {
     const { user_id, allEvents, feed, isFetching, handleSelection, displaySome, displayAll, filterActive, selectedFilter } = this.props;
 
-    const mappedFeed = [].concat(feed).reverse().map((data, i) => {
+    const mappedFeed = [].concat(feed).reverse().map(({ feed_item, id }, i) => {
+
       return (
         <FeedItem
           user_id={ user_id }
           key={ Math.random() }
           index={ i }
-          event_id={ data.event_id }
-          timestamp={ data.timestamp }
-          name={ data.name }
-          is_poll={ data.is_poll }
-          what={ data.what }
-          where={ data.where }
-          when={ data.when }
+          event_id={ feed_item.event_id }
+          timestamp={ feed_item.timestamp }
+          name={ feed_item.name }
+          is_poll={ feed_item.is_poll }
+          what={ feed_item.what }
+          where={ feed_item.where }
+          when={ feed_item.when }
           inviteesNumber={ undefined }
-          userIsHost={ data.host_user_id === user_id }
-          hostID={ data.host_user_id }
-          firstname={ data.firstname }
-          surname={ data.surname }
-          photo_url={ data.photo_url }
-          subject_user_id={ data.subject_user_id }
-          viewed={ data.viewed }
-          edited={ data.edited }
+          userIsHost={ feed_item.host_user_id === user_id }
+          hostID={ feed_item.host_user_id }
+          firstname={ feed_item.firstname }
+          surname={ feed_item.surname }
+          photo_url={ feed_item.photo_url }
+          subject_user_id={ feed_item.subject_user_id }
+          viewed={ feed_item.viewed }
+          edited={ feed_item.edited }
           handleSelection={ handleSelection }
+          id={ id }
         />
       );
     });

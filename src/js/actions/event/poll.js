@@ -1,3 +1,4 @@
+import Config from 'react-native-config';
 import { NavigationActions } from '@exponent/ex-navigation';
 import Router from '../../router';
 import { store } from '../../init-store';
@@ -19,7 +20,7 @@ export function postVote (token, vote, event_id) { // eslint-disable-line
   return (dispatch) => {
     dispatch(postVoteRequest());
 
-    fetch(`http://localhost:3000/votes/${event_id}`, {
+    fetch(`${Config.URI}/votes/${event_id}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -71,7 +72,7 @@ export function postVoteFailure (error) {
 export function finaliseEvent (token, hostEventChoices, event_id) { // eslint-disable-line
   return (dispatch) => {
     dispatch(finaliseEventRequest());
-    fetch(`http://localhost:3000/events/${event_id}`, {
+    fetch(`${Config.URI}/events/${event_id}`, {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',

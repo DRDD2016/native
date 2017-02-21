@@ -1,3 +1,4 @@
+import Config from 'react-native-config';
 import { NavigationActions } from '@exponent/ex-navigation';
 import { store } from '../init-store';
 import Router from '../router';
@@ -27,7 +28,7 @@ export function loginUser (email, password) {
 
   return (dispatch) => {
     dispatch(loginUserRequest());
-    fetch('http://localhost:3000/login', {
+    fetch(`${Config.URI}/login`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

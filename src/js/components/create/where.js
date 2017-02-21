@@ -1,4 +1,5 @@
 /* eslint-disable react/no-array-index-key */
+import Config from 'react-native-config';
 import React, { Component } from 'react';
 import { View, Text, Dimensions } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -54,7 +55,7 @@ export default class Where extends Component {
             onPress={(searchData, details, index = inputKey) => this.onPlaceSearch(searchData, details, index)}
             query={{
               types: ['establishment', 'geocode'],
-              key: process.env.GOOGLE_PLACES_API_KEY || require('../../keys').GOOGLE_PLACES_API_KEY,
+              key: Config.GOOGLE_PLACES_API_KEY,
               language: 'en'
             }}
             styles={{

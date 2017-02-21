@@ -11,16 +11,14 @@ import { hydrateCreateEvent, clearCreateEvent } from '../actions/create';
 import normaliseVoteData from '../lib/normalise-vote-data';
 
 
-const user_id = 3;
-
-const mapStateToProps = ({ event }) => {
+const mapStateToProps = ({ event, user }) => {
   return {
     isPoll: event.data.is_poll,
     event: event.data,
     vote_count: event.vote_count,
     rsvps: event.data.rsvps, // host
     isFetching: event.data.isFetching,
-    userIsHost: user_id === event.data.host_user_id,
+    userIsHost: user.user_id === event.data.host_user_id,
     voteSaved: event.poll.voteSaved,
     finalChoices: event.poll.finalChoices,
     error: event.data.error
