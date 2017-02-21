@@ -74,7 +74,7 @@ export const updateRsvpFailure = error => ({
 export function getEvent (token, event_id) {
   return (dispatch) => {
     dispatch(getEventRequest());
-    fetch(`${Config.HOST}:${Config.PORT}/events/${event_id}`, {
+    fetch(`${Config.URI}/events/${event_id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ export function editEvent (token, event, event_id) {
 
   return (dispatch) => {
     dispatch(editEventRequest());
-    fetch(`${Config.HOST}:${Config.PORT}/events/${event_id}`, {
+    fetch(`${Config.URI}/events/${event_id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ export function editEvent (token, event, event_id) {
 export function submitCode (token, code) {
   return (dispatch) => {
     dispatch(submitCodeRequest());
-    fetch(`${Config.HOST}:${Config.PORT}/events/rsvps`, {
+    fetch(`${Config.URI}/events/rsvps`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -151,7 +151,7 @@ export function submitCode (token, code) {
 export function updateRsvp (token, event_id, status) {
   return (dispatch) => {
     dispatch(updateRsvpRequest());
-    fetch(`${Config.HOST}:${Config.PORT}/events/${event_id}/rsvps`, {
+    fetch(`${Config.URI}/events/${event_id}/rsvps`, {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',

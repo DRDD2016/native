@@ -20,7 +20,7 @@ export function postVote (token, vote, event_id) { // eslint-disable-line
   return (dispatch) => {
     dispatch(postVoteRequest());
 
-    fetch(`${Config.HOST}:${Config.PORT}/votes/${event_id}`, {
+    fetch(`${Config.URI}/votes/${event_id}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -72,7 +72,7 @@ export function postVoteFailure (error) {
 export function finaliseEvent (token, hostEventChoices, event_id) { // eslint-disable-line
   return (dispatch) => {
     dispatch(finaliseEventRequest());
-    fetch(`${Config.HOST}:${Config.PORT}/events/${event_id}`, {
+    fetch(`${Config.URI}/events/${event_id}`, {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',

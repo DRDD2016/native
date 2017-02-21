@@ -28,7 +28,7 @@ export function loginUser (email, password) {
 
   return (dispatch) => {
     dispatch(loginUserRequest());
-    fetch(`${Config.HOST}:${Config.PORT}/login`, {
+    fetch(`${Config.URI}/login`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

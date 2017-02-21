@@ -59,7 +59,7 @@ export function setWhen (data, inputKey, format) {
 export function saveEvent (token, eventData) { //eslint-disable-line
   return function (dispatch) {
     dispatch(saveEventRequest());
-    fetch(`${Config.HOST}:${Config.PORT}/events`, {
+    fetch(`${Config.URI}/events`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

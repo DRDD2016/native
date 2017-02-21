@@ -22,7 +22,7 @@ export function confirmEmail (email) {
   console.log('email', email);
   return (dispatch) => {
     dispatch(confirmEmailRequest());
-    fetch(`${Config.HOST}:${Config.PORT}/reset-password`, {
+    fetch(`${Config.URI}/reset-password`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

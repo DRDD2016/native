@@ -27,7 +27,7 @@ export function signupUser (firstname, surname, email, password) {
 
   return (dispatch) => {
     dispatch(signupUserRequest());
-    fetch(`${Config.HOST}:${Config.PORT}/signup`, {
+    fetch(`${Config.URI}/signup`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

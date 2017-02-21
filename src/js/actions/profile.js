@@ -50,7 +50,7 @@ export const logout = () => ({
 export function editName (token, user_id, firstname, surname) {
   return (dispatch) => {
     dispatch(editNameRequest());
-    fetch(`${Config.HOST}:${Config.PORT}/users/${user_id}`, {
+    fetch(`${Config.URI}/users/${user_id}`, {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',
@@ -75,7 +75,7 @@ export function editName (token, user_id, firstname, surname) {
 export function uploadPhoto (token, formData) {
   return (dispatch) => {
     dispatch(uploadPhotoRequest());
-    fetch(`${Config.HOST}:${Config.PORT}/upload`, {
+    fetch(`${Config.URI}/upload`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
