@@ -5,6 +5,7 @@ export const CHANGE_NAME = 'CHANGE_NAME';
 export const UPLOAD_PHOTO_REQUEST = 'UPLOAD_PHOTO_REQUEST';
 export const UPLOAD_PHOTO_SUCCESS = 'UPLOAD_PHOTO_SUCCESS';
 export const UPLOAD_PHOTO_FAILURE = 'UPLOAD_PHOTO_FAILURE';
+export const LOGOUT = 'LOGOUT';
 
 export const changeName = (value, category) => ({
   type: CHANGE_NAME,
@@ -38,6 +39,10 @@ export const uploadPhotoSuccess = data => ({
 export const uploadPhotoFailure = error => ({
   type: UPLOAD_PHOTO_FAILURE,
   error
+});
+
+export const logout = () => ({
+  type: LOGOUT
 });
 
 export function editName (token, user_id, firstname, surname) {

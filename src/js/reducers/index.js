@@ -7,7 +7,6 @@ import event from './event/index';
 import feed from './feed.old';
 import create from './create';
 import user from './user';
-import reset from './reset-password';
 import confirmUserEmail from './confirm-email';
 
 
@@ -18,7 +17,6 @@ export default combineReducers({
   feed,
   create,
   user,
-  reset,
   confirmUserEmail,
   form
 });

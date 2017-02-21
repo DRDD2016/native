@@ -89,6 +89,10 @@ export default function user (state = initialState, action) {
         isFetching: false,
         errorUpload: action.error
       };
+    case profile.LOGOUT:
+      return {
+        ...state
+      };
     default:
       return state;
   }
