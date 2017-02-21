@@ -10,8 +10,6 @@ import { store } from './init-store';
 import Router from './router';
 import socket from './socket-router'; // eslint-disable-line no-unused-vars
 
-require('dotenv').config(); // will not use in production
-
 // disable remote debugger warning in a simulator
 console.disableYellowBox = true;
 

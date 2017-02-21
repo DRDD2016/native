@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-vars*/
+import Config from 'react-native-config';
+
 export const RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST';
 export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
 export const RESET_PASSWORD_FAILURE = 'RESET_PASSWORD_FAILURE';
@@ -22,7 +24,7 @@ export function newPassword (password) {
 
   return (dispatch) => {
     dispatch(resetPasswordRequest());
-    // fetch(`${process.env.HOST}:${process.env.PORT}/resetPassword`, {
+    // fetch(`${Config.HOST}:${Config.PORT}/resetPassword`, {
     //   method: 'POST',
     //   headers: {
     //     Accept: 'application/json',

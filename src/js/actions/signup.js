@@ -1,3 +1,4 @@
+import Config from 'react-native-config';
 import { NavigationActions } from '@exponent/ex-navigation';
 import { store } from '../init-store';
 import Router from '../router';
@@ -26,7 +27,7 @@ export function signupUser (firstname, surname, email, password) {
 
   return (dispatch) => {
     dispatch(signupUserRequest());
-    fetch(`${process.env.HOST}:${process.env.PORT}/signup`, {
+    fetch(`${Config.HOST}:${Config.PORT}/signup`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

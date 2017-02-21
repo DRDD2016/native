@@ -1,3 +1,5 @@
+import Config from 'react-native-config';
+
 export const EDIT_NAME_REQUEST = 'EDIT_NAME_REQUEST';
 export const EDIT_NAME_SUCCESS = 'EDIT_NAME_SUCCESS';
 export const EDIT_NAME_FAILURE = 'EDIT_NAME_FAILURE';
@@ -43,7 +45,7 @@ export const uploadPhotoFailure = error => ({
 export function editName (token, user_id, firstname, surname) {
   return (dispatch) => {
     dispatch(editNameRequest());
-    fetch(`${process.env.HOST}:${process.env.PORT}/users/${user_id}`, {
+    fetch(`${Config.HOST}:${Config.PORT}/users/${user_id}`, {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',
@@ -68,7 +70,7 @@ export function editName (token, user_id, firstname, surname) {
 export function uploadPhoto (token, formData) {
   return (dispatch) => {
     dispatch(uploadPhotoRequest());
-    fetch(`${process.env.HOST}:${process.env.PORT}/upload`, {
+    fetch(`${Config.HOST}:${Config.PORT}/upload`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
