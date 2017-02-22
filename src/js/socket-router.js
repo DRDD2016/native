@@ -17,6 +17,7 @@ socket.on('connected', () => {
       store.dispatch(getFeedRequest()); // spinner
 
       socket.on(`feed:${user_id}`, (data) => {
+        console.log(data, 'socetrouter');
         store.dispatch(getFeedSuccess(data));
       });
 

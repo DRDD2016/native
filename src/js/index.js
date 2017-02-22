@@ -18,13 +18,15 @@ const navigationContext = new NavigationContext({
   store
 });
 
+console.log((require('react-native-config').default));
+
 class App extends Component {
 
   render () {
     return (
       <Provider store={ store }>
         <NavigationProvider context={ navigationContext }>
-          <StackNavigation id="root" navigatorUID="root" initialRoute={ Router.getRoute('splash') } />
+          <StackNavigation id="root" navigatorUID="root" initialRoute={ Router.getRoute('navbar') } />
         </NavigationProvider>
       </Provider>
     );
