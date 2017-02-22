@@ -13,6 +13,7 @@ export default function feed (state = initialState, action) {
   switch (action.type) {
 
     case actions.GET_FEED_REQUEST:
+    case actions.FEED_ITEM_TOUCHED_REQUEST:
       return {
         ...state,
         isFetching: true
@@ -25,7 +26,21 @@ export default function feed (state = initialState, action) {
         data: [...state.data, ...action.data]
       };
 
+    case actions.FEED_ITEM_TOUCHED_SUCCESS: {
+      const index = state.data.findIndex((ele) => { // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex
+        return ele.id.toString() === action.id.toString();
+      });
+      const newFeed = [...state.data];
+      newFeed[index].feed_item.viewed = true;
+      return {
+        ...state,
+        isFetching: false,
+        data: newFeed
+      };
+    }
+
     case actions.GET_FEED_FAILURE:
+    case actions.FEED_ITEM_TOUCHED_FAILURE:
       return {
         ...state,
         isFetching: false,

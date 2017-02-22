@@ -32,7 +32,6 @@ export default class Feed extends Component {
           what={ feed_item.what }
           where={ feed_item.where }
           when={ feed_item.when }
-          inviteesNumber={ undefined }
           userIsHost={ feed_item.host_user_id === user_id }
           hostID={ feed_item.host_user_id }
           firstname={ feed_item.firstname }
@@ -42,7 +41,7 @@ export default class Feed extends Component {
           viewed={ feed_item.viewed }
           edited={ feed_item.edited }
           handleSelection={ handleSelection }
-          id={ id }
+          feed_item_id={ id }
         />
       );
     });
