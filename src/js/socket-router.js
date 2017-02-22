@@ -14,10 +14,9 @@ socket.on('connected', () => {
   .then((user_id) => {
     if (user_id) {
       socket.emit(INIT_FEED, user_id);
-      store.dispatch(getFeedRequest()); // spinner
+      store.dispatch(getFeedRequest());
 
       socket.on(`feed:${user_id}`, (data) => {
-        console.log(data, 'socetrouter');
         store.dispatch(getFeedSuccess(data));
       });
 
