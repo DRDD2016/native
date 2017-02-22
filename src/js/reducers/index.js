@@ -4,7 +4,7 @@ import { NavigationReducer } from '@exponent/ex-navigation';
 // import auth from './auth';
 import calendar from './calendar.old';
 import event from './event/index';
-import feed from './feed.old';
+import feed from './feed';
 import create from './create';
 import user from './user';
 import confirmUserEmail from './confirm-email';

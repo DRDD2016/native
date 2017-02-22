@@ -14,7 +14,7 @@ moment.locale('en-gb');
 const FeedItem = ({ user_id, event_id, timestamp, firstname, surname,
   photo_url, where, when, userIsHost, is_poll, subject_user_id,
   handleSelection, viewed, inviteesNumber, name, edited }) => {
-  console.log('viewed?', viewed, where);
+  console.log('viewed?', viewed);
   const userIsSubject = subject_user_id === user_id;
   return (
     <Card style={[styles.cardStyle, viewed && styles.viewedFeedItemStyle]}>
