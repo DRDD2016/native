@@ -5,7 +5,7 @@ import { NavigationActions } from '@exponent/ex-navigation';
 import { store } from '../init-store';
 import Router from '../router';
 import Event from '../components/event';
-import { getEvent, updateRsvp } from '../actions/event/data';
+import { getEvent, updateRsvp, deleteEvent } from '../actions/event/data';
 import { postVote, finaliseEvent } from '../actions/event/poll';
 import { hydrateCreateEvent, clearCreateEvent } from '../actions/create';
 import normaliseVoteData from '../lib/normalise-vote-data';
@@ -48,8 +48,12 @@ const mapDispatchToProps = dispatch => ({
     });
   },
   handleDeleteEvent: (event_id) => {
-
-    // delete event
+    AsyncStorage.getItem('spark_token')
+    .then((token) => {
+      if (token) {
+        dispatch(deleteEvent(token, event_id));
+      }
+    });
   },
   handleEdit: (event) => {
     dispatch(hydrateCreateEvent(event));

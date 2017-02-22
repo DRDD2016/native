@@ -58,6 +58,7 @@ export function setWhen (data, inputKey, format) {
 
 export function saveEvent (token, eventData) { //eslint-disable-line
   return function (dispatch) {
+    console.log('---------', Config);
     dispatch(saveEventRequest());
     fetch(`${Config.URI}/events`, {
       method: 'POST',
