@@ -13,15 +13,15 @@ moment.locale('en-gb');
 
 const FeedItem = ({ user_id, event_id, timestamp, firstname, surname,
   photo_url, where, when, userIsHost, is_poll, subject_user_id,
-  handleSelection, viewed, inviteesNumber, name, edited }) => {
-  console.log('viewed?', viewed, where);
+  handleSelection, viewed, feed_item_id, name, edited }) => {
+
   const userIsSubject = subject_user_id === user_id;
   return (
     <Card style={[styles.cardStyle, viewed && styles.viewedFeedItemStyle]}>
       <CardSection style={styles.cardSectionFeedItem}>
         <TouchableOpacity
           style={styles.cardButtonStyle}
-          onPress={ () => handleSelection(event_id, viewed) }
+          onPress={ () => handleSelection(event_id, viewed, feed_item_id) }
         >
 
           <View style={styles.leftColumn}>
@@ -52,11 +52,6 @@ const FeedItem = ({ user_id, event_id, timestamp, firstname, surname,
               { name }
             </Text>
 
-            <View>
-              <Text style={styles.numberOfInvites}>
-                { inviteesNumber && userIsSubject && userIsHost && ` invitation sent to ${inviteesNumber} friends` }
-              </Text>
-            </View>
           </View>
 
           <View style={styles.rightColumnFeed}>
@@ -95,14 +90,17 @@ FeedItem.propTypes = {
   when: PropTypes.array.isRequired,
   userIsHost: PropTypes.bool.isRequired,
   is_poll: PropTypes.bool.isRequired,
-  subject_user_id: PropTypes.string.isRequired,
+  subject_user_id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]).isRequired,
   firstname: PropTypes.string.isRequired,
   surname: PropTypes.string.isRequired,
   photo_url: PropTypes.string.isRequired,
   handleSelection: PropTypes.func.isRequired,
   edited: PropTypes.bool,
-  viewed: PropTypes.bool,
-  inviteesNumber: PropTypes.number
+  viewed: PropTypes.bool.isRequired,
+  feed_item_id: PropTypes.number.isRequired
 };
 
 export default FeedItem;
