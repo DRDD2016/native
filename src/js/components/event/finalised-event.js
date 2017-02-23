@@ -53,14 +53,14 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
     <View style={{ flex: 1 }}>
       { userIsHost ? <Text>Host view</Text> : <Text>Invitee view</Text> }
 
-      { userIsHost ?
+      { userIsHost &&
         <Button
           buttonStyle={{ backgroundColor: 'red', alignSelf: 'flex-end' }}
           textStyle={{ color: '#fff' }}
           onPress={ () => handleDeleteEvent(event.event_id) }
         >
           Delete
-        </Button> : ''
+        </Button>
       }
 
       <ScrollView>
@@ -88,7 +88,7 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
                 textStyle={styles.confirmButtonText}
                 onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_GOING) }
               >
-                <Text>Going</Text>
+                Going
               </Button>
               {
                 rsvps.going && rsvps.going.map((invitee) => {
@@ -104,7 +104,7 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
                 textStyle={styles.confirmButtonText}
                 onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_MAYBE) }
               >
-                <Text>Maybe</Text>
+                Maybe
               </Button>
               {
                 rsvps.maybe && rsvps.maybe.map((invitee) => {
@@ -120,7 +120,7 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
                 textStyle={styles.confirmButtonText}
                 onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_NOT_GOING) }
               >
-                <Text>Not Going</Text>
+                Not Going
               </Button>
               {
                 rsvps.not_going && rsvps.not_going.map((invitee) => {
@@ -137,6 +137,7 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
               rsvps.not_responded.map((invitee) => {
                 return (
                   <InviteeCard
+                    key={ invitee.firstname + Date.now() }
                     firstname={ invitee.firstname }
                     photo_url={ invitee.photo_url }
                   />
