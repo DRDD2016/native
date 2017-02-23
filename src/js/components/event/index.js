@@ -55,7 +55,7 @@ export default class Event extends React.Component {
     if (this.props.error) {
       return (
         <View>
-          <Text>This event has been deleted...</Text>
+          <Text>This event has been cancelled!</Text>
         </View>
       );
     } else if (this.props.userIsHost && this.props.isPoll) {
