@@ -46,12 +46,23 @@ const inlineStyle = {
   }
 };
 
-const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps }) => {
+const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEvent }) => {
   console.log('EVENT OWNER', event.host_user_id, 'ID', event.event_id, 'HOST?', userIsHost);
 
   return (
     <View style={{ flex: 1 }}>
       { userIsHost ? <Text>Host view</Text> : <Text>Invitee view</Text> }
+
+      { userIsHost ?
+        <Button
+          buttonStyle={{ backgroundColor: 'red', alignSelf: 'flex-end' }}
+          textStyle={{ color: '#fff' }}
+          onPress={ () => handleDeleteEvent(event.event_id) }
+        >
+          Delete
+        </Button> : ''
+      }
+
       <ScrollView>
 
         <View style={{ flexDirection: 'row' }}>

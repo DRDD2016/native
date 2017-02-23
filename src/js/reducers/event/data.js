@@ -29,6 +29,7 @@ export default function data (state = initialState, action) {
     case actions.EDIT_EVENT_REQUEST:
     case actions.SUBMIT_CODE_REQUEST:
     case actions.UPDATE_RSVP_REQUEST:
+    case actions.DELETE_EVENT_REQUEST:
       return { ...state, isFetching: true };
 
     case actions.GET_EVENT_SUCCESS:
@@ -37,10 +38,14 @@ export default function data (state = initialState, action) {
     case actions.UPDATE_RSVP_SUCCESS:
       return { ...state, ...action.data, isFetching: false };
 
+    case actions.DELETE_EVENT_SUCCESS:
+      return { ...state, isFetching: false };
+
     case actions.GET_EVENT_FAILURE:
     case actions.EDIT_EVENT_FAILURE:
     case actions.SUBMIT_CODE_FAILURE:
     case actions.UPDATE_RSVP_FAILURE:
+    case actions.DELETE_EVENT_FAILURE:
       return { ...state, ...action.error, isFetching: false };
 
     default:

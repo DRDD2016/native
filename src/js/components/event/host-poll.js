@@ -34,7 +34,6 @@ export default class HostPoll extends Component {
   render () {
 
     const { event, vote_count, handleConfirmEvent, finalChoices } = this.props;
-    console.log('finalChoice', finalChoices);
     const allCategoriesSelected = Object.keys(this.state)
       .map(category => this.state[category].length)
       .every(length => length === 1);

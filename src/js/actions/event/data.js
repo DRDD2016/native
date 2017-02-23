@@ -13,6 +13,9 @@ export const EDIT_EVENT_FAILURE = 'EDIT_EVENT_FAILURE';
 export const UPDATE_RSVP_REQUEST = 'UPDATE_RSVP_REQUEST';
 export const UPDATE_RSVP_SUCCESS = 'UPDATE_RSVP_SUCCESS';
 export const UPDATE_RSVP_FAILURE = 'UPDATE_RSVP_FAILURE';
+export const DELETE_EVENT_REQUEST = 'DELETE_EVENT_REQUEST';
+export const DELETE_EVENT_SUCCESS = 'DELETE_EVENT_SUCCESS';
+export const DELETE_EVENT_FAILURE = 'DELETE_EVENT_FAILURE';
 
 export const getEventRequest = () => ({
   type: GET_EVENT_REQUEST
@@ -68,6 +71,19 @@ export const updateRsvpSuccess = data => ({
 
 export const updateRsvpFailure = error => ({
   type: UPDATE_RSVP_FAILURE,
+  error
+});
+
+export const deleteEventRequest = () => ({
+  type: DELETE_EVENT_REQUEST
+});
+
+export const deleteEventSuccess = () => ({
+  type: DELETE_EVENT_SUCCESS
+});
+
+export const deleteEventFailure = error => ({
+  type: DELETE_EVENT_FAILURE,
   error
 });
 
@@ -166,12 +182,34 @@ export function updateRsvp (token, event_id, status) {
         if (data.error) {
           dispatch(updateRsvpFailure(data.error));
         } else {
-          console.log(data);
           dispatch(updateRsvpSuccess(data));
         }
       })
       .catch(err => dispatch(updateRsvpFailure(err)));
     })
     .catch(err => dispatch(updateRsvpFailure(err)));
+  };
+}
+
+export function deleteEvent (token, event_id) {
+  return (dispatch) => {
+    dispatch(deleteEventRequest());
+    fetch(`${Config.URI}/events/${event_id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        authorization: token
+      }
+    })
+    .then((res) => {
+      res.json()
+      .then(() => {
+        dispatch(deleteEventSuccess());
+        resetStackTo('feed');
+      })
+      .catch(err => dispatch(deleteEventFailure(err)));
+    })
+    .catch(err => dispatch(deleteEventFailure(err)));
   };
 }
