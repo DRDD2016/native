@@ -107,8 +107,6 @@ export default class Where extends Component {
       );
     });
 
-    const hideNext = data[0] === '';
-
     return (
       <View>
         <View style={ [styles.container, { marginHorizontal: 10 }] }>
@@ -124,17 +122,12 @@ export default class Where extends Component {
           <AddInput data={ data } handler={ addInput } />
 
           <View style={ styles.row }>
-            { (hideNext) &&
-              <View />
-            }
-            { (!hideNext) &&
-              <Button
-                buttonStyle={ styles.buttonStyle }
-                onPress={ () => this.nextPage(name) }
-              >
-                Next
-              </Button>
-            }
+            <Button
+              buttonStyle={ styles.buttonStyle }
+              onPress={ () => this.nextPage(name) }
+            >
+              Next
+            </Button>
           </View>
 
         </View>
