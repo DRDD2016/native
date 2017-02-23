@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, Text, Image, TextInput, Platform } from 'react-native';
+import { View, Text, Image, TextInput, Platform, ScrollView } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import Button from './common/Button';
 import Spinner from './common/Spinner';
@@ -66,7 +66,7 @@ export default class Profile extends Component {
     const { photo_url, firstname, surname, handleLogOut, handleChangeName } = this.props;
     const hideEditButton = (firstname === '' ? styles.hideEditButton : [styles.buttonStyle, { backgroundColor: 'green' }]);
     return (
-      <View style={styles.profilePage}>
+      <ScrollView style={styles.profilePage}>
         <View style={styles.container}>
 
           <View style={styles.row}>
@@ -77,7 +77,7 @@ export default class Profile extends Component {
             <Image style={styles.uiProfilePagePhotoCircularImage} source={ this.state.avatarSource || { uri: photo_url } } />
 
             <Button
-              buttonStyle={ [hideEditButton, { marginTop: 10, alignSelf: 'center' }] }
+              buttonStyle={ [hideEditButton, { marginTop: 10, alignSelf: 'center', backgroundColor: 'grey' }] }
               textStyle={{ color: '#fff' }}
               onPress={ this.selectPhotoTapped }
             >
@@ -126,7 +126,7 @@ export default class Profile extends Component {
             </Button>
           </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
