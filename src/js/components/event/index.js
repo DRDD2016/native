@@ -13,7 +13,7 @@ export default class Event extends React.Component {
     navigationBar: {
       title (params) {
         if (params.name === undefined) {
-          return '';
+          return 'Sorry...';
         }
         return params.name;
       },
@@ -55,7 +55,7 @@ export default class Event extends React.Component {
     if (this.props.error) {
       return (
         <View>
-          <Text>Whoops!  Something went wrong...</Text>
+          <Text>This event has been deleted...</Text>
         </View>
       );
     } else if (this.props.userIsHost && this.props.isPoll) {
@@ -86,6 +86,7 @@ export default class Event extends React.Component {
           userIsHost={ this.props.userIsHost }
           rsvps={ this.props.rsvps }
           rsvpToEvent={ this.props.rsvpToEvent }
+          handleDeleteEvent={ this.props.handleDeleteEvent }
         />
       );
     }

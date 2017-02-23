@@ -182,7 +182,6 @@ export function updateRsvp (token, event_id, status) {
         if (data.error) {
           dispatch(updateRsvpFailure(data.error));
         } else {
-          console.log(data);
           dispatch(updateRsvpSuccess(data));
         }
       })
@@ -207,6 +206,7 @@ export function deleteEvent (token, event_id) {
       res.json()
       .then(() => {
         dispatch(deleteEventSuccess());
+        resetStackTo('feed');
       })
       .catch(err => dispatch(deleteEventFailure(err)));
     })
