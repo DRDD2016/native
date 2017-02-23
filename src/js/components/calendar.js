@@ -1,5 +1,5 @@
 /* eslint-disable*/
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import CalendarItem from './calendar-item';
 import FilterPanel from './general/filter-panel';
@@ -7,7 +7,6 @@ import Spinner from './common/Spinner';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 
-const user_id = 1;
 export default class Calendar extends Component {
 
   static route = {
@@ -21,7 +20,7 @@ export default class Calendar extends Component {
   }
 
   render () {
-    const { allEvents, isFetching, displaySome, displayAll, filterActive, selectedFilter } = this.props;
+    const { allEvents, isFetching, displaySome, displayAll, filterActive, selectedFilter, user_id } = this.props;
     const sortedData = this.props.filteredEvents.sort((a, b) => {
       return a.when[0] > b.when[0];
     });
@@ -57,8 +56,8 @@ export default class Calendar extends Component {
                 return (
                   <CalendarItem
                     key={ item.event_id }
-                    userIsHost={ item.host_id === user_id }
-                    rsvpStatus={ item.RSVP }
+                    userIsHost={ item.host_user_id === user_id }
+                    rsvpStatus={ item.status }
                     name={ item.name }
                     what={ item.what }
                     where={ item.where }
@@ -74,3 +73,18 @@ export default class Calendar extends Component {
     );
   }
 }
+
+
+Calendar.propTypes = {
+  allEvents: PropTypes.object.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  displaySome: PropTypes.func.isRequired,
+  displayAll: PropTypes.func.isRequired,
+  filterActive: PropTypes.bool.isRequired,
+  selectedFilter: PropTypes.string,
+  filteredEvents: PropTypes.array.isRequired,
+  user_id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]).isRequired
+};

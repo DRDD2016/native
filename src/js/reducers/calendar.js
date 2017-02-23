@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import * as actions from '../actions/calendar.old';
+import * as actions from '../actions/calendar';
 
 const calendarData = [{
   when: [
@@ -40,7 +40,7 @@ const calendarData = [{
 }];
 
 const initialState = {
-  data: calendarData,
+  data: [],
   isFetching: false,
   error: undefined,
   selectedFilter: undefined,

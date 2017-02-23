@@ -33,11 +33,12 @@ export default class HostPoll extends Component {
 
   render () {
 
-    const { event, vote_count, handleConfirmEvent, finalChoices } = this.props;
+    const { event, voteCount, handleConfirmEvent, finalChoices } = this.props;
     const allCategoriesSelected = Object.keys(this.state)
       .map(category => this.state[category].length)
       .every(length => length === 1);
 
+    console.log('HERE???', voteCount);
     return (
       <View>
         <Text>POLL (HOST VIEW)</Text>
@@ -47,7 +48,7 @@ export default class HostPoll extends Component {
             category={'what'}
             data={event.what}
             toggleSelection={this.toggleSelection}
-            vote_count={vote_count}
+            voteCount={voteCount}
             userIsHost
           />
         </View>
@@ -56,7 +57,7 @@ export default class HostPoll extends Component {
             category={'where'}
             data={event.where}
             toggleSelection={this.toggleSelection}
-            vote_count={vote_count}
+            voteCount={voteCount}
             userIsHost
           />
         </View>
@@ -65,7 +66,7 @@ export default class HostPoll extends Component {
             category={'when'}
             data={event.when}
             toggleSelection={this.toggleSelection}
-            vote_count={vote_count}
+            voteCount={voteCount}
             userIsHost
           />
         </View>

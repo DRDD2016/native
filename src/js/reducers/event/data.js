@@ -8,7 +8,6 @@ export const initialState = {
   description: undefined,
   note: undefined,
   is_poll: undefined,
-  vote_count: undefined,
   what: [],
   where: [],
   when: [],

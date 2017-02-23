@@ -66,6 +66,7 @@ export default class Event extends React.Component {
           event={ this.props.event }
           finalChoices={ this.props.finalChoices }
           handleConfirmEvent={ this.props.handleConfirmEvent }
+          voteCount={ this.props.voteCount }
         />
       );
     } else if (!this.props.userIsHost && this.props.isPoll) {

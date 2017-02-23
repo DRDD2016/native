@@ -1,6 +1,8 @@
+import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Calendar from '../components/calendar';
-import { applyFilter, clearFilter } from '../actions/calendar.old';
+import { applyFilter, clearFilter } from '../actions/calendar';
+import { getEvent } from '../actions/event/data';
 import filterFeed from '../lib/filter-feed';
 import getFutureEvents from '../lib/get-future-events';
 
@@ -32,6 +34,14 @@ const mapDispatchToProps = dispatch => ({
   displayAll: () => {
 
     dispatch(clearFilter());
+  },
+  handleOnPress: (event_id) => {
+    AsyncStorage.getItem('spark_token')
+    .then((token) => {
+      if (token) {
+        dispatch(getEvent(token, event_id));
+      }
+    });
   }
 });
 
