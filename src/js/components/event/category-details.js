@@ -64,39 +64,39 @@ export default class CategoryDetails extends Component {
         {
           data.map((datum, index) => {
 
-            if (category === 'when') {
-              return (
-                <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
-
-                  <View style={{ flexBasis: 50 }}>
-                    <Text style={styles.optionTitleWhat}>{ index === 0 && categoryTitle }</Text>
-                  </View>
-
-                  <View style={{ flexBasis: 250 }}>
-                    <View>
-                      <Icon.Button
-                        name={this.icons[category]}
-                        size={16}
-                        borderRadius={100}
-                        color={(!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category]}
-                        backgroundColor={(!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index] ? colours[category] : OFF_WHITE}
-                        onPress={() => this._handleOnPress(category, datum, index)}
-                      >
-                        { `${formatDate(datum, 'half')}, ${formatTime(datum) || 'TBC'}` }
-                      </Icon.Button>
-                    </View>
-                  </View>
-
-                  {
-                    voteCount &&
-                    <View>
-                      <Text>{ voteCount[index] }</Text>
-                    </View>
-                  }
-
-                </View>
-              );
-            }
+            // if (category === 'when') {
+            //   return (
+            //     <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
+            //
+            //       <View style={{ flexBasis: 50 }}>
+            //         <Text style={styles.optionTitleWhat}>{ index === 0 && categoryTitle }</Text>
+            //       </View>
+            //
+            //       <View style={{ flexBasis: 200 }}>
+            //         <View>
+            //           <Icon.Button
+            //             name={this.icons[category]}
+            //             size={16}
+            //             borderRadius={100}
+            //             color={(!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category]}
+            //             backgroundColor={(!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index] ? colours[category] : OFF_WHITE}
+            //             onPress={() => this._handleOnPress(category, datum, index)}
+            //           >
+            //             { `${formatDate(datum, 'half')}, ${formatTime(datum) || 'TBC'}` }
+            //           </Icon.Button>
+            //         </View>
+            //       </View>
+            //
+            //       {
+            //         voteCount &&
+            //         <View>
+            //           <Text>{ voteCount[index] }</Text>
+            //         </View>
+            //       }
+            //
+            //     </View>
+            //   );
+            // }
             return (
               <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
 
@@ -104,7 +104,7 @@ export default class CategoryDetails extends Component {
                   <Text style={styles.optionTitleWhat}>{ index === 0 && categoryTitle }</Text>
                 </View>
 
-                <View style={{ flexBasis: 250 }}>
+                <View style={{ flexBasis: 200 }}>
                   <View>
                     <Icon.Button
                       name={this.icons[category]}
@@ -114,7 +114,8 @@ export default class CategoryDetails extends Component {
                       backgroundColor={(!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index] ? colours[category] : OFF_WHITE}
                       onPress={() => this._handleOnPress(category, datum, index)}
                     >
-                      { datum || 'TBC' }
+                      { category === 'when' && `${formatDate(datum, 'half')}, ${formatTime(datum) || 'TBC'}` }
+                      { !category === 'when' && (datum || 'TBC') }
                     </Icon.Button>
                   </View>
                 </View>

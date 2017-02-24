@@ -1,5 +1,6 @@
 import Config from 'react-native-config';
 import { NavigationActions } from '@exponent/ex-navigation';
+import { getCalendar } from '../calendar';
 import Router from '../../router';
 import { store } from '../../init-store';
 
@@ -137,6 +138,7 @@ export function finaliseEvent (token, hostEventChoices, event_id) { // eslint-di
       res.json()
       .then((data) => {
         dispatch(finaliseEventSuccess(data));
+        dispatch(getCalendar(token));
       })
       .catch(err => dispatch(finaliseEventFailure(err)));
     })
