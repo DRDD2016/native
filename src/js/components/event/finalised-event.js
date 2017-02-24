@@ -21,7 +21,6 @@ const STATUS_NOT_GOING = 'not_going';
 const inlineStyle = {
   button: {
     flexBasis: 100,
-    fontSize: 16,
     paddingHorizontal: 8,
     marginBottom: 4
   },
@@ -31,9 +30,7 @@ const inlineStyle = {
   },
   redButton: {
     flexBasis: 100,
-    fontSize: 16,
     paddingHorizontal: 5,
-    // marginBottom: 5,
     backgroundColor: colours.red,
     borderColor: colours.red
   },
