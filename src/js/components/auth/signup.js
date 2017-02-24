@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import { FormTextInput, FormPasswordInput } from './form-components';
@@ -39,34 +39,36 @@ class Signup extends Component {
   render () {
 
     return (
-      <View style={{ flex: 1, justifyContent: 'center' }}>
-        <View style={{ marginTop: 50 }}>
-          <Text style={{ paddingLeft: 5 }}>First name</Text>
-          <View style={ styles.row }>
-            <Field name="firstname" component={ FormTextInput } />
-          </View>
+      <ScrollView>
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <View style={{ marginTop: 50 }}>
+            <Text style={{ paddingLeft: 5 }}>First name</Text>
+            <View style={ styles.row }>
+              <Field name="firstname" component={ FormTextInput } />
+            </View>
 
-          <Text style={{ paddingLeft: 5 }}>Surname</Text>
-          <View style={ styles.row }>
-            <Field name="surname" component={ FormTextInput } />
-          </View>
+            <Text style={{ paddingLeft: 5 }}>Surname</Text>
+            <View style={ styles.row }>
+              <Field name="surname" component={ FormTextInput } />
+            </View>
 
-          <Text style={{ paddingLeft: 5 }}>Email</Text>
-          <View style={ styles.row }>
-            <Field name="email" component={ FormTextInput } isEmail />
-          </View>
+            <Text style={{ paddingLeft: 5 }}>Email</Text>
+            <View style={ styles.row }>
+              <Field name="email" component={ FormTextInput } isEmail />
+            </View>
 
-          <Text style={{ paddingLeft: 5 }}>Password</Text>
-          <View style={ styles.row }>
-            <Field name="password" component={ FormPasswordInput } />
+            <Text style={{ paddingLeft: 5 }}>Password</Text>
+            <View style={ styles.row }>
+              <Field name="password" component={ FormPasswordInput } />
+            </View>
+            <Text style={{ paddingLeft: 5 }}>Confirm password</Text>
+            <View style={ styles.row }>
+              <Field name="confirmPassword" component={ FormPasswordInput } />
+            </View>
+            { this.renderButton() }
           </View>
-          <Text style={{ paddingLeft: 5 }}>Confirm password</Text>
-          <View style={ styles.row }>
-            <Field name="confirmPassword" component={ FormPasswordInput } />
-          </View>
-          { this.renderButton() }
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
