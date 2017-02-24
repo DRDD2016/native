@@ -17,7 +17,7 @@ export default function poll (state = initialState, action) {
     case actions.FINALISE_EVENT_REQUEST:
       return { ...state, isSavingVote: true };
 
-    case action.GET_VOTES_SUCCESS:
+    case actions.GET_VOTES_SUCCESS:
       return { ...state, isSavingVote: false, voteCount: action.data };
 
     case actions.POST_VOTE_SUCCESS:
