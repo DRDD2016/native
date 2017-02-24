@@ -24,7 +24,7 @@ export default class CategoryDetails extends Component {
   _handleOnPress (category, selection, index) {
     if (this.state.isToggleable) {
       this.toggleHighlight(this.props.userIsHost, index);
-      
+
       if (this.props.userIsHost) {
         this.props.toggleSelection(category, selection);
       } else {
@@ -57,9 +57,9 @@ export default class CategoryDetails extends Component {
   }
 
   render () {
-    const { category, data } = this.props;
+    const { category, data, voteCount } = this.props;
     const categoryTitle = `W${category.substring(1)}`;
-
+    console.log('VOTE COUNT', voteCount);
     return (
       <View>
         {
@@ -87,6 +87,14 @@ export default class CategoryDetails extends Component {
                       </Icon.Button>
                     </View>
                   </View>
+
+                  {
+                    voteCount &&
+                    <View>
+                      <Text>{ voteCount[category][index] }</Text>
+                    </View>
+                  }
+
                 </View>
               );
             }
@@ -111,6 +119,14 @@ export default class CategoryDetails extends Component {
                     </Icon.Button>
                   </View>
                 </View>
+
+                {
+                  voteCount &&
+                  <View>
+                    <Text>{ voteCount[category][index] }</Text>
+                  </View>
+                }
+
               </View>
             );
           })

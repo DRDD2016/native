@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
 import { NavigationReducer } from '@exponent/ex-navigation';
 // import auth from './auth';
-import calendar from './calendar.old';
+import calendar from './calendar';
 import event from './event/index';
 import feed from './feed';
 import create from './create';

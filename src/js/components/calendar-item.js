@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react/forbid-prop-types */
+import React, { PropTypes } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../lib/format-date';
@@ -11,13 +12,11 @@ import styles from '../../styles';
 to FeedItem.jsx for feed view
 ***/
 
-const CalendarItem = ({ what, where, when,
- coverPhoto, rsvpStatus, userIsHost }) => {
-  // need to add onPress handler for Button.
+const CalendarItem = ({ event_id, name, where, when, coverPhoto, rsvpStatus, userIsHost, handleOnPress }) => {
   return (
     <Card style={styles.cardStyle}>
       <CardSection style={styles.cardSectionCalendar}>
-        <TouchableOpacity style={styles.cardButtonStyle}>
+        <TouchableOpacity style={styles.cardButtonStyle} onPress={() => handleOnPress(event_id)}>
           <View style={styles.leftColumn}>
 
             <View style={styles.cardTopRow}>
@@ -29,16 +28,16 @@ const CalendarItem = ({ what, where, when,
                 {!userIsHost && rsvpStatus === 'maybe' &&
                   <Icon name="question-circle" size={20} color="orange" />
                 }
-                {!userIsHost && rsvpStatus === 'notGoing' &&
+                {!userIsHost && rsvpStatus === 'not_going' &&
                   <Icon name="times-circle" size={20} color="red" />
                 }
-                {!userIsHost && rsvpStatus === null &&
+                {!userIsHost && rsvpStatus === 'not_responded' &&
                   <Icon name="exclamation-circle" size={20} color="gray" />
                 }
               </View>
 
-              <Text style={styles.calendarTitle}>
-                { what }
+              <Text numberOfLines={1} style={styles.calendarTitle}>
+                { name }
               </Text>
 
             </View>
@@ -47,12 +46,12 @@ const CalendarItem = ({ what, where, when,
 
               <Text style={styles.date}>
                 <Icon name="calendar-o" size={14} color="gray" />
-                { ` ${formatDate(when[0].date).toUpperCase() || 'TBC'}` }
+                { ` ${formatDate(when[0]).toUpperCase() || 'TBC'}` }
               </Text>
 
-              <Text style={styles.placeName}>
+              <Text numberOfLines={1} style={styles.placeName}>
                 <Icon name="map-marker" size={14} color="gray" />
-                { ` ${where[0].placeName || 'TBC'} ${where[0].placeAddress}` }
+                { ` ${where[0] || 'TBC'}` }
               </Text>
 
             </View>
@@ -73,6 +72,24 @@ const CalendarItem = ({ what, where, when,
     </Card>
 
   );
+};
+
+CalendarItem.propTypes = {
+  event_id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]).isRequired,
+  name: PropTypes.string.isRequired,
+  where: PropTypes.array.isRequired,
+  when: PropTypes.array.isRequired,
+  rsvpStatus: PropTypes.oneOf([
+    'going',
+    'maybe',
+    'not_going',
+    'not_responded'
+  ]).isRequired,
+  userIsHost: PropTypes.bool.isRequired,
+  handleOnPress: PropTypes.func.isRequired
 };
 
 export default CalendarItem;

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Calendar from '../components/calendar';
-import { applyFilter, clearFilter } from '../actions/calendar.old';
+import { applyFilter, clearFilter } from '../actions/calendar';
 import filterFeed from '../lib/filter-feed';
 import getPastEvents from '../lib/getPastEvents';
 

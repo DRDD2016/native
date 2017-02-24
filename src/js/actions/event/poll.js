@@ -3,6 +3,10 @@ import { NavigationActions } from '@exponent/ex-navigation';
 import Router from '../../router';
 import { store } from '../../init-store';
 
+export const GET_VOTES_REQUEST = 'GET_VOTES_REQUEST';
+export const GET_VOTES_SUCCESS = 'GET_VOTES_SUCCESS';
+export const GET_VOTES_FAILURE = 'GET_VOTES_FAILURE';
+
 export const POST_VOTE_REQUEST = 'POST_VOTE_REQUEST';
 export const POST_VOTE_SUCCESS = 'POST_VOTE_SUCCESS';
 export const POST_VOTE_FAILURE = 'POST_VOTE_FAILURE';
@@ -11,9 +15,59 @@ export const FINALISE_EVENT_REQUEST = 'FINALISE_EVENT_REQUEST';
 export const FINALISE_EVENT_SUCCESS = 'FINALISE_EVENT_SUCCESS';
 export const FINALISE_EVENT_FAILURE = 'FINALISE_EVENT_FAILURE';
 
-
 /********
-* VOTE ACTIONS
+* GET VOTES ACTIONS
+********/
+
+export function getVotes (token, event_id) {
+  return (dispatch) => {
+    dispatch(getVotesRequest());
+
+    fetch(`${Config.URI}/votes/${event_id}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        authorization: token
+      }
+    })
+    .then((res) => {
+      res.json()
+      .then((data) => {
+        console.log('???', data);
+        if (res.status === 200) {
+          console.log('GOT VOTES', data);
+          dispatch(getVotesSuccess(data));
+        } else {
+          dispatch(getVotesFailure(new Error('Something went wrong')));
+        }
+      });
+    })
+    .catch((err) => {
+      dispatch(getVotesFailure(err));
+    });
+  };
+}
+export function getVotesRequest () {
+  return {
+    type: GET_VOTES_REQUEST
+  };
+}
+
+export function getVotesSuccess (data) {
+  return {
+    type: GET_VOTES_SUCCESS,
+    data
+  };
+}
+export function getVotesFailure (error) {
+  return {
+    type: GET_VOTES_FAILURE,
+    error
+  };
+}
+/********
+* POST VOTE ACTIONS
 ********/
 
 export function postVote (token, vote, event_id) { // eslint-disable-line
@@ -66,7 +120,7 @@ export function postVoteFailure (error) {
 
 
 /********
-* CONFIRM EVENT ACTIONS
+* FINALISE EVENT ACTIONS
 ********/
 
 export function finaliseEvent (token, hostEventChoices, event_id) { // eslint-disable-line

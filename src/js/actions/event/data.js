@@ -1,4 +1,5 @@
 import Config from 'react-native-config';
+import { getVotes } from './poll';
 import { pushTo, resetStackTo } from '../../lib/navigate';
 
 export const GET_EVENT_REQUEST = 'GET_EVENT_REQUEST';
@@ -101,6 +102,10 @@ export function getEvent (token, event_id) {
     .then((res) => {
       res.json()
       .then((data) => {
+        if (data.is_poll) {
+
+          dispatch(getVotes(token, event_id));
+        }
         dispatch(getEventSuccess(data));
         pushTo('event');
       })

@@ -1,4 +1,4 @@
-import * as actions from '../../../src/js/actions/calendar.old';
+import * as actions from '../../../src/js/actions/calendar';
 
 describe('GET_CALENDAR actions', () => {
 
