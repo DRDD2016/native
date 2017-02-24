@@ -16,7 +16,7 @@ const CalendarItem = ({ event_id, name, where, when, coverPhoto, rsvpStatus, use
   return (
     <Card style={styles.cardStyle}>
       <CardSection style={styles.cardSectionCalendar}>
-        <TouchableOpacity style={styles.cardButtonStyle} onPress={() => console.log('PRESSED', event_id)}>
+        <TouchableOpacity style={styles.cardButtonStyle} onPress={() => handleOnPress(event_id)}>
           <View style={styles.leftColumn}>
 
             <View style={styles.cardTopRow}>
@@ -28,15 +28,15 @@ const CalendarItem = ({ event_id, name, where, when, coverPhoto, rsvpStatus, use
                 {!userIsHost && rsvpStatus === 'maybe' &&
                   <Icon name="question-circle" size={20} color="orange" />
                 }
-                {!userIsHost && rsvpStatus === 'notGoing' &&
+                {!userIsHost && rsvpStatus === 'not_going' &&
                   <Icon name="times-circle" size={20} color="red" />
                 }
-                {!userIsHost && rsvpStatus === null &&
+                {!userIsHost && rsvpStatus === 'not_responded' &&
                   <Icon name="exclamation-circle" size={20} color="gray" />
                 }
               </View>
 
-              <Text style={styles.calendarTitle}>
+              <Text numberOfLines={1} style={styles.calendarTitle}>
                 { name }
               </Text>
 
@@ -49,7 +49,7 @@ const CalendarItem = ({ event_id, name, where, when, coverPhoto, rsvpStatus, use
                 { ` ${formatDate(when[0]).toUpperCase() || 'TBC'}` }
               </Text>
 
-              <Text style={styles.placeName}>
+              <Text numberOfLines={1} style={styles.placeName}>
                 <Icon name="map-marker" size={14} color="gray" />
                 { ` ${where[0] || 'TBC'}` }
               </Text>

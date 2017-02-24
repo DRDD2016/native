@@ -46,9 +46,9 @@ export default class Calendar extends Component {
           <View style={styles.containerFeed}>
             {
               this.props.filteredEvents.length === 0 && !isFetching &&
-                <Text style={styles.smallMessageText}>
-                  You have no past or upcoming events events.
-                </Text>
+              <Text style={styles.smallMessageText}>
+                You have no upcoming events.
+              </Text>
             }
             {
               !isFetching && sortedData.map((item) => {
@@ -63,6 +63,7 @@ export default class Calendar extends Component {
                     where={ item.where }
                     when={ item.when }
                     event_id={ item.event_id }
+                    handleOnPress={ this.props.handleOnPress }
                   />
                 );
               })
@@ -86,5 +87,6 @@ Calendar.propTypes = {
   user_id: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
-  ]).isRequired
+  ]).isRequired,
+  handleOnPress: PropTypes.func.isRequired
 };

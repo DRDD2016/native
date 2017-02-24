@@ -8,7 +8,6 @@ import getFutureEvents from '../lib/get-future-events';
 
 
 const mapStateToProps = ({ calendar }) => {
-
   const futureEvents = calendar.data.filter(getFutureEvents);
   const data = calendar.data;
   const filterActive = calendar.filterActive;
@@ -23,7 +22,6 @@ const mapStateToProps = ({ calendar }) => {
     selectedFilter
   };
 };
-
 
 const mapDispatchToProps = dispatch => ({
 

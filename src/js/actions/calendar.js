@@ -36,7 +36,7 @@ export function getCalendar (token) {
       res.json()
       .then((data) => {
         if (data) {
-          dispatch(getCalendarSuccess(true));
+          dispatch(getCalendarSuccess(data));
         }
       })
       .catch(err => dispatch(getCalendarFailure(err)));
