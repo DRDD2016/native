@@ -17,16 +17,16 @@ const ConfirmWhen = ({ data }) => {
         key={ i }
       >
         { (hideTitle) &&
-          <View style={{ flexBasis: 60, marginHorizontal: 5 }} />
+          <View style={{ flexBasis: 50, marginHorizontal: 5 }} />
         }
         { (!hideTitle) &&
-          <View style={{ flexBasis: 60, marginHorizontal: 5 }}>
+          <View style={{ flexBasis: 50, marginHorizontal: 5 }}>
             <Text style={styles.optionTitleWhen}>
               When
             </Text>
           </View>
         }
-        <View style={{ flexBasis: 300 }}>
+        <View style={{ flexBasis: 250 }}>
           <View style={{}}>
             <Button buttonStyle={styles.optionSelectedWhen} textStyle={[styles.optionTextSelected, {lineHeight: 20}]}>
               <Icon name="calendar" size={18} color="white" />

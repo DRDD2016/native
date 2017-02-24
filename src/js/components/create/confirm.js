@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Linking, ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 // import Router from '../../router';
 import ConfirmWhat from './confirm-what';
 import ConfirmWhere from './confirm-where';
@@ -26,18 +26,8 @@ export default class Confirm extends Component {
     }
   }
 
-  openWhatsapp = () => {
-    const url = 'whatsapp://send?text=Hello%20from%20Spark!';
-    Linking.canOpenURL(url).then((supported) => {
-      if (!supported) {
-        console.error(`Can't handle url: ${url}`);
-      }
-      return Linking.openURL(url);
-    }).catch(err => console.error('An error occurred', err));
-  };
-
   render () {
-    const { what, where, when, description, note, saveEvent } = this.props;
+    const { what, where, when, description, note, handleOnPress } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <ScrollView>
@@ -52,7 +42,7 @@ export default class Confirm extends Component {
             <Button
               buttonStyle={styles.confirmButton}
               textStyle={styles.confirmButtonText}
-              onPress={ saveEvent }
+              onPress={ handleOnPress }
             >
               Invite friends
             </Button>
