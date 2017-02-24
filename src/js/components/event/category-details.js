@@ -59,7 +59,6 @@ export default class CategoryDetails extends Component {
   render () {
     const { category, data, voteCount } = this.props;
     const categoryTitle = `W${category.substring(1)}`;
-    console.log('VOTE COUNT', voteCount);
     return (
       <View>
         {
@@ -69,11 +68,11 @@ export default class CategoryDetails extends Component {
               return (
                 <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
 
-                  <View style={{ flexBasis: 60 }}>
+                  <View style={{ flexBasis: 50 }}>
                     <Text style={styles.optionTitleWhat}>{ index === 0 && categoryTitle }</Text>
                   </View>
 
-                  <View style={{ flexBasis: 300 }}>
+                  <View style={{ flexBasis: 250 }}>
                     <View>
                       <Icon.Button
                         name={this.icons[category]}
@@ -91,7 +90,7 @@ export default class CategoryDetails extends Component {
                   {
                     voteCount &&
                     <View>
-                      <Text>{ voteCount[category][index] }</Text>
+                      <Text>{ voteCount[index] }</Text>
                     </View>
                   }
 
@@ -101,11 +100,11 @@ export default class CategoryDetails extends Component {
             return (
               <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
 
-                <View style={{ flexBasis: 60 }}>
+                <View style={{ flexBasis: 50 }}>
                   <Text style={styles.optionTitleWhat}>{ index === 0 && categoryTitle }</Text>
                 </View>
 
-                <View style={{ flexBasis: 300 }}>
+                <View style={{ flexBasis: 250 }}>
                   <View>
                     <Icon.Button
                       name={this.icons[category]}
@@ -123,7 +122,7 @@ export default class CategoryDetails extends Component {
                 {
                   voteCount &&
                   <View>
-                    <Text>{ voteCount[category][index] }</Text>
+                    <Text>{ voteCount[index] }</Text>
                   </View>
                 }
 
