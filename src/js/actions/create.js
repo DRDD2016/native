@@ -1,4 +1,5 @@
 import Config from 'react-native-config';
+import { openWhatsApp, composeWhatsAppMessage } from '../lib/whatsapp';
 
 export const SET_DETAILS = 'SET_DETAILS';
 export const SET_WHAT = 'SET_WHAT';
@@ -56,9 +57,8 @@ export function setWhen (data, inputKey, format) {
 * SAVE EVENT ACTIONS
 ********/
 
-export function saveEvent (token, eventData) { //eslint-disable-line
+export function saveEvent (token, eventData) {
   return function (dispatch) {
-    console.log('---------', Config);
     dispatch(saveEventRequest());
     fetch(`${Config.URI}/events`, {
       method: 'POST',
@@ -73,12 +73,13 @@ export function saveEvent (token, eventData) { //eslint-disable-line
       response.json()
       .then((data) => {
         if (data.error) {
-          console.error('error', data.error);
           dispatch(saveEventFailure(data.error));
         } else {
-
           dispatch(saveEventSuccess());
           console.log('CODE', data);
+          openWhatsApp(
+            composeWhatsAppMessage(eventData, data.code)
+          );
         }
       });
     })
