@@ -25,7 +25,7 @@ export function initStore (initialState) {
 }
 export const store = initStore();
 // initialise store with previous app state
-persistStore(
+export const persistor = persistStore(
   store,
   {
     storage: AsyncStorage,
