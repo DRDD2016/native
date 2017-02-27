@@ -24,7 +24,6 @@ export default class Calendar extends Component {
     const sortedData = this.props.filteredEvents.sort((a, b) => {
       return a.when[0] > b.when[0];
     });
-
     return (
       <View>
         {
@@ -77,7 +76,7 @@ export default class Calendar extends Component {
 
 
 Calendar.propTypes = {
-  allEvents: PropTypes.object.isRequired,
+  allEvents: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   displaySome: PropTypes.func.isRequired,
   displayAll: PropTypes.func.isRequired,

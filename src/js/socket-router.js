@@ -2,9 +2,9 @@ import Config from 'react-native-config';
 import io from 'socket.io-client';
 import { AsyncStorage } from 'react-native';
 import { store } from './init-store';
-import { getFeedRequest, getFeedSuccess, getFeedFailure } from './actions/feed'; // eslint-disable-line no-unused-vars
+import { getFeedRequest, getFeedSuccess, getFeedFailure } from './actions/feed';
 
-const location = `${Config.URI}`; // will be something different when server is hosted!
+const location = `${Config.URI}`;
 const socket = io(`${location}/feed`, { transports: ['websocket'] });
 const INIT_FEED = 'INIT_FEED';
 
@@ -18,6 +18,13 @@ socket.on('connected', () => {
 
       socket.on(`feed:${user_id}`, (data) => {
         store.dispatch(getFeedSuccess(data));
+      });
+
+      socket.on(`hydrateFeed:${user_id}`, (data) => {
+        const existingFeed = store.getState().feed.data;
+        if (existingFeed.length === 0) { // only add to feed if it's empty (avoid duplicates)
+          store.dispatch(getFeedSuccess(data));
+        }
       });
 
       socket.on(`failure:${user_id}`, (error) => {
