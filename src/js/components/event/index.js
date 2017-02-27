@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import InviteePoll from './invitee-poll';
 import HostPoll from './host-poll';
@@ -6,7 +6,7 @@ import FinalisedEvent from './finalised-event';
 import colours from '../../../styles/colours';
 import Button from '../common/Button';
 
-export default class Event extends React.Component {
+export default class Event extends Component {
 
   static route = {
     navigationBar: {
@@ -30,24 +30,6 @@ export default class Event extends React.Component {
       backgroundColor: colours.blue,
       tintColor: colours.white
     }
-  }
-
-  componentDidMount () {
-    setTimeout(() => {
-      if (this.props.userIsHost) {
-        this.props.navigator.updateCurrentRouteParams({
-          name: this.props.event.name,
-          userIsHost: this.props.userIsHost,
-          navigator: this.props.navigator,
-          event: this.props.event,
-          handleEdit: this.props.handleEdit
-        });
-      } else {
-        this.props.navigator.updateCurrentRouteParams({
-          name: this.props.event.name
-        });
-      }
-    }, 300);
   }
 
   eventRouter () {

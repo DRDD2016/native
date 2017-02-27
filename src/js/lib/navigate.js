@@ -5,13 +5,14 @@ import Router from '../router';
 /**
  * pushTo dispatches an action to navigate app to a given route
  * @param {string} route - route to navigate to
+ * @param {object} params - params for target route (optional)
  * @returns {void}
  */
 
-export function pushTo (route) { // eslint-disable-line import/prefer-default-export
+export function pushTo (route, params) {
   if (route) {
     const navigatorUID = store.getState().navigation.currentNavigatorUID;
-    store.dispatch(NavigationActions.push(navigatorUID, Router.getRoute(route)));
+    store.dispatch(NavigationActions.push(navigatorUID, Router.getRoute(route, params)));
   }
 }
 
@@ -28,6 +29,12 @@ export function resetStackTo (route, index = 0) {
   }
 }
 
+/**
+ * jumpTo navigates from one TabNavigation tab to another
+ * @param {string} from - tab route to navigate from
+ * @param {string} to - tab route to navigate to
+ * @returns {void}
+ */
 
 export function jumpTo (from, to) {
   NavigationActions.performAction(({ tabs, stacks }) => {

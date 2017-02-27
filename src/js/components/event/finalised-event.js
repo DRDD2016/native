@@ -1,14 +1,9 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-else-return */
-/* eslint-disable no-unused-vars */
 /* eslint-disable arrow-body-style */
 import React from 'react';
 import { View, Image, Text, ScrollView } from 'react-native';
 import FinalisedWhat from '../create/confirm-what';
 import FinalisedWhere from '../create/confirm-where';
 import FinalisedWhen from '../create/confirm-when';
-import formatDate from '../../lib/format-date';
-import formatTime from '../../lib/format-time';
 import Button from '../common/Button';
 import InviteeCard from './invitee-card';
 import styles from '../../../styles';
