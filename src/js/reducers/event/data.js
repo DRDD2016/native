@@ -17,7 +17,8 @@ export const initialState = {
     not_going: [],
     not_responded: []
   },
-  isFetching: false
+  isFetching: false,
+  error: undefined
 };
 
 export default function data (state = initialState, action) {
@@ -45,7 +46,7 @@ export default function data (state = initialState, action) {
     case actions.SUBMIT_CODE_FAILURE:
     case actions.UPDATE_RSVP_FAILURE:
     case actions.DELETE_EVENT_FAILURE:
-      return { ...state, ...action.error, isFetching: false };
+      return { ...state, error: action.error, isFetching: false };
 
     default:
       return state;

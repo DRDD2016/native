@@ -109,9 +109,9 @@ export function getEvent (token, event_id) {
         dispatch(getEventSuccess(data));
         pushTo('event');
       })
-      .catch(err => dispatch(getEventFailure(err)));
+      .catch(err => dispatch(getEventFailure(err.message)));
     })
-    .catch(err => dispatch(getEventFailure(err)));
+    .catch(err => dispatch(getEventFailure(err.message)));
   };
 }
 
@@ -133,9 +133,9 @@ export function editEvent (token, event, event_id) {
       .then((data) => {
         dispatch(editEventSuccess(data));
       })
-      .catch(err => dispatch(editEventFailure(err)));
+      .catch(err => dispatch(editEventFailure(err.message)));
     })
-    .catch(err => dispatch(editEventFailure(err)));
+    .catch(err => dispatch(editEventFailure(err.message)));
   };
 }
 
@@ -163,9 +163,9 @@ export function submitCode (token, code) {
           resetStackTo('event');
         }
       })
-      .catch(err => dispatch(submitCodeFailure(err)));
+      .catch(err => dispatch(submitCodeFailure(err.message)));
     })
-    .catch(err => dispatch(submitCodeFailure(err)));
+    .catch(err => dispatch(submitCodeFailure(err.message)));
   };
 }
 
@@ -190,9 +190,9 @@ export function updateRsvp (token, event_id, status) {
           dispatch(updateRsvpSuccess(data));
         }
       })
-      .catch(err => dispatch(updateRsvpFailure(err)));
+      .catch(err => dispatch(updateRsvpFailure(err.message)));
     })
-    .catch(err => dispatch(updateRsvpFailure(err)));
+    .catch(err => dispatch(updateRsvpFailure(err.message)));
   };
 }
 
@@ -213,8 +213,8 @@ export function deleteEvent (token, event_id) {
         dispatch(deleteEventSuccess());
         resetStackTo('feed');
       })
-      .catch(err => dispatch(deleteEventFailure(err)));
+      .catch(err => dispatch(deleteEventFailure(err.message)));
     })
-    .catch(err => dispatch(deleteEventFailure(err)));
+    .catch(err => dispatch(deleteEventFailure(err.message)));
   };
 }

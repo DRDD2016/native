@@ -37,7 +37,7 @@ class Code extends Component {
   }
 
   render () {
-    const { handleSubmit, handleSubmitForm } = this.props;
+    const { handleSubmit, handleSubmitForm, codeError } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 70 }}>
@@ -57,6 +57,10 @@ class Code extends Component {
               <Text>JOIN EVENT</Text>
             </Button>
           </View>
+          {
+            codeError &&
+            <Text style={{ color: 'red' }}>{ codeError }</Text>
+          }
         </View>
       </View>
     );
