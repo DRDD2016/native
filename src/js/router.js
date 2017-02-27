@@ -39,6 +39,8 @@ const Router = createRouter(() => ({
   edit: () => EditContainer,
   code: () => Code,
   splash: () => Splash
-}));
+}),
+{ ignoreSerializableWarnings: true }
+);
 
 export default Router;

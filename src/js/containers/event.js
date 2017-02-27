@@ -56,12 +56,6 @@ const mapDispatchToProps = dispatch => ({
       }
     });
   },
-  handleEdit: (event) => {
-    dispatch(hydrateCreateEvent(event));
-    const navigatorUID = store.getState().navigation.currentNavigatorUID;
-    dispatch(NavigationActions.push(navigatorUID, Router.getRoute('edit')));
-    // get event?
-  },
   rsvpToEvent: (event_id, status) => {
     AsyncStorage.getItem('spark_token')
     .then((token) => {

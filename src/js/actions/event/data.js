@@ -1,6 +1,8 @@
 import Config from 'react-native-config';
 import { getVotes } from './poll';
+import { hydrateCreateEvent } from '../create';
 import { pushTo, resetStackTo } from '../../lib/navigate';
+import { store } from '../../init-store';
 
 export const GET_EVENT_REQUEST = 'GET_EVENT_REQUEST';
 export const GET_EVENT_SUCCESS = 'GET_EVENT_SUCCESS';
@@ -107,7 +109,16 @@ export function getEvent (token, event_id) {
           dispatch(getVotes(token, event_id));
         }
         dispatch(getEventSuccess(data));
-        pushTo('event');
+        const params = {
+          userIsHost: store.getState().user.user_id === data.host_user_id,
+          name: data.name,
+          event: data,
+          handleEdit: () => {
+            dispatch(hydrateCreateEvent(data));
+            pushTo('edit');
+          }
+        };
+        pushTo('event', params);
       })
       .catch(err => dispatch(getEventFailure(err.message)));
     })
