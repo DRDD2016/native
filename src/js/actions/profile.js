@@ -89,7 +89,7 @@ export function uploadPhoto (token, formData) {
       .then((data) => {
         dispatch(uploadPhotoSuccess(data));
       })
-      .catch(err => dispatch(uploadPhotoFailure('Something went wrong'))); // eslint-disable-line
+      .catch(() => dispatch(uploadPhotoFailure('Something went wrong')));
     })
     .catch(() => {
       dispatch(uploadPhotoFailure('Something went wrong'));
