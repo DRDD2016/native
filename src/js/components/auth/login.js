@@ -73,7 +73,6 @@ class Login extends Component {
 
   render () {
     const { handleSubmit, handleSubmitForm, navigator } = this.props;
-    console.log('server error', this.props.serverError);
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.container} />
