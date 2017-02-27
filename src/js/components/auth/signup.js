@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, ScrollView } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import hoistNonReactStatic from 'hoist-non-react-statics';
+import { persistor } from '../../init-store';
 import { FormTextInput, FormPasswordInput } from './form-components';
 import { signupValidator as validate } from './form-validation';
 import Spinner from '../common/Spinner';
@@ -18,6 +19,11 @@ class Signup extends Component {
       backgroundColor: colours.blue
     }
   }
+
+  componentWillMount () {
+    persistor.pause();
+  }
+
   renderButton = () => {
     const { handleSubmit, handleSubmitForm, isSigningUp } = this.props;
     if (isSigningUp) {

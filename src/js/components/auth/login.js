@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { persistor } from '../../init-store';
 import { FormTextInput, FormPasswordInput } from './form-components';
 import { loginValidator as validate } from './form-validation';
 import colours from '../../../styles/colours';
@@ -58,6 +59,10 @@ class Login extends Component {
       tintColor: colours.white,
       backgroundColor: colours.blue
     }
+  }
+
+  componentWillMount () {
+    persistor.pause();
   }
 
   renderServerError = () => {

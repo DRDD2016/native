@@ -1,6 +1,6 @@
 import Config from 'react-native-config';
 import { NavigationActions } from '@exponent/ex-navigation';
-import { store } from '../init-store';
+import { store, persistor } from '../init-store';
 import Router from '../router';
 import { storeToken, storeUserId } from '../lib/credentials';
 
@@ -38,6 +38,7 @@ export function signupUser (firstname, surname, email, password) {
     .then((response) => {
       response.json()
         .then((data) => {
+          persistor.resume();
           dispatch(signupUserSuccess({
             firstname: data.firstname,
             surname: data.surname,
