@@ -37,6 +37,9 @@ export function loginUser (email, password) {
       body: JSON.stringify({ email, password })
     })
     .then((response) => {
+      if (response.status === 401) {
+        dispatch(loginUserFailure('Wrong email or password!'));
+      }
       response.json()
         .then((data) => {
           dispatch(loginUserSuccess({
@@ -54,10 +57,11 @@ export function loginUser (email, password) {
           } else {
             dispatch(loginUserFailure(data.error));
           }
-        });
+        })
+        .catch(() => { dispatch(loginUserFailure('Wrong email or password!')); });
     })
-    .catch((error) => {
-      dispatch(loginUserFailure(error));
+    .catch(() => {
+      dispatch(loginUserFailure('Wrong email or password!'));
     });
   };
 }

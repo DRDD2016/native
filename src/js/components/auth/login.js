@@ -60,9 +60,15 @@ class Login extends Component {
     }
   }
 
+  renderServerError = () => {
+    if (this.props.serverError) {
+      return <Text style={{ color: 'red' }}>{this.props.serverError}</Text>;
+    }
+  }
+
   render () {
     const { handleSubmit, handleSubmitForm, navigator } = this.props;
-
+    console.log('server error', this.props.serverError);
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.container} />
@@ -79,6 +85,7 @@ class Login extends Component {
             </View>
             <Field style={styles.input} name="password" component={ FormPasswordInput } isLoginView />
           </View>
+          { this.renderServerError() }
           <TouchableOpacity activeOpacity={ 0.5 } onPress={handleSubmit(handleSubmitForm)}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>LOG IN</Text>

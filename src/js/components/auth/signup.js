@@ -36,6 +36,12 @@ class Signup extends Component {
     );
   };
 
+  renderServerError = () => {
+    if (this.props.serverError) {
+      return <Text style={{ color: 'red' }}>{this.props.serverError}</Text>;
+    }
+  }
+
   render () {
 
     return (
@@ -65,6 +71,7 @@ class Signup extends Component {
             <View style={ styles.row }>
               <Field name="confirmPassword" component={ FormPasswordInput } />
             </View>
+            { this.renderServerError() }
             { this.renderButton() }
           </View>
         </View>
