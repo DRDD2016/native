@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { AsyncStorage } from 'react-native';
+import { persistor } from '../init-store';
 import Profile from '../components/profile';
 import { changeName, editName, uploadPhoto, logout } from '../actions/profile';
 
@@ -22,6 +23,9 @@ const mapDispatchToProps = dispatch => ({
       AsyncStorage.removeItem('spark_user_id')
       .then(() => {
         dispatch(logout());
+        // clean up persisted state
+        persistor.purge();
+        // redirect
         const rootNavigator = nav.getNavigator('root');
         rootNavigator.replace('auth');
       });
