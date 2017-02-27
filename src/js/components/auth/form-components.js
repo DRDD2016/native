@@ -6,7 +6,7 @@ export function FormTextInput ({ isEmail, isLoginView, input: { value, onChange,
   return (
     <View style={{ flex: 1 }}>
       <TextInput
-        style={ isLoginView ? [styles.inputStyle, { fontSize: 19 }, { borderRadius: 0 }] : [styles.inputStyle, { fontSize: 19 }] }
+        style={ isLoginView ? [styles.inputStyle, { borderRadius: 0 }] : [styles.inputStyle] }
         onChangeText={ text => onChange(text) }
         onBlur={ text => onBlur(text) }
         value={ value }
@@ -15,7 +15,7 @@ export function FormTextInput ({ isEmail, isLoginView, input: { value, onChange,
         autoCorrect={ false }
       />
       {
-        touched && error && <Text style={{ color: '#ec3811' }}>{error}</Text>
+        touched && error && <Text style={{ color: '#ec3811', fontSize: 16, marginVertical: 2 }}>{error}</Text>
       }
     </View>
   );
@@ -25,7 +25,7 @@ export function FormPasswordInput ({ isLoginView, input: { value, onChange, onBl
   return (
     <View style={{ flex: 1 }}>
       <TextInput
-        style={ isLoginView ? [styles.inputStyle, { fontSize: 19 }, { borderRadius: 0 }] : [styles.inputStyle, { fontSize: 19 }] }
+        style={ isLoginView ? [styles.inputStyle, { borderRadius: 0 }] : [styles.inputStyle] }
         onChangeText={ text => onChange(text) }
         onBlur={ text => onBlur(text) }
         value={ value }
@@ -33,7 +33,7 @@ export function FormPasswordInput ({ isLoginView, input: { value, onChange, onBl
         secureTextEntry
       />
       {
-        touched && error && <Text style={{ color: '#ec3811' }}>{error}</Text>
+        touched && error && <Text style={{ color: '#ec3811', fontSize: 16, marginVertical: 2 }}>{error}</Text>
       }
     </View>
   );
