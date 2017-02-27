@@ -6,7 +6,7 @@ export function FormTextInput ({ isEmail, isLoginView, input: { value, onChange,
   return (
     <View style={{ flex: 1 }}>
       <TextInput
-        style={ isLoginView ? [styles.inputStyle, { borderRadius: 0 }] : [styles.inputStyle] }
+        style={ isLoginView ? [styles.inputStyleAuth, { borderRadius: 0 }] : [styles.inputStyleAuth] }
         onChangeText={ text => onChange(text) }
         onBlur={ text => onBlur(text) }
         value={ value }
@@ -25,7 +25,7 @@ export function FormPasswordInput ({ isLoginView, input: { value, onChange, onBl
   return (
     <View style={{ flex: 1 }}>
       <TextInput
-        style={ isLoginView ? [styles.inputStyle, { borderRadius: 0 }] : [styles.inputStyle] }
+        style={ isLoginView ? [styles.inputStyleAuth, { borderRadius: 0 }] : [styles.inputStyleAuth] }
         onChangeText={ text => onChange(text) }
         onBlur={ text => onBlur(text) }
         value={ value }
