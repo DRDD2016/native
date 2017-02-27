@@ -18,7 +18,7 @@ const mapStateToProps = ({ create }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveEvent: () => {
+    handleOnPress: () => {
       const event = store.getState().create;
       // TODO
       // add host photo url

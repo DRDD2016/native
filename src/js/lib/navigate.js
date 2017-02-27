@@ -27,3 +27,11 @@ export function resetStackTo (route, index = 0) {
     store.dispatch(NavigationActions.immediatelyResetStack(navigatorUID, [Router.getRoute(route)], index));
   }
 }
+
+
+export function jumpTo (from, to) {
+  NavigationActions.performAction(({ tabs, stacks }) => {
+    tabs('main').jumpToTab(to);
+    stacks(from).immediatelyResetStack([Router.getRoute(to)], 0);
+  });
+}
