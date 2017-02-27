@@ -56,7 +56,7 @@ class Signup extends Component {
 
     return (
       <ScrollView>
-        <View style={{ flex: 1, justifyContent: 'center' }}>
+        <View style={{ flex: 1, justifyContent: 'center', marginBottom: 30 }}>
           <View style={{ marginTop: 50 }}>
             <Text style={{ paddingLeft: 5 }}>First name</Text>
             <View style={ styles.row }>

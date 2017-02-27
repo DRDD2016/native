@@ -17,7 +17,7 @@ const styles = {
   },
   inputWrap: {
     flexDirection: 'row',
-    marginVertical: 10,
+    marginVertical: 12,
     height: 40,
     backgroundColor: 'transparent'
   },
