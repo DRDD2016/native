@@ -44,7 +44,11 @@ class Signup extends Component {
 
   renderServerError = () => {
     if (this.props.serverError) {
-      return <Text style={{ color: 'red' }}>{this.props.serverError}</Text>;
+      return (
+        <View style={ styles.row }>
+          <Text style={{ color: 'red' }}>{this.props.serverError}</Text>
+        </View>
+      );
     }
   }
 
