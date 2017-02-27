@@ -54,7 +54,8 @@ export default function user (state = initialState, action) {
         surname: action.data.surname,
         email: action.data.email,
         photo_url: action.data.photo_url,
-        user_id: action.data.user_id
+        user_id: action.data.user_id,
+        error: undefined
       };
 
     case profile.UPLOAD_PHOTO_SUCCESS:
@@ -91,7 +92,8 @@ export default function user (state = initialState, action) {
       };
     case profile.LOGOUT:
       return {
-        ...state
+        ...state,
+        error: undefined
       };
     default:
       return state;

@@ -1,6 +1,6 @@
 import Config from 'react-native-config';
 import { NavigationActions } from '@exponent/ex-navigation';
-import { store } from '../init-store';
+import { store, persistor } from '../init-store';
 import Router from '../router';
 import { storeToken, storeUserId } from '../lib/credentials';
 
@@ -37,8 +37,12 @@ export function loginUser (email, password) {
       body: JSON.stringify({ email, password })
     })
     .then((response) => {
+      if (response.status === 401) {
+        dispatch(loginUserFailure('Wrong email or password!'));
+      }
       response.json()
         .then((data) => {
+          persistor.resume();
           dispatch(loginUserSuccess({
             firstname: data.firstname,
             surname: data.surname,
@@ -54,10 +58,11 @@ export function loginUser (email, password) {
           } else {
             dispatch(loginUserFailure(data.error));
           }
-        });
+        })
+        .catch(() => { dispatch(loginUserFailure('Wrong email or password!')); });
     })
-    .catch((error) => {
-      dispatch(loginUserFailure(error));
+    .catch(() => {
+      dispatch(loginUserFailure('Wrong email or password!'));
     });
   };
 }

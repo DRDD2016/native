@@ -3,7 +3,8 @@ import Signup from '../../components/auth/signup';
 import { signupUser } from '../../actions/signup';
 
 const mapStateToProps = ({ user }) => ({
-  isSigningUp: user.isSigningUp
+  isSigningUp: user.isSigningUp,
+  serverError: user.error
 });
 
 const mapDispatchToProps = () => ({

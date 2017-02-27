@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { persistor } from '../../init-store';
 import { FormTextInput, FormPasswordInput } from './form-components';
 import { loginValidator as validate } from './form-validation';
 import colours from '../../../styles/colours';
@@ -60,9 +61,18 @@ class Login extends Component {
     }
   }
 
+  componentWillMount () {
+    persistor.pause();
+  }
+
+  renderServerError = () => {
+    if (this.props.serverError) {
+      return <Text style={{ color: 'red' }}>{this.props.serverError}</Text>;
+    }
+  }
+
   render () {
     const { handleSubmit, handleSubmitForm, navigator } = this.props;
-
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.container} />
@@ -79,6 +89,7 @@ class Login extends Component {
             </View>
             <Field style={styles.input} name="password" component={ FormPasswordInput } isLoginView />
           </View>
+          { this.renderServerError() }
           <TouchableOpacity activeOpacity={ 0.5 } onPress={handleSubmit(handleSubmitForm)}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>LOG IN</Text>
