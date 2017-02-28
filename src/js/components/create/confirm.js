@@ -10,12 +10,6 @@ import colours from '../../../styles/colours';
 
 export default class Confirm extends Component {
 
-  // const nextPage = () => {
-  //   navigation.performAction(({ tabs, stacks }) => {
-  //     tabs('main').jumpToTab('feed');
-  //     stacks('confirm').immediatelyResetStack([Router.getRoute('feed')], 0);
-  //   });
-  // };
   static route = {
     navigationBar: {
       title (params) {
@@ -25,6 +19,13 @@ export default class Confirm extends Component {
       backgroundColor: colours.blue
     }
   }
+
+  // goToCreate = () => {
+  //   this.props.navigation.performAction(({ tabs, stacks }) => {
+  //     tabs('main').jumpToTab('details');
+  //     stacks('confirm').immediatelyResetStack([Router.getRoute('details')], 0);
+  //   });
+  // }
 
   render () {
     const { what, where, when, description, note, handleOnPress } = this.props;
