@@ -33,8 +33,12 @@ export function confirmEmail (email) {
     .then((response) => {
       response.json()
         .then((data) => {
-          console.log('data', data);
-          dispatch(confirmEmailSuccess(data));
+          if (data.error) {
+            dispatch(confirmEmailFailure(data.error));
+          } else {
+            console.log('data', data);
+            dispatch(confirmEmailSuccess(data));
+          }
         })
         .catch(err => dispatch(confirmEmailFailure(err)));
     })

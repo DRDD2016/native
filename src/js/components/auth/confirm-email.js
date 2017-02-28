@@ -38,8 +38,8 @@ class ConfirmEmail extends Component {
   }
 
   renderServerError = () => {
-    if (this.props.error) {
-      return <Text style={{ color: 'red' }}>{ this.props.error }</Text>;
+    if (this.props.confirmEmailError) {
+      return <Text style={{ color: 'red' }}>{ this.props.confirmEmailError }</Text>;
     }
   }
 
