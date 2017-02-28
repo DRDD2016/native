@@ -1,6 +1,5 @@
 import Config from 'react-native-config';
 import { openWhatsApp, composeWhatsAppMessage } from '../lib/whatsapp';
-import { jumpTo } from '../lib/navigate';
 import { store } from '../init-store';
 
 export const SET_DETAILS = 'SET_DETAILS';
@@ -80,7 +79,7 @@ export function saveEvent (token, eventData) { //eslint-disable-line
 
           dispatch(saveEventSuccess());
           openWhatsApp(composeWhatsAppMessage(store.getState().user, eventData, data.code));
-          jumpTo('confirm', 'feed');
+          dispatch(clearCreateEvent());
         }
       });
     })
