@@ -30,7 +30,7 @@ export default function data (state = initialState, action) {
     case actions.SUBMIT_CODE_REQUEST:
     case actions.UPDATE_RSVP_REQUEST:
     case actions.DELETE_EVENT_REQUEST:
-      return { ...state, isFetching: true };
+      return { ...state, isFetching: true, error: undefined };
 
     case actions.GET_EVENT_SUCCESS:
     case actions.EDIT_EVENT_SUCCESS:
