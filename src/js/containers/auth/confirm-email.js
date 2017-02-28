@@ -4,7 +4,7 @@ import { confirmEmail } from '../../actions/confirm-email';
 
 const mapStateToProps = ({ confirmUserEmail }) => ({
   message: confirmUserEmail.message,
-  error: confirmUserEmail.error,
+  confirmEmailError: confirmUserEmail.error,
   isConfirming: confirmUserEmail.isConfirming
 });
 
