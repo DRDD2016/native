@@ -1,4 +1,5 @@
 import Config from 'react-native-config';
+import { getCalendar } from './calendar';
 import { openWhatsApp, composeWhatsAppMessage } from '../lib/whatsapp';
 import { store } from '../init-store';
 
@@ -78,6 +79,9 @@ export function saveEvent (token, eventData) { //eslint-disable-line
         } else {
 
           dispatch(saveEventSuccess());
+          if (eventData.is_poll === false) {
+            dispatch(getCalendar(token));
+          }
           openWhatsApp(composeWhatsAppMessage(store.getState().user, eventData, data.code));
           dispatch(clearCreateEvent());
         }
