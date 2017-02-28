@@ -396,6 +396,17 @@ const styles = {
     borderWidth: 1,
     borderColor: colours.lightgray,
     paddingHorizontal: 10,
+    // fontSize: 12,
+    height: 40,
+    flexDirection: 'row',
+    flex: 1
+  },
+  inputStyleAuth: {
+    color: colours.black,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: colours.lightgray,
+    paddingHorizontal: 10,
     fontSize: 19,
     height: 40,
     flexDirection: 'row'
