@@ -16,6 +16,12 @@ export const FINALISE_EVENT_REQUEST = 'FINALISE_EVENT_REQUEST';
 export const FINALISE_EVENT_SUCCESS = 'FINALISE_EVENT_SUCCESS';
 export const FINALISE_EVENT_FAILURE = 'FINALISE_EVENT_FAILURE';
 
+export const CLEAR_POLL_STATE = 'CLEAR_POLL_STATE';
+
+export const clearPollState = () => ({
+  type: CLEAR_POLL_STATE
+});
+
 /********
 * GET VOTES ACTIONS
 ********/
@@ -87,7 +93,7 @@ export function postVote (token, vote, event_id) { // eslint-disable-line
         dispatch(postVoteSuccess());
         setTimeout(() => {
           const navigatorUID = store.getState().navigation.currentNavigatorUID;
-          dispatch(NavigationActions.immediatelyResetStack(navigatorUID, [Router.getRoute('feed')], 0));
+          dispatch(NavigationActions.immediatelyResetStack(navigatorUID, [Router.getRoute('code')], 0));
         }, 3000);
       } else {
         dispatch(postVoteFailure(new Error('Something went wrong')));
