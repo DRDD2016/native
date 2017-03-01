@@ -86,37 +86,34 @@ export default class When extends Component {
 
     return (
       <ScrollView>
-        <View>
-          <View style={styles.container}>
+        <View style={styles.container}>
 
-            <Text style={styles.smallMessageText}>
-              Enter a date and a time for your event (or leave them blank to decide later).
-            </Text>
-            <Text style={styles.smallMessageText}>
-              You can add more than one option to create a poll.
-            </Text>
-          </View>
-          <View style={styles.whenContainer}>
-            { inputs }
+          <Text style={styles.smallMessageText}>
+            Enter a date and a time for your event (or leave them blank to decide later).
+          </Text>
+          <Text style={styles.smallMessageText}>
+            You can add more than one option to create a poll.
+          </Text>
+        </View>
+        <View style={styles.whenContainer}>
+          { inputs }
 
-            <AddInput data={ data } handler={ addInput } />
+          <AddInput data={ data } handler={ addInput } />
+        </View>
+        <View style={styles.container}>
+          <View style={styles.row}>
+            { (hideNext) &&
+              <View />
+            }
+            { (!hideNext) &&
+              <Button
+                buttonStyle={styles.buttonStyle}
+                onPress={ () => this.nextPage(name) }
+              >
+                Next
+              </Button>
+            }
           </View>
-          <View style={styles.container}>
-            <View style={styles.row}>
-              { (hideNext) &&
-                <View />
-              }
-              { (!hideNext) &&
-                <Button
-                  buttonStyle={styles.buttonStyle}
-                  onPress={ () => this.nextPage(name) }
-                >
-                  Next
-                </Button>
-              }
-            </View>
-          </View>
-
         </View>
       </ScrollView>
     );
