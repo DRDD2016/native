@@ -1,5 +1,5 @@
 import Config from 'react-native-config';
-import { getVotes } from './poll';
+import { getVotes, clearPollState } from './poll';
 import { hydrateCreateEvent } from '../create';
 import { pushTo, resetStackTo } from '../../lib/navigate';
 import { store } from '../../init-store';
@@ -109,6 +109,7 @@ export function getEvent (token, event_id) {
           dispatch(getVotes(token, event_id));
         }
         dispatch(getEventSuccess(data));
+        dispatch(clearPollState());
         const params = {
           userIsHost: store.getState().user.user_id === data.host_user_id,
           name: data.name,
@@ -171,7 +172,8 @@ export function submitCode (token, code) {
         } else {
           // redirect
           dispatch(submitCodeSuccess(data));
-          resetStackTo('event');
+          dispatch(clearPollState());
+          pushTo('event');
         }
       })
       .catch(err => dispatch(submitCodeFailure(err.message)));

@@ -31,6 +31,9 @@ export default function poll (state = initialState, action) {
     case actions.FINALISE_EVENT_FAILURE:
       return { ...state, isSavingVote: false, error: action.error };
 
+    case actions.CLEAR_POLL_STATE:
+      return initialState;
+
     default:
       return state;
   }
