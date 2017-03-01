@@ -57,7 +57,8 @@ export default class Where extends Component {
             query={{
               types: ['establishment', 'geocode'],
               key: Config.GOOGLE_PLACES_API_KEY,
-              language: 'en'
+              language: 'en',
+              components: 'country:gb'
             }}
             styles={{
               textInputContainer: {
