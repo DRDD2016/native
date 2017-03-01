@@ -48,6 +48,7 @@ export default class Event extends Component {
           finalChoices={ this.props.finalChoices }
           handleConfirmEvent={ this.props.handleConfirmEvent }
           voteCount={ this.props.voteCount }
+          handleInviteMoreFriends={ this.props.handleInviteMoreFriends }
         />
       );
     } else if (!this.props.userIsHost && this.props.isPoll) {
@@ -69,6 +70,7 @@ export default class Event extends Component {
           rsvps={ this.props.rsvps }
           rsvpToEvent={ this.props.rsvpToEvent }
           handleDeleteEvent={ this.props.handleDeleteEvent }
+          handleInviteMoreFriends={ this.props.handleInviteMoreFriends }
         />
       );
     }

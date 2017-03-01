@@ -9,6 +9,7 @@ import { getEvent, updateRsvp, deleteEvent } from '../actions/event/data';
 import { postVote, finaliseEvent } from '../actions/event/poll';
 import { hydrateCreateEvent, clearCreateEvent } from '../actions/create';
 import normaliseVoteData from '../lib/normalise-vote-data';
+import { openWhatsApp, composeWhatsAppMessage } from '../lib/whatsapp';
 
 
 const mapStateToProps = ({ event, user }) => {
@@ -66,6 +67,10 @@ const mapDispatchToProps = dispatch => ({
   },
   discardEvent: () => {
     dispatch(clearCreateEvent());
+  },
+  handleInviteMoreFriends: () => {
+    const event = store.getState().event.data;
+    openWhatsApp(composeWhatsAppMessage(store.getState().user, event, event.code));
   }
 });
 

@@ -38,7 +38,8 @@ const inlineStyle = {
   }
 };
 
-const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEvent }) => {
+const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEvent, handleInviteMoreFriends }) => {
+
   return (
     <View style={{ flex: 1 }}>
       { userIsHost ? <Text>Host view</Text> : <Text>Invitee view</Text> }
@@ -70,6 +71,13 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
         <FinalisedWhen data={ event.when } />
 
         <View style={{ marginTop: 10, borderTopColor: '#efefef', borderTopWidth: 1 }}>
+          <Button
+            buttonStyle={styles.confirmButton}
+            textStyle={styles.confirmButtonText}
+            onPress={ handleInviteMoreFriends }
+          >
+            Invite more friends
+          </Button>
           <Text style={{ margin: 10, fontSize: 16 }}>RSVPs</Text>
           <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
             <View style={ inlineStyle.column }>
