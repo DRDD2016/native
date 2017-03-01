@@ -176,9 +176,15 @@ export function submitCode (token, code) {
           pushTo('event');
         }
       })
-      .catch(err => dispatch(submitCodeFailure(err.message)));
+      .catch((err) => {
+        console.log(err);
+        dispatch(submitCodeFailure('Something went wrong. Try again!'));
+      });
     })
-    .catch(err => dispatch(submitCodeFailure(err.message)));
+    .catch((err) => {
+      console.log(err);
+      dispatch(submitCodeFailure('Something went wrong. Try again!'));
+    });
   };
 }
 
