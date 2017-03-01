@@ -3,6 +3,7 @@ import { NavigationActions } from '@exponent/ex-navigation';
 import { store, persistor } from '../init-store';
 import Router from '../router';
 import { storeToken, storeUserId } from '../lib/credentials';
+import initSocket from '../socket-router';
 
 export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
@@ -42,17 +43,18 @@ export function loginUser (email, password) {
       }
       response.json()
         .then((data) => {
-          persistor.resume();
-          dispatch(loginUserSuccess({
-            firstname: data.firstname,
-            surname: data.surname,
-            email: data.email,
-            user_id: data.user_id,
-            photo_url: data.photo_url
-          }));
           if (data.token && data.user_id) {
-            storeToken(data.token);
+            persistor.resume();
+            dispatch(loginUserSuccess({
+              firstname: data.firstname,
+              surname: data.surname,
+              email: data.email,
+              user_id: data.user_id,
+              photo_url: data.photo_url
+            }));
             storeUserId(data.user_id);
+            storeToken(data.token);
+            initSocket();
             const navigatorUID = store.getState().navigation.currentNavigatorUID;
             dispatch(NavigationActions.immediatelyResetStack(navigatorUID, [Router.getRoute('navbar')], 0));
           } else {
