@@ -9,10 +9,10 @@ export function composeWhatsAppMessage (user, event, code) {
 
 export function openWhatsApp (text) {
   const url = `whatsapp://send?text=${text}`;
-  Linking.canOpenURL(url).then((supported) => { // eslint-disable-line no-unused-vars
-    // if (!supported) {
-    //   console.error(`Can't handle url: ${url}`);
-    // }
+  Linking.canOpenURL(url).then((supported) => {
+    if (!supported) {
+      console.log(`Can't handle url: ${url}`);
+    }
     return Linking.openURL(url);
-  }).catch(err => console.error('An error occurred', err));
+  }).catch(() => console.log('An error occurred'));
 }
