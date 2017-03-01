@@ -4,6 +4,8 @@ import Router from '../../router';
 import Button from '../common/Button';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
+import { store } from '../../init-store';
+import { clearCreateEvent } from '../../actions/create';
 
 export default class Details extends Component {
 
@@ -13,6 +15,10 @@ export default class Details extends Component {
       backgroundColor: colours.blue,
       tintColor: colours.white
     }
+  }
+
+  componentWillMount () {
+    store.dispatch(clearCreateEvent());
   }
 
   nextPage = (name) => {
