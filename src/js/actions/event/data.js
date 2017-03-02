@@ -173,7 +173,7 @@ export function submitCode (token, code) {
           // redirect
           dispatch(submitCodeSuccess(data));
           dispatch(clearPollState());
-          pushTo('event');
+          pushTo('event', { name: data.name });
         }
       })
       .catch((err) => {
