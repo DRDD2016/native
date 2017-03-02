@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -74,7 +74,10 @@ class Login extends Component {
   render () {
     const { handleSubmit, handleSubmitForm, navigator } = this.props;
     return (
-      <View style={{ flex: 1 }}>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior="padding"
+      >
         <View style={styles.container} />
         <View style={styles.wrapper}>
           <View style={styles.inputWrap}>
@@ -102,7 +105,8 @@ class Login extends Component {
           </TouchableOpacity>
         </View>
         <View style={styles.container} />
-      </View>
+        <View style={{ height: 30 }} />
+      </KeyboardAvoidingView>
     );
   }
 }
