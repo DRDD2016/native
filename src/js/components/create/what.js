@@ -1,6 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Input from '../general/input';
 import Router from '../../router';
 import AddInput from '../general/add-input';
@@ -44,7 +45,11 @@ export default class What extends Component {
     });
 
     return (
-      <View>
+      <KeyboardAwareScrollView
+        style={{ backgroundColor: '#fff' }}
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        contentContainerStyle={{ flex: 1 }}
+      >
         <View style={ styles.container }>
           <Text style={ styles.smallMessageText }>
             Enter what your event will be (or leave blank to decide it later).
@@ -67,7 +72,7 @@ export default class What extends Component {
             </Button>
           </View>
         </View>
-      </View>
+      </KeyboardAwareScrollView>
     );
   }
 }

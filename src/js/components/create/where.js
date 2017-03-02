@@ -2,6 +2,7 @@
 import Config from 'react-native-config';
 import React, { Component } from 'react';
 import { View, Text, Dimensions } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Router from '../../router';
@@ -108,7 +109,11 @@ export default class Where extends Component {
     });
 
     return (
-      <View>
+      <KeyboardAwareScrollView
+        style={{ backgroundColor: '#fff' }}
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        contentContainerStyle={{ flex: 1 }}
+      >
         <View style={ [styles.container, { marginHorizontal: 10 }] }>
           <Text style={ styles.smallMessageText } >
             Enter where the event will take place (or leave blank to decide it later).
@@ -129,9 +134,9 @@ export default class Where extends Component {
               Next
             </Button>
           </View>
-
         </View>
-      </View>
+
+      </KeyboardAwareScrollView>
     );
   }
 }
