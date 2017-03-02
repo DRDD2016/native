@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import Button from '../common/Button';
 import styles from '../../../styles';
 
-const AddInput = ({ data, handler, extraStyle }) => {
+const AddInput = ({ data, handler }) => {
 
   return (
     <View>
@@ -13,7 +13,7 @@ const AddInput = ({ data, handler, extraStyle }) => {
       { (data.length < 3) &&
         <View style={styles.row}>
           <Button
-            buttonStyle={[styles.buttonStyle, extraStyle]}
+            buttonStyle={styles.buttonStyle}
             buttonTextStyle={styles.buttonTextStyle}
             onPress={ () => handler(data.length) }
           >
