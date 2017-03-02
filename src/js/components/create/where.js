@@ -33,6 +33,13 @@ export default class Where extends Component {
     }
   }
 
+  constructor () {
+    super();
+    this.state = {
+      listViewDisplayed: true
+    };
+  }
+
   onPlaceSearch = (data, details, i) => {
     const place = details.website ? `${details.name} ${details.formatted_address}` : `${details.formatted_address}`;
     this.props.handleChange(place, i);
@@ -53,6 +60,13 @@ export default class Where extends Component {
             minLength={2}
             autoFocus={false}
             fetchDetails
+            listViewDisplayed={this.state.listViewDisplayed}
+            textInputProps={{
+              onChangeText: (text) => {
+                this.props.handleChange(text, inputKey);
+              },
+              onBlur: () => this.setState({ listViewDisplayed: false })
+            }}
             onPress={(searchData, details, index = inputKey) => this.onPlaceSearch(searchData, details, index)}
             query={{
               types: ['establishment', 'geocode'],

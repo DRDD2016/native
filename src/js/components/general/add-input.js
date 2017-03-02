@@ -4,7 +4,7 @@ import Button from '../common/Button';
 import styles from '../../../styles';
 
 const AddInput = ({ data, handler }) => {
-  
+
   return (
     <View>
       { (data.length >= 3) &&
