@@ -5,7 +5,8 @@ import { submitCode } from '../actions/event/data';
 
 const mapStateToProps = ({ event }) => {
   return {
-    codeError: event.data.error
+    codeError: event.data.error,
+    isFetching: event.data.isFetching
   };
 };
 
