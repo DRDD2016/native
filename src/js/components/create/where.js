@@ -60,6 +60,7 @@ export default class Where extends Component {
               language: 'en',
               components: 'country:gb'
             }}
+            getDefaultValue={() => value }
             styles={{
               textInputContainer: {
                 backgroundColor: '#fff',
