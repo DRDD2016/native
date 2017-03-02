@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text } from 'react-native';
-// import Router from '../../router';
+import Router from '../../router';
 import ConfirmWhat from './confirm-what';
 import ConfirmWhere from './confirm-where';
 import ConfirmWhen from './confirm-when';
@@ -20,12 +20,9 @@ export default class Confirm extends Component {
     }
   }
 
-  // goToCreate = () => {
-  //   this.props.navigation.performAction(({ tabs, stacks }) => {
-  //     tabs('main').jumpToTab('details');
-  //     stacks('confirm').immediatelyResetStack([Router.getRoute('details')], 0);
-  //   });
-  // }
+  goToCreate = () => {
+    this.props.navigator.replace(Router.getRoute('details'));
+  }
 
   render () {
     const { what, where, when, description, note, handleOnPress } = this.props;
@@ -46,6 +43,13 @@ export default class Confirm extends Component {
               onPress={ handleOnPress }
             >
               Invite friends
+            </Button>
+            <Button
+              buttonStyle={[styles.confirmButton, { backgroundColor: colours.blue }]}
+              textStyle={styles.confirmButtonText}
+              onPress={ () => this.goToCreate() }
+            >
+              Create new event
             </Button>
           </View>
         </ScrollView>
