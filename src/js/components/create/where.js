@@ -36,13 +36,27 @@ export default class Where extends Component {
   constructor () {
     super();
     this.state = {
-      listViewDisplayed: true
+      listViewDisplayed: 'auto'
     };
   }
 
   onPlaceSearch = (data, details, i) => {
     const place = details.website ? `${details.name} ${details.formatted_address}` : `${details.formatted_address}`;
     this.props.handleChange(place, i);
+  }
+
+  checkForData () {
+    setTimeout(() => {
+      const results = this.googlePlaces._results.length;
+      if (!this.state.listViewDisplayed && results > 0) {
+        this.setState({ listViewDisplayed: 'auto' });
+      }
+      if (this.state.listViewDisplayed && results === 0) {
+        this.setState({
+          listViewDisplayed: false
+        });
+      }
+    }, 1000);
   }
 
   nextPage = (name) => {
@@ -55,6 +69,9 @@ export default class Where extends Component {
       return (
         <View key={ inputKey } style={inlineStyle.inputContainer}>
           <GooglePlacesAutocomplete
+            ref={ (googlePlaces) => {
+              this.googlePlaces = googlePlaces;
+            }}
             enablePoweredByContainer={false}
             placeholder="Where"
             minLength={2}
@@ -63,9 +80,9 @@ export default class Where extends Component {
             listViewDisplayed={this.state.listViewDisplayed}
             textInputProps={{
               onChangeText: (text) => {
+                this.checkForData();
                 this.props.handleChange(text, inputKey);
-              },
-              onBlur: () => this.setState({ listViewDisplayed: false })
+              }
             }}
             onPress={(searchData, details, index = inputKey) => this.onPlaceSearch(searchData, details, index)}
             query={{
