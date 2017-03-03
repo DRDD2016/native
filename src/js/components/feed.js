@@ -47,7 +47,7 @@ export default class Feed extends Component {
     });
 
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         {
           !isFetching && allEvents.length > 0 &&
           <FilterPanel
