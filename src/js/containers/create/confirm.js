@@ -18,7 +18,7 @@ const mapStateToProps = ({ create }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleOnPress: (navigator) => {
+    handleOnPress: (navigation) => {
       const event = store.getState().create;
       // TODO
       // add host photo url
@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch) => {
       AsyncStorage.getItem('spark_token')
       .then((token) => {
         if (token) {
-          dispatch(saveEvent(token, data, navigator));
+          dispatch(saveEvent(token, data, navigation));
         }
       })
       .catch(error => console.error(error));

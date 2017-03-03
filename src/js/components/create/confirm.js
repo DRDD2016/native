@@ -35,7 +35,7 @@ export default class Confirm extends Component {
             <Button
               buttonStyle={styles.confirmButton}
               textStyle={styles.confirmButtonText}
-              onPress={ () => handleOnPress(this.props.navigator) }
+              onPress={ () => handleOnPress(this.props.navigation) }
             >
               Invite friends
             </Button>

@@ -1,6 +1,5 @@
 import Config from 'react-native-config';
 import { getCalendar } from './calendar';
-import Router from '../router';
 import { openWhatsApp, composeWhatsAppMessage } from '../lib/whatsapp';
 import { store } from '../init-store';
 
@@ -60,7 +59,7 @@ export function setWhen (data, inputKey, format) {
 * SAVE EVENT ACTIONS
 ********/
 
-export function saveEvent (token, eventData, navigator) { //eslint-disable-line
+export function saveEvent (token, eventData, navigation) { //eslint-disable-line
   return function (dispatch) {
     dispatch(saveEventRequest());
     fetch(`${Config.URI}/events`, {
@@ -86,8 +85,12 @@ export function saveEvent (token, eventData, navigator) { //eslint-disable-line
 
           openWhatsApp(composeWhatsAppMessage(store.getState().user, eventData, data.code));
           dispatch(clearCreateEvent());
-          // store.dispatch(NavigationActions.jumpToTab('root', { key: 'feed' }))
-          navigator.replace(Router.getRoute('details'));
+          navigation.performAction(({ tabs, stacks }) => { // eslint-disable-line no-unused-vars
+            const { currentNavigatorUID } = navigation.navigationState;
+            if (navigation.navigationState.currentNavigatorUID !== 'main') {
+              stacks(currentNavigatorUID).popToTop(currentNavigatorUID);
+            }
+          });
         }
       });
     })
