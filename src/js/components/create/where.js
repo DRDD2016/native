@@ -43,8 +43,6 @@ export default class Where extends Component {
   onPlaceSearch = (data, details, i) => {
     const place = details.website ? `${details.name} ${details.formatted_address}` : `${details.formatted_address}`;
     this.props.handleChange(place, i);
-    // console.log(this.googlePlaces);
-    // this.setState({ listViewDisplayed: false });
   }
 
   checkForData () {
@@ -80,17 +78,11 @@ export default class Where extends Component {
             autoFocus={false}
             fetchDetails
             listViewDisplayed={this.state.listViewDisplayed}
-            // listViewDisplayed="auto"
             textInputProps={{
               onChangeText: (text) => {
                 this.checkForData();
                 this.props.handleChange(text, inputKey);
               }
-              // onBlur: () => {
-              //   setTimeout(() => {
-              //     this.setState({ listViewDisplayed: false });
-              //   }, 500);
-              // }
             }}
             onPress={(searchData, details, index = inputKey) => this.onPlaceSearch(searchData, details, index)}
             query={{
@@ -125,7 +117,7 @@ export default class Where extends Component {
                 left: 5,
                 right: 5,
                 top: 40,
-                backgroundColor: 'red'
+                backgroundColor: '#fff'
               },
               container: {
                 marginTop: 10,
