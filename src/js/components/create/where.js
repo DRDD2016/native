@@ -51,7 +51,7 @@ export default class Where extends Component {
       if (!this.state.listViewDisplayed && results > 0) {
         this.setState({ listViewDisplayed: 'auto' });
       }
-      if (results === 0) {
+      if (this.state.listViewDisplayed && results === 0) {
         this.setState({
           listViewDisplayed: false
         });
