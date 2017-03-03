@@ -36,13 +36,29 @@ export default class Where extends Component {
   constructor () {
     super();
     this.state = {
-      listViewDisplayed: true
+      listViewDisplayed: 'auto'
     };
   }
 
   onPlaceSearch = (data, details, i) => {
     const place = details.website ? `${details.name} ${details.formatted_address}` : `${details.formatted_address}`;
     this.props.handleChange(place, i);
+    // console.log(this.googlePlaces);
+    // this.setState({ listViewDisplayed: false });
+  }
+
+  checkForData () {
+    setTimeout(() => {
+      const results = this.googlePlaces._results.length;
+      if (!this.state.listViewDisplayed && results > 0) {
+        this.setState({ listViewDisplayed: 'auto' });
+      }
+      if (results === 0) {
+        this.setState({
+          listViewDisplayed: false
+        });
+      }
+    }, 1000);
   }
 
   nextPage = (name) => {
@@ -55,17 +71,26 @@ export default class Where extends Component {
       return (
         <View key={ inputKey } style={inlineStyle.inputContainer}>
           <GooglePlacesAutocomplete
+            ref={ (googlePlaces) => {
+              this.googlePlaces = googlePlaces;
+            }}
             enablePoweredByContainer={false}
             placeholder="Where"
             minLength={2}
             autoFocus={false}
             fetchDetails
             listViewDisplayed={this.state.listViewDisplayed}
+            // listViewDisplayed="auto"
             textInputProps={{
               onChangeText: (text) => {
+                this.checkForData();
                 this.props.handleChange(text, inputKey);
-              },
-              onBlur: () => this.setState({ listViewDisplayed: false })
+              }
+              // onBlur: () => {
+              //   setTimeout(() => {
+              //     this.setState({ listViewDisplayed: false });
+              //   }, 500);
+              // }
             }}
             onPress={(searchData, details, index = inputKey) => this.onPlaceSearch(searchData, details, index)}
             query={{
@@ -100,7 +125,7 @@ export default class Where extends Component {
                 left: 5,
                 right: 5,
                 top: 40,
-                backgroundColor: '#fff'
+                backgroundColor: 'red'
               },
               container: {
                 marginTop: 10,
