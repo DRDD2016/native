@@ -34,7 +34,7 @@ export function signupValidator ({ firstname, surname, email, password, confirmP
   if (!password) {
     errors.password = 'Password is required';
   } else if (password.length < 5) {
-    errors.password = 'Password is too short';
+    errors.password = 'Password is too short. Must be a minimum of 4 characters';
   }
   if (!confirmPassword) {
     errors.confirmPassword = 'Please confirm your password';
@@ -82,6 +82,6 @@ export function codeValidator ({ code }) {
   if (!code) {
     errors.code = 'Required field';
   }
-  
+
   return errors;
 }
