@@ -42,3 +42,17 @@ export function jumpTo (from, to) {
     stacks(from).immediatelyResetStack([Router.getRoute(to)], 0);
   });
 }
+
+/**
+ * popToTop redirects to the top of the stack
+ * @param {object} nav - navigtion prop
+ * @returns {void}
+ */
+export function popToTop (nav) {
+  nav.performAction(({ tabs, stacks }) => { // eslint-disable-line no-unused-vars
+    const { currentNavigatorUID } = nav.navigationState;
+    if (nav.navigationState.currentNavigatorUID !== 'main') {
+      stacks(currentNavigatorUID).popToTop(currentNavigatorUID);
+    }
+  });
+}
