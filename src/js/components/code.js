@@ -5,6 +5,7 @@ import hoistNonReactStatic from 'hoist-non-react-statics';
 import { FormTextInput } from './auth/form-components';
 import { codeValidator as validate } from './auth/form-validation';
 import Button from './common/Button';
+import Spinner from './common/Spinner';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 
@@ -36,8 +37,27 @@ class Code extends Component {
     }
   }
 
+  renderButton = () => {
+    const { handleSubmit, handleSubmitForm, isFetching } = this.props;
+    if (isFetching) {
+      return <Spinner size="large" />;
+    }
+    return (
+      <View style={ styles.row }>
+        <Button
+          buttonStyle={inlineStyle.buttonStyle}
+          textStyle={inlineStyle.textStyle}
+          onPress={handleSubmit(handleSubmitForm)}
+        >
+          <Text>JOIN EVENT</Text>
+        </Button>
+      </View>
+    );
+  };
+  
   render () {
-    const { handleSubmit, handleSubmitForm, codeError } = this.props;
+    const { codeError } = this.props;
+
     return (
       <View style={{ flex: 1 }}>
         <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 70 }}>
@@ -48,15 +68,8 @@ class Code extends Component {
           <View style={ styles.row }>
             <Field name="code" component={ FormTextInput } />
           </View>
-          <View style={ styles.row }>
-            <Button
-              buttonStyle={inlineStyle.buttonStyle}
-              textStyle={inlineStyle.textStyle}
-              onPress={handleSubmit(handleSubmitForm)}
-            >
-              <Text>JOIN EVENT</Text>
-            </Button>
-          </View>
+          { this.renderButton() }
+
           {
             codeError &&
             <Text style={{ color: 'red' }}>{ codeError }</Text>
