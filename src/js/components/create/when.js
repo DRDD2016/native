@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import moment from 'moment';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Router from '../../router';
 import AddInput from '../general/add-input';
 import Button from '../common/Button';
@@ -25,7 +26,7 @@ export default class When extends Component {
   };
 
   render () {
-    const { name, data, addInput, handleDate, handleTime } = this.props;
+    const { name, data, addInput, handleDate, handleTime, removeInput } = this.props;
     const inputs = data.map((value, i) => {
       return (
         <View key={ Math.random() }>
@@ -78,6 +79,15 @@ export default class When extends Component {
               onDateChange={ time => handleTime(time, i) }
             />
           </View>
+          { i !== 0 &&
+            <Icon
+              name="remove"
+              size={18}
+              color="gray"
+              style={{ position: 'absolute', right: 100, top: 20 }}
+              onPress={ removeInput }
+            />
+          }
         </View>
       );
     });
@@ -97,7 +107,6 @@ export default class When extends Component {
         </View>
         <View style={styles.whenContainer}>
           { inputs }
-
           <AddInput data={ data } handler={ addInput } />
         </View>
         <View style={styles.container}>
