@@ -104,9 +104,9 @@ export function getEvent (token, event_id) {
     .then((res) => {
       res.json()
       .then((data) => {
+        const userIsHost = store.getState().user.user_id === data.host_user_id;
         if (data.is_poll) {
-
-          dispatch(getVotes(token, event_id));
+          dispatch(getVotes(token, event_id, userIsHost));
         }
         dispatch(getEventSuccess(data));
         dispatch(clearPollState());
