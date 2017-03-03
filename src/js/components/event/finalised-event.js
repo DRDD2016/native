@@ -38,7 +38,7 @@ const inlineStyle = {
   }
 };
 
-const FinalisedEvent = ({ event, host_user_id, userIsHost, rsvpToEvent, rsvps, handleDeleteEvent, handleInviteMoreFriends }) => {
+const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEvent, handleInviteMoreFriends }) => {
   return (
     <View style={{ flex: 1 }}>
       { userIsHost ? <Text>Host view</Text> : <Text>Invitee view</Text> }
@@ -134,7 +134,7 @@ const FinalisedEvent = ({ event, host_user_id, userIsHost, rsvpToEvent, rsvps, h
           <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
             {
               rsvps.not_responded.map((invitee) => {
-                if (invitee.user_id === host_user_id) {
+                if (invitee.user_id === event.host_user_id) {
                   return null;
                 }
                 return (

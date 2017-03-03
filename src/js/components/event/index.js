@@ -67,7 +67,6 @@ export default class Event extends Component {
           event={ this.props.event }
           event_id={ this.props.event_id }
           userIsHost={ this.props.userIsHost }
-          host_user_id={this.props.host_user_id}
           rsvps={ this.props.rsvps }
           rsvpToEvent={ this.props.rsvpToEvent }
           handleDeleteEvent={ this.props.handleDeleteEvent }

@@ -23,8 +23,7 @@ const mapStateToProps = ({ event, user }) => {
     voteSaved: event.poll.voteSaved,
     finalChoices: event.poll.finalChoices,
     voteCount: event.poll.voteCount,
-    error: event.data.error,
-    host_user_id: event.data.host_user_id
+    error: event.data.error
   };
 };
 
