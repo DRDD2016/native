@@ -29,12 +29,18 @@ export default class Splash extends Component {
   }
 
   componentDidMount () {
-    const dispatchConnected = isConnected => this.props.handleConnect(isConnected);
-
     NetInfo.isConnected.fetch().then().done(() => {
-      NetInfo.isConnected.addEventListener('change', dispatchConnected);
+      NetInfo.isConnected.addEventListener('change', this._handleConnectionChange);
     });
   }
+
+  componentWillUnmount () {
+    NetInfo.isConnected.removeEventListener('change', this._handleConnectionChange);
+  }
+
+  _handleConnectionChange = (isConnected) => {
+    this.props.handleConnect(isConnected);
+  };
 
   render () {
     return (
