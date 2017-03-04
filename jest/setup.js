@@ -1,3 +1,4 @@
+global.Promise = require.requireActual('promise');
 jest.mock('Linking', () => {
   return {
     addEventListener: jest.fn(),
@@ -8,14 +9,14 @@ jest.mock('Linking', () => {
   };
 });
 
-// jest.mock('NetInfo', () => {
-//   return {
-//     isConnected: {
-//       fetch: () => {
-//         return new Promise((accept, resolve) => { //eslint-disable-line
-//           accept(true);
-//         });
-//       }
-//     }
-//   };
-// });
+jest.mock('NetInfo', () => {
+  return {
+    isConnected: {
+      fetch: () => {
+        return new Promise((accept, resolve) => { //eslint-disable-line
+          accept(true);
+        });
+      }
+    }
+  };
+});
