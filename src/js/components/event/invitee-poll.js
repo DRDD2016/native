@@ -11,6 +11,7 @@ export default class InviteePoll extends Component {
     super(props);
 
     const { what, where, when } = this.props.event;
+
     this.state = {
       what: what.length > 1 ? new Array(what.length).fill(0) : [1],
       where: where.length > 1 ? new Array(where.length).fill(0) : [1],

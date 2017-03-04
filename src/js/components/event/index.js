@@ -58,6 +58,7 @@ export default class Event extends Component {
           event={ this.props.event }
           voteSaved={this.props.voteSaved}
           handleVote={ this.props.handleVote }
+          voteCount={ this.props.voteCount }
         />
       );
     } else { // eslint-disable-line no-else-return

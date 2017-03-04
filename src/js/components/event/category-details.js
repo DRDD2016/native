@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { PropTypes, Component } from 'react';
 import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -66,7 +67,7 @@ export default class CategoryDetails extends Component {
 
             if (category === 'when') {
               return (
-                <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
+                <View key={index} style={{ flexDirection: 'row' }}>
 
                   <View style={{ flexBasis: 50 }}>
                     <Text style={styles.optionTitleWhat}>{ index === 0 && categoryTitle }</Text>
