@@ -29,7 +29,6 @@ export const clearPollState = () => ({
 export function getVotes (token, event_id, allVotes = false) {
   return (dispatch) => {
     dispatch(getVotesRequest());
-    console.log('GETTING VOTES event id', event_id);
     fetch(`${Config.URI}/votes/${event_id}?all=${allVotes}`, {
       method: 'GET',
       headers: {
@@ -42,7 +41,6 @@ export function getVotes (token, event_id, allVotes = false) {
       res.json()
       .then((data) => {
         if (res.status === 200) {
-          console.log('votes', data);
           dispatch(getVotesSuccess(data));
         } else {
           dispatch(getVotesFailure(new Error('Something went wrong')));

@@ -23,13 +23,10 @@ export default class InviteePoll extends Component {
   componentWillReceiveProps (nextProps) {
     const { what, where, when } = this.props.event;
     if (this.props.voteCount !== nextProps.voteCount) {
-      console.log('state???');
       this.setState({
         what: what.length > 1 ? nextProps.voteCount.what : [1],
         where: where.length > 1 ? nextProps.voteCount.where : [1],
         when: when.length > 1 ? nextProps.voteCount.when : [1]
-      }, () => {
-        console.log('newwwwwww', this.state);
       });
     }
   }
@@ -44,7 +41,6 @@ export default class InviteePoll extends Component {
 
   render () {
     const { event, handleVote, voteSaved, voteCount } = this.props;
-    console.log('VOTE', voteCount);
     const allCategoriesSelected = Object.keys(this.state)
       .every(category => this.state[category].includes(1));
     return (

@@ -1,4 +1,5 @@
 /* eslint-disable react/no-array-index-key */
+/* eslint-disable max-len */
 import React, { PropTypes, Component } from 'react';
 import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -97,7 +98,7 @@ export default class CategoryDetails extends Component {
                     >
                       {
 
-                        <Text>
+                        <Text style={{ color: (!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category] }}>
                           {category !== 'when' && (datum || 'TBC')}
                           {category === 'when' && `${formatDate(datum, 'half')}, ${formatTime(datum) || 'TBC'}`}
                         </Text>
@@ -107,7 +108,7 @@ export default class CategoryDetails extends Component {
                 </View>
 
                 {
-                  voteCount &&
+                  this.props.isHostPollView &&
                   <View>
                     <Text>{ voteCount[index] }</Text>
                   </View>

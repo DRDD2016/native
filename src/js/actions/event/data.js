@@ -119,7 +119,6 @@ export function getEvent (token, event_id) {
             pushTo('edit');
           }
         };
-        console.log('pushing', params);
         pushTo('event', params);
       })
       .catch((err) => {
@@ -178,9 +177,7 @@ export function submitCode (token, code) {
           dispatch(submitCodeFailure(data.error));
         } else {
           const userIsHost = store.getState().user.user_id === data.host_user_id;
-          // console.log('hostuserid', data.host_user_id, 'me', store.getState().user.user_id);
           if (data.is_poll) {
-            console.log('GOT EVENT', data, userIsHost);
             dispatch(getVotes(token, data.event_id, userIsHost));
           }
           dispatch(submitCodeSuccess(data));
