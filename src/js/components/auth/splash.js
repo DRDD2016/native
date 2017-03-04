@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
-import { Image, View, AsyncStorage, NetInfo, Text } from 'react-native';
+import { Image, View, AsyncStorage, NetInfo } from 'react-native';
 import Router from '../../router';
 import initSocket from '../../socket-router';
 
 const logo = require('../../../img/sparkLoginLogo.png');
 
 export default class Splash extends Component {
-  constructor () {
-    super();
-    this.state = {
-      isConnected: false
-    };
-  }
 
   componentWillMount () {
     setTimeout(() => {
-      if (this.state.isConnected) {
+      if (this.props.isConnected) {
         AsyncStorage.getItem('spark_token')
         .then((token) => {
           if (token) {
@@ -35,31 +29,18 @@ export default class Splash extends Component {
   }
 
   componentDidMount () {
-    NetInfo.isConnected.addEventListener(
-      'change',
-      this._handleConnectivityChange
-    );
-  }
+    const dispatchConnected = isConnected => this.props.handleConnect(isConnected);
 
-  // componentWillUnmount () {
-  //   NetInfo.isConnected.removeEventListener(
-  //     'change',
-  //     this._handleConnectivityChange
-  //   );
-  // }
-
-  _handleConnectivityChange = (isConnected) => {
-    this.setState({
-      isConnected
+    NetInfo.isConnected.fetch().then().done(() => {
+      NetInfo.isConnected.addEventListener('change', dispatchConnected);
     });
-  };
+  }
 
   render () {
     return (
       <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>
         <View style={{ justifyContent: 'center', alignItems: 'center', flex: 0.2 }}>
           <Image style={{ height: 100, width: 300 }} source={ logo } />
-          <Text>{this.state.isConnected ? 'Online' : 'Offline'}</Text>
         </View>
       </View>
     );

@@ -7,6 +7,7 @@ import feed from './feed';
 import create from './create';
 import user from './user';
 import confirmUserEmail from './confirm-email';
+import network from './network';
 
 const appReducer = combineReducers({
   navigation: NavigationReducer,
@@ -16,6 +17,7 @@ const appReducer = combineReducers({
   create,
   user,
   confirmUserEmail,
+  network,
   form
 });
 
