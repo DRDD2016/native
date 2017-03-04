@@ -9,7 +9,7 @@ export default class Splash extends Component {
   constructor () {
     super();
     this.state = {
-      isConnected: null
+      isConnected: false
     };
   }
 
@@ -41,12 +41,12 @@ export default class Splash extends Component {
     );
   }
 
-  componentWillUnmount () {
-    NetInfo.isConnected.removeEventListener(
-        'change',
-        this._handleConnectivityChange
-    );
-  }
+  // componentWillUnmount () {
+  //   NetInfo.isConnected.removeEventListener(
+  //     'change',
+  //     this._handleConnectivityChange
+  //   );
+  // }
 
   _handleConnectivityChange = (isConnected) => {
     this.setState({
