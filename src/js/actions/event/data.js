@@ -104,9 +104,9 @@ export function getEvent (token, event_id) {
     .then((res) => {
       res.json()
       .then((data) => {
+        const userIsHost = store.getState().user.user_id === data.host_user_id;
         if (data.is_poll) {
-
-          dispatch(getVotes(token, event_id));
+          dispatch(getVotes(token, event_id, userIsHost));
         }
         dispatch(getEventSuccess(data));
         dispatch(clearPollState());
@@ -121,9 +121,15 @@ export function getEvent (token, event_id) {
         };
         pushTo('event', params);
       })
-      .catch(err => dispatch(getEventFailure(err.message)));
+      .catch((err) => {
+        dispatch(getEventFailure(err.message));
+        console.log(err);
+      });
     })
-    .catch(err => dispatch(getEventFailure(err.message)));
+    .catch((err) => {
+      dispatch(getEventFailure(err.message));
+      console.log(err);
+    });
   };
 }
 
@@ -170,7 +176,10 @@ export function submitCode (token, code) {
         if (data.error) {
           dispatch(submitCodeFailure(data.error));
         } else {
-          // redirect
+          const userIsHost = store.getState().user.user_id === data.host_user_id;
+          if (data.is_poll) {
+            dispatch(getVotes(token, data.event_id, userIsHost));
+          }
           dispatch(submitCodeSuccess(data));
           dispatch(clearPollState());
           pushTo('event', { name: data.name });

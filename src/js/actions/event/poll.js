@@ -26,11 +26,10 @@ export const clearPollState = () => ({
 * GET VOTES ACTIONS
 ********/
 
-export function getVotes (token, event_id) {
+export function getVotes (token, event_id, allVotes = false) {
   return (dispatch) => {
     dispatch(getVotesRequest());
-
-    fetch(`${Config.URI}/votes/${event_id}`, {
+    fetch(`${Config.URI}/votes/${event_id}?all=${allVotes}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',

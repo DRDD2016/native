@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable max-len */
 import React, { PropTypes, Component } from 'react';
 import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -19,6 +21,16 @@ export default class CategoryDetails extends Component {
     };
     this._handleOnPress = this._handleOnPress.bind(this);
     this.toggleHighlight = this.toggleHighlight.bind(this);
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.voteCount) {
+      if (nextProps.voteCount.length > 1) {
+        this.setState({
+          selectedNodes: nextProps.voteCount
+        });
+      }
+    }
   }
 
   _handleOnPress (category, selection, index) {
@@ -63,45 +75,11 @@ export default class CategoryDetails extends Component {
       <View>
         {
           data.map((datum, index) => {
-
-            if (category === 'when') {
-              return (
-                <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
-
-                  <View style={{ flexBasis: 50 }}>
-                    <Text style={styles.optionTitleWhat}>{ index === 0 && categoryTitle }</Text>
-                  </View>
-
-                  <View style={{ flexBasis: 250 }}>
-                    <View>
-                      <Icon.Button
-                        name={this.icons[category]}
-                        size={16}
-                        borderRadius={100}
-                        color={(!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category]}
-                        backgroundColor={(!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index] ? colours[category] : OFF_WHITE}
-                        onPress={() => this._handleOnPress(category, datum, index)}
-                      >
-                        { `${formatDate(datum, 'half')}, ${formatTime(datum) || 'TBC'}` }
-                      </Icon.Button>
-                    </View>
-                  </View>
-
-                  {
-                    voteCount &&
-                    <View>
-                      <Text>{ voteCount[index] }</Text>
-                    </View>
-                  }
-
-                </View>
-              );
-            }
             return (
               <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
 
                 <View style={{ flexBasis: 50 }}>
-                  <Text style={styles.optionTitleWhat}>{ index === 0 && categoryTitle }</Text>
+                  <Text style={styles[`optionTitle${categoryTitle}`]}>{ index === 0 && categoryTitle }</Text>
                 </View>
 
                 <View style={{ flexBasis: 250 }}>
@@ -114,13 +92,19 @@ export default class CategoryDetails extends Component {
                       backgroundColor={(!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index] ? colours[category] : OFF_WHITE}
                       onPress={() => this._handleOnPress(category, datum, index)}
                     >
-                      { datum || 'TBC' }
+                      {
+
+                        <Text style={{ color: (!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category] }}>
+                          {category !== 'when' && (datum || 'TBC')}
+                          {category === 'when' && `${formatDate(datum, 'half')}, ${formatTime(datum) || 'TBC'}`}
+                        </Text>
+                      }
                     </Icon.Button>
                   </View>
                 </View>
 
                 {
-                  voteCount &&
+                  this.props.isHostPollView &&
                   <View>
                     <Text>{ voteCount[index] }</Text>
                   </View>
