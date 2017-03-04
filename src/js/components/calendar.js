@@ -19,13 +19,23 @@ export default class Calendar extends Component {
     }
   }
 
+  renderAlert = () => {
+    setTimeout(() => {
+      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
+        text: { color: '#fff' },
+        container: { backgroundColor: 'red' }
+      });
+    }, 2000);
+  }
+
   render () {
-    const { allEvents, isFetching, displaySome, displayAll, filterActive, selectedFilter, user_id } = this.props;
+    const { allEvents, isFetching, displaySome, displayAll, filterActive, selectedFilter, user_id, isConnected } = this.props;
     const sortedData = this.props.filteredEvents.sort((a, b) => {
       return a.when[0] > b.when[0];
     });
     return (
       <View>
+        { !isConnected && this.renderAlert() }
         {
           isFetching && <Spinner />
         }

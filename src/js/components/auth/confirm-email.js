@@ -65,9 +65,19 @@ class ConfirmEmail extends Component {
     );
   };
 
+  renderAlert = () => {
+    setTimeout(() => {
+      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
+        text: { color: '#fff' },
+        container: { backgroundColor: 'red' }
+      });
+    }, 2000);
+  }
+
   render () {
     return (
       <View style={{ flex: 1 }}>
+        { !this.props.isConnected && this.renderAlert() }
         <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 70 }}>
           <Text>Explanation text</Text>
           { this.renderServerMessage() }

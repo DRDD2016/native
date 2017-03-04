@@ -61,12 +61,21 @@ export default class Profile extends Component {
     });
   }
 
+  renderAlert = () => {
+    setTimeout(() => {
+      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
+        text: { color: '#fff' },
+        container: { backgroundColor: 'red' }
+      });
+    }, 2000);
+  }
 
   render () {
-    const { photo_url, firstname, surname, handleLogOut, handleChangeName } = this.props;
+    const { photo_url, firstname, surname, handleLogOut, handleChangeName, isConnected } = this.props;
     const hideEditButton = (firstname === '' ? styles.hideEditButton : [styles.buttonStyle, { backgroundColor: 'green' }]);
     return (
       <ScrollView style={styles.profilePage}>
+        { !isConnected && this.renderAlert() }
         <View style={styles.container}>
 
           <View style={styles.row}>

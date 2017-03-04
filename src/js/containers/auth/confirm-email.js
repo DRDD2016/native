@@ -2,10 +2,11 @@ import { connect } from 'react-redux';
 import ConfirmEmail from '../../components/auth/confirm-email';
 import { confirmEmail } from '../../actions/confirm-email';
 
-const mapStateToProps = ({ confirmUserEmail }) => ({
+const mapStateToProps = ({ confirmUserEmail, network }) => ({
   message: confirmUserEmail.message,
   confirmEmailError: confirmUserEmail.error,
-  isConfirming: confirmUserEmail.isConfirming
+  isConfirming: confirmUserEmail.isConfirming,
+  isConnected: network.isConnected
 });
 
 const mapDispatchToProps = () => ({

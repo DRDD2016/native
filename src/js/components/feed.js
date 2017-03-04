@@ -15,8 +15,17 @@ export default class Feed extends Component {
     }
   }
 
+  renderAlert = () => {
+    setTimeout(() => {
+      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
+        text: { color: '#fff' },
+        container: { backgroundColor: 'red' }
+      });
+    }, 2000);
+  }
+  
   render () {
-    const { user_id, allEvents, feed, isFetching, handleSelection, displaySome, displayAll, filterActive, selectedFilter } = this.props;
+    const { user_id, allEvents, feed, isFetching, handleSelection, displaySome, displayAll, filterActive, selectedFilter, isConnected } = this.props;
 
     const mappedFeed = [].concat(feed).reverse().map(({ feed_item, id }, i) => {
 
@@ -61,6 +70,7 @@ export default class Feed extends Component {
 
         <ScrollView>
           <View style={styles.containerFeed}>
+            { !isConnected && this.renderAlert() }
 
             {
               allEvents.length === 0 && !isFetching &&

@@ -15,7 +15,7 @@ AsyncStorage.getItem('spark_token')
   }
 });
 
-const mapStateToProps = ({ feed, user }) => {
+const mapStateToProps = ({ feed, user, network }) => {
 
   const data = feed.data;
   const filterActive = feed.filterActive;
@@ -27,7 +27,8 @@ const mapStateToProps = ({ feed, user }) => {
     isFetching: feed.isFetching,
     filterActive,
     selectedFilter,
-    user_id: user.user_id
+    user_id: user.user_id,
+    isConnected: network.isConnected
   };
 };
 const mapDispatchToProps = (dispatch) => {

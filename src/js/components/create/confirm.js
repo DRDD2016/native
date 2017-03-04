@@ -19,10 +19,20 @@ export default class Confirm extends Component {
     }
   }
 
+  renderAlert = () => {
+    setTimeout(() => {
+      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
+        text: { color: '#fff' },
+        container: { backgroundColor: 'red' }
+      });
+    }, 2000);
+  }
+
   render () {
-    const { what, where, when, description, note, handleOnPress } = this.props;
+    const { what, where, when, description, note, handleOnPress, isConnected } = this.props;
     return (
       <View style={{ flex: 1 }}>
+        { !isConnected && this.renderAlert() }
         <ScrollView>
           <View style={{ margin: 10, justifyContent: 'center', alignItems: 'center' }}>
             <Text>{ description }</Text>
