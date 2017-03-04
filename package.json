@@ -50,6 +50,7 @@
     "preset": "react-native",
     "transformIgnorePatterns": [
       "node_modules/@exponent//ex-navigation"
-    ]
+    ],
+    "setupFiles": ["jest/setup.js"]
   }
 }
