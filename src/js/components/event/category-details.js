@@ -28,10 +28,6 @@ export default class CategoryDetails extends Component {
       if (nextProps.voteCount.length > 1) {
         this.setState({
           selectedNodes: nextProps.voteCount
-        }, () => {
-          if (this.props.category === 'what') {
-            console.log('CATEGORY', this.state);
-          }
         });
       }
     }
