@@ -48,6 +48,7 @@ export default class HostPoll extends Component {
             toggleSelection={this.toggleSelection}
             voteCount={voteCount && voteCount.what}
             userIsHost
+            isHostPollView
           />
         </View>
         <View style={styles.row}>
@@ -57,6 +58,7 @@ export default class HostPoll extends Component {
             toggleSelection={this.toggleSelection}
             voteCount={voteCount && voteCount.where}
             userIsHost
+            isHostPollView
           />
         </View>
         <View style={styles.row}>
@@ -66,6 +68,7 @@ export default class HostPoll extends Component {
             toggleSelection={this.toggleSelection}
             voteCount={voteCount && voteCount.when}
             userIsHost
+            isHostPollView
           />
         </View>
         {
