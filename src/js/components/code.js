@@ -54,12 +54,22 @@ class Code extends Component {
       </View>
     );
   };
-  
+
+  renderAlert = () => {
+    setTimeout(() => {
+      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
+        text: { color: '#fff' },
+        container: { backgroundColor: 'red' }
+      });
+    }, 2000);
+  }
+
   render () {
-    const { codeError } = this.props;
+    const { codeError, isConnected } = this.props;
 
     return (
       <View style={{ flex: 1 }}>
+        { !isConnected && this.renderAlert() }
         <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 70 }}>
           <Text>Explanation text</Text>
         </View>
