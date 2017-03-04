@@ -51,8 +51,6 @@
     "transformIgnorePatterns": [
       "node_modules/@exponent//ex-navigation"
     ],
-    "setupFiles": [
-     "<rootDir>/jest/jest-setup.js"
-   ]
+    "setupFiles": ["./jest/setup.js"]
   }
 }
