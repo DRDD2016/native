@@ -105,7 +105,6 @@ export function getEvent (token, event_id) {
       res.json()
       .then((data) => {
         const userIsHost = store.getState().user.user_id === data.host_user_id;
-        console.log('GOT EVENT', data.is_poll);
         if (data.is_poll) {
           dispatch(getVotes(token, event_id, userIsHost));
         }
@@ -120,11 +119,18 @@ export function getEvent (token, event_id) {
             pushTo('edit');
           }
         };
+        console.log('pushing', params);
         pushTo('event', params);
       })
-      .catch(err => dispatch(getEventFailure(err.message)));
+      .catch((err) => {
+        dispatch(getEventFailure(err.message));
+        console.log(err);
+      });
     })
-    .catch(err => dispatch(getEventFailure(err.message)));
+    .catch((err) => {
+      dispatch(getEventFailure(err.message));
+      console.log(err);
+    });
   };
 }
 

@@ -52,6 +52,7 @@ export default class Event extends Component {
         />
       );
     } else if (!this.props.userIsHost && this.props.isPoll) {
+      console.log(this.props.voteCount, '???????');
       return (
         <InviteePoll
           navigator={this.props.navigator}

@@ -41,9 +41,8 @@ export function getVotes (token, event_id, allVotes = false) {
     .then((res) => {
       res.json()
       .then((data) => {
-        console.log(data);
         if (res.status === 200) {
-          console.log('VOTES INIIT', data);
+          console.log('votes', data);
           dispatch(getVotesSuccess(data));
         } else {
           dispatch(getVotesFailure(new Error('Something went wrong')));
