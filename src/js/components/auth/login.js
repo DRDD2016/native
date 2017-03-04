@@ -71,14 +71,24 @@ class Login extends Component {
     }
   }
 
+  renderAlert = () => {
+    setTimeout(() => {
+      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
+        text: { color: '#fff' },
+        container: { backgroundColor: 'red' }
+      });
+    }, 2000);
+  }
+
   render () {
-    const { handleSubmit, handleSubmitForm, navigator } = this.props;
+    const { handleSubmit, handleSubmitForm, isConnected, navigator } = this.props;
     return (
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior="padding"
       >
         <View style={styles.container} />
+        { !isConnected && this.renderAlert() }
         <View style={styles.wrapper}>
           <View style={styles.inputWrap}>
             <View style={styles.iconWrap}>

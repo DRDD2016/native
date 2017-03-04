@@ -2,8 +2,9 @@ import { connect } from 'react-redux';
 import Login from '../../components/auth/login';
 import { loginUser } from '../../actions/login';
 
-const mapStateToProps = ({ user }) => ({
-  serverError: user.error
+const mapStateToProps = ({ user, network }) => ({
+  serverError: user.error,
+  isConnected: network.isConnected
 });
 
 const mapDispatchToProps = () => ({

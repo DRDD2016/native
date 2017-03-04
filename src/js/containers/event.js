@@ -12,7 +12,7 @@ import normaliseVoteData from '../lib/normalise-vote-data';
 import { openWhatsApp, composeWhatsAppMessage } from '../lib/whatsapp';
 
 
-const mapStateToProps = ({ event, user }) => {
+const mapStateToProps = ({ event, user, network }) => {
   return {
     isPoll: event.data.is_poll,
     event: event.data,
@@ -23,7 +23,8 @@ const mapStateToProps = ({ event, user }) => {
     voteSaved: event.poll.voteSaved,
     finalChoices: event.poll.finalChoices,
     voteCount: event.poll.voteCount,
-    error: event.data.error
+    error: event.data.error,
+    isConnected: network.isConnected
   };
 };
 

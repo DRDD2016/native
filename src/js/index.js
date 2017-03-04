@@ -1,12 +1,14 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
+import { NetInfo } from 'react-native';
 import {
   NavigationContext,
   NavigationProvider,
   StackNavigation
 } from '@exponent/ex-navigation';
 import { store } from './init-store';
+import { setIsConnected } from './actions/network';
 import Router from './router';
 
 // disable remote debugger warning in a simulator
@@ -20,6 +22,20 @@ const navigationContext = new NavigationContext({
 console.log((require('react-native-config').default));
 
 class App extends Component {
+
+  componentDidMount () {
+    NetInfo.isConnected.fetch().then().done(() => {
+      NetInfo.isConnected.addEventListener('change', this._handleConnectionChange);
+    });
+  }
+
+  componentWillUnmount () {
+    NetInfo.isConnected.removeEventListener('change', this._handleConnectionChange);
+  }
+
+  _handleConnectionChange = (isConnected) => {
+    store.dispatch(setIsConnected(isConnected));
+  };
 
   render () {
     return (
