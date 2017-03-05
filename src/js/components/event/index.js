@@ -17,6 +17,7 @@ export default class Event extends Component {
         return params.name;
       },
       renderRight: (route) => {
+        console.log('------', route.params);
         return route.params.userIsHost ?
           <Button
             onPress={ () => route.params.handleEdit(route.params.event) }
