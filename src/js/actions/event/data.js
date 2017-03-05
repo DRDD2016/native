@@ -1,6 +1,7 @@
 import Config from 'react-native-config';
 import { getVotes, clearPollState } from './poll';
 import { hydrateCreateEvent } from '../create';
+import { getCalendar } from '../calendar';
 import { pushTo, resetStackTo } from '../../lib/navigate';
 import { store } from '../../init-store';
 
@@ -112,6 +113,7 @@ export function getEvent (token, event_id) {
         dispatch(clearPollState());
         const params = {
           userIsHost: store.getState().user.user_id === data.host_user_id,
+          isPoll: data.is_poll,
           name: data.name,
           event: data,
           handleEdit: () => {
@@ -123,40 +125,13 @@ export function getEvent (token, event_id) {
       })
       .catch((err) => {
         dispatch(getEventFailure(err.message));
-        console.log(err);
       });
     })
     .catch((err) => {
       dispatch(getEventFailure(err.message));
-      console.log(err);
     });
   };
 }
-
-export function editEvent (token, event, event_id) {
-
-  return (dispatch) => {
-    dispatch(editEventRequest());
-    fetch(`${Config.URI}/events/${event_id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        authorization: token
-      },
-      body: JSON.stringify({ event })
-    })
-    .then((res) => {
-      res.json()
-      .then((data) => {
-        dispatch(editEventSuccess(data));
-      })
-      .catch(err => dispatch(editEventFailure(err.message)));
-    })
-    .catch(err => dispatch(editEventFailure(err.message)));
-  };
-}
-
 
 export function submitCode (token, code) {
   return (dispatch) => {
@@ -182,7 +157,17 @@ export function submitCode (token, code) {
           }
           dispatch(submitCodeSuccess(data));
           dispatch(clearPollState());
-          pushTo('event', { name: data.name });
+          const params = {
+            userIsHost: store.getState().user.user_id === data.host_user_id,
+            isPoll: data.is_poll,
+            name: data.name,
+            event: data,
+            handleEdit: () => {
+              dispatch(hydrateCreateEvent(data));
+              pushTo('edit');
+            }
+          };
+          pushTo('event', { name: params });
         }
       })
       .catch((err) => {
@@ -196,6 +181,32 @@ export function submitCode (token, code) {
     });
   };
 }
+
+export function editEvent (token, event, event_id) {
+
+  return (dispatch) => {
+    dispatch(editEventRequest());
+    fetch(`${Config.URI}/events/${event_id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        authorization: token
+      },
+      body: JSON.stringify({ event })
+    })
+    .then((res) => {
+      res.json()
+      .then((data) => {
+        dispatch(editEventSuccess(data));
+        dispatch(getCalendar(token));
+      })
+      .catch(err => dispatch(editEventFailure(err.message)));
+    })
+    .catch(err => dispatch(editEventFailure(err.message)));
+  };
+}
+
 
 export function updateRsvp (token, event_id, status) {
   return (dispatch) => {
