@@ -1,6 +1,7 @@
 import Config from 'react-native-config';
 import { getVotes, clearPollState } from './poll';
 import { hydrateCreateEvent } from '../create';
+import { getCalendar } from '../calendar';
 import { pushTo, resetStackTo } from '../../lib/navigate';
 import { store } from '../../init-store';
 
@@ -198,7 +199,7 @@ export function editEvent (token, event, event_id) {
       res.json()
       .then((data) => {
         dispatch(editEventSuccess(data));
-        // refetch calendar
+        dispatch(getCalendar(token));
       })
       .catch(err => dispatch(editEventFailure(err.message)));
     })
