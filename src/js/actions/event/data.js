@@ -112,6 +112,7 @@ export function getEvent (token, event_id) {
         dispatch(clearPollState());
         const params = {
           userIsHost: store.getState().user.user_id === data.host_user_id,
+          isPoll: data.is_poll,
           name: data.name,
           event: data,
           handleEdit: () => {
@@ -155,7 +156,17 @@ export function submitCode (token, code) {
           }
           dispatch(submitCodeSuccess(data));
           dispatch(clearPollState());
-          pushTo('event', { name: data.name });
+          const params = {
+            userIsHost: store.getState().user.user_id === data.host_user_id,
+            isPoll: data.is_poll,
+            name: data.name,
+            event: data,
+            handleEdit: () => {
+              dispatch(hydrateCreateEvent(data));
+              pushTo('edit');
+            }
+          };
+          pushTo('event', { name: params });
         }
       })
       .catch((err) => {

@@ -17,7 +17,7 @@ export default class Event extends Component {
         return params.name;
       },
       renderRight: (route) => {
-        return route.params.userIsHost ?
+        return route.params.userIsHost && !route.params.isPoll ?
           <Button
             onPress={ () => route.params.handleEdit(route.params.event) }
             buttonStyle={{ margin: 15 }}
