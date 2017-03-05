@@ -106,7 +106,7 @@ export default class CategoryDetails extends Component {
                 {
                   this.props.isHostPollView &&
                   <View>
-                    <Text>{ voteCount[index] }</Text>
+                    <Text>{ voteCount && voteCount[index] }</Text>
                   </View>
                 }
 

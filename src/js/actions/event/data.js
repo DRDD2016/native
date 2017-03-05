@@ -123,40 +123,13 @@ export function getEvent (token, event_id) {
       })
       .catch((err) => {
         dispatch(getEventFailure(err.message));
-        console.log(err);
       });
     })
     .catch((err) => {
       dispatch(getEventFailure(err.message));
-      console.log(err);
     });
   };
 }
-
-export function editEvent (token, event, event_id) {
-
-  return (dispatch) => {
-    dispatch(editEventRequest());
-    fetch(`${Config.URI}/events/${event_id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        authorization: token
-      },
-      body: JSON.stringify({ event })
-    })
-    .then((res) => {
-      res.json()
-      .then((data) => {
-        dispatch(editEventSuccess(data));
-      })
-      .catch(err => dispatch(editEventFailure(err.message)));
-    })
-    .catch(err => dispatch(editEventFailure(err.message)));
-  };
-}
-
 
 export function submitCode (token, code) {
   return (dispatch) => {
@@ -196,6 +169,32 @@ export function submitCode (token, code) {
     });
   };
 }
+
+export function editEvent (token, event, event_id) {
+
+  return (dispatch) => {
+    dispatch(editEventRequest());
+    fetch(`${Config.URI}/events/${event_id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        authorization: token
+      },
+      body: JSON.stringify({ event })
+    })
+    .then((res) => {
+      res.json()
+      .then((data) => {
+        dispatch(editEventSuccess(data));
+        // refetch calendar
+      })
+      .catch(err => dispatch(editEventFailure(err.message)));
+    })
+    .catch(err => dispatch(editEventFailure(err.message)));
+  };
+}
+
 
 export function updateRsvp (token, event_id, status) {
   return (dispatch) => {
