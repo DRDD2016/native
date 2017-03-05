@@ -5,14 +5,15 @@ import Confirm from '../../components/create/confirm';
 import mapToISOString from '../../lib/map-to-iso-string';
 import { store } from '../../init-store';
 
-const mapStateToProps = ({ create }) => {
+const mapStateToProps = ({ create, network }) => {
   return {
     name: create.name,
     description: create.description,
     note: create.note,
     what: create.what,
     where: create.where,
-    when: create.when
+    when: create.when,
+    isConnected: network.isConnected
   };
 };
 
