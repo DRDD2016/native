@@ -4,20 +4,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Router from '../router';
 import { tabBarSelectedItemStyle } from '../../styles';
 import colours from '../../styles/colours';
-// import { popToTop } from '../lib/navigate';
-
+import { popToTop } from '../lib/navigate';
 
 export default class Navbar extends Component {
 
-  onPress = (tabItemOnPress, event) => { //eslint-disable-line
+  onPress = (tabItemOnPress) => {
     tabItemOnPress();
-    this.props.navigation.performAction(({ tabs, stacks }) => { // eslint-disable-line no-unused-vars
-      console.log('tabs', tabs, 'stacks', stacks);
-      const { currentNavigatorUID } = this.props.navigation.navigationState;
-      if (this.props.navigation.navigationState.currentNavigatorUID !== 'main') {
-        stacks(currentNavigatorUID).popToTop(currentNavigatorUID);
-      }
-    });
+    popToTop(this.props.navigation);
   }
 
   render () {
@@ -26,14 +19,13 @@ export default class Navbar extends Component {
         id="main"
         navigatorUID="main"
         initialTab="feed"
-
       >
         <TabItem
           id="code"
           title="Code"
           selectedStyle={ tabBarSelectedItemStyle }
           renderIcon={ isSelected => <Icon name="barcode" size={ 28 } color={ isSelected ? colours.blue : colours.gray } /> }
-          onPress={this.onPress }
+          onPress={ this.onPress }
         >
           <StackNavigation
             id="code"
@@ -45,9 +37,10 @@ export default class Navbar extends Component {
         <TabItem
           id="calendar"
           title="Calendar"
+          navigatorUID="calendar"
           selectedStyle={ tabBarSelectedItemStyle }
           renderIcon={ isSelected => <Icon name="calendar" size={ 28 } color={ isSelected ? colours.blue : colours.gray} /> }
-          onPress={this.onPress }
+          onPress={ this.onPress }
         >
           <StackNavigation
             id="calendar"
@@ -61,7 +54,7 @@ export default class Navbar extends Component {
           title="Feed"
           selectedStyle={ tabBarSelectedItemStyle }
           renderIcon={ isSelected => <Icon name="globe" size={ 28 } color={ isSelected ? colours.blue : colours.gray } /> }
-          onPress={this.onPress }
+          onPress={ this.onPress }
         >
           <StackNavigation
             id="feed"
@@ -75,7 +68,7 @@ export default class Navbar extends Component {
           title="Profile"
           selectedStyle={ tabBarSelectedItemStyle }
           renderIcon={ isSelected => <Icon name="user" size={ 28 } color={ isSelected ? colours.blue : colours.gray} /> }
-          onPress={this.onPress }
+          onPress={ this.onPress }
         >
           <StackNavigation
             id="profile"
@@ -89,7 +82,7 @@ export default class Navbar extends Component {
           title="Create"
           selectedStyle={ tabBarSelectedItemStyle }
           renderIcon={ isSelected => <Icon name="pencil" size={ 28 } color={ isSelected ? colours.blue : colours.gray } /> }
-          onPress={this.onPress }
+          onPress={ this.onPress }
         >
           <StackNavigation
             id="create"
