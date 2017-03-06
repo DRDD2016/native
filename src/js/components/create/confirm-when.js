@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React from 'react';
+import moment from 'moment';
 import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../common/Button';
@@ -8,7 +9,6 @@ import formatTime from '../../lib/format-time';
 import styles from '../../../styles';
 
 const ConfirmWhen = ({ data }) => {
-
   const layout = data.map((timestamp, i) => {
     const hideTitle = i > 0;
     return (
@@ -31,7 +31,7 @@ const ConfirmWhen = ({ data }) => {
             <Button buttonStyle={styles.optionSelectedWhen} textStyle={[styles.optionTextSelected, {lineHeight: 20}]}>
               <Icon name="calendar" size={18} color="white" />
               {'  '}
-              { formatDate(timestamp) || 'TBC' }
+              { formatDate(moment(timestamp.date, 'DD-MM-YYYY')) || 'TBC' }
               {'  '}
               <Icon name="clock-o" size={18} color="white" />
               {'  '}
