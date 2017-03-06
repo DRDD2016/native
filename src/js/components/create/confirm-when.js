@@ -11,6 +11,7 @@ import styles from '../../../styles';
 const ConfirmWhen = ({ data }) => {
   const layout = data.map((timestamp, i) => {
     const hideTitle = i > 0;
+    console.log(timestamp);
     return (
       <View
         style={{ flexDirection: 'row', alignItems: 'center' }}
@@ -31,7 +32,12 @@ const ConfirmWhen = ({ data }) => {
             <Button buttonStyle={styles.optionSelectedWhen} textStyle={[styles.optionTextSelected, {lineHeight: 20}]}>
               <Icon name="calendar" size={18} color="white" />
               {'  '}
-              { formatDate(moment(timestamp.date, 'DD-MM-YYYY')) || 'TBC' }
+              {
+                typeof timestamp === 'object' && (formatDate(moment(timestamp.date, 'DD-MM-YYYY')) || 'TBC')
+              }
+              {
+                typeof timestamp === 'string' && (formatDate(moment(timestamp)) || 'TBC')
+              }
               {'  '}
               <Icon name="clock-o" size={18} color="white" />
               {'  '}
