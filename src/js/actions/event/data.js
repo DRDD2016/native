@@ -99,7 +99,9 @@ export function getEvent (token, event_id) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        authorization: token
+        authorization: token,
+        'Cache-Control': 'no-cache',
+        Pragma: 'no-cache'
       }
     })
     .then((res) => {
@@ -111,6 +113,7 @@ export function getEvent (token, event_id) {
         }
         dispatch(getEventSuccess(data));
         dispatch(clearPollState());
+        dispatch(getCalendar(token));
         const params = {
           userIsHost: store.getState().user.user_id === data.host_user_id,
           isPoll: data.is_poll,
@@ -157,6 +160,7 @@ export function submitCode (token, code) {
           }
           dispatch(submitCodeSuccess(data));
           dispatch(clearPollState());
+          dispatch(getCalendar(token));
           const params = {
             userIsHost: store.getState().user.user_id === data.host_user_id,
             isPoll: data.is_poll,
@@ -227,6 +231,7 @@ export function updateRsvp (token, event_id, status) {
           dispatch(updateRsvpFailure(data.error));
         } else {
           dispatch(updateRsvpSuccess(data));
+          dispatch(getCalendar(token));
         }
       })
       .catch(err => dispatch(updateRsvpFailure(err.message)));
@@ -251,6 +256,7 @@ export function deleteEvent (token, event_id) {
       .then(() => {
         dispatch(deleteEventSuccess());
         resetStackTo('feed');
+        dispatch(getCalendar(token));
       })
       .catch(err => dispatch(deleteEventFailure(err.message)));
     })

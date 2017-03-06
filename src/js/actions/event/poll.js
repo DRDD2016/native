@@ -33,7 +33,8 @@ export function getVotes (token, event_id, allVotes = false) {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         authorization: token,
-        'Cache-Control': 'no-cache'
+        'Cache-Control': 'no-cache',
+        Pragma: 'no-cache'
       }
     })
     .then((res) => {
