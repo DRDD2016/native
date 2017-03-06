@@ -24,7 +24,8 @@ export default class CategoryDetails extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.voteCount) {
+    // hydrates the state with invitee's previous votes
+    if (nextProps.voteCount && !this.props.isHostPollView) {
       if (nextProps.voteCount.length > 1) {
         this.setState({
           selectedNodes: nextProps.voteCount
