@@ -167,7 +167,7 @@ export function submitCode (token, code) {
               pushTo('edit');
             }
           };
-          pushTo('event', { name: params });
+          pushTo('event', params);
         }
       })
       .catch((err) => {
