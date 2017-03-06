@@ -28,7 +28,7 @@ const mapStateToProps = ({ event, user, network }) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
 
   fetchEvent: (event_id) => {
 
@@ -38,7 +38,7 @@ const mapDispatchToProps = dispatch => ({
     AsyncStorage.getItem('spark_token')
     .then((token) => {
       if (token) {
-        dispatch(postVote(token, normaliseVoteData(vote), event_id));
+        dispatch(postVote(token, normaliseVoteData(vote), event_id, ownProps.navigation));
       }
     });
   },
