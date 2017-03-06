@@ -29,7 +29,9 @@ export function getCalendar (token) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        authorization: token
+        authorization: token,
+        'Cache-Control': 'no-cache',
+        Pragma: 'no-cache'
       }
     })
     .then((res) => {

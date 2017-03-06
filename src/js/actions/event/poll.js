@@ -1,7 +1,5 @@
 import Config from 'react-native-config';
-import { NavigationActions } from '@exponent/ex-navigation';
-import Router from '../../router';
-import { store } from '../../init-store';
+import { popToTop } from '../../lib/navigate';
 import { getCalendar } from '../calendar';
 
 export const GET_VOTES_REQUEST = 'GET_VOTES_REQUEST';
@@ -34,7 +32,9 @@ export function getVotes (token, event_id, allVotes = false) {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        authorization: token
+        authorization: token,
+        'Cache-Control': 'no-cache',
+        Pragma: 'no-cache'
       }
     })
     .then((res) => {
@@ -74,7 +74,7 @@ export function getVotesFailure (error) {
 * POST VOTE ACTIONS
 ********/
 
-export function postVote (token, vote, event_id) { // eslint-disable-line
+export function postVote (token, vote, event_id, navigation) {
   return (dispatch) => {
     dispatch(postVoteRequest());
 
@@ -91,8 +91,7 @@ export function postVote (token, vote, event_id) { // eslint-disable-line
       if (res.status === 201) {
         dispatch(postVoteSuccess());
         setTimeout(() => {
-          const navigatorUID = store.getState().navigation.currentNavigatorUID;
-          dispatch(NavigationActions.immediatelyResetStack(navigatorUID, [Router.getRoute('code')], 0));
+          popToTop(navigation);
         }, 3000);
       } else {
         dispatch(postVoteFailure(new Error('Something went wrong')));
