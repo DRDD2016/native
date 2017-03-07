@@ -11,7 +11,6 @@ import styles from '../../../styles';
 const ConfirmWhen = ({ data }) => {
   const layout = data.map((timestamp, i) => {
     const hideTitle = i > 0;
-    console.log(timestamp);
     return (
       <View
         style={{ flexDirection: 'row', alignItems: 'center' }}
