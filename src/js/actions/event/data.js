@@ -91,7 +91,7 @@ export const deleteEventFailure = error => ({
   error
 });
 
-export function getEvent (nav, token, event_id) {
+export function getEvent (token, event_id, nav) {
   return (dispatch) => {
     dispatch(getEventRequest());
     fetch(`${Config.URI}/events/${event_id}`, {
@@ -136,7 +136,7 @@ export function getEvent (nav, token, event_id) {
   };
 }
 
-export function submitCode (nav, token, code) {
+export function submitCode (token, code, nav) {
   return (dispatch) => {
     dispatch(submitCodeRequest());
     fetch(`${Config.URI}/events/rsvps`, {

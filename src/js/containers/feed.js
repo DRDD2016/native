@@ -31,14 +31,15 @@ const mapStateToProps = ({ feed, user, network }) => {
     isConnected: network.isConnected
   };
 };
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, props) => {
+  const { navigation } = props;
   return {
-    handleSelection: (nav, event_id, viewed, feed_item_id) => {
+    handleSelection: (event_id, viewed, feed_item_id) => {
       // need to tell server this feed item was touched
       AsyncStorage.getItem('spark_token')
       .then((token) => {
         if (token) {
-          dispatch(getEvent(nav, token, event_id));
+          dispatch(getEvent(token, event_id, navigation));
           console.log('ID', feed_item_id);
           if (!viewed) {
             dispatch(feedItemTouched(token, feed_item_id));

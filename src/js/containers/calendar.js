@@ -39,7 +39,7 @@ const mapDispatchToProps = (dispatch, props) => ({
     AsyncStorage.getItem('spark_token')
     .then((token) => {
       if (token) {
-        dispatch(getEvent(props.navigation, token, event_id));
+        dispatch(getEvent(token, event_id, props.navigation));
       }
     });
   }

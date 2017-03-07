@@ -49,7 +49,7 @@ export default class Feed extends Component {
           subject_user_id={ feed_item.subject_user_id }
           viewed={ feed_item.viewed }
           edited={ feed_item.edited }
-          handleSelection={ () => handleSelection(this.props.navigation, feed_item.event_id, feed_item.viewed, id) }
+          handleSelection={ handleSelection }
           feed_item_id={ id }
         />
       );
