@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, ScrollView, Dimensions, Text } from 'react-native';
+import { View, TextInput, ScrollView, Dimensions, Text, KeyboardAvoidingView } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import Config from 'react-native-config';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -54,171 +54,176 @@ export default class Edit extends Component {
     return (
       <View style={{ flex: 1 }}>
         <ScrollView>
-          <View style={ styles.container }>
-            <Text style={{ alignSelf: 'flex-start' }}>Details</Text>
-            <View style={ styles.row }>
-              <TextInput
-                style={ styles.inputStyle }
-                onChangeText={ text => handleDetailsChange(text, 'name') }
-                value={ name }
-                type="text"
-                placeholder="Event name"
-                autoCorrect
-              />
+          <KeyboardAvoidingView
+            behavior="padding"
+          >
+            <View style={ styles.container }>
+              <Text style={{ alignSelf: 'flex-start' }}>Details</Text>
+              <View style={ styles.row }>
+                <TextInput
+                  style={ styles.inputStyle }
+                  onChangeText={ text => handleDetailsChange(text, 'name') }
+                  value={ name }
+                  type="text"
+                  placeholder="Event name"
+                  autoCorrect
+                />
+              </View>
+              <View style={ styles.row }>
+                <TextInput
+                  style={ styles.inputStyle }
+                  onChangeText={ text => handleDetailsChange(text, 'description') }
+                  value={ description }
+                  type="text"
+                  placeholder="Event description"
+                  autoCorrect
+                />
+              </View>
+              <View style={ styles.row }>
+                <TextInput
+                  style={ styles.inputStyle }
+                  onChangeText={ text => handleDetailsChange(text, 'note') }
+                  value={ note }
+                  placeholder="Leave a note to your friends (optional)"
+                  autoCorrect
+                />
+              </View>
+              <Text style={{ alignSelf: 'flex-start' }}>What</Text>
+              <View style={ styles.row }>
+                <TextInput
+                  style={styles.inputStyle}
+                  onChangeText={ text => handleWhatChange(text, 0) }
+                  value={ what[0] }
+                  placeholder="What would you like to do?"
+                />
+              </View>
+              <Text style={{ alignSelf: 'flex-start' }}>Where</Text>
+              <View style={ styles.row }>
+                <GooglePlacesAutocomplete
+                  ref={ (googlePlaces) => {
+                    this.googlePlaces = googlePlaces;
+                  }}
+                  enablePoweredByContainer={false}
+                  placeholder="Where"
+                  minLength={2}
+                  autoFocus={false}
+                  fetchDetails
+                  listViewDisplayed={this.state.listViewDisplayed}
+                  textInputProps={{
+                    onChangeText: (text) => {
+                      this.checkForData();
+                      handleWhereChange(text, 0);
+                    }
+                  }}
+                  onPress={(searchData, details, index = 0) => this.onPlaceSearch(searchData, details, index)}
+                  query={{
+                    types: ['establishment', 'geocode'],
+                    key: Config.GOOGLE_PLACES_API_KEY,
+                    language: 'en',
+                    components: 'country:gb'
+                  }}
+                  getDefaultValue={() => where[0] }
+                  styles={{
+                    textInputContainer: {
+                      backgroundColor: '#fff',
+                      borderRadius: 5,
+                      height: 40,
+                      borderTopColor: '#D3D3D3',
+                      borderBottomColor: '#D3D3D3',
+                      borderTopWidth: 1,
+                      borderBottomWidth: 1,
+                      borderLeftWidth: 1,
+                      borderRightWidth: 1,
+                      borderLeftColor: '#D3D3D3',
+                      borderRightColor: '#D3D3D3',
+                      maxWidth: windowSize.width - (windowSize.width / 15)
+                    },
+                    textInput: {
+                      marginTop: 4,
+                      padding: 2
+                    },
+                    listView: {
+                      height: deviceHeight * 0.4,
+                      position: 'relative',
+                      left: 5,
+                      right: 5,
+                      backgroundColor: '#fff',
+                      zIndex: 99999999
+                    },
+                    container: {
+                      backgroundColor: '#fff',
+                      zIndex: 999999
+                    }
+                  }}
+                  nearbyPlacesAPI={'GooglePlacesSearch'}
+                  filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
+                />
+              </View>
+              <Text style={{ alignSelf: 'flex-start' }}>When</Text>
+              <View style={{ zIndex: 1 }}>
+                <DatePicker
+                  style={{ width: 200 }}
+                  date={ when[0].date }
+                  mode="date"
+                  placeholder="select date"
+                  format="DD/MM/YYYY"
+                  minDate={ moment().format('DD MM YYYY')}
+                  confirmBtnText="Confirm"
+                  cancelBtnText="Cancel"
+                  customStyles={{
+                    dateIcon: {
+                      position: 'absolute',
+                      left: 0,
+                      top: 4,
+                      marginLeft: 0,
+                      zIndex: 1
+                    },
+                    dateInput: {
+                      marginLeft: 36
+                    }
+                  }}
+                  onDateChange={date => handleDateChange(date, 0)}
+                />
+              </View>
+              <View>
+                <DatePicker
+                  style={{ width: 200 }}
+                  date={ when[0].time }
+                  mode="time"
+                  placeholder="select time"
+                  format="HH:mm"
+                  confirmBtnText="Confirm"
+                  cancelBtnText="Cancel"
+                  minuteInterval={10}
+                  customStyles={{
+                    dateIcon: {
+                      position: 'absolute',
+                      left: 0,
+                      top: 4,
+                      marginLeft: 0
+                    },
+                    dateInput: {
+                      marginLeft: 36
+                    }
+                  }}
+                  onDateChange={time => handleTimeChange(time, 0)}
+                />
+              </View>
             </View>
-            <View style={ styles.row }>
-              <TextInput
-                style={ styles.inputStyle }
-                onChangeText={ text => handleDetailsChange(text, 'description') }
-                value={ description }
-                type="text"
-                placeholder="Event description"
-                autoCorrect
-              />
-            </View>
-            <View style={ styles.row }>
-              <TextInput
-                style={ styles.inputStyle }
-                onChangeText={ text => handleDetailsChange(text, 'note') }
-                value={ note }
-                placeholder="Leave a note to your friends (optional)"
-                autoCorrect
-              />
-            </View>
-            <Text style={{ alignSelf: 'flex-start' }}>What</Text>
-            <View style={ styles.row }>
-              <TextInput
-                style={styles.inputStyle}
-                onChangeText={ text => handleWhatChange(text, 0) }
-                value={ what[0] }
-                placeholder="What would you like to do?"
-              />
-            </View>
-            <Text style={{ alignSelf: 'flex-start' }}>Where</Text>
-            <View style={ styles.row }>
-              <GooglePlacesAutocomplete
-                ref={ (googlePlaces) => {
-                  this.googlePlaces = googlePlaces;
-                }}
-                enablePoweredByContainer={false}
-                placeholder="Where"
-                minLength={2}
-                autoFocus={false}
-                fetchDetails
-                listViewDisplayed={this.state.listViewDisplayed}
-                textInputProps={{
-                  onChangeText: (text) => {
-                    this.checkForData();
-                    handleWhereChange(text, 0);
-                  }
-                }}
-                onPress={(searchData, details, index = 0) => this.onPlaceSearch(searchData, details, index)}
-                query={{
-                  types: ['establishment', 'geocode'],
-                  key: Config.GOOGLE_PLACES_API_KEY,
-                  language: 'en',
-                  components: 'country:gb'
-                }}
-                getDefaultValue={() => where[0] }
-                styles={{
-                  textInputContainer: {
-                    backgroundColor: '#fff',
-                    borderRadius: 5,
-                    height: 40,
-                    borderTopColor: '#D3D3D3',
-                    borderBottomColor: '#D3D3D3',
-                    borderTopWidth: 1,
-                    borderBottomWidth: 1,
-                    borderLeftWidth: 1,
-                    borderRightWidth: 1,
-                    borderLeftColor: '#D3D3D3',
-                    borderRightColor: '#D3D3D3',
-                    maxWidth: windowSize.width - (windowSize.width / 15)
-                  },
-                  textInput: {
-                    marginTop: 4,
-                    padding: 2
-                  },
-                  listView: {
-                    height: deviceHeight * 0.4,
-                    position: 'relative',
-                    left: 5,
-                    right: 5,
-                    backgroundColor: '#fff',
-                    zIndex: 99999999
-                  },
-                  container: {
-                    backgroundColor: '#fff',
-                    zIndex: 999999
-                  }
-                }}
-                nearbyPlacesAPI={'GooglePlacesSearch'}
-                filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
-              />
-            </View>
-            <Text style={{ alignSelf: 'flex-start' }}>When</Text>
-            <View style={{ zIndex: 1 }}>
-              <DatePicker
-                style={{ width: 200 }}
-                date={ when[0].date }
-                mode="date"
-                placeholder="select date"
-                format="DD/MM/YYYY"
-                minDate={ moment().format('DD MM YYYY')}
-                confirmBtnText="Confirm"
-                cancelBtnText="Cancel"
-                customStyles={{
-                  dateIcon: {
-                    position: 'absolute',
-                    left: 0,
-                    top: 4,
-                    marginLeft: 0,
-                    zIndex: 1
-                  },
-                  dateInput: {
-                    marginLeft: 36
-                  }
-                }}
-                onDateChange={date => handleDateChange(date, 0)}
-              />
-            </View>
-            <View>
-              <DatePicker
-                style={{ width: 200 }}
-                date={ when[0].time }
-                mode="time"
-                placeholder="select time"
-                format="HH:mm"
-                confirmBtnText="Confirm"
-                cancelBtnText="Cancel"
-                minuteInterval={10}
-                customStyles={{
-                  dateIcon: {
-                    position: 'absolute',
-                    left: 0,
-                    top: 4,
-                    marginLeft: 0
-                  },
-                  dateInput: {
-                    marginLeft: 36
-                  }
-                }}
-                onDateChange={time => handleTimeChange(time, 0)}
-              />
-            </View>
-          </View>
 
-          <View>
-            <Button
-              buttonStyle={styles.buttonStyle}
-              onPress={ () => {
-                handleEditEvent(event, event_id);
-                this.props.navigator.pop();
-              }}
-            >
-              Update
-            </Button>
-          </View>
+            <View>
+              <Button
+                buttonStyle={styles.buttonStyle}
+                onPress={ () => {
+                  handleEditEvent(event, event_id);
+                  this.props.navigator.pop();
+                }}
+              >
+                Update
+              </Button>
+            </View>
+            <View style={{ height: 60 }} />
+          </KeyboardAvoidingView>
         </ScrollView>
       </View>
     );
