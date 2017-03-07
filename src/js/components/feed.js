@@ -23,7 +23,7 @@ export default class Feed extends Component {
       });
     }, 2000);
   }
-  
+
   render () {
     const { user_id, allEvents, feed, isFetching, handleSelection, displaySome, displayAll, filterActive, selectedFilter, isConnected } = this.props;
 
@@ -49,7 +49,7 @@ export default class Feed extends Component {
           subject_user_id={ feed_item.subject_user_id }
           viewed={ feed_item.viewed }
           edited={ feed_item.edited }
-          handleSelection={ handleSelection }
+          handleSelection={ () => handleSelection(this.props.navigation, feed_item.event_id, feed_item.viewed, id) }
           feed_item_id={ id }
         />
       );

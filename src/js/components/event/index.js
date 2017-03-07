@@ -5,6 +5,7 @@ import HostPoll from './host-poll';
 import FinalisedEvent from './finalised-event';
 import colours from '../../../styles/colours';
 import Button from '../common/Button';
+import CloseIcon from '../common/CloseIcon';
 
 export default class Event extends Component {
 
@@ -27,6 +28,7 @@ export default class Event extends Component {
           </Button> :
           null;
       },
+      renderLeft: () => <CloseIcon />,
       backgroundColor: colours.blue,
       tintColor: colours.white
     }

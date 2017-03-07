@@ -33,12 +33,12 @@ const mapStateToProps = ({ feed, user, network }) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleSelection: (event_id, viewed, feed_item_id) => {
+    handleSelection: (nav, event_id, viewed, feed_item_id) => {
       // need to tell server this feed item was touched
       AsyncStorage.getItem('spark_token')
       .then((token) => {
         if (token) {
-          dispatch(getEvent(token, event_id));
+          dispatch(getEvent(nav, token, event_id));
           console.log('ID', feed_item_id);
           if (!viewed) {
             dispatch(feedItemTouched(token, feed_item_id));

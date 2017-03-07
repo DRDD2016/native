@@ -91,7 +91,7 @@ export const deleteEventFailure = error => ({
   error
 });
 
-export function getEvent (token, event_id) {
+export function getEvent (nav, token, event_id) {
   return (dispatch) => {
     dispatch(getEventRequest());
     fetch(`${Config.URI}/events/${event_id}`, {
@@ -124,7 +124,7 @@ export function getEvent (token, event_id) {
             pushTo('edit');
           }
         };
-        pushTo('event', params);
+        nav.showModal('event', params);
       })
       .catch((err) => {
         dispatch(getEventFailure(err.message));
