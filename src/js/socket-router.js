@@ -1,8 +1,9 @@
 import Config from 'react-native-config';
 import io from 'socket.io-client';
+import _ from 'lodash';
 import { AsyncStorage } from 'react-native';
 import { store } from './init-store';
-import { getFeedRequest, getFeedSuccess, getFeedFailure } from './actions/feed';
+import { getFeedSuccess, getFeedFailure } from './actions/feed';
 import { storeSocket } from './actions/profile';
 
 function initSocket () {
@@ -17,7 +18,7 @@ function initSocket () {
       if (user_id) {
         socket.emit(INIT_FEED, user_id);
         console.log('initiliase feed');
-        store.dispatch(getFeedRequest());
+        // store.dispatch(getFeedRequest());
 
         socket.on(`feed:${user_id}`, (data) => {
           store.dispatch(getFeedSuccess(data));
@@ -25,7 +26,8 @@ function initSocket () {
 
         socket.on(`hydrateFeed:${user_id}`, (data) => {
           const existingFeed = store.getState().feed.data;
-          if (existingFeed.length === 0) { // only add to feed if it's empty (avoid duplicates)
+          if (!_.isEqual(data, existingFeed)) { // only add to feed if it's empty (avoid duplicates)
+            console.log('HYDRATING FROM FRONT END');
             store.dispatch(getFeedSuccess(data));
           }
         });
