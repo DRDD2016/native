@@ -22,7 +22,7 @@ export default class InviteePoll extends Component {
 
   componentWillReceiveProps (nextProps) {
     const { what, where, when } = this.props.event;
-    if (this.props.voteCount !== nextProps.voteCount) {
+    if (nextProps.voteCount && this.props.voteCount !== nextProps.voteCount) {
       this.setState({
         what: what.length > 1 ? nextProps.voteCount.what : [1],
         where: where.length > 1 ? nextProps.voteCount.where : [1],
