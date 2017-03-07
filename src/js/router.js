@@ -17,7 +17,7 @@ import UploadPhoto from './containers/upload-photo';
 import ConfirmEmailContainer from './containers/auth/confirm-email';
 import EditContainer from './containers/edit';
 import Code from './containers/code';
-import Splash from './components/auth/splash';
+import Splash from './containers/splash';
 
 const Router = createRouter(() => ({
   auth: () => Index,
