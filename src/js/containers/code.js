@@ -16,7 +16,7 @@ const mapDispatchToProps = () => ({
     AsyncStorage.getItem('spark_token')
     .then((token) => {
       if (token) {
-        dispatch(submitCode(token, code));
+        dispatch(submitCode(props.navigation, token, code));
       }
     })
     .catch(error => console.error(error));

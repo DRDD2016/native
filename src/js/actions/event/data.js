@@ -136,7 +136,7 @@ export function getEvent (nav, token, event_id) {
   };
 }
 
-export function submitCode (token, code) {
+export function submitCode (nav, token, code) {
   return (dispatch) => {
     dispatch(submitCodeRequest());
     fetch(`${Config.URI}/events/rsvps`, {
@@ -171,7 +171,7 @@ export function submitCode (token, code) {
               pushTo('edit');
             }
           };
-          pushTo('event', params);
+          nav.showModal('event', params);
         }
       })
       .catch((err) => {

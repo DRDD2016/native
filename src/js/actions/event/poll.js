@@ -1,5 +1,4 @@
 import Config from 'react-native-config';
-import { popToTop } from '../../lib/navigate';
 import { getCalendar } from '../calendar';
 
 export const GET_VOTES_REQUEST = 'GET_VOTES_REQUEST';
@@ -74,7 +73,8 @@ export function getVotesFailure (error) {
 * POST VOTE ACTIONS
 ********/
 
-export function postVote (token, vote, event_id, navigation) {
+export function postVote (token, vote, event_id, navigation) { //eslint-disable-line
+  console.log('---- navigation', navigation);
   return (dispatch) => {
     dispatch(postVoteRequest());
 
@@ -90,9 +90,7 @@ export function postVote (token, vote, event_id, navigation) {
     .then((res) => {
       if (res.status === 201) {
         dispatch(postVoteSuccess());
-        setTimeout(() => {
-          popToTop(navigation);
-        }, 3000);
+        // we could possibly dimiss modal here
       } else {
         dispatch(postVoteFailure(new Error('Something went wrong')));
       }

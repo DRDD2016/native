@@ -25,7 +25,7 @@ const mapStateToProps = ({ calendar, user, network }) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, props) => ({
 
   displaySome: (filterChoice) => {
 
@@ -39,7 +39,7 @@ const mapDispatchToProps = dispatch => ({
     AsyncStorage.getItem('spark_token')
     .then((token) => {
       if (token) {
-        dispatch(getEvent(token, event_id));
+        dispatch(getEvent(props.navigation, token, event_id));
       }
     });
   }
