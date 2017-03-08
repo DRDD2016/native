@@ -55,6 +55,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     .then((token) => {
       if (token) {
         dispatch(deleteEvent(token, event_id));
+        ownProps.navigator.updateCurrentRouteParams({
+          eventIsCancelled: true
+        });
       }
     });
   },

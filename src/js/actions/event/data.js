@@ -2,7 +2,7 @@ import Config from 'react-native-config';
 import { getVotes, clearPollState } from './poll';
 import { hydrateCreateEvent, clearCreateEvent } from '../create';
 import { getCalendar } from '../calendar';
-import { pushTo, resetStackTo } from '../../lib/navigate';
+import { pushTo } from '../../lib/navigate';
 import { store } from '../../init-store';
 
 export const GET_EVENT_REQUEST = 'GET_EVENT_REQUEST';
@@ -256,7 +256,6 @@ export function deleteEvent (token, event_id) {
       res.json()
       .then(() => {
         dispatch(deleteEventSuccess());
-        resetStackTo('feed');
         dispatch(getCalendar(token));
       })
       .catch(err => dispatch(deleteEventFailure(err.message)));
