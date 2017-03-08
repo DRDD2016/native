@@ -41,9 +41,9 @@ export function getCalendar (token) {
           dispatch(getCalendarSuccess(data));
         }
       })
-      .catch(err => dispatch(getCalendarFailure(err)));
+      .catch(err => dispatch(getCalendarFailure(err.message)));
     })
-    .catch(err => dispatch(getCalendarFailure(err)));
+    .catch(err => dispatch(getCalendarFailure(err.message)));
   };
 }
 

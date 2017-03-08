@@ -3,17 +3,8 @@ import { connect } from 'react-redux';
 import Feed from '../components/feed';
 import { applyFilter, clearFilter, feedItemTouched } from '../actions/feed';
 import { getEvent } from '../actions/event/data';
-import { getCalendar } from '../actions/calendar';
 import filterFeed from '../lib/filter-feed';
-import { store } from '../init-store';
 
-
-AsyncStorage.getItem('spark_token')
-.then((token) => {
-  if (token) {
-    store.dispatch(getCalendar(token));
-  }
-});
 
 const mapStateToProps = ({ feed, user, network }) => {
 

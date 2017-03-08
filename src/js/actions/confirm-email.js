@@ -40,10 +40,10 @@ export function confirmEmail (email) {
             dispatch(confirmEmailSuccess(data));
           }
         })
-        .catch(err => dispatch(confirmEmailFailure(err)));
+        .catch(err => dispatch(confirmEmailFailure(err.message)));
     })
     .catch((err) => {
-      dispatch(confirmEmailFailure(err));
+      dispatch(confirmEmailFailure(err.message));
     });
   };
 }

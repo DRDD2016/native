@@ -42,12 +42,12 @@ export function getVotes (token, event_id, allVotes = false) {
         if (res.status === 200) {
           dispatch(getVotesSuccess(data));
         } else {
-          dispatch(getVotesFailure(new Error('Something went wrong')));
+          dispatch(getVotesFailure('Something went wrong'));
         }
       });
     })
     .catch((err) => {
-      dispatch(getVotesFailure(err));
+      dispatch(getVotesFailure(err.message));
     });
   };
 }
@@ -92,11 +92,11 @@ export function postVote (token, vote, event_id, navigation) { //eslint-disable-
         dispatch(postVoteSuccess());
         // we could possibly dimiss modal here
       } else {
-        dispatch(postVoteFailure(new Error('Something went wrong')));
+        dispatch(postVoteFailure('Something went wrong'));
       }
     })
     .catch((err) => {
-      dispatch(postVoteFailure(err));
+      dispatch(postVoteFailure(err.message));
     });
   };
 }
@@ -142,9 +142,9 @@ export function finaliseEvent (token, hostEventChoices, event_id) { // eslint-di
         dispatch(finaliseEventSuccess(data));
         dispatch(getCalendar(token));
       })
-      .catch(err => dispatch(finaliseEventFailure(err)));
+      .catch(err => dispatch(finaliseEventFailure(err.message)));
     })
-    .catch(err => dispatch(finaliseEventFailure(err)));
+    .catch(err => dispatch(finaliseEventFailure(err.message)));
   };
 }
 

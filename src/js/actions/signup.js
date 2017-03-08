@@ -59,7 +59,7 @@ export function signupUser (firstname, surname, email, password) {
         });
     })
     .catch((error) => {
-      dispatch(signupUserFailure(error));
+      dispatch(signupUserFailure(error.message));
     });
   };
 }

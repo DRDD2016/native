@@ -70,10 +70,10 @@ export function editName (token, user_id, firstname, surname) {
       .then((data) => {
         dispatch(editNameSuccess(data));
       })
-      .catch(err => dispatch(editNameFailure(err)));
+      .catch(err => dispatch(editNameFailure(err.message)));
     })
     .catch((err) => {
-      dispatch(editNameFailure(err));
+      dispatch(editNameFailure(err.message));
     });
   };
 }

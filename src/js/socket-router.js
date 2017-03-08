@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 import _ from 'lodash';
 import { AsyncStorage } from 'react-native';
 import { store } from './init-store';
+import { getCalendar } from './actions/calendar';
 import { getFeedSuccess, getFeedFailure } from './actions/feed';
 import { storeSocket } from './actions/profile';
 
@@ -17,8 +18,13 @@ function initSocket () {
     .then((user_id) => {
       if (user_id) {
         socket.emit(INIT_FEED, user_id);
-        console.log('initialising feed');
-        // store.dispatch(getFeedRequest());
+        console.log('initialising feed.  getting calendar');
+        AsyncStorage.getItem('spark_token')
+        .then((token) => {
+          if (token) {
+            store.dispatch(getCalendar(token));
+          }
+        });
 
         socket.on(`feed:${user_id}`, (data) => {
           console.log('new feed item', data.length);

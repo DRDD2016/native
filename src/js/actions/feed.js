@@ -64,7 +64,7 @@ export function feedItemTouched (token, feed_item_id) {
       dispatch(feedItemTouchedSuccess(feed_item_id));
     })
     .catch((error) => {
-      dispatch(feedItemTouchedFailure(error));
+      dispatch(feedItemTouchedFailure(error.message));
     });
   };
 }

@@ -91,7 +91,7 @@ export function saveEvent (token, eventData, navigation) { //eslint-disable-line
       });
     })
     .catch((error) => {
-      dispatch(saveEventFailure(error));
+      dispatch(saveEventFailure(error.message));
     });
   };
 }
