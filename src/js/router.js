@@ -18,6 +18,7 @@ import ConfirmEmailContainer from './containers/auth/confirm-email';
 import EditContainer from './containers/edit';
 import Code from './containers/code';
 import Splash from './components/auth/splash';
+import Modal from './components/modal';
 
 const Router = createRouter(() => ({
   auth: () => Index,
@@ -38,7 +39,8 @@ const Router = createRouter(() => ({
   confirmEmail: () => ConfirmEmailContainer,
   edit: () => EditContainer,
   code: () => Code,
-  splash: () => Splash
+  splash: () => Splash,
+  modal: () => Modal
 }),
 { ignoreSerializableWarnings: true }
 );

@@ -2,7 +2,7 @@ import Config from 'react-native-config';
 import { getVotes, clearPollState } from './poll';
 import { hydrateCreateEvent, clearCreateEvent } from '../create';
 import { getCalendar } from '../calendar';
-import { pushTo, resetStackTo } from '../../lib/navigate';
+import { pushTo } from '../../lib/navigate';
 import { store } from '../../init-store';
 
 export const GET_EVENT_REQUEST = 'GET_EVENT_REQUEST';
@@ -91,7 +91,7 @@ export const deleteEventFailure = error => ({
   error
 });
 
-export function getEvent (token, event_id) {
+export function getEvent (token, event_id, navigation) {
   return (dispatch) => {
     dispatch(getEventRequest());
     fetch(`${Config.URI}/events/${event_id}`, {
@@ -124,7 +124,7 @@ export function getEvent (token, event_id) {
             pushTo('edit');
           }
         };
-        pushTo('event', params);
+        navigation.showModal('event', params);
       })
       .catch((err) => {
         dispatch(getEventFailure(err.message));
@@ -136,7 +136,7 @@ export function getEvent (token, event_id) {
   };
 }
 
-export function submitCode (token, code) {
+export function submitCode (token, code, navigation) {
   return (dispatch) => {
     dispatch(submitCodeRequest());
     fetch(`${Config.URI}/events/rsvps`, {
@@ -171,7 +171,7 @@ export function submitCode (token, code) {
               pushTo('edit');
             }
           };
-          pushTo('event', params);
+          navigation.showModal('event', params);
         }
       })
       .catch((err) => {
@@ -256,7 +256,6 @@ export function deleteEvent (token, event_id) {
       res.json()
       .then(() => {
         dispatch(deleteEventSuccess());
-        resetStackTo('feed');
         dispatch(getCalendar(token));
       })
       .catch(err => dispatch(deleteEventFailure(err.message)));

@@ -23,7 +23,7 @@ export default class Feed extends Component {
       });
     }, 2000);
   }
-  
+
   render () {
     const { user_id, allEvents, feed, isFetching, handleSelection, displaySome, displayAll, filterActive, selectedFilter, isConnected } = this.props;
 

@@ -3,21 +3,15 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { NetInfo } from 'react-native';
 import {
-  NavigationContext,
   NavigationProvider,
   StackNavigation
 } from '@exponent/ex-navigation';
 import { store } from './init-store';
 import { setIsConnected } from './actions/network';
 import Router from './router';
-
+import navigationContext from './custom-navigation-context';
 // disable remote debugger warning in a simulator
 console.disableYellowBox = true;
-
-const navigationContext = new NavigationContext({
-  router: Router,
-  store
-});
 
 console.log((require('react-native-config').default));
 

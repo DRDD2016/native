@@ -5,6 +5,7 @@ import HostPoll from './host-poll';
 import FinalisedEvent from './finalised-event';
 import colours from '../../../styles/colours';
 import Button from '../common/Button';
+import CloseIcon from '../common/close-icon';
 
 export default class Event extends Component {
 
@@ -17,7 +18,7 @@ export default class Event extends Component {
         return params.name;
       },
       renderRight: (route) => {
-        return route.params.userIsHost && !route.params.isPoll ?
+        return route.params.userIsHost && !route.params.isPoll && !route.params.eventIsCancelled ?
           <Button
             onPress={ () => route.params.handleEdit(route.params.event) }
             buttonStyle={{ margin: 15 }}
@@ -27,6 +28,7 @@ export default class Event extends Component {
           </Button> :
           null;
       },
+      renderLeft: () => <CloseIcon />,
       backgroundColor: colours.blue,
       tintColor: colours.white
     }
