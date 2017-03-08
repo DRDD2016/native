@@ -91,7 +91,7 @@ export const deleteEventFailure = error => ({
   error
 });
 
-export function getEvent (token, event_id, nav) {
+export function getEvent (token, event_id, navigation) {
   return (dispatch) => {
     dispatch(getEventRequest());
     fetch(`${Config.URI}/events/${event_id}`, {
@@ -124,7 +124,7 @@ export function getEvent (token, event_id, nav) {
             pushTo('edit');
           }
         };
-        nav.showModal('event', params);
+        navigation.showModal('event', params);
       })
       .catch((err) => {
         dispatch(getEventFailure(err.message));
@@ -136,7 +136,7 @@ export function getEvent (token, event_id, nav) {
   };
 }
 
-export function submitCode (token, code, nav) {
+export function submitCode (token, code, navigation) {
   return (dispatch) => {
     dispatch(submitCodeRequest());
     fetch(`${Config.URI}/events/rsvps`, {
@@ -171,7 +171,7 @@ export function submitCode (token, code, nav) {
               pushTo('edit');
             }
           };
-          nav.showModal('event', params);
+          navigation.showModal('event', params);
         }
       })
       .catch((err) => {

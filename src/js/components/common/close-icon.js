@@ -5,11 +5,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import colours from '../../../styles/colours';
 
 @withNavigation
-export default class CloseButton extends Component {
+export default class CloseIcon extends Component {
   render () {
     return (
       <Icon
-        name="chevron-left"
+        name="close"
         style={{ padding: 5 }}
         size={ 24 }
         color={ colours.white }

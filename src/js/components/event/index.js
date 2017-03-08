@@ -5,7 +5,7 @@ import HostPoll from './host-poll';
 import FinalisedEvent from './finalised-event';
 import colours from '../../../styles/colours';
 import Button from '../common/Button';
-import CloseIcon from '../common/CloseIcon';
+import CloseIcon from '../common/close-icon';
 
 export default class Event extends Component {
 
