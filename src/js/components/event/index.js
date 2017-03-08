@@ -34,6 +34,14 @@ export default class Event extends Component {
     }
   }
 
+  componentWillUpdate (nextProps) {
+    if (nextProps.event.name !== this.props.event.name) {
+      this.props.navigator.updateCurrentRouteParams({
+        name: nextProps.event.name
+      });
+    }
+  }
+
   eventRouter () {
     if (this.props.error) {
       return (
