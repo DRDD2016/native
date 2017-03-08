@@ -17,17 +17,23 @@ function initSocket () {
     .then((user_id) => {
       if (user_id) {
         socket.emit(INIT_FEED, user_id);
-        console.log('initiliase feed');
+        console.log('initialising feed');
         // store.dispatch(getFeedRequest());
 
         socket.on(`feed:${user_id}`, (data) => {
-          store.dispatch(getFeedSuccess(data));
+          console.log('new feed item', data.length);
+          const mostRecentFeedItem = _.last(store.getState().feed.data);
+          if (mostRecentFeedItem && !_.isEqual(mostRecentFeedItem, data[0])) {
+            console.log('updating feed');
+            store.dispatch(getFeedSuccess(data));
+          }
         });
 
         socket.on(`hydrateFeed:${user_id}`, (data) => {
+          console.log('all feed:', data);
           const existingFeed = store.getState().feed.data;
-          if (!_.isEqual(data, existingFeed)) { // only add to feed if it's empty (avoid duplicates)
-            console.log('HYDRATING FROM FRONT END');
+          if (!_.isEqual(data, existingFeed)) {
+            console.log('hydrating feed');
             store.dispatch(getFeedSuccess(data));
           }
         });
