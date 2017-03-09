@@ -87,7 +87,10 @@ export default class When extends Component {
                   marginLeft: 36
                 }
               }}
-              onDateChange={ time => handleTime(time, i) }
+              onDateChange={ (time) => {
+                this.setState({ [`tbcSwitch${i}`]: false });
+                handleTime(time, i);
+              }}
             />
           </View>
           { i !== 0 &&
@@ -100,13 +103,10 @@ export default class When extends Component {
             />
           }
           <Switch
-            onValueChange={ (value) => {
-              this.setState({ [`tbcSwitch${i}`]: value });
-              if (value) {
-                handleTime('', i);
-              } else {
-                handleTime(moment().format('HH:mm'), i);
-              }
+            onValueChange={ (switchValue) => {
+              this.setState({ [`tbcSwitch${i}`]: switchValue });
+              const newTimeValue = switchValue ? '' : moment().format('HH:mm');
+              handleTime(newTimeValue, i);
             }}
             value={ this.state[`tbcSwitch${i}`] }
           />
