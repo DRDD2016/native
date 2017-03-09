@@ -104,6 +104,8 @@ export default class When extends Component {
               this.setState({ [`tbcSwitch${i}`]: value });
               if (value) {
                 handleTime('', i);
+              } else {
+                handleTime(moment().format('HH:mm'), i);
               }
             }}
             value={ this.state[`tbcSwitch${i}`] }
