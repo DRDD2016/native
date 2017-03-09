@@ -21,8 +21,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleOnPress: (navigation) => {
       const event = store.getState().create;
-      // TODO
-      // add host photo url
+
       const data = Object.assign({}, event,
         { when: mapToISOString(event.when) },
         { is_poll: event.what.concat(event.where, event.when).length > 3 }
@@ -35,7 +34,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(saveEvent(token, data, navigation));
         }
       })
-      .catch(error => console.error(error));
+      .catch(error => console.log(error));
     },
     discardEvent: () => {
       dispatch(clearCreateEvent());

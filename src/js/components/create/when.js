@@ -104,13 +104,13 @@ export default class When extends Component {
           }
           <View style={{ flexDirection: 'row', position: 'absolute', right: 40, top: 75 }}>
             <Switch
-            onValueChange={ (switchValue) => {
-              this.setState({ [`tbcSwitch${i}`]: switchValue });
-              const newTimeValue = switchValue ? '' : moment().format('HH:mm');
-              handleTime(newTimeValue, i);
-            }}
+              onValueChange={ (switchValue) => {
+                this.setState({ [`tbcSwitch${i}`]: switchValue });
+                const newTimeValue = switchValue ? '' : moment().format('HH:mm');
+                handleTime(newTimeValue, i);
+              }}
 
-            value={ this.state[`tbcSwitch${i}`] }
+              value={ this.state[`tbcSwitch${i}`] }
             />
             <Text style={{ margin: 5 }}>TBC</Text>
           </View>

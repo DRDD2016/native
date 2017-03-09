@@ -40,7 +40,10 @@ const ConfirmWhen = ({ data }) => {
               {'  '}
               <Icon name="clock-o" size={18} color="white" />
               {'  '}
-              { formatTime(timestamp) || 'TBC' }
+              {
+                formatTime(timestamp)
+              }
+
             </Button>
           </View>
         </View>
