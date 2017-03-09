@@ -1,5 +1,7 @@
+
+/* eslint-disable no-shadow */
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Switch } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -19,6 +21,15 @@ export default class When extends Component {
       tintColor: colours.white,
       backgroundColor: colours.blue
     }
+  }
+
+  constructor () {
+    super();
+    this.state = {
+      tbcSwitch0: undefined,
+      tbcSwitch1: undefined,
+      tbcSwitch2: undefined
+    };
   }
 
   nextPage = (name) => {
@@ -58,7 +69,7 @@ export default class When extends Component {
           <View style={{ margin: 10 }}>
             <DatePicker
               style={{ width: 200 }}
-              date={ value.time }
+              date={ value.time && value.time }
               mode="time"
               placeholder="select time"
               format="HH:mm"
@@ -88,6 +99,16 @@ export default class When extends Component {
               onPress={ removeInput }
             />
           }
+          <Switch
+            onValueChange={ (value) => {
+              this.setState({ [`tbcSwitch${i}`]: value });
+              if (value) {
+                handleTime('', i);
+              }
+            }}
+            value={ this.state[`tbcSwitch${i}`] }
+          />
+
         </View>
       );
     });
@@ -99,7 +120,7 @@ export default class When extends Component {
         <View style={styles.container}>
 
           <Text style={styles.smallMessageText}>
-            Enter a date and a time for your event (or leave them blank to decide later).
+            Enter a date and a time for your event.  Dates are required, but you can leave the time as TBC.
           </Text>
           <Text style={styles.smallMessageText}>
             You can add more than one option to create a poll.
