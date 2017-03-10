@@ -71,8 +71,8 @@ export default function create (state = initialState, action) {
 
     case actions.HYDRATE_CREATE_EVENT: {
       const dateTime = {
-        date: moment(action.data.when[0]).format('DD MM YYYY'),
-        time: moment(action.data.when[0]).format('HH:mm')
+        date: parseIsoString(action.data.when[0], 'date'),
+        time: parseIsoString(action.data.when[0], 'time')
       };
       return update(state, {
         name: { $set: action.data.name },
@@ -89,6 +89,19 @@ export default function create (state = initialState, action) {
 
     default:
       return state;
+  }
+}
+
+function parseIsoString (string, format) {
+  if (format === 'date') {
+    return moment(string.replace(':TBC', '')).format('DD MM YYYY');
+  }
+  if (format === 'time') {
+    // if TBC, return the empty string
+    if (/\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z):TBC/.test(string)) {
+      return '';
+    }
+    return moment(string).format('HH:mm');
   }
 }
 
