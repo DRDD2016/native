@@ -32,10 +32,8 @@ const ConfirmWhen = ({ data }) => {
               <Icon name="calendar" size={18} color="white" />
               {'  '}
               {
-                typeof timestamp === 'object' && (formatDate(moment(timestamp.date, 'DD-MM-YYYY')) || 'TBC')
-              }
-              {
-                typeof timestamp === 'string' && (formatDate(moment(timestamp)) || 'TBC')
+                // in finalised event view, date will be ISO string
+                formatDate(timestamp)
               }
               {'  '}
               <Icon name="clock-o" size={18} color="white" />
