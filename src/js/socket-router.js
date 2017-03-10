@@ -36,7 +36,6 @@ function initSocket () {
         });
 
         socket.on(`hydrateFeed:${user_id}`, (data) => {
-          console.log('all feed:', data);
           const existingFeed = store.getState().feed.data;
           if (!_.isEqual(data, existingFeed)) {
             console.log('hydrating feed');

@@ -12,7 +12,7 @@ import WhereContainer from './containers/create/where';
 import WhenContainer from './containers/create/when';
 import ConfirmContainer from './containers/create/confirm';
 import EventContainer from './containers/event';
-import Navbar from './components/navbar';
+import TabBar from './components/tab-bar';
 import UploadPhoto from './containers/upload-photo';
 import ConfirmEmailContainer from './containers/auth/confirm-email';
 import EditContainer from './containers/edit';
@@ -28,7 +28,7 @@ const Router = createRouter(() => ({
   calendar: () => CalendarContainer,
   feed: () => FeedContainer,
   profile: () => ProfileContainer,
-  navbar: () => Navbar,
+  tabBar: () => TabBar,
   details: () => DetailsContainer,
   what: () => WhatContainer,
   where: () => WhereContainer,
