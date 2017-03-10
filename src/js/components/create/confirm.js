@@ -4,6 +4,7 @@ import ConfirmWhat from './confirm-what';
 import ConfirmWhere from './confirm-where';
 import ConfirmWhen from './confirm-when';
 import Button from '../common/Button';
+import Spinner from '../common/Spinner';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 
@@ -29,7 +30,10 @@ export default class Confirm extends Component {
   }
 
   render () {
-    const { what, where, when, description, note, handleOnPress, isConnected } = this.props;
+    const { what, where, when, description, note, handleOnPress, isConnected, isFetching } = this.props;
+    if (isFetching) {
+      return <Spinner size="large" />;
+    }
     return (
       <View style={{ flex: 1 }}>
         { !isConnected && this.renderAlert() }
