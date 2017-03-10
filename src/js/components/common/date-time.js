@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, Switch } from 'react-native';
+import { View, Text, Switch, Dimensions } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
+
+const windowSize = Dimensions.get('window');
 
 class DateTime extends Component {
 
@@ -15,12 +17,11 @@ class DateTime extends Component {
 
   render () {
     const { data, handleDate, handleTime, removeInput, index } = this.props;
-    console.log('index', index);
     return (
-      <View key={ Math.random() }>
+      <View key={ Math.random() } style={{ width: windowSize.width, alignItems: 'center' }}>
         <View style={{ margin: 10 }}>
           <DatePicker
-            style={{ width: 200 }}
+            style={{ width: 200, marginRight: 60 }}
             date={ data.date }
             mode="date"
             placeholder="select date"
@@ -45,7 +46,7 @@ class DateTime extends Component {
 
         <View style={{ margin: 10 }}>
           <DatePicker
-            style={{ width: 200 }}
+            style={{ width: 200, marginRight: 60 }}
             date={ data.time && data.time }
             mode="time"
             placeholder="select time"
@@ -79,7 +80,7 @@ class DateTime extends Component {
             onPress={ removeInput }
           />
         }
-        <View style={{ flexDirection: 'row', position: 'absolute', right: 40, top: 75 }}>
+        <View style={{ flexDirection: 'row', position: 'absolute', right: windowSize.width * 0.05, top: 75 }}>
           <Switch
             onValueChange={ (switchValue) => {
               this.setState({ tbcSwitch: switchValue });
