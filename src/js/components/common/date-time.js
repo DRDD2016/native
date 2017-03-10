@@ -6,99 +6,91 @@ import moment from 'moment';
 
 class DateTime extends Component {
 
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
     this.state = {
-      tbcSwitch0: undefined,
-      tbcSwitch1: undefined,
-      tbcSwitch2: undefined
+      tbcSwitch: !this.props.data.time
     };
   }
 
   render () {
-    const { data, handleDate, handleTime, removeInput } = this.props;
-    const inputs = data.map((value, i) => {
-      return (
-        <View key={ Math.random() }>
-          <View style={{ margin: 10 }}>
-            <DatePicker
-              style={{ width: 200 }}
-              date={ value.date }
-              mode="date"
-              placeholder="select date"
-              format="DD/MM/YYYY"
-              minDate={ moment().format('DD MM YYYY')}
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
-              customStyles={{
-                dateIcon: {
-                  position: 'absolute',
-                  left: 0,
-                  top: 4,
-                  marginLeft: 0
-                },
-                dateInput: {
-                  marginLeft: 36
-                }
-              }}
-              onDateChange={ date => handleDate(date, i) }
-            />
-          </View>
-
-          <View style={{ margin: 10 }}>
-            <DatePicker
-              style={{ width: 200 }}
-              date={ value.time && value.time }
-              mode="time"
-              placeholder="select time"
-              format="HH:mm"
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
-              minuteInterval={10}
-              customStyles={{
-                dateIcon: {
-                  position: 'absolute',
-                  left: 0,
-                  top: 4,
-                  marginLeft: 0
-                },
-                dateInput: {
-                  marginLeft: 36
-                }
-              }}
-              onDateChange={ (time) => {
-                this.setState({ [`tbcSwitch${i}`]: false });
-                handleTime(time, i);
-              }}
-            />
-          </View>
-          { i !== 0 &&
-            <Icon
-              name="remove"
-              size={18}
-              color="gray"
-              style={{ position: 'absolute', right: 100, top: 20 }}
-              onPress={ removeInput }
-            />
-          }
-          <View style={{ flexDirection: 'row', position: 'absolute', right: 40, top: 75 }}>
-            <Switch
-              onValueChange={ (switchValue) => {
-                this.setState({ [`tbcSwitch${i}`]: switchValue });
-                const newTimeValue = switchValue ? '' : moment().format('HH:mm');
-                handleTime(newTimeValue, i);
-              }}
-              value={ this.state[`tbcSwitch${i}`] }
-            />
-            <Text style={{ margin: 5 }}>TBC</Text>
-          </View>
-
-        </View>
-      );
-    });
+    const { data, handleDate, handleTime, removeInput, index } = this.props;
+    console.log('index', index);
     return (
-      <View>
-        {inputs}
+      <View key={ Math.random() }>
+        <View style={{ margin: 10 }}>
+          <DatePicker
+            style={{ width: 200 }}
+            date={ data.date }
+            mode="date"
+            placeholder="select date"
+            format="DD/MM/YYYY"
+            minDate={ moment().format('DD MM YYYY')}
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            customStyles={{
+              dateIcon: {
+                position: 'absolute',
+                left: 0,
+                top: 4,
+                marginLeft: 0
+              },
+              dateInput: {
+                marginLeft: 36
+              }
+            }}
+            onDateChange={ date => handleDate(date, index) }
+          />
+        </View>
+
+        <View style={{ margin: 10 }}>
+          <DatePicker
+            style={{ width: 200 }}
+            date={ data.time && data.time }
+            mode="time"
+            placeholder="select time"
+            format="HH:mm"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            minuteInterval={10}
+            customStyles={{
+              dateIcon: {
+                position: 'absolute',
+                left: 0,
+                top: 4,
+                marginLeft: 0
+              },
+              dateInput: {
+                marginLeft: 36
+              }
+            }}
+            onDateChange={ (time) => {
+              this.setState({ tbcSwitch: false });
+              handleTime(time, index);
+            }}
+          />
+        </View>
+        { index !== 0 &&
+          <Icon
+            name="remove"
+            size={18}
+            color="gray"
+            style={{ position: 'absolute', right: 100, top: 20 }}
+            onPress={ removeInput }
+          />
+        }
+        <View style={{ flexDirection: 'row', position: 'absolute', right: 40, top: 75 }}>
+          <Switch
+            onValueChange={ (switchValue) => {
+              this.setState({ tbcSwitch: switchValue });
+              const newTimeValue = switchValue ? '' : moment().format('HH:mm');
+              handleTime(newTimeValue, index);
+            }}
+            value={ this.state.tbcSwitch }
+          />
+          <Text style={{ margin: 5 }}>TBC</Text>
+        </View>
+
       </View>
     );
   }

@@ -159,11 +159,18 @@ export default class Edit extends Component {
                 />
               </View>
               <Text style={{ alignSelf: 'flex-start' }}>When</Text>
-              <DateTime
-                data={when}
-                handleDate={handleDateChange}
-                handleTime={handleTimeChange}
-              />
+              {
+                when.map((data, i) => {
+                  return (
+                    <DateTime
+                      data={data}
+                      handleDate={handleDateChange}
+                      handleTime={handleTimeChange}
+                      index={i}
+                    />
+                  );
+                })
+              }
             </View>
 
             <View>

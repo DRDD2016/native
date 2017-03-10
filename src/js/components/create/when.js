@@ -41,12 +41,20 @@ export default class When extends Component {
           </Text>
         </View>
         <View style={styles.whenContainer}>
-          <DateTime
-            data={data}
-            handleDate={handleDate}
-            handleTime={handleTime}
-            removeInput={removeInput}
-          />
+          {
+            data.map((datum, i) => {
+              return (
+                <DateTime
+                  data={datum}
+                  handleDate={handleDate}
+                  handleTime={handleTime}
+                  removeInput={removeInput}
+                  index={i}
+                  key={Math.random()}
+                />
+              );
+            })
+          }
           <AddInput data={ data } handler={ addInput } />
         </View>
         <View style={styles.container}>
