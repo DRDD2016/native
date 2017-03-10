@@ -10,7 +10,6 @@ import moment from 'moment';
 moment.locale('en-gb');
 
 export default function formatDate (date, full) {
-  console.log('DATE', date);
   if (typeof date === 'string') {
 
     if (date === '') {
