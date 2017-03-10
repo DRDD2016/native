@@ -167,6 +167,7 @@ export default class Edit extends Component {
                       handleDate={handleDateChange}
                       handleTime={handleTimeChange}
                       index={i}
+                      key={Math.random()}
                     />
                   );
                 })

@@ -31,7 +31,6 @@ const mapDispatchToProps = (dispatch, props) => {
       .then((token) => {
         if (token) {
           dispatch(getEvent(token, event_id, navigation));
-          console.log('ID', feed_item_id);
           if (!viewed) {
             dispatch(feedItemTouched(token, feed_item_id));
           }

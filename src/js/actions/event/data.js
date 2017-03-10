@@ -120,7 +120,10 @@ export function getEvent (token, event_id, navigation) {
           name: data.name,
           event: data,
           handleEdit: () => {
-            dispatch(hydrateCreateEvent(data));
+            dispatch(clearCreateEvent());
+            setTimeout(() => {
+              dispatch(hydrateCreateEvent(data));
+            }, 200);
             pushTo('edit');
           }
         };
@@ -167,7 +170,10 @@ export function submitCode (token, code, navigation) {
             name: data.name,
             event: data,
             handleEdit: () => {
-              dispatch(hydrateCreateEvent(data));
+              dispatch(clearCreateEvent());
+              setTimeout(() => {
+                dispatch(hydrateCreateEvent(data));
+              }, 200);
               pushTo('edit');
             }
           };
