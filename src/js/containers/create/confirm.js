@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(saveEvent(token, data, navigation));
         }
       })
-      .catch(error => console.error(error));
+      .catch(error => console.log(error));
     },
     discardEvent: () => {
       dispatch(clearCreateEvent());

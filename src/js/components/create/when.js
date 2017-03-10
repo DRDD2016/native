@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import DatePicker from 'react-native-datepicker';
-import moment from 'moment';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Router from '../../router';
 import AddInput from '../general/add-input';
 import Button from '../common/Button';
+import DateTime from '../common/date-time';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 
@@ -27,70 +25,7 @@ export default class When extends Component {
 
   render () {
     const { name, data, addInput, handleDate, handleTime, removeInput } = this.props;
-    const inputs = data.map((value, i) => {
-      return (
-        <View key={ Math.random() }>
-          <View style={{ margin: 10 }}>
-            <DatePicker
-              style={{ width: 200 }}
-              date={ value.date }
-              mode="date"
-              placeholder="select date"
-              format="DD/MM/YYYY"
-              minDate={ moment().format('DD MM YYYY')}
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
-              customStyles={{
-                dateIcon: {
-                  position: 'absolute',
-                  left: 0,
-                  top: 4,
-                  marginLeft: 0
-                },
-                dateInput: {
-                  marginLeft: 36
-                }
-              }}
-              onDateChange={ date => handleDate(date, i) }
-            />
-          </View>
 
-          <View style={{ margin: 10 }}>
-            <DatePicker
-              style={{ width: 200 }}
-              date={ value.time }
-              mode="time"
-              placeholder="select time"
-              format="HH:mm"
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
-              minuteInterval={10}
-              customStyles={{
-                dateIcon: {
-                  position: 'absolute',
-                  left: 0,
-                  top: 4,
-                  marginLeft: 0
-                },
-                dateInput: {
-                  marginLeft: 36
-                }
-              }}
-              onDateChange={ time => handleTime(time, i) }
-            />
-          </View>
-          { i !== 0 &&
-            <Icon
-              name="remove"
-              size={18}
-              color="gray"
-              style={{ position: 'absolute', right: 100, top: 20 }}
-              onPress={ removeInput }
-            />
-          }
-        </View>
-      );
-    });
 
     const hideNext = data[0].date === '';
 
@@ -99,14 +34,27 @@ export default class When extends Component {
         <View style={styles.container}>
 
           <Text style={styles.smallMessageText}>
-            Enter a date and a time for your event (or leave them blank to decide later).
+            Enter a date and a time for your event.  Dates are required, but you can leave the time as TBC.
           </Text>
           <Text style={styles.smallMessageText}>
             You can add more than one option to create a poll.
           </Text>
         </View>
         <View style={styles.whenContainer}>
-          { inputs }
+          {
+            data.map((datum, i) => {
+              return (
+                <DateTime
+                  data={datum}
+                  handleDate={handleDate}
+                  handleTime={handleTime}
+                  removeInput={removeInput}
+                  index={i}
+                  key={Math.random()}
+                />
+              );
+            })
+          }
           <AddInput data={ data } handler={ addInput } />
         </View>
         <View style={styles.container}>

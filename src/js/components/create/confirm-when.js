@@ -32,15 +32,19 @@ const ConfirmWhen = ({ data }) => {
               <Icon name="calendar" size={18} color="white" />
               {'  '}
               {
-                typeof timestamp === 'object' && (formatDate(moment(timestamp.date, 'DD-MM-YYYY')) || 'TBC')
-              }
-              {
-                typeof timestamp === 'string' && (formatDate(moment(timestamp)) || 'TBC')
+                // in create/confirm view, timestamp will be an object: { date: DD-MM-YYYY, time: HH:mm }
+                // everywhere else will be ISO string
+                formatDate(timestamp)
               }
               {'  '}
               <Icon name="clock-o" size={18} color="white" />
               {'  '}
-              { formatTime(timestamp) || 'TBC' }
+              {
+                // in create/confirm view, timestamp will be an object: { date: DD-MM-YYYY, time: HH:mm }
+                // everywhere else will be ISO string, or for 'TBC' a modified ISO string with `:TBC` appended
+                formatTime(timestamp)
+              }
+
             </Button>
           </View>
         </View>

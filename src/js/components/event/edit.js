@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { View, TextInput, ScrollView, Dimensions, Text, KeyboardAvoidingView } from 'react-native';
-import DatePicker from 'react-native-datepicker';
 import Config from 'react-native-config';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import moment from 'moment';
+import DateTime from '../common/date-time';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import Button from '../common/Button';
@@ -23,7 +22,8 @@ export default class Edit extends Component {
   constructor () {
     super();
     this.state = {
-      listViewDisplayed: 'auto'
+      listViewDisplayed: 'auto',
+      tbcSwitch: undefined
     };
   }
 
@@ -92,7 +92,7 @@ export default class Edit extends Component {
               <View style={ styles.row }>
                 <TextInput
                   style={styles.inputStyle}
-                  onChangeText={ text => handleWhatChange(text, 0) }
+                  onChangeText={ text => handleWhatChange(text) }
                   value={ what[0] }
                   placeholder="What would you like to do?"
                 />
@@ -112,7 +112,7 @@ export default class Edit extends Component {
                   textInputProps={{
                     onChangeText: (text) => {
                       this.checkForData();
-                      handleWhereChange(text, 0);
+                      handleWhereChange(text);
                     }
                   }}
                   onPress={(searchData, details, index = 0) => this.onPlaceSearch(searchData, details, index)}
@@ -159,55 +159,19 @@ export default class Edit extends Component {
                 />
               </View>
               <Text style={{ alignSelf: 'flex-start' }}>When</Text>
-              <View style={{ zIndex: 1 }}>
-                <DatePicker
-                  style={{ width: 200 }}
-                  date={ when[0].date }
-                  mode="date"
-                  placeholder="select date"
-                  format="DD/MM/YYYY"
-                  minDate={ moment().format('DD MM YYYY')}
-                  confirmBtnText="Confirm"
-                  cancelBtnText="Cancel"
-                  customStyles={{
-                    dateIcon: {
-                      position: 'absolute',
-                      left: 0,
-                      top: 4,
-                      marginLeft: 0,
-                      zIndex: 1
-                    },
-                    dateInput: {
-                      marginLeft: 36
-                    }
-                  }}
-                  onDateChange={date => handleDateChange(date, 0)}
-                />
-              </View>
-              <View>
-                <DatePicker
-                  style={{ width: 200 }}
-                  date={ when[0].time }
-                  mode="time"
-                  placeholder="select time"
-                  format="HH:mm"
-                  confirmBtnText="Confirm"
-                  cancelBtnText="Cancel"
-                  minuteInterval={10}
-                  customStyles={{
-                    dateIcon: {
-                      position: 'absolute',
-                      left: 0,
-                      top: 4,
-                      marginLeft: 0
-                    },
-                    dateInput: {
-                      marginLeft: 36
-                    }
-                  }}
-                  onDateChange={time => handleTimeChange(time, 0)}
-                />
-              </View>
+              {
+                when.map((data, i) => {
+                  return (
+                    <DateTime
+                      data={data}
+                      handleDate={handleDateChange}
+                      handleTime={handleTimeChange}
+                      index={i}
+                      key={Math.random()}
+                    />
+                  );
+                })
+              }
             </View>
 
             <View>

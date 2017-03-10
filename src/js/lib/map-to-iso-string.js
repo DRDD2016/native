@@ -9,6 +9,9 @@ import moment from 'moment';
 export default function mapToISOString (array) {
 
   return array.map((obj) => {
+    if (obj.time === '') {
+      return moment(obj.date, 'DD MM YYYY').toISOString() + ':TBC'; // eslint-disable-line prefer-template
+    }
     const chosenTimeHours = moment(obj.time, 'HH mm').hour();
     const chosenTimeMins = moment(obj.time, 'HH mm').minute();
     const comboDate = moment(obj.date, 'DD MM YYYY').hour(chosenTimeHours).minute(chosenTimeMins);

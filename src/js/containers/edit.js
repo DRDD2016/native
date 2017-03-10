@@ -23,16 +23,16 @@ const mapDispatchToProps = dispatch => ({
   handleDetailsChange: (text, category) => {
     dispatch(setDetails(text, category));
   },
-  handleWhatChange: (text, inputKey) => {
+  handleWhatChange: (text, inputKey = 0) => {
     dispatch(setWhat(text, inputKey));
   },
-  handleWhereChange: (text, inputKey) => {
+  handleWhereChange: (text, inputKey = 0) => {
     dispatch(setWhere(text, inputKey));
   },
-  handleDateChange: (date, inputKey) => {
+  handleDateChange: (date, inputKey = 0) => {
     dispatch(setWhen(date, inputKey, 'date'));
   },
-  handleTimeChange: (time, inputKey) => {
+  handleTimeChange: (time, inputKey = 0) => {
     dispatch(setWhen(time, inputKey, 'time'));
   },
   handleEditEvent: (event, event_id) => {
