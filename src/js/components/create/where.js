@@ -79,6 +79,11 @@ export default class Where extends Component {
             fetchDetails
             listViewDisplayed={this.state.listViewDisplayed}
             textInputProps={{
+              onKeyPress: (e) => {
+                if (e.nativeEvent.key === 'Enter') {
+                  this.setState({ listViewDisplayed: 'false' });
+                }
+              },
               onChangeText: (text) => {
                 this.checkForData();
                 this.props.handleChange(text, inputKey);
@@ -86,7 +91,7 @@ export default class Where extends Component {
             }}
             onPress={(searchData, details, index = inputKey) => this.onPlaceSearch(searchData, details, index)}
             query={{
-              types: ['establishment', 'geocode'],
+              types: ['establishment'],
               key: Config.GOOGLE_PLACES_API_KEY,
               language: 'en'
             }}
