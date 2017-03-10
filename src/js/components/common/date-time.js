@@ -80,7 +80,7 @@ class DateTime extends Component {
             onPress={ removeInput }
           />
         }
-        <View style={{ flexDirection: 'row', position: 'absolute', right: 15, top: 75 }}>
+        <View style={{ flexDirection: 'row', position: 'absolute', right: 10, top: 75 }}>
           <Switch
             onValueChange={ (switchValue) => {
               this.setState({ tbcSwitch: switchValue });
