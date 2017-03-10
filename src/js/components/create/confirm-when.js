@@ -32,13 +32,16 @@ const ConfirmWhen = ({ data }) => {
               <Icon name="calendar" size={18} color="white" />
               {'  '}
               {
-                // in finalised event view, date will be ISO string
+                // in create/confirm view, timestamp will be an object: { date: DD-MM-YYYY, time: HH:mm }
+                // everywhere else will be ISO string
                 formatDate(timestamp)
               }
               {'  '}
               <Icon name="clock-o" size={18} color="white" />
               {'  '}
               {
+                // in create/confirm view, timestamp will be an object: { date: DD-MM-YYYY, time: HH:mm }
+                // everywhere else will be ISO string, or for 'TBC' a modified ISO string with `:TBC` appended
                 formatTime(timestamp)
               }
 
