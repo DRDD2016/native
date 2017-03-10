@@ -21,7 +21,7 @@ class DateTime extends Component {
       <View key={ Math.random() } style={{ width: windowSize.width, alignItems: 'center' }}>
         <View style={{ margin: 10 }}>
           <DatePicker
-            style={{ width: 200, marginRight: 60 }}
+            style={{ width: 180, marginRight: 60 }}
             date={ data.date }
             mode="date"
             placeholder="select date"
@@ -46,7 +46,7 @@ class DateTime extends Component {
 
         <View style={{ margin: 10 }}>
           <DatePicker
-            style={{ width: 200, marginRight: 60 }}
+            style={{ width: 180, marginRight: 60 }}
             date={ data.time && data.time }
             mode="time"
             placeholder="select time"
@@ -80,7 +80,7 @@ class DateTime extends Component {
             onPress={ removeInput }
           />
         }
-        <View style={{ flexDirection: 'row', position: 'absolute', right: windowSize.width * 0.05, top: 75 }}>
+        <View style={{ flexDirection: 'row', position: 'absolute', right: 15, top: 75 }}>
           <Switch
             onValueChange={ (switchValue) => {
               this.setState({ tbcSwitch: switchValue });
