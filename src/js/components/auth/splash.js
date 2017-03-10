@@ -13,7 +13,7 @@ export default class Splash extends Component {
       .then((token) => {
         if (token) {
           initSocket();
-          this.props.navigator.push(Router.getRoute('navbar'));
+          this.props.navigator.push(Router.getRoute('tabBar'));
         } else {
           this.props.navigator.push(Router.getRoute('auth'));
         }

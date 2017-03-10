@@ -6,7 +6,7 @@ import { tabBarSelectedItemStyle } from '../../styles';
 import colours from '../../styles/colours';
 import { popToTop } from '../lib/navigate';
 
-export default class Navbar extends Component {
+export default class TabBar extends Component {
 
   onPress = (tabItemOnPress) => {
     tabItemOnPress();

@@ -78,7 +78,7 @@ export default class UploadPhoto extends Component {
       title: 'Upload Photo',
       backgroundColor: colours.blue,
       tintColor: colours.white,
-      renderRight: () => <Text style={{ margin: 15, color: '#fff' }} onPress={ () => resetStackTo('navbar') }>SKIP</Text>
+      renderRight: () => <Text style={{ margin: 15, color: '#fff' }} onPress={ () => resetStackTo('tabBar') }>SKIP</Text>
     }
   }
 
@@ -124,7 +124,7 @@ export default class UploadPhoto extends Component {
 
   nextPage () {
     this.props.handleUpload(this.state.avatarSource);
-    this.props.navigator.immediatelyResetStack([Router.getRoute('navbar')], 0);
+    this.props.navigator.immediatelyResetStack([Router.getRoute('tabBar')], 0);
   }
 
   render () {
