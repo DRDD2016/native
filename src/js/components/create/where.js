@@ -79,6 +79,11 @@ export default class Where extends Component {
             fetchDetails
             listViewDisplayed={this.state.listViewDisplayed}
             textInputProps={{
+              onKeyPress: (e) => {
+                if (e.nativeEvent.key === 'Enter') {
+                  this.setState({ listViewDisplayed: 'false' });
+                }
+              },
               onChangeText: (text) => {
                 this.checkForData();
                 this.props.handleChange(text, inputKey);
