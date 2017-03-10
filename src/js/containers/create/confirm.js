@@ -13,6 +13,7 @@ const mapStateToProps = ({ create, network }) => {
     what: create.what,
     where: create.where,
     when: create.when,
+    isFetching: create.isFetching,
     isConnected: network.isConnected
   };
 };
@@ -21,8 +22,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleOnPress: (navigation) => {
       const event = store.getState().create;
-      // TODO
-      // add host photo url
       const data = Object.assign({}, event,
         { when: mapToISOString(event.when) },
         { is_poll: event.what.concat(event.where, event.when).length > 3 }
