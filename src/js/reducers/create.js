@@ -9,7 +9,7 @@ export const initialState = {
   what: [''],
   where: [''],
   when: [
-    { date: moment().format('DD MM YYYY'), time: moment().format('HH:mm') }
+    { date: moment().format('DD MM YYYY'), time: '' }
   ],
   is_poll: undefined,
   isFetching: false,
