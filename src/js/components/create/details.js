@@ -6,6 +6,7 @@ import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import { store } from '../../init-store';
 import { clearCreateEvent } from '../../actions/create';
+import discardEvent from '../../lib/discard-event';
 
 export default class Details extends Component {
 
@@ -13,7 +14,18 @@ export default class Details extends Component {
     navigationBar: {
       title: 'Create event',
       backgroundColor: colours.blue,
-      tintColor: colours.white
+      tintColor: colours.white,
+      renderRight: () => {
+        return (
+          <Button
+            onPress={ discardEvent }
+            buttonStyle={{ margin: 15 }}
+            textStyle={{ color: colours.white, fontWeight: '600' }}
+          >
+            <Text>Cancel</Text>
+          </Button>
+        );
+      }
     }
   }
 
