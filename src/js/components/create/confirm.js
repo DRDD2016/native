@@ -7,6 +7,7 @@ import Button from '../common/Button';
 import Spinner from '../common/Spinner';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
+import discardEvent from '../../lib/discard-event';
 
 export default class Confirm extends Component {
 
@@ -15,8 +16,19 @@ export default class Confirm extends Component {
       title (params) {
         return params.name;
       },
+      backgroundColor: colours.blue,
       tintColor: colours.white,
-      backgroundColor: colours.blue
+      renderRight: () => {
+        return (
+          <Button
+            onPress={ discardEvent }
+            buttonStyle={{ margin: 15 }}
+            textStyle={{ color: colours.white, fontWeight: '600' }}
+          >
+            <Text>Cancel</Text>
+          </Button>
+        );
+      }
     }
   }
 

@@ -10,6 +10,7 @@ import AddInput from '../general/add-input';
 import Button from '../common/Button';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
+import discardEvent from '../../lib/discard-event';
 
 const windowSize = Dimensions.get('window');
 const deviceHeight = windowSize.height;
@@ -29,7 +30,18 @@ export default class Where extends Component {
         return params.name;
       },
       tintColor: colours.white,
-      backgroundColor: colours.blue
+      backgroundColor: colours.blue,
+      renderRight: () => {
+        return (
+          <Button
+            onPress={ discardEvent }
+            buttonStyle={{ margin: 15 }}
+            textStyle={{ color: colours.white, fontWeight: '600' }}
+          >
+            <Text>Cancel</Text>
+          </Button>
+        );
+      }
     }
   }
 
