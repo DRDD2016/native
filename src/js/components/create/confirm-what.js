@@ -17,17 +17,17 @@ const ConfirmWhat = ({ data }) => {
         key={ i }
       >
         { (hideTitle) &&
-          <View style={{ flexBasis: 150, marginHorizontal: 5 }} />
+          <View style={{ flex: 150, marginHorizontal: 5 }} />
         }
         { (!hideTitle) &&
-          <View style={{ flexBasis: 150, marginHorizontal: 5 }}>
+          <View style={{ flex: 150, marginHorizontal: 5 }}>
             <Text style={styles.optionTitleWhat}>
               What
             </Text>
           </View>
         }
         <View
-          style={{ flexBasis: 800 }}
+          style={{ flex: 800 }}
           key={ i }
         >
           <View style={{}}>
@@ -44,7 +44,7 @@ const ConfirmWhat = ({ data }) => {
   });
 
   return (
-    <View style={{ marginVertical: 10 }}>
+    <View style={{ marginVertical: 10, marginRight: 10 }}>
       { layout }
     </View>
   );

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableHighlight } from 'react-native';
 import InviteePoll from './invitee-poll';
 import HostPoll from './host-poll';
 import FinalisedEvent from './finalised-event';
 import colours from '../../../styles/colours';
-import Button from '../common/Button';
 import CloseIcon from '../common/close-icon';
+import EditIcon from '../common/edit-icon';
 
 export default class Event extends Component {
 
@@ -19,16 +19,23 @@ export default class Event extends Component {
       },
       renderRight: (route) => {
         return route.params.userIsHost && !route.params.isPoll && !route.params.eventIsCancelled ?
-          <Button
+
+          <TouchableHighlight
             onPress={ () => route.params.handleEdit(route.params.event) }
-            buttonStyle={{ margin: 15 }}
-            textStyle={{ color: colours.white, fontWeight: '600' }}
+            style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
           >
-            <Text>Edit</Text>
-          </Button> :
+            <View>
+              <EditIcon />
+            </View>
+          </TouchableHighlight> :
           null;
       },
-      renderLeft: () => <CloseIcon />,
+      renderLeft: () =>
+        <TouchableHighlight style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+          <View>
+            <CloseIcon />
+          </View>
+        </TouchableHighlight>,
       backgroundColor: colours.blue,
       tintColor: colours.white
     }

@@ -5,6 +5,18 @@ import styles from '../../../styles';
 import formatDate from '../../lib/format-date';
 import formatTime from '../../lib/format-time';
 
+const inlineStyle = {
+  row: {
+    backgroundColor: 'red',
+    flexDirection: 'row',
+    marginTop: 5,
+    marginBottom: 5,
+    paddingLeft: 5,
+    paddingRight: 5,
+    minHeight: 40
+  }
+};
+
 export default class HostPoll extends Component {
 
   constructor (props) {
@@ -38,10 +50,12 @@ export default class HostPoll extends Component {
       .map(category => this.state[category].length)
       .every(length => length === 1);
     return (
-      <View>
-        <Text>POLL (HOST VIEW)</Text>
+      <View style={{ backgroundColor: 'green', flexDirection: 'column' }}>
+        <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Text>You created a Poll</Text>
+        </View>
 
-        <View style={styles.row}>
+        <View style={ inlineStyle.row }>
           <CategoryDetails
             category={'what'}
             data={event.what}
@@ -51,7 +65,7 @@ export default class HostPoll extends Component {
             isHostPollView
           />
         </View>
-        <View style={styles.row}>
+        <View style={ inlineStyle.row }>
           <CategoryDetails
             category={'where'}
             data={event.where}
@@ -61,7 +75,7 @@ export default class HostPoll extends Component {
             isHostPollView
           />
         </View>
-        <View style={styles.row}>
+        <View style={ inlineStyle.row }>
           <CategoryDetails
             category={'when'}
             data={event.when}

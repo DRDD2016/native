@@ -17,17 +17,17 @@ const ConfirmWhere = ({ data }) => { // eslint-disable-line react/prop-types
         key={ i }
       >
         { (hideTitle) &&
-          <View style={{ flexBasis: 150, marginHorizontal: 5 }} />
+          <View style={{ flex: 50, marginHorizontal: 5 }} />
         }
         { (!hideTitle) &&
-          <View style={{ flexBasis: 150, marginHorizontal: 5 }}>
+          <View style={{ flex: 50, marginHorizontal: 5 }}>
             <Text style={styles.optionTitleWhere}>
               Where
             </Text>
           </View>
         }
         <View
-          style={{ flexBasis: 800 }}
+          style={{ flex: 250 }}
         >
           <View style={{ }}>
             <Button buttonStyle={styles.optionSelectedWhere} textStyle={[styles.optionTextSelected, {lineHeight: 20}]}>
@@ -42,7 +42,7 @@ const ConfirmWhere = ({ data }) => { // eslint-disable-line react/prop-types
   });
 
   return (
-    <View style={{ marginVertical: 10 }}>
+    <View style={{ marginVertical: 10, marginRight: 10 }}>
       { layout }
     </View>
   );

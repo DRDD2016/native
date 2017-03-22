@@ -285,6 +285,20 @@ const styles = {
     fontSize: 18,
     color: colours.white
   },
+  inviteButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colours.confirm,
+    borderColor: colours.confirm,
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 30
+  },
+  inviteButtonText: {
+    fontSize: 18,
+    color: colours.white
+  },
 
   // login page
 

@@ -5,6 +5,7 @@ import FinalisedWhat from '../create/confirm-what';
 import FinalisedWhere from '../create/confirm-where';
 import FinalisedWhen from '../create/confirm-when';
 import Button from '../common/Button';
+import DeleteIcon from '../common/delete-icon';
 import InviteeCard from './invitee-card';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
@@ -41,17 +42,19 @@ const inlineStyle = {
 const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEvent, handleInviteMoreFriends }) => {
   return (
     <View style={{ flex: 1 }}>
-      { userIsHost ? <Text>Host view</Text> : <Text>Invitee view</Text> }
+      <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
+        { userIsHost ? <Text>You are hosting</Text> : <Text>You have been invited, please RSVP</Text> }
 
-      { userIsHost &&
-        <Button
-          buttonStyle={{ backgroundColor: 'red', alignSelf: 'flex-end' }}
-          textStyle={{ color: '#fff' }}
-          onPress={ () => handleDeleteEvent(event.event_id) }
-        >
-          Delete
-        </Button>
-      }
+        { userIsHost &&
+          <Button
+            buttonStyle={{ paddingLeft: 20, paddingRight: 20, flexDirection: 'row', alignSelf: 'flex-end' }}
+            textStyle={{ color: colours.gray }}
+            onPress={ () => handleDeleteEvent(event.event_id) }
+          >
+            <DeleteIcon />
+          </Button>
+        }
+      </View>
 
       <ScrollView>
 
@@ -69,16 +72,18 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
         <FinalisedWhere data={ event.where } />
         <FinalisedWhen data={ event.when } />
 
-        <View style={{ marginTop: 10, borderTopColor: '#efefef', borderTopWidth: 1 }}>
+        <View style={{ marginTop: 10, borderTopColor: '#efefef', borderTopWidth: 1, alignItems: 'center' }}>
+
           { userIsHost &&
             <Button
-              buttonStyle={styles.confirmButton}
-              textStyle={styles.confirmButtonText}
+              buttonStyle={[styles.inviteButton, { marginTop: 10, marginBottom: 10 }]}
+              textStyle={styles.inviteButtonText}
               onPress={ handleInviteMoreFriends }
             >
               Invite more friends
             </Button>
           }
+
           <Text style={{ margin: 10, fontSize: 16 }}>RSVPs</Text>
           <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
             <View style={ inlineStyle.column }>
@@ -130,7 +135,9 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
               }
             </View>
           </View>
-          <Text>Not responded</Text>
+          <View style={{ marginTop: 10, marginBottom: 10 }}>
+            <Text>Not responded</Text>
+          </View>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
             {
               rsvps.not_responded.map((invitee) => {
