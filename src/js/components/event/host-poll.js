@@ -7,7 +7,6 @@ import formatTime from '../../lib/format-time';
 
 const inlineStyle = {
   row: {
-    backgroundColor: 'red',
     flexDirection: 'row',
     marginTop: 5,
     marginBottom: 5,
@@ -50,7 +49,7 @@ export default class HostPoll extends Component {
       .map(category => this.state[category].length)
       .every(length => length === 1);
     return (
-      <View style={{ backgroundColor: 'green', flexDirection: 'column' }}>
+      <View style={{ flexDirection: 'column' }}>
         <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
           <Text>You created a Poll</Text>
         </View>

@@ -883,20 +883,20 @@ const styles = {
   RSVPButtonNotResponded: {
 
   },
-  barContainer: {
-    flexDirection: 'column',
-    marginTop: 1,
-    marginBottom: 1
-  },
+  // barContainer: {
+  //   flexDirection: 'column',
+  //   marginTop: 1,
+  //   marginBottom: 1
+  // },
   // Item
-  barItem: {
-    flexDirection: 'column',
-    flex: 1
-  },
-  barData: {
-    flex: 2,
-    flexDirection: 'row'
-  },
+  // barItem: {
+  //   flexDirection: 'column',
+  //   flex: 1
+  // },
+  // barData: {
+  //   flex: 2,
+  //   flexDirection: 'row'
+  // },
   bar: {
     borderBottomLeftRadius: 0,
     borderTopLeftRadius: 0,

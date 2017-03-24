@@ -81,7 +81,7 @@ export default class CategoryDetails extends Component {
           data.map((datum, index) => {
             const tally = voteCount && voteCount[index];
             return (
-              <View key={JSON.stringify(datum)} style={{ flexDirection: 'row', backgroundColor: 'blue' }}>
+              <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
 
                 <View style={{ flex: 150 }}>
                   <Text style={styles[`optionTitle${categoryTitle}`]}>{ index === 0 && categoryTitle }</Text>
@@ -112,27 +112,27 @@ export default class CategoryDetails extends Component {
 
                   {
                     this.props.isHostPollView &&
-                    <View style={{ marginTop: 5, marginBottom: 5, backgroundColor: 'green', flexDirection: 'row', alignItems: 'center' }}>
-                      <View style={{ paddingLeft: 1, paddingVertical: 10, width: 1, backgroundColor: 'gray' }} />
+                    <View style={{ flex: 1, marginTop: 5, marginBottom: 5, flexDirection: 'row', alignItems: 'center' }}>
+                      <View style={{ paddingLeft: 1, paddingVertical: 10, width: 1, backgroundColor: 'lightgray' }} />
 
-                      <View style={{ backgroundColor: 'yellow', flexDirection: 'column', justifyContent: 'center' }}>
-                        <View style={{ flex: 1 }}>
-                          <Text style={styles.msg3}>
+                      <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
+                          <Text style={styles.msg4}>
                             { (tally !== 0) && (tally !== undefined) && (tally !== 1) && `${tally} votes` }
                             { (tally === 1) && `${tally} vote` }
                           </Text>
                         </View>
 
-                        <View style={{ flex: 1, backgroundColor: 'pink' }}>
+                        <View style={{ flex: 1, justifyContent: 'center' }}>
 
                           {
                             (tally !== 0) && (tally !== undefined) &&
-                            <BarChart tally={tally} allData={voteCount} chartColor={colours.where} />
+                            <BarChart tally={tally} allData={voteCount} chartColor={colours[category]} />
                           }
 
                         </View>
                         <View style={{ flex: 1 }}>
-                          <Text style={styles.msg3} />
+                          <Text style={styles.msg4} />
                         </View>
                       </View>
 
