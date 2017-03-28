@@ -342,10 +342,10 @@ const styles = {
     alignItems: 'center',
     margin: 5
   },
-  whenContainer: {
-    flexDirection: 'column',
-    margin: 15
-  },
+  // whenContainer: {
+  //   flexDirection: 'column',
+  //   margin: 15
+  // },
   containerFeed: {
 
   },

@@ -15,13 +15,6 @@ import discardEvent from '../../lib/discard-event';
 const windowSize = Dimensions.get('window');
 const deviceHeight = windowSize.height;
 
-const inlineStyle = {
-  inputContainer: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    zIndex: 999999
-  }
-};
 export default class Where extends Component {
 
   static route = {
@@ -79,7 +72,18 @@ export default class Where extends Component {
     const { data, name, addInput, removeInput } = this.props;
     const inputs = data.map((value, inputKey) => {
       return (
-        <View key={ inputKey } style={inlineStyle.inputContainer}>
+        <View
+          key={ inputKey }
+          style={{
+            flexDirection: 'row',
+            marginTop: 10,
+            borderRadius: 10,
+            borderColor: 'black',
+            borderWidth: 5,
+            paddingHorizontal: 10 // #fff
+            // zIndex: 999999
+          }}
+        >
           <GooglePlacesAutocomplete
             ref={ (googlePlaces) => {
               this.googlePlaces = googlePlaces;
@@ -91,6 +95,7 @@ export default class Where extends Component {
             fetchDetails
             listViewDisplayed={this.state.listViewDisplayed}
             textInputProps={{
+              underlineColorAndroid: 'white',
               onKeyPress: (e) => {
                 if (e.nativeEvent.key === 'Enter') {
                   this.setState({ listViewDisplayed: 'false' });
@@ -109,48 +114,54 @@ export default class Where extends Component {
             }}
             getDefaultValue={() => value }
             styles={{
+              container: {
+                flex: 10,
+                backgroundColor: 'purple' // '#fff'
+                // zIndex: 999999
+              },
               textInputContainer: {
                 backgroundColor: '#fff',
-                borderRadius: 5,
+                // borderRadius: 5,
                 height: 38,
-                borderTopColor: '#D3D3D3',
-                borderBottomColor: '#D3D3D3',
-                borderTopWidth: 1,
-                borderBottomWidth: 1,
-                borderLeftWidth: 1,
-                borderRightWidth: 1,
-                borderLeftColor: '#D3D3D3',
-                borderRightColor: '#D3D3D3',
+                borderColor: '#D3D3D3',
+                borderWidth: 1,
                 maxWidth: windowSize.width - (windowSize.width / 5)
               },
               textInput: {
                 marginTop: 4,
-                padding: 4
+                marginBottom: 4,
+                flex: 1
               },
               listView: {
                 height: deviceHeight,
-                position: 'absolute',
+                // ios - position: 'absolute',
                 left: 5,
                 right: 5,
-                top: 40,
-                backgroundColor: '#fff'
-              },
-              container: {
-                marginTop: 10,
-                backgroundColor: '#fff',
-                zIndex: 999999
+                top: 10, // 40
+                backgroundColor: 'pink' // #fff',
               }
             }}
             nearbyPlacesAPI={'GooglePlacesSearch'}
             filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
           />
           { inputKey !== 0 &&
-            <Icon
-              name="remove"
-              size={14}
-              color="gray"
-              style={{ alignSelf: 'center', marginRight: 25, marginTop: 15 }}
-              onPress={ removeInput }
+            <View
+              style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'red', flex: 1, paddingLeft: 5 }}
+            >
+              <View>
+                <Icon
+                  name="remove"
+                  size={18}
+                  color="gray"
+                  style={{ }}
+                  onPress={ removeInput }
+                />
+              </View>
+            </View>
+          }
+          { inputKey === 0 &&
+            <View
+              style={{ backgroundColor: 'red', flex: 1, paddingLeft: 5, justifyContent: 'center' }}
             />
           }
         </View>
@@ -159,11 +170,11 @@ export default class Where extends Component {
 
     return (
       <KeyboardAwareScrollView
-        style={{ backgroundColor: '#fff' }}
+        style={{ backgroundColor: 'red' }} // #fff
         resetScrollToCoords={{ x: 0, y: 0 }}
         contentContainerStyle={{ flex: 1 }}
       >
-        <View style={ [styles.container, { marginHorizontal: 10 }] }>
+        <View style={ [styles.container, { marginHorizontal: 10 }, { backgroundColor: 'orange' }]}>
           <Text style={ styles.smallMessageText } >
             Enter where the event will take place (or leave blank to decide it later).
           </Text>
@@ -175,7 +186,7 @@ export default class Where extends Component {
 
           <AddInput data={ data } handler={ addInput } />
 
-          <View style={ styles.row }>
+          <View style={[styles.row, { marginTop: 20 }] }>
             <Button
               buttonStyle={ styles.buttonStyle }
               onPress={ () => this.nextPage(name) }

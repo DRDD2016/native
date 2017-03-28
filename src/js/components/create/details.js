@@ -49,6 +49,7 @@ export default class Details extends Component {
 
           <View style={ styles.row }>
             <TextInput
+              underlineColorAndroid="transparent"
               style={ styles.inputStyle }
               onChangeText={ text => handleChange(text, 'name') }
               value={ name }
@@ -59,6 +60,7 @@ export default class Details extends Component {
           </View>
           <View style={ styles.row }>
             <TextInput
+              underlineColorAndroid="transparent"
               style={ styles.inputStyle }
               onChangeText={ text => handleChange(text, 'description') }
               value={ description }
@@ -69,6 +71,7 @@ export default class Details extends Component {
           </View>
           <View style={ styles.row }>
             <TextInput
+              underlineColorAndroid="transparent"
               style={ styles.inputStyle }
               onChangeText={ text => handleChange(text, 'note') }
               value={ note }

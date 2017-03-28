@@ -52,7 +52,7 @@ export default class When extends Component {
             You can add more than one option to create a poll.
           </Text>
         </View>
-        <View style={styles.whenContainer}>
+        <View style={{ flexDirection: 'column' }}>
           {
             data.map((datum, i) => {
               return (
@@ -67,7 +67,9 @@ export default class When extends Component {
               );
             })
           }
-          <AddInput data={ data } handler={ addInput } />
+          <View style={{ alignItems: 'center' }}>
+            <AddInput data={ data } handler={ addInput } />
+          </View>
         </View>
         <View style={styles.container}>
           <View style={styles.row}>
