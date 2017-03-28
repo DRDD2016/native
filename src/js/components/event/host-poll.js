@@ -87,7 +87,7 @@ export default class HostPoll extends Component {
         {
           allCategoriesSelected &&
           <TouchableOpacity
-            style={{ backgroundColor: 'green' }}
+            style={styles.confirmButton}
             onPress={ () => handleConfirmEvent(this.state, event.event_id) }
           >
             <Text style={styles.confirmButtonText}>CONFIRM EVENT DETAILS</Text>

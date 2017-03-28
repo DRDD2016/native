@@ -4,6 +4,7 @@ import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../common/Button';
 import styles from '../../../styles';
+import colours from '../../../styles/colours';
 
 const ConfirmWhere = ({ data }) => { // eslint-disable-line react/prop-types
 
@@ -30,11 +31,13 @@ const ConfirmWhere = ({ data }) => { // eslint-disable-line react/prop-types
           style={{ flex: 250 }}
         >
           <View style={{ }}>
-            <Button buttonStyle={styles.optionSelectedWhere} textStyle={[styles.optionTextSelected, {lineHeight: 20}]}>
-              <Icon name="map-marker" size={18} color="white" />
+            <View style={[styles.optionInfoWhere, { flexDirection: 'row' }]} >
+              <Icon name="map-marker" size={18} color={colours.where} />
+              <Text style={[styles.optionTextInfoWhere, { lineHeight: 20 }]}>
               {'  '}
               { datum || 'TBC' }
-            </Button>
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -42,7 +45,7 @@ const ConfirmWhere = ({ data }) => { // eslint-disable-line react/prop-types
   });
 
   return (
-    <View style={{ marginVertical: 10, marginRight: 10 }}>
+    <View style={{ marginTop: 3, marginRight: 10 }}>
       { layout }
     </View>
   );

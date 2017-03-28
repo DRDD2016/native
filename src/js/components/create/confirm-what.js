@@ -4,6 +4,7 @@ import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../common/Button';
 import styles from '../../../styles';
+import colours from '../../../styles/colours';
 
 const ConfirmWhat = ({ data }) => {
 
@@ -31,8 +32,8 @@ const ConfirmWhat = ({ data }) => {
           key={ i }
         >
           <View style={{}}>
-            <Button buttonStyle={styles.optionSelectedWhat} textStyle={[styles.optionTextSelected, {lineHeight: 20}]}>
-              <Icon name="star" size={18} color="white" />
+            <Button buttonStyle={styles.optionInfoWhat} textStyle={[styles.optionTextInfoWhat, {lineHeight: 20}]}>
+              <Icon name="star" size={18} color={colours.what} />
               {'  '}
               { datum || 'TBC' }
             </Button>
@@ -44,7 +45,7 @@ const ConfirmWhat = ({ data }) => {
   });
 
   return (
-    <View style={{ marginVertical: 10, marginRight: 10 }}>
+    <View style={{ marginTop: 3, marginRight: 10 }}>
       { layout }
     </View>
   );

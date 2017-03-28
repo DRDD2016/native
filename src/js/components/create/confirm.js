@@ -55,9 +55,12 @@ export default class Confirm extends Component {
             <Text>{ note }</Text>
           </View>
           <ConfirmWhat data={what} />
+          <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
           <ConfirmWhere data={where} />
+          <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
           <ConfirmWhen data={when} />
-          <View style={styles.rowCentered}>
+          
+          <View style={[styles.rowCentered, { marginTop: 10 }]}>
             <Button
               buttonStyle={styles.confirmButton}
               textStyle={styles.confirmButtonText}

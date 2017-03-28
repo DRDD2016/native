@@ -77,9 +77,6 @@ export default class Where extends Component {
           style={{
             flexDirection: 'row',
             marginTop: 10,
-            borderRadius: 10,
-            borderColor: 'black',
-            borderWidth: 5,
             paddingHorizontal: 10 // #fff
             // zIndex: 999999
           }}
@@ -115,8 +112,8 @@ export default class Where extends Component {
             getDefaultValue={() => value }
             styles={{
               container: {
-                flex: 10,
-                backgroundColor: 'purple' // '#fff'
+                flex: 10
+                // backgroundColor: 'purple' // '#fff'
                 // zIndex: 999999
               },
               textInputContainer: {
@@ -138,7 +135,7 @@ export default class Where extends Component {
                 left: 5,
                 right: 5,
                 top: 10, // 40
-                backgroundColor: 'pink' // #fff',
+                backgroundColor: '#fff'
               }
             }}
             nearbyPlacesAPI={'GooglePlacesSearch'}
@@ -146,7 +143,7 @@ export default class Where extends Component {
           />
           { inputKey !== 0 &&
             <View
-              style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'red', flex: 1, paddingLeft: 5 }}
+              style={{ flexDirection: 'row', alignItems: 'center', flex: 1, paddingLeft: 5 }}
             >
               <View>
                 <Icon
@@ -161,7 +158,7 @@ export default class Where extends Component {
           }
           { inputKey === 0 &&
             <View
-              style={{ backgroundColor: 'red', flex: 1, paddingLeft: 5, justifyContent: 'center' }}
+              style={{ flex: 1, paddingLeft: 5, justifyContent: 'center' }}
             />
           }
         </View>
@@ -170,11 +167,11 @@ export default class Where extends Component {
 
     return (
       <KeyboardAwareScrollView
-        style={{ backgroundColor: 'red' }} // #fff
+        style={{ backgroundColor: '#fff' }}
         resetScrollToCoords={{ x: 0, y: 0 }}
         contentContainerStyle={{ flex: 1 }}
       >
-        <View style={ [styles.container, { marginHorizontal: 10 }, { backgroundColor: 'orange' }]}>
+        <View style={ [styles.container, { marginHorizontal: 10 }]}>
           <Text style={ styles.smallMessageText } >
             Enter where the event will take place (or leave blank to decide it later).
           </Text>

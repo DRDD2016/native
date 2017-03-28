@@ -7,6 +7,7 @@ import Button from '../common/Button';
 import formatDate from '../../lib/format-date';
 import formatTime from '../../lib/format-time';
 import styles from '../../../styles';
+import colours from '../../../styles/colours';
 
 const ConfirmWhen = ({ data }) => {
   const layout = data.map((timestamp, i) => {
@@ -28,8 +29,8 @@ const ConfirmWhen = ({ data }) => {
         }
         <View style={{ flex: 800 }}>
           <View style={{}}>
-            <Button buttonStyle={styles.optionSelectedWhen} textStyle={[styles.optionTextSelected, {lineHeight: 20}]}>
-              <Icon name="calendar" size={18} color="white" />
+            <Button buttonStyle={styles.optionInfoWhen} textStyle={[styles.optionTextInfoWhen, {lineHeight: 20}]}>
+              <Icon name="calendar" size={18} color={colours.when} />
               {'  '}
               {
                 // in create/confirm view, timestamp will be an object: { date: DD-MM-YYYY, time: HH:mm }
@@ -37,7 +38,7 @@ const ConfirmWhen = ({ data }) => {
                 formatDate(timestamp)
               }
               {'  '}
-              <Icon name="clock-o" size={18} color="white" />
+              <Icon name="clock-o" size={18} color={colours.when} />
               {'  '}
               {
                 // in create/confirm view, timestamp will be an object: { date: DD-MM-YYYY, time: HH:mm }
@@ -53,7 +54,7 @@ const ConfirmWhen = ({ data }) => {
   });
 
   return (
-    <View style={{ marginVertical: 10, marginRight: 10 }}>
+    <View style={{ marginTop: 3, marginRight: 10 }}>
       { layout }
     </View>
   );

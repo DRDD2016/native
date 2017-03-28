@@ -32,10 +32,10 @@ const inlineStyle = {
   },
   column: {
     margin: 5,
-    flexGrow: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
+    backgroundColor: 'green'
   }
 };
 
@@ -72,11 +72,11 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
         <FinalisedWhere data={ event.where } />
         <FinalisedWhen data={ event.when } />
 
-        <View style={{ marginTop: 10, borderTopColor: '#efefef', borderTopWidth: 1, alignItems: 'center' }}>
+        <View style={{ marginTop: 5, marginHorizontal: 5, borderTopColor: '#efefef', borderTopWidth: 1, alignItems: 'center' }}>
 
           { userIsHost &&
             <Button
-              buttonStyle={[styles.inviteButton, { marginTop: 10, marginBottom: 10 }]}
+              buttonStyle={[styles.inviteButton, { marginTop: 10, marginBottom: 5 }]}
               textStyle={styles.inviteButtonText}
               onPress={ handleInviteMoreFriends }
             >
@@ -84,77 +84,81 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
             </Button>
           }
 
-          <Text style={{ margin: 10, fontSize: 16 }}>RSVPs</Text>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-            <View style={ inlineStyle.column }>
-              <Button
-                buttonStyle={[styles.confirmButton, inlineStyle.button, inlineStyle.greenButton]}
-                textStyle={styles.confirmButtonText}
-                onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_GOING) }
-              >
-                Going
-              </Button>
-              {
-                rsvps.going && rsvps.going.map((invitee) => {
-                  return (
-                    <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
-                  );
-                })
-              }
-            </View>
-            <View style={ inlineStyle.column }>
-              <Button
-                buttonStyle={[styles.confirmButton, inlineStyle.button, inlineStyle.orangeButton]}
-                textStyle={styles.confirmButtonText}
-                onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_MAYBE) }
-              >
-                Maybe
-              </Button>
-              {
-                rsvps.maybe && rsvps.maybe.map((invitee) => {
-                  return (
-                    <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
-                  );
-                })
-              }
-            </View>
-            <View style={ [inlineStyle.column, { flexGrow: 0.5 }] }>
-              <Button
-                buttonStyle={[styles.confirmButton, inlineStyle.button, inlineStyle.redButton]}
-                textStyle={styles.confirmButtonText}
-                onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_NOT_GOING) }
-              >
-                Not Going
-              </Button>
-              {
-                rsvps.not_going && rsvps.not_going.map((invitee) => {
-                  return (
-                    <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
-                  );
-                })
-              }
-            </View>
-          </View>
-          <View style={{ marginTop: 10, marginBottom: 10 }}>
-            <Text>Not responded</Text>
-          </View>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+        </View>
+
+        <View style={{ flex: 1, flexDirection: 'row' }}>
+          <Text style={{ marginLeft: 5, marginVertical: 5, fontSize: 14 }}>RSVPs</Text>
+        </View>
+        <View style={{ flexDirection: 'row', backgroundColor: 'gray', justifyContent: 'space-around' }}>
+          <View style={ inlineStyle.column }>
+            <Button
+              buttonStyle={[styles.RSVPButton, inlineStyle.button, inlineStyle.greenButton]}
+              textStyle={styles.RSVPButtonText}
+              onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_GOING) }
+            >
+              Going
+            </Button>
             {
-              rsvps.not_responded.map((invitee) => {
-                if (invitee.user_id === event.host_user_id) {
-                  return null;
-                }
+              rsvps.going && rsvps.going.map((invitee) => {
                 return (
-                  <InviteeCard
-                    key={ invitee.firstname + Date.now() }
-                    firstname={ invitee.firstname }
-                    photo_url={ invitee.photo_url }
-                  />
+                  <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
+                );
+              })
+            }
+          </View>
+          <View style={ inlineStyle.column }>
+            <Button
+              buttonStyle={[styles.RSVPButton, inlineStyle.button, inlineStyle.orangeButton]}
+              textStyle={styles.RSVPButtonText}
+              onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_MAYBE) }
+            >
+              Maybe
+            </Button>
+            {
+              rsvps.maybe && rsvps.maybe.map((invitee) => {
+                return (
+                  <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
+                );
+              })
+            }
+          </View>
+          <View style={ [inlineStyle.column, { flexGrow: 0.5 }] }>
+            <Button
+              buttonStyle={[styles.RSVPButton, inlineStyle.button, inlineStyle.redButton]}
+              textStyle={styles.RSVPButtonText}
+              onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_NOT_GOING) }
+            >
+              Not Going
+            </Button>
+            {
+              rsvps.not_going && rsvps.not_going.map((invitee) => {
+                return (
+                  <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
                 );
               })
             }
           </View>
         </View>
+        <View style={{ marginTop: 10, marginBottom: 10 }}>
+          <Text>Not responded</Text>
+        </View>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+          {
+            rsvps.not_responded.map((invitee) => {
+              if (invitee.user_id === event.host_user_id) {
+                return null;
+              }
+              return (
+                <InviteeCard
+                  key={ invitee.firstname + Date.now() }
+                  firstname={ invitee.firstname }
+                  photo_url={ invitee.photo_url }
+                />
+              );
+            })
+          }
+        </View>
+
 
       </ScrollView>
     </View>

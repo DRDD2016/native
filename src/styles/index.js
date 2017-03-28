@@ -169,12 +169,27 @@ const styles = {
     backgroundColor: colours.what,
     borderColor: colours.what,
     borderWidth: 1,
-    borderRadius: 100,
+    borderRadius: 30,
     paddingTop: 8,
     paddingBottom: 8,
     paddingLeft: 15,
     paddingRight: 15,
     marginBottom: 2
+  },
+  optionInfoWhat: {
+    flex: 1,
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 15,
+    paddingRight: 15,
+    marginBottom: 2
+  },
+  optionTextInfoWhat: {
+    flex: 1,
+    fontSize: 12,
+    fontWeight: '500',
+    color: colours.what,
+    justifyContent: 'space-around'
   },
   optionTextSelected: {
     flex: 1,
@@ -230,6 +245,21 @@ const styles = {
     paddingRight: 15,
     marginBottom: 2
   },
+  optionInfoWhere: {
+    flex: 1,
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 15,
+    paddingRight: 15,
+    marginBottom: 2
+  },
+  optionTextInfoWhere: {
+    flex: 1,
+    fontSize: 12,
+    fontWeight: '500',
+    color: colours.where,
+    justifyContent: 'space-around'
+  },
   optionTextDeselectedWhere: {
     flex: 1,
     fontSize: 12,
@@ -266,6 +296,21 @@ const styles = {
     paddingRight: 15,
     marginBottom: 2
   },
+  optionInfoWhen: {
+    flex: 1,
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 15,
+    paddingRight: 15,
+    marginBottom: 2
+  },
+  optionTextInfoWhen: {
+    flex: 1,
+    fontSize: 12,
+    fontWeight: '500',
+    color: colours.when,
+    justifyContent: 'space-around'
+  },
   optionTextDeselectedWhen: {
     flex: 1,
     fontSize: 12,
@@ -277,9 +322,10 @@ const styles = {
     backgroundColor: colours.confirm,
     borderColor: colours.confirm,
     borderWidth: 1,
-    borderRadius: 100,
     paddingVertical: 8,
-    paddingHorizontal: 30
+    paddingHorizontal: 10,
+    marginTop: 15,
+    marginHorizontal: 20
   },
   confirmButtonText: {
     fontSize: 18,
@@ -296,6 +342,21 @@ const styles = {
     paddingHorizontal: 30
   },
   inviteButtonText: {
+    fontSize: 18,
+    color: colours.white
+  },
+  RSVPButton: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colours.confirm,
+    borderColor: colours.confirm,
+    borderWidth: 1,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    marginHorizontal: 20
+  },
+  RSVPButtonText: {
     fontSize: 18,
     color: colours.white
   },
