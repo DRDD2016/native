@@ -15,18 +15,38 @@ const STATUS_MAYBE = 'maybe';
 const STATUS_NOT_GOING = 'not_going';
 
 const inlineStyle = {
-  button: {
-    flexBasis: 100,
+  RSVPButton: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colours.confirm,
+    borderColor: colours.confirm,
+    borderWidth: 1,
+    paddingVertical: 5,
     paddingHorizontal: 8,
-    marginBottom: 4
+    marginHorizontal: 5
+  },
+  RSVPTitle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 5,
+    paddingHorizontal: 8,
+    marginHorizontal: 5
+  },
+  RSVPButtonText: {
+    fontSize: 16,
+    color: colours.white
+  },
+  RSVPTitleText: {
+    fontSize: 12,
+    fontWeight: '600'
   },
   orangeButton: {
     backgroundColor: colours.orange,
     borderColor: colours.orange
   },
   redButton: {
-    flexBasis: 100,
-    paddingHorizontal: 5,
     backgroundColor: colours.red,
     borderColor: colours.red
   },
@@ -86,18 +106,47 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
 
         </View>
 
-        <View style={{ flex: 1, flexDirection: 'row' }}>
+        <View style={{ flex: 1, flexDirection: 'column' }}>
           <Text style={{ marginLeft: 5, marginVertical: 5, fontSize: 14 }}>RSVPs</Text>
-        </View>
-        <View style={{ flexDirection: 'row', backgroundColor: 'gray', justifyContent: 'space-around' }}>
-          <View style={ inlineStyle.column }>
+          <View style={{ flexDirection: 'row' }}>
             <Button
-              buttonStyle={[styles.RSVPButton, inlineStyle.button, inlineStyle.greenButton]}
+              buttonStyle={[styles.RSVPButton, inlineStyle.greenButton]}
               textStyle={styles.RSVPButtonText}
               onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_GOING) }
             >
               Going
             </Button>
+            <Button
+              buttonStyle={[styles.RSVPButton, inlineStyle.orangeButton]}
+              textStyle={styles.RSVPButtonText}
+              onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_MAYBE) }
+            >
+              Maybe
+            </Button>
+            <Button
+              buttonStyle={[styles.RSVPButton, inlineStyle.redButton]}
+              textStyle={styles.RSVPButtonText}
+              onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_NOT_GOING) }
+            >
+              Not Going
+            </Button>
+          </View>
+        </View>
+        <View style={{ marginBottom: 10, marginTop: 10, marginHorizontal: 5, borderTopColor: '#efefef', borderTopWidth: 1, alignItems: 'center' }} />
+        <View style={{ flexDirection: 'row', backgroundColor: '#efefef', paddingVertical: 3, justifyContent: 'space-around' }}>
+          <View style={[inlineStyle.RSVPTitle]}>
+            <Text style={[{ color: colours.green }, inlineStyle.RSVPTitleText]}>GOING</Text>
+          </View>
+          <View style={[inlineStyle.RSVPTitle]}>
+            <Text style={[{ color: colours.orange }, inlineStyle.RSVPTitleText]}>MAYBE</Text>
+          </View>
+          <View style={[inlineStyle.RSVPTitle]}>
+            <Text style={[{ color: colours.red }, inlineStyle.RSVPTitleText]}>NOT GOING</Text>
+          </View>
+        </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+          <View style={ inlineStyle.column }>
+
             {
               rsvps.going && rsvps.going.map((invitee) => {
                 return (
@@ -107,13 +156,7 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
             }
           </View>
           <View style={ inlineStyle.column }>
-            <Button
-              buttonStyle={[styles.RSVPButton, inlineStyle.button, inlineStyle.orangeButton]}
-              textStyle={styles.RSVPButtonText}
-              onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_MAYBE) }
-            >
-              Maybe
-            </Button>
+
             {
               rsvps.maybe && rsvps.maybe.map((invitee) => {
                 return (
@@ -123,13 +166,7 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
             }
           </View>
           <View style={ [inlineStyle.column, { flexGrow: 0.5 }] }>
-            <Button
-              buttonStyle={[styles.RSVPButton, inlineStyle.button, inlineStyle.redButton]}
-              textStyle={styles.RSVPButtonText}
-              onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_NOT_GOING) }
-            >
-              Not Going
-            </Button>
+
             {
               rsvps.not_going && rsvps.not_going.map((invitee) => {
                 return (

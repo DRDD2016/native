@@ -353,11 +353,11 @@ const styles = {
     borderColor: colours.confirm,
     borderWidth: 1,
     paddingVertical: 5,
-    paddingHorizontal: 10,
-    marginHorizontal: 20
+    paddingHorizontal: 0,
+    marginHorizontal: 5
   },
   RSVPButtonText: {
-    fontSize: 18,
+    fontSize: 16,
     color: colours.white
   },
 
