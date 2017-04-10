@@ -32,8 +32,8 @@ class Signup extends Component {
     return (
       <View style={ styles.row }>
         <Button
-          buttonStyle={{ backgroundColor: colours.blue, padding: 10, flex: 1, borderRadius: 5, paddingVertical: 15, marginVertical: 15 }}
-          textStyle={{ alignSelf: 'center', color: '#fff' }}
+          buttonStyle={ [styles.confirmButton, { backgroundColor: colours.orange, borderColor: colours.orange, flex: 1 }] }
+          textStyle={ styles.confirmButtonText }
           onPress={handleSubmit(handleSubmitForm)}
         >
           <Text>SIGN UP</Text>
@@ -61,28 +61,31 @@ class Signup extends Component {
         >
           <View style={{ flex: 1, justifyContent: 'center', marginBottom: 30 }}>
             <View style={{ marginTop: 50 }}>
-              <Text style={{ paddingLeft: 5 }}>First name</Text>
-              <View style={ styles.row }>
-                <Field name="firstname" component={ FormTextInput } />
+
+              <View style={ [styles.row, { marginHorizontal: 10 }] }>
+                <Field name="firstname" component={ FormTextInput } placeholder="* First name" />
               </View>
 
-              <Text style={{ paddingLeft: 5 }}>Surname</Text>
-              <View style={ styles.row }>
-                <Field name="surname" component={ FormTextInput } />
+
+              <View style={ [styles.row, { marginHorizontal: 10 }] }>
+                <Field name="surname" component={ FormTextInput } placeholder="* Surname" />
               </View>
 
-              <Text style={{ paddingLeft: 5 }}>Email</Text>
-              <View style={ styles.row }>
-                <Field name="email" component={ FormTextInput } isEmail />
+
+              <View style={ [styles.row, { marginHorizontal: 10 }] }>
+                <Field name="email" component={ FormTextInput } placeholder="* Email" isEmail />
               </View>
 
-              <Text style={{ paddingLeft: 5 }}>Password</Text>
-              <View style={ styles.row }>
-                <Field name="password" component={ FormPasswordInput } />
+
+              <View style={ [styles.row, { marginHorizontal: 10 }] }>
+                <Field name="password" component={ FormPasswordInput } placeholder="* Password" />
               </View>
-              <Text style={{ paddingLeft: 5 }}>Confirm password</Text>
-              <View style={ styles.row }>
-                <Field name="confirmPassword" component={ FormPasswordInput } />
+
+              <View style={ [styles.row, { marginHorizontal: 10 }] }>
+                <Field name="confirmPassword" component={ FormPasswordInput } placeholder="* Confirm password" />
+              </View>
+              <View style={ [styles.row, { justifyContent: 'flex-end' }] }>
+                <Text>* Mandatory fields</Text>
               </View>
               { this.renderServerError() }
               { this.renderButton() }

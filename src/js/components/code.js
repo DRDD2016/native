@@ -70,13 +70,13 @@ class Code extends Component {
     return (
       <View style={{ flex: 1 }}>
         { !isConnected && this.renderAlert() }
-        <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 70 }}>
-          <Text>Explanation text</Text>
+        <View style={{ alignItems: 'center', marginHorizontal: 10, marginTop: 50, marginBottom: 70 }}>
+          <Text>If your friend has sent you a code to join their event, enter the code below to respond to their invitation.</Text>
         </View>
         <View style={ styles.container }>
-          <Text style={inlineStyle.labelStyle}>Event Code</Text>
+          <Text style={inlineStyle.labelStyle}>Event Code:</Text>
           <View style={ styles.row }>
-            <Field name="code" component={ FormTextInput } />
+            <Field style={styles.input} name="code" component={ FormTextInput } placeholder="Enter code here" />
           </View>
           { this.renderButton() }
 

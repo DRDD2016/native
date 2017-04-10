@@ -1,7 +1,7 @@
 
 /* eslint-disable no-else-return */
 import React, { Component } from 'react';
-import { Text, View, TouchableHighlight } from 'react-native';
+import { Text, View, TouchableHighlight, ScrollView } from 'react-native';
 import CategoryDetails from './category-details';
 import styles from '../../../styles';
 
@@ -44,7 +44,8 @@ export default class InviteePoll extends Component {
     const allCategoriesSelected = Object.keys(this.state)
       .every(category => this.state[category].includes(1));
     return (
-      <View>
+
+      <ScrollView>
         <Text>POLL (INVITEE VIEW)</Text>
         <View style={styles.row}>
           <CategoryDetails
@@ -75,10 +76,10 @@ export default class InviteePoll extends Component {
         {
           allCategoriesSelected &&
           <TouchableHighlight
-            style={styles.buttonStyle}
+            style={ [styles.confirmButton, { marginBottom: 20 }] }
             onPress={ () => handleVote(this.state, event.event_id) }
           >
-            <Text>VOTE</Text>
+            <Text style={styles.confirmButtonText}>VOTE</Text>
           </TouchableHighlight>
         }
 
@@ -86,7 +87,8 @@ export default class InviteePoll extends Component {
           voteSaved &&
           <Text>Thanks for voting!</Text>
         }
-      </View>
+      </ScrollView>
+
     );
   }
 }

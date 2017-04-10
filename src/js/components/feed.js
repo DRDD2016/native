@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
+import Spinner from './common/Spinner';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 
@@ -71,6 +72,10 @@ export default class Feed extends Component {
         <ScrollView>
           <View style={styles.containerFeed}>
             { !isConnected && this.renderAlert() }
+
+            {
+              isFetching && <Spinner />
+            }
 
             {
               allEvents.length === 0 && !isFetching &&

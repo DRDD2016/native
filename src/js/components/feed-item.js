@@ -3,11 +3,11 @@
 import React, { PropTypes } from 'react';
 import moment from 'moment';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../lib/format-date';
 import CardSection from './common/CardSection';
 import Card from './common/Card';
 import styles from '../../styles';
+import colours from '../../styles/colours';
 
 moment.locale('en-gb');
 
@@ -24,17 +24,17 @@ const FeedItem = ({ user_id, event_id, timestamp, firstname, surname,
           onPress={ () => handleSelection(event_id, viewed, feed_item_id) }
         >
 
-          <View style={styles.leftColumn}>
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
             <Image style={styles.uiProfilePhotoCircularImage} source={{ uri: photo_url }} />
           </View>
-          <View style={styles.middleColumn}>
-            <Text style={styles.timestamp}> { moment(timestamp).startOf().fromNow() } </Text>
+          <View style={{ flex: 3, paddingBottom: 5 }}>
+            <Text style={[styles.timestamp, viewed && styles.viewedFeedItemTimestamp]}> { moment(timestamp).startOf().fromNow() } </Text>
             <Text>
-              <Text style={styles.subjectName}>
+              <Text style={[styles.subjectName, viewed && styles.viewedFeedItemName]}>
                 { userIsSubject && 'You'}
                 { !userIsSubject && `${firstname}  ${surname}` }
               </Text>
-              <Text style={styles.subjectAction}>
+              <Text style={[styles.subjectAction, viewed && styles.viewedFeedItemAction]}>
                 { userIsSubject && is_poll && ' have created a poll ' }
                 { userIsSubject && !is_poll && !edited && ' have created an event ' }
                 { userIsSubject && !is_poll && edited && ' have edited an event' }
@@ -48,30 +48,38 @@ const FeedItem = ({ user_id, event_id, timestamp, firstname, surname,
 
               </Text>
             </Text>
-            <Text style={styles.name}>
+            <Text style={[styles.subjectName, viewed && styles.viewedFeedItemName]}>
               { name }
             </Text>
 
           </View>
 
-          <View style={styles.rightColumnFeed}>
+          <View style={{ flex: 1.5, flexDirection: 'column', borderLeftColor: colours.lightgray, borderLeftWidth: 0.5 }}>
+            <View style={{ flex: 1, justifyContent: 'space-around' }}>
 
-            <Text style={styles.date}>
-              <Icon name="calendar-o" size={14} color="gray" />
-              {
-                (when.length > 1 && 'VOTE') ||
-                (when.length === 1 && when[0].date === '' && 'TBC') ||
-                formatDate(when[0]).toUpperCase()
-              }
-            </Text>
-            <Text numberOfLines={1} style={styles.placeName}>
-              <Icon name="map-marker" size={14} color="gray" />
-              {
-                (where.length > 1 && 'VOTE') ||
-                (where.length === 1 && where[0] === '' && 'TBC') ||
-                where[0]
-              }
-            </Text>
+              <View style={{ flexDirection: 'row', marginBottom: 5 }}>
+
+                <Text style={[styles.date, { flex: 3, marginLeft: 5 }, viewed && styles.viewedFeedItemDate]}>
+                  {
+                    (when.length > 1 && 'VOTE') ||
+                    (when.length === 1 && when[0].date === '' && 'TBC') ||
+                    formatDate(when[0]).toUpperCase()
+                  }
+                </Text>
+              </View>
+
+              <View style={{ flexDirection: 'row' }}>
+
+                <Text numberOfLines={1} style={[styles.placeName, { flex: 3, marginLeft: 5 }, viewed && styles.viewedFeedItemPlaceName]}>
+                  {
+                    (where.length > 1 && 'VOTE') ||
+                    (where.length === 1 && where[0] === '' && 'TBC') ||
+                    where[0]
+                  }
+                </Text>
+              </View>
+            </View>
+
           </View>
 
         </TouchableOpacity>

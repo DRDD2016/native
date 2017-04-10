@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { View, Text, Image, TextInput, Platform, ScrollView } from 'react-native';
+import { View, Text, Image, TextInput, Platform, ScrollView, TouchableHighlight } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from './common/Button';
 import Spinner from './common/Spinner';
 import styles from '../../styles';
@@ -72,7 +73,7 @@ export default class Profile extends Component {
 
   render () {
     const { photo_url, firstname, surname, handleLogOut, handleChangeName, isConnected } = this.props;
-    const hideEditButton = (firstname === '' ? styles.hideEditButton : [styles.buttonStyle, { backgroundColor: 'green' }]);
+    const hideEditButton = (firstname === '' ? styles.hideEditButton : [{ backgroundColor: 'green' }]);
     return (
       <ScrollView style={styles.profilePage}>
         { !isConnected && this.renderAlert() }
@@ -83,20 +84,37 @@ export default class Profile extends Component {
           </View>
 
           <View>
+
             <Image style={styles.uiProfilePagePhotoCircularImage} source={ this.state.avatarSource || { uri: photo_url } } />
 
-            <Button
-              buttonStyle={ [hideEditButton, { marginTop: 10, alignSelf: 'center', backgroundColor: 'grey' }] }
-              textStyle={{ color: '#fff' }}
+            <TouchableHighlight
+              style={ [hideEditButton, {
+                position: 'absolute',
+                right: -24,
+                bottom: 6,
+                padding: 5,
+                backgroundColor: 'transparent',
+                borderColor: 'transparent',
+                alignItems: 'flex-end'
+              }] }
               onPress={ this.selectPhotoTapped }
             >
-              Change Photo
-            </Button>
+              <View>
+                <View>
+                  <Icon name="camera" size={36} color={colours.white} />
+                </View>
+                <View style={{ position: 'absolute', top: 10, left: 10, width: 20, height: 20, backgroundColor: colours.white }} />
+                <View style={{ position: 'absolute', top: 3, left: 3 }}>
+                  <Icon name="camera" size={30} color={colours.gray} />
+                </View>
+              </View>
+            </TouchableHighlight>
 
           </View>
 
           <View style={styles.row}>
             <TextInput
+              underlineColorAndroid="transparent"
               value={ firstname }
               placeholder="First name"
               onChangeText={ text => handleChangeName(text, 'firstname') }
@@ -106,6 +124,7 @@ export default class Profile extends Component {
 
           <View style={styles.row}>
             <TextInput
+              underlineColorAndroid="transparent"
               value={ surname }
               placeholder="Surname"
               onChangeText={ text => handleChangeName(text, 'surname')}
@@ -116,8 +135,13 @@ export default class Profile extends Component {
           <View style={styles.row}>
             { this.props.isFetching ? <Spinner /> :
             <Button
-              buttonStyle={ [hideEditButton, { marginTop: 10, alignSelf: 'center' }] }
-              textStyle={{ color: '#fff' }}
+              buttonStyle={ [hideEditButton, styles.confirmButton, {
+                backgroundColor: colours.purple,
+                borderColor: colours.purple,
+                marginTop: 2,
+                flex: 1
+              }] }
+              textStyle={ styles.confirmButtonText }
               onPress={ () => this.saveChanges(firstname, surname) }
             >
               Save changes
@@ -127,8 +151,8 @@ export default class Profile extends Component {
 
           <View style={styles.row}>
             <Button
-              buttonStyle={ [hideEditButton, { marginTop: 10, alignSelf: 'center', backgroundColor: 'gray' }] }
-              textStyle={{ color: '#fff' }}
+              buttonStyle={ [hideEditButton, styles.confirmButton, { backgroundColor: colours.white, borderColor: colours.gray, flex: 1 }] }
+              textStyle={ [styles.confirmButtonText, { color: colours.gray }]}
               onPress={ () => handleLogOut(this.props.navigation) }
             >
               Log Out

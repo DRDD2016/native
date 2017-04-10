@@ -5,6 +5,7 @@ const colours = {
   blue: '#316AB3', // blue of tabbar
   blueWhat: '#424FA1', // blue of what
   purple: '#7D3E98',
+  darkgray: '#a39b9b',
   gray: '#939598',
   lightgray: 'lightgray',
   orange: '#F58220',

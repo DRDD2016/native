@@ -94,13 +94,13 @@ class Login extends Component {
             <View style={styles.iconWrap}>
               <Icon name="envelope-o" size={15} color="rgba(255, 255, 255, 0.76)" />
             </View>
-            <Field style={styles.input} name="email" component={ FormTextInput } isEmail isLoginView />
+            <Field style={styles.input} name="email" component={ FormTextInput } isEmail isLoginView placeholder="email address" />
           </View>
           <View style={styles.inputWrap}>
             <View style={styles.iconWrap}>
               <Icon name="lock" size={20} color="rgba(255, 255, 255, 0.76)" />
             </View>
-            <Field style={styles.input} name="password" component={ FormPasswordInput } isLoginView />
+            <Field style={styles.input} name="password" component={ FormPasswordInput } isLoginView placeholder="password" />
           </View>
           { this.renderServerError() }
           <TouchableOpacity activeOpacity={ 0.5 } onPress={handleSubmit(handleSubmitForm)}>

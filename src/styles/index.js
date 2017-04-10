@@ -450,14 +450,15 @@ const styles = {
     flex: 1
   },
   userName: {
-    fontSize: 36,
+    fontSize: 32,
     fontWeight: '200',
     color: colours.gray
   },
   uiProfilePagePhotoCircularImage: {
-    height: 100,
-    width: 100,
-    borderRadius: 15,
+    height: 150,
+    width: 150,
+    borderRadius: 5,
+    marginBottom: 10,
     alignSelf: 'center'
   },
   editNameTitle: {
@@ -466,24 +467,26 @@ const styles = {
     flex: 1
   },
   inputStyle: {
-    color: colours.black,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: colours.lightgray,
+    color: colours.darkgray,
+    borderRadius: 0,
+    borderWidth: 0.5,
+    borderColor: colours.gray,
     paddingHorizontal: 10,
-    // fontSize: 12,
-    height: 40,
+    fontSize: 16,
+    fontWeight: '400',
+    height: 45,
     flexDirection: 'row',
     flex: 1
   },
   inputStyleAuth: {
-    color: colours.black,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: colours.lightgray,
+    color: colours.darkgray,
+    borderRadius: 0,
+    borderWidth: 0.5,
+    borderColor: colours.gray,
     paddingHorizontal: 10,
-    fontSize: 19,
-    height: 40,
+    fontSize: 16,
+    fontWeight: '500',
+    height: 45,
     flexDirection: 'row'
   },
   smallButtonStyle: {
@@ -624,15 +627,39 @@ const styles = {
   cardButtonStyle: {
     flex: 1,
     backgroundColor: '#fff',
-    marginLeft: 5,
-    marginRight: 5,
+    marginLeft: 2,
+    marginRight: 2,
     padding: 3,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center'
   },
   viewedFeedItemStyle: {
-    backgroundColor: 'red'
+    backgroundColor: 'darkgray',
+    shadowOpacity: 0.2,
+    shadowRadius: 3
+  },
+  viewedFeedItemName: {
+    fontSize: 14,
+    color: colours.black,
+    fontWeight: '500'
+  },
+  viewedFeedItemAction: {
+    color: colours.black
+  },
+  viewedFeedItemTimestamp: {
+    color: colours.darkgray,
+    fontWeight: '500'
+  },
+  viewedFeedItemDate: {
+    fontSize: 16,
+    color: colours.black,
+    fontWeight: '500'
+  },
+  viewedFeedItemPlaceName: {
+    fontSize: 14,
+    color: colours.black,
+    fontWeight: '500'
   },
   leftColumn: {
     flex: 1,
@@ -660,8 +687,8 @@ const styles = {
     color: 'lightgray'
   },
   subjectName: {
-    fontSize: 12,
-    fontWeight: 'bold'
+    fontSize: 14,
+    fontWeight: '500'
   },
   subjectAction: {
     // fontSize: 10,

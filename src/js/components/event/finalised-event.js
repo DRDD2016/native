@@ -51,11 +51,11 @@ const inlineStyle = {
     borderColor: colours.red
   },
   column: {
-    margin: 5,
+    flex: 1,
+    padding: 2,
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    alignItems: 'stretch',
-    backgroundColor: 'green'
+    alignItems: 'stretch'
   }
 };
 
@@ -106,8 +106,10 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
 
         </View>
 
+        { !userIsHost &&
         <View style={{ flex: 1, flexDirection: 'column' }}>
           <Text style={{ marginLeft: 5, marginVertical: 5, fontSize: 14 }}>RSVPs</Text>
+
           <View style={{ flexDirection: 'row' }}>
             <Button
               buttonStyle={[styles.RSVPButton, inlineStyle.greenButton]}
@@ -131,8 +133,10 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
               Not Going
             </Button>
           </View>
+
         </View>
-        <View style={{ marginBottom: 10, marginTop: 10, marginHorizontal: 5, borderTopColor: '#efefef', borderTopWidth: 1, alignItems: 'center' }} />
+        }
+        <View style={{ marginBottom: 10, marginTop: 5, marginHorizontal: 5, borderTopColor: '#efefef', borderTopWidth: 1, alignItems: 'center' }} />
         <View style={{ flexDirection: 'row', backgroundColor: '#efefef', paddingVertical: 3, justifyContent: 'space-around' }}>
           <View style={[inlineStyle.RSVPTitle]}>
             <Text style={[{ color: colours.green }, inlineStyle.RSVPTitleText]}>GOING</Text>
@@ -146,34 +150,43 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
           <View style={ inlineStyle.column }>
+            <View>
 
-            {
-              rsvps.going && rsvps.going.map((invitee) => {
-                return (
-                  <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
-                );
-              })
-            }
+              {
+                rsvps.going && rsvps.going.map((invitee) => {
+                  return (
+                    <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
+                  );
+                })
+              }
+
+            </View>
           </View>
           <View style={ inlineStyle.column }>
+            <View>
 
-            {
-              rsvps.maybe && rsvps.maybe.map((invitee) => {
-                return (
-                  <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
-                );
-              })
-            }
+              {
+                rsvps.maybe && rsvps.maybe.map((invitee) => {
+                  return (
+                    <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
+                  );
+                })
+              }
+
+            </View>
           </View>
-          <View style={ [inlineStyle.column, { flexGrow: 0.5 }] }>
+          <View style={ inlineStyle.column }>
+            <View>
 
-            {
-              rsvps.not_going && rsvps.not_going.map((invitee) => {
-                return (
-                  <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
-                );
-              })
-            }
+              {
+                rsvps.not_going && rsvps.not_going.map((invitee) => {
+                  return (
+                    <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
+                  );
+                })
+              }
+
+            </View>
           </View>
         </View>
         <View style={{ marginTop: 10, marginBottom: 10 }}>
