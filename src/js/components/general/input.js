@@ -5,7 +5,7 @@ import Button from '../common/Button';
 import styles from '../../../styles';
 
 const Input = ({ handleChange, value, placeholder, removeInput, inputKey }) => {
-  
+
   return (
     <View style={ styles.row }>
 
@@ -16,14 +16,14 @@ const Input = ({ handleChange, value, placeholder, removeInput, inputKey }) => {
         onChangeText={ text => handleChange(text, inputKey) }
         style={ styles.inputStyle }
       />
-      <View style={ styles.shortRow }>
+      <View style={ [styles.shortRow, { alignItems: 'center' }] }>
 
         { (inputKey === 0) &&
           <View />
         }
         { (inputKey !== 0) &&
-          <Button buttonStyle={styles.smallButtonStyle} onPress={ () => removeInput(inputKey) }>
-            <Icon name="times" size={14} color="gray" />
+          <Button buttonStyle={[styles.smallButtonStyle, { justifyContent: 'center' }]} onPress={ () => removeInput(inputKey) }>
+            <Icon name="times" size={16} color="gray" />
           </Button>
         }
       </View>

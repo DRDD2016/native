@@ -34,7 +34,7 @@ export default class Calendar extends Component {
       return a.when[0] > b.when[0];
     });
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         { !isConnected && this.renderAlert() }
         {
           isFetching && <Spinner />

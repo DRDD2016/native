@@ -429,7 +429,8 @@ const styles = {
     paddingRight: 5
   },
   shortRow: {
-    width: 50
+    width: 50,
+    alignItems: 'center'
   },
   leftJustified: {
     flexDirection: 'row',
@@ -450,13 +451,13 @@ const styles = {
     flex: 1
   },
   userName: {
-    fontSize: 32,
+    fontSize: 24,
     fontWeight: '200',
     color: colours.gray
   },
   uiProfilePagePhotoCircularImage: {
-    height: 150,
-    width: 150,
+    height: 130,
+    width: 130,
     borderRadius: 5,
     marginBottom: 10,
     alignSelf: 'center'
@@ -490,28 +491,51 @@ const styles = {
     flexDirection: 'row'
   },
   smallButtonStyle: {
-    flex: 0.1,
-    margin: 10
+    flex: 0.1
   },
   buttonStyle: {
-    borderRadius: 18,
-    borderWidth: 1,
-    borderColor: colours.lightgray,
-    paddingRight: 15,
-    paddingLeft: 15,
-    height: 32,
-    minWidth: 100,
+    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: colours.next,
+    borderColor: colours.next,
+    borderWidth: 1,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    marginTop: 10,
+    marginHorizontal: 20,
+    maxHeight: 60
   },
   buttonTextStyle: {
-    flex: 1,
     fontSize: 16,
     fontWeight: '600',
     paddingTop: 10,
     paddingBottom: 10,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    color: colours.white
+  },
+  addButtonStyle: {
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colours.lightgray,
+    borderColor: colours.verylightgray,
+    borderWidth: 1,
+    borderRadius: 30,
+    marginTop: 0,
+    marginHorizontal: 10,
+    maxHeight: 60
+  },
+  addButtonTextStyle: {
+    fontSize: 16,
+    fontWeight: '600',
+    paddingTop: 10,
+    paddingBottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: colours.white
   },
   hideEditButton: {
     height: 0,
@@ -590,11 +614,11 @@ const styles = {
   // feedItem
 
   cardStyle: {
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderRadius: 2,
-    borderColor: '#ddd',
+    borderColor: colours.main,
     borderBottomWidth: 0,
-    shadowColor: '#000',
+    shadowColor: colours.main,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
@@ -609,7 +633,7 @@ const styles = {
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
     flexDirection: 'column',
-    borderColor: '#ddd',
+    borderColor: colours.main,
     position: 'relative'
   },
   cardSectionInvite: {
@@ -618,7 +642,7 @@ const styles = {
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
     flexDirection: 'column',
-    borderColor: '#ddd',
+    borderColor: colours.main, // '#ddd'
     position: 'relative'
   },
   cardSectionFeedItem: {
@@ -635,7 +659,7 @@ const styles = {
     alignItems: 'center'
   },
   viewedFeedItemStyle: {
-    backgroundColor: 'darkgray',
+    backgroundColor: colours.blue,
     shadowOpacity: 0.2,
     shadowRadius: 3
   },
@@ -652,14 +676,19 @@ const styles = {
     fontWeight: '500'
   },
   viewedFeedItemDate: {
-    fontSize: 16,
     color: colours.black,
     fontWeight: '500'
   },
   viewedFeedItemPlaceName: {
-    fontSize: 14,
     color: colours.black,
     fontWeight: '500'
+  },
+  unConfirmedItemStyle: {
+    backgroundColor: colours.verylightgray
+  },
+  unConfirmedItemText: {
+    color: colours.gray,
+    fontSize: 14
   },
   leftColumn: {
     flex: 1,
@@ -688,16 +717,17 @@ const styles = {
   },
   subjectName: {
     fontSize: 14,
+    color: colours.darkgray,
     fontWeight: '500'
   },
   subjectAction: {
-    // fontSize: 10,
-    color: 'gray'
+    fontSize: 12,
+    color: colours.gray
   },
   eventName: {
     // fontSize: 12,
     // fontWeight: 'bold',
-    color: 'gray'
+    color: colours.darkgray
   },
   rightColumnFeed: {
     flex: 1,

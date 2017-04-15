@@ -59,6 +59,9 @@ export default class Feed extends Component {
     return (
       <View style={{ flex: 1 }}>
         {
+          isFetching && <Spinner />
+        }
+        {
           !isFetching && allEvents.length > 0 &&
           <FilterPanel
             displayAll={ displayAll }
@@ -72,11 +75,7 @@ export default class Feed extends Component {
         <ScrollView>
           <View style={styles.containerFeed}>
             { !isConnected && this.renderAlert() }
-
-            {
-              isFetching && <Spinner />
-            }
-
+            
             {
               allEvents.length === 0 && !isFetching &&
               <Text style={styles.smallMessageText}>

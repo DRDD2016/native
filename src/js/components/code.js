@@ -6,6 +6,7 @@ import { FormTextInput } from './auth/form-components';
 import { codeValidator as validate } from './auth/form-validation';
 import Button from './common/Button';
 import Spinner from './common/Spinner';
+import Header from './common/Header';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 
@@ -32,8 +33,8 @@ class Code extends Component {
   static route = {
     navigationBar: {
       title: 'Enter Your Event Code',
-      backgroundColor: colours.blue,
-      tintColor: colours.white
+      backgroundColor: colours.transparent,
+      tintColor: colours.darkgray
     }
   }
 
@@ -45,11 +46,16 @@ class Code extends Component {
     return (
       <View style={ styles.row }>
         <Button
-          buttonStyle={inlineStyle.buttonStyle}
-          textStyle={inlineStyle.textStyle}
+          buttonStyle={[
+            styles.confirmButton,
+            { backgroundColor: colours.purple,
+              borderColor: colours.purple,
+              marginTop: 2,
+              flex: 1 }]}
+          textStyle={ styles.confirmButtonText }
           onPress={handleSubmit(handleSubmitForm)}
         >
-          <Text>JOIN EVENT</Text>
+          <Text>Join Event</Text>
         </Button>
       </View>
     );
@@ -70,7 +76,8 @@ class Code extends Component {
     return (
       <View style={{ flex: 1 }}>
         { !isConnected && this.renderAlert() }
-        <View style={{ alignItems: 'center', marginHorizontal: 10, marginTop: 50, marginBottom: 70 }}>
+        <Header />
+        <View style={{ alignItems: 'center', marginHorizontal: 10, marginTop: 70, marginBottom: 60 }}>
           <Text>If your friend has sent you a code to join their event, enter the code below to respond to their invitation.</Text>
         </View>
         <View style={ styles.container }>

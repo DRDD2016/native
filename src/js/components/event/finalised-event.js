@@ -82,9 +82,13 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
           <View style={{ alignSelf: 'flex-start' }}>
             <Image source={{ uri: event.host_photo_url }} style={{ width: 60, height: 60, resizeMode: 'contain' }} />
           </View>
-          <View style={{ alignSelf: 'center', marginHorizontal: 10 }}>
-            <Text>{event.description}</Text>
-            <Text>{ event.note }</Text>
+          <View style={{ flex: 1, alignSelf: 'center', marginHorizontal: 10 }}>
+            <View>
+              <Text>{event.description}</Text>
+            </View>
+            <View>
+              <Text>{ event.note }</Text>
+            </View>
           </View>
         </View>
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import Router from '../../router';
 import Button from '../common/Button';
+import Header from '../common/Header';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import { store } from '../../init-store';
@@ -13,14 +14,14 @@ export default class Details extends Component {
   static route = {
     navigationBar: {
       title: 'Create event',
-      backgroundColor: colours.blue,
-      tintColor: colours.white,
+      backgroundColor: colours.transparent,
+      tintColor: colours.darkgray,
       renderRight: () => {
         return (
           <Button
             onPress={ discardEvent }
             buttonStyle={{ margin: 15 }}
-            textStyle={{ color: colours.white, fontWeight: '600' }}
+            textStyle={{ color: colours.darkgray, fontWeight: '600' }}
           >
             <Text>Cancel</Text>
           </Button>
@@ -42,8 +43,15 @@ export default class Details extends Component {
     const hideNext = name === '' || description === '';
     return (
       <View>
-        <View style={ styles.container }>
-          <Text>
+        <Header />
+        <View
+          style={{
+            flexDirection: 'column',
+            alignItems: 'center',
+            marginHorizontal: 20,
+            marginTop: 70 }}
+        >
+          <Text style={{ fontWeight: '700', color: colours.gray }}>
             Enter the name of your event and a description.
           </Text>
 
@@ -72,9 +80,11 @@ export default class Details extends Component {
           <View style={ styles.row }>
             <TextInput
               underlineColorAndroid="transparent"
-              style={ styles.inputStyle }
+              style={ [styles.inputStyle, { height: 100 }] }
               onChangeText={ text => handleChange(text, 'note') }
               value={ note }
+              multiline
+              numberOfLines={5}
               placeholder="Leave a note to your friends (optional)"
               autoCorrect
             />
@@ -86,8 +96,8 @@ export default class Details extends Component {
             { (!hideNext) &&
               <Button
                 onPress={ () => this.nextPage(name) }
-                buttonStyle={ styles.buttonStyle }
-                buttonTextStyle={ styles.buttonTextStyle }
+                buttonStyle={[styles.buttonStyle, { flex: 1 }]}
+                textStyle={ styles.buttonTextStyle }
               >
                 Next
               </Button>

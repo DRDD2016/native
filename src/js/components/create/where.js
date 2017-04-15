@@ -181,11 +181,14 @@ export default class Where extends Component {
 
           { inputs }
 
-          <AddInput data={ data } handler={ addInput } />
+          <View style={ [styles.row, { marginTop: 20 }] }>
+            <AddInput data={ data } handler={ addInput } />
+          </View>
 
-          <View style={[styles.row, { marginTop: 20 }] }>
+          <View style={[styles.row, { marginTop: 10 }] }>
             <Button
-              buttonStyle={ styles.buttonStyle }
+              buttonStyle={ [styles.buttonStyle, { flex: 1 }] }
+              textStyle={ styles.buttonTextStyle }
               onPress={ () => this.nextPage(name) }
             >
               Next

@@ -43,16 +43,16 @@ const FilterPanel = ({ displaySome, displayAll, filterActive, selectedFilter }) 
 
 const styles = {
   rowFilterPanel: {
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 10,
     flexDirection: 'row',
-    height: 30
+    height: 40
   },
   filterButton: {
     backgroundColor: 'white',
-    borderRadius: 18,
+    borderRadius: 0,
     borderWidth: 1,
-    borderColor: 'lightgray',
+    borderColor: colours.main,
     paddingRight: 10,
     paddingLeft: 10,
     marginLeft: 5,
@@ -63,23 +63,23 @@ const styles = {
   },
   buttonText: {
     fontSize: 12,
-    color: colours.blue,
-    fontWeight: '600',
+    color: colours.main,
+    fontWeight: '700',
     paddingTop: 5,
     paddingBottom: 5
   },
   buttonTextSelected: {
-    fontSize: 12,
+    fontSize: 14,
     color: 'white',
-    fontWeight: '600',
+    fontWeight: '700',
     paddingTop: 5,
     paddingBottom: 5
   },
   filterButtonSelected: {
-    backgroundColor: colours.blue,
-    borderRadius: 18,
+    backgroundColor: colours.main,
+    borderRadius: 0,
     borderWidth: 1,
-    borderColor: 'lightgray',
+    borderColor: colours.gray,
     paddingRight: 10,
     paddingLeft: 10,
     marginLeft: 5,

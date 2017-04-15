@@ -11,6 +11,7 @@ export function FormTextInput ({ placeholder, isEmail, isLoginView, input: { val
         onBlur={ text => onBlur(text) }
         value={ value }
         type="text"
+        underlineColorAndroid="transparent"
         placeholder={ placeholder }
         autoCapitalize={ isEmail ? 'none' : 'words' }
         autoCorrect={ false }
@@ -31,6 +32,7 @@ export function FormPasswordInput ({ placeholder, isLoginView, input: { value, o
         onBlur={ text => onBlur(text) }
         value={ value }
         type="password"
+        underlineColorAndroid="transparent"
         placeholder={ placeholder }
         secureTextEntry
       />

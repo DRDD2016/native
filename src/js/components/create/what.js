@@ -72,13 +72,15 @@ export default class What extends Component {
 
           { inputs }
 
-          <AddInput data={ data } handler={ addInput } />
+          <View style={ styles.row }>
+            <AddInput data={ data } handler={ addInput } />
+          </View>
 
           <View style={ styles.row }>
             <Button
               onPress={ () => this.nextPage(name) }
-              buttonStyle={ styles.buttonStyle }
-              buttonTextStyle={ styles.buttonTextStyle }
+              buttonStyle={ [styles.buttonStyle, { flex: 1 }] }
+              textStyle={ styles.buttonTextStyle }
             >
               Next
             </Button>

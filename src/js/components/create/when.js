@@ -67,7 +67,7 @@ export default class When extends Component {
               );
             })
           }
-          <View style={{ alignItems: 'center' }}>
+          <View style={ styles.row }>
             <AddInput data={ data } handler={ addInput } />
           </View>
         </View>
@@ -78,7 +78,8 @@ export default class When extends Component {
             }
             { (!hideNext) &&
               <Button
-                buttonStyle={styles.buttonStyle}
+                buttonStyle={ [styles.buttonStyle, { flex: 1 }] }
+                textStyle={ styles.buttonTextStyle }
                 onPress={ () => this.nextPage(name) }
               >
                 Next
