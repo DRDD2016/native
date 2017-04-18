@@ -7,6 +7,7 @@ import { FormTextInput, FormPasswordInput } from './form-components';
 import { signupValidator as validate } from './form-validation';
 import Spinner from '../common/Spinner';
 import Button from '../common/Button';
+import Header from '../common/Header';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 
@@ -16,7 +17,7 @@ class Signup extends Component {
     navigationBar: {
       title: 'Sign up',
       tintColor: colours.white,
-      backgroundColor: colours.blue
+      backgroundColor: colours.transparent
     }
   }
 
@@ -30,10 +31,10 @@ class Signup extends Component {
       return <Spinner size="large" />;
     }
     return (
-      <View style={ styles.row }>
+      <View>
         <Button
-          buttonStyle={{ backgroundColor: colours.blue, padding: 10, flex: 1, borderRadius: 5, paddingVertical: 15, marginVertical: 15 }}
-          textStyle={{ alignSelf: 'center', color: '#fff' }}
+          buttonStyle={ [styles.confirmButton, { backgroundColor: colours.orange, borderColor: colours.orange, flex: 1 }] }
+          textStyle={ styles.confirmButtonText }
           onPress={handleSubmit(handleSubmitForm)}
         >
           <Text>SIGN UP</Text>
@@ -55,42 +56,48 @@ class Signup extends Component {
   render () {
 
     return (
-      <ScrollView>
-        <KeyboardAvoidingView
-          behavior="padding"
-        >
-          <View style={{ flex: 1, justifyContent: 'center', marginBottom: 30 }}>
-            <View style={{ marginTop: 50 }}>
-              <Text style={{ paddingLeft: 5 }}>First name</Text>
-              <View style={ styles.row }>
-                <Field name="firstname" component={ FormTextInput } />
-              </View>
+      <View>
+        <Header />
+        <ScrollView>
+          <KeyboardAvoidingView
+            behavior="padding"
+          >
+            <View style={{ flex: 1, justifyContent: 'center', marginBottom: 30 }}>
+              <View style={{ marginTop: 70 }}>
 
-              <Text style={{ paddingLeft: 5 }}>Surname</Text>
-              <View style={ styles.row }>
-                <Field name="surname" component={ FormTextInput } />
-              </View>
+                <View style={ [styles.row, { marginHorizontal: 10 }] }>
+                  <Field name="firstname" component={ FormTextInput } placeholder="* First name" />
+                </View>
 
-              <Text style={{ paddingLeft: 5 }}>Email</Text>
-              <View style={ styles.row }>
-                <Field name="email" component={ FormTextInput } isEmail />
-              </View>
 
-              <Text style={{ paddingLeft: 5 }}>Password</Text>
-              <View style={ styles.row }>
-                <Field name="password" component={ FormPasswordInput } />
+                <View style={ [styles.row, { marginHorizontal: 10 }] }>
+                  <Field name="surname" component={ FormTextInput } placeholder="* Surname" />
+                </View>
+
+
+                <View style={ [styles.row, { marginHorizontal: 10 }] }>
+                  <Field name="email" component={ FormTextInput } placeholder="* Email" isEmail />
+                </View>
+
+
+                <View style={ [styles.row, { marginHorizontal: 10 }] }>
+                  <Field name="password" component={ FormPasswordInput } placeholder="* Password" />
+                </View>
+
+                <View style={ [styles.row, { marginHorizontal: 10 }] }>
+                  <Field name="confirmPassword" component={ FormPasswordInput } placeholder="* Confirm password" />
+                </View>
+                <View style={ [styles.row, { justifyContent: 'flex-end' }] }>
+                  <Text>* Mandatory fields</Text>
+                </View>
+                { this.renderServerError() }
+                { this.renderButton() }
               </View>
-              <Text style={{ paddingLeft: 5 }}>Confirm password</Text>
-              <View style={ styles.row }>
-                <Field name="confirmPassword" component={ FormPasswordInput } />
-              </View>
-              { this.renderServerError() }
-              { this.renderButton() }
             </View>
-          </View>
-          <View style={{ height: 30 }} />
-        </KeyboardAvoidingView>
-      </ScrollView>
+            <View style={{ height: 30 }} />
+          </KeyboardAvoidingView>
+        </ScrollView>
+      </View>
     );
   }
 }

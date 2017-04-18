@@ -5,15 +5,14 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import colours from '../../../styles/colours';
 
 @withNavigation
-export default class CloseIcon extends Component {
+export default class DeleteIcon extends Component {
   render () {
     return (
       <Icon
-        name="chevron-left"
+        name="trash"
         style={{ paddingLeft: 15, paddingRight: 15 }}
         size={ 24 }
-        color={ colours.darkgray }
-        onPress={() => this.props.navigation.dismissModal()}
+        color={ colours.gray }
       />
     );
   }

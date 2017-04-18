@@ -5,7 +5,7 @@ import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../../lib/format-date';
 import formatTime from '../../lib/format-time';
-// import BarChart from '../../components/event/bar-chart';
+import BarChart from '../../components/event/bar-chart';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 
@@ -71,45 +71,75 @@ export default class CategoryDetails extends Component {
 
   render () {
     const { category, data, voteCount } = this.props;
+
+    console.log('voteCount');
+    console.log(voteCount);
     const categoryTitle = `W${category.substring(1)}`;
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         {
           data.map((datum, index) => {
+            const tally = voteCount && voteCount[index];
             return (
               <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
 
-                <View style={{ flexBasis: 50 }}>
+                <View style={{ flex: 150 }}>
                   <Text style={styles[`optionTitle${categoryTitle}`]}>{ index === 0 && categoryTitle }</Text>
                 </View>
 
-                <View style={{ flexBasis: 250 }}>
-                  <View>
+                <View style={{ flex: 500 }}>
+                  <View style={{ marginTop: 5, marginBottom: 5 }}>
                     <Icon.Button
                       name={this.icons[category]}
                       size={16}
                       borderRadius={100}
+                      style={{ padding: 10 }}
                       color={(!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category]}
                       backgroundColor={(!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index] ? colours[category] : OFF_WHITE}
                       onPress={() => this._handleOnPress(category, datum, index)}
                     >
                       {
-
                         <Text style={{ color: (!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category] }}>
                           {category !== 'when' && (datum || 'TBC')}
                           {category === 'when' && `${formatDate(datum, 'half')}, ${formatTime(datum) || 'TBC'}`}
                         </Text>
                       }
                     </Icon.Button>
+
                   </View>
                 </View>
+                <View style={{ flex: 300, paddingLeft: 5, justifyContent: 'center' }}>
 
-                {
-                  this.props.isHostPollView &&
-                  <View>
-                    <Text>{ voteCount && voteCount[index] }</Text>
-                  </View>
-                }
+                  {
+                    this.props.isHostPollView &&
+                    <View style={{ flex: 1, marginTop: 5, marginBottom: 5, flexDirection: 'row', alignItems: 'center' }}>
+                      <View style={{ paddingLeft: 1, paddingVertical: 10, width: 1, backgroundColor: 'lightgray' }} />
+
+                      <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
+                          <Text style={styles.msg4}>
+                            { (tally !== 0) && (tally !== undefined) && (tally !== 1) && `${tally} votes` }
+                            { (tally === 1) && `${tally} vote` }
+                          </Text>
+                        </View>
+
+                        <View style={{ flex: 1, justifyContent: 'center' }}>
+
+                          {
+                            (tally !== 0) && (tally !== undefined) &&
+                            <BarChart tally={tally} allData={voteCount} chartColor={colours[category]} />
+                          }
+
+                        </View>
+                        <View style={{ flex: 1 }}>
+                          <Text style={styles.msg4} />
+                        </View>
+                      </View>
+
+                    </View>
+                  }
+                </View>
+
 
               </View>
             );
