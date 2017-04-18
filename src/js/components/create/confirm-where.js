@@ -22,7 +22,7 @@ const ConfirmWhere = ({ data }) => { // eslint-disable-line react/prop-types
         }
         { (!hideTitle) &&
           <View style={{ flex: 50, marginHorizontal: 5 }}>
-            <Text style={styles.optionTitleWhere}>
+            <Text style={[styles.title3, { flex: 1, color: colours.where, paddingTop: 4 }]}>
               Where
             </Text>
           </View>
@@ -31,13 +31,23 @@ const ConfirmWhere = ({ data }) => { // eslint-disable-line react/prop-types
           style={{ flex: 250 }}
         >
           <View style={{ }}>
-            <View style={[styles.optionInfoWhere, { flexDirection: 'row' }]} >
+            <Button
+              buttonStyle={{
+                flex: 1,
+                paddingTop: 4,
+                paddingBottom: 4,
+                paddingLeft: 15,
+                paddingRight: 15 }}
+              textStyle={[styles.title4, {
+                flex: 1,
+                color: colours.where,
+                justifyContent: 'space-around',
+                lineHeight: 20 }]}
+            >
               <Icon name="map-marker" size={18} color={colours.where} />
-              <Text style={[styles.optionTextInfoWhere, { lineHeight: 20 }]}>
               {'  '}
               { datum || 'TBC' }
-              </Text>
-            </View>
+            </Button>
           </View>
         </View>
       </View>

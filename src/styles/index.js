@@ -12,6 +12,14 @@ const styles = {
   title2: {
     flex: 1
   },
+  title3: {
+    fontSize: 12,
+    fontWeight: '600'
+  },
+  title4: {
+    fontSize: 12,
+    fontWeight: '500'
+  },
   msg1: {
     fontSize: 18,
     color: colours.gray,
@@ -24,13 +32,20 @@ const styles = {
   },
   msg3: {
     fontSize: 14,
-    color: colours.gray,
-    fontWeight: '600'
+    fontWeight: '700',
+    color: colours.gray
   },
   msg4: {
     fontSize: 12,
     color: colours.gray,
     fontWeight: '600'
+  },
+  smallMessageText: {
+    fontSize: 12,
+    color: colours.gray,
+    fontWeight: '300',
+    paddingTop: 10,
+    paddingBottom: 10
   },
   invitedTitle: {
     fontSize: 18,
@@ -61,7 +76,6 @@ const styles = {
     paddingBottom: 10,
     flexWrap: 'wrap'
   },
-
 
   // topBar
 
@@ -162,7 +176,7 @@ const styles = {
     fontSize: 12,
     fontWeight: 'bold',
     color: colours.what,
-    paddingTop: 10
+    paddingTop: 0
   },
   optionSelectedWhat: {
     flex: 1,
@@ -551,19 +565,14 @@ const styles = {
 
   // feed
 
-  smallMessageText: {
-    fontSize: 12,
-    fontWeight: '300',
-    paddingTop: 10,
-    paddingBottom: 10
-  },
-
   // filter-panel
   filterPanelContainer: {
-    height: 50
+    height: 50,
+    borderWidth: 2,
+    borderColor: 'red'
   },
   rowFilterPanel: {
-    marginTop: 20,
+    marginTop: 10,
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -625,7 +634,7 @@ const styles = {
     elevation: 1,
     marginLeft: 5,
     marginRight: 5,
-    marginTop: 10
+    marginBottom: 10
   },
   cardSectionCalendar: {
     borderBottomWidth: 1,

@@ -4,6 +4,7 @@ import ConfirmWhat from './confirm-what';
 import ConfirmWhere from './confirm-where';
 import ConfirmWhen from './confirm-when';
 import Button from '../common/Button';
+import Header from '../common/Header';
 import Spinner from '../common/Spinner';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
@@ -16,14 +17,14 @@ export default class Confirm extends Component {
       title (params) {
         return params.name;
       },
-      backgroundColor: colours.blue,
+      backgroundColor: colours.transparent,
       tintColor: colours.white,
       renderRight: () => {
         return (
           <Button
             onPress={ discardEvent }
             buttonStyle={{ margin: 15 }}
-            textStyle={{ color: colours.white, fontWeight: '600' }}
+            textStyle={{ color: colours.darkgray, fontWeight: '600' }}
           >
             <Text>Cancel</Text>
           </Button>
@@ -48,28 +49,31 @@ export default class Confirm extends Component {
     }
     return (
       <View style={{ flex: 1 }}>
-        { !isConnected && this.renderAlert() }
-        <ScrollView>
-          <View style={{ margin: 10, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>{ description }</Text>
-            <Text>{ note }</Text>
-          </View>
-          <ConfirmWhat data={what} />
-          <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
-          <ConfirmWhere data={where} />
-          <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
-          <ConfirmWhen data={when} />
-          
-          <View style={[styles.rowCentered, { marginTop: 10 }]}>
-            <Button
-              buttonStyle={styles.confirmButton}
-              textStyle={styles.confirmButtonText}
-              onPress={ () => handleOnPress(this.props.navigation) }
-            >
-              Invite friends
-            </Button>
-          </View>
-        </ScrollView>
+        <Header />
+        <View style={{ flex: 1 }}>
+          { !isConnected && this.renderAlert() }
+          <ScrollView>
+            <View style={{ marginTop: 70, justifyContent: 'center', alignItems: 'center' }}>
+              <Text style={[styles.msg4, { backgroundColor: colours.transparent, paddingBottom: 5 }]}>{ description }</Text>
+              <Text style={[styles.msg4, { backgroundColor: colours.transparent, paddingBottom: 5 }]}>{ note }</Text>
+            </View>
+            <ConfirmWhat data={what} />
+            <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
+            <ConfirmWhere data={where} />
+            <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
+            <ConfirmWhen data={when} />
+
+            <View style={[styles.rowCentered, { marginTop: 0 }]}>
+              <Button
+                buttonStyle={styles.confirmButton}
+                textStyle={styles.confirmButtonText}
+                onPress={ () => handleOnPress(this.props.navigation) }
+              >
+                Invite friends
+              </Button>
+            </View>
+          </ScrollView>
+        </View>
       </View>
     );
   }

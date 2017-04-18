@@ -1,6 +1,7 @@
 /* eslint-disable arrow-body-style */
 import React from 'react';
 import { View, Image, Text, ScrollView } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import FinalisedWhat from '../create/confirm-what';
 import FinalisedWhere from '../create/confirm-where';
 import FinalisedWhen from '../create/confirm-when';
@@ -31,7 +32,7 @@ const inlineStyle = {
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 5,
-    paddingHorizontal: 8,
+    paddingHorizontal: 2,
     marginHorizontal: 5
   },
   RSVPButtonText: {
@@ -143,13 +144,22 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
         <View style={{ marginBottom: 10, marginTop: 5, marginHorizontal: 5, borderTopColor: '#efefef', borderTopWidth: 1, alignItems: 'center' }} />
         <View style={{ flexDirection: 'row', backgroundColor: '#efefef', paddingVertical: 3, justifyContent: 'space-around' }}>
           <View style={[inlineStyle.RSVPTitle]}>
-            <Text style={[{ color: colours.green }, inlineStyle.RSVPTitleText]}>GOING</Text>
+            <Text style={[{ color: colours.green }, inlineStyle.RSVPTitleText]}>
+              <Icon name="check-circle" size={16} color={colours.green} />
+              {' GOING'}
+            </Text>
           </View>
           <View style={[inlineStyle.RSVPTitle]}>
-            <Text style={[{ color: colours.orange }, inlineStyle.RSVPTitleText]}>MAYBE</Text>
+            <Text style={[{ color: colours.orange }, inlineStyle.RSVPTitleText]}>
+              <Icon name="question-circle" size={16} color={colours.orange} />
+              {' MAYBE'}
+            </Text>
           </View>
           <View style={[inlineStyle.RSVPTitle]}>
-            <Text style={[{ color: colours.red }, inlineStyle.RSVPTitleText]}>NOT GOING</Text>
+            <Text style={[{ color: colours.red }, inlineStyle.RSVPTitleText]}>
+              <Icon name="times-circle" size={16} color={colours.red} />
+              {' NOT GOING'}
+            </Text>
           </View>
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -193,8 +203,8 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
             </View>
           </View>
         </View>
-        <View style={{ marginTop: 10, marginBottom: 10 }}>
-          <Text>Not responded</Text>
+        <View style={{ marginTop: 10, marginBottom: 10, borderTopWidth: 1, borderTopColor: '#efefef' }}>
+          <Text style={[styles.msg4, { marginLeft: 10, marginTop: 5 }]}>Not responded</Text>
         </View>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
           {

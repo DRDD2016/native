@@ -78,7 +78,9 @@ class Code extends Component {
         { !isConnected && this.renderAlert() }
         <Header />
         <View style={{ alignItems: 'center', marginHorizontal: 10, marginTop: 70, marginBottom: 60 }}>
-          <Text>If your friend has sent you a code to join their event, enter the code below to respond to their invitation.</Text>
+          <Text style={styles.msg3}>
+            If your friend has sent you a code to join their event, enter the code below to respond to their invitation.
+          </Text>
         </View>
         <View style={ styles.container }>
           <Text style={inlineStyle.labelStyle}>Event Code:</Text>

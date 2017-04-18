@@ -88,7 +88,7 @@ export default class Profile extends Component {
               marginTop: 20 }}
           >
 
-            <View style={styles.row}>
+            <View style={[styles.row, { backgroundColor: colours.transparent }]}>
               <Text style={styles.userName}> { `${firstname} ${surname}` } </Text>
             </View>
 

@@ -12,7 +12,7 @@ export default class EditIcon extends Component {
         name="edit"
         style={{ paddingLeft: 15, paddingRight: 15 }}
         size={ 24 }
-        color={ colours.white }
+        color={ colours.darkgray }
       />
     );
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, Text, View } from 'react-native';
 import Button from '../common/Button';
+import Header from '../common/Header';
 import Router from '../../router';
 import colours from '../../../styles/colours';
 import styles from '../../../styles';
@@ -19,6 +20,7 @@ export default function Index ({ navigator }) {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>
+      <Header style={{ top: -25 }} />
       <View style={{ flex: 0.2 }} />
       <View style={{ justifyContent: 'center', alignItems: 'center', flex: 0.2 }}>
         <Image style={{ height: 100, width: 300 }} source={ logo } />

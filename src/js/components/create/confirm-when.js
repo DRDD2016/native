@@ -22,14 +22,26 @@ const ConfirmWhen = ({ data }) => {
         }
         { (!hideTitle) &&
           <View style={{ flex: 150, marginHorizontal: 5 }}>
-            <Text style={styles.optionTitleWhen}>
+            <Text style={[styles.title3, { flex: 1, color: colours.when, paddingTop: 4 }]}>
               When
             </Text>
           </View>
         }
         <View style={{ flex: 800 }}>
-          <View style={{}}>
-            <Button buttonStyle={styles.optionInfoWhen} textStyle={[styles.optionTextInfoWhen, {lineHeight: 20}]}>
+          <View style={{ }}>
+            <Button
+              buttonStyle={{
+                flex: 1,
+                paddingTop: 4,
+                paddingBottom: 4,
+                paddingLeft: 15,
+                paddingRight: 15 }}
+              textStyle={[styles.title4, {
+                flex: 1,
+                color: colours.when,
+                justifyContent: 'space-around',
+                lineHeight: 20 }]}
+            >
               <Icon name="calendar" size={18} color={colours.when} />
               {'  '}
               {
@@ -45,7 +57,6 @@ const ConfirmWhen = ({ data }) => {
                 // everywhere else will be ISO string, or for 'TBC' a modified ISO string with `:TBC` appended
                 formatTime(timestamp)
               }
-
             </Button>
           </View>
         </View>

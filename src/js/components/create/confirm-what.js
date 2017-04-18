@@ -22,7 +22,7 @@ const ConfirmWhat = ({ data }) => {
         }
         { (!hideTitle) &&
           <View style={{ flex: 150, marginHorizontal: 5 }}>
-            <Text style={styles.optionTitleWhat}>
+            <Text style={[styles.title3, { flex: 1, color: colours.what, paddingTop: 4 }]}>
               What
             </Text>
           </View>
@@ -32,7 +32,19 @@ const ConfirmWhat = ({ data }) => {
           key={ i }
         >
           <View style={{}}>
-            <Button buttonStyle={styles.optionInfoWhat} textStyle={[styles.optionTextInfoWhat, {lineHeight: 20}]}>
+            <Button
+            buttonStyle={{
+              flex: 1,
+              paddingTop: 4,
+              paddingBottom: 4,
+              paddingLeft: 15,
+              paddingRight: 15 }}
+            textStyle={[styles.title4, {
+              flex: 1,
+              color: colours.what,
+              justifyContent: 'space-around',
+              lineHeight: 20 }]}
+          >
               <Icon name="star" size={18} color={colours.what} />
               {'  '}
               { datum || 'TBC' }
@@ -45,7 +57,7 @@ const ConfirmWhat = ({ data }) => {
   });
 
   return (
-    <View style={{ marginTop: 3, marginRight: 10 }}>
+    <View style={{ marginTop: 0, marginRight: 10 }}>
       { layout }
     </View>
   );

@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Router from '../../router';
 import AddInput from '../general/add-input';
 import Button from '../common/Button';
+import Header from '../common/Header';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import discardEvent from '../../lib/discard-event';
@@ -23,7 +24,7 @@ export default class Where extends Component {
         return params.name;
       },
       tintColor: colours.white,
-      backgroundColor: colours.blue,
+      backgroundColor: colours.transparent,
       renderRight: () => {
         return (
           <Button
@@ -166,37 +167,54 @@ export default class Where extends Component {
     });
 
     return (
-      <KeyboardAwareScrollView
-        style={{ backgroundColor: '#fff' }}
-        resetScrollToCoords={{ x: 0, y: 0 }}
-        contentContainerStyle={{ flex: 1 }}
-      >
-        <View style={ [styles.container, { marginHorizontal: 10 }]}>
-          <Text style={ styles.smallMessageText } >
-            Enter where the event will take place (or leave blank to decide it later).
-          </Text>
-          <Text style={ styles.smallMessageText }>
-            You can add more than one option to create a poll.
-          </Text>
+      <View style={{ flex: 1 }}>
+        <Header />
+        <KeyboardAwareScrollView
+          style={{ backgroundColor: colours.transparent }}
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          contentContainerStyle={{ flex: 1 }}
+        >
+          <View style={ [styles.container, { marginTop: 70, marginHorizontal: 10 }]}>
+            <Text style={ styles.smallMessageText } >
+              Enter where the event will take place (or leave blank to decide it later).
+            </Text>
+            <Text style={ styles.smallMessageText }>
+              You can add more than one option to create a poll.
+            </Text>
 
-          { inputs }
+            { inputs }
 
-          <View style={ [styles.row, { marginTop: 20 }] }>
-            <AddInput data={ data } handler={ addInput } />
-          </View>
-
-          <View style={[styles.row, { marginTop: 10 }] }>
-            <Button
-              buttonStyle={ [styles.buttonStyle, { flex: 1 }] }
-              textStyle={ styles.buttonTextStyle }
-              onPress={ () => this.nextPage(name) }
+            <View
+              style={{
+                flexDirection: 'row',
+                marginTop: 10,
+                marginBottom: 10,
+                paddingLeft: 5,
+                paddingRight: 5 }}
             >
-              Next
-            </Button>
-          </View>
-        </View>
+              <AddInput data={ data } handler={ addInput } />
+            </View>
 
-      </KeyboardAwareScrollView>
+            <View
+              style={{
+                flexDirection: 'row',
+                marginTop: 0,
+                marginBottom: 10,
+                paddingLeft: 5,
+                paddingRight: 5 }}
+            >
+              <Button
+                buttonStyle={ [styles.buttonStyle, { flex: 1 }] }
+                textStyle={ styles.buttonTextStyle }
+                onPress={ () => this.nextPage(name) }
+              >
+                Next
+              </Button>
+            </View>
+          </View>
+
+        </KeyboardAwareScrollView>
+      </View>
     );
   }
 }

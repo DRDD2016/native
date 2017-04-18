@@ -44,7 +44,7 @@ const FilterPanel = ({ displaySome, displayAll, filterActive, selectedFilter }) 
 const styles = {
   rowFilterPanel: {
     marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 15,
     flexDirection: 'row',
     height: 40
   },

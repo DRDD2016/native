@@ -4,6 +4,7 @@ import InviteePoll from './invitee-poll';
 import HostPoll from './host-poll';
 import FinalisedEvent from './finalised-event';
 import colours from '../../../styles/colours';
+import Header from '../common/Header';
 import CloseIcon from '../common/close-icon';
 import EditIcon from '../common/edit-icon';
 
@@ -36,8 +37,8 @@ export default class Event extends Component {
             <CloseIcon />
           </View>
         </TouchableHighlight>,
-      backgroundColor: colours.blue,
-      tintColor: colours.white
+      backgroundColor: colours.transparent,
+      tintColor: colours.darkgray
     }
   }
 
@@ -97,9 +98,12 @@ export default class Event extends Component {
   render () {
     return (
       <View style={{ flex: 1 }}>
-        {
-          this.props.event && this.eventRouter()
-        }
+        <Header />
+        <View style={{ flex: 1, marginTop: 70 }}>
+          {
+            this.props.event && this.eventRouter()
+          }
+        </View>
       </View>
     );
   }
