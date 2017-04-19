@@ -10,7 +10,7 @@ const cardStyle = {
   borderRadius: 3,
   marginHorizontal: 2,
   marginVertical: 1,
-  backgroundColor: 'white',
+  backgroundColor: '#efefef',
   alignItems: 'center',
   flexDirection: 'row',
   justifyContent: 'space-between',
@@ -20,7 +20,6 @@ const cardStyle = {
 const imageStyle = {
   width: 30,
   height: 30,
-  borderRadius: 15,
   marginRight: 5
 };
 const textStyle = {

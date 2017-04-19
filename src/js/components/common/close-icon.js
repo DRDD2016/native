@@ -9,10 +9,10 @@ export default class CloseIcon extends Component {
   render () {
     return (
       <Icon
-        name="chevron-left"
-        style={{ paddingLeft: 15, paddingRight: 15 }}
+        name="close"
+        style={{ padding: 5 }}
         size={ 24 }
-        color={ colours.darkgray }
+        color={ colours.white }
         onPress={() => this.props.navigation.dismissModal()}
       />
     );

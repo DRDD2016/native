@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, TextInput, View } from 'react-native';
 import styles from '../../../styles';
 
-export function FormTextInput ({ placeholder, isEmail, isLoginView, input: { value, onChange, onBlur }, meta: { touched, error } }) {
+export function FormTextInput ({ isEmail, isLoginView, input: { value, onChange, onBlur }, meta: { touched, error } }) {
   return (
     <View style={{ flex: 1 }}>
       <TextInput
@@ -11,8 +11,6 @@ export function FormTextInput ({ placeholder, isEmail, isLoginView, input: { val
         onBlur={ text => onBlur(text) }
         value={ value }
         type="text"
-        underlineColorAndroid="transparent"
-        placeholder={ placeholder }
         autoCapitalize={ isEmail ? 'none' : 'words' }
         autoCorrect={ false }
       />
@@ -23,7 +21,7 @@ export function FormTextInput ({ placeholder, isEmail, isLoginView, input: { val
   );
 }
 
-export function FormPasswordInput ({ placeholder, isLoginView, input: { value, onChange, onBlur }, meta: { touched, error } }) {
+export function FormPasswordInput ({ isLoginView, input: { value, onChange, onBlur }, meta: { touched, error } }) {
   return (
     <View style={{ flex: 1 }}>
       <TextInput
@@ -32,8 +30,6 @@ export function FormPasswordInput ({ placeholder, isLoginView, input: { value, o
         onBlur={ text => onBlur(text) }
         value={ value }
         type="password"
-        underlineColorAndroid="transparent"
-        placeholder={ placeholder }
         secureTextEntry
       />
       {

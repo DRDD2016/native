@@ -6,7 +6,6 @@ import { FormTextInput } from './auth/form-components';
 import { codeValidator as validate } from './auth/form-validation';
 import Button from './common/Button';
 import Spinner from './common/Spinner';
-import Header from './common/Header';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 
@@ -33,8 +32,8 @@ class Code extends Component {
   static route = {
     navigationBar: {
       title: 'Enter Your Event Code',
-      backgroundColor: colours.transparent,
-      tintColor: colours.darkgray
+      backgroundColor: colours.blue,
+      tintColor: colours.white
     }
   }
 
@@ -46,16 +45,11 @@ class Code extends Component {
     return (
       <View style={ styles.row }>
         <Button
-          buttonStyle={[
-            styles.confirmButton,
-            { backgroundColor: colours.purple,
-              borderColor: colours.purple,
-              marginTop: 2,
-              flex: 1 }]}
-          textStyle={ styles.confirmButtonText }
+          buttonStyle={inlineStyle.buttonStyle}
+          textStyle={inlineStyle.textStyle}
           onPress={handleSubmit(handleSubmitForm)}
         >
-          <Text>Join Event</Text>
+          <Text>JOIN EVENT</Text>
         </Button>
       </View>
     );
@@ -76,16 +70,13 @@ class Code extends Component {
     return (
       <View style={{ flex: 1 }}>
         { !isConnected && this.renderAlert() }
-        <Header />
-        <View style={{ alignItems: 'center', marginHorizontal: 10, marginTop: 70, marginBottom: 60 }}>
-          <Text style={styles.msg3}>
-            If your friend has sent you a code to join their event, enter the code below to respond to their invitation.
-          </Text>
+        <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 70 }}>
+          <Text>Explanation text</Text>
         </View>
         <View style={ styles.container }>
-          <Text style={inlineStyle.labelStyle}>Event Code:</Text>
+          <Text style={inlineStyle.labelStyle}>Event Code</Text>
           <View style={ styles.row }>
-            <Field style={styles.input} name="code" component={ FormTextInput } placeholder="Enter code here" />
+            <Field name="code" component={ FormTextInput } />
           </View>
           { this.renderButton() }
 

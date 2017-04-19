@@ -30,7 +30,6 @@ export default function Input ({ label, value, onChangeText, placeholder, secure
     <View style={ containerStyle }>
       <Text style={labelStyle}>{label}</Text>
       <TextInput
-        underlineColorAndroid="transparent"
         secureTextEntry={secureTextEntry}
         placeholder={placeholder}
         autoCorrect={false}

@@ -5,16 +5,20 @@ import hoistNonReactStatic from 'hoist-non-react-statics';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { persistor } from '../../init-store';
 import { FormTextInput, FormPasswordInput } from './form-components';
-import Header from '../common/Header';
 import { loginValidator as validate } from './form-validation';
 import colours from '../../../styles/colours';
-import styles from '../../../styles';
 
-const inlineStyles = {
+const styles = {
+  container: {
+    flex: 1
+  },
+  wrapper: {
+    paddingHorizontal: 15
+  },
   inputWrap: {
     flexDirection: 'row',
     marginVertical: 12,
-    height: 45,
+    height: 40,
     backgroundColor: 'transparent'
   },
   input: {
@@ -35,14 +39,14 @@ const inlineStyles = {
     marginVertical: 15,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 0
+    borderRadius: 5
   },
   buttonText: {
     color: '#FFF',
     fontSize: 18
   },
   forgotPasswordText: {
-    color: colours.blue,
+    color: '#000',
     textAlign: 'center'
   }
 };
@@ -53,7 +57,7 @@ class Login extends Component {
     navigationBar: {
       title: 'Login',
       tintColor: colours.white,
-      backgroundColor: colours.transparent
+      backgroundColor: colours.blue
     }
   }
 
@@ -79,43 +83,40 @@ class Login extends Component {
   render () {
     const { handleSubmit, handleSubmitForm, isConnected, navigator } = this.props;
     return (
-      <View style={{ flex: 1 }}>
-        <Header />
-        <KeyboardAvoidingView
-          style={{ flex: 1, marginTop: 70 }}
-          behavior="padding"
-        >
-          <View />
-          { !isConnected && this.renderAlert() }
-          <View style={{ paddingHorizontal: 15, flex: 1 }}>
-            <View style={inlineStyles.inputWrap}>
-              <View style={inlineStyles.iconWrap}>
-                <Icon name="envelope-o" size={15} color="rgba(255, 255, 255, 0.76)" />
-              </View>
-              <Field style={inlineStyles.input} name="email" component={ FormTextInput } isEmail isLoginView placeholder="email address" />
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior="padding"
+      >
+        <View style={styles.container} />
+        { !isConnected && this.renderAlert() }
+        <View style={styles.wrapper}>
+          <View style={styles.inputWrap}>
+            <View style={styles.iconWrap}>
+              <Icon name="envelope-o" size={15} color="rgba(255, 255, 255, 0.76)" />
             </View>
-            <View style={inlineStyles.inputWrap}>
-              <View style={inlineStyles.iconWrap}>
-                <Icon name="lock" size={20} color="rgba(255, 255, 255, 0.76)" />
-              </View>
-              <Field style={inlineStyles.input} name="password" component={ FormPasswordInput } isLoginView placeholder="password" />
-            </View>
-            { this.renderServerError() }
-            <TouchableOpacity activeOpacity={ 0.5 } onPress={handleSubmit(handleSubmitForm)}>
-              <View style={styles.confirmButton}>
-                <Text style={styles.confirmButtonText}>LOG IN</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={{ marginTop: 5, paddingTop: 10 }} activeOpacity={ 0.5 } onPress={() => navigator.push('confirmEmail')}>
-              <View>
-                <Text style={inlineStyles.forgotPasswordText}>Forgot Password?</Text>
-              </View>
-            </TouchableOpacity>
+            <Field style={styles.input} name="email" component={ FormTextInput } isEmail isLoginView />
           </View>
-          <View style={inlineStyles.container} />
-          <View style={{ height: 30 }} />
-        </KeyboardAvoidingView>
-      </View>
+          <View style={styles.inputWrap}>
+            <View style={styles.iconWrap}>
+              <Icon name="lock" size={20} color="rgba(255, 255, 255, 0.76)" />
+            </View>
+            <Field style={styles.input} name="password" component={ FormPasswordInput } isLoginView />
+          </View>
+          { this.renderServerError() }
+          <TouchableOpacity activeOpacity={ 0.5 } onPress={handleSubmit(handleSubmitForm)}>
+            <View style={styles.button}>
+              <Text style={styles.buttonText}>LOG IN</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={ 0.5 } onPress={() => navigator.push('confirmEmail')}>
+            <View>
+              <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.container} />
+        <View style={{ height: 30 }} />
+      </KeyboardAvoidingView>
     );
   }
 }
