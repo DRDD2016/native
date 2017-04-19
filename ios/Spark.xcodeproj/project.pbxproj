@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -28,7 +27,6 @@
 		55FE454B52CD4C2D8843B8C2 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC10FEAA35E144BAA72C03AE /* EvilIcons.ttf */; };
 		5AFC853895294C44B319F6AA /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 667565734A1048E98139A2BC /* MaterialCommunityIcons.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
-		7D1FCD2340424AFE8EB275B6 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE9A52AF4454977912918C0 /* libReactNativeConfig.a */; };
 		7EE5D282799C42148C859FCC /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27A4C181FB3543CE93E221A6 /* FontAwesome.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8B7FE31E9D264641BAA9E642 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C4614363EC944AD82185989 /* Foundation.ttf */; };
@@ -37,6 +35,7 @@
 		E91BA5CA1C434C74B4C720BD /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02C22524056F47B79F2F9471 /* Octicons.ttf */; };
 		EC0D572736CE47F1AAAAF046 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF49FDCD16E455883BA9976 /* libRNImagePicker.a */; };
 		FA9BD33EDC2D48918858901B /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C2BE23B743B544C7834AEAFF /* Zocial.ttf */; };
+		7D1FCD2340424AFE8EB275B6 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE9A52AF4454977912918C0 /* libReactNativeConfig.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,33 +207,13 @@
 			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
 			remoteInfo = "jschelpers-tvOS";
 		};
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-<<<<<<< Updated upstream
 		55EF94D61E6E1CB40069EEB4 /* PBXContainerItemProxy */ = {
-=======
-<<<<<<< HEAD
-		555355B81EA6D3E50008A61C /* PBXContainerItemProxy */ = {
-=======
-		55EF94D61E6E1CB40069EEB4 /* PBXContainerItemProxy */ = {
->>>>>>> origin/master
-=======
-		55EF94D61E6E1CB40069EEB4 /* PBXContainerItemProxy */ = {
->>>>>>> origin/master
->>>>>>> Stashed changes
 			isa = PBXContainerItemProxy;
 			containerPortal = 531CC31C0613476A928E92FF /* ReactNativeConfig.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EB2648DF1C7BE17A00B8F155;
 			remoteInfo = ReactNativeConfig;
 		};
-<<<<<<< Updated upstream
-=======
->>>>>>> parent of edb301a... commitXcodeChange
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 		5E9157321DD0AC6500FF2AA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
@@ -290,9 +269,7 @@
 		1CA7932B3EF14AC4BFF6D695 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		27A4C181FB3543CE93E221A6 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		2C4614363EC944AD82185989 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
-		3EE9A52AF4454977912918C0 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
 		4FE59460AB5E4E1B81F33B2F /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
-		531CC31C0613476A928E92FF /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		667565734A1048E98139A2BC /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		6BF49FDCD16E455883BA9976 /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
@@ -304,6 +281,8 @@
 		D064A81C2FED45A29C497032 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		E29048F491C744A880FF6791 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		EC10FEAA35E144BAA72C03AE /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		531CC31C0613476A928E92FF /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativeConfig.xcodeproj"; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		3EE9A52AF4454977912918C0 /* libReactNativeConfig.a */ = {isa = PBXFileReference; name = "libReactNativeConfig.a"; path = "libReactNativeConfig.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -461,41 +440,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-		5553559C1EA6D3E50008A61C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				555355B91EA6D3E50008A61C /* libReactNativeConfig.a */,
-=======
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
 		55EF94BA1E6E1CB40069EEB4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				55EF94D71E6E1CB40069EEB4 /* libReactNativeConfig.a */,
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-<<<<<<< Updated upstream
-=======
->>>>>>> parent of edb301a... commitXcodeChange
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -635,6 +587,10 @@
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 26TVQPX48T;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Spark" */;
@@ -694,30 +650,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-<<<<<<< Updated upstream
 					ProductGroup = 55EF94BA1E6E1CB40069EEB4 /* Products */;
 					ProjectRef = 531CC31C0613476A928E92FF /* ReactNativeConfig.xcodeproj */;
 				},
 				{
-=======
->>>>>>> parent of edb301a... commitXcodeChange
-=======
-<<<<<<< HEAD
-					ProductGroup = 5553559C1EA6D3E50008A61C /* Products */;
-=======
-					ProductGroup = 55EF94BA1E6E1CB40069EEB4 /* Products */;
->>>>>>> origin/master
-=======
-					ProductGroup = 55EF94BA1E6E1CB40069EEB4 /* Products */;
->>>>>>> origin/master
-					ProjectRef = 531CC31C0613476A928E92FF /* ReactNativeConfig.xcodeproj */;
-				},
-				{
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 					ProductGroup = 39917D2E1E5CC5CF003E1A5B /* Products */;
 					ProjectRef = CC0B3FF2942E44169742C60A /* RNImagePicker.xcodeproj */;
 				},
@@ -896,40 +832,13 @@
 			remoteRef = 3DAD3EAE1DF850E9000B6D8A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-		555355B91EA6D3E50008A61C /* libReactNativeConfig.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libReactNativeConfig.a;
-			remoteRef = 555355B81EA6D3E50008A61C /* PBXContainerItemProxy */;
-=======
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
 		55EF94D71E6E1CB40069EEB4 /* libReactNativeConfig.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libReactNativeConfig.a;
 			remoteRef = 55EF94D61E6E1CB40069EEB4 /* PBXContainerItemProxy */;
-<<<<<<< Updated upstream
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-=======
->>>>>>> parent of edb301a... commitXcodeChange
-=======
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 		5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1092,8 +1001,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Wanna Enterprises Ltd (26TVQPX48T)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 26TVQPX48T;
 				INFOPLIST_FILE = Spark/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1101,6 +1013,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.david-rickard.Spark";
 				PRODUCT_NAME = Spark;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1110,7 +1023,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Wanna Enterprises Ltd (26TVQPX48T)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 26TVQPX48T;
 				INFOPLIST_FILE = Spark/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1118,6 +1034,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.david-rickard.Spark";
 				PRODUCT_NAME = Spark;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
