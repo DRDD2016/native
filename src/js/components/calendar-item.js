@@ -6,7 +6,6 @@ import formatDate from '../lib/format-date';
 import CardSection from './common/CardSection';
 import Card from './common/Card';
 import styles from '../../styles';
-import colours from '../../styles/colours';
 
 /***
 * CalendarItem is used in calendar and album views. Plays equivalent role
@@ -17,72 +16,49 @@ const CalendarItem = ({ event_id, name, where, when, coverPhoto, rsvpStatus, use
   return (
     <Card style={styles.cardStyle}>
       <CardSection style={styles.cardSectionCalendar}>
-        <TouchableOpacity
-          style={{
-            flex: 1,
-            marginLeft: 2,
-            marginRight: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-around'
-          }}
-          onPress={() => handleOnPress(event_id)}
-        >
-          <View style={{ flex: 1, alignItems: 'flex-start' }}>
+        <TouchableOpacity style={styles.cardButtonStyle} onPress={() => handleOnPress(event_id)}>
+          <View style={styles.leftColumn}>
 
-            <View style={{ alignItems: 'flex-start', marginBottom: 3 }}>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={styles.cardTopRow}>
 
-                <View>
-                  {(userIsHost || rsvpStatus === 'going') &&
-                    <Icon name="check-circle" size={20} color={colours.green} />
-                  }
-                  {!userIsHost && rsvpStatus === 'maybe' &&
-                    <Icon name="question-circle" size={20} color={colours.orange} />
-                  }
-                  {!userIsHost && rsvpStatus === 'not_going' &&
-                    <Icon name="times-circle" size={20} color={colours.red} />
-                  }
-                  {!userIsHost && rsvpStatus === 'not_responded' &&
-                    <Icon name="exclamation-circle" size={20} color={colours.gray} />
-                  }
-                </View>
-
-                <Text numberOfLines={1} style={{ alignItems: 'center', fontSize: 16, fontWeight: '700', color: colours.black, paddingLeft: 3 }}>
-                  { name }
-                </Text>
-
+              <View>
+                {(userIsHost || rsvpStatus === 'going') &&
+                  <Icon name="check-circle" size={20} color="green" />
+                }
+                {!userIsHost && rsvpStatus === 'maybe' &&
+                  <Icon name="question-circle" size={20} color="orange" />
+                }
+                {!userIsHost && rsvpStatus === 'not_going' &&
+                  <Icon name="times-circle" size={20} color="red" />
+                }
+                {!userIsHost && rsvpStatus === 'not_responded' &&
+                  <Icon name="exclamation-circle" size={20} color="gray" />
+                }
               </View>
+
+              <Text numberOfLines={1} style={styles.calendarTitle}>
+                { name }
+              </Text>
+
             </View>
 
-            <View>
+            <View style={styles.cardMiddleRow}>
 
-              <View style={{ flexDirection: 'row', marginRight: 5 }}>
-                <View style={{ width: 14, justifyContent: 'center', alignItems: 'center' }}>
-                  <Icon name="calendar-o" size={14} color={colours.darkgray} />
-                </View>
-                <View>
-                  <Text style={{ fontSize: 14, marginLeft: 5, marginRight: 5, color: colours.darkgray, fontWeight: '600' }}>
-                    { `${formatDate(when[0]).toUpperCase() || 'TBC'}` }
-                  </Text>
-                </View>
-              </View>
+              <Text style={styles.date}>
+                <Icon name="calendar-o" size={14} color="gray" />
+                { ` ${formatDate(when[0]).toUpperCase() || 'TBC'}` }
+              </Text>
 
-              <View style={{ flexDirection: 'row', marginTop: 2 }}>
-                <View style={{ width: 14, justifyContent: 'flex-start', alignItems: 'center' }}>
-                  <Icon name="map-marker" size={14} color={colours.darkgray} />
-                </View>
-                <View>
-                  <Text numberOfLines={2} style={{ fontSize: 12, marginLeft: 5, marginRight: 5, color: colours.darkgray }}>
-                    { `${where[0] || 'TBC'}` }
-                  </Text>
-                </View>
-              </View>
+              <Text numberOfLines={1} style={styles.placeName}>
+                <Icon name="map-marker" size={14} color="gray" />
+                { ` ${where[0] || 'TBC'}` }
+              </Text>
 
             </View>
 
           </View>
 
-          <View style={{ marginLeft: 5, borderWidth: 1, borderColor: colours.lightgray, padding: 2 }}>
+          <View style={styles.rightColumnCalendar}>
 
             <Image
               style={styles.coverImage}

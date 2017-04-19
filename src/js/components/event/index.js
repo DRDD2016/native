@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import { View, Text } from 'react-native';
 import InviteePoll from './invitee-poll';
 import HostPoll from './host-poll';
 import FinalisedEvent from './finalised-event';
 import colours from '../../../styles/colours';
-import Header from '../common/Header';
+import Button from '../common/Button';
 import CloseIcon from '../common/close-icon';
-import EditIcon from '../common/edit-icon';
 
 export default class Event extends Component {
 
@@ -20,25 +19,18 @@ export default class Event extends Component {
       },
       renderRight: (route) => {
         return route.params.userIsHost && !route.params.isPoll && !route.params.eventIsCancelled ?
-
-          <TouchableHighlight
+          <Button
             onPress={ () => route.params.handleEdit(route.params.event) }
-            style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
+            buttonStyle={{ margin: 15 }}
+            textStyle={{ color: colours.white, fontWeight: '600' }}
           >
-            <View>
-              <EditIcon />
-            </View>
-          </TouchableHighlight> :
+            <Text>Edit</Text>
+          </Button> :
           null;
       },
-      renderLeft: () =>
-        <TouchableHighlight style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-          <View>
-            <CloseIcon />
-          </View>
-        </TouchableHighlight>,
-      backgroundColor: colours.transparent,
-      tintColor: colours.darkgray
+      renderLeft: () => <CloseIcon />,
+      backgroundColor: colours.blue,
+      tintColor: colours.white
     }
   }
 
@@ -98,12 +90,9 @@ export default class Event extends Component {
   render () {
     return (
       <View style={{ flex: 1 }}>
-        <Header />
-        <View style={{ flex: 1, marginTop: 70 }}>
-          {
-            this.props.event && this.eventRouter()
-          }
-        </View>
+        {
+          this.props.event && this.eventRouter()
+        }
       </View>
     );
   }

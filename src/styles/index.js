@@ -12,14 +12,6 @@ const styles = {
   title2: {
     flex: 1
   },
-  title3: {
-    fontSize: 12,
-    fontWeight: '600'
-  },
-  title4: {
-    fontSize: 12,
-    fontWeight: '500'
-  },
   msg1: {
     fontSize: 18,
     color: colours.gray,
@@ -32,20 +24,13 @@ const styles = {
   },
   msg3: {
     fontSize: 14,
-    fontWeight: '700',
-    color: colours.gray
+    color: colours.gray,
+    fontWeight: '600'
   },
   msg4: {
     fontSize: 12,
     color: colours.gray,
     fontWeight: '600'
-  },
-  smallMessageText: {
-    fontSize: 12,
-    color: colours.gray,
-    fontWeight: '300',
-    paddingTop: 10,
-    paddingBottom: 10
   },
   invitedTitle: {
     fontSize: 18,
@@ -76,6 +61,7 @@ const styles = {
     paddingBottom: 10,
     flexWrap: 'wrap'
   },
+
 
   // topBar
 
@@ -176,34 +162,19 @@ const styles = {
     fontSize: 12,
     fontWeight: 'bold',
     color: colours.what,
-    paddingTop: 0
+    paddingTop: 10
   },
   optionSelectedWhat: {
     flex: 1,
     backgroundColor: colours.what,
     borderColor: colours.what,
     borderWidth: 1,
-    borderRadius: 30,
+    borderRadius: 100,
     paddingTop: 8,
     paddingBottom: 8,
     paddingLeft: 15,
     paddingRight: 15,
     marginBottom: 2
-  },
-  optionInfoWhat: {
-    flex: 1,
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingLeft: 15,
-    paddingRight: 15,
-    marginBottom: 2
-  },
-  optionTextInfoWhat: {
-    flex: 1,
-    fontSize: 12,
-    fontWeight: '500',
-    color: colours.what,
-    justifyContent: 'space-around'
   },
   optionTextSelected: {
     flex: 1,
@@ -259,21 +230,6 @@ const styles = {
     paddingRight: 15,
     marginBottom: 2
   },
-  optionInfoWhere: {
-    flex: 1,
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingLeft: 15,
-    paddingRight: 15,
-    marginBottom: 2
-  },
-  optionTextInfoWhere: {
-    flex: 1,
-    fontSize: 12,
-    fontWeight: '500',
-    color: colours.where,
-    justifyContent: 'space-around'
-  },
   optionTextDeselectedWhere: {
     flex: 1,
     fontSize: 12,
@@ -310,21 +266,6 @@ const styles = {
     paddingRight: 15,
     marginBottom: 2
   },
-  optionInfoWhen: {
-    flex: 1,
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingLeft: 15,
-    paddingRight: 15,
-    marginBottom: 2
-  },
-  optionTextInfoWhen: {
-    flex: 1,
-    fontSize: 12,
-    fontWeight: '500',
-    color: colours.when,
-    justifyContent: 'space-around'
-  },
   optionTextDeselectedWhen: {
     flex: 1,
     fontSize: 12,
@@ -336,42 +277,12 @@ const styles = {
     backgroundColor: colours.confirm,
     borderColor: colours.confirm,
     borderWidth: 1,
-    paddingVertical: 8,
-    paddingHorizontal: 10,
-    marginTop: 15,
-    marginHorizontal: 20
-  },
-  confirmButtonText: {
-    fontSize: 18,
-    color: colours.white
-  },
-  inviteButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colours.confirm,
-    borderColor: colours.confirm,
-    borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 100,
     paddingVertical: 8,
     paddingHorizontal: 30
   },
-  inviteButtonText: {
+  confirmButtonText: {
     fontSize: 18,
-    color: colours.white
-  },
-  RSVPButton: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colours.confirm,
-    borderColor: colours.confirm,
-    borderWidth: 1,
-    paddingVertical: 5,
-    paddingHorizontal: 0,
-    marginHorizontal: 5
-  },
-  RSVPButtonText: {
-    fontSize: 16,
     color: colours.white
   },
 
@@ -417,10 +328,10 @@ const styles = {
     alignItems: 'center',
     margin: 5
   },
-  // whenContainer: {
-  //   flexDirection: 'column',
-  //   margin: 15
-  // },
+  whenContainer: {
+    flexDirection: 'column',
+    margin: 15
+  },
   containerFeed: {
 
   },
@@ -443,8 +354,7 @@ const styles = {
     paddingRight: 5
   },
   shortRow: {
-    width: 50,
-    alignItems: 'center'
+    width: 50
   },
   leftJustified: {
     flexDirection: 'row',
@@ -465,15 +375,14 @@ const styles = {
     flex: 1
   },
   userName: {
-    fontSize: 24,
+    fontSize: 36,
     fontWeight: '200',
     color: colours.gray
   },
   uiProfilePagePhotoCircularImage: {
-    height: 130,
-    width: 130,
-    borderRadius: 5,
-    marginBottom: 10,
+    height: 100,
+    width: 100,
+    borderRadius: 15,
     alignSelf: 'center'
   },
   editNameTitle: {
@@ -482,74 +391,49 @@ const styles = {
     flex: 1
   },
   inputStyle: {
-    color: colours.darkgray,
-    borderRadius: 0,
-    borderWidth: 0.5,
-    borderColor: colours.gray,
+    color: colours.black,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: colours.lightgray,
     paddingHorizontal: 10,
-    fontSize: 16,
-    fontWeight: '400',
-    height: 45,
+    // fontSize: 12,
+    height: 40,
     flexDirection: 'row',
     flex: 1
   },
   inputStyleAuth: {
-    color: colours.darkgray,
-    borderRadius: 0,
-    borderWidth: 0.5,
-    borderColor: colours.gray,
+    color: colours.black,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: colours.lightgray,
     paddingHorizontal: 10,
-    fontSize: 16,
-    fontWeight: '500',
-    height: 45,
+    fontSize: 19,
+    height: 40,
     flexDirection: 'row'
   },
   smallButtonStyle: {
-    flex: 0.1
+    flex: 0.1,
+    margin: 10
   },
   buttonStyle: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colours.next,
-    borderColor: colours.next,
+    borderRadius: 18,
     borderWidth: 1,
-    paddingVertical: 8,
-    paddingHorizontal: 10,
-    marginTop: 10,
-    marginHorizontal: 20,
-    maxHeight: 60
+    borderColor: colours.lightgray,
+    paddingRight: 15,
+    paddingLeft: 15,
+    height: 32,
+    minWidth: 100,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   buttonTextStyle: {
+    flex: 1,
     fontSize: 16,
     fontWeight: '600',
     paddingTop: 10,
     paddingBottom: 10,
     justifyContent: 'center',
-    alignItems: 'center',
-    color: colours.white
-  },
-  addButtonStyle: {
-    width: 50,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colours.lightgray,
-    borderColor: colours.verylightgray,
-    borderWidth: 1,
-    borderRadius: 30,
-    marginTop: 0,
-    marginHorizontal: 10,
-    maxHeight: 60
-  },
-  addButtonTextStyle: {
-    fontSize: 16,
-    fontWeight: '600',
-    paddingTop: 10,
-    paddingBottom: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: colours.white
+    alignItems: 'center'
   },
   hideEditButton: {
     height: 0,
@@ -565,14 +449,19 @@ const styles = {
 
   // feed
 
+  smallMessageText: {
+    fontSize: 12,
+    fontWeight: '300',
+    paddingTop: 10,
+    paddingBottom: 10
+  },
+
   // filter-panel
   filterPanelContainer: {
-    height: 50,
-    borderWidth: 2,
-    borderColor: 'red'
+    height: 50
   },
   rowFilterPanel: {
-    marginTop: 10,
+    marginTop: 20,
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -623,18 +512,18 @@ const styles = {
   // feedItem
 
   cardStyle: {
-    borderWidth: 0.5,
+    borderWidth: 1,
     borderRadius: 2,
-    borderColor: colours.main,
+    borderColor: '#ddd',
     borderBottomWidth: 0,
-    shadowColor: colours.main,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 1,
     marginLeft: 5,
     marginRight: 5,
-    marginBottom: 10
+    marginTop: 10
   },
   cardSectionCalendar: {
     borderBottomWidth: 1,
@@ -642,7 +531,7 @@ const styles = {
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
     flexDirection: 'column',
-    borderColor: colours.main,
+    borderColor: '#ddd',
     position: 'relative'
   },
   cardSectionInvite: {
@@ -651,7 +540,7 @@ const styles = {
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
     flexDirection: 'column',
-    borderColor: colours.main, // '#ddd'
+    borderColor: '#ddd',
     position: 'relative'
   },
   cardSectionFeedItem: {
@@ -660,44 +549,15 @@ const styles = {
   cardButtonStyle: {
     flex: 1,
     backgroundColor: '#fff',
-    marginLeft: 2,
-    marginRight: 2,
+    marginLeft: 5,
+    marginRight: 5,
     padding: 3,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center'
   },
   viewedFeedItemStyle: {
-    backgroundColor: colours.blue,
-    shadowOpacity: 0.2,
-    shadowRadius: 3
-  },
-  viewedFeedItemName: {
-    fontSize: 14,
-    color: colours.black,
-    fontWeight: '500'
-  },
-  viewedFeedItemAction: {
-    color: colours.black
-  },
-  viewedFeedItemTimestamp: {
-    color: colours.darkgray,
-    fontWeight: '500'
-  },
-  viewedFeedItemDate: {
-    color: colours.black,
-    fontWeight: '500'
-  },
-  viewedFeedItemPlaceName: {
-    color: colours.black,
-    fontWeight: '500'
-  },
-  unConfirmedItemStyle: {
-    backgroundColor: colours.verylightgray
-  },
-  unConfirmedItemText: {
-    color: colours.gray,
-    fontSize: 14
+    backgroundColor: 'red'
   },
   leftColumn: {
     flex: 1,
@@ -725,18 +585,17 @@ const styles = {
     color: 'lightgray'
   },
   subjectName: {
-    fontSize: 14,
-    color: colours.darkgray,
-    fontWeight: '500'
+    fontSize: 12,
+    fontWeight: 'bold'
   },
   subjectAction: {
-    fontSize: 12,
-    color: colours.gray
+    // fontSize: 10,
+    color: 'gray'
   },
   eventName: {
     // fontSize: 12,
     // fontWeight: 'bold',
-    color: colours.darkgray
+    color: 'gray'
   },
   rightColumnFeed: {
     flex: 1,
@@ -1010,20 +869,20 @@ const styles = {
   RSVPButtonNotResponded: {
 
   },
-  // barContainer: {
-  //   flexDirection: 'column',
-  //   marginTop: 1,
-  //   marginBottom: 1
-  // },
+  barContainer: {
+    flexDirection: 'column',
+    marginTop: 1,
+    marginBottom: 1
+  },
   // Item
-  // barItem: {
-  //   flexDirection: 'column',
-  //   flex: 1
-  // },
-  // barData: {
-  //   flex: 2,
-  //   flexDirection: 'row'
-  // },
+  barItem: {
+    flexDirection: 'column',
+    flex: 1
+  },
+  barData: {
+    flex: 2,
+    flexDirection: 'row'
+  },
   bar: {
     borderBottomLeftRadius: 0,
     borderTopLeftRadius: 0,

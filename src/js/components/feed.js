@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
-import Spinner from './common/Spinner';
-import Header from './common/Header';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 
@@ -12,7 +10,7 @@ export default class Feed extends Component {
   static route = {
     navigationBar: {
       title: 'Feed',
-      backgroundColor: colours.transparent,
+      backgroundColor: colours.blue,
       tintColor: colours.white
     }
   }
@@ -59,68 +57,47 @@ export default class Feed extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <Header />
-        <View style={{ flex: 1 }}>
-          {
-            isFetching && <Spinner />
-          }
-          {
-            !isFetching && allEvents.length > 0 &&
-            <FilterPanel
-              displayAll={ displayAll }
-              displaySome={ displaySome }
-              filterActive={ filterActive }
-              selectedFilter={ selectedFilter }
-            />
-          }
+        {
+          !isFetching && allEvents.length > 0 &&
+          <FilterPanel
+            displayAll={ displayAll }
+            displaySome={ displaySome }
+            filterActive={ filterActive }
+            selectedFilter={ selectedFilter }
+          />
+        }
 
 
-          <ScrollView>
-            <View>
-              { !isConnected && this.renderAlert() }
+        <ScrollView>
+          <View style={styles.containerFeed}>
+            { !isConnected && this.renderAlert() }
 
-              {
-                allEvents.length === 0 && !isFetching &&
-                  <View style={{ alignItems: 'center' }}>
-                    <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
-                      You have no events.
-                    </Text>
-                    <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
-                      (Why not create some?)
-                    </Text>
-                  </View>
-              }
-              {
-                feed.length === 0 && selectedFilter === 'hosting' &&
-                  <View style={{ alignItems: 'center' }}>
-                    <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
-                      You are not hosting any events.
-                    </Text>
-                    <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
-                      (Why not create some?)
-                    </Text>
-                  </View>
-              }
-              {
-                feed.length === 0 && selectedFilter === 'received' &&
-                  <View style={{ alignItems: 'center' }}>
-                    <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
-                      You have not been invited to any events.
-                    </Text>
-                    <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
-                      Tap { '"Code"' } below to enter to join an event using an invite code.
-                    </Text>
-                  </View>
-              }
+            {
+              allEvents.length === 0 && !isFetching &&
+              <Text style={styles.smallMessageText}>
+                You have no events.
+                (Why not create some?)
+              </Text>
+            }
+            {
+              feed.length === 0 && selectedFilter === 'hosting' &&
+                <Text style={styles.smallMessageText}>
+                  You are not hosting any events.
+                  (Why not create some?)
+              </Text>
+            }
+            {
+              feed.length === 0 && selectedFilter === 'received' &&
+                <Text style={styles.smallMessageText}>
+                  You have not been invited to any events.
+                </Text>
+            }
+            {
+              !isFetching && mappedFeed
+            }
+          </View>
+        </ScrollView>
 
-              {
-                !isFetching && mappedFeed
-              }
-            </View>
-
-          </ScrollView>
-
-        </View>
       </View>
     );
   }
