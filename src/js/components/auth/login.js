@@ -3,12 +3,15 @@ import { Text, View, TouchableOpacity, KeyboardAvoidingView } from 'react-native
 import { Field, reduxForm } from 'redux-form';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import Icon from 'react-native-vector-icons/FontAwesome';
+// import Fabric from 'react-native-fabric';
 import { persistor } from '../../init-store';
 import { FormTextInput, FormPasswordInput } from './form-components';
 import Header from '../common/Header';
 import { loginValidator as validate } from './form-validation';
 import colours from '../../../styles/colours';
 import styles from '../../../styles';
+
+// const { Answers } = Fabric;
 
 const inlineStyles = {
   inputWrap: {
@@ -59,6 +62,10 @@ class Login extends Component {
 
   componentWillMount () {
     persistor.pause();
+  }
+
+  componentDidMount () {
+    // Answers.logCustom('Visited LoginScreen', { additionalData: 'nothing' });
   }
 
   renderServerError = () => {

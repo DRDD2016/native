@@ -1,12 +1,10 @@
 import Config from 'react-native-config';
 import { NavigationActions } from '@exponent/ex-navigation';
-// import Fabric from 'react-native-fabric';
 import { store, persistor } from '../init-store';
 import Router from '../router';
 import { storeToken, storeUserId } from '../lib/credentials';
 import initSocket from '../socket-router';
 
-// const { Answers } = Fabric;
 
 export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
@@ -48,7 +46,6 @@ export function loginUser (email, password) {
         .then((data) => {
           if (data.token && data.user_id) {
             persistor.resume();
-            // Answers.logCustom('SuccessfulLogin', { emailData: email });
             dispatch(loginUserSuccess({
               firstname: data.firstname,
               surname: data.surname,

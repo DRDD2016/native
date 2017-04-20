@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import hoistNonReactStatic from 'hoist-non-react-statics';
+// import Fabric from 'react-native-fabric';
 import { persistor } from '../../init-store';
 import { FormTextInput, FormPasswordInput } from './form-components';
 import { signupValidator as validate } from './form-validation';
@@ -10,6 +11,8 @@ import Button from '../common/Button';
 import Header from '../common/Header';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
+
+// const { Answers } = Fabric;
 
 class Signup extends Component {
 
@@ -23,6 +26,10 @@ class Signup extends Component {
 
   componentWillMount () {
     persistor.pause();
+  }
+
+  componentDidMount () {
+    // Answers.logCustom('Visited SignUpScreen', { additionalData: 'nothing' });
   }
 
   renderButton = () => {

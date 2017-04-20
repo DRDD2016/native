@@ -25,6 +25,8 @@ class App extends Component {
     NetInfo.isConnected.fetch().then().done(() => {
       NetInfo.isConnected.addEventListener('change', this._handleConnectionChange);
     });
+    // Answers.logCustom('Index.js Mounted', { additionalData: 'nothing' });
+    // Crashlytics.recordError('Crashlytics recording!');
   }
 
   componentWillUnmount () {
