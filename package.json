@@ -53,7 +53,7 @@
     "preset": "react-native",
     "transformIgnorePatterns": [
       "node_modules/@exponent//ex-navigation",
-      "<rootDir>/node_modules/react-native-fabric"
+      "node_modules/"
     ],
     "setupFiles": [
       "./jest/setup.js"
