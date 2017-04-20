@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Router from '../../router';
 import AddInput from '../general/add-input';
 import Button from '../common/Button';
+import Header from '../common/Header';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import discardEvent from '../../lib/discard-event';
@@ -15,13 +16,6 @@ import discardEvent from '../../lib/discard-event';
 const windowSize = Dimensions.get('window');
 const deviceHeight = windowSize.height;
 
-const inlineStyle = {
-  inputContainer: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    zIndex: 999999
-  }
-};
 export default class Where extends Component {
 
   static route = {
@@ -30,7 +24,7 @@ export default class Where extends Component {
         return params.name;
       },
       tintColor: colours.white,
-      backgroundColor: colours.blue,
+      backgroundColor: colours.transparent,
       renderRight: () => {
         return (
           <Button
@@ -79,7 +73,15 @@ export default class Where extends Component {
     const { data, name, addInput, removeInput } = this.props;
     const inputs = data.map((value, inputKey) => {
       return (
-        <View key={ inputKey } style={inlineStyle.inputContainer}>
+        <View
+          key={ inputKey }
+          style={{
+            flexDirection: 'row',
+            marginTop: 10,
+            paddingHorizontal: 10 // #fff
+            // zIndex: 999999
+          }}
+        >
           <GooglePlacesAutocomplete
             ref={ (googlePlaces) => {
               this.googlePlaces = googlePlaces;
@@ -91,6 +93,7 @@ export default class Where extends Component {
             fetchDetails
             listViewDisplayed={this.state.listViewDisplayed}
             textInputProps={{
+              underlineColorAndroid: 'white',
               onKeyPress: (e) => {
                 if (e.nativeEvent.key === 'Enter') {
                   this.setState({ listViewDisplayed: 'false' });
@@ -109,48 +112,54 @@ export default class Where extends Component {
             }}
             getDefaultValue={() => value }
             styles={{
+              container: {
+                flex: 10
+                // backgroundColor: 'purple' // '#fff'
+                // zIndex: 999999
+              },
               textInputContainer: {
                 backgroundColor: '#fff',
-                borderRadius: 5,
+                // borderRadius: 5,
                 height: 38,
-                borderTopColor: '#D3D3D3',
-                borderBottomColor: '#D3D3D3',
-                borderTopWidth: 1,
-                borderBottomWidth: 1,
-                borderLeftWidth: 1,
-                borderRightWidth: 1,
-                borderLeftColor: '#D3D3D3',
-                borderRightColor: '#D3D3D3',
+                borderColor: '#D3D3D3',
+                borderWidth: 1,
                 maxWidth: windowSize.width - (windowSize.width / 5)
               },
               textInput: {
                 marginTop: 4,
-                padding: 4
+                marginBottom: 4,
+                flex: 1
               },
               listView: {
                 height: deviceHeight,
-                position: 'absolute',
+                // ios - position: 'absolute',
                 left: 5,
                 right: 5,
-                top: 40,
+                top: 10, // 40
                 backgroundColor: '#fff'
-              },
-              container: {
-                marginTop: 10,
-                backgroundColor: '#fff',
-                zIndex: 999999
               }
             }}
             nearbyPlacesAPI={'GooglePlacesSearch'}
             filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
           />
           { inputKey !== 0 &&
-            <Icon
-              name="remove"
-              size={14}
-              color="gray"
-              style={{ alignSelf: 'center', marginRight: 25, marginTop: 15 }}
-              onPress={ removeInput }
+            <View
+              style={{ flexDirection: 'row', alignItems: 'center', flex: 1, paddingLeft: 5 }}
+            >
+              <View>
+                <Icon
+                  name="remove"
+                  size={18}
+                  color="gray"
+                  style={{ }}
+                  onPress={ removeInput }
+                />
+              </View>
+            </View>
+          }
+          { inputKey === 0 &&
+            <View
+              style={{ flex: 1, paddingLeft: 5, justifyContent: 'center' }}
             />
           }
         </View>
@@ -158,34 +167,54 @@ export default class Where extends Component {
     });
 
     return (
-      <KeyboardAwareScrollView
-        style={{ backgroundColor: '#fff' }}
-        resetScrollToCoords={{ x: 0, y: 0 }}
-        contentContainerStyle={{ flex: 1 }}
-      >
-        <View style={ [styles.container, { marginHorizontal: 10 }] }>
-          <Text style={ styles.smallMessageText } >
-            Enter where the event will take place (or leave blank to decide it later).
-          </Text>
-          <Text style={ styles.smallMessageText }>
-            You can add more than one option to create a poll.
-          </Text>
+      <View style={{ flex: 1 }}>
+        <Header />
+        <KeyboardAwareScrollView
+          style={{ backgroundColor: colours.transparent }}
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          contentContainerStyle={{ flex: 1 }}
+        >
+          <View style={ [styles.container, { marginTop: 70, marginHorizontal: 10 }]}>
+            <Text style={ styles.smallMessageText } >
+              Enter where the event will take place (or leave blank to decide it later).
+            </Text>
+            <Text style={ styles.smallMessageText }>
+              You can add more than one option to create a poll.
+            </Text>
 
-          { inputs }
+            { inputs }
 
-          <AddInput data={ data } handler={ addInput } />
-
-          <View style={ styles.row }>
-            <Button
-              buttonStyle={ styles.buttonStyle }
-              onPress={ () => this.nextPage(name) }
+            <View
+              style={{
+                flexDirection: 'row',
+                marginTop: 10,
+                marginBottom: 10,
+                paddingLeft: 5,
+                paddingRight: 5 }}
             >
-              Next
-            </Button>
-          </View>
-        </View>
+              <AddInput data={ data } handler={ addInput } />
+            </View>
 
-      </KeyboardAwareScrollView>
+            <View
+              style={{
+                flexDirection: 'row',
+                marginTop: 0,
+                marginBottom: 10,
+                paddingLeft: 5,
+                paddingRight: 5 }}
+            >
+              <Button
+                buttonStyle={ [styles.buttonStyle, { flex: 1 }] }
+                textStyle={ styles.buttonTextStyle }
+                onPress={ () => this.nextPage(name) }
+              >
+                Next
+              </Button>
+            </View>
+          </View>
+
+        </KeyboardAwareScrollView>
+      </View>
     );
   }
 }

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "deploy": "react-native bundle && fastlane beta",
     "test": "jest --runInBand --forceExit --coverage",
     "test-watch": "jest --runInBand --forceExit --coverage --watch",
     "lint": "node_modules/eslint/bin/eslint.js 'src/**/*.js' '__tests__/**/*.js'",
@@ -23,6 +24,7 @@
     "react-native": "0.40.0",
     "react-native-config": "^0.3.1",
     "react-native-datepicker": "^1.4.4",
+    "react-native-fabric": "^0.4.1",
     "react-native-google-places-autocomplete": "^1.2.7",
     "react-native-image-picker": "^0.25.1",
     "react-native-keyboard-aware-scroll-view": "^0.2.7",
