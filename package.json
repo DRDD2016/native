@@ -52,7 +52,7 @@
   "jest": {
     "preset": "react-native",
     "transformIgnorePatterns": [
-      "node_modules/(?!@exponent//ex-navigation|react-native-fabric)/"
+      "node_modules/@exponent//ex-navigation"
     ],
     "setupFiles": [
       "./jest/setup.js"

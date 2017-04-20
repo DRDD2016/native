@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import hoistNonReactStatic from 'hoist-non-react-statics';
-import Fabric from 'react-native-fabric';
+// import Fabric from 'react-native-fabric';
 import { persistor } from '../../init-store';
 import { FormTextInput, FormPasswordInput } from './form-components';
 import { signupValidator as validate } from './form-validation';
@@ -12,7 +12,7 @@ import Header from '../common/Header';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 
-const { Answers } = Fabric;
+// const { Answers } = Fabric;
 
 class Signup extends Component {
 
@@ -29,7 +29,7 @@ class Signup extends Component {
   }
 
   componentDidMount () {
-    Answers.logCustom('Visited SignUpScreen', { additionalData: 'nothing' });
+    // Answers.logCustom('Visited SignUpScreen', { additionalData: 'nothing' });
   }
 
   renderButton = () => {
