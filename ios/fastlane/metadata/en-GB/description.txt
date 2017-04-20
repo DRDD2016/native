@@ -1,0 +1,1 @@
+Spark is a simple app for organising events between friends and family.  Use it to organise parties, holidays, dinners, drinks, or anything you like.

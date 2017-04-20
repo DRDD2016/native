@@ -4,6 +4,7 @@ import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../common/Button';
 import styles from '../../../styles';
+import colours from '../../../styles/colours';
 
 const ConfirmWhat = ({ data }) => {
 
@@ -17,22 +18,34 @@ const ConfirmWhat = ({ data }) => {
         key={ i }
       >
         { (hideTitle) &&
-          <View style={{ flexBasis: 50, marginHorizontal: 5 }} />
+          <View style={{ flex: 150, marginHorizontal: 5 }} />
         }
         { (!hideTitle) &&
-          <View style={{ flexBasis: 50, marginHorizontal: 5 }}>
-            <Text style={styles.optionTitleWhat}>
+          <View style={{ flex: 150, marginHorizontal: 5 }}>
+            <Text style={[styles.title3, { flex: 1, color: colours.what, paddingTop: 4 }]}>
               What
             </Text>
           </View>
         }
         <View
-          style={{ flexBasis: 250 }}
+          style={{ flex: 800 }}
           key={ i }
         >
           <View style={{}}>
-            <Button buttonStyle={styles.optionSelectedWhat} textStyle={[styles.optionTextSelected, {lineHeight: 20}]}>
-              <Icon name="star" size={18} color="white" />
+            <Button
+            buttonStyle={{
+              flex: 1,
+              paddingTop: 4,
+              paddingBottom: 4,
+              paddingLeft: 15,
+              paddingRight: 15 }}
+            textStyle={[styles.title4, {
+              flex: 1,
+              color: colours.what,
+              justifyContent: 'space-around',
+              lineHeight: 20 }]}
+          >
+              <Icon name="star" size={18} color={colours.what} />
               {'  '}
               { datum || 'TBC' }
             </Button>
@@ -44,7 +57,7 @@ const ConfirmWhat = ({ data }) => {
   });
 
   return (
-    <View style={{ marginVertical: 10 }}>
+    <View style={{ marginTop: 0, marginRight: 10 }}>
       { layout }
     </View>
   );

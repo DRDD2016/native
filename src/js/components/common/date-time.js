@@ -19,9 +19,10 @@ class DateTime extends Component {
     const { data, handleDate, handleTime, removeInput, index } = this.props;
     return (
       <View key={ Math.random() } style={{ width: windowSize.width, alignItems: 'center' }}>
-        <View style={{ margin: 10 }}>
+        <View style={{ flexDirection: 'row', flex: 1, marginTop: 10, marginHorizontal: 10 }}>
+          <View style={{ flex: 0.1 }} />
           <DatePicker
-            style={{ width: 180, marginRight: 60 }}
+            style={{ flex: 2.5 }}
             date={ data.date }
             mode="date"
             placeholder="select date"
@@ -42,11 +43,32 @@ class DateTime extends Component {
             }}
             onDateChange={ date => handleDate(date, index) }
           />
+          { index !== 0 &&
+            <View
+              style={{ flex: 1, paddingLeft: 5, justifyContent: 'center' }}
+            >
+              <View>
+                <Icon
+                  name="remove"
+                  size={18}
+                  color="gray"
+                  style={{ flex: 1 }}
+                  onPress={ removeInput }
+                />
+              </View>
+            </View>
+          }
+          { index === 0 &&
+            <View
+              style={{ flex: 1, paddingLeft: 5 }}
+            />
+          }
         </View>
 
-        <View style={{ margin: 10 }}>
+        <View style={{ flexDirection: 'row', flex: 1, margin: 10 }}>
+          <View style={{ flex: 0.1 }} />
           <DatePicker
-            style={{ width: 180, marginRight: 60 }}
+            style={{ flex: 2.5 }}
             date={ data.time && data.time }
             mode="time"
             placeholder="select time"
@@ -70,26 +92,17 @@ class DateTime extends Component {
               handleTime(time, index);
             }}
           />
-        </View>
-        { index !== 0 &&
-          <Icon
-            name="remove"
-            size={18}
-            color="gray"
-            style={{ position: 'absolute', right: 100, top: 20 }}
-            onPress={ removeInput }
-          />
-        }
-        <View style={{ flexDirection: 'row', position: 'absolute', right: 10, top: 75 }}>
-          <Switch
-            onValueChange={ (switchValue) => {
-              this.setState({ tbcSwitch: switchValue });
-              const newTimeValue = switchValue ? '' : moment().format('HH:mm');
-              handleTime(newTimeValue, index);
-            }}
-            value={ this.state.tbcSwitch }
-          />
-          <Text style={{ margin: 5 }}>TBC</Text>
+          <View style={{ flexDirection: 'row', flex: 1, paddingLeft: 5, alignItems: 'center' }}>
+            <Switch
+              onValueChange={ (switchValue) => {
+                this.setState({ tbcSwitch: switchValue });
+                const newTimeValue = switchValue ? '' : moment().format('HH:mm');
+                handleTime(newTimeValue, index);
+              }}
+              value={ this.state.tbcSwitch }
+            />
+            <Text style={{ margin: 5 }}>TBC</Text>
+          </View>
         </View>
 
       </View>

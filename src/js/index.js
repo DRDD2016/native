@@ -6,10 +6,14 @@ import {
   NavigationProvider,
   StackNavigation
 } from '@exponent/ex-navigation';
+// import Fabric from 'react-native-fabric';
 import { store } from './init-store';
 import { setIsConnected } from './actions/network';
 import Router from './router';
 import navigationContext from './custom-navigation-context';
+
+// const { Crashlytics, Answers } = Fabric;
+
 // disable remote debugger warning in a simulator
 console.disableYellowBox = true;
 

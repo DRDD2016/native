@@ -4,6 +4,7 @@ import { View, Text, ScrollView } from 'react-native';
 import CalendarItem from './calendar-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
+import Header from './common/Header';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 
@@ -14,7 +15,7 @@ export default class Calendar extends Component {
       title (params) {
         return params.title;
       },
-      backgroundColor: colours.blue,
+      backgroundColor: colours.transparent,
       tintColor: colours.white
     }
   }
@@ -34,51 +35,54 @@ export default class Calendar extends Component {
       return a.when[0] > b.when[0];
     });
     return (
-      <View>
-        { !isConnected && this.renderAlert() }
-        {
-          isFetching && <Spinner />
-        }
-        <View style={styles.filterPanelContainer}>
+      <View style={{ flex: 1 }}>
+        <Header />
+        <View style={{ flex: 1 }}>
+          { !isConnected && this.renderAlert() }
           {
-            !isFetching && allEvents.length > 0 &&
-            <FilterPanel
-              displaySome={ displaySome }
-              displayAll={ displayAll }
-              filterActive={ filterActive }
-              selectedFilter={ selectedFilter }
-            />
+            isFetching && <Spinner />
           }
+
+            {
+              !isFetching && allEvents.length > 0 &&
+              <FilterPanel
+                displaySome={ displaySome }
+                displayAll={ displayAll }
+                filterActive={ filterActive }
+                selectedFilter={ selectedFilter }
+              />
+            }
+          
+
+          <ScrollView>
+            <View style={styles.containerFeed}>
+              {
+                this.props.filteredEvents.length === 0 && !isFetching &&
+                <Text style={styles.smallMessageText}>
+                  You have no upcoming events.
+                </Text>
+              }
+              {
+                !isFetching && sortedData.map((item) => {
+
+                  return (
+                    <CalendarItem
+                      key={ item.event_id }
+                      userIsHost={ item.host_user_id === user_id }
+                      rsvpStatus={ item.status }
+                      name={ item.name }
+                      what={ item.what }
+                      where={ item.where }
+                      when={ item.when }
+                      event_id={ item.event_id }
+                      handleOnPress={ this.props.handleOnPress }
+                    />
+                  );
+                })
+              }
+            </View>
+          </ScrollView>
         </View>
-
-        <ScrollView>
-          <View style={styles.containerFeed}>
-            {
-              this.props.filteredEvents.length === 0 && !isFetching &&
-              <Text style={styles.smallMessageText}>
-                You have no upcoming events.
-              </Text>
-            }
-            {
-              !isFetching && sortedData.map((item) => {
-
-                return (
-                  <CalendarItem
-                    key={ item.event_id }
-                    userIsHost={ item.host_user_id === user_id }
-                    rsvpStatus={ item.status }
-                    name={ item.name }
-                    what={ item.what }
-                    where={ item.where }
-                    when={ item.when }
-                    event_id={ item.event_id }
-                    handleOnPress={ this.props.handleOnPress }
-                  />
-                );
-              })
-            }
-          </View>
-        </ScrollView>
       </View>
     );
   }

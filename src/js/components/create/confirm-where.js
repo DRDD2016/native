@@ -4,6 +4,7 @@ import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../common/Button';
 import styles from '../../../styles';
+import colours from '../../../styles/colours';
 
 const ConfirmWhere = ({ data }) => { // eslint-disable-line react/prop-types
 
@@ -17,21 +18,33 @@ const ConfirmWhere = ({ data }) => { // eslint-disable-line react/prop-types
         key={ i }
       >
         { (hideTitle) &&
-          <View style={{ flexBasis: 50, marginHorizontal: 5 }} />
+          <View style={{ flex: 50, marginHorizontal: 5 }} />
         }
         { (!hideTitle) &&
-          <View style={{ flexBasis: 50, marginHorizontal: 5 }}>
-            <Text style={styles.optionTitleWhere}>
+          <View style={{ flex: 50, marginHorizontal: 5 }}>
+            <Text style={[styles.title3, { flex: 1, color: colours.where, paddingTop: 4 }]}>
               Where
             </Text>
           </View>
         }
         <View
-          style={{ flexBasis: 250 }}
+          style={{ flex: 250 }}
         >
           <View style={{ }}>
-            <Button buttonStyle={styles.optionSelectedWhere} textStyle={[styles.optionTextSelected, {lineHeight: 20}]}>
-              <Icon name="map-marker" size={18} color="white" />
+            <Button
+              buttonStyle={{
+                flex: 1,
+                paddingTop: 4,
+                paddingBottom: 4,
+                paddingLeft: 15,
+                paddingRight: 15 }}
+              textStyle={[styles.title4, {
+                flex: 1,
+                color: colours.where,
+                justifyContent: 'space-around',
+                lineHeight: 20 }]}
+            >
+              <Icon name="map-marker" size={18} color={colours.where} />
               {'  '}
               { datum || 'TBC' }
             </Button>
@@ -42,7 +55,7 @@ const ConfirmWhere = ({ data }) => { // eslint-disable-line react/prop-types
   });
 
   return (
-    <View style={{ marginVertical: 10 }}>
+    <View style={{ marginTop: 3, marginRight: 10 }}>
       { layout }
     </View>
   );

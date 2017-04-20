@@ -54,9 +54,21 @@ export default class BarChart extends Component {
     const { barWidth } = this.state;
 
     return (
-      <View style={styles.barContainer}>
-        <View style={styles.barItem}>
-          <View style={styles.barData}>
+      <View
+        style={{
+          flexDirection: 'column',
+          marginTop: 1,
+          marginBottom: 1 }}
+      >
+        <View
+          style={{ flex: 1 }}
+        >
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'center' }}
+          >
             {barWidth &&
               <Animated.View style={[styles.bar, { backgroundColor: this.props.chartColor }, { width: barWidth }]} />
             }
