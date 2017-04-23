@@ -1,4 +1,4 @@
-package com.spark;
+package net.wannaenterprises.spark;
 
 import com.facebook.react.ReactActivity;
 

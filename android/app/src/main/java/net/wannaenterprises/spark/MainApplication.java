@@ -1,4 +1,4 @@
-package com.spark;
+package net.wannaenterprises.spark;
 
 import android.app.Application;
 import android.util.Log;
