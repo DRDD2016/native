@@ -6,13 +6,13 @@ import {
   NavigationProvider,
   StackNavigation
 } from '@exponent/ex-navigation';
-// import Fabric from 'react-native-fabric';
+import Fabric from 'react-native-fabric';
 import { store } from './init-store';
 import { setIsConnected } from './actions/network';
 import Router from './router';
 import navigationContext from './custom-navigation-context';
 
-// const { Crashlytics, Answers } = Fabric;
+const { Answers } = Fabric;
 
 // disable remote debugger warning in a simulator
 console.disableYellowBox = true;
@@ -25,8 +25,7 @@ class App extends Component {
     NetInfo.isConnected.fetch().then().done(() => {
       NetInfo.isConnected.addEventListener('change', this._handleConnectionChange);
     });
-    // Answers.logCustom('Index.js Mounted', { additionalData: 'nothing' });
-    // Crashlytics.recordError('Crashlytics recording!');
+    Answers.logCustom('Index.js Mounted', { additionalData: 'nothing' });
   }
 
   componentWillUnmount () {
