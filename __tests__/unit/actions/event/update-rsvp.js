@@ -1,5 +1,16 @@
 import * as actions from '../../../../src/js/actions/event/data';
 
+jest.mock('react-native-fabric', () => {
+  return {
+    Crashlytics: {
+      crash: () => {}
+    },
+    Answers: {
+      logCustom: () => {},
+      logContentView: () => {}
+    }
+  };
+});
 
 describe('GET_EVENT actions', () => {
 

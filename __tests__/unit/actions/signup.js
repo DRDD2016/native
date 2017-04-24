@@ -1,5 +1,16 @@
 import * as actions from '../../../src/js/actions/signup';
 
+jest.mock('react-native-fabric', () => {
+  return {
+    Crashlytics: {
+      crash: () => {}
+    },
+    Answers: {
+      logCustom: () => {},
+      logContentView: () => {}
+    }
+  };
+});
 
 describe('SIGNUP_USER actions', () => {
 
