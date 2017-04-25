@@ -1,5 +1,17 @@
 import * as actions from '../../../src/js/actions/create';
 
+jest.mock('react-native-fabric', () => {
+  return {
+    Crashlytics: {
+      crash: () => {}
+    },
+    Answers: {
+      logCustom: () => {},
+      logContentView: () => {}
+    }
+  };
+});
+
 describe('create event actions', () => {
 
   describe('`setDetails` action creator', () => {

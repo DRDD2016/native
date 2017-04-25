@@ -1,4 +1,17 @@
 import * as actions from '../../../src/js/actions/login';
+
+jest.mock('react-native-fabric', () => {
+  return {
+    Crashlytics: {
+      crash: () => {}
+    },
+    Answers: {
+      logCustom: () => {},
+      logContentView: () => {}
+    }
+  };
+});
+
 // import createThunk from '../../utils/mock-thunk';
 //
 // describe('`loginUser` async action creator', () => {
