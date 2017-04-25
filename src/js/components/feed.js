@@ -17,6 +17,10 @@ export default class Feed extends Component {
     }
   }
 
+  componentDidMount () {
+    console.log(' Feed loaded');
+  }
+
   renderAlert = () => {
     setTimeout(() => {
       this.props.navigator.showLocalAlert('You are not connected to Internet!', {
