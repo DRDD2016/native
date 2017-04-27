@@ -2,7 +2,7 @@ import * as actions from '../actions/feed';
 
 const initialState = {
   data: [],
-  isFetching: false,
+  isFetching: true,
   error: undefined,
   selectedFilter: undefined,
   filterActive: false

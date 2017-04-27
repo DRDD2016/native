@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, ListView } from 'react-native';
 import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
@@ -17,8 +17,28 @@ export default class Feed extends Component {
     }
   }
 
+  constructor () {
+    super();
+    this.renderRow = this.renderRow.bind(this);
+  }
+
   componentDidMount () {
     console.log(' Feed loaded');
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const { feed } = nextProps;
+    console.log('willRec');
+    const newData = [].concat(feed).reverse();
+    this.createDataSource(newData);
+
+  }
+
+  createDataSource (feed) {
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
+    });
+    this.dataSource = ds.cloneWithRows(feed);
   }
 
   renderAlert = () => {
@@ -27,19 +47,19 @@ export default class Feed extends Component {
         text: { color: '#fff' },
         container: { backgroundColor: 'red' }
       });
-    }, 2000);
+    }, 1000);
   }
 
-  render () {
-    const { user_id, allEvents, feed, isFetching, handleSelection, displaySome, displayAll, filterActive, selectedFilter, isConnected } = this.props;
+  renderRow (rowData, rowID) {
+    const { feed_item, id } = rowData;
+    const { user_id, handleSelection } = this.props;
 
-    const mappedFeed = [].concat(feed).reverse().map(({ feed_item, id }, i) => {
-
-      return (
+    return (
+      <View>
         <FeedItem
           user_id={ user_id }
           key={ Math.random() }
-          index={ i }
+          index={ rowID }
           event_id={ feed_item.event_id }
           timestamp={ feed_item.timestamp }
           name={ feed_item.name }
@@ -58,8 +78,13 @@ export default class Feed extends Component {
           handleSelection={ handleSelection }
           feed_item_id={ id }
         />
-      );
-    });
+      </View>
+    );
+  }
+
+  render () {
+
+    const { allEvents, feed, isFetching, displaySome, displayAll, filterActive, selectedFilter, isConnected } = this.props;
 
     return (
       <View style={{ flex: 1 }}>
@@ -118,8 +143,14 @@ export default class Feed extends Component {
               }
 
               {
-                !isFetching && mappedFeed
+                !isFetching && this.dataSource &&
+                <ListView
+                  enableEmptySections
+                  dataSource={this.dataSource}
+                  renderRow={this.renderRow}
+                />
               }
+
             </View>
 
           </ScrollView>
