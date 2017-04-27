@@ -22,6 +22,7 @@ const FeedItem = ({ user_id, event_id, timestamp, firstname, surname,
       (when.length === 1 && when[0].date === '');
 
   const userIsSubject = subject_user_id === user_id;
+
   return (
     <Card style={[styles.cardStyle, viewed && styles.viewedFeedItemStyle]}>
       <CardSection style={styles.cardSectionFeedItem}>
@@ -34,7 +35,8 @@ const FeedItem = ({ user_id, event_id, timestamp, firstname, surname,
             <Image style={styles.uiProfilePhotoCircularImage} source={{ uri: photo_url }} />
           </View>
           <View style={{ flex: 3, paddingBottom: 5, paddingRight: 3 }}>
-            <Text style={[styles.timestamp, viewed && styles.viewedFeedItemTimestamp]}> { moment(timestamp).startOf().fromNow() } </Text>
+            <Text style={[styles.timestamp, viewed && styles.viewedFeedItemTimestamp]}>
+              { moment(timestamp).startOf().fromNow() } </Text>
             <Text>
               <Text style={[styles.subjectName, viewed && styles.viewedFeedItemName]}>
                 { userIsSubject && 'You'}

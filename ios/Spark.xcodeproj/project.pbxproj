@@ -622,7 +622,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 26TVQPX48T;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1061,9 +1061,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Wanna Enterprises Ltd (26TVQPX48T)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: David Rickard (N83BEDBXB9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 26TVQPX48T;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1079,6 +1079,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.wannaenterprises.Spark;
 				PRODUCT_NAME = Spark;
+				PROVISIONING_PROFILE = "5bf3e239-75cb-4104-923a-5892cd03a8ee";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development net.wannaenterprises.Spark";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1088,8 +1090,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Wanna Enterprises Ltd (26TVQPX48T)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 26TVQPX48T;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1104,6 +1106,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.wannaenterprises.Spark;
 				PRODUCT_NAME = Spark;
+				PROVISIONING_PROFILE = "96738b81-4f4a-4c39-8b4b-19cabb93740e";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore net.wannaenterprises.Spark";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

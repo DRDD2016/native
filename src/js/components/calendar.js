@@ -52,7 +52,7 @@ export default class Calendar extends Component {
                 selectedFilter={ selectedFilter }
               />
             }
-          
+
 
           <ScrollView>
             <View style={styles.containerFeed}>

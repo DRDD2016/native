@@ -30,16 +30,20 @@ platform :ios do
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :beta do
-    # match(type: "appstore") # more information: https://codesigning.guide
+    match(
+      type: "appstore",
+      git_url: "https://github.com/rickardinho/codeSigning.git"
+    ) # more information: https://codesigning.guide
+
     sigh
-    
+
     increment_build_number(
-      xcodeproj: './ios/Spark.xcodeproj'
+      xcodeproj: './Spark.xcodeproj'
     )
 
     gym(
       scheme: "Spark",
-      project: './ios/Spark.xcodeproj'
+      project: './Spark.xcodeproj'
     ) # Build your app - more options available
 
     pilot
