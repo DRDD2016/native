@@ -17,18 +17,8 @@ export default class Feed extends Component {
     }
   }
 
-  constructor () {
-    super();
-    this.renderRow = this.renderRow.bind(this);
-  }
-
-  componentDidMount () {
-    console.log(' Feed loaded');
-  }
-
   componentWillReceiveProps (nextProps) {
     const { feed } = nextProps;
-    console.log('willRec');
     const newData = [].concat(feed).reverse();
     this.createDataSource(newData);
 
@@ -50,35 +40,33 @@ export default class Feed extends Component {
     }, 1000);
   }
 
-  renderRow (rowData, rowID) {
+  renderRow = (rowData, rowID) => {
     const { feed_item, id } = rowData;
     const { user_id, handleSelection } = this.props;
 
     return (
-      <View>
-        <FeedItem
-          user_id={ user_id }
-          key={ Math.random() }
-          index={ rowID }
-          event_id={ feed_item.event_id }
-          timestamp={ feed_item.timestamp }
-          name={ feed_item.name }
-          is_poll={ feed_item.is_poll }
-          what={ feed_item.what }
-          where={ feed_item.where }
-          when={ feed_item.when }
-          userIsHost={ feed_item.host_user_id === user_id }
-          hostID={ feed_item.host_user_id }
-          firstname={ feed_item.firstname }
-          surname={ feed_item.surname }
-          photo_url={ feed_item.photo_url }
-          subject_user_id={ feed_item.subject_user_id }
-          viewed={ feed_item.viewed }
-          edited={ feed_item.edited }
-          handleSelection={ handleSelection }
-          feed_item_id={ id }
-        />
-      </View>
+      <FeedItem
+        user_id={ user_id }
+        key={ Math.random() }
+        index={ rowID }
+        event_id={ feed_item.event_id }
+        timestamp={ feed_item.timestamp }
+        name={ feed_item.name }
+        is_poll={ feed_item.is_poll }
+        what={ feed_item.what }
+        where={ feed_item.where }
+        when={ feed_item.when }
+        userIsHost={ feed_item.host_user_id === user_id }
+        hostID={ feed_item.host_user_id }
+        firstname={ feed_item.firstname }
+        surname={ feed_item.surname }
+        photo_url={ feed_item.photo_url }
+        subject_user_id={ feed_item.subject_user_id }
+        viewed={ feed_item.viewed }
+        edited={ feed_item.edited }
+        handleSelection={ handleSelection }
+        feed_item_id={ id }
+      />
     );
   }
 
