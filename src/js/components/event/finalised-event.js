@@ -169,7 +169,7 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
               {
                 rsvps.going && rsvps.going.map((invitee) => {
                   return (
-                    <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
+                    <InviteeCard key={invitee.user_id} firstname={invitee.firstname} photo_url={invitee.photo_url} />
                   );
                 })
               }
@@ -182,7 +182,7 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
               {
                 rsvps.maybe && rsvps.maybe.map((invitee) => {
                   return (
-                    <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
+                    <InviteeCard key={invitee.user_id} firstname={invitee.firstname} photo_url={invitee.photo_url} />
                   );
                 })
               }
@@ -195,7 +195,7 @@ const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEve
               {
                 rsvps.not_going && rsvps.not_going.map((invitee) => {
                   return (
-                    <InviteeCard firstname={invitee.firstname} photo_url={invitee.photo_url} />
+                    <InviteeCard key={invitee.user_id} firstname={invitee.firstname} photo_url={invitee.photo_url} />
                   );
                 })
               }
