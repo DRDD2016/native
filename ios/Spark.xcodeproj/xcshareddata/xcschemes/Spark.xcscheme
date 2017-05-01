@@ -66,6 +66,16 @@
                ReferencedContainer = "container:Spark.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "551E75C01EB480CE007282A3"
+               BuildableName = "SparkUITests.xctest"
+               BlueprintName = "SparkUITests"
+               ReferencedContainer = "container:Spark.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
