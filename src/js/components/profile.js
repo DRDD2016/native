@@ -7,8 +7,9 @@ import Spinner from './common/Spinner';
 import Header from './common/Header';
 import styles from '../../styles';
 import colours from '../../styles/colours';
+import { connectAlert } from './Alert';
 
-export default class Profile extends Component {
+class Profile extends Component {
 
   static route = {
     navigationBar: {
@@ -65,10 +66,7 @@ export default class Profile extends Component {
 
   renderAlert = () => {
     setTimeout(() => {
-      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
-        text: { color: '#fff' },
-        container: { backgroundColor: 'red' }
-      });
+      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
     }, 2000);
   }
 
@@ -183,3 +181,5 @@ Profile.propTypes = {
   handleChangeName: PropTypes.func.isRequired,
   handleUpload: PropTypes.func.isRequired
 };
+
+export default connectAlert(Profile);

@@ -10,6 +10,7 @@ import Header from '../common/Header';
 import { loginValidator as validate } from './form-validation';
 import colours from '../../../styles/colours';
 import styles from '../../../styles';
+import { connectAlert } from '../Alert';
 
 const { Answers } = Fabric;
 
@@ -76,10 +77,7 @@ class Login extends Component {
 
   renderAlert = () => {
     setTimeout(() => {
-      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
-        text: { color: '#fff' },
-        container: { backgroundColor: 'red' }
-      });
+      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
     }, 2000);
   }
 
@@ -128,4 +126,4 @@ class Login extends Component {
 }
 
 const decoratedComponent = reduxForm({ form: 'login', validate })(Login);
-export default hoistNonReactStatic(decoratedComponent, Login);
+export default connectAlert(hoistNonReactStatic(decoratedComponent, Login));

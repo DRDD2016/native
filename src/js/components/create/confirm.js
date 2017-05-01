@@ -9,8 +9,9 @@ import Spinner from '../common/Spinner';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import discardEvent from '../../lib/discard-event';
+import { connectAlert } from '../Alert';
 
-export default class Confirm extends Component {
+class Confirm extends Component {
 
   static route = {
     navigationBar: {
@@ -35,10 +36,7 @@ export default class Confirm extends Component {
 
   renderAlert = () => {
     setTimeout(() => {
-      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
-        text: { color: '#fff' },
-        container: { backgroundColor: 'red' }
-      });
+      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
     }, 2000);
   }
 
@@ -78,3 +76,5 @@ export default class Confirm extends Component {
     );
   }
 }
+
+export default connectAlert(Confirm);

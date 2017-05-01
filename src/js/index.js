@@ -13,6 +13,7 @@ import { setIsConnected } from './actions/network';
 import Spinner from './components/common/Spinner';
 import Router from './router';
 import navigationContext from './custom-navigation-context';
+import { AlertProvider } from './components/Alert';
 
 const { Answers } = Fabric;
 
@@ -55,9 +56,11 @@ class App extends Component {
     if (!this.state.rehydrated) return <Spinner />;
     return (
       <Provider store={ store }>
-        <NavigationProvider context={ navigationContext }>
-          <StackNavigation id="root" navigatorUID="root" initialRoute={ Router.getRoute('splash') } />
-        </NavigationProvider>
+        <AlertProvider>
+          <NavigationProvider context={ navigationContext }>
+            <StackNavigation id="root" navigatorUID="root" initialRoute={ Router.getRoute('splash') } />
+          </NavigationProvider>
+        </AlertProvider>
       </Provider>
     );
   }

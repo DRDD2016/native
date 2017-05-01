@@ -41,7 +41,6 @@ export default class TabBar extends Component {
           selectedStyle={ tabBarSelectedItemStyle }
           renderIcon={ isSelected => <Icon name="calendar" size={ 28 } color={ isSelected ? colours.blue : colours.gray} /> }
           onPress={ this.onPress }
-          testID="test-id-calButton"
         >
           <StackNavigation
             id="calendar"

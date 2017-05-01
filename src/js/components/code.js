@@ -9,6 +9,7 @@ import Spinner from './common/Spinner';
 import Header from './common/Header';
 import styles from '../../styles';
 import colours from '../../styles/colours';
+import { connectAlert } from './Alert';
 
 const inlineStyle = {
   buttonStyle: {
@@ -63,10 +64,7 @@ class Code extends Component {
 
   renderAlert = () => {
     setTimeout(() => {
-      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
-        text: { color: '#fff' },
-        container: { backgroundColor: 'red' }
-      });
+      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
     }, 2000);
   }
 
@@ -100,4 +98,4 @@ class Code extends Component {
 }
 
 const decoratedComponent = reduxForm({ form: 'code', validate })(Code);
-export default hoistNonReactStatic(decoratedComponent, Code);
+export default connectAlert(hoistNonReactStatic(decoratedComponent, Code));

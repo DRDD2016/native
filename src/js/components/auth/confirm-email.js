@@ -8,6 +8,7 @@ import Button from '../common/Button';
 import Spinner from '../common/Spinner';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
+import { connectAlert } from '../Alert';
 
 const inlineStyle = {
   buttonStyle: {
@@ -67,10 +68,7 @@ class ConfirmEmail extends Component {
 
   renderAlert = () => {
     setTimeout(() => {
-      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
-        text: { color: '#fff' },
-        container: { backgroundColor: 'red' }
-      });
+      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
     }, 2000);
   }
 
@@ -98,4 +96,4 @@ class ConfirmEmail extends Component {
 }
 
 const decoratedComponent = reduxForm({ form: 'confirmEmail', validate })(ConfirmEmail);
-export default hoistNonReactStatic(decoratedComponent, ConfirmEmail);
+export default connectAlert(hoistNonReactStatic(decoratedComponent, ConfirmEmail));

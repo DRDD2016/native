@@ -7,8 +7,9 @@ import Spinner from './common/Spinner';
 import Header from './common/Header';
 import styles from '../../styles';
 import colours from '../../styles/colours';
+import { connectAlert } from './Alert';
 
-export default class Calendar extends Component {
+class Calendar extends Component {
 
   static route = {
     navigationBar: {
@@ -45,10 +46,7 @@ export default class Calendar extends Component {
 
   renderAlert = () => {
     setTimeout(() => {
-      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
-        text: { color: '#fff' },
-        container: { backgroundColor: 'red' }
-      });
+      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
     }, 2000);
   }
 
@@ -69,7 +67,7 @@ export default class Calendar extends Component {
           event_id={ item.event_id }
           handleOnPress={ this.props.handleOnPress }
         />
-      
+
     );
   }
 
@@ -135,3 +133,5 @@ Calendar.propTypes = {
   ]).isRequired,
   handleOnPress: PropTypes.func.isRequired
 };
+
+export default connectAlert(Calendar);
