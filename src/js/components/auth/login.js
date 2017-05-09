@@ -53,12 +53,8 @@ const inlineStyles = {
 
 class Login extends Component {
 
-  static route = {
-    navigationBar: {
-      title: 'Login',
-      tintColor: colours.white,
-      backgroundColor: colours.transparent
-    }
+  static navigationOptions = {
+    title: 'Login'
   }
 
   componentWillMount () {
@@ -82,7 +78,7 @@ class Login extends Component {
   }
 
   render () {
-    const { handleSubmit, handleSubmitForm, isConnected, navigator } = this.props;
+    const { handleSubmit, handleSubmitForm, isConnected, navigation } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <Header />
@@ -111,7 +107,9 @@ class Login extends Component {
                 <Text style={styles.confirmButtonText}>LOG IN</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={{ marginTop: 5, paddingTop: 10 }} activeOpacity={ 0.5 } onPress={() => navigator.push('confirmEmail')}>
+            <TouchableOpacity
+              style={{ marginTop: 5, paddingTop: 10 }} activeOpacity={ 0.5 } onPress={() => navigation.navigate('confirmEmail')}
+            >
               <View>
                 <Text style={inlineStyles.forgotPasswordText}>Forgot Password?</Text>
               </View>

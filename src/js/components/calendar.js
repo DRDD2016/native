@@ -11,14 +11,8 @@ import { connectAlert } from './Alert';
 
 class Calendar extends Component {
 
-  static route = {
-    navigationBar: {
-      title (params) {
-        return params.title;
-      },
-      backgroundColor: colours.transparent,
-      tintColor: colours.white
-    }
+  static navigationOptions = {
+    title: 'Calendar'
   }
 
   componentWillMount () {
@@ -72,10 +66,11 @@ class Calendar extends Component {
   }
 
   render () {
+
     const { allEvents, isFetching, displaySome, displayAll, filterActive, selectedFilter, user_id, isConnected } = this.props;
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: colours.white }}>
         <Header />
         <View style={{ flex: 1 }}>
           { !isConnected && this.renderAlert() }
@@ -95,22 +90,28 @@ class Calendar extends Component {
 
 
           <ScrollView>
-            <View style={styles.containerFeed}>
+
               {
                 this.props.filteredEvents.length === 0 && !isFetching &&
-                <Text style={styles.smallMessageText}>
-                  You have no upcoming events.
-                </Text>
+                <View style={[styles.containerFeed, { alignItems: 'center' }]}>
+                  <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
+                    You have no upcoming events.
+                  </Text>
+                </View>
               }
+
               {
                 !isFetching && this.dataSource &&
-                <ListView
-                  enableEmptySections
-                  dataSource={this.dataSource}
-                  renderRow={this.renderRow}
-                />
+                <View style={styles.containerFeed}>
+                  <ListView
+                    enableEmptySections
+                    dataSource={this.dataSource}
+                    renderRow={this.renderRow}
+                    removeClippedSubviews={false}
+                  />
+                </View>
               }
-            </View>
+
           </ScrollView>
         </View>
       </View>

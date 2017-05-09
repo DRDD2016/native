@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { StackNavigation, TabNavigation, TabNavigationItem as TabItem } from '@exponent/ex-navigation';
+import { TabNavigation, TabNavigationItem as TabItem } from '@exponent/ex-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Router from '../router';
+import { StackFeed, StackCalendar, StackCode, StackProfile, StackCreate } from '../routes';
 import { tabBarSelectedItemStyle } from '../../styles';
 import colours from '../../styles/colours';
 import { popToTop } from '../lib/navigate';
@@ -27,11 +27,7 @@ export default class TabBar extends Component {
           renderIcon={ isSelected => <Icon name="barcode" size={ 28 } color={ isSelected ? colours.blue : colours.gray } /> }
           onPress={ this.onPress }
         >
-          <StackNavigation
-            id="code"
-            navigatorUID="code"
-            initialRoute={ Router.getRoute('code', { title: 'Code' }) }
-          />
+          <StackCode />
         </TabItem>
 
         <TabItem
@@ -42,11 +38,7 @@ export default class TabBar extends Component {
           renderIcon={ isSelected => <Icon name="calendar" size={ 28 } color={ isSelected ? colours.blue : colours.gray} /> }
           onPress={ this.onPress }
         >
-          <StackNavigation
-            id="calendar"
-            navigatorUID="calendar"
-            initialRoute={ Router.getRoute('calendar', { title: 'Calendar' }) }
-          />
+          <StackCalendar />
         </TabItem>
 
         <TabItem
@@ -56,11 +48,7 @@ export default class TabBar extends Component {
           renderIcon={ isSelected => <Icon name="globe" size={ 28 } color={ isSelected ? colours.blue : colours.gray } /> }
           onPress={ this.onPress }
         >
-          <StackNavigation
-            id="feed"
-            navigatorUID="feed"
-            initialRoute={ Router.getRoute('feed') }
-          />
+          <StackFeed />
         </TabItem>
 
         <TabItem
@@ -70,11 +58,7 @@ export default class TabBar extends Component {
           renderIcon={ isSelected => <Icon name="user" size={ 28 } color={ isSelected ? colours.blue : colours.gray} /> }
           onPress={ this.onPress }
         >
-          <StackNavigation
-            id="profile"
-            navigatorUID="profile"
-            initialRoute={ Router.getRoute('profile') }
-          />
+          <StackProfile />
         </TabItem>
 
         <TabItem
@@ -84,11 +68,7 @@ export default class TabBar extends Component {
           renderIcon={ isSelected => <Icon name="pencil" size={ 28 } color={ isSelected ? colours.blue : colours.gray } /> }
           onPress={ this.onPress }
         >
-          <StackNavigation
-            id="create"
-            navigatorUID="create"
-            initialRoute={ Router.getRoute('details') }
-          />
+          <StackCreate />
         </TabItem>
       </TabNavigation>
     );

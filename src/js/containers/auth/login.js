@@ -9,7 +9,7 @@ const mapStateToProps = ({ user, network }) => ({
 
 const mapDispatchToProps = () => ({
   handleSubmitForm: ({ email, password }, dispatch, props) => { //eslint-disable-line
-    dispatch(loginUser(email.toLowerCase(), password));
+    dispatch(loginUser(email.toLowerCase(), password, props.navigation));
   }
 });
 

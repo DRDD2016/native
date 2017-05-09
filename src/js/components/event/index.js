@@ -10,41 +10,37 @@ import EditIcon from '../common/edit-icon';
 
 export default class Event extends Component {
 
-  static route = {
-    navigationBar: {
-      title (params) {
-        if (params.name === undefined) {
-          return 'Sorry...';
-        }
-        return params.name;
-      },
-      renderRight: (route) => {
-        return route.params.userIsHost && !route.params.isPoll && !route.params.eventIsCancelled ?
+  static navigationOptions = ({ navigation }) => ({
 
-          <TouchableHighlight
-            onPress={ () => route.params.handleEdit(route.params.event) }
-            style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
-          >
-            <View>
-              <EditIcon />
-            </View>
-          </TouchableHighlight> :
-          null;
-      },
-      renderLeft: () =>
-        <TouchableHighlight style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+    title: (navigation.state.params.name === undefined) ? 'Sorry...' : navigation.state.params.name,
+    headerRight: (
+      navigation.state.params.userIsHost && !navigation.state.params.isPoll && !navigation.state.params.eventIsCancelled ?
+
+        <TouchableHighlight
+          onPress={ () => navigation.state.params.handleEdit(navigation.state.params.event) }
+          style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
+        >
           <View>
-            <CloseIcon />
+            <EditIcon />
           </View>
-        </TouchableHighlight>,
-      backgroundColor: colours.transparent,
-      tintColor: colours.darkgray
-    }
-  }
+        </TouchableHighlight> :
+        null
+    ),
+    headerLeft: (
+      <TouchableHighlight style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+        <View>
+          <CloseIcon navigation={navigation} />
+        </View>
+      </TouchableHighlight>
+    )
+  });
 
   componentWillUpdate (nextProps) {
+    console.log('thisProps', this.props);
+    console.log('nextProps', nextProps);
+
     if (nextProps.event.name !== this.props.event.name) {
-      this.props.navigator.updateCurrentRouteParams({
+      this.props.navigation.setParams({
         name: nextProps.event.name
       });
     }
@@ -60,7 +56,7 @@ export default class Event extends Component {
     } else if (this.props.userIsHost && this.props.isPoll) {
       return (
         <HostPoll
-          navigator={this.props.navigator}
+          navigator={this.props.navigation}
           vote_count={ this.props.vote_count }
           event={ this.props.event }
           finalChoices={ this.props.finalChoices }
@@ -72,7 +68,7 @@ export default class Event extends Component {
     } else if (!this.props.userIsHost && this.props.isPoll) {
       return (
         <InviteePoll
-          navigator={this.props.navigator}
+          navigator={this.props.navigation}
           event={ this.props.event }
           voteSaved={this.props.voteSaved}
           handleVote={ this.props.handleVote }
@@ -82,7 +78,7 @@ export default class Event extends Component {
     } else { // eslint-disable-line no-else-return
       return (
         <FinalisedEvent
-          navigator={this.props.navigator}
+          navigator={this.props.navigation}
           event={ this.props.event }
           event_id={ this.props.event_id }
           userIsHost={ this.props.userIsHost }
@@ -96,8 +92,9 @@ export default class Event extends Component {
   }
 
   render () {
+    console.log('thisProps', this.props);
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: colours.white }}>
         <Header />
         <View style={{ flex: 1, marginTop: 70 }}>
           {

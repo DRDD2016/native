@@ -11,12 +11,8 @@ import { connectAlert } from './Alert';
 
 class Profile extends Component {
 
-  static route = {
-    navigationBar: {
-      title: 'Profile',
-      backgroundColor: colours.transparent,
-      tintColor: colours.darkgray
-    }
+  static navigationOptions = {
+    title: 'Profile'
   }
 
   constructor (props) {
@@ -71,10 +67,11 @@ class Profile extends Component {
   }
 
   render () {
-    const { photo_url, firstname, surname, handleLogOut, handleChangeName, isConnected } = this.props;
+
+    const { photo_url, firstname, surname, handleLogOut, handleChangeName, isConnected, navigation } = this.props;
     const hideEditButton = (firstname === '' ? styles.hideEditButton : [{ backgroundColor: 'green' }]);
     return (
-      <View>
+      <View style={{ backgroundColor: colours.white }}>
         <Header />
         <ScrollView style={styles.profilePage}>
           { !isConnected && this.renderAlert() }
@@ -160,7 +157,7 @@ class Profile extends Component {
               <Button
                 buttonStyle={ [hideEditButton, styles.confirmButton, { backgroundColor: colours.white, borderColor: colours.gray, flex: 1 }] }
                 textStyle={ [styles.confirmButtonText, { color: colours.gray }]}
-                onPress={ () => handleLogOut(this.props.navigation) }
+                onPress={ () => handleLogOut(navigation) }
               >
                 Log Out
               </Button>

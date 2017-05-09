@@ -124,10 +124,11 @@ export function getEvent (token, event_id, navigation) {
             setTimeout(() => {
               dispatch(hydrateCreateEvent(data));
             }, 200);
-            pushTo('edit');
-          }
+            pushTo('Edit', params, navigation);
+          },
+          previousRoute: navigation.state.routeName
         };
-        navigation.showModal('event', params);
+        navigation.navigate('event', params);
       })
       .catch((err) => {
         dispatch(getEventFailure(err.message));
@@ -174,10 +175,11 @@ export function submitCode (token, code, navigation) {
               setTimeout(() => {
                 dispatch(hydrateCreateEvent(data));
               }, 200);
-              pushTo('edit');
-            }
+              pushTo('Edit', params, navigation);
+            },
+            previousRoute: navigation.state.routeName
           };
-          navigation.showModal('event', params);
+          navigation.navigate('event', params);
         }
       })
       .catch((err) => {

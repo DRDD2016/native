@@ -46,7 +46,7 @@ class Confirm extends Component {
       return <Spinner size="large" />;
     }
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: colours.white }}>
         <Header />
         <View style={{ flex: 1 }}>
           { !isConnected && this.renderAlert() }

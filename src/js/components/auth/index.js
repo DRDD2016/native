@@ -2,20 +2,25 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 import Button from '../common/Button';
 import Header from '../common/Header';
-import Router from '../../router';
 import colours from '../../../styles/colours';
 import styles from '../../../styles';
 
 const logo = require('../../../img/sparkLoginLogo.png');
 
-export default function Index ({ navigator }) {
+Index.navigationOptions = () => {
+  return {
+    header: null
+  };
+};
+
+export default function Index ({ navigation }) {
 
   const goToLogin = () => {
-    navigator.push(Router.getRoute('login'));
+    navigation.navigate('login');
   };
 
   const goToSignup = () => {
-    navigator.push(Router.getRoute('signup'));
+    navigation.navigate('signup');
   };
 
   return (

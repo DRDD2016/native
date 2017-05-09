@@ -1,5 +1,6 @@
-import { NavigationActions } from '@exponent/ex-navigation';
-import { store } from '../init-store';
+// import { NavigationActions } from '@exponent/ex-navigation';
+import { NavigationActions } from 'react-navigation';
+// import { store } from '../init-store';
 import Router from '../router';
 
 /**
@@ -9,10 +10,18 @@ import Router from '../router';
  * @returns {void}
  */
 
-export function pushTo (route, params) {
+export function pushTo (route, params, navigation) {
   if (route) {
-    const navigatorUID = store.getState().navigation.currentNavigatorUID;
-    store.dispatch(NavigationActions.push(navigatorUID, Router.getRoute(route, params)));
+    console.log(route);
+    console.log(params);
+    console.log(navigation);
+    const navigateAction = NavigationActions.navigate({
+      routeName: route,
+      params: { params },
+      action: NavigationActions.navigate({ routeName: route })
+    });
+    navigation.dispatch(navigateAction);
+
   }
 }
 
@@ -22,12 +31,24 @@ export function pushTo (route, params) {
  * @param {number} index - stack index. Defaults to 0
  * @returns {void}
  */
+
 export function resetStackTo (route, index = 0) {
   if (route) {
-    const navigatorUID = store.getState().navigation.currentNavigatorUID;
-    store.dispatch(NavigationActions.immediatelyResetStack(navigatorUID, [Router.getRoute(route)], index));
+    NavigationActions.reset({
+      index,
+      actions: [
+        NavigationActions.navigate({ routeName: route })
+      ]
+    });
   }
 }
+
+// export function resetStackTo (route, index = 0) {
+//   if (route) {
+//     const navigatorUID = store.getState().navigation.currentNavigatorUID;
+//     store.dispatch(NavigationActions.immediatelyResetStack(navigatorUID, [Router.getRoute(route)], index));
+//   }
+// }
 
 /**
  * jumpTo navigates from one TabNavigation tab to another

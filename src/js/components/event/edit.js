@@ -5,7 +5,7 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import DateTime from '../common/date-time';
 import Header from '../common/Header';
 import styles from '../../../styles';
-import colours from '../../../styles/colours';
+// import colours from '../../../styles/colours';
 import Button from '../common/Button';
 
 const windowSize = Dimensions.get('window');
@@ -13,13 +13,10 @@ const deviceHeight = windowSize.height;
 
 export default class Edit extends Component {
 
-  static route = {
-    navigationBar: {
-      title: 'Edit event',
-      backgroundColor: colours.transparent,
-      tintColor: colours.darkgray
-    }
-  }
+  static navigationOptions = {
+    title: 'Edit event'
+  };
+
   constructor () {
     super();
     this.state = {
@@ -188,7 +185,7 @@ export default class Edit extends Component {
                   textStyle={styles.buttonTextStyle}
                   onPress={ () => {
                     handleEditEvent(event, event_id);
-                    this.props.navigator.pop();
+                    this.props.navigation.goBack();
                   }}
                 >
                   Update

@@ -16,12 +16,8 @@ const { Answers } = Fabric;
 
 class Signup extends Component {
 
-  static route = {
-    navigationBar: {
-      title: 'Sign up',
-      tintColor: colours.white,
-      backgroundColor: colours.transparent
-    }
+  static navigationOptions = {
+    title: 'Sign up'
   }
 
   componentWillMount () {

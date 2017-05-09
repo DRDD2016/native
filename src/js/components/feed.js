@@ -10,12 +10,11 @@ import { connectAlert } from './Alert';
 
 class Feed extends Component {
 
-  static route = {
-    navigationBar: {
-      title: 'Feed',
-      backgroundColor: colours.transparent,
-      tintColor: colours.white
-    }
+  static navigationOptions = {
+    title: 'Feed',
+    headerStyle: { backgroundColor: colours.transparent },
+    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerTintColor: colours.headerButtonColor
   }
 
   componentWillReceiveProps (nextProps) {
@@ -73,7 +72,7 @@ class Feed extends Component {
     const { allEvents, feed, isFetching, displaySome, displayAll, filterActive, selectedFilter, isConnected } = this.props;
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: colours.white }}>
         <Header />
         <View style={{ flex: 1 }}>
           {
@@ -134,6 +133,7 @@ class Feed extends Component {
                   enableEmptySections
                   dataSource={this.dataSource}
                   renderRow={this.renderRow}
+                  removeClippedSubviews={false}
                 />
               }
 

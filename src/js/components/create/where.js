@@ -5,7 +5,7 @@ import { View, Text, Dimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Router from '../../router';
+// import Router from '../../router';
 import AddInput from '../general/add-input';
 import Button from '../common/Button';
 import Header from '../common/Header';
@@ -18,26 +18,20 @@ const deviceHeight = windowSize.height;
 
 export default class Where extends Component {
 
-  static route = {
-    navigationBar: {
-      title (params) {
-        return params.name;
-      },
-      tintColor: colours.white,
-      backgroundColor: colours.transparent,
-      renderRight: () => {
-        return (
-          <Button
-            onPress={ discardEvent }
-            buttonStyle={{ margin: 15 }}
-            textStyle={{ color: colours.white, fontWeight: '600' }}
-          >
-            <Text>Cancel</Text>
-          </Button>
-        );
-      }
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.state.params.name,
+    headerRight: () => {
+      return (
+        <Button
+          onPress={ discardEvent }
+          buttonStyle={{ margin: 15 }}
+          textStyle={{ color: colours.white, fontWeight: '600' }}
+        >
+          <Text>Cancel</Text>
+        </Button>
+      );
     }
-  }
+  });
 
   constructor () {
     super();
@@ -66,7 +60,7 @@ export default class Where extends Component {
   }
 
   nextPage = (name) => {
-    this.props.navigator.push(Router.getRoute('when', { name }));
+    this.props.navigation.navigate('When', { name });
   }
 
   render () {
@@ -167,7 +161,7 @@ export default class Where extends Component {
     });
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: colours.white }}>
         <Header />
         <KeyboardAwareScrollView
           style={{ backgroundColor: colours.transparent }}

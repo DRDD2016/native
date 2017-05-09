@@ -31,12 +31,8 @@ const inlineStyle = {
 
 class Code extends Component {
 
-  static route = {
-    navigationBar: {
-      title: 'Enter Your Event Code',
-      backgroundColor: colours.transparent,
-      tintColor: colours.darkgray
-    }
+  static navigationOptions = {
+    title: 'Enter Your Event Code'
   }
 
   renderButton = () => {
@@ -45,7 +41,7 @@ class Code extends Component {
       return <Spinner size="large" />;
     }
     return (
-      <View style={ styles.row }>
+      <View style={styles.row}>
         <Button
           buttonStyle={[
             styles.confirmButton,
@@ -72,7 +68,7 @@ class Code extends Component {
     const { codeError, isConnected } = this.props;
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: colours.white }}>
         { !isConnected && this.renderAlert() }
         <Header />
         <View style={{ alignItems: 'center', marginHorizontal: 10, marginTop: 70, marginBottom: 60 }}>

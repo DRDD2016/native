@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import Router from '../../router';
 import AddInput from '../general/add-input';
 import Button from '../common/Button';
 import Header from '../common/Header';
@@ -11,29 +10,23 @@ import discardEvent from '../../lib/discard-event';
 
 export default class When extends Component {
 
-  static route = {
-    navigationBar: {
-      title (params) {
-        return params.name;
-      },
-      backgroundColor: colours.transparent,
-      tintColor: colours.white,
-      renderRight: () => {
-        return (
-          <Button
-            onPress={ discardEvent }
-            buttonStyle={{ margin: 15 }}
-            textStyle={{ color: colours.white, fontWeight: '600' }}
-          >
-            <Text>Cancel</Text>
-          </Button>
-        );
-      }
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.state.params.name,
+    headerRight: () => {
+      return (
+        <Button
+          onPress={ discardEvent }
+          buttonStyle={{ margin: 15 }}
+          textStyle={{ color: colours.white, fontWeight: '600' }}
+        >
+          <Text>Cancel</Text>
+        </Button>
+      );
     }
-  }
+  });
 
   nextPage = (name) => {
-    this.props.navigator.push(Router.getRoute('confirm', { name }));
+    this.props.navigation.navigate('Confirm', { name });
   };
 
   render () {
@@ -43,7 +36,7 @@ export default class When extends Component {
     const hideNext = data[0].date === '';
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: colours.white }}>
         <Header />
         <ScrollView>
           <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 70, marginHorizontal: 15 }}>

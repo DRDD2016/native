@@ -30,12 +30,8 @@ const inlineStyle = {
 
 class ConfirmEmail extends Component {
 
-  static route = {
-    navigationBar: {
-      title: 'Forgot your password?',
-      backgroundColor: colours.blue,
-      tintColor: colours.white
-    }
+  static navigationOptions = {
+    title: 'Forgot your password?'
   }
 
   renderServerError = () => {
