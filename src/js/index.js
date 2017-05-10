@@ -8,7 +8,6 @@ import { store } from './init-store';
 import { setIsConnected } from './actions/network';
 import Spinner from './components/common/Spinner';
 import { StackRoot } from './routes';
-// import navigationContext from './custom-navigation-context';
 import { AlertProvider } from './components/Alert';
 
 const { Answers } = Fabric;

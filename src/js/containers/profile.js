@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { AsyncStorage } from 'react-native';
-// import { NavigationActions } from 'react-navigation';
 import { persistor, store } from '../init-store';
 import Profile from '../components/profile';
 import { changeName, editName, uploadPhoto, logout } from '../actions/profile';

@@ -2,7 +2,6 @@ import Config from 'react-native-config';
 import { getVotes, clearPollState } from './poll';
 import { hydrateCreateEvent, clearCreateEvent } from '../create';
 import { getCalendar } from '../calendar';
-import { pushTo } from '../../lib/navigate';
 import { store } from '../../init-store';
 
 export const GET_EVENT_REQUEST = 'GET_EVENT_REQUEST';
@@ -124,7 +123,7 @@ export function getEvent (token, event_id, navigation) {
             setTimeout(() => {
               dispatch(hydrateCreateEvent(data));
             }, 200);
-            pushTo('Edit', params, navigation);
+            navigation.navigate('Edit', params, navigation);
           },
           previousRoute: navigation.state.routeName
         };
@@ -175,7 +174,7 @@ export function submitCode (token, code, navigation) {
               setTimeout(() => {
                 dispatch(hydrateCreateEvent(data));
               }, 200);
-              pushTo('Edit', params, navigation);
+              navigation.navigate('Edit', params, navigation);
             },
             previousRoute: navigation.state.routeName
           };

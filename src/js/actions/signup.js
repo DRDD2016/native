@@ -1,8 +1,5 @@
 import Config from 'react-native-config';
-// import { NavigationActions } from '@exponent/ex-navigation';
-// import { NavigationActions } from 'react-navigation';
 import { persistor } from '../init-store';
-// import Router from '../router';
 import { storeToken, storeUserId } from '../lib/credentials';
 import initSocket from '../socket-router';
 
@@ -52,7 +49,6 @@ export function signupUser (firstname, surname, email, password, navigation) {
             storeUserId(data.user_id);
             storeToken(data.token);
             initSocket();
-            // const navigatorUID = store.getState().navigation.currentNavigatorUID;
             navigation.navigate('uploadPhoto');
 
           } else {

@@ -1,7 +1,5 @@
 import Config from 'react-native-config';
-// import { NavigationActions } from '@exponent/ex-navigation';
 import { persistor } from '../init-store';
-// import Router from '../router';
 import { storeToken, storeUserId } from '../lib/credentials';
 import initSocket from '../socket-router';
 
