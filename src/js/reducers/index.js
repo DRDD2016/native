@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
-import { NavigationReducer } from '@exponent/ex-navigation';
 import calendar from './calendar';
 import event from './event/index';
 import feed from './feed';
@@ -10,7 +9,6 @@ import confirmUserEmail from './confirm-email';
 import network from './network';
 
 const appReducer = combineReducers({
-  navigation: NavigationReducer,
   calendar,
   event,
   feed,

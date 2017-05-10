@@ -17,7 +17,9 @@ const colours = {
   confirm: '#8DC744',
   next: '#316AB3',
   main: '#316AB3', // tabbar, card borders, etc
-  transparent: 'transparent'
+  transparent: 'transparent',
+  headerButtonColor: this.gray,
+  headerTitleColor: this.darkgray
 };
 
 export default colours;

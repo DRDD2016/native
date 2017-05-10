@@ -1,7 +1,5 @@
 import Config from 'react-native-config';
-import { NavigationActions } from '@exponent/ex-navigation';
-import { store, persistor } from '../init-store';
-import Router from '../router';
+import { persistor } from '../init-store';
 import { storeToken, storeUserId } from '../lib/credentials';
 import initSocket from '../socket-router';
 
@@ -24,7 +22,7 @@ export const signupUserFailure = error => ({
   error
 });
 
-export function signupUser (firstname, surname, email, password) {
+export function signupUser (firstname, surname, email, password, navigation) {
 
   return (dispatch) => {
     dispatch(signupUserRequest());
@@ -51,8 +49,8 @@ export function signupUser (firstname, surname, email, password) {
             storeUserId(data.user_id);
             storeToken(data.token);
             initSocket();
-            const navigatorUID = store.getState().navigation.currentNavigatorUID;
-            dispatch(NavigationActions.immediatelyResetStack(navigatorUID, [Router.getRoute('uploadPhoto')], 0));
+            navigation.navigate('uploadPhoto');
+
           } else {
             dispatch(signupUserFailure(data.error));
           }

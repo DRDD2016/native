@@ -2,7 +2,6 @@ import Config from 'react-native-config';
 import { getCalendar } from './calendar';
 import { openWhatsApp, composeWhatsAppMessage } from '../lib/whatsapp';
 import { store } from '../init-store';
-import { popToTop } from '../lib/navigate';
 
 export const SET_DETAILS = 'SET_DETAILS';
 export const SET_WHAT = 'SET_WHAT';
@@ -86,7 +85,7 @@ export function saveEvent (token, eventData, navigation) { //eslint-disable-line
 
           openWhatsApp(composeWhatsAppMessage(store.getState().user, eventData, data.code));
           dispatch(clearCreateEvent());
-          popToTop(navigation);
+          navigation.goBack();
         }
       });
     })

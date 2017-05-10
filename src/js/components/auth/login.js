@@ -10,6 +10,7 @@ import Header from '../common/Header';
 import { loginValidator as validate } from './form-validation';
 import colours from '../../../styles/colours';
 import styles from '../../../styles';
+import { connectAlert } from '../Alert';
 
 const { Answers } = Fabric;
 
@@ -52,12 +53,8 @@ const inlineStyles = {
 
 class Login extends Component {
 
-  static route = {
-    navigationBar: {
-      title: 'Login',
-      tintColor: colours.white,
-      backgroundColor: colours.transparent
-    }
+  static navigationOptions = {
+    title: 'Login'
   }
 
   componentWillMount () {
@@ -76,15 +73,12 @@ class Login extends Component {
 
   renderAlert = () => {
     setTimeout(() => {
-      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
-        text: { color: '#fff' },
-        container: { backgroundColor: 'red' }
-      });
+      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
     }, 2000);
   }
 
   render () {
-    const { handleSubmit, handleSubmitForm, isConnected, navigator } = this.props;
+    const { handleSubmit, handleSubmitForm, isConnected, navigation } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <Header />
@@ -113,7 +107,9 @@ class Login extends Component {
                 <Text style={styles.confirmButtonText}>LOG IN</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={{ marginTop: 5, paddingTop: 10 }} activeOpacity={ 0.5 } onPress={() => navigator.push('confirmEmail')}>
+            <TouchableOpacity
+              style={{ marginTop: 5, paddingTop: 10 }} activeOpacity={ 0.5 } onPress={() => navigation.navigate('confirmEmail')}
+            >
               <View>
                 <Text style={inlineStyles.forgotPasswordText}>Forgot Password?</Text>
               </View>
@@ -128,4 +124,4 @@ class Login extends Component {
 }
 
 const decoratedComponent = reduxForm({ form: 'login', validate })(Login);
-export default hoistNonReactStatic(decoratedComponent, Login);
+export default connectAlert(hoistNonReactStatic(decoratedComponent, Login));

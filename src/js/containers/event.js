@@ -1,9 +1,7 @@
 /* eslint-disable no-unused-vars  */
 import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
-import { NavigationActions } from '@exponent/ex-navigation';
 import { store } from '../init-store';
-import Router from '../router';
 import Event from '../components/event';
 import { getEvent, updateRsvp, deleteEvent } from '../actions/event/data';
 import { postVote, finaliseEvent } from '../actions/event/poll';
@@ -55,7 +53,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     .then((token) => {
       if (token) {
         dispatch(deleteEvent(token, event_id));
-        ownProps.navigator.updateCurrentRouteParams({
+        ownProps.navigation.updateCurrentRouteParams({
           eventIsCancelled: true
         });
       }

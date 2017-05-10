@@ -2,17 +2,13 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { NetInfo, AsyncStorage } from 'react-native';
-import {
-  NavigationProvider,
-  StackNavigation
-} from '@exponent/ex-navigation';
 import Fabric from 'react-native-fabric';
 import { persistStore } from 'redux-persist';
 import { store } from './init-store';
 import { setIsConnected } from './actions/network';
 import Spinner from './components/common/Spinner';
-import Router from './router';
-import navigationContext from './custom-navigation-context';
+import { StackRoot } from './routes';
+import { AlertProvider } from './components/Alert';
 
 const { Answers } = Fabric;
 
@@ -55,9 +51,9 @@ class App extends Component {
     if (!this.state.rehydrated) return <Spinner />;
     return (
       <Provider store={ store }>
-        <NavigationProvider context={ navigationContext }>
-          <StackNavigation id="root" navigatorUID="root" initialRoute={ Router.getRoute('splash') } />
-        </NavigationProvider>
+        <AlertProvider>
+          <StackRoot />
+        </AlertProvider>
       </Provider>
     );
   }

@@ -8,8 +8,8 @@ const mapStateToProps = ({ user }) => ({
 });
 
 const mapDispatchToProps = () => ({
-  handleSubmitForm: ({ firstname, surname, email, password }, dispatch) => {
-    dispatch(signupUser(firstname, surname, email.toLowerCase(), password));
+  handleSubmitForm: ({ firstname, surname, email, password }, dispatch, props) => {
+    dispatch(signupUser(firstname, surname, email.toLowerCase(), password, props.navigation));
   }
 });
 

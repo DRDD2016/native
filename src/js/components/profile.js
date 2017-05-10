@@ -7,15 +7,12 @@ import Spinner from './common/Spinner';
 import Header from './common/Header';
 import styles from '../../styles';
 import colours from '../../styles/colours';
+import { connectAlert } from './Alert';
 
-export default class Profile extends Component {
+class Profile extends Component {
 
-  static route = {
-    navigationBar: {
-      title: 'Profile',
-      backgroundColor: colours.transparent,
-      tintColor: colours.darkgray
-    }
+  static navigationOptions = {
+    title: 'Profile'
   }
 
   constructor (props) {
@@ -65,18 +62,16 @@ export default class Profile extends Component {
 
   renderAlert = () => {
     setTimeout(() => {
-      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
-        text: { color: '#fff' },
-        container: { backgroundColor: 'red' }
-      });
+      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
     }, 2000);
   }
 
   render () {
-    const { photo_url, firstname, surname, handleLogOut, handleChangeName, isConnected } = this.props;
+
+    const { photo_url, firstname, surname, handleLogOut, handleChangeName, isConnected, navigation } = this.props;
     const hideEditButton = (firstname === '' ? styles.hideEditButton : [{ backgroundColor: 'green' }]);
     return (
-      <View>
+      <View style={{ backgroundColor: colours.white }}>
         <Header />
         <ScrollView style={styles.profilePage}>
           { !isConnected && this.renderAlert() }
@@ -162,7 +157,7 @@ export default class Profile extends Component {
               <Button
                 buttonStyle={ [hideEditButton, styles.confirmButton, { backgroundColor: colours.white, borderColor: colours.gray, flex: 1 }] }
                 textStyle={ [styles.confirmButtonText, { color: colours.gray }]}
-                onPress={ () => handleLogOut(this.props.navigation) }
+                onPress={ () => handleLogOut(navigation) }
               >
                 Log Out
               </Button>
@@ -183,3 +178,5 @@ Profile.propTypes = {
   handleChangeName: PropTypes.func.isRequired,
   handleUpload: PropTypes.func.isRequired
 };
+
+export default connectAlert(Profile);

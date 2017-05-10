@@ -9,6 +9,7 @@ import Spinner from './common/Spinner';
 import Header from './common/Header';
 import styles from '../../styles';
 import colours from '../../styles/colours';
+import { connectAlert } from './Alert';
 
 const inlineStyle = {
   buttonStyle: {
@@ -30,12 +31,8 @@ const inlineStyle = {
 
 class Code extends Component {
 
-  static route = {
-    navigationBar: {
-      title: 'Enter Your Event Code',
-      backgroundColor: colours.transparent,
-      tintColor: colours.darkgray
-    }
+  static navigationOptions = {
+    title: 'Enter Your Event Code'
   }
 
   renderButton = () => {
@@ -44,7 +41,7 @@ class Code extends Component {
       return <Spinner size="large" />;
     }
     return (
-      <View style={ styles.row }>
+      <View style={styles.row}>
         <Button
           buttonStyle={[
             styles.confirmButton,
@@ -63,10 +60,7 @@ class Code extends Component {
 
   renderAlert = () => {
     setTimeout(() => {
-      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
-        text: { color: '#fff' },
-        container: { backgroundColor: 'red' }
-      });
+      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
     }, 2000);
   }
 
@@ -74,7 +68,7 @@ class Code extends Component {
     const { codeError, isConnected } = this.props;
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: colours.white }}>
         { !isConnected && this.renderAlert() }
         <Header />
         <View style={{ alignItems: 'center', marginHorizontal: 10, marginTop: 70, marginBottom: 60 }}>
@@ -100,4 +94,4 @@ class Code extends Component {
 }
 
 const decoratedComponent = reduxForm({ form: 'code', validate })(Code);
-export default hoistNonReactStatic(decoratedComponent, Code);
+export default connectAlert(hoistNonReactStatic(decoratedComponent, Code));

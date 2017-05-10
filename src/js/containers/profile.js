@@ -18,13 +18,15 @@ const mapStateToProps = ({ user, network }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleLogOut: (nav) => {
+  handleLogOut: (navigation) => {
     AsyncStorage.removeItem('spark_token')
     .then(() => {
       AsyncStorage.removeItem('spark_user_id')
       .then(() => {
-        const rootNavigator = nav.getNavigator('root');
-        rootNavigator.replace('auth');
+        navigation.navigate('splash');
+
+        // const rootNavigator = nav.getNavigator('root');
+        // rootNavigator.replace('auth');
         // clean up persisted state
         persistor.purge();
         store.getState().user.socket.disconnect();

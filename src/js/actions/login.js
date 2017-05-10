@@ -1,7 +1,5 @@
 import Config from 'react-native-config';
-import { NavigationActions } from '@exponent/ex-navigation';
-import { store, persistor } from '../init-store';
-import Router from '../router';
+import { persistor } from '../init-store';
 import { storeToken, storeUserId } from '../lib/credentials';
 import initSocket from '../socket-router';
 
@@ -26,7 +24,7 @@ export const loginUserFailure = error => ({
   error
 });
 
-export function loginUser (email, password) {
+export function loginUser (email, password, navigation) {
 
   return (dispatch) => {
     dispatch(loginUserRequest());
@@ -56,8 +54,7 @@ export function loginUser (email, password) {
             storeUserId(data.user_id);
             storeToken(data.token);
             initSocket();
-            const navigatorUID = store.getState().navigation.currentNavigatorUID;
-            dispatch(NavigationActions.immediatelyResetStack(navigatorUID, [Router.getRoute('tabBar')], 0));
+            navigation.navigate('tabsMain');
           } else {
             dispatch(loginUserFailure(data.error));
           }

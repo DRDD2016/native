@@ -6,15 +6,15 @@ import Spinner from './common/Spinner';
 import Header from './common/Header';
 import styles from '../../styles';
 import colours from '../../styles/colours';
+import { connectAlert } from './Alert';
 
-export default class Feed extends Component {
+class Feed extends Component {
 
-  static route = {
-    navigationBar: {
-      title: 'Feed',
-      backgroundColor: colours.transparent,
-      tintColor: colours.white
-    }
+  static navigationOptions = {
+    title: 'Feed',
+    headerStyle: { backgroundColor: colours.transparent },
+    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerTintColor: colours.headerButtonColor
   }
 
   componentWillReceiveProps (nextProps) {
@@ -33,11 +33,8 @@ export default class Feed extends Component {
 
   renderAlert = () => {
     setTimeout(() => {
-      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
-        text: { color: '#fff' },
-        container: { backgroundColor: 'red' }
-      });
-    }, 1000);
+      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
+    }, 2000);
   }
 
   renderRow = (rowData, rowID) => {
@@ -75,7 +72,7 @@ export default class Feed extends Component {
     const { allEvents, feed, isFetching, displaySome, displayAll, filterActive, selectedFilter, isConnected } = this.props;
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: colours.white }}>
         <Header />
         <View style={{ flex: 1 }}>
           {
@@ -136,6 +133,7 @@ export default class Feed extends Component {
                   enableEmptySections
                   dataSource={this.dataSource}
                   renderRow={this.renderRow}
+                  removeClippedSubviews={false}
                 />
               }
 
@@ -148,3 +146,5 @@ export default class Feed extends Component {
     );
   }
 }
+
+export default connectAlert(Feed);

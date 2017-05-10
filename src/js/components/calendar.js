@@ -7,17 +7,12 @@ import Spinner from './common/Spinner';
 import Header from './common/Header';
 import styles from '../../styles';
 import colours from '../../styles/colours';
+import { connectAlert } from './Alert';
 
-export default class Calendar extends Component {
+class Calendar extends Component {
 
-  static route = {
-    navigationBar: {
-      title (params) {
-        return params.title;
-      },
-      backgroundColor: colours.transparent,
-      tintColor: colours.white
-    }
+  static navigationOptions = {
+    title: 'Calendar'
   }
 
   componentWillMount () {
@@ -45,10 +40,7 @@ export default class Calendar extends Component {
 
   renderAlert = () => {
     setTimeout(() => {
-      this.props.navigator.showLocalAlert('You are not connected to Internet!', {
-        text: { color: '#fff' },
-        container: { backgroundColor: 'red' }
-      });
+      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
     }, 2000);
   }
 
@@ -69,15 +61,16 @@ export default class Calendar extends Component {
           event_id={ item.event_id }
           handleOnPress={ this.props.handleOnPress }
         />
-      
+
     );
   }
 
   render () {
+
     const { allEvents, isFetching, displaySome, displayAll, filterActive, selectedFilter, user_id, isConnected } = this.props;
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: colours.white }}>
         <Header />
         <View style={{ flex: 1 }}>
           { !isConnected && this.renderAlert() }
@@ -97,22 +90,28 @@ export default class Calendar extends Component {
 
 
           <ScrollView>
-            <View style={styles.containerFeed}>
+
               {
                 this.props.filteredEvents.length === 0 && !isFetching &&
-                <Text style={styles.smallMessageText}>
-                  You have no upcoming events.
-                </Text>
+                <View style={[styles.containerFeed, { alignItems: 'center' }]}>
+                  <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
+                    You have no upcoming events.
+                  </Text>
+                </View>
               }
+
               {
                 !isFetching && this.dataSource &&
-                <ListView
-                  enableEmptySections
-                  dataSource={this.dataSource}
-                  renderRow={this.renderRow}
-                />
+                <View style={styles.containerFeed}>
+                  <ListView
+                    enableEmptySections
+                    dataSource={this.dataSource}
+                    renderRow={this.renderRow}
+                    removeClippedSubviews={false}
+                  />
+                </View>
               }
-            </View>
+
           </ScrollView>
         </View>
       </View>
@@ -135,3 +134,5 @@ Calendar.propTypes = {
   ]).isRequired,
   handleOnPress: PropTypes.func.isRequired
 };
+
+export default connectAlert(Calendar);

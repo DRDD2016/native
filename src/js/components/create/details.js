@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Router from '../../router';
 import Button from '../common/Button';
 import Header from '../common/Header';
 import styles from '../../../styles';
@@ -13,27 +12,23 @@ import discardEvent from '../../lib/discard-event';
 
 export default class Details extends Component {
 
-  static route = {
-    navigationBar: {
-      title: 'Create event',
-      backgroundColor: colours.transparent,
-      tintColor: colours.darkgray,
-      renderRight: () => {
-        return (
-          <Button
-            onPress={ discardEvent }
-            buttonStyle={{ margin: 15, justifyContent: 'center' }}
-            textStyle={{ color: colours.darkgray, fontWeight: '600' }}
-          >
-            <Icon
-              name="close"
-              style={{ paddingLeft: 15, paddingRight: 15 }}
-              size={ 24 }
-              color={ colours.darkgray }
-            />
-          </Button>
-        );
-      }
+  static navigationOptions = {
+    title: 'Create event',
+    headerRight: () => {
+      return (
+        <Button
+          onPress={ discardEvent }
+          buttonStyle={{ margin: 15, justifyContent: 'center' }}
+          textStyle={{ color: colours.darkgray, fontWeight: '600' }}
+        >
+          <Icon
+            name="close"
+            style={{ paddingLeft: 15, paddingRight: 15 }}
+            size={ 24 }
+            color={ colours.darkgray }
+          />
+        </Button>
+      );
     }
   }
 
@@ -42,14 +37,14 @@ export default class Details extends Component {
   }
 
   nextPage = (name) => {
-    this.props.navigator.push(Router.getRoute('what', { name }));
+    this.props.navigation.navigate('What', { name });
   }
 
   render () {
     const { name, description, note, handleChange } = this.props;
     const hideNext = name === '' || description === '';
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: colours.white }}>
         <Header />
         <KeyboardAwareScrollView
           style={{ backgroundColor: colours.transparent }}
