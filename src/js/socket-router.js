@@ -5,7 +5,7 @@ import { AsyncStorage } from 'react-native';
 import { store } from './init-store';
 import { getCalendar } from './actions/calendar';
 import { getFeedSuccess, getFeedFailure } from './actions/feed';
-import { storeSocket } from './actions/profile';
+import { storeSocket } from './actions/network';
 
 function initSocket () {
   const location = `${Config.URI}`;

@@ -29,7 +29,7 @@ const mapDispatchToProps = dispatch => ({
         // rootNavigator.replace('auth');
         // clean up persisted state
         persistor.purge();
-        store.getState().user.socket.disconnect();
+        store.getState().network.socket.disconnect();
         dispatch(logout());
         // redirect
       });
