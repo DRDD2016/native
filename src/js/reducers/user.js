@@ -14,8 +14,7 @@ export const initialState = {
   isFetching: false,
   isFetchingUpload: false,
   errorUpdate: undefined,
-  errorUpload: undefined,
-  socket: undefined
+  errorUpload: undefined
 };
 
 export default function user (state = initialState, action) {
@@ -91,11 +90,7 @@ export default function user (state = initialState, action) {
         isFetching: false,
         errorUpload: action.error
       };
-    case profile.STORE_SOCKET:
-      return {
-        ...state,
-        socket: action.socket
-      };
+
     default:
       return state;
   }

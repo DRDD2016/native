@@ -8,7 +8,7 @@ export const UPLOAD_PHOTO_REQUEST = 'UPLOAD_PHOTO_REQUEST';
 export const UPLOAD_PHOTO_SUCCESS = 'UPLOAD_PHOTO_SUCCESS';
 export const UPLOAD_PHOTO_FAILURE = 'UPLOAD_PHOTO_FAILURE';
 export const LOGOUT = 'LOGOUT';
-export const STORE_SOCKET = 'STORE_SOCKET';
+
 
 export const changeName = (value, category) => ({
   type: CHANGE_NAME,
@@ -46,11 +46,6 @@ export const uploadPhotoFailure = error => ({
 
 export const logout = () => ({
   type: LOGOUT
-});
-
-export const storeSocket = socket => ({
-  type: STORE_SOCKET,
-  socket
 });
 
 export function editName (token, user_id, firstname, surname) {
