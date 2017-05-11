@@ -27,3 +27,12 @@ export const persistor = persistStore(
     debounce: 2000
   }
 );
+
+/*
+to clear the old app state in AsyncStorage:
+1. uncomment the line below
+2. run the app once for each OS - the app state will be purged
+3. delete the line below
+ */
+
+// persistor.purge();
