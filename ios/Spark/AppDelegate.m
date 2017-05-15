@@ -14,6 +14,7 @@
 #import <React/RCTLog.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <react-native-branch/RNBranch.h>
 
 @implementation AppDelegate
 
@@ -22,6 +23,9 @@
   [Fabric with:@[[Crashlytics class]]];
   RCTSetLogThreshold(RCTLogLevelInfo);
   RCTSetLogFunction(CrashlyticsReactLogFunction);
+  
+  [RNBranch initSessionWithLaunchOptions:launchOptions isReferrable:YES];
+  
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
@@ -39,6 +43,20 @@
   [self.window makeKeyAndVisible];
   return YES;
 }
+
+// Respond to URI scheme links
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+  if (![RNBranch handleDeepLink:url]) {
+    // do other deep link routing for the Facebook SDK, Pinterest SDK, etc
+  }
+  return YES;
+}
+
+// Respond to Universal Links
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler {
+  return [RNBranch continueUserActivity:userActivity];
+}
+
 
 RCTLogFunction CrashlyticsReactLogFunction = ^(
                                                RCTLogLevel level,

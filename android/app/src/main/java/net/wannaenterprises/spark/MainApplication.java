@@ -5,6 +5,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import io.branch.rnbranch.*;
+import io.branch.referral.Branch;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -33,6 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new FabricPackage(),
           new MainReactPackage(),
+            new RNBranchPackage(),
             new ReactNativeConfigPackage(),
             new ImagePickerPackage(),
             new VectorIconsPackage()
@@ -50,6 +53,7 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     Fabric.with(this, new Crashlytics());
     SoLoader.init(this, /* native exopackage */ false);
+    Branch.getAutoInstance(this);
   }
 
 }
