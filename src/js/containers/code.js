@@ -7,7 +7,8 @@ const mapStateToProps = ({ event, network }) => {
   return {
     codeError: event.data.error,
     isFetching: event.data.isFetching,
-    isConnected: network.isConnected
+    isConnected: network.isConnected,
+    inComingLink: network.inComingLink
   };
 };
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, ListView } from 'react-native';
+// import subscribeToBranchLinks from '../lib/branchLink';
 import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
@@ -17,10 +18,17 @@ class Feed extends Component {
     headerTintColor: colours.headerButtonColor
   }
 
+  // componentDidMount () {
+  //   subscribeToBranchLinks();
+  // }
+
   componentWillReceiveProps (nextProps) {
     const { feed } = nextProps;
     const newData = [].concat(feed).reverse();
     this.createDataSource(newData);
+    if (nextProps.inComingLink !== undefined) {
+      this.props.navigation.navigate('Code');
+    }
 
   }
 

@@ -19,7 +19,8 @@ const mapStateToProps = ({ feed, user, network }) => {
     filterActive,
     selectedFilter,
     user_id: user.user_id,
-    isConnected: network.isConnected
+    isConnected: network.isConnected,
+    inComingLink: network.inComingLink
   };
 };
 const mapDispatchToProps = (dispatch, props) => {

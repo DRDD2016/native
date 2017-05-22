@@ -65,7 +65,7 @@ class Code extends Component {
   }
 
   render () {
-    const { codeError, isConnected } = this.props;
+    const { codeError, isConnected, inComingLink } = this.props;
 
     return (
       <View style={{ flex: 1, backgroundColor: colours.white }}>
@@ -79,7 +79,13 @@ class Code extends Component {
         <View style={ styles.container }>
           <Text style={inlineStyle.labelStyle}>Event Code:</Text>
           <View style={ styles.row }>
-            <Field style={styles.input} name="code" component={ FormTextInput } placeholder="Enter code here" />
+            <Field
+              style={styles.input}
+              name="code"
+              component={ FormTextInput }
+              placeholder="Enter code here"
+              value={ inComingLink ? inComingLink.params : undefined }
+            />
           </View>
           { this.renderButton() }
 

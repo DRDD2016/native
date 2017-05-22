@@ -26,7 +26,8 @@ import Splash from './components/auth/splash';
 
 export const StackCode = StackNavigator({
   ScreenCode: {
-    screen: Code
+    screen: Code,
+    path: 'code/:eventcode'
   }
 }, {
   navigationOptions: {

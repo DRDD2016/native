@@ -23,9 +23,13 @@
   [Fabric with:@[[Crashlytics class]]];
   RCTSetLogThreshold(RCTLogLevelInfo);
   RCTSetLogFunction(CrashlyticsReactLogFunction);
-  
+
+  #ifdef DEBUG
+    [RNBranch useTestInstance];
+  #endif
+
   [RNBranch initSessionWithLaunchOptions:launchOptions isReferrable:YES];
-  
+
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
@@ -67,14 +71,14 @@ RCTLogFunction CrashlyticsReactLogFunction = ^(
                                                )
 {
   NSString *log = RCTFormatLog([NSDate date], level, fileName, lineNumber, message);
-  
+
 #ifdef DEBUG
   fprintf(stderr, "%s\n", log.UTF8String);
   fflush(stderr);
 #else
   CLS_LOG(@"REACT LOG: %s", log.UTF8String);
 #endif
-  
+
   int aslLevel;
   switch(level) {
     case RCTLogLevelTrace:
@@ -94,8 +98,8 @@ RCTLogFunction CrashlyticsReactLogFunction = ^(
       break;
   }
   asl_log(NULL, NULL, aslLevel, "%s", message.UTF8String);
-  
-  
+
+
 };
 
 @end

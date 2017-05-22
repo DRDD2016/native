@@ -2,7 +2,8 @@ import * as actions from '../actions/network';
 
 const initialState = {
   isConnected: true,
-  socket: undefined
+  socket: undefined,
+  inComingLink: undefined
 };
 
 const network = (state = initialState, action) => {
@@ -17,6 +18,12 @@ const network = (state = initialState, action) => {
       return {
         ...state,
         socket: action.socket
+      };
+
+    case actions.STORE_INCOMING_LINK:
+      return {
+        ...state,
+        inComingLink: action.inComingLink
       };
 
     default:

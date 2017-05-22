@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Image, View, AsyncStorage } from 'react-native';
 import initSocket from '../../socket-router';
+import { subscribeToBranchLinks } from '../../lib/branchLink';
 
 const logo = require('../../../img/sparkLoginLogo.png');
 
@@ -12,6 +13,9 @@ export default class Splash extends Component {
   }
 
   componentWillMount () {
+
+    subscribeToBranchLinks();
+
     setTimeout(() => {
       AsyncStorage.getItem('spark_token')
       .then((token) => {

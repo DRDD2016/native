@@ -34,6 +34,13 @@
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
         </intent-filter>
+        <intent-filter android:autoVerify="true">
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" android:host="spark.app.link" />
+            <data android:scheme="https" android:host="spark.alternate-app.link" />
+        </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 
@@ -43,6 +50,9 @@
       <meta-data
             android:name="io.branch.sdk.BranchKey"
             android:value="key_live_pkvEE0oiYjjNH4Wp7ZCCGhmeECeDUqav" />
+      <meta-data
+            android:name="io.branch.sdk.BranchKey.test"
+            android:value="key_test_gozDB6oc4opRT89o76zBJnmhACezJxiH" />
     </application>
 
     <receiver android:name="io.branch.referral.InstallListener" android:exported="true">
