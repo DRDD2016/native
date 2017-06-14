@@ -1,6 +1,3 @@
-import React from 'react-native';
-
-React.NativeModules.RNBranch = {};
 
 jest.mock('NetInfo', () => {
   return {
