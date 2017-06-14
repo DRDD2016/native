@@ -59,6 +59,9 @@
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?react-native|react-navigation)"
     ],
+    "modulePathIgnorePatterns": [
+      "async"
+    ],
     "setupFiles": [
       "./jest/setup.js"
     ]
