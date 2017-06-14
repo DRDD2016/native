@@ -7,6 +7,7 @@ import moment from 'moment';
  */
 
 export default function getEndTime (date) {
+
   return moment(date)
         .startOf('day')
         .add(1, 'day')

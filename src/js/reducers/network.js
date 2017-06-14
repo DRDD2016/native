@@ -3,7 +3,7 @@ import * as actions from '../actions/network';
 const initialState = {
   isConnected: true,
   socket: undefined,
-  inComingLink: undefined
+  inComingLinkCode: 'none'
 };
 
 const network = (state = initialState, action) => {
@@ -23,7 +23,7 @@ const network = (state = initialState, action) => {
     case actions.STORE_INCOMING_LINK:
       return {
         ...state,
-        inComingLink: action.inComingLink
+        inComingLinkCode: action.inComingLinkCode
       };
 
     default:

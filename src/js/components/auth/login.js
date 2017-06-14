@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { Text, View, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -80,10 +80,14 @@ class Login extends Component {
   render () {
     const { handleSubmit, handleSubmitForm, isConnected, navigation } = this.props;
     return (
-      <View style={{ flex: 1 }}>
-        <Header />
+      <View
+        style={[
+          styles.headerBuffer,
+          { backgroundColor: colours.white }]}
+      >
+        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
         <KeyboardAvoidingView
-          style={{ flex: 1, marginTop: 70 }}
+          style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 70 : 160 }}
           behavior="padding"
         >
           <View />

@@ -11,6 +11,8 @@ export default function getFutureEvents (event) {
   if (event.when[0] === '') {
     return false;
   }
-  const end = getEndTime(event.when[0]);
+  const eventWhen = event.when[0].split(':TBC');
+  const when = eventWhen[0];
+  const end = getEndTime(when);
   return moment().toISOString() < end;
 }

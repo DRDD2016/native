@@ -12,7 +12,22 @@ export const storeSocket = socket => ({
   socket
 });
 
-export const storeIncomingLink = inComingLink => ({
+export const storeIncomingLink = inComingLinkCode => ({
   type: STORE_INCOMING_LINK,
-  inComingLink
+  inComingLinkCode
 });
+
+export function saveIncomingLink (linkData) {
+
+  return (dispatch) => {
+    dispatch(storeIncomingLink(linkData));
+  };
+}
+
+export function deleteIncomingLink () {
+
+  return (dispatch) => {
+    dispatch(storeIncomingLink('none'));
+
+  };
+}

@@ -12,7 +12,12 @@ import { connectAlert } from './Alert';
 class Profile extends Component {
 
   static navigationOptions = {
-    title: 'Profile'
+    title: 'Profile',
+    tabBarIcon: ({ tintColor }) =>
+      <Icon name="user" size={32} color={tintColor} />,
+    headerStyle: { backgroundColor: colours.transparent },
+    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerTintColor: colours.headerButtonColor
   }
 
   constructor (props) {
@@ -71,9 +76,13 @@ class Profile extends Component {
     const { photo_url, firstname, surname, handleLogOut, handleChangeName, isConnected, navigation } = this.props;
     const hideEditButton = (firstname === '' ? styles.hideEditButton : [{ backgroundColor: 'green' }]);
     return (
-      <View style={{ backgroundColor: colours.white }}>
-        <Header />
-        <ScrollView style={styles.profilePage}>
+      <View
+        style={[
+          styles.headerBuffer,
+          { backgroundColor: colours.white }]}
+      >
+        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
+        <ScrollView style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 50 : 130 }}>
           { !isConnected && this.renderAlert() }
 
           <View

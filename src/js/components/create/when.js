@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Platform } from 'react-native';
 import AddInput from '../general/add-input';
 import Button from '../common/Button';
 import Header from '../common/Header';
@@ -22,7 +22,10 @@ export default class When extends Component {
           <Text>Cancel</Text>
         </Button>
       );
-    }
+    },
+    headerStyle: { backgroundColor: colours.transparent },
+    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerTintColor: colours.headerButtonColor
   });
 
   nextPage = (name) => {
@@ -36,9 +39,13 @@ export default class When extends Component {
     const hideNext = data[0].date === '';
 
     return (
-      <View style={{ flex: 1, backgroundColor: colours.white }}>
-        <Header />
-        <ScrollView>
+      <View
+        style={[
+          styles.headerBuffer,
+          { backgroundColor: colours.white }]}
+      >
+        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
+        <ScrollView style={{ marginTop: 80 }} >
           <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 70, marginHorizontal: 15 }}>
 
             <Text style={[styles.msg4, { backgroundColor: colours.transparent, paddingTop: 10, paddingBottom: 10 }]}>

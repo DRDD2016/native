@@ -39,7 +39,9 @@
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
             <data android:scheme="https" android:host="spark.app.link" />
-            <data android:scheme="https" android:host="spark.alternate-app.link" />
+            <data android:scheme="https" android:host="spark-alternate.app.link" />
+            <data android:scheme="https" android:host="spark.test-app.link" />
+            <data android:scheme="https" android:host="spark-alternate.test-app.link" />
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />

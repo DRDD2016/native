@@ -1,10 +1,15 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import colours from './colours';
 
 const styles = {
 
   // app Wide
 
+  headerBuffer: {
+    flex: Platform.OS === 'ios' ? 1 : null,
+    height: Platform.OS === 'ios' ? null : Dimensions.get('window').height * 0.85,
+    top: Platform.OS === 'ios' ? null : -70
+  },
   title1: {
     color: colours.white,
     fontSize: 24
@@ -408,9 +413,6 @@ const styles = {
 
   // profilePage
 
-  profilePage: {
-    marginTop: 20
-  },
   container: {
     // flex: 1,
     flexDirection: 'column',

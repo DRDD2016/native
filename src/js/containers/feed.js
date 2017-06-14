@@ -2,7 +2,8 @@ import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Feed from '../components/feed';
 import { applyFilter, clearFilter, feedItemTouched } from '../actions/feed';
-import { getEvent } from '../actions/event/data';
+import { getEvent, submitCode } from '../actions/event/data';
+// import { deleteIncomingLink } from '../actions/network';
 import filterFeed from '../lib/filter-feed';
 
 
@@ -20,7 +21,7 @@ const mapStateToProps = ({ feed, user, network }) => {
     selectedFilter,
     user_id: user.user_id,
     isConnected: network.isConnected,
-    inComingLink: network.inComingLink
+    eventCode: network.inComingLinkCode
   };
 };
 const mapDispatchToProps = (dispatch, props) => {
@@ -37,6 +38,17 @@ const mapDispatchToProps = (dispatch, props) => {
           }
         }
       });
+    },
+    handleSubmitCode: (code) => { //eslint-disable-line
+      AsyncStorage.getItem('spark_token')
+      .then((token) => {
+        if (token) {
+          // dispatch(deleteIncomingLink());
+          dispatch(submitCode(token, code, props.navigation));
+        }
+      })
+      .catch(error => console.error(error));
+
     },
     displaySome: (selectedFilter) => {
       dispatch(applyFilter(selectedFilter));

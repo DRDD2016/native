@@ -1,7 +1,7 @@
 import { Linking } from 'react-native';
 import branch, { RegisterViewEvent } from 'react-native-branch';
 import { store } from '../init-store';
-import { storeIncomingLink } from '../actions/network';
+import { saveIncomingLink } from '../actions/network';
 
 /**
  * trimAndReplaceSpaces trim the text and replaces spaces with %20
@@ -59,7 +59,8 @@ export async function composeWhatsAppMessage (user, event, code) {
   const controlParams = {
     // $desktop_url: 'http://spark-app.net',
     // $ios_deepview: 'branch_default',
-    $deeplink_path: `sparksocial://Code/${code}`
+    $deeplink_path: `sparksocial://Code/${code}`,
+    eventCode: `${code}`
   };
 
   const url = await bUO.generateShortUrl(linkProperties, controlParams);
@@ -84,38 +85,32 @@ export async function openWhatsApp (text) {
 }
 
 export async function subscribeToBranchLinks () {
+
   console.info('Subscribing to Branch links');
 
-  await branch.subscribe(async ({ error, params, uri }) => {
-    console.log('error: ', error);
-    console.log('params: ', params);
-    console.log('uri: ', uri);
+  await branch.subscribe(async ({ error, params }) => {
 
+    let linkData = 'none';
     if (error) {
       // there was an error. this is a String
-      console.error('Error from Branch: ', error);
+      console.info('Error from Branch: ', error);
+      linkData = 'none';
+    }
+    if (params.eventCode) {
+      linkData = params.eventCode;
+    } else {
+      linkData = 'none';
     }
 
-    if (params) {
-      // this is an Object with the Branch params if it's nonnull
-      console.info('Received link response from Branch');
-      console.log('params: ', JSON.stringify(params));
-      const lastParams = await branch.getLatestReferringParams();
-      console.log('lastParams', lastParams);
-    }
+    console.info('Received link params from Branch');
+    console.log('Branch params: ', JSON.stringify(params));
+    // const lastParams = await branch.getLatestReferringParams();
+    // console.log('lastParams Params', lastParams);
 
-    if (uri) {
-      // This is a String with the original URI handled by the app, before passing off to the Branch SDK.
-      console.info('Received URI from Branch');
-      console.log('uri: ', JSON.stringify(uri));
-      const lastParams = await branch.getLatestReferringParams();
-      console.log('lastParams', lastParams);
+    console.log('saving linkData', linkData);
+    store.dispatch(saveIncomingLink(linkData));
+    // store.dispatch(storeIncomingLink(linkData));
 
-    }
-
-    const linkData = { error, params, uri };
-    console.log(linkData);
-    store.dispatch(storeIncomingLink(linkData));
 
   });
 

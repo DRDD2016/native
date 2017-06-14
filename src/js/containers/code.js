@@ -8,12 +8,13 @@ const mapStateToProps = ({ event, network }) => {
     codeError: event.data.error,
     isFetching: event.data.isFetching,
     isConnected: network.isConnected,
-    inComingLink: network.inComingLink
+    eventCode: network.inComingLinkCode
   };
 };
 
 const mapDispatchToProps = () => ({
   handleSubmitForm: ({ code }, dispatch, props) => { //eslint-disable-line
+    console.log(code);
     AsyncStorage.getItem('spark_token')
     .then((token) => {
       if (token) {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Platform } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { Field, reduxForm } from 'redux-form';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import { FormTextInput } from './auth/form-components';
@@ -32,8 +33,15 @@ const inlineStyle = {
 class Code extends Component {
 
   static navigationOptions = {
-    title: 'Enter Your Event Code'
+    title: 'Enter Your Event Code',
+    tabBarLabel: 'RSVP',
+    tabBarIcon: ({ tintColor }) =>
+      <Icon name="barcode" size={32} color={tintColor} />,
+    headerStyle: { backgroundColor: colours.transparent },
+    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerTintColor: colours.headerButtonColor
   }
+
 
   renderButton = () => {
     const { handleSubmit, handleSubmitForm, isFetching } = this.props;
@@ -65,13 +73,18 @@ class Code extends Component {
   }
 
   render () {
-    const { codeError, isConnected, inComingLink } = this.props;
+    console.log('renderprops', this.props);
+    const { codeError, isConnected } = this.props;
 
     return (
-      <View style={{ flex: 1, backgroundColor: colours.white }}>
+      <View
+        style={[
+          styles.headerBuffer,
+          { backgroundColor: colours.white }]}
+      >
         { !isConnected && this.renderAlert() }
-        <Header />
-        <View style={{ alignItems: 'center', marginHorizontal: 10, marginTop: 70, marginBottom: 60 }}>
+        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
+        <View style={{ alignItems: 'center', marginHorizontal: 10, marginTop: Platform.OS === 'ios' ? 70 : 180, marginBottom: 60 }}>
           <Text style={styles.msg3}>
             If your friend has sent you a code to join their event, enter the code below to respond to their invitation.
           </Text>
@@ -83,8 +96,7 @@ class Code extends Component {
               style={styles.input}
               name="code"
               component={ FormTextInput }
-              placeholder="Enter code here"
-              value={ inComingLink ? inComingLink.params : undefined }
+              placeholder={ 'Enter code here' }
             />
           </View>
           { this.renderButton() }

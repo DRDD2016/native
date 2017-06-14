@@ -5,7 +5,9 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>applinks:spark.app.link</string>
-		<string>applinks:spark.alternate-app.link</string>
+		<string>applinks:spark-alternate.app.link</string>
+		<string>applinks:spark.test-app.link</string>
+		<string>applinks:spark-alternate.test-app.link</string>
 	</array>
 </dict>
 </plist>

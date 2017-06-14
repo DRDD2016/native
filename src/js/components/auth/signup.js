@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { Text, View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import Fabric from 'react-native-fabric';
@@ -59,9 +59,13 @@ class Signup extends Component {
   render () {
 
     return (
-      <View>
-        <Header />
-        <ScrollView>
+      <View
+        style={[
+          styles.headerBuffer,
+          { backgroundColor: colours.white }]}
+      >
+        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
+        <ScrollView style={{ marginTop: Platform.OS === 'ios' ? null : 80 }} >
           <KeyboardAvoidingView
             behavior="padding"
           >
