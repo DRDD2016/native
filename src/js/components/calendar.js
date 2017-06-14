@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 /* eslint-disable*/
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { View, Text, ScrollView, ListView, Dimensions, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CalendarItem from './calendar-item';
