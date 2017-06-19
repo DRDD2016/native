@@ -66,7 +66,7 @@ export const StackRoot = StackNavigator({
     }, {
       tabBarPosition: 'bottom',
       swipeEnabled: true,
-      lazy: true, // added to attempt to stop Code loading until Feed has initialised.
+      // lazy: true, // added to attempt to stop Code loading until Feed has initialised.
       animationEnabled: true,
       pressColor: colours.purple,
       initialRouteName: 'Feed',
