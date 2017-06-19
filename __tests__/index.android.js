@@ -17,6 +17,12 @@ jest.mock('react-native-fabric', () => {
   };
 });
 
+jest.mock('react-native-branch', () => {
+  return {
+
+  };
+});
+
 it('renders correctly', () => {
   renderer.create(
     <Index />
