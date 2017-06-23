@@ -15,11 +15,13 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 
 import io.fabric.sdk.android.Fabric;
 import com.crashlytics.android.Crashlytics;
 import java.util.Arrays;
 import java.util.List;
+
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -35,10 +37,11 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new FabricPackage(),
           new MainReactPackage(),
-            new RNBranchPackage(),
-            new ReactNativeConfigPackage(),
-            new ImagePickerPackage(),
-            new VectorIconsPackage()
+          new RNBranchPackage(),
+          new ReactNativeConfigPackage(),
+          new ImagePickerPackage(),
+          new VectorIconsPackage(),
+          new ReactNativePushNotificationPackage()
       );
     }
   };

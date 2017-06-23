@@ -32,9 +32,9 @@
 
   NSURL *jsCodeLocation;
 
-  // jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil]; // use this for debugging on simulator
+  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil]; // use this for debugging on simulator
   
-  jsCodeLocation = [NSURL URLWithString:@"http://192.168.1.74:8081/index.ios.bundle?platform=ios&dev=true&minify=false"];  // use this for debugging on device
+  // jsCodeLocation = [NSURL URLWithString:@"http://192.168.1.74:8081/index.ios.bundle?platform=ios&dev=true&minify=false"];  // use this for debugging on device
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"Spark"
