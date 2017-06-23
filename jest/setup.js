@@ -1,3 +1,4 @@
+
 jest.mock('NetInfo', () => {
   return {
     isConnected: {

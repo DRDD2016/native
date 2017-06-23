@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Input from '../general/input';
 // import Router from '../../router';
@@ -25,7 +25,10 @@ export default class What extends Component {
           <Text>Cancel</Text>
         </Button>
       );
-    }
+    },
+    headerStyle: { backgroundColor: colours.transparent },
+    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerTintColor: colours.headerButtonColor
   });
 
   nextPage = (name) => {
@@ -52,10 +55,14 @@ export default class What extends Component {
     });
 
     return (
-      <View style={{ flex: 1, backgroundColor: colours.white }}>
-        <Header />
+      <View
+        style={[
+          styles.headerBuffer,
+          { backgroundColor: colours.white }]}
+      >
+        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
         <KeyboardAwareScrollView
-          style={{ backgroundColor: colours.transparent }}
+          style={{ backgroundColor: colours.transparent, marginTop: Platform.OS === 'ios' ? null : 90 }}
           resetScrollToCoords={{ x: 0, y: 0 }}
           contentContainerStyle={{ flex: 1 }}
         >
