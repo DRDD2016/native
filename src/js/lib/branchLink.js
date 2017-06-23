@@ -104,13 +104,9 @@ export async function subscribeToBranchLinks () {
 
     console.info('Received link params from Branch');
     console.log('Branch params: ', JSON.stringify(params));
-    // const lastParams = await branch.getLatestReferringParams();
-    // console.log('lastParams Params', lastParams);
 
     console.log('saving linkData', linkData);
     store.dispatch(saveIncomingLink(linkData));
-    // store.dispatch(storeIncomingLink(linkData));
-
 
   });
 
