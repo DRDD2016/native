@@ -1,6 +1,8 @@
+import PropTypes from 'prop-types';
 /* eslint-disable*/
-import React, { Component, PropTypes } from 'react';
-import { View, Text, ScrollView, ListView } from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, ScrollView, ListView, Dimensions, Platform } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import CalendarItem from './calendar-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
@@ -12,7 +14,12 @@ import { connectAlert } from './Alert';
 class Calendar extends Component {
 
   static navigationOptions = {
-    title: 'Calendar'
+    title: 'Calendar',
+    tabBarIcon: ({ tintColor }) =>
+      <Icon name="calendar" size={32} color={tintColor} />,
+    headerStyle: { backgroundColor: colours.transparent },
+    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerTintColor: colours.headerButtonColor
   }
 
   componentWillMount () {
@@ -70,9 +77,13 @@ class Calendar extends Component {
     const { allEvents, isFetching, displaySome, displayAll, filterActive, selectedFilter, user_id, isConnected } = this.props;
 
     return (
-      <View style={{ flex: 1, backgroundColor: colours.white }}>
-        <Header />
-        <View style={{ flex: 1 }}>
+      <View
+        style={[
+          styles.headerBuffer,
+          { backgroundColor: colours.white }]}
+      >
+        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
+        <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? null : 70 }}>
           { !isConnected && this.renderAlert() }
           {
             isFetching && <Spinner />

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { Text, View, Image, Dimensions } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;

@@ -1,6 +1,6 @@
 import Config from 'react-native-config';
 import { getCalendar } from './calendar';
-import { openWhatsApp, composeWhatsAppMessage } from '../lib/whatsapp';
+import { openWhatsApp, composeWhatsAppMessage } from '../lib/branchLink';
 import { store } from '../init-store';
 
 export const SET_DETAILS = 'SET_DETAILS';

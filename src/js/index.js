@@ -32,6 +32,7 @@ class App extends Component {
   }
 
   componentDidMount () {
+
     NetInfo.isConnected.fetch().then().done(() => {
       NetInfo.isConnected.addEventListener('change', this._handleConnectionChange);
     });

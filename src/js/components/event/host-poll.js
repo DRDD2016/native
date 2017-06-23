@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import Modal from 'react-native-modal';
 import CategoryDetails from './category-details';
 import styles from '../../../styles';
 import formatDate from '../../lib/format-date';
 import formatTime from '../../lib/format-time';
+
 
 const inlineStyle = {
   row: {
@@ -23,33 +25,65 @@ export default class HostPoll extends Component {
 
     const { what, where, when } = this.props.event;
     this.state = {
-      what: what.length === 1 ? what : [],
-      where: where.length === 1 ? where : [],
-      when: when.length === 1 ? when : []
+      eventdetails: {
+        what: what.length === 1 ? what : [],
+        where: where.length === 1 ? where : [],
+        when: when.length === 1 ? when : []
+      },
+      isModalVisible: false
     };
     this.toggleSelection = this.toggleSelection.bind(this);
   }
 
   toggleSelection (category, selection) {
-    if (!this.state[category].includes(selection)) {
+    if (!this.state.eventdetails[category].includes(selection)) {
       this.setState({
-        [category]: [selection]
+        eventdetails: {
+          [category]: [selection]
+        }
       });
     } else {
       this.setState({
-        [category]: []
+        eventdetails: {
+          [category]: []
+        }
       });
     }
   }
 
+  _showModal = () => this.setState({ isModalVisible: true })
+
+  _hideModal = () => this.setState({ isModalVisible: false })
+
   render () {
 
     const { event, voteCount, handleConfirmEvent, finalChoices } = this.props;
-    const allCategoriesSelected = Object.keys(this.state)
-      .map(category => this.state[category].length)
+
+
+    const allCategoriesSelected = Object.keys(this.state.eventdetails)
+      .map(category => this.state.eventdetails[category].length)
       .every(length => length === 1);
+    console.log('finalchoices', finalChoices);
+    console.log('state', this.state);
+    if (finalChoices) {
+      this._showModal();
+    }
+
     return (
       <ScrollView>
+        <Modal isVisible={this.state.isModalVisible}>
+          {
+            finalChoices &&
+            <View style={{ flex: 1 }}>
+              <Text>Your event is now finalised!</Text>
+              <Text>What: {finalChoices.what}</Text>
+              <Text>Where: {finalChoices.where}</Text>
+              <Text>When: {formatDate(finalChoices.when[0])} {formatTime(finalChoices.when[0])}</Text>
+            </View>
+          }
+
+
+        </Modal>
         <View style={{ flexDirection: 'column' }}>
           <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
             <Text>You created a Poll</Text>
@@ -89,20 +123,12 @@ export default class HostPoll extends Component {
             allCategoriesSelected &&
             <TouchableOpacity
               style={ [styles.confirmButton, { marginBottom: 20 }] }
-              onPress={ () => handleConfirmEvent(this.state, event.event_id) }
+              onPress={ () => handleConfirmEvent(this.state.eventdetails, event.event_id) }
             >
               <Text style={styles.confirmButtonText}>CONFIRM EVENT DETAILS</Text>
             </TouchableOpacity>
           }
-          {
-            finalChoices &&
-            <View>
-              <Text>Your event is now finalised!</Text>
-              <Text>What: {finalChoices.what}</Text>
-              <Text>Where: {finalChoices.where}</Text>
-              <Text>When: {formatDate(finalChoices.when[0])} {formatTime(finalChoices.when[0])}</Text>
-            </View>
-          }
+
         </View>
       </ScrollView>
     );
