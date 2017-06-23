@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Button from '../common/Button';
@@ -29,7 +29,10 @@ export default class Details extends Component {
           />
         </Button>
       );
-    }
+    },
+    headerStyle: { backgroundColor: colours.transparent },
+    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerTintColor: colours.headerButtonColor
   }
 
   componentWillMount () {
@@ -44,8 +47,12 @@ export default class Details extends Component {
     const { name, description, note, handleChange } = this.props;
     const hideNext = name === '' || description === '';
     return (
-      <View style={{ flex: 1, backgroundColor: colours.white }}>
-        <Header />
+      <View
+        style={[
+          styles.headerBuffer,
+          { backgroundColor: colours.white }]}
+      >
+        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
         <KeyboardAwareScrollView
           style={{ backgroundColor: colours.transparent }}
           resetScrollToCoords={{ x: 0, y: 0 }}
@@ -56,7 +63,7 @@ export default class Details extends Component {
               flexDirection: 'column',
               alignItems: 'center',
               marginHorizontal: 10,
-              marginTop: 70 }}
+              marginTop: Platform.OS === 'ios' ? 70 : 160 }}
           >
             <Text style={styles.msg3}>
               Enter the name of your event and a description.
