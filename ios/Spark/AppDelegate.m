@@ -14,6 +14,7 @@
 #import <React/RCTLog.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <react-native-branch/RNBranch.h>
 
 @implementation AppDelegate
 
@@ -22,9 +23,18 @@
   [Fabric with:@[[Crashlytics class]]];
   RCTSetLogThreshold(RCTLogLevelInfo);
   RCTSetLogFunction(CrashlyticsReactLogFunction);
+
+  #ifdef DEBUG
+    [RNBranch useTestInstance];
+  #endif
+
+  [RNBranch initSessionWithLaunchOptions:launchOptions isReferrable:YES];
+
   NSURL *jsCodeLocation;
 
-  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
+  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil]; // use this for debugging on simulator
+  
+  // jsCodeLocation = [NSURL URLWithString:@"http://192.168.1.74:8081/index.ios.bundle?platform=ios&dev=true&minify=false"];  // use this for debugging on device
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"Spark"
@@ -40,6 +50,20 @@
   return YES;
 }
 
+// Respond to URI scheme links
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+  if (![RNBranch handleDeepLink:url]) {
+    // do other deep link routing for the Facebook SDK, Pinterest SDK, etc
+  }
+  return YES;
+}
+
+// Respond to Universal Links
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler {
+  return [RNBranch continueUserActivity:userActivity];
+}
+
+
 RCTLogFunction CrashlyticsReactLogFunction = ^(
                                                RCTLogLevel level,
                                                __unused RCTLogSource source,
@@ -49,14 +73,14 @@ RCTLogFunction CrashlyticsReactLogFunction = ^(
                                                )
 {
   NSString *log = RCTFormatLog([NSDate date], level, fileName, lineNumber, message);
-  
+
 #ifdef DEBUG
   fprintf(stderr, "%s\n", log.UTF8String);
   fflush(stderr);
 #else
   CLS_LOG(@"REACT LOG: %s", log.UTF8String);
 #endif
-  
+
   int aslLevel;
   switch(level) {
     case RCTLogLevelTrace:
@@ -76,8 +100,8 @@ RCTLogFunction CrashlyticsReactLogFunction = ^(
       break;
   }
   asl_log(NULL, NULL, aslLevel, "%s", message.UTF8String);
-  
-  
+
+
 };
 
 @end

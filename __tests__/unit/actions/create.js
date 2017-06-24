@@ -12,6 +12,15 @@ jest.mock('react-native-fabric', () => {
   };
 });
 
+jest.mock('react-native-branch', () => {
+  return {
+    AddToCartEvent: 'Add To Cart',
+    subscribe: (cb) => { cb({ params: {}, error: null }); }
+
+    // and for createBranchUniversalObject, etc.
+  };
+});
+
 describe('create event actions', () => {
 
   describe('`setDetails` action creator', () => {

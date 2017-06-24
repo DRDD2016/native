@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text, Platform } from 'react-native';
 import ConfirmWhat from './confirm-what';
 import ConfirmWhere from './confirm-where';
 import ConfirmWhen from './confirm-when';
@@ -13,26 +13,23 @@ import { connectAlert } from '../Alert';
 
 class Confirm extends Component {
 
-  static route = {
-    navigationBar: {
-      title (params) {
-        return params.name;
-      },
-      backgroundColor: colours.transparent,
-      tintColor: colours.white,
-      renderRight: () => {
-        return (
-          <Button
-            onPress={ discardEvent }
-            buttonStyle={{ margin: 15 }}
-            textStyle={{ color: colours.darkgray, fontWeight: '600' }}
-          >
-            <Text>Cancel</Text>
-          </Button>
-        );
-      }
-    }
-  }
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.state.params.name,
+    headerRight: () => {
+      return (
+        <Button
+          onPress={ discardEvent }
+          buttonStyle={{ margin: 15 }}
+          textStyle={{ color: colours.white, fontWeight: '600' }}
+        >
+          <Text>Cancel</Text>
+        </Button>
+      );
+    },
+    headerStyle: { backgroundColor: colours.transparent },
+    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerTintColor: colours.headerButtonColor
+  });
 
   renderAlert = () => {
     setTimeout(() => {
@@ -46,9 +43,13 @@ class Confirm extends Component {
       return <Spinner size="large" />;
     }
     return (
-      <View style={{ flex: 1, backgroundColor: colours.white }}>
-        <Header />
-        <View style={{ flex: 1 }}>
+      <View
+        style={[
+          styles.headerBuffer,
+          { backgroundColor: colours.white }]}
+      >
+        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
+        <View style={{ flex: 1, marginTop: 80 }}>
           { !isConnected && this.renderAlert() }
           <ScrollView>
             <View style={{ marginTop: 70, justifyContent: 'center', alignItems: 'center' }}>

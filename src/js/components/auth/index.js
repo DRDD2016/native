@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, Text, View, Platform } from 'react-native';
 import Button from '../common/Button';
 import Header from '../common/Header';
 import colours from '../../../styles/colours';
@@ -25,7 +25,7 @@ export default function Index ({ navigation }) {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>
-      <Header style={{ top: -25 }} />
+      <Header style={{ top: Platform.OS === 'ios' ? -25 : -30 }} />
       <View style={{ flex: 0.2 }} />
       <View style={{ justifyContent: 'center', alignItems: 'center', flex: 0.2 }}>
         <Image style={{ height: 100, width: 300 }} source={ logo } />

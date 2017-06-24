@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import Config from 'react-native-config';
 import React, { Component } from 'react';
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text, Dimensions, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -30,7 +30,10 @@ export default class Where extends Component {
           <Text>Cancel</Text>
         </Button>
       );
-    }
+    },
+    headerStyle: { backgroundColor: colours.transparent },
+    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerTintColor: colours.headerButtonColor
   });
 
   constructor () {
@@ -161,10 +164,14 @@ export default class Where extends Component {
     });
 
     return (
-      <View style={{ flex: 1, backgroundColor: colours.white }}>
-        <Header />
+      <View
+        style={[
+          styles.headerBuffer,
+          { backgroundColor: colours.white }]}
+      >
+        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
         <KeyboardAwareScrollView
-          style={{ backgroundColor: colours.transparent }}
+          style={{ backgroundColor: colours.transparent, marginTop: 80 }}
           resetScrollToCoords={{ x: 0, y: 0 }}
           contentContainerStyle={{ flex: 1 }}
         >

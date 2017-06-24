@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 /* eslint-disable react/forbid-prop-types */
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../lib/format-date';
