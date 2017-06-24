@@ -28,6 +28,7 @@ export function loginUser (email, password, navigation) {
 
   return (dispatch) => {
     dispatch(loginUserRequest());
+    console.log(`${Config.URI}/login`);
     fetch(`${Config.URI}/login`, {
       method: 'POST',
       headers: {

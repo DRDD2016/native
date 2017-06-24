@@ -7,7 +7,7 @@ import { getEvent, updateRsvp, deleteEvent } from '../actions/event/data';
 import { postVote, finaliseEvent } from '../actions/event/poll';
 import { hydrateCreateEvent, clearCreateEvent } from '../actions/create';
 import normaliseVoteData from '../lib/normalise-vote-data';
-import { openWhatsApp, composeWhatsAppMessage } from '../lib/whatsapp';
+import { openWhatsApp, composeWhatsAppMessage } from '../lib/branchLink';
 
 
 const mapStateToProps = ({ event, user, network }) => {

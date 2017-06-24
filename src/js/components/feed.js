@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, ListView } from 'react-native';
+import { View, Text, ScrollView, ListView, Platform } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
@@ -12,15 +13,32 @@ class Feed extends Component {
 
   static navigationOptions = {
     title: 'Feed',
+    tabBarIcon: ({ tintColor }) =>
+      <Icon name="globe" size={32} color={tintColor} />,
     headerStyle: { backgroundColor: colours.transparent },
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
     headerTintColor: colours.headerButtonColor
+  }
+
+  componentWillMount () {
+    console.log('Feed WillMount props:', this.props);
+
+    if (this.props.eventCode) {
+      if (this.props.eventCode !== 'none') {
+        const code = this.props.eventCode;
+        console.log(code);
+        console.log('submitting Code');
+        this.props.handleSubmitCode(code);
+      }
+    }
   }
 
   componentWillReceiveProps (nextProps) {
     const { feed } = nextProps;
     const newData = [].concat(feed).reverse();
     this.createDataSource(newData);
+
+    console.log('Feed WillReceive NextProps:', nextProps);
 
   }
 
@@ -72,9 +90,13 @@ class Feed extends Component {
     const { allEvents, feed, isFetching, displaySome, displayAll, filterActive, selectedFilter, isConnected } = this.props;
 
     return (
-      <View style={{ flex: 1, backgroundColor: colours.white }}>
-        <Header />
-        <View style={{ flex: 1 }}>
+      <View
+        style={[
+          styles.headerBuffer,
+          { backgroundColor: colours.white }]}
+      >
+        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
+        <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? null : 70 }}>
           {
             isFetching && <Spinner />
           }

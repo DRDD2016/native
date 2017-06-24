@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable max-len */
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../../lib/format-date';
