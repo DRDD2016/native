@@ -52,6 +52,7 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 
+.gitignore-d/
 src/js/keys.js
 coverage/
 .env
