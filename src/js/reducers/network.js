@@ -1,5 +1,6 @@
 import * as actions from '../actions/network';
 
+
 const initialState = {
   isConnected: true,
   socket: undefined,

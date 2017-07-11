@@ -22,6 +22,9 @@ class Feed extends Component {
 
   componentWillMount () {
     console.log('Feed WillMount props:', this.props);
+    // if (this.props.user.push_info) {
+    //   this.props.handleSavePush(this.props.push_info);
+    // }
 
     if (this.props.eventCode) {
       if (this.props.eventCode !== 'none') {
