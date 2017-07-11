@@ -9,6 +9,7 @@ import { setIsConnected } from './actions/network';
 import Spinner from './components/common/Spinner';
 import { StackRoot } from './routes';
 import { AlertProvider } from './components/Alert';
+import PushController from './lib/PushController';
 
 const { Answers } = Fabric;
 
@@ -53,7 +54,9 @@ class App extends Component {
     return (
       <Provider store={ store }>
         <AlertProvider>
-          <StackRoot />
+          <PushController>
+            <StackRoot />
+          </PushController>
         </AlertProvider>
       </Provider>
     );

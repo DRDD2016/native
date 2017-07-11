@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>123660166490-5fi0rvaj19nsoti3rb4p4vocntag1l2o.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.123660166490-5fi0rvaj19nsoti3rb4p4vocntag1l2o</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDfbwLOFNpWeunLlQeQSNgsuj-YEkDh3n4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>123660166490</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>net.wannaenterprises.Spark</string>
+	<key>PROJECT_ID</key>
+	<string>spark-cac3e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>spark-cac3e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:123660166490:ios:77c5188927329e05</string>
+	<key>DATABASE_URL</key>
+	<string>https://spark-cac3e.firebaseio.com</string>
+</dict>
+</plist>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "123660166490",
+    "firebase_url": "https://spark-cac3e.firebaseio.com",
+    "project_id": "spark-cac3e",
+    "storage_bucket": "spark-cac3e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123660166490:android:fcce3368a36dc7cd",
+        "android_client_info": {
+          "package_name": "net.wannaenterprises.spark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123660166490-u4907opegqppjng5beirkp6ahk0td0pt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHzZXI6CclxLzmblw_HLvIRm8KrE-RJN0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

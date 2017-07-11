@@ -20,6 +20,7 @@ const mapStateToProps = ({ feed, user, network }) => {
     filterActive,
     selectedFilter,
     user_id: user.user_id,
+    push_info: user.push_info,
     isConnected: network.isConnected,
     eventCode: network.inComingLinkCode
   };

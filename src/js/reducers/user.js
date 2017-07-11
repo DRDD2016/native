@@ -1,6 +1,7 @@
 import * as signup from '../actions/signup';
 import * as login from '../actions/login';
 import * as profile from '../actions/profile';
+import * as push from '../actions/push';
 
 export const initialState = {
   isSigningUp: false,
@@ -11,6 +12,7 @@ export const initialState = {
   email: '',
   photo_url: '',
   user_id: '',
+  push_info: '', // new
   isFetching: false,
   isFetchingUpload: false,
   errorUpdate: undefined,
@@ -89,6 +91,23 @@ export default function user (state = initialState, action) {
         ...state,
         isFetching: false,
         errorUpload: action.error
+      };
+    case push.EDIT_PUSHINFO_REQUEST:
+      return {
+        ...state,
+        isFetching: true
+      };
+    case push.EDIT_PUSHINFO_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        push_info: action.data.push_info
+      };
+    case push.EDIT_PUSHINFO_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        errorUpdate: action.error
       };
 
     default:

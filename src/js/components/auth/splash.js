@@ -15,6 +15,7 @@ export default class Splash extends Component {
   componentWillMount () {
 
     subscribeToBranchLinks();
+    console.log('SplashProps', this.props);
 
     setTimeout(() => {
       AsyncStorage.getItem('spark_token')
