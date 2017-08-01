@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Platform, AsyncStorage, View } from 'react-native';
 import FCM, { FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType } from 'react-native-fcm';
 import { savePush } from '../actions/push';
+import { store } from '../init-store';
 
 
 export default class PushController extends Component {
@@ -23,7 +24,7 @@ export default class PushController extends Component {
           console.log('got Spark user_id:', user_id);
           if (token && user_id) {
             console.log('saving PushToken');
-            savePush(token, user_id, pushToken);
+            store.dispatch(savePush(token, user_id, pushToken));
           }
         })
         .catch(error => console.log(error));
@@ -73,8 +74,7 @@ export default class PushController extends Component {
 
       this.refreshTokenListener = FCM.on(FCMEvent.RefreshToken, (pushToken) => {
         console.log('TOKEN (refreshedToken: )', pushToken);
-      });
-
+      }); // might need to move or bind this for componentWillUnmount to recognise
 
     });
   }

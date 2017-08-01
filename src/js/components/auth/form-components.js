@@ -6,6 +6,7 @@ export function FormTextInput ({ placeholder, isEmail, isLoginView, input: { val
   return (
     <View style={{ flex: 1 }}>
       <TextInput
+        accessibilityLabel="Email"
         style={ isLoginView ? [styles.inputStyleAuth, { borderRadius: 0 }] : [styles.inputStyleAuth] }
         onChangeText={ text => onChange(text) }
         onBlur={ text => onBlur(text) }
@@ -27,6 +28,7 @@ export function FormPasswordInput ({ placeholder, isLoginView, input: { value, o
   return (
     <View style={{ flex: 1 }}>
       <TextInput
+        accessibilityLabel="Password"
         style={ isLoginView ? [styles.inputStyleAuth, { borderRadius: 0 }] : [styles.inputStyleAuth] }
         onChangeText={ text => onChange(text) }
         onBlur={ text => onBlur(text) }
