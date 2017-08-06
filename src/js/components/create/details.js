@@ -71,6 +71,7 @@ export default class Details extends Component {
 
             <View style={ styles.row }>
               <TextInput
+                accessibilityLabel="Event name"
                 underlineColorAndroid="transparent"
                 style={ styles.inputStyle }
                 onChangeText={ text => handleChange(text, 'name') }
@@ -82,6 +83,7 @@ export default class Details extends Component {
             </View>
             <View style={ styles.row }>
               <TextInput
+                accessibilityLabel="Event description"
                 underlineColorAndroid="transparent"
                 style={ styles.inputStyle }
                 onChangeText={ text => handleChange(text, 'description') }
@@ -93,6 +95,7 @@ export default class Details extends Component {
             </View>
             <View style={ styles.row }>
               <TextInput
+                accessibilityLabel="Note"
                 underlineColorAndroid="transparent"
                 style={ [styles.inputStyle, { height: 100 }] }
                 onChangeText={ text => handleChange(text, 'note') }
@@ -109,6 +112,7 @@ export default class Details extends Component {
               }
               { (!hideNext) &&
                 <Button
+                  testDescription="Confirm Event Details"
                   onPress={ () => this.nextPage(name) }
                   buttonStyle={[styles.buttonStyle, { flex: 1 }]}
                   textStyle={ styles.buttonTextStyle }

@@ -45,16 +45,16 @@ Submit a new Beta Build to Google Play
 fastlane android alpha
 ```
 Submit a new Alpha Build to Google Play
+### android screenshots
+```
+fastlane android screenshots
+```
+Create and Submit Screenshots to Google Play
 ### android deploy
 ```
 fastlane android deploy
 ```
 Deploy a new version to the Google Play
-### android playstore
-```
-fastlane android playstore
-```
-Build APK ready for deployment
 
 ----
 

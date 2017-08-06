@@ -111,7 +111,7 @@ class Login extends Component {
             </View>
             { this.renderServerError() }
             <TouchableOpacity
-              testDescription="LOG IN Submit"
+              accessibilityLabel="LOG IN Submit"
               activeOpacity={ 0.5 } onPress={handleSubmit(handleSubmitForm)}
             >
               <View style={styles.confirmButton}>

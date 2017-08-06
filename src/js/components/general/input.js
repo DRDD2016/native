@@ -4,12 +4,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../common/Button';
 import styles from '../../../styles';
 
-const Input = ({ handleChange, value, placeholder, removeInput, inputKey }) => {
+const Input = ({ handleChange, value, placeholder, removeInput, inputKey, testDescription }) => {
 
   return (
     <View style={ styles.row }>
 
       <TextInput
+        accessibilityLabel={testDescription}
         placeholder={ placeholder }
         autoCorrect={ false }
         value={ value }

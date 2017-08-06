@@ -19,7 +19,7 @@ class DateTime extends Component {
     const { data, handleDate, handleTime, removeInput, index } = this.props;
     return (
       <View key={ Math.random() } style={{ width: windowSize.width, alignItems: 'center' }}>
-        <View style={{ flexDirection: 'row', flex: 1, marginTop: 10, marginHorizontal: 10 }}>
+        <View accessibilityLabel={`Date option ${index + 1}`} style={{ flexDirection: 'row', flex: 1, marginTop: 10, marginHorizontal: 10 }}>
           <View style={{ flex: 0.1 }} />
           <DatePicker
             style={{ flex: 2.5 }}
@@ -65,7 +65,7 @@ class DateTime extends Component {
           }
         </View>
 
-        <View style={{ flexDirection: 'row', flex: 1, margin: 10 }}>
+        <View accessibilityLabel={`Time option ${index + 1}`} style={{ flexDirection: 'row', flex: 1, margin: 10 }}>
           <View style={{ flex: 0.1 }} />
           <DatePicker
             style={{ flex: 2.5 }}

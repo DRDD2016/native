@@ -81,7 +81,7 @@ export default class PushController extends Component {
 
   componentWillUnmount () {
     this.notificationListener.remove();
-    this.refreshTokenListener.remove();
+    // this.refreshTokenListener.remove();
   }
 
   render () {

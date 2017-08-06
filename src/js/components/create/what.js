@@ -42,6 +42,7 @@ export default class What extends Component {
     const inputs = data.map((value, i) => {
       return (
         <Input
+          testDescription={`What option ${i + 1}`}
           style={styles.inputStyle}
           handleChange={ handleChange }
           key={ i }
@@ -85,7 +86,7 @@ export default class What extends Component {
                 paddingLeft: 5,
                 paddingRight: 5 }}
             >
-              <AddInput data={ data } handler={ addInput } />
+              <AddInput testDescription="Add What option" data={ data } handler={ addInput } />
             </View>
 
             <View
@@ -97,6 +98,7 @@ export default class What extends Component {
                 paddingRight: 5 }}
             >
               <Button
+                testDescription="Confirm What"
                 onPress={ () => this.nextPage(name) }
                 buttonStyle={ [styles.buttonStyle, { flex: 1 }] }
                 textStyle={ styles.buttonTextStyle }
