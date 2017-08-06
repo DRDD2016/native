@@ -71,6 +71,7 @@ export default class Where extends Component {
     const inputs = data.map((value, inputKey) => {
       return (
         <View
+          accessibilityLabel={`Where option ${inputKey + 1}`}
           key={ inputKey }
           style={{
             flexDirection: 'row',
@@ -165,6 +166,7 @@ export default class Where extends Component {
 
     return (
       <View
+        accessibilityLabel="Where"
         style={[
           styles.headerBuffer,
           { backgroundColor: colours.white }]}
@@ -175,7 +177,7 @@ export default class Where extends Component {
           resetScrollToCoords={{ x: 0, y: 0 }}
           contentContainerStyle={{ flex: 1 }}
         >
-          <View style={ [styles.container, { marginTop: 70, marginHorizontal: 10 }]}>
+          <View accessibilityLabel="Where options" style={ [styles.container, { marginTop: 70, marginHorizontal: 10 }]}>
             <Text style={ styles.smallMessageText } >
               Enter where the event will take place (or leave blank to decide it later).
             </Text>
@@ -186,6 +188,7 @@ export default class Where extends Component {
             { inputs }
 
             <View
+              accessibilityLabel="Add Where"
               style={{
                 flexDirection: 'row',
                 marginTop: 10,
@@ -193,7 +196,7 @@ export default class Where extends Component {
                 paddingLeft: 5,
                 paddingRight: 5 }}
             >
-              <AddInput data={ data } handler={ addInput } />
+              <AddInput testDescription="Add Where option" data={ data } handler={ addInput } />
             </View>
 
             <View
@@ -205,6 +208,7 @@ export default class Where extends Component {
                 paddingRight: 5 }}
             >
               <Button
+                testDescription="Confirm Where"
                 buttonStyle={ [styles.buttonStyle, { flex: 1 }] }
                 textStyle={ styles.buttonTextStyle }
                 onPress={ () => this.nextPage(name) }

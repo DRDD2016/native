@@ -24,7 +24,9 @@ export function savePushFailure (error) {
 }
 
 export function savePush (token, user_id, push_info) { //eslint-disable-line
-  return function (dispatch) {
+  console.log('savePush about to start: ', push_info);
+  return (dispatch) => {
+    console.log('savePush starting: ', push_info);
     dispatch(savePushRequest());
     fetch(`${Config.URI}/savePush/${user_id}`, {
       method: 'PATCH',
@@ -36,15 +38,14 @@ export function savePush (token, user_id, push_info) { //eslint-disable-line
       body: JSON.stringify({ user: { push_info } })
     })
     .then((response) => {
+      console.log('response', response);
       response.json()
       .then((data) => {
         if (data.error) {
           dispatch(savePushFailure(data.error));
         } else {
-
-          dispatch(savePushSuccess());
           console.log('successfully saved push details to server');
-
+          dispatch(savePushSuccess());
         }
       });
     })

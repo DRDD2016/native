@@ -95,6 +95,7 @@ export default class When extends Component {
               }
               { (!hideNext) &&
                 <Button
+                  testDescription="Confirm When"
                   buttonStyle={ [styles.buttonStyle, { flex: 1 }] }
                   textStyle={ styles.buttonTextStyle }
                   onPress={ () => this.nextPage(name) }

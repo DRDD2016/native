@@ -97,16 +97,23 @@ class Login extends Component {
               <View style={inlineStyles.iconWrap}>
                 <Icon name="envelope-o" size={15} color="rgba(255, 255, 255, 0.76)" />
               </View>
-              <Field style={inlineStyles.input} name="email" component={ FormTextInput } isEmail isLoginView placeholder="email address" />
+              <Field
+                style={inlineStyles.input} name="email" component={ FormTextInput } isEmail isLoginView placeholder="email address"
+              />
             </View>
             <View style={inlineStyles.inputWrap}>
               <View style={inlineStyles.iconWrap}>
                 <Icon name="lock" size={20} color="rgba(255, 255, 255, 0.76)" />
               </View>
-              <Field style={inlineStyles.input} name="password" component={ FormPasswordInput } isLoginView placeholder="password" />
+              <Field
+                style={inlineStyles.input} name="password" component={ FormPasswordInput } isLoginView placeholder="password"
+              />
             </View>
             { this.renderServerError() }
-            <TouchableOpacity activeOpacity={ 0.5 } onPress={handleSubmit(handleSubmitForm)}>
+            <TouchableOpacity
+              accessibilityLabel="LOG IN Submit"
+              activeOpacity={ 0.5 } onPress={handleSubmit(handleSubmitForm)}
+            >
               <View style={styles.confirmButton}>
                 <Text style={styles.confirmButtonText}>LOG IN</Text>
               </View>

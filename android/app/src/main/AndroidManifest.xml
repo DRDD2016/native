@@ -73,12 +73,14 @@
             android:name="io.branch.sdk.BranchKey.test"
             android:value="key_test_gozDB6oc4opRT89o76zBJnmhACezJxiH" />
 
+      <receiver android:name="io.branch.referral.InstallListener" android:exported="true">
+        <intent-filter>
+          <action android:name="com.android.vending.INSTALL_REFERRER" />
+        </intent-filter>
+      </receiver>
+
     </application>
 
-    <receiver android:name="io.branch.referral.InstallListener" android:exported="true">
-      <intent-filter>
-        <action android:name="com.android.vending.INSTALL_REFERRER" />
-      </intent-filter>
-    </receiver>
+
 
 </manifest>

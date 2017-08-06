@@ -1,2 +1,2 @@
-json_key_file "/Users/dave/davedev/native/android/googleplay/google-play-api-secret.json" # Path to the json secret file - Follow https://github.com/fastlane/supply#setup to get one
-package_name "net.wannaenterprises.spark" # e.g. com.krausefx.app
+json_key_file "/Users/dave/davedev/native/android/googleplay/google-play-key-secret.json" # Path to the json secret file - Follow https://github.com/fastlane/supply#setup to get one
+package_name "net.wannaenterprises.spark"

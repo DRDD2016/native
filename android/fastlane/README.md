@@ -39,7 +39,17 @@ Runs all the tests
 ```
 fastlane android beta
 ```
-Submit a new Beta Build to Crashlytics Beta
+Submit a new Beta Build to Google Play
+### android alpha
+```
+fastlane android alpha
+```
+Submit a new Alpha Build to Google Play
+### android screenshots
+```
+fastlane android screenshots
+```
+Create and Submit Screenshots to Google Play
 ### android deploy
 ```
 fastlane android deploy

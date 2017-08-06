@@ -37,8 +37,11 @@ export default function Index ({ navigation }) {
         </Text>
       </View>
       <View style={{ flexDirection: 'row', flex: 0.3 }}>
-        <View style={{ justifyContent: 'center', flexDirection: 'column', flex: 1, marginBottom: 40 }}>
+        <View
+          style={{ justifyContent: 'center', flexDirection: 'column', flex: 1, marginBottom: 40 }}
+        >
           <Button
+            testDescription="LOG IN"
             buttonStyle={ [styles.confirmButton, { flex: 0.2, backgroundColor: colours.green, marginTop: 2 }] }
             textStyle={ styles.confirmButtonText }
             onPress={ goToLogin }
