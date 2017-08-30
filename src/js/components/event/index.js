@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableHighlight, Platform } from 'react-native';
 import InviteePoll from './invitee-poll';
 import HostPoll from './host-poll';
 import FinalisedEvent from './finalised-event';
+import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import Header from '../common/Header';
 import CloseIcon from '../common/close-icon';
@@ -13,6 +14,7 @@ export default class Event extends Component {
   static navigationOptions = ({ navigation }) => ({
 
     title: (navigation.state.params.name === undefined) ? 'Sorry...' : navigation.state.params.name,
+    headerStyle: { backgroundColor: colours.transparent },
     headerRight: (
       navigation.state.params.userIsHost && !navigation.state.params.isPoll && !navigation.state.params.eventIsCancelled ?
 
@@ -32,7 +34,8 @@ export default class Event extends Component {
           <CloseIcon navigation={navigation} />
         </View>
       </TouchableHighlight>
-    )
+    ),
+    headerTintColor: colours.headerButtonColor
   });
 
   componentWillUpdate (nextProps) {
@@ -94,12 +97,18 @@ export default class Event extends Component {
   render () {
     console.log('thisProps', this.props);
     return (
-      <View style={{ flex: 1, backgroundColor: colours.white }}>
-        <Header />
-        <View style={{ flex: 1, marginTop: 70 }}>
-          {
-            this.props.event && this.eventRouter()
-          }
+      <View style={{ flex: 1 }}>
+        <View
+          style={[
+            styles.headerBuffer2,
+            { backgroundColor: colours.white }]}
+        >
+          <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
+          <View style={{ flex: 1, marginTop: 150 }}>
+            {
+              this.props.event && this.eventRouter()
+            }
+          </View>
         </View>
       </View>
     );

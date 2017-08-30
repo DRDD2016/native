@@ -1,13 +1,20 @@
 import { Dimensions, Platform } from 'react-native';
 import colours from './colours';
 
+
 const styles = {
 
   // app Wide
 
   headerBuffer: {
     flex: Platform.OS === 'ios' ? 1 : null,
-    height: Platform.OS === 'ios' ? null : Dimensions.get('window').height * 0.85,
+    height: Platform.OS === 'ios' ? null : Dimensions.get('window').height * 0.85, // put back to 0.85 if problems
+    top: Platform.OS === 'ios' ? null : -70,
+    marginBottom: Platform.OS === 'ios' ? null : -70
+  },
+  headerBuffer2: {
+    flex: Platform.OS === 'ios' ? 1 : null,
+    height: Platform.OS === 'ios' ? null : Dimensions.get('window').height * 1, // can remove if no problems on above
     top: Platform.OS === 'ios' ? null : -70
   },
   title1: {
@@ -625,6 +632,7 @@ const styles = {
   // feedItem
 
   cardStyle: {
+    backgroundColor: colours.white,
     borderWidth: 0.5,
     borderRadius: 2,
     borderColor: colours.main,

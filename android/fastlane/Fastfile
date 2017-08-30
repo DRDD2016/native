@@ -25,40 +25,50 @@ platform :android do
     gradle(task: "test")
   end
 
-  desc "Submit a new Beta Build to Google Play"
-  lane :beta do
-    gradle(
-      task: 'assemble',
-      build_type: 'Release'
-    )
-    supply(track: 'beta')
-
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
-  end
-
-  desc "Submit a new Alpha Build to Google Play"
-  lane :alpha do
-    gradle(
-      task: 'assemble',
-      build_type: 'Release'
-    )
-    supply(track: 'alpha')
-
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
-  end
+  # desc "Submit a new Beta Build to Crashlytics Beta"
+  # lane :beta do
+  #   gradle(
+  #     task: 'assemble',
+  #     build_type: 'Release'
+  #   )
+  #   supply(track: 'beta')
+  #
+  #   # sh "your_script.sh"
+  #   # You can also use other beta testing services here
+  # end
 
   desc "Create and Submit Screenshots to Google Play"
   lane :screenshots do
     screengrab
-    supply
+    # supply // don't supply as might want to pick just the best screenshots and delete others
   end
 
-  desc "Deploy a new version to the Google Play"
-  lane :deploy do
-    gradle(task: "assembleRelease")
-    supply
+  desc "Submit a new Alpha Build to GooglePlay Alpha"
+  lane :alpha do
+
+    # Get the last version code and increment it.
+    versionCode = File.read("metadata/versionCode").to_i
+    versionCode = versionCode +1
+
+    f = File.new("metadata/versionCode", "w")
+    f.write(versionCode)
+    f.close
+
+    versionName = "1.0.#{versionCode}"
+
+    gradle(
+      task: "assemble",
+      build_type: "Release",
+      properties: {
+        'versionCode' => versionCode,
+        'versionName' => versionName
+      }
+    )
+
+    supply(track: 'alpha')
+
+    # sh "your_script.sh"
+    # You can also use other beta testing services here
   end
 
   # You can define as many lanes as you want

@@ -47,16 +47,19 @@ export default class Details extends Component {
     const { name, description, note, handleChange } = this.props;
     const hideNext = name === '' || description === '';
     return (
-      <View
+      <KeyboardAwareScrollView
         style={[
           styles.headerBuffer,
           { backgroundColor: colours.white }]}
+        enableOnAndroid
+        extraHeight={0}
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        contentContainerStyle={{ }}
       >
+
         <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
-        <KeyboardAwareScrollView
+        <View
           style={{ backgroundColor: colours.transparent }}
-          resetScrollToCoords={{ x: 0, y: 0 }}
-          contentContainerStyle={{ flex: 1 }}
         >
           <View
             style={{
@@ -97,7 +100,7 @@ export default class Details extends Component {
               <TextInput
                 accessibilityLabel="Note"
                 underlineColorAndroid="transparent"
-                style={ [styles.inputStyle, { height: 100 }] }
+                style={ [styles.inputStyle, { height: 70 }] }
                 onChangeText={ text => handleChange(text, 'note') }
                 value={ note }
                 multiline
@@ -106,6 +109,7 @@ export default class Details extends Component {
                 autoCorrect
               />
             </View>
+
             <View style={ styles.row }>
               { (hideNext) &&
                 <View />
@@ -121,9 +125,11 @@ export default class Details extends Component {
                 </Button>
               }
             </View>
+            <View style={{ height: 60 }} />
           </View>
-        </KeyboardAwareScrollView>
-      </View>
+        </View>
+
+      </KeyboardAwareScrollView>
     );
   }
 }
