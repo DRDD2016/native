@@ -174,8 +174,10 @@ export default class Where extends Component {
         <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
         <KeyboardAwareScrollView
           style={{ backgroundColor: colours.transparent, marginTop: 80 }}
+          enableOnAndroid
+          extraHeight={0}
           resetScrollToCoords={{ x: 0, y: 0 }}
-          contentContainerStyle={{ flex: 1 }}
+          contentContainerStyle={{ }}
         >
           <View accessibilityLabel="Where options" style={ [styles.container, { marginTop: 70, marginHorizontal: 10 }]}>
             <Text style={ styles.smallMessageText } >
