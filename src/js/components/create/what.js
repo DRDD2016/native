@@ -64,8 +64,10 @@ export default class What extends Component {
         <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
         <KeyboardAwareScrollView
           style={{ backgroundColor: colours.transparent, marginTop: Platform.OS === 'ios' ? null : 90 }}
+          enableOnAndroid
+          extraHeight={0}
           resetScrollToCoords={{ x: 0, y: 0 }}
-          contentContainerStyle={{ flex: 1 }}
+          contentContainerStyle={{ }}
         >
 
           <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 70, marginHorizontal: 15 }}>

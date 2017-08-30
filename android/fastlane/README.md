@@ -35,6 +35,11 @@ xcode-select --install
 fastlane android test
 ```
 Runs all the tests
+### android screenshots
+```
+fastlane android screenshots
+```
+Create and Submit Screenshots to Google Play
 ### android alpha
 ```
 fastlane android alpha

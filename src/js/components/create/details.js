@@ -81,7 +81,7 @@ export default class Details extends Component {
                 value={ name }
                 type="text"
                 placeholder="Event name"
-                autoCorrect
+                // autoCorrect
               />
             </View>
             <View style={ styles.row }>
@@ -93,20 +93,20 @@ export default class Details extends Component {
                 value={ description }
                 type="text"
                 placeholder="Event description"
-                autoCorrect
+                // autoCorrect
               />
             </View>
             <View style={ styles.row }>
               <TextInput
                 accessibilityLabel="Note"
                 underlineColorAndroid="transparent"
-                style={ [styles.inputStyle, { height: 70 }] }
+                style={ [styles.inputStyle, { height: 120 }] }
                 onChangeText={ text => handleChange(text, 'note') }
                 value={ note }
                 multiline
                 numberOfLines={5}
                 placeholder="Leave a note to your friends (optional)"
-                autoCorrect
+                // autoCorrect
               />
             </View>
 

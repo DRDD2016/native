@@ -73,8 +73,8 @@ export default class CategoryDetails extends Component {
   render () {
     const { category, data, voteCount } = this.props;
 
-    console.log('voteCount');
-    console.log(voteCount);
+    console.log('voteCount: ', voteCount);
+    
     const categoryTitle = `W${category.substring(1)}`;
     return (
       <View style={{ flex: 1 }}>

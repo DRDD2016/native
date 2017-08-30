@@ -11,6 +11,7 @@ const Input = ({ handleChange, value, placeholder, removeInput, inputKey, testDe
 
       <TextInput
         accessibilityLabel={testDescription}
+        underlineColorAndroid="transparent"
         placeholder={ placeholder }
         autoCorrect={ false }
         value={ value }
