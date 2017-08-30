@@ -35,9 +35,43 @@ export default class Details extends Component {
     headerTintColor: colours.headerButtonColor
   }
 
+  // state = {
+  //   keyboardHeight: new Animated.Value(0)
+  // }; // used for animateKeyboardHeight
+
   componentWillMount () {
     store.dispatch(clearCreateEvent());
+
+    // then make keyboard hide properly with Android - see https://github.com/Palisand/kasv-expo/blob/master/App.js
+
+    // if (Platform.OS === 'android') {
+    //   this.keyboardShowListener = Keyboard.addListener('keyboardDidShow', ({ endCoordinates }) => {
+    //     this.animateKeyboardHeight(endCoordinates.height, 0);
+    //   });
+    //   this.keyboardHideListener = Keyboard.addListener('keyboardDidHide', () => {
+    //     this.animateKeyboardHeight(0, 300);
+    //   });
+    // }
+
   }
+
+  // animateKeyboardHeight = (toValue, duration) => {
+  //   // to make KeyboardAwareScrollView work on Android
+  //   Animated.timing(
+  //     this.state.keyboardHeight,
+  //     { toValue, duration },
+  //   ).start();
+  // };
+
+  // scrollToInput = (reactNode) => {
+  //   this.view.scrollToFocusedInput(reactNode);
+  // };
+  //
+  // handleOnFocus = (e) => {
+  //   if (Platform.OS === 'android') {
+  //     this.scrollToInput(ReactNative.findNodeHandle(e.target));
+  //   }
+  // };
 
   nextPage = (name) => {
     this.props.navigation.navigate('What', { name });
@@ -47,16 +81,19 @@ export default class Details extends Component {
     const { name, description, note, handleChange } = this.props;
     const hideNext = name === '' || description === '';
     return (
-      <View
+      <KeyboardAwareScrollView
         style={[
           styles.headerBuffer,
           { backgroundColor: colours.white }]}
+        enableOnAndroid
+        extraHeight={0}
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        contentContainerStyle={{ }}
       >
+
         <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
-        <KeyboardAwareScrollView
+        <View
           style={{ backgroundColor: colours.transparent }}
-          resetScrollToCoords={{ x: 0, y: 0 }}
-          contentContainerStyle={{ flex: 1 }}
         >
           <View
             style={{
@@ -94,7 +131,7 @@ export default class Details extends Component {
             <View style={ styles.row }>
               <TextInput
                 underlineColorAndroid="transparent"
-                style={ [styles.inputStyle, { height: 100 }] }
+                style={ [styles.inputStyle, { height: 70 }] }
                 onChangeText={ text => handleChange(text, 'note') }
                 value={ note }
                 multiline
@@ -103,6 +140,7 @@ export default class Details extends Component {
                 autoCorrect
               />
             </View>
+
             <View style={ styles.row }>
               { (hideNext) &&
                 <View />
@@ -117,9 +155,11 @@ export default class Details extends Component {
                 </Button>
               }
             </View>
+            <View style={{ height: 60 }} />
           </View>
-        </KeyboardAwareScrollView>
-      </View>
+        </View>
+
+      </KeyboardAwareScrollView>
     );
   }
 }

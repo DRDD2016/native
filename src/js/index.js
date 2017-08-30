@@ -18,6 +18,7 @@ console.disableYellowBox = true;
 
 console.log((require('react-native-config').default));
 
+
 class App extends Component {
 
   componentWillMount () {
@@ -55,7 +56,9 @@ class App extends Component {
       <Provider store={ store }>
         <AlertProvider>
           <PushController>
+
             <StackRoot />
+
           </PushController>
         </AlertProvider>
       </Provider>
