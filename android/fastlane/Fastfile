@@ -39,6 +39,17 @@ platform :android do
 
   desc "Create and Submit Screenshots to Google Play"
   lane :screenshots do
+
+    gradle(
+      task: "assemble",
+      build_type: "Debug",
+    )
+
+    gradle(
+      task: "assemble",
+      build_type: "AndroidTest",
+    )
+
     screengrab
     # supply // don't supply as might want to pick just the best screenshots and delete others
   end

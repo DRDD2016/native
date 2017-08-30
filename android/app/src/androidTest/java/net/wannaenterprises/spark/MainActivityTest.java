@@ -99,9 +99,9 @@ public class MainActivityTest {
 
         Screengrab.screenshot("CreateDetails");
         onView(allOf(withContentDescription("Event name"), isDisplayed())).perform(click());
-        onView(allOf(withContentDescription("Event name"), isDisplayed())).perform(replaceText("Birthday Drinks"), closeSoftKeyboard());
+        onView(allOf(withContentDescription("Event name"), isDisplayed())).perform(replaceText("Friday Night Drinks"), closeSoftKeyboard());
         onView(allOf(withContentDescription("Event description"), isDisplayed())).perform(click());
-        onView(allOf(withContentDescription("Event description"), isDisplayed())).perform(replaceText("I am going to be 25 again"), closeSoftKeyboard());
+        onView(allOf(withContentDescription("Event description"), isDisplayed())).perform(replaceText("Whoo-hoo, the end of the week"), closeSoftKeyboard());
         onView(allOf(withContentDescription("Note"), isDisplayed())).perform(click());
         onView(allOf(withContentDescription("Note"), isDisplayed())).perform(replaceText("Hey guys, please vote for your preferred venue and date"), closeSoftKeyboard());
 
@@ -203,7 +203,7 @@ public class MainActivityTest {
             e.printStackTrace();
         }
 
-        onView(allOf(withChild(withChild(withText("Birthday Drinks"))), isDisplayed())).perform(click());
+        onView(allOf(withChild(withChild(withText("Amy's Birthday Drinks"))), isDisplayed())).perform(click());
 
         try {
             Thread.sleep(2000);
