@@ -33,8 +33,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(getEvent(event_id));
   },
   handleVote: (vote, event_id) => {
+    console.log('handleVote: ', `${JSON.stringify(vote)} / event_id: ${event_id}`);
     AsyncStorage.getItem('spark_token')
     .then((token) => {
+      console.log('token: ', token);
       if (token) {
         dispatch(postVote(token, normaliseVoteData(vote), event_id, ownProps.navigation));
       }
