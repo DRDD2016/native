@@ -10,21 +10,38 @@ import BarChart from '../../components/event/bar-chart';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 
-const OFF_WHITE = '#efefef';
+const OFF_WHITE = colours.offWhite;
 
 export default class CategoryDetails extends Component {
 
   constructor (props) {
     super(props);
+    console.log('category details - constructor props: ', props);
     this.state = {
       selectedNodes: new Array(props.data.length).fill(false),
       isToggleable: props.data.length !== 1
     };
+    console.log('category details - constructor state: ', this.state);
     this._handleOnPress = this._handleOnPress.bind(this);
     this.toggleHighlight = this.toggleHighlight.bind(this);
   }
 
+  componentWillMount () {
+    console.log('category details - compWillMountprops', this.props);
+    // hydrates the state with invitee's previous votes
+    if (this.props.voteCount && !this.props.isHostPollView) {
+      if (this.props.voteCount.length > 1) {
+        this.setState({
+          selectedNodes: this.props.voteCount
+        });
+      }
+    }
+    console.log('cat details - compWillReceiveProps this.state: ', this.state);
+
+  }
+
   componentWillReceiveProps (nextProps) {
+    console.log('category details - compWillReceiveNextprops');
     // hydrates the state with invitee's previous votes
     if (nextProps.voteCount && !this.props.isHostPollView) {
       if (nextProps.voteCount.length > 1) {
@@ -33,9 +50,11 @@ export default class CategoryDetails extends Component {
         });
       }
     }
+    console.log('cat details - compWillReceiveProps this.state: ', this.state);
   }
 
   _handleOnPress (category, selection, index) {
+    console.log('handlingOnPress');
     if (this.state.isToggleable) {
       this.toggleHighlight(this.props.userIsHost, index);
 
@@ -72,9 +91,9 @@ export default class CategoryDetails extends Component {
 
   render () {
     const { category, data, voteCount } = this.props;
-
+    console.log('cat details Render Props: ', this.props);
     console.log('voteCount: ', voteCount);
-    
+
     const categoryTitle = `W${category.substring(1)}`;
     return (
       <View style={{ flex: 1 }}>

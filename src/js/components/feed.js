@@ -8,6 +8,8 @@ import Header from './common/Header';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
+// import { initSocket, stopSocket } from '../socket-router';
+
 
 class Feed extends Component {
 
@@ -26,17 +28,22 @@ class Feed extends Component {
     //   this.props.handleSavePush(this.props.push_info);
     // }
 
+    // initSocket();
+
     if (this.props.eventCode) {
       if (this.props.eventCode !== 'none') {
+        // stopSocket();
         const code = this.props.eventCode;
         console.log(code);
         console.log('submitting Code');
         this.props.handleSubmitCode(code);
       }
     }
+
   }
 
   componentWillReceiveProps (nextProps) {
+    console.log('Feed compWillReceiveNextprops: ', nextProps);
     const { feed } = nextProps;
     const newData = [].concat(feed).reverse();
     this.createDataSource(newData);
@@ -89,6 +96,7 @@ class Feed extends Component {
   }
 
   render () {
+    console.log('Feed RenderProps: ', this.props);
 
     const { allEvents, feed, isFetching, displaySome, displayAll, filterActive, selectedFilter, isConnected } = this.props;
 

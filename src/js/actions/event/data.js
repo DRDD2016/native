@@ -1,4 +1,5 @@
 import Config from 'react-native-config';
+import { NavigationActions } from 'react-navigation';
 import { getVotes, clearPollState } from './poll';
 import { hydrateCreateEvent, clearCreateEvent } from '../create';
 import { getCalendar } from '../calendar';
@@ -10,6 +11,7 @@ export const GET_EVENT_FAILURE = 'GET_EVENT_FAILURE';
 export const SUBMIT_CODE_REQUEST = 'SUBMIT_CODE_REQUEST';
 export const SUBMIT_CODE_SUCCESS = 'SUBMIT_CODE_SUCCESS';
 export const SUBMIT_CODE_FAILURE = 'SUBMIT_CODE_FAILURE';
+export const CLEAR_CODE_REQUEST = 'CLEAR_CODE_REQUEST';
 export const EDIT_EVENT_REQUEST = 'EDIT_EVENT_REQUEST';
 export const EDIT_EVENT_SUCCESS = 'EDIT_EVENT_SUCCESS';
 export const EDIT_EVENT_FAILURE = 'EDIT_EVENT_FAILURE';
@@ -46,6 +48,10 @@ export const submitCodeSuccess = data => ({
 export const submitCodeFailure = error => ({
   type: SUBMIT_CODE_FAILURE,
   error
+});
+
+export const clearCodeRequest = () => ({
+  type: CLEAR_CODE_REQUEST
 });
 
 
@@ -92,6 +98,7 @@ export const deleteEventFailure = error => ({
 
 export function getEvent (token, event_id, navigation) {
   return (dispatch) => {
+    console.log('getEvent action');
     dispatch(getEventRequest());
     fetch(`${Config.URI}/events/${event_id}`, {
       method: 'GET',
@@ -127,7 +134,20 @@ export function getEvent (token, event_id, navigation) {
           },
           previousRoute: navigation.state.routeName
         };
-        navigation.navigate('event', params);
+        console.log('resetting route to event in data action creator');
+        // new code - reset navigation
+        const resetAction = NavigationActions.reset({
+          index: 1,
+          actions: [
+            NavigationActions.navigate({ routeName: 'event', params })
+          ]
+        });
+
+        this.props.navigation.dispatch(resetAction);
+
+        //
+
+        // navigation.navigate('event', params);
       })
       .catch((err) => {
         dispatch(getEventFailure(err.message));
@@ -136,6 +156,12 @@ export function getEvent (token, event_id, navigation) {
     .catch((err) => {
       dispatch(getEventFailure(err.message));
     });
+  };
+}
+
+export function clearCode () {
+  return (dispatch) => {
+    dispatch(clearCodeRequest());
   };
 }
 
@@ -178,6 +204,20 @@ export function submitCode (token, code, navigation) {
             },
             previousRoute: navigation.state.routeName
           };
+
+          console.log('resetting route to event in submit code data action creator');
+          // new code - reset navigation
+          // const resetAction = NavigationActions.reset({
+          //   index: 1,
+          //   actions: [
+          //     NavigationActions.navigate({ routeName: 'event', params })
+          //   ]
+          // });
+          //
+          // navigation.dispatch(resetAction);
+
+          //
+
           navigation.navigate('event', params);
         }
       })

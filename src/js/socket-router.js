@@ -7,6 +7,15 @@ import { getCalendar } from './actions/calendar';
 import { getFeedSuccess, getFeedFailure } from './actions/feed';
 import { storeSocket } from './actions/network';
 
+// export function stopSocket () {
+//   const location = `${Config.URI}`;
+//   const socket = io(`${location}/feed`, { transports: ['websocket'] });
+//
+//   socket.on('disconnect', () => {
+//     console.log('user disconnected');
+//   });
+// }
+
 function initSocket () {
   const location = `${Config.URI}`;
   const socket = io(`${location}/feed`, { transports: ['websocket'] });

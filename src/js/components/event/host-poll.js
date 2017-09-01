@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, TouchableHighlight, ScrollView } from 'react-native';
 import Modal from 'react-native-modal';
 import CategoryDetails from './category-details';
 import styles from '../../../styles';
@@ -79,6 +79,19 @@ export default class HostPoll extends Component {
               <Text>What: {finalChoices.what}</Text>
               <Text>Where: {finalChoices.where}</Text>
               <Text>When: {formatDate(finalChoices.when[0])} {formatTime(finalChoices.when[0])}</Text>
+              <TouchableHighlight
+                style={ [styles.confirmButton, { marginBottom: 20 }] }
+                onPress={ () => {
+                  this.setState({
+                    isModalVisible: false
+                  });
+
+                  this.props.navigator.navigate('Feed');
+
+                }}
+              >
+                <Text style={styles.confirmButtonText}>OK</Text>
+              </TouchableHighlight>
             </View>
           }
 
@@ -123,7 +136,14 @@ export default class HostPoll extends Component {
             allCategoriesSelected &&
             <TouchableOpacity
               style={ [styles.confirmButton, { marginBottom: 20 }] }
-              onPress={ () => handleConfirmEvent(this.state.eventdetails, event.event_id) }
+              onPress={ () => {
+                this.setState({
+                  isModalVisible: true
+                });
+                return (
+                  handleConfirmEvent(this.state.eventdetails, event.event_id)
+                );
+              }}
             >
               <Text style={styles.confirmButtonText}>CONFIRM EVENT DETAILS</Text>
             </TouchableOpacity>
