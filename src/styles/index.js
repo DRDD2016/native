@@ -5,7 +5,21 @@ import colours from './colours';
 const styles = {
 
   // app Wide
-
+  modalWrapper: {
+    height: Dimensions.get('window').height * 1,
+    width: Dimensions.get('window').width * 1,
+    backgroundColor: colours.modalBackground,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  modalConfirm: {
+    height: Dimensions.get('window').height * 0.5,
+    width: Dimensions.get('window').width * 0.9,
+    backgroundColor: colours.verylightgray,
+    margin: 20,
+    padding: 10,
+    alignItems: 'center'
+  },
   headerBuffer: {
     flex: Platform.OS === 'ios' ? 1 : null,
     height: Platform.OS === 'ios' ? null : Dimensions.get('window').height * 0.85, // put back to 0.85 if problems
@@ -343,6 +357,7 @@ const styles = {
     color: colours.when
   },
   confirmButton: {
+    width: Dimensions.get('window').width * 0.5,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colours.confirm,

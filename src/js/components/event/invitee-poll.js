@@ -5,6 +5,7 @@ import { Text, View, TouchableHighlight, ScrollView, Modal } from 'react-native'
 import update from 'immutability-helper';
 import CategoryDetails from './category-details';
 import styles from '../../../styles';
+import Spinner from '../common/Spinner';
 import { store } from '../../init-store';
 import { deleteIncomingLink } from '../../actions/network';
 
@@ -98,24 +99,46 @@ export default class InviteePoll extends Component {
     return (
 
       <ScrollView>
-        <Modal animationType={'slide'} visible={this.state.isModalVisible} onRequestClose={() => { alert('Modal has been closed.'); }}>
+        <Modal transparent animationType={'slide'} visible={this.state.isModalVisible} onRequestClose={() => { alert('Modal has been closed.'); }}>
           {
-            <View style={{ flex: 1 }}>
-              <Text>Thanks for voting!</Text>
-              <TouchableHighlight
-                style={ [styles.confirmButton, { marginBottom: 20 }] }
-                onPress={ () => {
-                  this.setState({
-                    isModalVisible: false
-                  });
+            <View style={styles.modalWrapper}>
 
-                  this.props.navigator.navigate('Feed');
+              {
+                !voteSaved &&
+                <View style={styles.modalConfirm}>
 
-                }}
-              >
-                <Text style={styles.confirmButtonText}>OK</Text>
-              </TouchableHighlight>
+                  <Text style={[styles.msg1, { flex: 1 }]}>Sending vote</Text>
+                  <Text style={[styles.msg2, { flex: 1 }]}>please wait...</Text>
+                  <Spinner size="large" />
+                  <View style={{ flex: 1 }} />
 
+                </View>
+              }
+
+              {
+                voteSaved &&
+                <View style={styles.modalConfirm}>
+
+                  <Text style={[styles.msg1, { flex: 1 }]}>Vote Sent</Text>
+                  <Text style={[styles.msg2, { flex: 1 }]}>Thanks for voting!</Text>
+                  <View style={{ flex: 1 }}>
+                    <TouchableHighlight
+                      style={ [styles.confirmButton, { marginBottom: 20, marginTop: 20 }] }
+                      onPress={ () => {
+                        this.setState({
+                          isModalVisible: false
+                        });
+
+                        this.props.navigator.navigate('Feed');
+
+                      }}
+                    >
+                      <Text style={styles.confirmButtonText}>OK</Text>
+                    </TouchableHighlight>
+                  </View>
+
+                </View>
+              }
             </View>
           }
 
@@ -149,27 +172,31 @@ export default class InviteePoll extends Component {
             voteCount={voteCount && voteCount.when}
           />
         </View>
-        {
-          allCategoriesSelected &&
-          <TouchableHighlight
-            style={ [styles.confirmButton, { marginBottom: 20 }] }
-            onPress={ () => {
-              this.setState({
-                isModalVisible: true
-              });
-              return (
-                handleVote(this.state.eventdetails, event.event_id)
-              );
-            }}
-          >
-            <Text style={styles.confirmButtonText}>VOTE</Text>
-          </TouchableHighlight>
-        }
+
+        <View style={styles.row}>
+          {
+            allCategoriesSelected &&
+            <TouchableHighlight
+              style={ [styles.confirmButton, { marginBottom: 20 }] }
+              onPress={ () => {
+                this.setState({
+                  isModalVisible: true
+                });
+                return (
+                  handleVote(this.state.eventdetails, event.event_id)
+                );
+              }}
+            >
+              <Text style={styles.confirmButtonText}>VOTE</Text>
+            </TouchableHighlight>
+          }
+        </View>
 
         {
           voteSaved &&
           <Text>Thanks for voting!</Text>
         }
+
       </ScrollView>
 
     );
