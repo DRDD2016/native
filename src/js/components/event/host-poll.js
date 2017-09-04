@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, TouchableHighlight, ScrollView } from 'react-native';
-import Modal from 'react-native-modal';
+import { View, Text, TouchableOpacity, TouchableHighlight, ScrollView, Modal } from 'react-native';
 import CategoryDetails from './category-details';
 import styles from '../../../styles';
+import Spinner from '../common/Spinner';
 import formatDate from '../../lib/format-date';
 import formatTime from '../../lib/format-time';
 
@@ -22,8 +22,9 @@ export default class HostPoll extends Component {
 
   constructor (props) {
     super(props);
-
+    console.log('this.props.event: ', this.props.event);
     const { what, where, when } = this.props.event;
+    console.log('what: ', what);
     this.state = {
       eventdetails: {
         what: what.length === 1 ? what : [],
@@ -36,67 +37,85 @@ export default class HostPoll extends Component {
   }
 
   toggleSelection (category, selection) {
+
     if (!this.state.eventdetails[category].includes(selection)) {
+
       this.setState({
-        eventdetails: {
-          [category]: [selection]
-        }
+        eventdetails: { ...this.state.eventdetails, [category]: [selection] }
       });
+
     } else {
       this.setState({
-        eventdetails: {
-          [category]: []
-        }
+        eventdetails: { ...this.state.eventdetails, [category]: [] }
       });
     }
   }
 
-  _showModal = () => this.setState({ isModalVisible: true })
-
-  _hideModal = () => this.setState({ isModalVisible: false })
 
   render () {
-
-    const { event, voteCount, handleConfirmEvent, finalChoices } = this.props;
-
+    console.log('this props', this.props);
+    const { event, voteCount, handleConfirmEvent, finalChoices, isFetching } = this.props;
 
     const allCategoriesSelected = Object.keys(this.state.eventdetails)
       .map(category => this.state.eventdetails[category].length)
       .every(length => length === 1);
-    console.log('finalchoices', finalChoices);
-    console.log('state', this.state);
-    if (finalChoices) {
-      this._showModal();
-    }
 
     return (
       <ScrollView>
-        <Modal isVisible={this.state.isModalVisible}>
+        <Modal transparent animationType={'slide'} visible={this.state.isModalVisible} onRequestClose={() => { alert('Modal has been closed.'); }}>
           {
-            finalChoices &&
-            <View style={{ flex: 1 }}>
-              <Text>Your event is now finalised!</Text>
-              <Text>What: {finalChoices.what}</Text>
-              <Text>Where: {finalChoices.where}</Text>
-              <Text>When: {formatDate(finalChoices.when[0])} {formatTime(finalChoices.when[0])}</Text>
-              <TouchableHighlight
-                style={ [styles.confirmButton, { marginBottom: 20 }] }
-                onPress={ () => {
-                  this.setState({
-                    isModalVisible: false
-                  });
+            <View style={styles.modalWrapper}>
 
-                  this.props.navigator.navigate('Feed');
+              {
+                !finalChoices &&
+                <View style={styles.modalConfirm}>
 
-                }}
-              >
-                <Text style={styles.confirmButtonText}>OK</Text>
-              </TouchableHighlight>
+                  <Text style={[styles.msg1, { flex: 1 }]}>Confirming event</Text>
+                  <Text style={[styles.msg2, { flex: 1 }]}>please wait...</Text>
+                  <Spinner size="large" />
+                  <View style={{ flex: 1 }} />
+
+                </View>
+              }
+
+              {
+                finalChoices &&
+                <View style={styles.modalConfirm}>
+                  <Text style={[styles.msg1, { flex: 1 }]}>Event confirmed</Text>
+                  <Text style={[styles.msg2, { flex: 1 }]}>Your event is now confirmed:</Text>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.msg3}>What: {finalChoices.what}</Text>
+                    <Text style={styles.msg3}>Where: {finalChoices.where}</Text>
+                    <Text style={styles.msg3}>When: {formatDate(finalChoices.when[0])} {formatTime(finalChoices.when[0])}</Text>
+                  </View>
+
+                  <View style={{ flex: 1 }}>
+                    <TouchableHighlight
+                      style={ [styles.confirmButton, { marginBottom: 20, marginTop: 20 }] }
+                      onPress={ () => {
+                        this.setState({
+                          isModalVisible: false
+                        });
+
+                        this.props.navigator.navigate('Feed');
+
+                      }}
+                    >
+                      <Text style={styles.confirmButtonText}>OK</Text>
+                    </TouchableHighlight>
+                  </View>
+
+                </View>
+              }
             </View>
           }
 
-
         </Modal>
+
+        {
+          isFetching && <Spinner />
+        }
+
         <View style={{ flexDirection: 'column' }}>
           <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
             <Text>You created a Poll</Text>
@@ -132,22 +151,25 @@ export default class HostPoll extends Component {
               isHostPollView
             />
           </View>
-          {
-            allCategoriesSelected &&
-            <TouchableOpacity
-              style={ [styles.confirmButton, { marginBottom: 20 }] }
-              onPress={ () => {
-                this.setState({
-                  isModalVisible: true
-                });
-                return (
-                  handleConfirmEvent(this.state.eventdetails, event.event_id)
-                );
-              }}
-            >
-              <Text style={styles.confirmButtonText}>CONFIRM EVENT DETAILS</Text>
-            </TouchableOpacity>
-          }
+
+          <View style={[styles.row, { justifyContent: 'center' }]}>
+            {
+              allCategoriesSelected &&
+              <TouchableOpacity
+                style={ [styles.confirmButton, { marginBottom: 20 }] }
+                onPress={ () => {
+                  this.setState({
+                    isModalVisible: true
+                  });
+                  return (
+                    handleConfirmEvent(this.state.eventdetails, event.event_id)
+                  );
+                }}
+              >
+                <Text style={[styles.confirmButtonText, { textAlign: 'center' }]}>CONFIRM EVENT DETAILS</Text>
+              </TouchableOpacity>
+            }
+          </View>
 
         </View>
       </ScrollView>

@@ -38,7 +38,7 @@ export default function Index ({ navigation }) {
       </View>
       <View style={{ flexDirection: 'row', flex: 0.3 }}>
         <View
-          style={{ justifyContent: 'center', flexDirection: 'column', flex: 1, marginBottom: 40 }}
+          style={{ alignItems: 'center', justifyContent: 'center', flexDirection: 'column', flex: 1, marginBottom: 40 }}
         >
           <Button
             testDescription="LOG IN"

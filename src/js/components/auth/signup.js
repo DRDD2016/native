@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import { Text, View, Platform } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Field, reduxForm } from 'redux-form';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import Fabric from 'react-native-fabric';
@@ -17,7 +18,10 @@ const { Answers } = Fabric;
 class Signup extends Component {
 
   static navigationOptions = {
-    title: 'Sign up'
+    title: 'Sign up',
+    headerStyle: { backgroundColor: colours.transparent },
+    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerTintColor: colours.headerButtonColor
   }
 
   componentWillMount () {
@@ -34,9 +38,9 @@ class Signup extends Component {
       return <Spinner size="large" />;
     }
     return (
-      <View>
+      <View style={{ alignItems: 'center', marginTop: 10 }}>
         <Button
-          buttonStyle={ [styles.confirmButton, { backgroundColor: colours.orange, borderColor: colours.orange, flex: 1 }] }
+          buttonStyle={ [styles.confirmButton, { backgroundColor: colours.orange, borderColor: colours.orange }] }
           textStyle={ styles.confirmButtonText }
           onPress={handleSubmit(handleSubmitForm)}
         >
@@ -59,52 +63,57 @@ class Signup extends Component {
   render () {
 
     return (
-      <View
+      <KeyboardAwareScrollView
         style={[
           styles.headerBuffer,
           { backgroundColor: colours.white }]}
+        enableOnAndroid
+        resetScrollToCoords={{ x: 0, y: 0 }}
       >
+
         <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
-        <ScrollView style={{ marginTop: Platform.OS === 'ios' ? null : 80 }} >
-          <KeyboardAvoidingView
-            behavior="padding"
-          >
-            <View style={{ flex: 1, justifyContent: 'center', marginBottom: 30 }}>
-              <View style={{ marginTop: 70 }}>
+        <View
+          style={{ marginTop: Platform.OS === 'ios' ? null : 80 }}
+        >
 
-                <View style={ [styles.row, { marginHorizontal: 10 }] }>
-                  <Field name="firstname" component={ FormTextInput } placeholder="* First name" />
-                </View>
+          <View style={{ flex: 1, justifyContent: 'center', marginBottom: 20 }}>
+            <View style={{ marginTop: 40 }}>
 
-
-                <View style={ [styles.row, { marginHorizontal: 10 }] }>
-                  <Field name="surname" component={ FormTextInput } placeholder="* Surname" />
-                </View>
-
-
-                <View style={ [styles.row, { marginHorizontal: 10 }] }>
-                  <Field name="email" component={ FormTextInput } placeholder="* Email" isEmail />
-                </View>
-
-
-                <View style={ [styles.row, { marginHorizontal: 10 }] }>
-                  <Field name="password" component={ FormPasswordInput } placeholder="* Password" />
-                </View>
-
-                <View style={ [styles.row, { marginHorizontal: 10 }] }>
-                  <Field name="confirmPassword" component={ FormPasswordInput } placeholder="* Confirm password" />
-                </View>
-                <View style={ [styles.row, { justifyContent: 'flex-end' }] }>
-                  <Text>* Mandatory fields</Text>
-                </View>
-                { this.renderServerError() }
-                { this.renderButton() }
+              <View style={ [styles.row, { backgroundColor: 'transparent', marginBottom: 0, justifyContent: 'flex-end' }] }>
+                <Text>* Mandatory fields</Text>
               </View>
+
+              <View style={ [styles.row, { marginHorizontal: 10, marginBottom: 0 }] }>
+                <Field name="firstname" component={ FormTextInput } placeholder="* First name" />
+              </View>
+
+
+              <View style={ [styles.row, { marginHorizontal: 10, marginBottom: 0 }] }>
+                <Field name="surname" component={ FormTextInput } placeholder="* Surname" />
+              </View>
+
+
+              <View style={ [styles.row, { marginHorizontal: 10, marginBottom: 0 }] }>
+                <Field name="email" component={ FormTextInput } placeholder="* Email" isEmail />
+              </View>
+
+
+              <View style={ [styles.row, { marginHorizontal: 10, marginBottom: 0 }] }>
+                <Field name="password" component={ FormPasswordInput } placeholder="* Password" />
+              </View>
+
+              <View style={ [styles.row, { marginHorizontal: 10 }] }>
+                <Field name="confirmPassword" component={ FormPasswordInput } placeholder="* Confirm password" />
+              </View>
+
+              { this.renderServerError() }
+              { this.renderButton() }
             </View>
-            <View style={{ height: 30 }} />
-          </KeyboardAvoidingView>
-        </ScrollView>
-      </View>
+          </View>
+          <View style={{ height: 30 }} />
+
+        </View>
+      </KeyboardAwareScrollView>
     );
   }
 }

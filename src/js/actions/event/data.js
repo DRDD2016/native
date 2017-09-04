@@ -1,5 +1,4 @@
 import Config from 'react-native-config';
-import { NavigationActions } from 'react-navigation';
 import { getVotes, clearPollState } from './poll';
 import { hydrateCreateEvent, clearCreateEvent } from '../create';
 import { getCalendar } from '../calendar';
@@ -136,18 +135,18 @@ export function getEvent (token, event_id, navigation) {
         };
         console.log('resetting route to event in data action creator');
         // new code - reset navigation
-        const resetAction = NavigationActions.reset({
-          index: 1,
-          actions: [
-            NavigationActions.navigate({ routeName: 'event', params })
-          ]
-        });
-
-        this.props.navigation.dispatch(resetAction);
+        // const resetAction = NavigationActions.reset({
+        //   index: 1,
+        //   actions: [
+        //     NavigationActions.navigate({ routeName: 'event', params })
+        //   ]
+        // });
+        //
+        // this.props.navigation.dispatch(resetAction);
 
         //
 
-        // navigation.navigate('event', params);
+        navigation.navigate('event', params);
       })
       .catch((err) => {
         dispatch(getEventFailure(err.message));

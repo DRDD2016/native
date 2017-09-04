@@ -365,8 +365,8 @@ const styles = {
     borderWidth: 1,
     paddingVertical: 8,
     paddingHorizontal: 10,
-    marginTop: 15,
-    marginHorizontal: 20
+    marginHorizontal: 20,
+    height: 50
   },
   confirmButtonText: {
     fontSize: 18,
