@@ -113,6 +113,7 @@ class Login extends Component {
             <TouchableOpacity
               accessibilityLabel="LOG IN Submit"
               activeOpacity={ 0.5 } onPress={handleSubmit(handleSubmitForm)}
+              style={{ alignItems: 'center', marginTop: 10 }}
             >
               <View style={styles.confirmButton}>
                 <Text style={styles.confirmButtonText}>LOG IN</Text>

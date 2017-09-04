@@ -104,7 +104,7 @@ export default class Event extends Component {
             { backgroundColor: colours.white }]}
         >
           <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
-          <View style={{ flex: 1, marginTop: 150 }}>
+          <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 70 : 150 }}>
             {
               this.props.event && this.eventRouter()
             }
