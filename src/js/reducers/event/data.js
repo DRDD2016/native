@@ -34,7 +34,7 @@ export default function data (state = initialState, action) {
       return { ...state, isFetching: true, error: undefined };
 
     case actions.GET_EVENT_SUCCESS:
-      return { ...state, isFetching: false };
+      return { ...state, ...action.data, isFetching: false };
     case actions.EDIT_EVENT_SUCCESS:
     case actions.SUBMIT_CODE_SUCCESS:
     case actions.UPDATE_RSVP_SUCCESS:
