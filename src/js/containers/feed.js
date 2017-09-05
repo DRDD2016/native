@@ -29,6 +29,7 @@ const mapDispatchToProps = (dispatch, props) => {
   const { navigation } = props;
   return {
     handleSelection: (event_id, viewed, feed_item_id) => {
+      console.log(`feed item touched handleSelection: event_id: ${event_id}, viewed: ${viewed}, id: ${feed_item_id}`);
       // need to tell server this feed item was touched
       AsyncStorage.getItem('spark_token')
       .then((token) => {

@@ -97,7 +97,9 @@ export const deleteEventFailure = error => ({
 
 export function getEvent (token, event_id, navigation) {
   return (dispatch) => {
-    console.log('getEvent action');
+    console.log(`getEvent action: token:${token}, event_id:${event_id}`);
+    console.log('navigation: ');
+    console.log(JSON.stringify(navigation));
     dispatch(getEventRequest());
     fetch(`${Config.URI}/events/${event_id}`, {
       method: 'GET',
@@ -112,6 +114,7 @@ export function getEvent (token, event_id, navigation) {
     .then((res) => {
       res.json()
       .then((data) => {
+        console.log('data: ', data);
         const userIsHost = store.getState().user.user_id === data.host_user_id;
         if (data.is_poll) {
           dispatch(getVotes(token, event_id, userIsHost));
@@ -134,6 +137,7 @@ export function getEvent (token, event_id, navigation) {
           previousRoute: navigation.state.routeName
         };
         console.log('resetting route to event in data action creator');
+        console.log('params', params);
         // new code - reset navigation
         // const resetAction = NavigationActions.reset({
         //   index: 1,
