@@ -45,7 +45,7 @@
           <category android:name="android.intent.category.DEFAULT" />
         </intent-filter>
         <intent-filter>
-            <data android:scheme="sparksocial://" android:host="open" />
+            <data android:scheme="sparksocial://" />
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
