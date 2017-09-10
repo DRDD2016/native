@@ -106,6 +106,7 @@ class Feed extends Component {
           styles.headerBuffer,
           { backgroundColor: colours.white }]}
       >
+        { !isConnected && this.renderAlert() }
         <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
         <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? null : 70 }}>
           {
