@@ -88,14 +88,18 @@ export default class InviteePoll extends Component {
     //     [category]: newArray
     //   }
     // });
+    console.log('new this.state.eventdetails: ', this.state.eventdetails);
+    this.forceUpdate(); // forces this component to update to take account of child components updates
   }
 
   render () {
-    const { event, handleVote, voteSaved, voteCount } = this.props;
+    console.log('render invitee Poll this.props: ', this.props);
+    const { event, handleVote, voteSaved, voteCount, navigator } = this.props;
     console.log('inviteePoll RenderProps: ', this.props);
     console.log('this.state.isModalVisible: ', this.state.isModalVisible);
     const allCategoriesSelected = Object.keys(this.state.eventdetails)
       .every(category => this.state.eventdetails[category].includes(1));
+    console.log('allCategoriesSelected', allCategoriesSelected);
     return (
 
       <ScrollView>
@@ -125,11 +129,12 @@ export default class InviteePoll extends Component {
                     <TouchableHighlight
                       style={ [styles.confirmButton, { marginBottom: 20, marginTop: 20 }] }
                       onPress={ () => {
+
                         this.setState({
                           isModalVisible: false
                         });
 
-                        this.props.navigator.navigate('Feed');
+                        navigator.goBack(null);
 
                       }}
                     >
@@ -144,7 +149,7 @@ export default class InviteePoll extends Component {
 
 
         </Modal>
-        <Text>POLL (INVITEE VIEW)</Text>
+        <Text>{'Click the options below to vote on the poll '}</Text>
         <View style={styles.row}>
 
           <CategoryDetails
@@ -173,7 +178,7 @@ export default class InviteePoll extends Component {
           />
         </View>
 
-        <View style={styles.row}>
+        <View style={[styles.row, { justifyContent: 'center' }]}>
           {
             allCategoriesSelected &&
             <TouchableHighlight
@@ -191,11 +196,6 @@ export default class InviteePoll extends Component {
             </TouchableHighlight>
           }
         </View>
-
-        {
-          voteSaved &&
-          <Text>Thanks for voting!</Text>
-        }
 
       </ScrollView>
 

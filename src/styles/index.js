@@ -31,6 +31,11 @@ const styles = {
     height: Platform.OS === 'ios' ? null : Dimensions.get('window').height * 1, // can remove if no problems on above
     top: Platform.OS === 'ios' ? null : -70
   },
+  titleHeader1: {
+    color: colours.headerTitleColor,
+    fontSize: 20,
+    fontWeight: '600'
+  },
   title1: {
     color: colours.white,
     fontSize: 24

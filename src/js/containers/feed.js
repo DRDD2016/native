@@ -14,14 +14,14 @@ const mapStateToProps = ({ feed, user, network }) => {
   const selectedFilter = feed.selectedFilter;
   const feedData = filterFeed(data, filterActive, selectedFilter);
   return {
-    allEvents: data,
-    feed: feedData,
-    isFetching: feed.isFetching,
     filterActive,
     selectedFilter,
     user_id: user.user_id,
-    push_info: user.push_info,
     isConnected: network.isConnected,
+    allEvents: data,
+    feed: feedData,
+    isFetching: feed.isFetching,
+    push_info: user.push_info,
     eventCode: network.inComingLinkCode
   };
 };

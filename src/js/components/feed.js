@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, ListView, Platform } from 'react-native';
+import { View, Text, ScrollView, ListView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
-import Header from './common/Header';
+import ImageHeader from './common/ImageHeader';
+import HeaderBack from './common/HeaderBackground';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
-// import { initSocket, stopSocket } from '../socket-router';
-
 
 class Feed extends Component {
 
@@ -17,13 +16,13 @@ class Feed extends Component {
     title: 'Feed',
     tabBarIcon: ({ tintColor }) =>
       <Icon name="globe" size={32} color={tintColor} />,
-    headerStyle: { backgroundColor: colours.transparent },
+    header: props => <ImageHeader {...props} />,
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
     headerTintColor: colours.headerButtonColor
   }
 
   componentWillMount () {
-    console.log('Feed WillMount props:', this.props);
+
     // if (this.props.user.push_info) {
     //   this.props.handleSavePush(this.props.push_info);
     // }
@@ -34,8 +33,7 @@ class Feed extends Component {
       if (this.props.eventCode !== 'none') {
         // stopSocket();
         const code = this.props.eventCode;
-        console.log(code);
-        console.log('submitting Code');
+
         this.props.handleSubmitCode(code);
       }
     }
@@ -43,12 +41,10 @@ class Feed extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log('Feed compWillReceiveNextprops: ', nextProps);
+
     const { feed } = nextProps;
     const newData = [].concat(feed).reverse();
     this.createDataSource(newData);
-
-    console.log('Feed WillReceive NextProps:', nextProps);
 
   }
 
@@ -96,19 +92,16 @@ class Feed extends Component {
   }
 
   render () {
-    console.log('Feed RenderProps: ', this.props);
 
     const { allEvents, feed, isFetching, displaySome, displayAll, filterActive, selectedFilter, isConnected } = this.props;
 
     return (
       <View
-        style={[
-          styles.headerBuffer,
-          { backgroundColor: colours.white }]}
+        style={{ backgroundColor: colours.white, flex: 1 }}
       >
         { !isConnected && this.renderAlert() }
-        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
-        <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? null : 70 }}>
+        <HeaderBack />
+        <View style={{ flex: 1 }}>
           {
             isFetching && <Spinner />
           }

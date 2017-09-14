@@ -37,7 +37,7 @@ class Calendar extends Component {
       return a.when[0] > b.when[0];
     });
     this.createDataSource(sortedData);
-
+    
   }
 
   createDataSource (calendar) {

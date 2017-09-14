@@ -39,8 +39,6 @@ export default class Event extends Component {
   });
 
   componentWillUpdate (nextProps) {
-    console.log('thisProps', this.props);
-    console.log('nextProps', nextProps);
 
     if (nextProps.event.name !== this.props.event.name) {
       this.props.navigation.setParams({
@@ -50,7 +48,7 @@ export default class Event extends Component {
   }
 
   eventRouter () {
-    console.log('eventRouter this.props', this.props.error);
+
     if (this.props.error) {
       return (
         <View>
@@ -96,7 +94,7 @@ export default class Event extends Component {
   }
 
   render () {
-    console.log('indexevent render thisProps', this.props);
+    
     return (
       <View style={{ flex: 1 }}>
         <View
