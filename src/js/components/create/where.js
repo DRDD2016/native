@@ -112,8 +112,8 @@ export default class Where extends Component {
               onFocus: () => {
                 this.setState({ inputFocussed: true, inputKeyFocussed: inputKey, listViewDisplayed: 'auto' });
               },
-              onEndEditing: () => {
-                this.setState({ inputFocussed: false, inputKeyFocussed: '' });
+              onSubmitEditing: () => {
+                this.setState({ inputFocussed: false, inputKeyFocussed: '', listViewDisplayed: 'false' });
               }
             }}
             onPress={(searchData, details, index = inputKey) => this.onPlaceSearch(searchData, details, index)}
@@ -191,7 +191,7 @@ export default class Where extends Component {
           !this.state.inputFocussed && <HeaderBack />
         }
         <KeyboardAwareScrollView
-          style={{ backgroundColor: colours.transparent, borderWidth: 2, borderColor: 'blue', marginTop: Platform.OS === 'ios' ? null : 80 }}
+          style={{ backgroundColor: colours.transparent, borderWidth: 2, borderColor: 'blue', marginTop: Platform.OS === 'ios' ? null : null }}
           enableOnAndroid
           extraHeight={0}
           resetScrollToCoords={{ x: 0, y: 0 }}
@@ -203,7 +203,7 @@ export default class Where extends Component {
               flexDirection: 'column',
               alignItems: 'center',
               margin: 5,
-              marginTop: Platform.OS === 'ios' ? null : 70,
+              marginTop: Platform.OS === 'ios' ? null : null,
               marginHorizontal: 10 }}
           >
             {
