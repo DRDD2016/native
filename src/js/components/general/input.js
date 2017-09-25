@@ -3,6 +3,7 @@ import { TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../common/Button';
 import styles from '../../../styles';
+import colours from '../../../styles/colours';
 
 const Input = ({ handleChange, value, placeholder, removeInput, inputKey, testDescription }) => {
 
@@ -16,7 +17,7 @@ const Input = ({ handleChange, value, placeholder, removeInput, inputKey, testDe
         autoCorrect={ false }
         value={ value }
         onChangeText={ text => handleChange(text, inputKey) }
-        style={ styles.inputStyle }
+        style={[styles.inputStyle, { height: 38, borderColor: colours.what, borderWidth: 1, borderRadius: 5 }]}
       />
       <View style={ [styles.shortRow, { alignItems: 'center' }] }>
 

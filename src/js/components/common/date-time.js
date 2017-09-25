@@ -3,6 +3,7 @@ import { View, Text, Switch, Dimensions } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
+import colours from '../../../styles/colours';
 
 const windowSize = Dimensions.get('window');
 
@@ -38,7 +39,10 @@ class DateTime extends Component {
                 marginLeft: 0
               },
               dateInput: {
-                marginLeft: 36
+                marginLeft: 36,
+                borderRadius: 5,
+                borderColor: colours.when,
+                borderWidth: 1
               }
             }}
             onDateChange={ date => handleDate(date, index) }
@@ -84,7 +88,10 @@ class DateTime extends Component {
                 marginLeft: 0
               },
               dateInput: {
-                marginLeft: 36
+                marginLeft: 36,
+                borderRadius: 5,
+                borderColor: colours.when,
+                borderWidth: 1
               }
             }}
             onDateChange={ (time) => {

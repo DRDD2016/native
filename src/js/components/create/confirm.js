@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Platform } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import ConfirmWhat from './confirm-what';
 import ConfirmWhere from './confirm-where';
 import ConfirmWhen from './confirm-when';
 import Button from '../common/Button';
-import Header from '../common/Header';
+import ImageHeader from '../common/ImageHeader';
+import HeaderBack from '../common/CreateHeaderBackground';
 import Spinner from '../common/Spinner';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
@@ -28,7 +29,8 @@ class Confirm extends Component {
     },
     headerStyle: { backgroundColor: colours.transparent },
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
-    headerTintColor: colours.headerButtonColor
+    headerTintColor: colours.headerButtonColor,
+    header: props => <ImageHeader {...props} />
   });
 
   renderAlert = () => {
@@ -45,14 +47,13 @@ class Confirm extends Component {
     return (
       <View
         style={[
-          styles.headerBuffer,
-          { backgroundColor: colours.white }]}
+          { backgroundColor: colours.white, flex: 1 }]}
       >
-        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
-        <View style={{ flex: 1, marginTop: 80 }}>
+        <HeaderBack />
+        <View>
           { !isConnected && this.renderAlert() }
           <ScrollView>
-            <View style={{ marginTop: 70, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
               <Text style={[styles.msg4, { backgroundColor: colours.transparent, paddingBottom: 5 }]}>{ description }</Text>
               <Text style={[styles.msg4, { backgroundColor: colours.transparent, paddingBottom: 5 }]}>{ note }</Text>
             </View>
@@ -62,7 +63,7 @@ class Confirm extends Component {
             <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
             <ConfirmWhen data={when} />
 
-            <View style={[styles.rowCentered, { marginTop: 0 }]}>
+            <View style={[styles.rowCentered, { marginTop: 10 }]}>
               <Button
                 buttonStyle={styles.confirmButton}
                 textStyle={styles.confirmButtonText}

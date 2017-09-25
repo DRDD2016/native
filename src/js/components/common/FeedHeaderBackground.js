@@ -9,8 +9,6 @@ export default function HeaderBack ({ children }) {
 
     <Image
       style={{
-        borderWidth: 2,
-        borderColor: 'yellow',
         flexDirection: 'row',
         flex: 1,
         // width: Dimensions.get('window').width * 1,

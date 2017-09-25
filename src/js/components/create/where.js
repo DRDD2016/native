@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import Config from 'react-native-config';
 import React, { Component } from 'react';
-import { View, Text, Dimensions, Platform } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -15,7 +15,6 @@ import colours from '../../../styles/colours';
 import discardEvent from '../../lib/discard-event';
 
 const windowSize = Dimensions.get('window');
-const deviceHeight = windowSize.height;
 
 export default class Where extends Component {
 
@@ -42,12 +41,14 @@ export default class Where extends Component {
     this.state = {
       listViewDisplayed: 'auto',
       inputFocussed: false,
-      inputKeyFocussed: ''
+      inputKeyFocussed: -1
     };
   }
 
   onPlaceSearch = (data, details, i) => {
+
     const place = details.website ? `${details.name} ${details.formatted_address}` : `${details.formatted_address}`;
+    this.setState({ inputFocussed: false, inputKeyFocussed: -1 }); // clears listview and unhides Where text,etc
     this.props.handleChange(place, i);
   }
 
@@ -72,7 +73,25 @@ export default class Where extends Component {
   render () {
     const { data, name, addInput, removeInput } = this.props;
     const inputs = data.map((value, inputKey) => {
+      console.log('data: ', data);
+      console.log('name: ', name);
+      console.log('inputKey: ', inputKey);
+      console.log('this.state.inputFocussed: ', this.state.inputFocussed);
+      console.log('this.state.inputKeyFocussed: ', this.state.inputKeyFocussed);
+      console.log('this.state.listViewDisplayed: ', this.state.listViewDisplayed);
+
+      if (this.state.inputFocussed !== false && inputKey !== this.state.inputKeyFocussed && this.state.inputKeyFocussed !== '') {
+        console.log('inputsNOTFocussed');
+        return (
+          <View
+            accessibilityLabel={`Where option ${inputKey + 1}`}
+            key={ inputKey }
+          />
+        );
+      }
+
       return (
+
         <View
           accessibilityLabel={`Where option ${inputKey + 1}`}
           key={ inputKey }
@@ -86,34 +105,39 @@ export default class Where extends Component {
           <GooglePlacesAutocomplete
             ref={ (googlePlaces) => {
               this.googlePlaces = googlePlaces;
-              console.log('googlePlaces: ', googlePlaces);
-              console.log('inputKey: ', inputKey);
             }}
-            enablePoweredByContainer={false}
+            enablePoweredByContainer
+            keyboardShouldPersistTaps="handled"
             placeholder="Enter a venue"
             minLength={2}
             autoFocus={false}
             fetchDetails
-            isRowScrollable={false}
-            listViewDisplayed={this.state.listViewDisplayed}
+            listViewDisplayed={this.state.inputFocussed && this.state.inputKeyFocussed === inputKey}
             textInputProps={{
+              returnKeyType: 'done',
               underlineColorAndroid: 'white',
               onKeyPress: (e) => { // IOS only
                 if (e.nativeEvent.key === 'Enter') {
-                  this.setState({ listViewDisplayed: 'false', inputFocussed: false });
+                  this.setState({ listViewDisplayed: 'false', inputFocussed: false, inputKeyFocussed: -1 });
                 }
               },
               onChangeText: (text) => {
-                console.log('onChangeText: ', text);
-
                 this.checkForData();
                 this.props.handleChange(text, inputKey);
               },
               onFocus: () => {
-                this.setState({ inputFocussed: true, inputKeyFocussed: inputKey, listViewDisplayed: 'auto' });
+                this.setState({ inputFocussed: true, inputKeyFocussed: inputKey });
               },
               onSubmitEditing: () => {
-                this.setState({ inputFocussed: false, inputKeyFocussed: '', listViewDisplayed: 'false' });
+                // when IOS return key is pressed
+                this.setState({ inputKeyFocussed: -1 });
+              },
+              onEndEditing: () => {
+                // when textinput loses focus, NOT when item in list is clicked
+
+                // console.log('onEndEditing: ', 'listview FALSE');
+                // this.setState({ inputFocussed: false, inputKeyFocussed: '' });
+
               }
             }}
             onPress={(searchData, details, index = inputKey) => this.onPlaceSearch(searchData, details, index)}
@@ -125,10 +149,10 @@ export default class Where extends Component {
             getDefaultValue={() => value }
             styles={{
               container: {
-                flex: 10,
-                borderRadius: 5,
-                borderColor: colours.where,
-                borderWidth: 1
+                flex: 10
+                // borderRadius: 5
+                // borderColor: colours.where
+                // borderWidth: 1
                 // backgroundColor: 'purple' // '#fff'
                 // zIndex: 999999
               },
@@ -137,7 +161,7 @@ export default class Where extends Component {
                 height: 38,
                 borderRadius: 5,
                 borderColor: colours.where,
-                borderWidth: 0,
+                borderWidth: 1,
                 maxWidth: windowSize.width - (windowSize.width / 5)
               },
               textInput: {
@@ -146,7 +170,7 @@ export default class Where extends Component {
                 flex: 1
               },
               listView: {
-                height: deviceHeight,
+                // height: deviceHeight,
                 // ios - position: 'absolute',
                 // left: 5,
                 // right: 5,
@@ -185,13 +209,13 @@ export default class Where extends Component {
       <View
         accessibilityLabel="Where"
         style={[
-          { borderWidth: 2, borderColor: 'red', backgroundColor: colours.white, flex: 1 }]}
+          { backgroundColor: colours.white, flex: 1 }]}
       >
         {
           !this.state.inputFocussed && <HeaderBack />
         }
         <KeyboardAwareScrollView
-          style={{ backgroundColor: colours.transparent, borderWidth: 2, borderColor: 'blue', marginTop: Platform.OS === 'ios' ? null : null }}
+          style={{ backgroundColor: colours.transparent }}
           enableOnAndroid
           extraHeight={0}
           resetScrollToCoords={{ x: 0, y: 0 }}
@@ -203,7 +227,6 @@ export default class Where extends Component {
               flexDirection: 'column',
               alignItems: 'center',
               margin: 5,
-              marginTop: Platform.OS === 'ios' ? null : null,
               marginHorizontal: 10 }}
           >
             {
@@ -235,7 +258,7 @@ export default class Where extends Component {
                     paddingLeft: 5,
                     paddingRight: 5 }}
                 >
-                  <AddInput testDescription="Add Where option" data={ data } handler={ addInput } />
+                  <AddInput testDescription="Add Where option" colour={colours.where} data={ data } handler={ addInput } />
                 </View>
 
                 <View

@@ -16,7 +16,7 @@ const colours = {
   where: '#7D3E98',
   when: '#F58220',
   confirm: '#8DC744',
-  next: '#316AB3',
+  next: '#8DC744',
   main: '#316AB3', // tabbar, card borders, etc
   transparent: 'transparent',
   background: this.offWhite,
