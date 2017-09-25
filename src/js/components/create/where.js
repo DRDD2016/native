@@ -8,7 +8,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 // import Router from '../../router';
 import AddInput from '../general/add-input';
 import Button from '../common/Button';
-import Header from '../common/Header';
+import ImageHeader from '../common/ImageHeader';
+import HeaderBack from '../common/CreateHeaderBackground';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import discardEvent from '../../lib/discard-event';
@@ -31,9 +32,9 @@ export default class Where extends Component {
         </Button>
       );
     },
-    headerStyle: { backgroundColor: colours.transparent },
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
-    headerTintColor: colours.headerButtonColor
+    headerTintColor: colours.headerButtonColor,
+    header: props => <ImageHeader {...props} />
   });
 
   constructor () {
@@ -92,7 +93,7 @@ export default class Where extends Component {
             listViewDisplayed={this.state.listViewDisplayed}
             textInputProps={{
               underlineColorAndroid: 'white',
-              onKeyPress: (e) => {
+              onKeyPress: (e) => { // IOS only
                 if (e.nativeEvent.key === 'Enter') {
                   this.setState({ listViewDisplayed: 'false' });
                 }
@@ -168,18 +169,25 @@ export default class Where extends Component {
       <View
         accessibilityLabel="Where"
         style={[
-          styles.headerBuffer,
-          { backgroundColor: colours.white }]}
+          { borderWidth: 2, borderColor: 'red', backgroundColor: colours.white, flex: 1 }]}
       >
-        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
+        <HeaderBack />
         <KeyboardAwareScrollView
-          style={{ backgroundColor: colours.transparent, marginTop: 80 }}
+          style={{ backgroundColor: colours.transparent, borderWidth: 2, borderColor: 'blue', marginTop: Platform.OS === 'ios' ? null : 80 }}
           enableOnAndroid
           extraHeight={0}
           resetScrollToCoords={{ x: 0, y: 0 }}
           contentContainerStyle={{ }}
         >
-          <View accessibilityLabel="Where options" style={ [styles.container, { marginTop: 70, marginHorizontal: 10 }]}>
+          <View
+            accessibilityLabel="Where options"
+            style={{
+              flexDirection: 'column',
+              alignItems: 'center',
+              margin: 5,
+              marginTop: Platform.OS === 'ios' ? null : 70,
+              marginHorizontal: 10 }}
+          >
             <Text style={ styles.smallMessageText } >
               Enter where the event will take place (or leave blank to decide it later).
             </Text>

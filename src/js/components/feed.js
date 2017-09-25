@@ -6,7 +6,7 @@ import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
 import ImageHeader from './common/ImageHeader';
-import HeaderBack from './common/HeaderBackground';
+import HeaderBack from './common/FeedHeaderBackground';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
