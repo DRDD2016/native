@@ -97,10 +97,9 @@ export const deleteEventFailure = error => ({
 
 export function getEvent (token, event_id, navigation) {
   return (dispatch) => {
-    console.log(`getEvent action: token:${token}, event_id:${event_id}`);
-    console.log('navigation: ');
-    console.log(JSON.stringify(navigation));
+
     dispatch(getEventRequest());
+    
     fetch(`${Config.URI}/events/${event_id}`, {
       method: 'GET',
       headers: {

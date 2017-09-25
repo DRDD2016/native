@@ -53,8 +53,8 @@ export default class HostPoll extends Component {
 
 
   render () {
-    console.log('this props', this.props);
-    const { event, voteCount, handleConfirmEvent, finalChoices, isFetching } = this.props;
+    
+    const { event, voteCount, handleConfirmEvent, finalChoices, isFetching, navigator } = this.props;
 
     const allCategoriesSelected = Object.keys(this.state.eventdetails)
       .map(category => this.state.eventdetails[category].length)
@@ -97,7 +97,7 @@ export default class HostPoll extends Component {
                           isModalVisible: false
                         });
 
-                        this.props.navigator.navigate('Feed');
+                        navigator.goBack(null);
 
                       }}
                     >

@@ -55,7 +55,7 @@
     "husky": "^0.13.1",
     "jest": "18.1.0",
     "react-test-renderer": "15.4.2",
-    "remote-redux-devtools": "^0.5.7"
+    "remote-redux-devtools": "^0.5.12"
   },
   "jest": {
     "preset": "react-native",

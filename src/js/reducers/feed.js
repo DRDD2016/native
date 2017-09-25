@@ -13,6 +13,10 @@ export default function feed (state = initialState, action) {
   switch (action.type) {
 
     case actions.GET_FEED_REQUEST:
+      return {
+        ...state,
+        isFetching: true
+      };
     case actions.FEED_ITEM_TOUCHED_REQUEST:
       return {
         ...state,
@@ -40,6 +44,11 @@ export default function feed (state = initialState, action) {
     }
 
     case actions.GET_FEED_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error
+      };
     case actions.FEED_ITEM_TOUCHED_FAILURE:
       return {
         ...state,

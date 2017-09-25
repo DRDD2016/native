@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { store } from '../init-store';
 import Event from '../components/event';
 import { getEvent, updateRsvp, deleteEvent } from '../actions/event/data';
-import { postVote, finaliseEvent } from '../actions/event/poll';
+import { postVote, finaliseEvent, dismissModal } from '../actions/event/poll';
 import { hydrateCreateEvent, clearCreateEvent } from '../actions/create';
 import normaliseVoteData from '../lib/normalise-vote-data';
 import { openWhatsApp, composeWhatsAppMessage } from '../lib/branchLink';
@@ -26,57 +26,60 @@ const mapStateToProps = ({ event, user, network }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const { navigation } = ownProps;
+  return {
+    fetchEvent: (event_id) => {
 
-  fetchEvent: (event_id) => {
-
-    dispatch(getEvent(event_id));
-  },
-  handleVote: (vote, event_id) => {
-    console.log('handleVote: ', `${JSON.stringify(vote)} / event_id: ${event_id}`);
-    AsyncStorage.getItem('spark_token')
-    .then((token) => {
-      console.log('token: ', token);
-      if (token) {
-        dispatch(postVote(token, normaliseVoteData(vote), event_id, ownProps.navigation));
-      }
-    });
-  },
-  handleConfirmEvent: (hostEventChoices, event_id) => {
-    AsyncStorage.getItem('spark_token')
-    .then((token) => {
-      if (token) {
-        dispatch(finaliseEvent(token, hostEventChoices, event_id));
-      }
-    });
-  },
-  handleDeleteEvent: (event_id) => {
-    AsyncStorage.getItem('spark_token')
-    .then((token) => {
-      if (token) {
-        dispatch(deleteEvent(token, event_id));
-        ownProps.navigation.updateCurrentRouteParams({
-          eventIsCancelled: true
-        });
-      }
-    });
-  },
-  rsvpToEvent: (event_id, status) => {
-    AsyncStorage.getItem('spark_token')
-    .then((token) => {
-      if (token) {
-        dispatch(updateRsvp(token, event_id, status));
-      }
-    });
-  },
-  discardEvent: () => {
-    dispatch(clearCreateEvent());
-  },
-  handleInviteMoreFriends: () => {
-    const event = store.getState().event.data;
-    openWhatsApp(composeWhatsAppMessage(store.getState().user, event, event.code));
-  }
-});
+      dispatch(getEvent(event_id));
+    },
+    handleVote: (vote, event_id) => {
+      console.log('handleVote: ', `${JSON.stringify(vote)} / event_id: ${event_id}`);
+      console.log('ownProps.navigation: ', navigation);
+      AsyncStorage.getItem('spark_token')
+      .then((token) => {
+        console.log('token: ', token);
+        if (token) {
+          dispatch(postVote(token, normaliseVoteData(vote), event_id, navigation));
+        }
+      });
+    },
+    handleConfirmEvent: (hostEventChoices, event_id) => {
+      AsyncStorage.getItem('spark_token')
+      .then((token) => {
+        if (token) {
+          dispatch(finaliseEvent(token, hostEventChoices, event_id));
+        }
+      });
+    },
+    handleDeleteEvent: (event_id) => {
+      AsyncStorage.getItem('spark_token')
+      .then((token) => {
+        if (token) {
+          dispatch(deleteEvent(token, event_id));
+          navigation.updateCurrentRouteParams({
+            eventIsCancelled: true
+          });
+        }
+      });
+    },
+    rsvpToEvent: (event_id, status) => {
+      AsyncStorage.getItem('spark_token')
+      .then((token) => {
+        if (token) {
+          dispatch(updateRsvp(token, event_id, status));
+        }
+      });
+    },
+    discardEvent: () => {
+      dispatch(clearCreateEvent());
+    },
+    handleInviteMoreFriends: () => {
+      const event = store.getState().event.data;
+      openWhatsApp(composeWhatsAppMessage(store.getState().user, event, event.code));
+    }
+  };
+};
 
 const EventContainer = connect(
     mapStateToProps,

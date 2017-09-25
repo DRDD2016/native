@@ -31,6 +31,11 @@ const styles = {
     height: Platform.OS === 'ios' ? null : Dimensions.get('window').height * 1, // can remove if no problems on above
     top: Platform.OS === 'ios' ? null : -70
   },
+  titleHeader1: {
+    color: colours.headerTitleColor,
+    fontSize: 20,
+    fontWeight: '600'
+  },
   title1: {
     color: colours.white,
     fontSize: 24
@@ -589,20 +594,20 @@ const styles = {
 
   // feed
 
-  // filter-panel
+  // filter-panel - not sure if used
   filterPanelContainer: {
     height: 50,
     borderWidth: 2,
     borderColor: 'red'
   },
   rowFilterPanel: {
-    marginTop: 10,
     flex: 1,
+    borderColor: 'green',
+    borderWidth: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     paddingLeft: 10,
-    paddingRight: 10,
-    maxHeight: 30
+    paddingRight: 10
   },
   filterButton: {
     backgroundColor: colours.white,

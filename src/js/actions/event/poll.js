@@ -51,6 +51,7 @@ export function getVotes (token, event_id, allVotes = false) {
     });
   };
 }
+
 export function getVotesRequest () {
   return {
     type: GET_VOTES_REQUEST
@@ -74,7 +75,7 @@ export function getVotesFailure (error) {
 ********/
 
 export function postVote (token, vote, event_id, navigation) { //eslint-disable-line
-  console.log('---- navigation', navigation);
+  
   return (dispatch) => {
     dispatch(postVoteRequest());
 

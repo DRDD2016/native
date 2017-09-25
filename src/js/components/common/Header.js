@@ -13,7 +13,7 @@ export default function Header (props) {
     >
       <Image
         style={{ height: Platform.OS === 'ios' ? 150 : 170, width: Dimensions.get('window').width * 1 }}
-        source={require('../../../img/bannerDiagTop.png')}
+        source={require('../../../img/AppBannerDiagBottom.png')}
       >
         <View
           style={[{

@@ -1,19 +1,27 @@
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Platform } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-// import devTools from 'remote-redux-devtools';
+import { composeWithDevTools } from 'remote-redux-devtools';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import rootReducer from './reducers/';
 
 export function initStore (initialState) {
-
+  if (Platform.OS === 'ios') {
+    return createStore(
+      rootReducer,
+      initialState,
+        compose(
+          applyMiddleware(thunkMiddleware),
+          autoRehydrate({ log: true })
+        )
+    );
+  }
   return createStore(
     rootReducer,
     initialState,
-    compose(
+    composeWithDevTools(
       applyMiddleware(thunkMiddleware),
-      autoRehydrate({ log: true }),
-      // devTools()
+      autoRehydrate({ log: true })
     )
   );
 }

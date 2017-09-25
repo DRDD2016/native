@@ -27,6 +27,7 @@ export default function data (state = initialState, action) {
 
     case actions.GET_EVENT_REQUEST:
       return { ...state, isFetching: true };
+      
     case actions.EDIT_EVENT_REQUEST:
     case actions.SUBMIT_CODE_REQUEST:
     case actions.UPDATE_RSVP_REQUEST:

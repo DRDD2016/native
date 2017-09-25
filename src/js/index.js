@@ -13,14 +13,17 @@ import PushController from './lib/PushController';
 
 const { Answers } = Fabric;
 
+console.log((require('react-native-config').default));
 // disable remote debugger warning in a simulator
 console.disableYellowBox = true;
-
-console.log((require('react-native-config').default));
+console.ignoredYellowBox = [
+  'Setting a timer'
+];
 
 class App extends Component {
 
   componentWillMount () {
+
     persistStore(store,
       {
         storage: AsyncStorage,
