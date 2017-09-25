@@ -21,7 +21,9 @@ export default class Splash extends Component {
       AsyncStorage.getItem('spark_token')
       .then((token) => {
         if (token) {
+          console.log('socket init');
           initSocket();
+          console.log('socket inited');
           this.props.navigation.navigate('tabsMain');
         } else {
           this.props.navigation.navigate('auth');

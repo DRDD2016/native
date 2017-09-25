@@ -1,27 +1,41 @@
 import React from 'react';
-import { View, Dimensions, Image, Platform } from 'react-native';
+import { View, Dimensions, Image } from 'react-native';
 import { Header } from 'react-navigation';
+import colours from '../../../styles/colours';
 
 export default function ImageHeader (props) {
-  
+  console.log('Header.HEIGHT: ', Header.HEIGHT);
+
   return (
     <View
       style={{
-        backgroundColor: 'white',
-        height: Header.HEIGHT
+        // flex: 1,
+        backgroundColor: colours.white,
+        // marginTop: -5,
+        height: Header.HEIGHT,
+        flexDirection: 'column',
+        alignItems: 'flex-end'
       }}
     >
-      <Header {...props} style={{ backgroundColor: 'transparent' }} />
+
       <Image
-        source={require('../../../img/bannerDiagTop.png')}
+        source={require('../../../img/AppBannerDiagTop.png')}
         style={{
-          top: Platform.OS === 'ios' ? -5 : -5,
-          opacity: 0.3,
-          height: Platform.OS === 'ios' ? 150 : 150,
-          width: Dimensions.get('window').width * 1,
-          position: 'absolute'
+          flex: 1,
+          zIndex: 0,
+          // position: 'absolute',
+
+          width: Dimensions.get('window').width * 1
+          // height: Platform.OS === 'ios' ? Header.HEIGHT + 15 : Header.HEIGHT,
+          // resizeMode: Image.resizeMode.contain
+
         }}
-      />
+
+      >
+        <Header {...props} style={{ flex: 1, zIndex: 1, backgroundColor: 'rgba(255, 255, 255, 0.6)' }} />
+      </Image>
+
+
     </View>
   );
 }

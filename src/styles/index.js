@@ -594,20 +594,20 @@ const styles = {
 
   // feed
 
-  // filter-panel
+  // filter-panel - not sure if used
   filterPanelContainer: {
     height: 50,
     borderWidth: 2,
     borderColor: 'red'
   },
   rowFilterPanel: {
-    marginTop: 10,
     flex: 1,
+    borderColor: 'green',
+    borderWidth: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     paddingLeft: 10,
-    paddingRight: 10,
-    maxHeight: 30
+    paddingRight: 10
   },
   filterButton: {
     backgroundColor: colours.white,

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, ListView } from 'react-native';
+import { Header } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
@@ -16,9 +17,9 @@ class Feed extends Component {
     title: 'Feed',
     tabBarIcon: ({ tintColor }) =>
       <Icon name="globe" size={32} color={tintColor} />,
-    header: props => <ImageHeader {...props} />,
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
-    headerTintColor: colours.headerButtonColor
+    headerTintColor: colours.headerButtonColor,
+    header: props => <ImageHeader {...props} />
   }
 
   componentWillMount () {
@@ -97,24 +98,44 @@ class Feed extends Component {
 
     return (
       <View
-        style={{ backgroundColor: colours.white, flex: 1 }}
+        style={{
+          borderBottomWidth: 1,
+          borderBottomColor: colours.lightgray,
+          justifyContent: 'flex-start',
+          backgroundColor: colours.white,
+          flex: 1 }}
       >
         { !isConnected && this.renderAlert() }
-        <HeaderBack />
+        <View style={{ height: Header.HEIGHT, flexDirection: 'row', alignItems: 'flex-start' }}>
+          <HeaderBack>
+            <View
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                borderBottomWidth: 1,
+                borderBottomColor: colours.lightgray,
+                borderTopWidth: 1,
+                borderTopColor: colours.gray }}
+            >
+
+              {
+                !isFetching && allEvents.length > 0 &&
+                <FilterPanel
+                  displayAll={ displayAll }
+                  displaySome={ displaySome }
+                  filterActive={ filterActive }
+                  selectedFilter={ selectedFilter }
+                />
+              }
+
+            </View>
+
+          </HeaderBack>
+        </View>
         <View style={{ flex: 1 }}>
           {
             isFetching && <Spinner />
           }
-          {
-            !isFetching && allEvents.length > 0 &&
-            <FilterPanel
-              displayAll={ displayAll }
-              displaySome={ displaySome }
-              filterActive={ filterActive }
-              selectedFilter={ selectedFilter }
-            />
-          }
-
 
           <ScrollView>
             <View>
