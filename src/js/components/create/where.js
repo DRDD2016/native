@@ -40,7 +40,9 @@ export default class Where extends Component {
   constructor () {
     super();
     this.state = {
-      listViewDisplayed: 'auto'
+      listViewDisplayed: 'auto',
+      inputFocussed: false,
+      inputKeyFocussed: ''
     };
   }
 
@@ -84,23 +86,34 @@ export default class Where extends Component {
           <GooglePlacesAutocomplete
             ref={ (googlePlaces) => {
               this.googlePlaces = googlePlaces;
+              console.log('googlePlaces: ', googlePlaces);
+              console.log('inputKey: ', inputKey);
             }}
             enablePoweredByContainer={false}
-            placeholder="Where"
+            placeholder="Enter a venue"
             minLength={2}
             autoFocus={false}
             fetchDetails
+            isRowScrollable={false}
             listViewDisplayed={this.state.listViewDisplayed}
             textInputProps={{
               underlineColorAndroid: 'white',
               onKeyPress: (e) => { // IOS only
                 if (e.nativeEvent.key === 'Enter') {
-                  this.setState({ listViewDisplayed: 'false' });
+                  this.setState({ listViewDisplayed: 'false', inputFocussed: false });
                 }
               },
               onChangeText: (text) => {
+                console.log('onChangeText: ', text);
+
                 this.checkForData();
                 this.props.handleChange(text, inputKey);
+              },
+              onFocus: () => {
+                this.setState({ inputFocussed: true, inputKeyFocussed: inputKey, listViewDisplayed: 'auto' });
+              },
+              onEndEditing: () => {
+                this.setState({ inputFocussed: false, inputKeyFocussed: '' });
               }
             }}
             onPress={(searchData, details, index = inputKey) => this.onPlaceSearch(searchData, details, index)}
@@ -112,16 +125,19 @@ export default class Where extends Component {
             getDefaultValue={() => value }
             styles={{
               container: {
-                flex: 10
+                flex: 10,
+                borderRadius: 5,
+                borderColor: colours.where,
+                borderWidth: 1
                 // backgroundColor: 'purple' // '#fff'
                 // zIndex: 999999
               },
               textInputContainer: {
-                backgroundColor: '#fff',
-                // borderRadius: 5,
+                backgroundColor: inputKey === this.state.inputKeyFocussed && this.state.inputFocussed ? colours.where : colours.white,
                 height: 38,
-                borderColor: '#D3D3D3',
-                borderWidth: 1,
+                borderRadius: 5,
+                borderColor: colours.where,
+                borderWidth: 0,
                 maxWidth: windowSize.width - (windowSize.width / 5)
               },
               textInput: {
@@ -132,10 +148,10 @@ export default class Where extends Component {
               listView: {
                 height: deviceHeight,
                 // ios - position: 'absolute',
-                left: 5,
-                right: 5,
-                top: 10, // 40
-                backgroundColor: '#fff'
+                // left: 5,
+                // right: 5,
+                // top: 10, // 40
+                backgroundColor: colours.verylightgray
               }
             }}
             nearbyPlacesAPI={'GooglePlacesSearch'}
@@ -171,7 +187,9 @@ export default class Where extends Component {
         style={[
           { borderWidth: 2, borderColor: 'red', backgroundColor: colours.white, flex: 1 }]}
       >
-        <HeaderBack />
+        {
+          !this.state.inputFocussed && <HeaderBack />
+        }
         <KeyboardAwareScrollView
           style={{ backgroundColor: colours.transparent, borderWidth: 2, borderColor: 'blue', marginTop: Platform.OS === 'ios' ? null : 80 }}
           enableOnAndroid
@@ -188,44 +206,58 @@ export default class Where extends Component {
               marginTop: Platform.OS === 'ios' ? null : 70,
               marginHorizontal: 10 }}
           >
-            <Text style={ styles.smallMessageText } >
-              Enter where the event will take place (or leave blank to decide it later).
-            </Text>
-            <Text style={ styles.smallMessageText }>
-              You can add more than one option to create a poll.
-            </Text>
+            {
+              !this.state.inputFocussed &&
+              <View>
+                <Text style={ styles.smallMessageText } >
+                  Enter where the event will take place (or leave blank to decide it later).
+                </Text>
+                <Text style={ styles.smallMessageText }>
+                  You can add more than one option to create a poll.
+                </Text>
+              </View>
+
+            }
 
             { inputs }
 
-            <View
-              accessibilityLabel="Add Where"
-              style={{
-                flexDirection: 'row',
-                marginTop: 10,
-                marginBottom: 10,
-                paddingLeft: 5,
-                paddingRight: 5 }}
-            >
-              <AddInput testDescription="Add Where option" data={ data } handler={ addInput } />
-            </View>
+            {
+              !this.state.inputFocussed &&
 
-            <View
-              style={{
-                flexDirection: 'row',
-                marginTop: 0,
-                marginBottom: 10,
-                paddingLeft: 5,
-                paddingRight: 5 }}
-            >
-              <Button
-                testDescription="Confirm Where"
-                buttonStyle={ [styles.buttonStyle, { flex: 1 }] }
-                textStyle={ styles.buttonTextStyle }
-                onPress={ () => this.nextPage(name) }
-              >
-                Next
-              </Button>
-            </View>
+              <View>
+
+                <View
+                  accessibilityLabel="Add Where"
+                  style={{
+                    flexDirection: 'row',
+                    marginTop: 10,
+                    marginBottom: 10,
+                    paddingLeft: 5,
+                    paddingRight: 5 }}
+                >
+                  <AddInput testDescription="Add Where option" data={ data } handler={ addInput } />
+                </View>
+
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    marginTop: 0,
+                    marginBottom: 10,
+                    paddingLeft: 5,
+                    paddingRight: 5 }}
+                >
+                  <Button
+                    testDescription="Confirm Where"
+                    buttonStyle={ [styles.confirmButton, { backgroundColor: colours.next, borderColor: colours.next }] }
+                    textStyle={ styles.confirmButtonText }
+                    onPress={ () => this.nextPage(name) }
+                  >
+                    Next
+                  </Button>
+                </View>
+              </View>
+
+            }
           </View>
 
         </KeyboardAwareScrollView>
