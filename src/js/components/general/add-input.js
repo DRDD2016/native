@@ -5,7 +5,7 @@ import Button from '../common/Button';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 
-const AddInput = ({ data, handler, testDescription }) => {
+const AddInput = ({ data, handler, testDescription, colour }) => {
 
   return (
     <View style={{ flexDirection: 'row', flex: 1 }}>
@@ -18,7 +18,7 @@ const AddInput = ({ data, handler, testDescription }) => {
 
           <Button
             testDescription={testDescription}
-            buttonStyle={[styles.addButtonStyle]}
+            buttonStyle={[styles.addButtonStyle, { opacity: 0.8, backgroundColor: colour }]}
             textStyle={styles.addButtonTextStyle}
             onPress={ () => handler(data.length) }
           >

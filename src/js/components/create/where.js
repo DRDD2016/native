@@ -1,20 +1,20 @@
 /* eslint-disable react/no-array-index-key */
 import Config from 'react-native-config';
 import React, { Component } from 'react';
-import { View, Text, Dimensions, Platform } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Icon from 'react-native-vector-icons/FontAwesome';
 // import Router from '../../router';
 import AddInput from '../general/add-input';
 import Button from '../common/Button';
-import Header from '../common/Header';
+import ImageHeader from '../common/ImageHeader';
+import HeaderBack from '../common/CreateHeaderBackground';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import discardEvent from '../../lib/discard-event';
 
 const windowSize = Dimensions.get('window');
-const deviceHeight = windowSize.height;
 
 export default class Where extends Component {
 
@@ -31,20 +31,24 @@ export default class Where extends Component {
         </Button>
       );
     },
-    headerStyle: { backgroundColor: colours.transparent },
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
-    headerTintColor: colours.headerButtonColor
+    headerTintColor: colours.headerButtonColor,
+    header: props => <ImageHeader {...props} />
   });
 
   constructor () {
     super();
     this.state = {
-      listViewDisplayed: 'auto'
+      listViewDisplayed: 'auto',
+      inputFocussed: false,
+      inputKeyFocussed: -1
     };
   }
 
   onPlaceSearch = (data, details, i) => {
+
     const place = details.website ? `${details.name} ${details.formatted_address}` : `${details.formatted_address}`;
+    this.setState({ inputFocussed: false, inputKeyFocussed: -1 }); // clears listview and unhides Where text,etc
     this.props.handleChange(place, i);
   }
 
@@ -69,7 +73,25 @@ export default class Where extends Component {
   render () {
     const { data, name, addInput, removeInput } = this.props;
     const inputs = data.map((value, inputKey) => {
+      console.log('data: ', data);
+      console.log('name: ', name);
+      console.log('inputKey: ', inputKey);
+      console.log('this.state.inputFocussed: ', this.state.inputFocussed);
+      console.log('this.state.inputKeyFocussed: ', this.state.inputKeyFocussed);
+      console.log('this.state.listViewDisplayed: ', this.state.listViewDisplayed);
+
+      if (this.state.inputFocussed !== false && inputKey !== this.state.inputKeyFocussed && this.state.inputKeyFocussed !== '') {
+        console.log('inputsNOTFocussed');
+        return (
+          <View
+            accessibilityLabel={`Where option ${inputKey + 1}`}
+            key={ inputKey }
+          />
+        );
+      }
+
       return (
+
         <View
           accessibilityLabel={`Where option ${inputKey + 1}`}
           key={ inputKey }
@@ -84,22 +106,38 @@ export default class Where extends Component {
             ref={ (googlePlaces) => {
               this.googlePlaces = googlePlaces;
             }}
-            enablePoweredByContainer={false}
-            placeholder="Where"
+            enablePoweredByContainer
+            keyboardShouldPersistTaps="handled"
+            placeholder="Enter a venue"
             minLength={2}
             autoFocus={false}
             fetchDetails
-            listViewDisplayed={this.state.listViewDisplayed}
+            listViewDisplayed={this.state.inputFocussed && this.state.inputKeyFocussed === inputKey}
             textInputProps={{
+              returnKeyType: 'done',
               underlineColorAndroid: 'white',
-              onKeyPress: (e) => {
+              onKeyPress: (e) => { // IOS only
                 if (e.nativeEvent.key === 'Enter') {
-                  this.setState({ listViewDisplayed: 'false' });
+                  this.setState({ listViewDisplayed: 'false', inputFocussed: false, inputKeyFocussed: -1 });
                 }
               },
               onChangeText: (text) => {
                 this.checkForData();
                 this.props.handleChange(text, inputKey);
+              },
+              onFocus: () => {
+                this.setState({ inputFocussed: true, inputKeyFocussed: inputKey });
+              },
+              onSubmitEditing: () => {
+                // when IOS return key is pressed
+                this.setState({ inputKeyFocussed: -1 });
+              },
+              onEndEditing: () => {
+                // when textinput loses focus, NOT when item in list is clicked
+
+                // console.log('onEndEditing: ', 'listview FALSE');
+                // this.setState({ inputFocussed: false, inputKeyFocussed: '' });
+
               }
             }}
             onPress={(searchData, details, index = inputKey) => this.onPlaceSearch(searchData, details, index)}
@@ -112,14 +150,17 @@ export default class Where extends Component {
             styles={{
               container: {
                 flex: 10
+                // borderRadius: 5
+                // borderColor: colours.where
+                // borderWidth: 1
                 // backgroundColor: 'purple' // '#fff'
                 // zIndex: 999999
               },
               textInputContainer: {
-                backgroundColor: '#fff',
-                // borderRadius: 5,
+                backgroundColor: inputKey === this.state.inputKeyFocussed && this.state.inputFocussed ? colours.where : colours.white,
                 height: 38,
-                borderColor: '#D3D3D3',
+                borderRadius: 5,
+                borderColor: colours.where,
                 borderWidth: 1,
                 maxWidth: windowSize.width - (windowSize.width / 5)
               },
@@ -129,12 +170,12 @@ export default class Where extends Component {
                 flex: 1
               },
               listView: {
-                height: deviceHeight,
+                // height: deviceHeight,
                 // ios - position: 'absolute',
-                left: 5,
-                right: 5,
-                top: 10, // 40
-                backgroundColor: '#fff'
+                // left: 5,
+                // right: 5,
+                // top: 10, // 40
+                backgroundColor: colours.verylightgray
               }
             }}
             nearbyPlacesAPI={'GooglePlacesSearch'}
@@ -168,56 +209,78 @@ export default class Where extends Component {
       <View
         accessibilityLabel="Where"
         style={[
-          styles.headerBuffer,
-          { backgroundColor: colours.white }]}
+          { backgroundColor: colours.white, flex: 1 }]}
       >
-        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
+        {
+          !this.state.inputFocussed && <HeaderBack />
+        }
         <KeyboardAwareScrollView
-          style={{ backgroundColor: colours.transparent, marginTop: 80 }}
+          style={{ backgroundColor: colours.transparent }}
           enableOnAndroid
           extraHeight={0}
           resetScrollToCoords={{ x: 0, y: 0 }}
           contentContainerStyle={{ }}
         >
-          <View accessibilityLabel="Where options" style={ [styles.container, { marginTop: 70, marginHorizontal: 10 }]}>
-            <Text style={ styles.smallMessageText } >
-              Enter where the event will take place (or leave blank to decide it later).
-            </Text>
-            <Text style={ styles.smallMessageText }>
-              You can add more than one option to create a poll.
-            </Text>
+          <View
+            accessibilityLabel="Where options"
+            style={{
+              flexDirection: 'column',
+              alignItems: 'center',
+              margin: 5,
+              marginHorizontal: 10 }}
+          >
+            {
+              !this.state.inputFocussed &&
+              <View>
+                <Text style={ styles.smallMessageText } >
+                  Enter where the event will take place (or leave blank to decide it later).
+                </Text>
+                <Text style={ styles.smallMessageText }>
+                  You can add more than one option to create a poll.
+                </Text>
+              </View>
+
+            }
 
             { inputs }
 
-            <View
-              accessibilityLabel="Add Where"
-              style={{
-                flexDirection: 'row',
-                marginTop: 10,
-                marginBottom: 10,
-                paddingLeft: 5,
-                paddingRight: 5 }}
-            >
-              <AddInput testDescription="Add Where option" data={ data } handler={ addInput } />
-            </View>
+            {
+              !this.state.inputFocussed &&
 
-            <View
-              style={{
-                flexDirection: 'row',
-                marginTop: 0,
-                marginBottom: 10,
-                paddingLeft: 5,
-                paddingRight: 5 }}
-            >
-              <Button
-                testDescription="Confirm Where"
-                buttonStyle={ [styles.buttonStyle, { flex: 1 }] }
-                textStyle={ styles.buttonTextStyle }
-                onPress={ () => this.nextPage(name) }
-              >
-                Next
-              </Button>
-            </View>
+              <View>
+
+                <View
+                  accessibilityLabel="Add Where"
+                  style={{
+                    flexDirection: 'row',
+                    marginTop: 10,
+                    marginBottom: 10,
+                    paddingLeft: 5,
+                    paddingRight: 5 }}
+                >
+                  <AddInput testDescription="Add Where option" colour={colours.where} data={ data } handler={ addInput } />
+                </View>
+
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    marginTop: 0,
+                    marginBottom: 10,
+                    paddingLeft: 5,
+                    paddingRight: 5 }}
+                >
+                  <Button
+                    testDescription="Confirm Where"
+                    buttonStyle={ [styles.confirmButton, { backgroundColor: colours.next, borderColor: colours.next }] }
+                    textStyle={ styles.confirmButtonText }
+                    onPress={ () => this.nextPage(name) }
+                  >
+                    Next
+                  </Button>
+                </View>
+              </View>
+
+            }
           </View>
 
         </KeyboardAwareScrollView>

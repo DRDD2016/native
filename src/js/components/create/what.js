@@ -1,12 +1,13 @@
 /* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
-import { View, Text, Platform } from 'react-native';
+import { View, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Input from '../general/input';
 // import Router from '../../router';
 import AddInput from '../general/add-input';
 import Button from '../common/Button';
-import Header from '../common/Header';
+import ImageHeader from '../common/ImageHeader';
+import HeaderBack from '../common/CreateHeaderBackground';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import discardEvent from '../../lib/discard-event';
@@ -26,9 +27,9 @@ export default class What extends Component {
         </Button>
       );
     },
-    headerStyle: { backgroundColor: colours.transparent },
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
-    headerTintColor: colours.headerButtonColor
+    headerTintColor: colours.headerButtonColor,
+    header: props => <ImageHeader {...props} />
   });
 
   nextPage = (name) => {
@@ -56,21 +57,19 @@ export default class What extends Component {
     });
 
     return (
-      <View
-        style={[
-          styles.headerBuffer,
-          { backgroundColor: colours.white }]}
+      <KeyboardAwareScrollView
+        style={{ backgroundColor: colours.white }}
+        enableOnAndroid
+        extraHeight={80}
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        contentContainerStyle={{ }}
       >
-        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
-        <KeyboardAwareScrollView
-          style={{ backgroundColor: colours.transparent, marginTop: Platform.OS === 'ios' ? null : 90 }}
-          enableOnAndroid
-          extraHeight={0}
-          resetScrollToCoords={{ x: 0, y: 0 }}
-          contentContainerStyle={{ }}
+        <HeaderBack />
+        <View
+          style={{ backgroundColor: colours.transparent }}
         >
 
-          <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 70, marginHorizontal: 15 }}>
+          <View style={{ flexDirection: 'column', alignItems: 'center', marginHorizontal: 15 }}>
             <Text style={ [styles.msg4, { paddingTop: 10, paddingBottom: 10 }] }>
               Enter what your event will be (or leave blank to decide it later).
             </Text>
@@ -88,7 +87,7 @@ export default class What extends Component {
                 paddingLeft: 5,
                 paddingRight: 5 }}
             >
-              <AddInput testDescription="Add What option" data={ data } handler={ addInput } />
+              <AddInput testDescription="Add What option" colour={colours.what} data={ data } handler={ addInput } />
             </View>
 
             <View
@@ -108,9 +107,10 @@ export default class What extends Component {
                 Next
               </Button>
             </View>
+            <View style={{ height: 80 }} />
           </View>
-        </KeyboardAwareScrollView>
-      </View>
+        </View>
+      </KeyboardAwareScrollView>
     );
   }
 }

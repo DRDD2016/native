@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Platform } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import AddInput from '../general/add-input';
 import Button from '../common/Button';
-import Header from '../common/Header';
+import ImageHeader from '../common/ImageHeader';
+import HeaderBack from '../common/CreateHeaderBackground';
 import DateTime from '../common/date-time';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
@@ -23,9 +24,9 @@ export default class When extends Component {
         </Button>
       );
     },
-    headerStyle: { backgroundColor: colours.transparent },
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
-    headerTintColor: colours.headerButtonColor
+    headerTintColor: colours.headerButtonColor,
+    header: props => <ImageHeader {...props} />
   });
 
   nextPage = (name) => {
@@ -40,13 +41,11 @@ export default class When extends Component {
 
     return (
       <View
-        style={[
-          styles.headerBuffer,
-          { backgroundColor: colours.white }]}
+        style={{ backgroundColor: colours.white }}
       >
-        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
-        <ScrollView style={{ marginTop: 80 }} >
-          <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 70, marginHorizontal: 15 }}>
+        <HeaderBack />
+        <ScrollView>
+          <View style={{ flexDirection: 'column', alignItems: 'center', marginHorizontal: 15 }}>
 
             <Text style={[styles.msg4, { backgroundColor: colours.transparent, paddingTop: 10, paddingBottom: 10 }]}>
               Enter a date and a time for your event.  Dates are required, but you can leave the time as TBC.
@@ -78,7 +77,7 @@ export default class When extends Component {
                 paddingLeft: 5,
                 paddingRight: 5 }}
             >
-              <AddInput data={ data } handler={ addInput } />
+              <AddInput colour={colours.when} data={ data } handler={ addInput } />
             </View>
           </View>
           <View style={styles.container}>

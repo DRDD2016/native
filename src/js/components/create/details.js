@@ -3,7 +3,8 @@ import { View, Text, TextInput, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Button from '../common/Button';
-import Header from '../common/Header';
+import ImageHeader from '../common/ImageHeader';
+import HeaderBack from '../common/CreateHeaderBackground';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import { store } from '../../init-store';
@@ -32,7 +33,8 @@ export default class Details extends Component {
     },
     headerStyle: { backgroundColor: colours.transparent },
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
-    headerTintColor: colours.headerButtonColor
+    headerTintColor: colours.headerButtonColor,
+    header: props => <ImageHeader {...props} />
   }
 
   componentWillMount () {
@@ -48,16 +50,13 @@ export default class Details extends Component {
     const hideNext = name === '' || description === '';
     return (
       <KeyboardAwareScrollView
-        style={[
-          styles.headerBuffer,
-          { backgroundColor: colours.white }]}
+        style={{ backgroundColor: colours.white }}
         enableOnAndroid
         extraHeight={0}
         resetScrollToCoords={{ x: 0, y: 0 }}
         contentContainerStyle={{ }}
       >
-
-        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
+        <HeaderBack />
         <View
           style={{ backgroundColor: colours.transparent }}
         >
@@ -66,7 +65,7 @@ export default class Details extends Component {
               flexDirection: 'column',
               alignItems: 'center',
               marginHorizontal: 10,
-              marginTop: Platform.OS === 'ios' ? 70 : 160 }}
+              marginTop: Platform.OS === 'ios' ? null : 160 }}
           >
             <Text style={styles.msg3}>
               Enter the name of your event and a description.
