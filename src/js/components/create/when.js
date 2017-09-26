@@ -41,7 +41,7 @@ export default class When extends Component {
 
     return (
       <View
-        style={{ backgroundColor: colours.white }}
+        style={{ flex: 1, backgroundColor: colours.white }}
       >
         <HeaderBack />
         <ScrollView>
