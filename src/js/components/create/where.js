@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import Config from 'react-native-config';
 import React, { Component } from 'react';
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text, Dimensions, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -97,8 +97,8 @@ export default class Where extends Component {
           key={ inputKey }
           style={{
             flexDirection: 'row',
-            marginTop: 10,
-            paddingHorizontal: 10 // #fff
+            marginTop: !this.state.inputFocussed ? 10 : null,
+            paddingHorizontal: !this.state.inputFocussed ? 10 : null // #fff
             // zIndex: 999999
           }}
         >
@@ -130,13 +130,15 @@ export default class Where extends Component {
               },
               onSubmitEditing: () => {
                 // when IOS return key is pressed
-                this.setState({ inputKeyFocussed: -1 });
+                this.setState({ inputKeyFocussed: -1, inputFocussed: false }); // check IOS inputFocussed not causing bugs
               },
               onEndEditing: () => {
                 // when textinput loses focus, NOT when item in list is clicked
 
-                // console.log('onEndEditing: ', 'listview FALSE');
-                // this.setState({ inputFocussed: false, inputKeyFocussed: '' });
+                console.log('onEndEditing: ');
+                if (Platform !== 'IOS') {
+                  this.setState({ inputFocussed: false, inputKeyFocussed: -1 });
+                }
 
               }
             }}
@@ -149,7 +151,8 @@ export default class Where extends Component {
             getDefaultValue={() => value }
             styles={{
               container: {
-                flex: 10
+                flex: !this.state.inputFocussed ? 10 : null,
+                width: this.state.inputFocussed ? windowSize.width : null
                 // borderRadius: 5
                 // borderColor: colours.where
                 // borderWidth: 1
@@ -162,7 +165,7 @@ export default class Where extends Component {
                 borderRadius: 5,
                 borderColor: colours.where,
                 borderWidth: 1,
-                maxWidth: windowSize.width - (windowSize.width / 5)
+                maxWidth: !this.state.inputFocussed ? windowSize.width - (windowSize.width / 5) : null
               },
               textInput: {
                 marginTop: 4,
@@ -226,8 +229,8 @@ export default class Where extends Component {
             style={{
               flexDirection: 'column',
               alignItems: 'center',
-              margin: 5,
-              marginHorizontal: 10 }}
+              margin: !this.state.inputFocussed ? 5 : null,
+              marginHorizontal: !this.state.inputFocussed ? 10 : null }}
           >
             {
               !this.state.inputFocussed &&

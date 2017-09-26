@@ -65,7 +65,7 @@ export default class Details extends Component {
               flexDirection: 'column',
               alignItems: 'center',
               marginHorizontal: 10,
-              marginTop: Platform.OS === 'ios' ? null : 160 }}
+              marginTop: Platform.OS === 'ios' ? null : 10 }}
           >
             <Text style={styles.msg3}>
               Enter the name of your event and a description.
@@ -99,7 +99,7 @@ export default class Details extends Component {
               <TextInput
                 accessibilityLabel="Note"
                 underlineColorAndroid="transparent"
-                style={ [styles.inputStyle, { height: 120 }] }
+                style={ [styles.inputStyle, { textAlignVertical: 'top', height: 120 }] }
                 onChangeText={ text => handleChange(text, 'note') }
                 value={ note }
                 multiline
