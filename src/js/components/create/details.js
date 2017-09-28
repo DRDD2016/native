@@ -1,44 +1,35 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, Platform } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Button from '../common/Button';
+import ButtonHeader from '../common/ButtonHeader';
 import ImageHeader from '../common/ImageHeader';
 import HeaderBack from '../common/CreateHeaderBackground';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import { store } from '../../init-store';
 import { clearCreateEvent } from '../../actions/create';
-import discardEvent from '../../lib/discard-event';
+import BackIcon from '../common/back-icon';
 
 export default class Details extends Component {
 
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     title: 'Create event',
-    headerRight: () => {
-      return (
-        <Button
-          onPress={ discardEvent }
-          buttonStyle={{ margin: 15, justifyContent: 'center' }}
-          textStyle={{ color: colours.darkgray, fontWeight: '600' }}
-        >
-          <Icon
-            name="close"
-            style={{ paddingLeft: 15, paddingRight: 15 }}
-            size={ 24 }
-            color={ colours.darkgray }
-          />
-        </Button>
-      );
-    },
+    headerLeft: <ButtonHeader
+      onPress={() => navigation.goBack(null)}
+    >
+      <BackIcon />
+    </ButtonHeader>,
     headerStyle: { backgroundColor: colours.transparent },
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
     headerTintColor: colours.headerButtonColor,
     header: props => <ImageHeader {...props} />
-  }
+  });
 
   componentWillMount () {
     store.dispatch(clearCreateEvent());
+    console.log('this.props: ', this.props);
+
   }
 
   nextPage = (name) => {

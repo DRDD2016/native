@@ -9,6 +9,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import AddInput from '../general/add-input';
 import Button from '../common/Button';
 import ImageHeader from '../common/ImageHeader';
+import ButtonHeader from '../common/ButtonHeader';
+import BackIcon from '../common/back-icon';
 import HeaderBack from '../common/CreateHeaderBackground';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
@@ -20,6 +22,11 @@ export default class Where extends Component {
 
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.name,
+    headerLeft: <ButtonHeader
+      onPress={() => navigation.goBack(null)}
+    >
+      <BackIcon />
+    </ButtonHeader>,
     headerRight: () => {
       return (
         <Button
