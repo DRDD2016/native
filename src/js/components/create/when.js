@@ -4,6 +4,8 @@ import AddInput from '../general/add-input';
 import Button from '../common/Button';
 import ImageHeader from '../common/ImageHeader';
 import HeaderBack from '../common/CreateHeaderBackground';
+import ButtonHeader from '../common/ButtonHeader';
+import BackIcon from '../common/back-icon';
 import DateTime from '../common/date-time';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
@@ -13,6 +15,11 @@ export default class When extends Component {
 
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.name,
+    headerLeft: <ButtonHeader
+      onPress={() => navigation.goBack(null)}
+    >
+      <BackIcon />
+    </ButtonHeader>,
     headerRight: () => {
       return (
         <Button

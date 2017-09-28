@@ -6,27 +6,29 @@ import Input from '../general/input';
 // import Router from '../../router';
 import AddInput from '../general/add-input';
 import Button from '../common/Button';
+import ButtonHeader from '../common/ButtonHeader';
 import ImageHeader from '../common/ImageHeader';
 import HeaderBack from '../common/CreateHeaderBackground';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import discardEvent from '../../lib/discard-event';
+import BackIcon from '../common/back-icon';
+import CloseIcon from '../common/close-icon';
 
 export default class What extends Component {
 
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.name,
-    headerRight: () => {
-      return (
-        <Button
-          onPress={ discardEvent }
-          buttonStyle={{ margin: 15 }}
-          textStyle={{ color: colours.white, fontWeight: '600' }}
-        >
-          <Text>Cancel</Text>
-        </Button>
-      );
-    },
+    headerLeft: <ButtonHeader
+      onPress={() => navigation.goBack(null)}
+    >
+      <BackIcon />
+    </ButtonHeader>,
+    headerRight: <ButtonHeader
+      onPress={ discardEvent }
+    >
+      <CloseIcon />
+    </ButtonHeader>,
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
     headerTintColor: colours.headerButtonColor,
     header: props => <ImageHeader {...props} />
