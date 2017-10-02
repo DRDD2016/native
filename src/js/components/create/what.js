@@ -11,9 +11,9 @@ import ImageHeader from '../common/ImageHeader';
 import HeaderBack from '../common/CreateHeaderBackground';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
-import discardEvent from '../../lib/discard-event';
+// import discardEvent from '../../lib/discard-event';
 import BackIcon from '../common/back-icon';
-import CloseIcon from '../common/close-icon';
+import CloseButton from '../common/CloseButton';
 
 export default class What extends Component {
 
@@ -24,11 +24,7 @@ export default class What extends Component {
     >
       <BackIcon />
     </ButtonHeader>,
-    headerRight: <ButtonHeader
-      onPress={ discardEvent }
-    >
-      <CloseIcon />
-    </ButtonHeader>,
+    headerRight: <CloseButton stack="ScreenCreate" nav={navigation} />,
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
     headerTintColor: colours.headerButtonColor,
     header: props => <ImageHeader {...props} />

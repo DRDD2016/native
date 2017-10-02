@@ -6,7 +6,7 @@ import FinalisedEvent from './finalised-event';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import Header from '../common/Header';
-import CloseIcon from '../common/close-icon';
+import CloseButton from '../common/CloseButton';
 import EditIcon from '../common/edit-icon';
 
 export default class Event extends Component {
@@ -28,13 +28,7 @@ export default class Event extends Component {
         </TouchableHighlight> :
         null
     ),
-    headerLeft: (
-      <TouchableHighlight style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-        <View>
-          <CloseIcon navigation={navigation} />
-        </View>
-      </TouchableHighlight>
-    ),
+    headerLeft: <CloseButton stack="Event" nav={navigation} />,
     headerTintColor: colours.headerButtonColor
   });
 
@@ -94,7 +88,7 @@ export default class Event extends Component {
   }
 
   render () {
-    
+
     return (
       <View style={{ flex: 1 }}>
         <View
