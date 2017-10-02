@@ -6,10 +6,10 @@ import ImageHeader from '../common/ImageHeader';
 import HeaderBack from '../common/CreateHeaderBackground';
 import ButtonHeader from '../common/ButtonHeader';
 import BackIcon from '../common/back-icon';
+import CloseButton from '../common/CloseButton';
 import DateTime from '../common/date-time';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
-import discardEvent from '../../lib/discard-event';
 
 export default class When extends Component {
 
@@ -20,17 +20,7 @@ export default class When extends Component {
     >
       <BackIcon />
     </ButtonHeader>,
-    headerRight: () => {
-      return (
-        <Button
-          onPress={ discardEvent }
-          buttonStyle={{ margin: 15 }}
-          textStyle={{ color: colours.white, fontWeight: '600' }}
-        >
-          <Text>Cancel</Text>
-        </Button>
-      );
-    },
+    headerRight: <CloseButton stack="ScreenCreate" nav={navigation} />,
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
     headerTintColor: colours.headerButtonColor,
     header: props => <ImageHeader {...props} />

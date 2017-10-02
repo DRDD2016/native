@@ -9,20 +9,21 @@ import HeaderBack from '../common/CreateHeaderBackground';
 import Spinner from '../common/Spinner';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
-import discardEvent from '../../lib/discard-event';
 import ButtonHeader from '../common/ButtonHeader';
-import CloseIcon from '../common/close-icon';
+import BackIcon from '../common/back-icon';
+import CloseButton from '../common/CloseButton';
 import { connectAlert } from '../Alert';
 
 class Confirm extends Component {
 
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.name,
-    headerRight: <ButtonHeader
-      onPress={ discardEvent } // don't duplicate on Press for icon and button - discard event vs navigationgoBack()
+    headerLeft: <ButtonHeader
+      onPress={() => navigation.goBack(null)}
     >
-      <CloseIcon navigation={navigation} />
+      <BackIcon />
     </ButtonHeader>,
+    headerRight: <CloseButton stack="ScreenCreate" nav={navigation} />,
     headerStyle: { backgroundColor: colours.transparent },
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
     headerTintColor: colours.headerButtonColor,

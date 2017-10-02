@@ -13,7 +13,6 @@ export default class BackIcon extends Component {
         style={{ paddingLeft: 15, paddingRight: 15 }}
         size={ 24 }
         color={ colours.gray }
-        // onPress={() => this.props.navigation.goBack(null)}
       />
     );
   }

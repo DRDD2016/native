@@ -11,10 +11,10 @@ import Button from '../common/Button';
 import ImageHeader from '../common/ImageHeader';
 import ButtonHeader from '../common/ButtonHeader';
 import BackIcon from '../common/back-icon';
+import CloseButton from '../common/CloseButton';
 import HeaderBack from '../common/CreateHeaderBackground';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
-import discardEvent from '../../lib/discard-event';
 
 const windowSize = Dimensions.get('window');
 
@@ -27,17 +27,7 @@ export default class Where extends Component {
     >
       <BackIcon />
     </ButtonHeader>,
-    headerRight: () => {
-      return (
-        <Button
-          onPress={ discardEvent }
-          buttonStyle={{ margin: 15 }}
-          textStyle={{ color: colours.white, fontWeight: '600' }}
-        >
-          <Text>Cancel</Text>
-        </Button>
-      );
-    },
+    headerRight: <CloseButton stack="ScreenCreate" nav={navigation} />,
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
     headerTintColor: colours.headerButtonColor,
     header: props => <ImageHeader {...props} />

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight, Platform } from 'react-native';
+import { View, Text, Platform } from 'react-native';
 import InviteePoll from './invitee-poll';
 import HostPoll from './host-poll';
 import FinalisedEvent from './finalised-event';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import Header from '../common/Header';
-import CloseIcon from '../common/close-icon';
-import EditIcon from '../common/edit-icon';
+import CloseButton from '../common/CloseButton';
+import Button from '../common/Button';
+import DeleteIcon from '../common/delete-icon';
 
 export default class Event extends Component {
 
@@ -16,43 +17,47 @@ export default class Event extends Component {
     title: (navigation.state.params.name === undefined) ? 'Sorry...' : navigation.state.params.name,
     headerStyle: { backgroundColor: colours.transparent },
     headerRight: (
-      navigation.state.params.userIsHost && !navigation.state.params.isPoll && !navigation.state.params.eventIsCancelled ?
-
-        <TouchableHighlight
-          onPress={ () => navigation.state.params.handleEdit(navigation.state.params.event) }
-          style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
+      navigation.state.params.userIsHost &&
+        <Button
+          buttonStyle={{ paddingLeft: 20, paddingRight: 20, flexDirection: 'row', alignSelf: 'flex-end' }}
+          textStyle={{ color: colours.gray }}
+          onPress={ () => navigation.state.params.handleDeleteEvent(navigation.state.params.event.event_id) }
         >
-          <View>
-            <EditIcon />
-          </View>
-        </TouchableHighlight> :
-        null
+          <DeleteIcon />
+        </Button>
     ),
-    headerLeft: (
-      <TouchableHighlight style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-        <View>
-          <CloseIcon navigation={navigation} />
-        </View>
-      </TouchableHighlight>
-    ),
+    headerLeft: <CloseButton stack="Event" nav={navigation} />,
     headerTintColor: colours.headerButtonColor
   });
 
   componentWillUpdate (nextProps) {
+
+    console.log('thisProps: ', this.props);
+
 
     if (nextProps.event.name !== this.props.event.name) {
       this.props.navigation.setParams({
         name: nextProps.event.name
       });
     }
+
+    console.log('nextProps: ', nextProps);
+    console.log('ThisPropsNavigation: ', this.props.navigation);
   }
 
   eventRouter () {
 
-    if (this.props.error) {
+    if (this.props.error === 'Event has been deleted') {
       return (
         <View>
           <Text>This event has been cancelled!</Text>
+        </View>
+      );
+    } else if (this.props.error) {
+      return (
+        <View>
+          <Text>An error has occurred!</Text>
+          <Text>{`ERROR: ${this.props.error}`}</Text>
         </View>
       );
     } else if (this.props.userIsHost && this.props.isPoll) {
@@ -84,9 +89,11 @@ export default class Event extends Component {
           event={ this.props.event }
           event_id={ this.props.event_id }
           userIsHost={ this.props.userIsHost }
+          isPoll={this.props.isPoll}
           rsvps={ this.props.rsvps }
           rsvpToEvent={ this.props.rsvpToEvent }
           handleDeleteEvent={ this.props.handleDeleteEvent }
+          handleEdit={ this.props.navigation.state.params.handleEdit }
           handleInviteMoreFriends={ this.props.handleInviteMoreFriends }
         />
       );
@@ -94,7 +101,7 @@ export default class Event extends Component {
   }
 
   render () {
-    
+
     return (
       <View style={{ flex: 1 }}>
         <View

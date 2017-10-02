@@ -15,9 +15,7 @@ export default class Details extends Component {
 
   static navigationOptions = ({ navigation }) => ({
     title: 'Create event',
-    headerLeft: <ButtonHeader
-      onPress={() => navigation.goBack(null)}
-    >
+    headerLeft: <ButtonHeader onPress={() => navigation.goBack(null)}>
       <BackIcon />
     </ButtonHeader>,
     headerStyle: { backgroundColor: colours.transparent },
