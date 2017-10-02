@@ -21,5 +21,5 @@ export function openWhatsApp (text) {
       console.log(`Can't handle url: ${url}`);
     }
     return Linking.openURL(url);
-  }).catch(() => console.log('An error occurred'));
+  }).catch(() => console.log('An error occurred')); // put this error into a modal with a OK button and nav if needed
 }

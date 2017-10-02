@@ -1,12 +1,13 @@
 /* eslint-disable arrow-body-style */
 import React from 'react';
-import { View, Image, Text, ScrollView } from 'react-native';
+import { View, Image, Text, ScrollView, TouchableHighlight } from 'react-native';
+import { Header } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FinalisedWhat from '../create/confirm-what';
 import FinalisedWhere from '../create/confirm-where';
 import FinalisedWhen from '../create/confirm-when';
 import Button from '../common/Button';
-import DeleteIcon from '../common/delete-icon';
+import EditIcon from '../common/edit-icon';
 import InviteeCard from './invitee-card';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
@@ -60,30 +61,56 @@ const inlineStyle = {
   }
 };
 
-const FinalisedEvent = ({ event, userIsHost, rsvpToEvent, rsvps, handleDeleteEvent, handleInviteMoreFriends }) => {
+const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, handleEdit, handleInviteMoreFriends }) => {
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
-        { userIsHost ? <Text>You are hosting</Text> : <Text>You have been invited, please RSVP</Text> }
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
 
-        { userIsHost &&
-          <Button
-            buttonStyle={{ paddingLeft: 20, paddingRight: 20, flexDirection: 'row', alignSelf: 'flex-end' }}
-            textStyle={{ color: colours.gray }}
-            onPress={ () => handleDeleteEvent(event.event_id) }
-          >
-            <DeleteIcon />
-          </Button>
+        <Image source={{ uri: event.host_photo_url }} style={{ width: 60, height: 60, resizeMode: 'contain' }} />
+
+        { userIsHost ?
+          <View>
+            <Text style={{ alignSelf: 'center' }}>You are hosting</Text>
+            <Text style={[styles.msg1, { alignSelf: 'center' }]}>{event.name}</Text>
+          </View>
+          :
+          <View>
+            <Text style={{ alignSelf: 'center' }}>You have been invited to</Text>
+            <Text style={[styles.msg1, { alignSelf: 'center' }]}>{event.name}</Text>
+            <Text style={{ alignSelf: 'center' }}>please RSVP</Text>
+          </View>
         }
+
+        { userIsHost ?
+          null
+          :
+          <View style={{ width: Header.HEIGHT, height: Header.HEIGHT }} />
+        }
+
+        { userIsHost && !isPoll ?
+          <TouchableHighlight
+            onPress={ () => handleEdit(event) }
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: Header.HEIGHT,
+              height: Header.HEIGHT
+            }}
+          >
+            <View>
+              <EditIcon />
+            </View>
+          </TouchableHighlight>
+          : null
+        }
+
       </View>
 
       <ScrollView>
 
         <View style={{ flexDirection: 'row' }}>
-          <View style={{ alignSelf: 'flex-start' }}>
-            <Image source={{ uri: event.host_photo_url }} style={{ width: 60, height: 60, resizeMode: 'contain' }} />
-          </View>
-          <View style={{ flex: 1, alignSelf: 'center', marginHorizontal: 10 }}>
+          <View style={{ flex: 1, alignSelf: 'center', marginTop: 10, marginHorizontal: 10 }}>
             <View>
               <Text>{event.description}</Text>
             </View>

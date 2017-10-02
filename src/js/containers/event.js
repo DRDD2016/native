@@ -35,10 +35,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     handleVote: (vote, event_id) => {
       console.log('handleVote: ', `${JSON.stringify(vote)} / event_id: ${event_id}`);
-      console.log('ownProps.navigation: ', navigation);
       AsyncStorage.getItem('spark_token')
       .then((token) => {
-        console.log('token: ', token);
         if (token) {
           dispatch(postVote(token, normaliseVoteData(vote), event_id, navigation));
         }
@@ -57,9 +55,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       .then((token) => {
         if (token) {
           dispatch(deleteEvent(token, event_id));
-          navigation.updateCurrentRouteParams({
-            eventIsCancelled: true
-          });
+          // navigation.updateCurrentRouteParams({
+          //   eventIsCancelled: true     // might need to redux this
+          // });
         }
       });
     },

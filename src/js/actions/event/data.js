@@ -99,7 +99,7 @@ export function getEvent (token, event_id, navigation) {
   return (dispatch) => {
 
     dispatch(getEventRequest());
-    
+
     fetch(`${Config.URI}/events/${event_id}`, {
       method: 'GET',
       headers: {
@@ -113,7 +113,7 @@ export function getEvent (token, event_id, navigation) {
     .then((res) => {
       res.json()
       .then((data) => {
-        console.log('data: ', data);
+        console.log('getEvent data: ', data);
         const userIsHost = store.getState().user.user_id === data.host_user_id;
         if (data.is_poll) {
           dispatch(getVotes(token, event_id, userIsHost));
@@ -128,9 +128,11 @@ export function getEvent (token, event_id, navigation) {
           event: data,
           handleEdit: () => {
             dispatch(clearCreateEvent());
+
             setTimeout(() => {
               dispatch(hydrateCreateEvent(data));
             }, 200);
+
             navigation.navigate('Edit', params, navigation);
           },
           previousRoute: navigation.state.routeName
