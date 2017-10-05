@@ -23,12 +23,23 @@ class Profile extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { avatarSource: null };
+    this.state = { avatarSource: null, avatarUri: null };
     this.selectPhotoTapped = this.selectPhotoTapped.bind(this);
   }
 
   saveChanges (firstname, surname) {
-    this.props.handleUpload(this.state.avatarSource);
+
+    let uploadSource = '';
+
+    if (Platform.OS === 'android') {
+      console.log('this.state.avatarUri', this.state.avatarUri);
+      uploadSource = { uri: this.state.avatarUri };
+    } else {
+      console.log(this.state.avatarUri);
+      uploadSource = { uri: this.state.avatarUri.replace('file://', '') };
+    }
+    console.log(uploadSource); // /var/mobile/Containers/Data/Application/1F15368F-4…ocuments/2BE4B05B-440A-41B6-8680-F4230E046902.jpg
+    this.props.handleUpload(uploadSource);
     this.props.handleEditName(firstname, surname);
   }
 
@@ -55,11 +66,11 @@ class Profile extends Component {
         if (Platform.OS === 'android') {
           source = { uri: response.uri };
         } else {
-          console.log('rss', response);
           source = { uri: response.uri.replace('file://', '') };
         }
 
         this.setState({
+          avatarUri: response.uri,
           avatarSource: source
         });
       }

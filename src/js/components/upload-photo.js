@@ -108,6 +108,7 @@ export default class UploadPhoto extends Component {
         }
 
         this.setState({
+          avatarUri: response.uri,
           avatarSource: source
         });
       }
@@ -115,7 +116,16 @@ export default class UploadPhoto extends Component {
   }
 
   nextPage () {
-    this.props.handleUpload(this.state.avatarSource);
+
+    let uploadSource = '';
+
+    if (Platform.OS === 'android') {
+      uploadSource = { uri: this.state.avatarUri };
+    } else {
+      uploadSource = { uri: this.state.avatarUri.replace('file://', '') };
+    }
+
+    this.props.handleUpload(uploadSource);
     this.props.navigation.navigate('tabsMain');
   }
 

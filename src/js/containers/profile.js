@@ -54,11 +54,12 @@ const mapDispatchToProps = dispatch => ({
     .then((token) => {
       if (token) {
         const uri = source.uri;
-        const fileType = uri.substr(uri.indexOf('.') + 1);
+        const fileName = uri.substr(uri.indexOf('.') + 1); // check iphone name is unique
+        const fileType = uri.substr(uri.lastIndexOf('.') + 1);
         const formData = new FormData();
         formData.append('photo', {
           uri,
-          name: `photo.${fileType}`,
+          name: `photo.${fileName}`,
           type: `image/${fileType}`
         });
         dispatch(uploadPhoto(token, formData));

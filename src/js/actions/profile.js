@@ -89,6 +89,7 @@ export function uploadPhoto (token, formData) {
       body: formData
     })
     .then((res) => {
+      console.log('res', res);
       res.json()
       .then((data) => {
         console.log('Photo response data: ', data);
