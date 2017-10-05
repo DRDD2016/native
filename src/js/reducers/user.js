@@ -63,7 +63,8 @@ export default function user (state = initialState, action) {
     case profile.UPLOAD_PHOTO_SUCCESS:
       return {
         ...state,
-        photo_url: action.data.photo_url
+        photo_url: action.data.photo_url,
+        isFetchingUpload: false
       };
     case profile.EDIT_NAME_SUCCESS:
       return {
@@ -89,7 +90,7 @@ export default function user (state = initialState, action) {
     case profile.UPLOAD_PHOTO_FAILURE:
       return {
         ...state,
-        isFetching: false,
+        isFetchingUpload: false,
         errorUpload: action.error
       };
     case push.EDIT_PUSHINFO_REQUEST:

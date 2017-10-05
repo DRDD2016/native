@@ -74,6 +74,9 @@ export function editName (token, user_id, firstname, surname) {
 }
 
 export function uploadPhoto (token, formData) {
+  console.log('Photo formData: ', formData);
+  console.log('UploadPhotoURL: ', `${Config.URI}/upload`);
+  console.log('token: ', token);
   return (dispatch) => {
     dispatch(uploadPhotoRequest());
     fetch(`${Config.URI}/upload`, {
@@ -86,13 +89,19 @@ export function uploadPhoto (token, formData) {
       body: formData
     })
     .then((res) => {
+      console.log('res', res);
       res.json()
       .then((data) => {
+        console.log('Photo response data: ', data);
         dispatch(uploadPhotoSuccess(data));
       })
-      .catch(() => dispatch(uploadPhotoFailure('Something went wrong')));
+      .catch((e) => {
+        console.log('Photo response error: ', e);
+        dispatch(uploadPhotoFailure('Something went wrong'));
+      });
     })
-    .catch(() => {
+    .catch((e) => {
+      console.log('Photo response error: ', JSON.stringify(e));
       dispatch(uploadPhotoFailure('Something went wrong'));
     });
   };
