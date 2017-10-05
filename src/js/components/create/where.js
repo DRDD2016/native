@@ -41,6 +41,11 @@ export default class Where extends Component {
       inputKeyFocussed: -1
     };
   }
+  componentWillMount () {
+    console.log('mount where');
+    this.setState({ listViewDisplayed: 'auto', inputFocussed: false, inputKeyFocussed: -1 });
+    this.forceUpdate();
+  }
 
   onPlaceSearch = (data, details, i) => {
 
@@ -133,7 +138,7 @@ export default class Where extends Component {
                 // when textinput loses focus, NOT when item in list is clicked
 
                 console.log('onEndEditing: ');
-                if (Platform !== 'IOS') {
+                if (Platform === 'IOS') {
                   this.setState({ inputFocussed: false, inputKeyFocussed: -1 });
                 }
 
@@ -158,13 +163,15 @@ export default class Where extends Component {
               },
               textInputContainer: {
                 backgroundColor: inputKey === this.state.inputKeyFocussed && this.state.inputFocussed ? colours.where : colours.white,
-                height: 38,
+                height: 42,
+                alignItems: 'center',
                 borderRadius: 5,
                 borderColor: colours.where,
                 borderWidth: 1,
                 maxWidth: !this.state.inputFocussed ? windowSize.width - (windowSize.width / 5) : null
               },
               textInput: {
+                height: 34,
                 marginTop: 4,
                 marginBottom: 4,
                 flex: 1
