@@ -21,7 +21,7 @@ export default class Event extends Component {
         <Button
           buttonStyle={{ paddingLeft: 20, paddingRight: 20, flexDirection: 'row', alignSelf: 'flex-end' }}
           textStyle={{ color: colours.gray }}
-          onPress={ () => navigation.state.params.handleDeleteEvent(navigation.state.params.event.event_id) }
+          onPress={ () => navigation.state.params.handleDelete(navigation.state.params.event, navigation.state.params.event.event_id) }
         >
           <DeleteIcon />
         </Button>
@@ -30,19 +30,29 @@ export default class Event extends Component {
     headerTintColor: colours.headerButtonColor
   });
 
+  componentDidMount () {
+    this.props.navigation.setParams({
+      handleDelete: this.handleDelete.bind(this)
+    });
+  }
+
   componentWillUpdate (nextProps) {
 
     console.log('thisProps: ', this.props);
 
-
     if (nextProps.event.name !== this.props.event.name) {
       this.props.navigation.setParams({
-        name: nextProps.event.name
+        name: nextProps.event.name,
+        handleDelete: this.props.handleDeleteEvent
       });
     }
 
     console.log('nextProps: ', nextProps);
     console.log('ThisPropsNavigation: ', this.props.navigation);
+  }
+
+  handleDelete (event, event_id) {
+    this.props.handleDeleteEvent(event, event_id);
   }
 
   eventRouter () {
