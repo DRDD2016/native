@@ -50,11 +50,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         }
       });
     },
-    handleDeleteEvent: (event_id) => {
+    handleDeleteEvent: (event, event_id) => {
+      console.log('handleDelete Event Container');
       AsyncStorage.getItem('spark_token')
       .then((token) => {
+        console.log('delete token', token);
+        console.log('delete event id', event_id);
         if (token) {
-          dispatch(deleteEvent(token, event_id));
+          dispatch(deleteEvent(token, event, event_id));
           // navigation.updateCurrentRouteParams({
           //   eventIsCancelled: true     // might need to redux this
           // });

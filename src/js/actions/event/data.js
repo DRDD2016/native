@@ -86,8 +86,9 @@ export const deleteEventRequest = () => ({
   type: DELETE_EVENT_REQUEST
 });
 
-export const deleteEventSuccess = () => ({
-  type: DELETE_EVENT_SUCCESS
+export const deleteEventSuccess = data => ({
+  type: DELETE_EVENT_SUCCESS,
+  data
 });
 
 export const deleteEventFailure = error => ({
@@ -292,7 +293,7 @@ export function updateRsvp (token, event_id, status) {
   };
 }
 
-export function deleteEvent (token, event_id) {
+export function deleteEvent (token, event, event_id) {
   return (dispatch) => {
     dispatch(deleteEventRequest());
     fetch(`${Config.URI}/events/${event_id}`, {
@@ -301,12 +302,15 @@ export function deleteEvent (token, event_id) {
         'Content-Type': 'application/json',
         Accept: 'application/json',
         authorization: token
-      }
+      },
+      body: JSON.stringify({ event })
     })
     .then((res) => {
+
       res.json()
-      .then(() => {
-        dispatch(deleteEventSuccess());
+      .then((data) => {   // this never runs because response returned is a 204 no Content
+        console.log('success data', data);
+        dispatch(deleteEventSuccess(data));
         dispatch(getCalendar(token));
       })
       .catch(err => dispatch(deleteEventFailure(err.message)));
