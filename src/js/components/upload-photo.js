@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { View, Text, Platform, PixelRatio, TouchableOpacity, Image } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ImagePicker from 'react-native-image-picker';
 // import { resetStackTo } from '../lib/navigate';
 // import Router from '../router';
-import Header from './common/Header';
+import Button from './common/Button';
+import ImageHeader from './common/ImageHeader';
+import HeaderBack from './common/FeedHeaderBackground';
 import colours from '../../styles/colours';
 import styles from '../../styles';
 
 const inlineStyles = {
-  uploadContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
+
   titleText: {
     alignSelf: 'center',
     marginTop: 50
@@ -68,11 +67,15 @@ const inlineStyles = {
 
 export default class UploadPhoto extends Component {
 
-  static navigationOptions = {
-    title: 'Profile Photo',
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Upload Profile Photo',
     headerLeft: null,
-    headerRight: <Text style={{ margin: 15, color: '#fff' }} onPress={ () => this.props.navigation.navigate('Feed') }>SKIP</Text>
-  };
+    headerRight: <Text style={{ margin: 15, color: '#fff' }} onPress={ () => navigation.navigate('tabsMain') }>SKIP</Text>,
+    headerStyle: { backgroundColor: colours.transparent },
+    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerTintColor: colours.headerButtonColor,
+    header: props => <ImageHeader {...props} />
+  });
 
   constructor (props) {
     super(props);
@@ -130,11 +133,31 @@ export default class UploadPhoto extends Component {
   }
 
   render () {
+
+    const hideNext = this.state.avatarSource === null;
+
     return (
-      <View style={{ flex: 1, backgroundColor: colours.white }}>
-        <Header />
-        <View style={{ flex: 1, marginTop: 70 }}>
-          <View style={ inlineStyles.uploadContainer }>
+      <KeyboardAwareScrollView
+        style={{ backgroundColor: colours.white }}
+        enableOnAndroid
+        extraHeight={0}
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        contentContainerStyle={{ }}
+      >
+        <HeaderBack />
+        <View
+          style={{ backgroundColor: colours.transparent }}
+        >
+          <View
+            style={{
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginHorizontal: 10,
+              marginTop: Platform.OS === 'ios' ? null : 10,
+              paddingTop: 30,
+              paddingBottom: 30 }}
+          >
             <TouchableOpacity onPress={ this.selectPhotoTapped } active={0.3}>
               <View style={ [inlineStyles.avatar, inlineStyles.avatarContainer, inlineStyles.shadow, { marginBottom: 20 }] }>
                 { this.state.avatarSource === null ? <Text style={{ color: '#fff' }}>Select a Photo</Text> :
@@ -144,15 +167,33 @@ export default class UploadPhoto extends Component {
             </TouchableOpacity>
           </View>
 
-          <View style={{ paddingHorizontal: 15, flex: 1 }}>
-            <TouchableOpacity activeOpacity={ 0.5 } onPress={ this.nextPage }>
-              <View style={styles.confirmButton}>
-                <Text style={styles.confirmButtonText}>SAVE & NEXT</Text>
-              </View>
-            </TouchableOpacity>
+          <View
+            style={{
+              flexDirection: 'row',
+              marginTop: 0,
+              marginBottom: 10,
+              paddingLeft: 5,
+              paddingRight: 5 }}
+          >
+
+            { (hideNext) &&
+              <View />
+            }
+            { (!hideNext) &&
+              <Button
+                testDescription="Confirm When"
+                buttonStyle={ [styles.buttonStyle, { flex: 1, marginHorizontal: 80 }] }
+                textStyle={ styles.buttonTextStyle }
+                activeOpacity={ 0.5 }
+                onPress={ this.nextPage }
+              >
+                SAVE PHOTO
+              </Button>
+            }
+
           </View>
         </View>
-      </View>
+      </KeyboardAwareScrollView>
     );
   }
 }
