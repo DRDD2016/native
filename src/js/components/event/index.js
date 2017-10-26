@@ -57,7 +57,13 @@ export default class Event extends Component {
 
   eventRouter () {
 
-    if (this.props.error === 'Event has been deleted') {
+    if (this.props.cancelled) {
+      return (
+        <View>
+          <Text>This event has been cancelled!</Text>
+        </View>
+      );
+    } else if (this.props.error === 'Event has been deleted') {
       return (
         <View>
           <Text>This event has been cancelled!</Text>
