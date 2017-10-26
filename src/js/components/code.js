@@ -7,7 +7,8 @@ import { FormTextInput } from './auth/form-components';
 import { codeValidator as validate } from './auth/form-validation';
 import Button from './common/Button';
 import Spinner from './common/Spinner';
-import Header from './common/Header';
+import FeedHeader from './common/FeedHeader';
+import ImageHeader from './common/ImageHeader';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
@@ -37,9 +38,9 @@ class Code extends Component {
     tabBarLabel: 'RSVP',
     tabBarIcon: ({ tintColor }) =>
       <Icon name="barcode" size={32} color={tintColor} />,
-    headerStyle: { backgroundColor: colours.transparent },
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
-    headerTintColor: colours.headerButtonColor
+    headerTintColor: colours.headerButtonColor,
+    header: props => <ImageHeader {...props} />
   }
 
 
@@ -77,34 +78,40 @@ class Code extends Component {
     const { codeError, isConnected } = this.props;
 
     return (
-      <View
-        style={[
-          styles.headerBuffer,
-          { backgroundColor: colours.white }]}
-      >
-        { !isConnected && this.renderAlert() }
-        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
-        <View style={{ alignItems: 'center', marginHorizontal: 10, marginTop: Platform.OS === 'ios' ? 70 : 180, marginBottom: 60 }}>
-          <Text style={styles.msg3}>
-            If your friend has sent you a code to join their event, enter the code below to respond to their invitation.
-          </Text>
-        </View>
-        <View style={ styles.container }>
-          <Text style={inlineStyle.labelStyle}>Event Code:</Text>
-          <View style={ styles.row }>
-            <Field
-              style={styles.input}
-              name="code"
-              component={ FormTextInput }
-              placeholder={ 'Enter code here' }
-            />
-          </View>
-          { this.renderButton() }
+      <View style={{ flex: 1 }}>
+        <FeedHeader>
+          { !isConnected && this.renderAlert() }
+        </FeedHeader>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: colours.white,
+            borderBottomWidth: 1,
+            borderBottomColor: colours.lightgray }}
+        >
 
-          {
-            codeError &&
-            <Text style={{ color: 'red' }}>{ codeError }</Text>
-          }
+          <View style={{ alignItems: 'center', marginHorizontal: 10, marginTop: Platform.OS === 'ios' ? 70 : 40, marginBottom: 60 }}>
+            <Text style={styles.msg3}>
+              If your friend has sent you a code to join their event, enter the code below to respond to their invitation.
+            </Text>
+          </View>
+          <View style={ styles.container }>
+            <Text style={inlineStyle.labelStyle}>Event Code:</Text>
+            <View style={ styles.row }>
+              <Field
+                style={styles.input}
+                name="code"
+                component={ FormTextInput }
+                placeholder={ 'Enter code here' }
+              />
+            </View>
+            { this.renderButton() }
+
+            {
+              codeError &&
+              <Text style={{ color: 'red' }}>{ codeError }</Text>
+            }
+          </View>
         </View>
       </View>
     );

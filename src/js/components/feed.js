@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, ListView } from 'react-native';
-import { Header } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
 import ImageHeader from './common/ImageHeader';
-import HeaderBack from './common/FeedHeaderBackground';
+import FeedHeader from './common/FeedHeader';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
@@ -97,42 +96,26 @@ class Feed extends Component {
     const { allEvents, feed, isFetching, displaySome, displayAll, filterActive, selectedFilter, isConnected } = this.props;
 
     return (
-      <View
-        style={{
-          borderBottomWidth: 1,
-          borderBottomColor: colours.lightgray,
-          justifyContent: 'flex-start',
-          backgroundColor: colours.white,
-          flex: 1 }}
-      >
-        { !isConnected && this.renderAlert() }
-        <View style={{ height: Header.HEIGHT, flexDirection: 'row', alignItems: 'flex-start' }}>
-          <HeaderBack>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                borderBottomWidth: 1,
-                borderBottomColor: colours.lightgray,
-                borderTopWidth: 1,
-                borderTopColor: colours.gray }}
-            >
-
-              {
-                !isFetching && allEvents.length > 0 &&
-                <FilterPanel
-                  displayAll={ displayAll }
-                  displaySome={ displaySome }
-                  filterActive={ filterActive }
-                  selectedFilter={ selectedFilter }
-                />
-              }
-
-            </View>
-
-          </HeaderBack>
-        </View>
-        <View style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
+        <FeedHeader>
+          { !isConnected && this.renderAlert() }
+          {
+            !isFetching && allEvents.length > 0 &&
+            <FilterPanel
+              displayAll={ displayAll }
+              displaySome={ displaySome }
+              filterActive={ filterActive }
+              selectedFilter={ selectedFilter }
+            />
+          }
+        </FeedHeader>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: colours.white,
+            borderBottomWidth: 1,
+            borderBottomColor: colours.lightgray }}
+        >
           {
             isFetching && <Spinner />
           }
@@ -191,6 +174,7 @@ class Feed extends Component {
 
         </View>
       </View>
+
     );
   }
 }
