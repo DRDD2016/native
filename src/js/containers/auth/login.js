@@ -1,15 +1,19 @@
 import { connect } from 'react-redux';
 import Login from '../../components/auth/login';
-import { loginUser } from '../../actions/login';
+import { loginUser, loginUserReset } from '../../actions/login';
 
 const mapStateToProps = ({ user, network }) => ({
   serverError: user.error,
-  isConnected: network.isConnected
+  isConnected: network.isConnected,
+  isLoggingIn: user.isLoggingIn
 });
 
-const mapDispatchToProps = () => ({
-  handleSubmitForm: ({ email, password }, dispatch, props) => { //eslint-disable-line
-    dispatch(loginUser(email.toLowerCase(), password, props.navigation));
+const mapDispatchToProps = dispatch => ({
+  handleSubmitForm: ({ email, password }, props, navigation) => { //eslint-disable-line
+    dispatch(loginUser(email.toLowerCase(), password, navigation.navigation));
+  },
+  handleResetLogin: () => {
+    dispatch(loginUserReset());
   }
 });
 

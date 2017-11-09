@@ -7,6 +7,7 @@ import initSocket from '../socket-router';
 export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
+export const LOGIN_USER_RESET = 'LOGIN_USER_RESET';
 export const LOGOUT = 'LOGOUT';
 
 
@@ -24,9 +25,14 @@ export const loginUserFailure = error => ({
   error
 });
 
+export const loginUserReset = () => ({
+  type: LOGIN_USER_RESET
+});
+
 export function loginUser (email, password, navigation) {
 
   return (dispatch) => {
+    console.log('LOGIN WITHOUT RESET');
     dispatch(loginUserRequest());
     console.log(`${Config.URI}/login`);
     fetch(`${Config.URI}/login`, {
@@ -55,6 +61,7 @@ export function loginUser (email, password, navigation) {
             storeUserId(data.user_id);
             storeToken(data.token);
             initSocket();
+            console.log('navigation: ', navigation);
             navigation.navigate('tabsMain');
           } else {
             dispatch(loginUserFailure(data.error));

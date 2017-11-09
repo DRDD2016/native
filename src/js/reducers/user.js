@@ -25,7 +25,14 @@ export default function user (state = initialState, action) {
     case login.LOGIN_USER_REQUEST:
       return {
         ...state,
-        isLoggingIn: true
+        isLoggingIn: true,
+        error: undefined
+      };
+    case login.LOGIN_USER_RESET:
+      return {
+        ...state,
+        isLoggingIn: false,
+        error: undefined
       };
     case profile.EDIT_NAME_REQUEST:
       return {
