@@ -21,8 +21,8 @@ const { Answers } = Fabric;
 const inlineStyles = {
   inputWrap: {
     flexDirection: 'row',
-    marginVertical: 12,
-    height: 45,
+    marginVertical: 5,
+    // height: 70,
     backgroundColor: 'transparent'
   },
   input: {
@@ -33,6 +33,7 @@ const inlineStyles = {
   },
   iconWrap: {
     width: 40,
+    height: 45,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colours.blue
@@ -100,12 +101,6 @@ class Login extends Component {
       });
     }
 
-  }
-
-  renderServerError = () => {
-    if (this.props.serverError) {
-      return <Text style={{ color: 'red' }}>{this.props.serverError}</Text>;
-    }
   }
 
   renderAlert = () => {
