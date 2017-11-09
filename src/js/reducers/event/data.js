@@ -18,7 +18,8 @@ export const initialState = {
     not_responded: []
   },
   isFetching: false,
-  error: undefined
+  error: undefined,
+  cancelled: undefined
 };
 
 export default function data (state = initialState, action) {
@@ -42,7 +43,7 @@ export default function data (state = initialState, action) {
       return { ...state, ...action.data, isFetching: false };
 
     case actions.DELETE_EVENT_SUCCESS:
-      return { ...state, isFetching: false };
+      return { ...state, ...action.data, isFetching: false };
 
     case actions.GET_EVENT_FAILURE:
       return { ...state, isFetching: false };

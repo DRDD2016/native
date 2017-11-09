@@ -3,6 +3,9 @@ import { Text, TextInput, View } from 'react-native';
 import styles from '../../../styles';
 
 export function FormTextInput ({ placeholder, isEmail, isLoginView, input: { value, onChange, onBlur }, meta: { touched, error } }) {
+  console.log('touched: ', touched);
+  console.log('error: ', error);
+
   return (
     <View style={{ flex: 1 }}>
       <TextInput
@@ -18,7 +21,7 @@ export function FormTextInput ({ placeholder, isEmail, isLoginView, input: { val
         autoCorrect={ false }
       />
       {
-        touched && error && <Text style={{ color: '#ec3811', fontSize: 16, marginVertical: 2 }}>{error}</Text>
+        touched && error && <Text style={{ height: 25, color: 'red', fontSize: 16, marginVertical: 2 }}>{error}</Text>
       }
     </View>
   );

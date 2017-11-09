@@ -22,7 +22,8 @@ const mapStateToProps = ({ event, user, network }) => {
     finalChoices: event.poll.finalChoices,
     voteCount: event.poll.voteCount,
     error: event.data.error,
-    isConnected: network.isConnected
+    isConnected: network.isConnected,
+    cancelled: event.data.cancelled
   };
 };
 

@@ -294,10 +294,11 @@ export function updateRsvp (token, event_id, status) {
 }
 
 export function deleteEvent (token, event, event_id) {
+  console.log('deleteEvent: ', event_id);
   return (dispatch) => {
     dispatch(deleteEventRequest());
     fetch(`${Config.URI}/events/${event_id}`, {
-      method: 'DELETE',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -306,9 +307,9 @@ export function deleteEvent (token, event, event_id) {
       body: JSON.stringify({ event })
     })
     .then((res) => {
-
+      console.log('res: ', res);
       res.json()
-      .then((data) => {   // this never runs because response returned is a 204 no Content
+      .then((data) => {
         console.log('success data', data);
         dispatch(deleteEventSuccess(data));
         dispatch(getCalendar(token));

@@ -7,6 +7,9 @@ import CalendarItem from './calendar-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
 import Header from './common/Header';
+import ImageHeader from './common/ImageHeader';
+import HeaderBack from './common/FeedHeaderBackground';
+import FeedHeader from './common/FeedHeader';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
@@ -17,9 +20,9 @@ class Calendar extends Component {
     title: 'Calendar',
     tabBarIcon: ({ tintColor }) =>
       <Icon name="calendar" size={32} color={tintColor} />,
-    headerStyle: { backgroundColor: colours.transparent },
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
-    headerTintColor: colours.headerButtonColor
+    headerTintColor: colours.headerButtonColor,
+    header: props => <ImageHeader {...props} />
   }
 
   componentWillMount () {
@@ -37,7 +40,7 @@ class Calendar extends Component {
       return a.when[0] > b.when[0];
     });
     this.createDataSource(sortedData);
-    
+
   }
 
   createDataSource (calendar) {
@@ -80,28 +83,30 @@ class Calendar extends Component {
     const { allEvents, isFetching, displaySome, displayAll, filterActive, selectedFilter, user_id, isConnected } = this.props;
 
     return (
-      <View
-        style={[
-          styles.headerBuffer,
-          { backgroundColor: colours.white }]}
-      >
-        <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
-        <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? null : 70 }}>
+      <View style={{ flex: 1 }}>
+        <FeedHeader>
           { !isConnected && this.renderAlert() }
+          {
+            !isFetching && allEvents.length > 0 &&
+            <FilterPanel
+              displayAll={ displayAll }
+              displaySome={ displaySome }
+              filterActive={ filterActive }
+              selectedFilter={ selectedFilter }
+            />
+          }
+        </FeedHeader>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: colours.white,
+            borderBottomWidth: 1,
+            borderBottomColor: colours.lightgray }}
+        >
+
           {
             isFetching && <Spinner />
           }
-
-            {
-              !isFetching && allEvents.length > 0 &&
-              <FilterPanel
-                displaySome={ displaySome }
-                displayAll={ displayAll }
-                filterActive={ filterActive }
-                selectedFilter={ selectedFilter }
-              />
-            }
-
 
           <ScrollView>
 

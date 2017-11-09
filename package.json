@@ -40,6 +40,7 @@
     "redux-action-buffer": "^1.0.1",
     "redux-form": "^6.4.3",
     "redux-persist": "^4.4.0",
+    "redux-persist-transform-filter": "0.0.16",
     "redux-thunk": "^2.1.0",
     "socket.io-client": "^1.5.1"
   },

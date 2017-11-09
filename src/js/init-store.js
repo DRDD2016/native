@@ -3,6 +3,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 // import { composeWithDevTools } from 'remote-redux-devtools';
 import { persistStore, autoRehydrate } from 'redux-persist';
+import { createFilter } from 'redux-persist-transform-filter';
 import rootReducer from './reducers/';
 
 export function initStore (initialState) {
@@ -27,10 +28,27 @@ export function initStore (initialState) {
 }
 export const store = initStore();
 // initialise store with previous app state
+
+// you want to store only a subset of your state of reducer one
+const saveSubsetFilter = createFilter(
+  'user',
+  [
+    'firstname',
+    'surname',
+    'email',
+    'photo_url',
+    'user_id',
+    'push_info'
+  ]
+);
+
 export const persistor = persistStore(
   store,
   {
     storage: AsyncStorage,
+    transforms: [
+      saveSubsetFilter
+    ],
     whitelist: ['user'],
     debounce: 2000
   }
