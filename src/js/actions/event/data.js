@@ -239,10 +239,11 @@ export function submitCode (token, code, navigation) {
 }
 
 export function editEvent (token, event, event_id) {
+  console.log('editEvent executing');
 
   return (dispatch) => {
     dispatch(editEventRequest());
-    fetch(`${Config.URI}/events/${event_id}`, {
+    fetch(`${Config.URI}/events/${event_id}/edit`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -254,6 +255,7 @@ export function editEvent (token, event, event_id) {
     .then((res) => {
       res.json()
       .then((data) => {
+        console.log('editEvent YEAH');
         dispatch(editEventSuccess(data));
         dispatch(clearCreateEvent());
         dispatch(getCalendar(token));
