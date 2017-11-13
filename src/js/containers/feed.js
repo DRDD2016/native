@@ -7,13 +7,14 @@ import { getEvent, submitCode } from '../actions/event/data';
 import filterFeed from '../lib/filter-feed';
 
 
-const mapStateToProps = ({ feed, user, network }) => {
+const mapStateToProps = ({ nav, feed, user, network, create }) => {
 
   const data = feed.data;
   const filterActive = feed.filterActive;
   const selectedFilter = feed.selectedFilter;
   const feedData = filterFeed(data, filterActive, selectedFilter);
   return {
+    nav,
     filterActive,
     selectedFilter,
     user_id: user.user_id,
@@ -22,7 +23,8 @@ const mapStateToProps = ({ feed, user, network }) => {
     feed: feedData,
     isFetching: feed.isFetching,
     push_info: user.push_info,
-    eventCode: network.inComingLinkCode
+    eventCode: network.inComingLinkCode,
+    saveEventDone: create.saveEventDone
   };
 };
 const mapDispatchToProps = (dispatch, props) => {

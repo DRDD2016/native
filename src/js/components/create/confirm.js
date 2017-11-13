@@ -37,6 +37,8 @@ class Confirm extends Component {
   }
 
   render () {
+
+    console.log('confirm Props', this.props);
     const { what, where, when, description, note, handleOnPress, isConnected, isFetching } = this.props;
     if (isFetching) {
       return <Spinner size="large" />;

@@ -7,7 +7,7 @@ import { persistStore } from 'redux-persist';
 import { store } from './init-store';
 import { setIsConnected } from './actions/network';
 import Spinner from './components/common/Spinner';
-import { StackRoot } from './routes';
+import AppWithNavigationState from './routes';
 import { AlertProvider } from './components/Alert';
 import PushController from './lib/PushController';
 
@@ -58,7 +58,7 @@ class App extends Component {
       <Provider store={ store }>
         <AlertProvider>
           <PushController>
-            <StackRoot />
+            <AppWithNavigationState />
           </PushController>
         </AlertProvider>
       </Provider>

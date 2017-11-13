@@ -29,6 +29,9 @@ class Feed extends Component {
 
     // initSocket();
 
+    console.log('feed mountProps', this.props);
+
+
     if (this.props.eventCode) {
       if (this.props.eventCode !== 'none') {
         // stopSocket();
@@ -41,6 +44,8 @@ class Feed extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
+
+    console.log('feed nextProps', nextProps);
 
     const { feed } = nextProps;
     const newData = [].concat(feed).reverse();
