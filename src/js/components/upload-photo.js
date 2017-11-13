@@ -70,7 +70,7 @@ export default class UploadPhoto extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Upload Profile Photo',
     headerLeft: null,
-    headerRight: <Text style={{ margin: 15, color: '#fff' }} onPress={ () => navigation.navigate('tabsMain') }>SKIP</Text>,
+    headerRight: <Text style={{ margin: 15, color: colours.gray }} onPress={ () => navigation.navigate('tabsMain') }>SKIP</Text>,
     headerStyle: { backgroundColor: colours.transparent },
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
     headerTintColor: colours.headerButtonColor,

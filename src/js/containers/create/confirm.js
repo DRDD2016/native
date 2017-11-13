@@ -5,8 +5,9 @@ import Confirm from '../../components/create/confirm';
 import mapToISOString from '../../lib/map-to-iso-string';
 import { store } from '../../init-store';
 
-const mapStateToProps = ({ create, network }) => {
+const mapStateToProps = ({ nav, create, network }) => {
   return {
+    nav,
     name: create.name,
     description: create.description,
     note: create.note,

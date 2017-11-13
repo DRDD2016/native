@@ -1,4 +1,5 @@
 import Config from 'react-native-config';
+import { NavigationActions } from 'react-navigation';
 import { getCalendar } from './calendar';
 import { openWhatsApp, composeWhatsAppMessage } from '../lib/branchLink';
 import { store } from '../init-store';
@@ -11,6 +12,7 @@ export const SET_WHEN = 'SET_WHEN';
 export const SAVE_EVENT_REQUEST = 'SAVE_EVENT_REQUEST';
 export const SAVE_EVENT_SUCCESS = 'SAVE_EVENT_SUCCESS';
 export const SAVE_EVENT_FAILURE = 'SAVE_EVENT_FAILURE';
+export const SAVE_EVENT_DONE = 'SAVE_EVENT_DONE';
 
 export const HYDRATE_CREATE_EVENT = 'HYDRATE_CREATE_EVENT';
 export const CLEAR_CREATE_EVENT = 'CLEAR_CREATE_EVENT';
@@ -85,7 +87,21 @@ export function saveEvent (token, eventData, navigation) { //eslint-disable-line
 
           openWhatsApp(composeWhatsAppMessage(store.getState().user, eventData, data.code));
           dispatch(clearCreateEvent());
-          navigation.goBack();
+
+          const resetAction = NavigationActions.reset({
+            index: 0,
+            key: null,
+            actions: [
+              NavigationActions.navigate({ routeName: 'tabsMain' })
+            ]
+          });
+          console.log('about to nav');
+
+          navigation.dispatch(resetAction);
+
+          console.log('about to saveDone');
+          dispatch(saveEventDone());
+
         }
       });
     })
@@ -111,6 +127,12 @@ export function saveEventFailure (error) {
   return {
     type: SAVE_EVENT_FAILURE,
     error
+  };
+}
+
+export function saveEventDone () {
+  return {
+    type: SAVE_EVENT_DONE
   };
 }
 

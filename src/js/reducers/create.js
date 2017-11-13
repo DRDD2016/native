@@ -13,7 +13,8 @@ export const initialState = {
   ],
   is_poll: undefined,
   isFetching: false,
-  error: undefined
+  error: undefined,
+  saveEventDone: false
 };
 
 export default function create (state = initialState, action) {
@@ -55,7 +56,8 @@ export default function create (state = initialState, action) {
 
     case actions.SAVE_EVENT_REQUEST:
       return update(state, {
-        isFetching: { $set: true }
+        isFetching: { $set: true },
+        saveEventDone: { $set: false }
       });
 
     case actions.SAVE_EVENT_SUCCESS:
@@ -67,6 +69,11 @@ export default function create (state = initialState, action) {
       return update(state, {
         isFetching: { $set: false },
         error: { $set: action.error }
+      });
+
+    case actions.SAVE_EVENT_DONE:
+      return update(state, {
+        saveEventDone: { $set: true }
       });
 
     case actions.HYDRATE_CREATE_EVENT: {

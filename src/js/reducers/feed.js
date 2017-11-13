@@ -5,7 +5,8 @@ const initialState = {
   isFetching: true,
   error: undefined,
   selectedFilter: undefined,
-  filterActive: false
+  filterActive: false,
+  saveEventDone: false
 };
 
 export default function feed (state = initialState, action) {
