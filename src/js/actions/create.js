@@ -95,12 +95,10 @@ export function saveEvent (token, eventData, navigation) { //eslint-disable-line
               NavigationActions.navigate({ routeName: 'tabsMain' })
             ]
           });
-          console.log('about to nav');
 
           navigation.dispatch(resetAction);
 
-          console.log('about to saveDone');
-          dispatch(saveEventDone());
+          dispatch(saveEventDone()); // forces Feed to update after navigation.
 
         }
       });
