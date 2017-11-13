@@ -239,7 +239,6 @@ export function submitCode (token, code, navigation) {
 }
 
 export function editEvent (token, event, event_id) {
-  console.log('editEvent executing');
 
   return (dispatch) => {
     dispatch(editEventRequest());
@@ -255,7 +254,6 @@ export function editEvent (token, event, event_id) {
     .then((res) => {
       res.json()
       .then((data) => {
-        console.log('editEvent YEAH');
         dispatch(editEventSuccess(data));
         dispatch(clearCreateEvent());
         dispatch(getCalendar(token));
