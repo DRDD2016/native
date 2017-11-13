@@ -92,6 +92,7 @@ export default class Edit extends Component {
                 value={ name }
                 type="text"
                 placeholder="Event name"
+                underlineColorAndroid="transparent"
                 autoCorrect
               />
             </View>
@@ -102,6 +103,7 @@ export default class Edit extends Component {
                 value={ description }
                 type="text"
                 placeholder="Event description"
+                underlineColorAndroid="transparent"
                 autoCorrect
               />
             </View>
@@ -111,6 +113,7 @@ export default class Edit extends Component {
                 onChangeText={ text => handleDetailsChange(text, 'note') }
                 value={ note }
                 placeholder="Leave a note to your friends (optional)"
+                underlineColorAndroid="transparent"
                 autoCorrect
               />
             </View>
@@ -121,6 +124,7 @@ export default class Edit extends Component {
                 onChangeText={ text => handleWhatChange(text) }
                 value={ what[0] }
                 placeholder="What would you like to do?"
+                underlineColorAndroid="transparent"
               />
             </View>
             <Text style={{ alignSelf: 'flex-start' }}>Where</Text>

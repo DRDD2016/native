@@ -39,6 +39,7 @@ const mapDispatchToProps = dispatch => ({
     const data = Object.assign({}, event,
       { when: mapToISOString(event.when) }
     );
+    console.log('event: ', event);
     AsyncStorage.getItem('spark_token')
     .then((token) => {
       if (token) {

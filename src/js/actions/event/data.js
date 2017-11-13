@@ -242,7 +242,7 @@ export function editEvent (token, event, event_id) {
 
   return (dispatch) => {
     dispatch(editEventRequest());
-    fetch(`${Config.URI}/events/${event_id}`, {
+    fetch(`${Config.URI}/events/${event_id}/edit`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
