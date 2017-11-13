@@ -7,8 +7,11 @@ import create from './create';
 import user from './user';
 import confirmUserEmail from './confirm-email';
 import network from './network';
+import { StackRoot } from '../routes';
+
 
 const appReducer = combineReducers({
+  nav: (state, action) => StackRoot.router.getStateForAction(action, state),
   calendar,
   event,
   feed,

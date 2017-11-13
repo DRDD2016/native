@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dimensions, Platform } from 'react-native';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { connect } from 'react-redux';
+import { StackNavigator, TabNavigator, addNavigationHelpers } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colours from '../styles/colours';
 
@@ -109,4 +110,12 @@ export const StackRoot = StackNavigator({
   initialRouteName: 'splash'
 });
 
-export default StackRoot;
+const AppWithNavigationState = ({ dispatch, nav }) => (
+  <StackRoot navigation={addNavigationHelpers({ dispatch, state: nav })} />
+);
+
+const mapStateToProps = state => ({
+  nav: state.nav
+});
+
+export default connect(mapStateToProps)(AppWithNavigationState);
