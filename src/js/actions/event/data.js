@@ -1,6 +1,7 @@
 import Config from 'react-native-config';
+import { NavigationActions } from 'react-navigation';
 import { getVotes, clearPollState } from './poll';
-import { hydrateCreateEvent, clearCreateEvent } from '../create';
+import { hydrateCreateEvent, clearCreateEvent, saveEventDone } from '../create';
 import { getCalendar } from '../calendar';
 import { store } from '../../init-store';
 
@@ -114,7 +115,6 @@ export function getEvent (token, event_id, navigation) {
     .then((res) => {
       res.json()
       .then((data) => {
-        console.log('getEvent data: ', data);
         const userIsHost = store.getState().user.user_id === data.host_user_id;
         if (data.is_poll) {
           dispatch(getVotes(token, event_id, userIsHost));
@@ -293,7 +293,7 @@ export function updateRsvp (token, event_id, status) {
   };
 }
 
-export function deleteEvent (token, event, event_id) {
+export function deleteEvent (token, event, event_id, navigation) {
   console.log('deleteEvent: ', event_id);
   return (dispatch) => {
     dispatch(deleteEventRequest());
@@ -307,12 +307,23 @@ export function deleteEvent (token, event, event_id) {
       body: JSON.stringify({ event })
     })
     .then((res) => {
-      console.log('res: ', res);
       res.json()
       .then((data) => {
-        console.log('success data', data);
         dispatch(deleteEventSuccess(data));
         dispatch(getCalendar(token));
+
+        const resetAction = NavigationActions.reset({
+          index: 0,
+          key: null,
+          actions: [
+            NavigationActions.navigate({ routeName: 'tabsMain' })
+          ]
+        });
+
+        navigation.dispatch(resetAction);
+
+        dispatch(saveEventDone());
+
       })
       .catch(err => dispatch(deleteEventFailure(err.message)));
     })

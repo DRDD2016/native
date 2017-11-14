@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Platform } from 'react-native';
+import { View, Text, Platform, TouchableHighlight, Modal } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import InviteePoll from './invitee-poll';
 import HostPoll from './host-poll';
 import FinalisedEvent from './finalised-event';
@@ -30,6 +31,13 @@ export default class Event extends Component {
     headerTintColor: colours.headerButtonColor
   });
 
+  constructor (props) {
+    super(props);
+    this.state = {
+      isModalVisible: false
+    };
+  }
+
   componentDidMount () {
     this.props.navigation.setParams({
       handleDelete: this.handleDelete.bind(this)
@@ -52,7 +60,11 @@ export default class Event extends Component {
   }
 
   handleDelete (event, event_id) {
-    this.props.handleDeleteEvent(event, event_id);
+    this.setState({
+      isModalVisible: true
+    });
+    console.log(event_id);
+    // this.props.handleDeleteEvent(event, event_id);
   }
 
   eventRouter () {
@@ -126,6 +138,59 @@ export default class Event extends Component {
             { backgroundColor: colours.white }]}
         >
           <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
+
+          <Modal transparent animationType={'slide'} visible={this.state.isModalVisible} onRequestClose={() => { alert('Modal has been closed.'); }}>
+
+            <View style={styles.modalWrapper}>
+
+              <View style={styles.modalConfirm}>
+                <View style={{ flex: 0.5 }}>
+                  <Icon name="warning" size={18} color={colours.orange} />
+                </View>
+                <Text style={[styles.msg1, { flex: 1 }]}>Please Confirm</Text>
+                <Text style={[styles.msg2, { flex: 0.4 }]}>Are you sure you want</Text>
+                <Text style={[styles.msg2, { flex: 0.4 }]}>to delete this event?</Text>
+
+                <View style={{ justifyContent: 'space-between', marginTop: 40, flex: 2, flexDirection: 'row' }}>
+                  <TouchableHighlight
+                    style={ [styles.confirmButton, { flex: 1, marginHorizontal: 5, marginBottom: 20, marginTop: 20 }] }
+                    onPress={ () => {
+                      this.setState({
+                        isModalVisible: false
+                      });
+
+                    }}
+                  >
+                    <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                      <Icon name="times-circle" size={24} color={colours.red} />
+                      <Text style={styles.confirmButtonText}> KEEP</Text>
+                    </View>
+                  </TouchableHighlight>
+                  <TouchableHighlight
+                    style={ [styles.confirmButton, { flex: 1, marginHorizontal: 5, marginBottom: 20, marginTop: 20 }] }
+                    onPress={ () => {
+                      this.setState({
+                        isModalVisible: false
+                      });
+                      console.log('this.props.event', this.props.event);
+                      console.log('this.props.event_id', this.props.event_id);
+                      this.props.handleDeleteEvent(this.props.event, this.props.event.event_id);
+
+                    }}
+                  >
+                    <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                      <Icon name="check-circle" size={24} color={'green'} />
+                      <Text style={styles.confirmButtonText}> DELETE</Text>
+                    </View>
+                  </TouchableHighlight>
+                </View>
+
+              </View>
+
+            </View>
+
+          </Modal>
+
           <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 70 : 150 }}>
             {
               this.props.event && this.eventRouter()
