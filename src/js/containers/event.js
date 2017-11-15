@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         console.log('delete token', token);
         console.log('delete event id', event_id);
         if (token) {
-          dispatch(deleteEvent(token, event, event_id));
+          dispatch(deleteEvent(token, event, event_id, navigation));
           // navigation.updateCurrentRouteParams({
           //   eventIsCancelled: true     // might need to redux this
           // });
