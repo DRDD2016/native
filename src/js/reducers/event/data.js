@@ -32,6 +32,7 @@ export default function data (state = initialState, action) {
     case actions.EDIT_EVENT_REQUEST:
       return { ...state, isFetching: true, error: undefined };
     case actions.SUBMIT_CODE_REQUEST:
+      return { ...state, isFetching: true, error: undefined };
     case actions.UPDATE_RSVP_REQUEST:
     case actions.DELETE_EVENT_REQUEST:
       return { ...state, isFetching: true, error: undefined };
@@ -41,6 +42,7 @@ export default function data (state = initialState, action) {
     case actions.EDIT_EVENT_SUCCESS:
       return { ...state, ...action.data, isFetching: false };
     case actions.SUBMIT_CODE_SUCCESS:
+      return { ...state, ...action.data, isFetching: false };
     case actions.UPDATE_RSVP_SUCCESS:
       return { ...state, ...action.data, isFetching: false };
 
@@ -51,6 +53,7 @@ export default function data (state = initialState, action) {
       return { ...state, isFetching: false };
     case actions.EDIT_EVENT_FAILURE:
     case actions.SUBMIT_CODE_FAILURE:
+      return { ...state, isFetching: false };
     case actions.UPDATE_RSVP_FAILURE:
     case actions.DELETE_EVENT_FAILURE:
       return { ...state, error: action.error, isFetching: false };

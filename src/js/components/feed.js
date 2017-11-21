@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, ListView } from 'react-native';
+import { View, Text, ScrollView, ListView, Modal, TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
@@ -21,6 +21,15 @@ class Feed extends Component {
     header: props => <ImageHeader {...props} />
   }
 
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      isModalVisible: false
+    };
+
+  }
+
   componentWillMount () {
 
     // if (this.props.user.push_info) {
@@ -31,21 +40,46 @@ class Feed extends Component {
 
     console.log('feed mountProps', this.props);
 
-
-    if (this.props.eventCode) {
-      if (this.props.eventCode !== 'none') {
-        // stopSocket();
-        const code = this.props.eventCode;
-
-        this.props.handleSubmitCode(code);
-      }
-    }
+    // if (this.props.eventCodeError || this.props.eventIsFetching) {
+    //   this.setState({ isModalVisible: true });
+    // }
+    //
+    // if (this.props.eventCode) {
+    //   if (this.props.eventCode !== 'none') {
+    //     // stopSocket();
+    //     const code = this.props.eventCode;
+    //
+    //     console.log('submittingCode feed compWillMount');
+    //
+    //     this.props.handleSubmitCode(code);
+    //   }
+    // }
 
   }
 
   componentWillReceiveProps (nextProps) {
 
     console.log('feed nextProps', nextProps);
+    console.log('feed thisprops', this.props);
+
+    if (this.props.eventCodeError || this.props.eventIsFetching) {
+      this.setState({ isModalVisible: true });
+    }
+
+    if (!this.props.eventCodeError && !this.props.eventIsFetching) {
+      this.setState({ isModalVisible: false });
+    }
+
+    if (nextProps.eventCode && !nextProps.eventIsFetching) {
+      if (nextProps.eventCode !== 'none') {
+        // stopSocket();
+        const code = nextProps.eventCode;
+
+        console.log('submittingCode feed compWillRecProps');
+
+        this.props.handleSubmitCode(code);
+      }
+    }
 
     const { feed } = nextProps;
     const newData = [].concat(feed).reverse();
@@ -98,10 +132,65 @@ class Feed extends Component {
 
   render () {
 
-    const { allEvents, feed, isFetching, displaySome, displayAll, filterActive, selectedFilter, isConnected } = this.props;
-
+    const {
+      allEvents,
+      feed,
+      isFetching,
+      eventIsFetching,
+      displaySome,
+      displayAll,
+      filterActive,
+      selectedFilter,
+      isConnected,
+      eventCodeError } = this.props;
+    console.log('isFetching: ', isFetching);
+    console.log('eventIsFetching: ', eventIsFetching);
     return (
       <View style={{ flex: 1 }}>
+        <Modal transparent animationType={'slide'} visible={this.state.isModalVisible} onRequestClose={() => { alert('Modal has been closed.'); }}>
+          {
+            <View style={styles.modalWrapper}>
+
+              {
+                eventIsFetching &&
+                <View style={styles.modalConfirm}>
+
+                  <Text style={[styles.msg1, { flex: 1 }]}>Fetching invite</Text>
+                  <Text style={[styles.msg2, { flex: 1 }]}>please wait...</Text>
+                  <Spinner size="large" />
+                  <View style={{ flex: 1 }} />
+
+                </View>
+              }
+
+              {
+                eventCodeError &&
+                <View style={styles.modalConfirm}>
+                  <Text style={[styles.msg1, { flex: 1 }]}>Error fetching invite</Text>
+                  <Text style={[styles.msg2, { flex: 1 }]}>please check your internet connection</Text>
+                  <View style={{ flex: 1 }} />
+
+                  <View style={{ flex: 1 }}>
+                    <TouchableHighlight
+                      style={ [styles.confirmButton, { marginBottom: 20, marginTop: 20 }] }
+                      onPress={ () => {
+                        this.setState({
+                          isModalVisible: false
+                        });
+
+                      }}
+                    >
+                      <Text style={styles.confirmButtonText}>OK</Text>
+                    </TouchableHighlight>
+                  </View>
+
+                </View>
+              }
+            </View>
+          }
+
+        </Modal>
+
         <FeedHeader>
           { !isConnected && this.renderAlert() }
           {

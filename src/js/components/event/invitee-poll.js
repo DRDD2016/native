@@ -14,7 +14,7 @@ export default class InviteePoll extends Component {
   constructor (props) {
     super(props);
     console.log('inviteePoll constructor Props: ', this.props);
-    console.log('this.props.event.InviteePoll: ', this.props.event);
+    
     const { what, where, when } = this.props.event;
 
     this.state = {
@@ -69,37 +69,30 @@ export default class InviteePoll extends Component {
       });
 
     }
-    console.log('this.state: ', this.state);
+
   }
 
   toggleSelection (category, index) {
-    console.log('selection toggled : category: ', `${category} ${index}`);
-    console.log('this.state.eventdetails: ', this.state.eventdetails);
+
     const newArray = this.state.eventdetails[category];
-    console.log('newArray: ', newArray);
+
     newArray[index] = parseInt(this.state.eventdetails[category][index], 10) ? 0 : 1;
 
     update(this.state.eventdetails, {
       [category]: { $set: newArray }
     });
 
-    // this.setState({
-    //   eventdetails: {
-    //     [category]: newArray
-    //   }
-    // });
-    console.log('new this.state.eventdetails: ', this.state.eventdetails);
     this.forceUpdate(); // forces this component to update to take account of child components updates
   }
 
   render () {
-    console.log('render invitee Poll this.props: ', this.props);
+
     const { event, handleVote, voteSaved, voteCount, navigator } = this.props;
     console.log('inviteePoll RenderProps: ', this.props);
     console.log('this.state.isModalVisible: ', this.state.isModalVisible);
     const allCategoriesSelected = Object.keys(this.state.eventdetails)
       .every(category => this.state.eventdetails[category].includes(1));
-    console.log('allCategoriesSelected', allCategoriesSelected);
+
     return (
 
       <ScrollView>

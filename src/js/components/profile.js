@@ -33,13 +33,13 @@ class Profile extends Component {
     let uploadSource = '';
 
     if (Platform.OS === 'android') {
-      console.log('this.state.avatarUri', this.state.avatarUri);
+      // console.log('this.state.avatarUri', this.state.avatarUri);
       uploadSource = { uri: this.state.avatarUri };
     } else {
-      console.log(this.state.avatarUri);
+      // console.log(this.state.avatarUri);
       uploadSource = { uri: this.state.avatarUri.replace('file://', '') };
     }
-    console.log(uploadSource); // /var/mobile/Containers/Data/Application/1F15368F-4…ocuments/2BE4B05B-440A-41B6-8680-F4230E046902.jpg
+    // console.log(uploadSource); // /var/mobile/Containers/Data/Application/1F15368F-4…ocuments/2BE4B05B-440A-41B6-8680-F4230E046902.jpg
     this.props.handleUpload(uploadSource);
     this.props.handleEditName(firstname, surname);
   }
@@ -57,11 +57,11 @@ class Profile extends Component {
     ImagePicker.showImagePicker(options, (response) => {
 
       if (response.didCancel) {
-        console.log('User cancelled photo picker');
+        // console.log('User cancelled photo picker');
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
+        // console.log('ImagePicker Error: ', response.error);
       } else if (response.customButton) {
-        console.log('User tapped custom button ', response.customButton);
+        // console.log('User tapped custom button ', response.customButton);
       } else {
         let source;
         if (Platform.OS === 'android') {

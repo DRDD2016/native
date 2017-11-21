@@ -74,7 +74,7 @@ class Code extends Component {
   }
 
   render () {
-    console.log('code RenderProps', this.props);
+    // console.log('code RenderProps', this.props);
     const { codeError, isConnected } = this.props;
 
     return (

@@ -1,7 +1,7 @@
 import { Linking } from 'react-native';
 import branch, { RegisterViewEvent } from 'react-native-branch';
 import { store } from '../init-store';
-import { saveIncomingLink } from '../actions/network';
+import { saveIncomingLink, saveIncomingLinkError } from '../actions/network';
 
 /**
  * trimAndReplaceSpaces trim the text and replaces spaces with %20
@@ -95,6 +95,7 @@ export async function subscribeToBranchLinks () {
       // there was an error. this is a String
       console.info('Error from Branch: ', error);
       linkData = 'none';
+      store.dispatch(saveIncomingLinkError(error));
     }
     if (params.eventCode) {
       linkData = params.eventCode;
