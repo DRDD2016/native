@@ -32,6 +32,7 @@ class Feed extends Component {
 
   componentWillMount () {
 
+
     // if (this.props.user.push_info) {
     //   this.props.handleSavePush(this.props.push_info);
     // }
@@ -70,16 +71,16 @@ class Feed extends Component {
       this.setState({ isModalVisible: false });
     }
 
-    if (nextProps.eventCode && !nextProps.eventIsFetching) {
-      if (nextProps.eventCode !== 'none') {
-        // stopSocket();
-        const code = nextProps.eventCode;
-
-        console.log('submittingCode feed compWillRecProps');
-
-        this.props.handleSubmitCode(code);
-      }
-    }
+    // if (nextProps.eventCode && !nextProps.eventIsFetching) {
+    //   if (nextProps.eventCode !== 'none') {
+    //     // stopSocket();
+    //     const code = nextProps.eventCode;
+    //
+    //     console.log('submittingCode feed compWillRecProps');
+    //
+    //     this.props.handleSubmitCode(code);
+    //   }
+    // }
 
     const { feed } = nextProps;
     const newData = [].concat(feed).reverse();

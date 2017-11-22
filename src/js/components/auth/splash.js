@@ -14,7 +14,6 @@ export default class Splash extends Component {
 
   componentWillMount () {
 
-    subscribeToBranchLinks();
     console.log('SplashProps', this.props);
 
     setTimeout(() => {
@@ -24,12 +23,19 @@ export default class Splash extends Component {
           console.log('socket init');
           initSocket();
           console.log('socket inited');
+
+          subscribeToBranchLinks(this.props.navigation);
+
+          // if branch link rec'd go to event, else go to tabsMain/Feed.
+          // Then do same on Feed.
+
+
           this.props.navigation.navigate('tabsMain');
         } else {
           this.props.navigation.navigate('auth');
         }
       });
-    }, 2000);
+    }, 1000);
   }
 
   render () {

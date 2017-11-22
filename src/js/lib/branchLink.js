@@ -1,7 +1,8 @@
-import { Linking } from 'react-native';
+import { Linking, AsyncStorage } from 'react-native';
 import branch, { RegisterViewEvent } from 'react-native-branch';
 import { store } from '../init-store';
 import { saveIncomingLink, saveIncomingLinkError } from '../actions/network';
+import { submitCode } from '../actions/event/data';
 
 /**
  * trimAndReplaceSpaces trim the text and replaces spaces with %20
@@ -84,7 +85,7 @@ export async function openWhatsApp (text) {
   }).catch(() => console.log('An error occurred'));
 }
 
-export async function subscribeToBranchLinks () {
+export async function subscribeToBranchLinks (navigation) {
 
   console.info('Subscribing to Branch links');
 
@@ -108,6 +109,19 @@ export async function subscribeToBranchLinks () {
 
     console.log('saving linkData', linkData);
     store.dispatch(saveIncomingLink(linkData));
+
+    // can we add call to Submit_Code_directly here? remove from Feed?
+
+    AsyncStorage.getItem('spark_token')
+    .then((token) => {
+      if (token) {
+        console.log('submittingCode feed container');
+        // dispatch(deleteIncomingLink());
+        const code = linkData;
+        store.dispatch(submitCode(token, code, navigation));
+      }
+    })
+    .catch(e => console.error(e));
 
   });
 
