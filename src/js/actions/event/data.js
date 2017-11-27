@@ -2,7 +2,6 @@ import Config from 'react-native-config';
 import { NavigationActions } from 'react-navigation';
 import { getVotes, clearPollState } from './poll';
 import { hydrateCreateEvent, clearCreateEvent, saveEventDone } from '../create';
-import { deleteIncomingLink } from '../network';
 import { getCalendar } from '../calendar';
 import { store } from '../../init-store';
 
@@ -177,7 +176,7 @@ export function submitCode (token, code, navigation) {
   return (dispatch) => {
     console.log('submitCodeRequest');
     dispatch(submitCodeRequest());
-    dispatch(deleteIncomingLink());
+    // dispatch(deleteIncomingLink());
     fetch(`${Config.URI}/events/rsvps`, {
       method: 'POST',
       headers: {
@@ -228,7 +227,7 @@ export function submitCode (token, code, navigation) {
           //   ]
           // });
 
-          console.log('submitCode about to Nav');
+          console.log('navigating to Event (SubmitCode)');
 
           // navigation.dispatch(resetAction);
 

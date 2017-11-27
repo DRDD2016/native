@@ -5,7 +5,8 @@ const initialState = {
   isConnected: true,
   socket: undefined,
   inComingLinkCode: 'none',
-  inComingLinkError: undefined
+  inComingLinkError: undefined,
+  isFetching: false
 };
 
 const network = (state = initialState, action) => {
@@ -25,13 +26,22 @@ const network = (state = initialState, action) => {
     case actions.STORE_INCOMING_LINK:
       return {
         ...state,
-        inComingLinkCode: action.inComingLinkCode
+        inComingLinkCode: action.inComingLinkCode,
+        isFetching: true
+      };
+
+    case actions.DELETE_INCOMING_LINK:
+      return {
+        ...state,
+        inComingLinkCode: action.inComingLinkCode,
+        isFetching: false
       };
 
     case actions.STORE_INCOMING_LINK_ERROR:
       return {
         ...state,
-        inComingLinkError: action.inComingLinkError
+        inComingLinkError: action.inComingLinkError,
+        isFetching: false
       };
 
     default:

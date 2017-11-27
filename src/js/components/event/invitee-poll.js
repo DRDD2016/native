@@ -6,15 +6,13 @@ import update from 'immutability-helper';
 import CategoryDetails from './category-details';
 import styles from '../../../styles';
 import Spinner from '../common/Spinner';
-import { store } from '../../init-store';
-import { deleteIncomingLink } from '../../actions/network';
 
 export default class InviteePoll extends Component {
 
   constructor (props) {
     super(props);
     console.log('inviteePoll constructor Props: ', this.props);
-    
+
     const { what, where, when } = this.props.event;
 
     this.state = {
@@ -31,8 +29,6 @@ export default class InviteePoll extends Component {
 
   componentWillMount () {
     console.log('inviteePoll compWillMount: ', this.props);
-    console.log('deleting linkData');
-    store.dispatch(deleteIncomingLink());
 
     // new
     const { what, where, when } = this.props.event;

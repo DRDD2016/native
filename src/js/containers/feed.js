@@ -22,6 +22,7 @@ const mapStateToProps = ({ nav, feed, user, network, create, event }) => {
     allEvents: data,
     feed: feedData,
     isFetching: feed.isFetching,
+    networkIsFetching: network.isFetching,
     eventIsFetching: event.data.isFetching,
     push_info: user.push_info,
     eventCode: network.inComingLinkCode,

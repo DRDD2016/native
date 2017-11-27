@@ -59,6 +59,10 @@ export default class Event extends Component {
     console.log('ThisPropsNavigation: ', this.props.navigation);
   }
 
+  componentWillUnMount () {
+    console.log('Event will UnMount');
+  }
+
   handleDelete (event, event_id) {
     this.setState({
       isModalVisible: true

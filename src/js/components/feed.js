@@ -41,6 +41,11 @@ class Feed extends Component {
 
     console.log('feed mountProps', this.props);
 
+    if (!this.props.eventCodeError && !this.props.eventIsFetching && !this.props.networkIsFetching) {
+      this.forceUpdate();
+    }
+
+
     // if (this.props.eventCodeError || this.props.eventIsFetching) {
     //   this.setState({ isModalVisible: true });
     // }
@@ -60,14 +65,15 @@ class Feed extends Component {
 
   componentWillReceiveProps (nextProps) {
 
-    console.log('feed nextProps', nextProps);
-    console.log('feed thisprops', this.props);
+    console.log('compWillRecProps feed thisprops', this.props);
+    console.log('compWillRecProps feed nextProps', nextProps);
 
-    if (this.props.eventCodeError || this.props.eventIsFetching) {
+
+    if (this.props.eventCodeError || this.props.eventIsFetching || this.props.networkIsFetching) {
       this.setState({ isModalVisible: true });
     }
 
-    if (!this.props.eventCodeError && !this.props.eventIsFetching) {
+    if (!this.props.eventCodeError && !this.props.eventIsFetching && !this.props.networkIsFetching) {
       this.setState({ isModalVisible: false });
     }
 
@@ -138,14 +144,19 @@ class Feed extends Component {
       feed,
       isFetching,
       eventIsFetching,
+      networkIsFetching,
       displaySome,
       displayAll,
       filterActive,
       selectedFilter,
       isConnected,
       eventCodeError } = this.props;
+
+    const anyIsFetching = eventIsFetching || networkIsFetching;
+
     console.log('isFetching: ', isFetching);
     console.log('eventIsFetching: ', eventIsFetching);
+    console.log('networkIsFetching: ', networkIsFetching);
     return (
       <View style={{ flex: 1 }}>
         <Modal transparent animationType={'slide'} visible={this.state.isModalVisible} onRequestClose={() => { alert('Modal has been closed.'); }}>
@@ -153,7 +164,7 @@ class Feed extends Component {
             <View style={styles.modalWrapper}>
 
               {
-                eventIsFetching &&
+                anyIsFetching &&
                 <View style={styles.modalConfirm}>
 
                   <Text style={[styles.msg1, { flex: 1 }]}>Fetching invite</Text>

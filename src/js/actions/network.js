@@ -2,6 +2,7 @@
 export const SET_IS_CONNECTED = 'SET_IS_CONNECTED';
 export const STORE_SOCKET = 'STORE_SOCKET';
 export const STORE_INCOMING_LINK = 'STORE_INCOMING_LINK';
+export const DELETE_INCOMING_LINK = 'DELETE_INCOMING_LINK';
 export const STORE_INCOMING_LINK_ERROR = 'STORE_INCOMING_LINK_ERROR';
 
 export const setIsConnected = isConnected => ({
@@ -16,6 +17,11 @@ export const storeSocket = socket => ({
 
 export const storeIncomingLink = inComingLinkCode => ({
   type: STORE_INCOMING_LINK,
+  inComingLinkCode
+});
+
+export const removeIncomingLink = inComingLinkCode => ({
+  type: DELETE_INCOMING_LINK,
   inComingLinkCode
 });
 
@@ -41,7 +47,7 @@ export function saveIncomingLinkError (error) {
 export function deleteIncomingLink () {
 
   return (dispatch) => {
-    dispatch(storeIncomingLink('none'));
+    dispatch(removeIncomingLink('none'));
 
   };
 }

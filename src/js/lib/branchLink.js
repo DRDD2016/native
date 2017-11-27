@@ -115,7 +115,7 @@ export async function subscribeToBranchLinks (navigation) {
     AsyncStorage.getItem('spark_token')
     .then((token) => {
       if (token) {
-        console.log('submittingCode feed container');
+        console.log('submittingCode');
         // dispatch(deleteIncomingLink());
         const code = linkData;
         store.dispatch(submitCode(token, code, navigation));
