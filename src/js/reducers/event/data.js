@@ -17,7 +17,7 @@ export const initialState = {
     not_going: [],
     not_responded: []
   },
-  isFetching: true,
+  isFetching: false,
   error: undefined,
   cancelled: undefined
 };

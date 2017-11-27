@@ -4,7 +4,7 @@ import { Header } from 'react-navigation';
 import colours from '../../../styles/colours';
 
 export default function ImageHeader (props) {
-  console.log('Header.HEIGHT: ', Header.HEIGHT);
+  // console.log('Header.HEIGHT: ', Header.HEIGHT);
 
   return (
     <View

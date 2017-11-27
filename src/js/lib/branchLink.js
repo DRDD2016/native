@@ -92,6 +92,10 @@ export async function subscribeToBranchLinks (navigation) {
   await branch.subscribe(async ({ error, params }) => {
 
     let linkData = 'none';
+
+    console.info('Received link params from Branch');
+    console.log('Branch params: ', JSON.stringify(params));
+
     if (error) {
       // there was an error. this is a String
       console.info('Error from Branch: ', error);
@@ -99,29 +103,28 @@ export async function subscribeToBranchLinks (navigation) {
       store.dispatch(saveIncomingLinkError(error));
     }
     if (params.eventCode) {
+
       linkData = params.eventCode;
+
+      AsyncStorage.getItem('spark_token')
+      .then((token) => {
+        if (token) {
+          console.log('submittingCode');
+          // dispatch(deleteIncomingLink());
+          const code = linkData;
+          store.dispatch(saveIncomingLink(linkData));
+          store.dispatch(submitCode(token, code, navigation));
+        }
+      })
+      .catch(e => console.error(e));
+
     } else {
       linkData = 'none';
+      console.log('saving linkData', linkData);
+      store.dispatch(saveIncomingLink(linkData));
     }
 
-    console.info('Received link params from Branch');
-    console.log('Branch params: ', JSON.stringify(params));
-
-    console.log('saving linkData', linkData);
-    store.dispatch(saveIncomingLink(linkData));
-
     // can we add call to Submit_Code_directly here? remove from Feed?
-
-    AsyncStorage.getItem('spark_token')
-    .then((token) => {
-      if (token) {
-        console.log('submittingCode');
-        // dispatch(deleteIncomingLink());
-        const code = linkData;
-        store.dispatch(submitCode(token, code, navigation));
-      }
-    })
-    .catch(e => console.error(e));
 
   });
 

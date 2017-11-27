@@ -23,7 +23,7 @@ import UploadPhoto from './containers/upload-photo';
 import ConfirmEmailContainer from './containers/auth/confirm-email';
 import EditContainer from './containers/edit';
 import Code from './containers/code';
-import Splash from './containers/auth/splash';
+import Splash from './components/auth/splash';
 // import Modal from './components/modal';
 
 export const StackRoot = StackNavigator({

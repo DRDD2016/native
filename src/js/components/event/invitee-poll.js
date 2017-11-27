@@ -45,7 +45,7 @@ export default class InviteePoll extends Component {
       });
 
     }
-    console.log('this.state: ', this.state);
+    console.log('InviteePoll this.state: ', this.state);
     //
 
   }
@@ -85,7 +85,7 @@ export default class InviteePoll extends Component {
 
     const { event, handleVote, voteSaved, voteCount, navigator } = this.props;
     console.log('inviteePoll RenderProps: ', this.props);
-    console.log('this.state.isModalVisible: ', this.state.isModalVisible);
+    console.log('inviteePoll this.state.isModalVisible: ', this.state.isModalVisible);
     const allCategoriesSelected = Object.keys(this.state.eventdetails)
       .every(category => this.state.eventdetails[category].includes(1));
 

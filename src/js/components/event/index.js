@@ -38,6 +38,11 @@ export default class Event extends Component {
     };
   }
 
+  componentWillMount () {
+    console.log('stopFetching Link');
+    this.props.stopFetchingLink();
+  }
+
   componentDidMount () {
     this.props.navigation.setParams({
       handleDelete: this.handleDelete.bind(this)
@@ -57,10 +62,6 @@ export default class Event extends Component {
 
     console.log('nextProps: ', nextProps);
     console.log('ThisPropsNavigation: ', this.props.navigation);
-  }
-
-  componentWillUnMount () {
-    console.log('Event will UnMount');
   }
 
   handleDelete (event, event_id) {

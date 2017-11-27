@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, ListView, Modal, TouchableHighlight } from 'react-native';
+import { View, Text, Modal, TouchableHighlight, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
@@ -25,7 +25,8 @@ class Feed extends Component {
     super(props);
 
     this.state = {
-      isModalVisible: false
+      isModalVisible: false,
+      refreshing: false
     };
 
   }
@@ -39,11 +40,25 @@ class Feed extends Component {
 
     // initSocket();
 
-    console.log('feed mountProps', this.props);
+    // console.log('feed mountProps beforeTimeOut', this.props);
 
-    if (!this.props.eventCodeError && !this.props.eventIsFetching && !this.props.networkIsFetching) {
-      this.forceUpdate();
-    }
+    setTimeout(() => {
+
+      // code here will execute after time limit?
+
+      if (this.props.eventCode === 'none') {
+        // console.log('no Code');
+        if (this.props.networkIsFetching) {
+          // console.log('stopFetching Link');
+          this.props.stopFetchingLink();
+        }
+
+      } else {
+        // Code so just wait until SubmitCode action completes, will go to Event.
+        // console.log('Code so waiting for Submit Code to finish');
+      }
+
+    }, 3000);
 
 
     // if (this.props.eventCodeError || this.props.eventIsFetching) {
@@ -65,15 +80,15 @@ class Feed extends Component {
 
   componentWillReceiveProps (nextProps) {
 
-    console.log('compWillRecProps feed thisprops', this.props);
-    console.log('compWillRecProps feed nextProps', nextProps);
+    // console.log('compWillRecProps feed thisprops', this.props);
+    // console.log('compWillRecProps feed nextProps', nextProps);
 
 
     if (this.props.eventCodeError || this.props.eventIsFetching || this.props.networkIsFetching) {
       this.setState({ isModalVisible: true });
     }
 
-    if (!this.props.eventCodeError && !this.props.eventIsFetching && !this.props.networkIsFetching) {
+    if (!nextProps.eventCodeError && !nextProps.eventIsFetching && !nextProps.networkIsFetching) {
       this.setState({ isModalVisible: false });
     }
 
@@ -95,11 +110,20 @@ class Feed extends Component {
   }
 
   createDataSource (feed) {
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    });
-    this.dataSource = ds.cloneWithRows(feed);
+    this.dataSource = feed;
   }
+
+  handleRefresh = () => {
+    this.setState({
+      refreshing: true
+    }, () => {
+      this.updateFeed();
+    });
+  }
+
+  updateFeed = () => {
+
+  };
 
   renderAlert = () => {
     setTimeout(() => {
@@ -107,15 +131,17 @@ class Feed extends Component {
     }, 2000);
   }
 
-  renderRow = (rowData, rowID) => {
-    const { feed_item, id } = rowData;
+  renderItem = (item) => {
+
+    const { index } = item;
+    const { feed_item, id } = item.item;
     const { user_id, handleSelection } = this.props;
 
     return (
       <FeedItem
         user_id={ user_id }
         key={ Math.random() }
-        index={ rowID }
+        index={ index }
         event_id={ feed_item.event_id }
         timestamp={ feed_item.timestamp }
         name={ feed_item.name }
@@ -153,10 +179,10 @@ class Feed extends Component {
       eventCodeError } = this.props;
 
     const anyIsFetching = eventIsFetching || networkIsFetching;
-
-    console.log('isFetching: ', isFetching);
-    console.log('eventIsFetching: ', eventIsFetching);
-    console.log('networkIsFetching: ', networkIsFetching);
+    // console.log('Feed this.state.isModalVisible: ', this.state.isModalVisible);
+    // console.log('isFetching: ', isFetching);
+    // console.log('eventIsFetching: ', eventIsFetching);
+    // console.log('networkIsFetching: ', networkIsFetching);
     return (
       <View style={{ flex: 1 }}>
         <Modal transparent animationType={'slide'} visible={this.state.isModalVisible} onRequestClose={() => { alert('Modal has been closed.'); }}>
@@ -167,7 +193,7 @@ class Feed extends Component {
                 anyIsFetching &&
                 <View style={styles.modalConfirm}>
 
-                  <Text style={[styles.msg1, { flex: 1 }]}>Fetching invite</Text>
+                  <Text style={[styles.msg1, { flex: 1 }]}>Loading</Text>
                   <Text style={[styles.msg2, { flex: 1 }]}>please wait...</Text>
                   <Spinner size="large" />
                   <View style={{ flex: 1 }} />
@@ -226,57 +252,57 @@ class Feed extends Component {
             isFetching && <Spinner />
           }
 
-          <ScrollView>
-            <View>
-              { !isConnected && this.renderAlert() }
 
-              {
-                allEvents.length === 0 && !isFetching &&
-                  <View style={{ alignItems: 'center' }}>
-                    <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
-                      You have no events.
-                    </Text>
-                    <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
-                      (Why not create some?)
-                    </Text>
-                  </View>
-              }
-              {
-                feed.length === 0 && selectedFilter === 'hosting' &&
-                  <View style={{ alignItems: 'center' }}>
-                    <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
-                      You are not hosting any events.
-                    </Text>
-                    <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
-                      (Why not create some?)
-                    </Text>
-                  </View>
-              }
-              {
-                feed.length === 0 && selectedFilter === 'received' &&
-                  <View style={{ alignItems: 'center' }}>
-                    <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
-                      You have not been invited to any events.
-                    </Text>
-                    <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
-                      Tap { '"Code"' } below to enter to join an event using an invite code.
-                    </Text>
-                  </View>
-              }
+          <View>
+            { !isConnected && this.renderAlert() }
 
-              {
-                !isFetching && this.dataSource &&
-                <ListView
-                  enableEmptySections
-                  dataSource={this.dataSource}
-                  renderRow={this.renderRow}
-                  removeClippedSubviews={false}
-                />
-              }
+            {
+              allEvents.length === 0 && !isFetching &&
+                <View style={{ alignItems: 'center' }}>
+                  <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
+                    You have no events.
+                  </Text>
+                  <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
+                    (Why not create some?)
+                  </Text>
+                </View>
+            }
+            {
+              feed.length === 0 && selectedFilter === 'hosting' &&
+                <View style={{ alignItems: 'center' }}>
+                  <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
+                    You are not hosting any events.
+                  </Text>
+                  <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
+                    (Why not create some?)
+                  </Text>
+                </View>
+            }
+            {
+              feed.length === 0 && selectedFilter === 'received' &&
+                <View style={{ alignItems: 'center' }}>
+                  <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
+                    You have not been invited to any events.
+                  </Text>
+                  <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
+                    Tap { '"Code"' } below to enter to join an event using an invite code.
+                  </Text>
+                </View>
+            }
 
-            </View>
+            {
+              !isFetching && this.dataSource &&
+              <FlatList
+                data={this.dataSource}
+                extraData={this.state}
+                renderItem={this.renderItem}
+                keyExtractor={item => item.id}
+                refreshing={this.state.refreshing}
+                onRefresh={this.handleRefresh}
+              />
+            }
 
-          </ScrollView>
+          </View>
 
         </View>
       </View>

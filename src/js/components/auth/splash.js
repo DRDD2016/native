@@ -26,29 +26,9 @@ export default class Splash extends Component {
 
           subscribeToBranchLinks(this.props.navigation);
 
-          console.log('beforeTimeOut');
-
-          setTimeout(() => {
-
-            console.log('afterTimeOut');
-
-            // code here will execute after time limit?
-
-            console.log('Splash - this.props: ', this.props);
-
-            if (this.props.inComingLinkCode === 'none') {
-              console.log('no Code');
-
-              console.log('navigating to Feed');
-              this.props.navigation.navigate('tabsMain');
-
-
-            } else {
-              // Code so just wait until SubmitCode action completes, will go to Event.
-              console.log('Code so no Nav yet, waiting for Submit Code to finish');
-            }
-
-          }, 2000);
+          // start isFetching here
+          console.log('navigating to Feed');
+          this.props.navigation.navigate('tabsMain');
 
         } else {
           // if no token, go to login/signup

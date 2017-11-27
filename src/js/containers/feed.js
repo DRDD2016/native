@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Feed from '../components/feed';
 import { applyFilter, clearFilter, feedItemTouched } from '../actions/feed';
 import { getEvent, submitCode } from '../actions/event/data';
-// import { deleteIncomingLink } from '../actions/network';
+import { deleteIncomingLink } from '../actions/network';
 import filterFeed from '../lib/filter-feed';
 
 
@@ -56,6 +56,11 @@ const mapDispatchToProps = (dispatch, props) => {
         }
       })
       .catch(error => console.error(error));
+
+    },
+    stopFetchingLink: () => { //eslint-disable-line
+
+      dispatch(deleteIncomingLink());
 
     },
     displaySome: (selectedFilter) => {
