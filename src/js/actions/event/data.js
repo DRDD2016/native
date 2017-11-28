@@ -140,17 +140,19 @@ export function getEvent (token, event_id, navigation) {
         };
         console.log('resetting route to event in data action creator');
         console.log('params', params);
-        // new code - reset navigation
+
+
         // const resetAction = NavigationActions.reset({
-        //   index: 1,
+        //   index: 0,
+        //   key: null,
         //   actions: [
         //     NavigationActions.navigate({ routeName: 'event', params })
         //   ]
         // });
-        //
-        // this.props.navigation.dispatch(resetAction);
 
-        //
+        console.log('getEvent about to Nav');
+
+        // navigation.dispatch(resetAction);
 
         navigation.navigate('event', params);
       })
@@ -172,7 +174,9 @@ export function clearCode () {
 
 export function submitCode (token, code, navigation) {
   return (dispatch) => {
+    console.log('submitCodeRequest');
     dispatch(submitCodeRequest());
+    // dispatch(deleteIncomingLink());
     fetch(`${Config.URI}/events/rsvps`, {
       method: 'POST',
       headers: {
@@ -186,12 +190,14 @@ export function submitCode (token, code, navigation) {
       res.json()
       .then((data) => {
         if (data.error) {
+          console.log('submitCodeFailure');
           dispatch(submitCodeFailure(data.error));
         } else {
           const userIsHost = store.getState().user.user_id === data.host_user_id;
           if (data.is_poll) {
             dispatch(getVotes(token, data.event_id, userIsHost));
           }
+          console.log('submitCodeSuccess');
           dispatch(submitCodeSuccess(data));
           dispatch(clearPollState());
           dispatch(getCalendar(token));
@@ -211,17 +217,19 @@ export function submitCode (token, code, navigation) {
           };
 
           console.log('resetting route to event in submit code data action creator');
-          // new code - reset navigation
+
+
           // const resetAction = NavigationActions.reset({
-          //   index: 1,
+          //   index: 0,
+          //   key: null,
           //   actions: [
           //     NavigationActions.navigate({ routeName: 'event', params })
           //   ]
           // });
-          //
-          // navigation.dispatch(resetAction);
 
-          //
+          console.log('navigating to Event (SubmitCode)');
+
+          // navigation.dispatch(resetAction);
 
           navigation.navigate('event', params);
         }

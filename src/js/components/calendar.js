@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 /* eslint-disable*/
 import React, { Component } from 'react';
-import { View, Text, ScrollView, ListView, Dimensions, Platform } from 'react-native';
+import { View, Text, ScrollView, FlatList, Dimensions, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CalendarItem from './calendar-item';
 import FilterPanel from './general/filter-panel';
@@ -26,7 +26,7 @@ class Calendar extends Component {
   }
 
   componentWillMount () {
-    console.log('calendar compWillMount', this.props);
+    // console.log('calendar compWillMount', this.props);
     const sortedData = this.props.filteredEvents.sort((a, b) => {
       return a.when[0] > b.when[0];
     });
@@ -35,7 +35,7 @@ class Calendar extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log('calendar compWillReceiveNextprops', nextProps);
+    // console.log('calendar compWillReceiveNextprops', nextProps);
     const sortedData = nextProps.filteredEvents.sort((a, b) => {
       return a.when[0] > b.when[0];
     });
@@ -43,11 +43,18 @@ class Calendar extends Component {
 
   }
 
+  shouldComponentUpdate (nextProps) {
+
+    if (nextProps.nav.index === 1) {
+      if (nextProps.nav.routes[1].index === 1) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   createDataSource (calendar) {
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    });
-    this.dataSource = ds.cloneWithRows(calendar);
+    this.dataSource = calendar;
   }
 
   renderAlert = () => {
@@ -56,29 +63,31 @@ class Calendar extends Component {
     }, 2000);
   }
 
-  renderRow = (rowData, rowID) => {
-    const item = rowData;
+  renderItem = (item) => {
+
+    const { event_id, host_user_id, status, name, what, where, when } = item.item;
     const { user_id, handleOnPress } = this.props;
 
     return (
 
         <CalendarItem
-          key={ item.event_id }
-          userIsHost={ item.host_user_id === user_id }
-          rsvpStatus={ item.status }
-          name={ item.name }
-          what={ item.what }
-          where={ item.where }
-          when={ item.when }
-          event_id={ item.event_id }
-          handleOnPress={ this.props.handleOnPress }
+          key={ event_id }
+          userIsHost={ host_user_id === user_id }
+          rsvpStatus={ status }
+          name={ name }
+          what={ what }
+          where={ where }
+          when={ when }
+          event_id={ event_id }
+          handleOnPress={ handleOnPress }
         />
 
     );
   }
 
   render () {
-    console.log('calendar RenderProps', this.props);
+
+    console.log('renderCalendar');
 
     const { allEvents, isFetching, displaySome, displayAll, filterActive, selectedFilter, user_id, isConnected } = this.props;
 
@@ -108,7 +117,7 @@ class Calendar extends Component {
             isFetching && <Spinner />
           }
 
-          <ScrollView>
+          <View>
 
               {
                 this.props.filteredEvents.length === 0 && !isFetching &&
@@ -122,16 +131,16 @@ class Calendar extends Component {
               {
                 !isFetching && this.dataSource &&
                 <View style={styles.containerFeed}>
-                  <ListView
-                    enableEmptySections
-                    dataSource={this.dataSource}
-                    renderRow={this.renderRow}
-                    removeClippedSubviews={false}
-                  />
+                <FlatList
+                  data={this.dataSource}
+                  extraData={this.state}
+                  renderItem={this.renderItem}
+                  keyExtractor={item => item.event_id}
+                />
                 </View>
               }
 
-          </ScrollView>
+          </View>
         </View>
       </View>
     );

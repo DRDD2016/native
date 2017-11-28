@@ -1,5 +1,6 @@
 import { NavigationActions } from 'react-navigation';
 import { clearCreateEvent } from '../actions/create';
+import { deleteIncomingLink } from '../actions/network';
 import { store } from '../init-store';
 
 export default async function discardEvent (stack, navigation) {
@@ -28,8 +29,15 @@ export default async function discardEvent (stack, navigation) {
     }
     case 'Event': {
 
-      navigation.dispatch(NavigationActions.back());
+      store.dispatch(deleteIncomingLink());
+
+      const backAction = NavigationActions.back();
+
+      await navigation.dispatch(backAction);
+
+
       break;
+
     }
 
 

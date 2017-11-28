@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import Feed from '../components/feed';
 import { applyFilter, clearFilter, feedItemTouched } from '../actions/feed';
 import { getEvent, submitCode } from '../actions/event/data';
-// import { deleteIncomingLink } from '../actions/network';
+import { deleteIncomingLink } from '../actions/network';
 import filterFeed from '../lib/filter-feed';
 
 
-const mapStateToProps = ({ nav, feed, user, network, create }) => {
+const mapStateToProps = ({ nav, feed, user, network, create, event }) => {
 
   const data = feed.data;
   const filterActive = feed.filterActive;
@@ -22,8 +22,11 @@ const mapStateToProps = ({ nav, feed, user, network, create }) => {
     allEvents: data,
     feed: feedData,
     isFetching: feed.isFetching,
+    networkIsFetching: network.isFetching,
+    eventIsFetching: event.data.isFetching,
     push_info: user.push_info,
     eventCode: network.inComingLinkCode,
+    eventCodeError: network.inComingLinkError,
     saveEventDone: create.saveEventDone
   };
 };
@@ -47,11 +50,17 @@ const mapDispatchToProps = (dispatch, props) => {
       AsyncStorage.getItem('spark_token')
       .then((token) => {
         if (token) {
+          console.log('submittingCode feed container');
           // dispatch(deleteIncomingLink());
           dispatch(submitCode(token, code, props.navigation));
         }
       })
       .catch(error => console.error(error));
+
+    },
+    stopFetchingLink: () => { //eslint-disable-line
+
+      dispatch(deleteIncomingLink());
 
     },
     displaySome: (selectedFilter) => {

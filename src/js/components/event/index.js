@@ -38,6 +38,11 @@ export default class Event extends Component {
     };
   }
 
+  componentWillMount () {
+    // console.log('stopFetching Link');
+    this.props.stopFetchingLink();
+  }
+
   componentDidMount () {
     this.props.navigation.setParams({
       handleDelete: this.handleDelete.bind(this)
