@@ -25,8 +25,7 @@ class Feed extends Component {
     super(props);
 
     this.state = {
-      isModalVisible: false,
-      refreshing: false
+      isModalVisible: false
     };
 
   }
@@ -40,8 +39,7 @@ class Feed extends Component {
 
     // initSocket();
 
-    // console.log('feed mountProps beforeTimeOut', this.props);
-
+    console.log('FeedWillMount');
     setTimeout(() => {
 
       // code here will execute after time limit?
@@ -60,29 +58,12 @@ class Feed extends Component {
 
     }, 3000);
 
-
-    // if (this.props.eventCodeError || this.props.eventIsFetching) {
-    //   this.setState({ isModalVisible: true });
-    // }
-    //
-    // if (this.props.eventCode) {
-    //   if (this.props.eventCode !== 'none') {
-    //     // stopSocket();
-    //     const code = this.props.eventCode;
-    //
-    //     console.log('submittingCode feed compWillMount');
-    //
-    //     this.props.handleSubmitCode(code);
-    //   }
-    // }
-
   }
+
 
   componentWillReceiveProps (nextProps) {
 
-    // console.log('compWillRecProps feed thisprops', this.props);
-    // console.log('compWillRecProps feed nextProps', nextProps);
-
+    console.log('FeedWillReceiveProps');
 
     if (this.props.eventCodeError || this.props.eventIsFetching || this.props.networkIsFetching) {
       this.setState({ isModalVisible: true });
@@ -92,38 +73,25 @@ class Feed extends Component {
       this.setState({ isModalVisible: false });
     }
 
-    // if (nextProps.eventCode && !nextProps.eventIsFetching) {
-    //   if (nextProps.eventCode !== 'none') {
-    //     // stopSocket();
-    //     const code = nextProps.eventCode;
-    //
-    //     console.log('submittingCode feed compWillRecProps');
-    //
-    //     this.props.handleSubmitCode(code);
-    //   }
-    // }
-
     const { feed } = nextProps;
     const newData = [].concat(feed).reverse();
     this.createDataSource(newData);
 
   }
 
+  shouldComponentUpdate (nextProps) {
+
+    if (nextProps.nav.index === 1) {
+      if (nextProps.nav.routes[1].index === 2) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   createDataSource (feed) {
     this.dataSource = feed;
   }
-
-  handleRefresh = () => {
-    this.setState({
-      refreshing: true
-    }, () => {
-      this.updateFeed();
-    });
-  }
-
-  updateFeed = () => {
-
-  };
 
   renderAlert = () => {
     setTimeout(() => {
@@ -165,6 +133,8 @@ class Feed extends Component {
 
   render () {
 
+    console.log('renderFeed');
+
     const {
       allEvents,
       feed,
@@ -179,10 +149,7 @@ class Feed extends Component {
       eventCodeError } = this.props;
 
     const anyIsFetching = eventIsFetching || networkIsFetching;
-    // console.log('Feed this.state.isModalVisible: ', this.state.isModalVisible);
-    // console.log('isFetching: ', isFetching);
-    // console.log('eventIsFetching: ', eventIsFetching);
-    // console.log('networkIsFetching: ', networkIsFetching);
+    
     return (
       <View style={{ flex: 1 }}>
         <Modal transparent animationType={'slide'} visible={this.state.isModalVisible} onRequestClose={() => { alert('Modal has been closed.'); }}>
@@ -297,8 +264,6 @@ class Feed extends Component {
                 extraData={this.state}
                 renderItem={this.renderItem}
                 keyExtractor={item => item.id}
-                refreshing={this.state.refreshing}
-                onRefresh={this.handleRefresh}
               />
             }
 

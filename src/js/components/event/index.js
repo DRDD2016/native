@@ -39,7 +39,7 @@ export default class Event extends Component {
   }
 
   componentWillMount () {
-    console.log('stopFetching Link');
+    // console.log('stopFetching Link');
     this.props.stopFetchingLink();
   }
 
