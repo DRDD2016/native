@@ -2,6 +2,7 @@ import Config from 'react-native-config';
 import { NavigationActions } from 'react-navigation';
 import { getVotes, clearPollState } from './poll';
 import { hydrateCreateEvent, clearCreateEvent, saveEventDone } from '../create';
+import { linkDatafromBranch } from '../network';
 import { getCalendar } from '../calendar';
 import { store } from '../../init-store';
 
@@ -155,6 +156,9 @@ export function getEvent (token, event_id, navigation) {
         // navigation.dispatch(resetAction);
 
         navigation.navigate('event', params);
+
+        console.log('navigated to event so dispatch finished getting link from branch');
+        dispatch(linkDatafromBranch());
       })
       .catch((err) => {
         dispatch(getEventFailure(err.message));
@@ -172,7 +176,7 @@ export function clearCode () {
   };
 }
 
-export function submitCode (token, code, navigation) {
+export function submitCode (token, code) {
   return (dispatch) => {
     console.log('submitCodeRequest');
     dispatch(submitCodeRequest());
@@ -201,6 +205,7 @@ export function submitCode (token, code, navigation) {
           dispatch(submitCodeSuccess(data));
           dispatch(clearPollState());
           dispatch(getCalendar(token));
+          console.log('store.getState()', store.getState());
           const params = {
             userIsHost: store.getState().user.user_id === data.host_user_id,
             isPoll: data.is_poll,
@@ -211,9 +216,10 @@ export function submitCode (token, code, navigation) {
               setTimeout(() => {
                 dispatch(hydrateCreateEvent(data));
               }, 200);
-              navigation.navigate('Edit', params, navigation);
+              dispatch(NavigationActions.navigate({ routeName: 'Edit', params }));
+              // navigation.navigate('Edit', params, navigation);
             },
-            previousRoute: navigation.state.routeName
+            previousRoute: store.getState().nav.routeName // fix this
           };
 
           console.log('resetting route to event in submit code data action creator');
@@ -231,7 +237,9 @@ export function submitCode (token, code, navigation) {
 
           // navigation.dispatch(resetAction);
 
-          navigation.navigate('event', params);
+          dispatch(NavigationActions.navigate({ routeName: 'event', params }));
+          console.log('finishing SubmitCode');
+          dispatch(linkDatafromBranch());
         }
       })
       .catch((err) => {

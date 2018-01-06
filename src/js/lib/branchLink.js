@@ -1,7 +1,7 @@
 import { Linking, AsyncStorage } from 'react-native';
 import branch, { RegisterViewEvent } from 'react-native-branch';
 import { store } from '../init-store';
-import { saveIncomingLink, saveIncomingLinkError } from '../actions/network';
+import { subscribeToBranch, linkDatafromBranch, saveIncomingLink, saveIncomingLinkError } from '../actions/network';
 import { submitCode } from '../actions/event/data';
 
 /**
@@ -87,13 +87,21 @@ export async function openWhatsApp (text) {
 
 export async function subscribeToBranchLinks (navigation) {
 
+  store.dispatch(subscribeToBranch());
+
   console.info('Subscribing to Branch links');
 
+
   await branch.subscribe(async ({ error, params }) => {
+
+    store.dispatch(subscribeToBranch());
 
     let linkData = 'none';
 
     console.info('Received link params from Branch');
+
+    // repeat this to set loading true when new link rec'd when app already open
+
     console.log('Branch params: ', JSON.stringify(params));
 
     if (error) {
@@ -101,6 +109,8 @@ export async function subscribeToBranchLinks (navigation) {
       console.info('Error from Branch: ', error);
       linkData = 'none';
       store.dispatch(saveIncomingLinkError(error));
+      store.dispatch(linkDatafromBranch());
+      // return linkData;
     }
     if (params.eventCode) {
 
@@ -109,11 +119,13 @@ export async function subscribeToBranchLinks (navigation) {
       AsyncStorage.getItem('spark_token')
       .then((token) => {
         if (token) {
-          console.log('submittingCode');
+          console.log('submittingEventCode');
           // dispatch(deleteIncomingLink());
           const code = linkData;
           store.dispatch(saveIncomingLink(linkData));
           store.dispatch(submitCode(token, code, navigation));
+          // store.dispatch(linkDatafromBranch());
+          // return linkData;
         }
       })
       .catch(e => console.error(e));
@@ -122,6 +134,8 @@ export async function subscribeToBranchLinks (navigation) {
       linkData = 'none';
       console.log('saving linkData', linkData);
       store.dispatch(saveIncomingLink(linkData));
+      store.dispatch(linkDatafromBranch());
+      // return linkData;
     }
 
     // can we add call to Submit_Code_directly here? remove from Feed?

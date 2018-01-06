@@ -4,6 +4,8 @@ export const STORE_SOCKET = 'STORE_SOCKET';
 export const STORE_INCOMING_LINK = 'STORE_INCOMING_LINK';
 export const DELETE_INCOMING_LINK = 'DELETE_INCOMING_LINK';
 export const STORE_INCOMING_LINK_ERROR = 'STORE_INCOMING_LINK_ERROR';
+export const SUBSCRIBE_BRANCH = 'SUBSCRIBE_BRANCH';
+export const LINKDATA_FROM_BRANCH = 'LINKDATA_FROM_BRANCH';
 
 export const setIsConnected = isConnected => ({
   type: 'SET_IS_CONNECTED',
@@ -13,6 +15,14 @@ export const setIsConnected = isConnected => ({
 export const storeSocket = socket => ({
   type: STORE_SOCKET,
   socket
+});
+
+export const subscribeToBranch = () => ({
+  type: SUBSCRIBE_BRANCH
+});
+
+export const linkDatafromBranch = () => ({
+  type: LINKDATA_FROM_BRANCH
 });
 
 export const storeIncomingLink = inComingLinkCode => ({

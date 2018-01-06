@@ -951,7 +951,7 @@ const styles = {
 
   tabContainer: {
     flex: 1,
-    backgroundColor: 'transparent',
+    backgroundColor: colours.white,
     justifyContent: 'center',
     alignItems: 'center'
   },
