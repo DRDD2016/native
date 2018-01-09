@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Image, View, AsyncStorage } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import initSocket from '../../socket-router';
 import Spinner from '../common/Spinner';
 import { store } from '../../init-store';
-// import { subscribeToBranchLinks } from '../../lib/branchLink';
 
 const logo = require('../../../img/sparkLoginLogo.png');
 
@@ -41,16 +41,36 @@ export default class Splash extends Component {
 
             if (splashStore.inComingLinkCode === 'none') {
               console.log('navigating to Feed because inComingLinkCode === none');
-              this.props.navigation.navigate('tabsMain');
+
+              const resetAction = NavigationActions.reset({
+                index: 0,
+                key: null,
+                actions: [
+                  NavigationActions.navigate({ routeName: 'tabsMain' })
+                ]
+              });
+
+              this.props.navigation.dispatch(resetAction);
+
             } else {
               console.log('inComingLinkCode NOT none so navigating to Event');
-              console.log('TO ROUTE');
-              // this.props.navigation.navigate('tabsMain');
+              console.log('NOT routed, shouldnt be required');
+
             }
 
           } else {
             console.log('inComingLinkCode === undefined so navigating to Feed');
-            this.props.navigation.navigate('tabsMain');
+
+            const resetAction = NavigationActions.reset({
+              index: 0,
+              key: null,
+              actions: [
+                NavigationActions.navigate({ routeName: 'tabsMain' })
+              ]
+            });
+
+            this.props.navigation.dispatch(resetAction);
+
           }
 
         } else {
@@ -61,24 +81,6 @@ export default class Splash extends Component {
       });
     }, 1000);
   }
-
-  // componentWillUpdate (nextProps) {
-  //
-  //   console.log('SplashWillUpdateProps', this.props);
-  //   console.log('SplashWillUpdateNextProps', nextProps);
-  //
-  //   if (nextProps.inComingLinkCode === 'none') {
-  //     console.log('no Code');
-  //
-  //     console.log('navigating to Feed');
-  //     this.props.navigation.navigate('tabsMain');
-  //
-  //   } else {
-  //     // Code so just wait until SubmitCode action completes, will go to Event.
-  //     console.log('Code so no Nav yet, waiting for Submit Code to finish');
-  //   }
-  //
-  // }
 
   render () {
     console.log('splash render');

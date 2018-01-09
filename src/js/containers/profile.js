@@ -24,7 +24,6 @@ const mapDispatchToProps = dispatch => ({
     .then(() => {
       AsyncStorage.removeItem('spark_user_id')
       .then(() => {
-        // navigation.navigate('splash');   // reset
 
         const resetAction = NavigationActions.reset({
           index: 0,
