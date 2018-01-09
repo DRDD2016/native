@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { AsyncStorage } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import { persistor, store } from '../init-store';
 import Profile from '../components/profile';
 import { changeName, editName, uploadPhoto, logout } from '../actions/profile';
@@ -23,7 +24,16 @@ const mapDispatchToProps = dispatch => ({
     .then(() => {
       AsyncStorage.removeItem('spark_user_id')
       .then(() => {
-        navigation.navigate('splash');
+
+        const resetAction = NavigationActions.reset({
+          index: 0,
+          key: null,
+          actions: [
+            NavigationActions.navigate({ routeName: 'splash' })
+          ]
+        });
+
+        navigation.dispatch(resetAction);
 
         // const rootNavigator = nav.getNavigator('root');
         // rootNavigator.replace('auth');

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 /* eslint-disable*/
 import React, { Component } from 'react';
-import { View, Text, ScrollView, FlatList, Dimensions, Platform } from 'react-native';
+import { View, Text, FlatList, Dimensions, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CalendarItem from './calendar-item';
 import FilterPanel from './general/filter-panel';

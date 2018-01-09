@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Feed from '../components/feed';
 import { applyFilter, clearFilter, feedItemTouched } from '../actions/feed';
 import { getEvent, submitCode } from '../actions/event/data';
-import { deleteIncomingLink } from '../actions/network';
+import { deleteIncomingLink, linkDatafromBranch } from '../actions/network';
 import filterFeed from '../lib/filter-feed';
 
 
@@ -24,6 +24,7 @@ const mapStateToProps = ({ nav, feed, user, network, create, event }) => {
     isFetching: feed.isFetching,
     networkIsFetching: network.isFetching,
     eventIsFetching: event.data.isFetching,
+    isFetchingBranch: network.isFetchingBranch,
     push_info: user.push_info,
     eventCode: network.inComingLinkCode,
     eventCodeError: network.inComingLinkError,
@@ -58,9 +59,12 @@ const mapDispatchToProps = (dispatch, props) => {
       .catch(error => console.error(error));
 
     },
+    linkDatafromBranch: () => { //eslint-disable-line
+      dispatch(linkDatafromBranch());
+    },
     stopFetchingLink: () => { //eslint-disable-line
 
-      dispatch(deleteIncomingLink());
+      dispatch(deleteIncomingLink()); // is this still used?
 
     },
     displaySome: (selectedFilter) => {

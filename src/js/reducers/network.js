@@ -6,7 +6,8 @@ const initialState = {
   socket: undefined,
   inComingLinkCode: 'none',
   inComingLinkError: undefined,
-  isFetching: false
+  isFetching: false,
+  isFetchingBranch: false
 };
 
 const network = (state = initialState, action) => {
@@ -21,6 +22,18 @@ const network = (state = initialState, action) => {
       return {
         ...state,
         socket: action.socket
+      };
+
+    case actions.SUBSCRIBE_BRANCH:
+      return {
+        ...state,
+        isFetchingBranch: true
+      };
+
+    case actions.LINKDATA_FROM_BRANCH:
+      return {
+        ...state,
+        isFetchingBranch: false
       };
 
     case actions.STORE_INCOMING_LINK:
