@@ -36,6 +36,7 @@ export default class Details extends Component {
   }
 
   render () {
+    console.log('render this.props: ', this.props);
     const { name, description, note, handleChange } = this.props;
     const hideNext = name === '' || description === '';
     return (
