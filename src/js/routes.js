@@ -1,7 +1,7 @@
-import React from 'react';
-import { Dimensions, Platform } from 'react-native';
+import React, { Component } from 'react';
+import { Dimensions, Platform, BackHandler } from 'react-native';
 import { connect } from 'react-redux';
-import { StackNavigator, TabNavigator, addNavigationHelpers } from 'react-navigation';
+import { StackNavigator, TabNavigator, addNavigationHelpers, NavigationActions } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colours from '../styles/colours';
 
@@ -110,9 +110,39 @@ export const StackRoot = StackNavigator({
   initialRouteName: 'splash'
 });
 
-const AppWithNavigationState = ({ dispatch, nav }) => (
-  <StackRoot navigation={addNavigationHelpers({ dispatch, state: nav })} />
-);
+
+class AppWithNavigationState extends Component {
+
+  componentDidMount () {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+  }
+  componentWillUnmount () {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+  }
+  onBackPress = () => {
+    const { dispatch, nav } = this.props;
+    console.log('nav routes', nav.routes[0]);
+    if (nav.routes[0].index === 4) {
+      dispatch(NavigationActions.back());
+      return true;
+    } else if (nav.index === 0) {
+      return false;
+    }
+    dispatch(NavigationActions.back());
+    return true;
+  };
+
+  render () {
+    const { dispatch, nav } = this.props;
+    console.log('nav: ', nav);
+    const navigation = addNavigationHelpers({
+      dispatch,
+      state: nav
+    });
+
+    return <StackRoot navigation={navigation} />;
+  }
+}
 
 const mapStateToProps = state => ({
   nav: state.nav
