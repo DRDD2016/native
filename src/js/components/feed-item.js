@@ -26,6 +26,9 @@ class FeedItem extends PureComponent {
       photo_url, where, when, userIsHost, is_poll, subject_user_id,
       viewed, name, edited } = this.props;
 
+    console.log('name: ', name);
+    console.log('viewed: ', viewed);
+
     const unConfirmedItem =
           (when.length > 1) ||
           (when.length === 1 && when[0].date === '');
@@ -33,7 +36,7 @@ class FeedItem extends PureComponent {
     const userIsSubject = subject_user_id === user_id;
 
     return (
-      <Card style={[styles.cardStyle, viewed && styles.viewedFeedItemStyle]}>
+      <Card style={[styles.cardStyle, !viewed && styles.viewedFeedItemStyle]}>
         <CardSection style={styles.cardSectionFeedItem}>
           <TouchableOpacity
             style={styles.cardButtonStyle}
@@ -44,14 +47,14 @@ class FeedItem extends PureComponent {
               <Image style={styles.uiProfilePhotoCircularImage} source={{ uri: photo_url }} />
             </View>
             <View style={{ flex: 3, paddingBottom: 5, paddingRight: 3 }}>
-              <Text style={[styles.timestamp, viewed && styles.viewedFeedItemTimestamp]}>
+              <Text style={[styles.timestamp, !viewed && styles.viewedFeedItemTimestamp]}>
                 { moment(timestamp).startOf().fromNow() } </Text>
               <Text>
-                <Text style={[styles.subjectName, viewed && styles.viewedFeedItemName]}>
+                <Text style={[styles.subjectName, !viewed && styles.viewedFeedItemName]}>
                   { userIsSubject && 'You'}
                   { !userIsSubject && `${firstname}  ${surname}` }
                 </Text>
-                <Text style={[styles.subjectAction, viewed && styles.viewedFeedItemAction]}>
+                <Text style={[styles.subjectAction, !viewed && styles.viewedFeedItemAction]}>
                   { userIsSubject && is_poll && ' have created a poll ' }
                   { userIsSubject && !is_poll && !edited && ' have created an event ' }
                   { userIsSubject && !is_poll && edited && ' have edited an event' }
@@ -65,7 +68,7 @@ class FeedItem extends PureComponent {
 
                 </Text>
               </Text>
-              <Text style={[styles.eventName, viewed && styles.viewedFeedItemName]}>
+              <Text style={[styles.eventName, !viewed && styles.viewedFeedItemName]}>
                 { name }
               </Text>
 
@@ -95,7 +98,7 @@ class FeedItem extends PureComponent {
                   <Text
                     style={[{ fontSize: 16, flex: 3, marginLeft: 5 },
                       unConfirmedItem && styles.unConfirmedItemText,
-                      viewed && styles.viewedFeedItemDate]}
+                      !viewed && styles.viewedFeedItemDate]}
                   >
                     {
                       (when.length > 1 && 'VOTE') ||
@@ -126,7 +129,7 @@ class FeedItem extends PureComponent {
                     numberOfLines={2}
                     style={[{ fontSize: 12, flex: 3, marginLeft: 5 },
                       unConfirmedItem && styles.unConfirmedItemText,
-                      viewed && styles.viewedFeedItemPlaceName]}
+                      !viewed && styles.viewedFeedItemPlaceName]}
                   >
                     {
                       (where.length > 1 && 'VOTE') ||
