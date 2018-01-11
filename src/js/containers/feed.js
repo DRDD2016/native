@@ -59,6 +59,11 @@ const mapDispatchToProps = (dispatch, props) => {
       .catch(error => console.error(error));
 
     },
+    createNewEvent: () => { //eslint-disable-line
+
+      props.navigation.navigate('Create');
+
+    },
     linkDatafromBranch: () => { //eslint-disable-line
       dispatch(linkDatafromBranch());
     },

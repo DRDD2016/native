@@ -1,7 +1,7 @@
 
 /* eslint-disable no-else-return */
 import React, { Component } from 'react';
-import { Text, View, TouchableHighlight, ScrollView, Modal } from 'react-native';
+import { Text, Image, View, TouchableHighlight, ScrollView, Modal } from 'react-native';
 import update from 'immutability-helper';
 import CategoryDetails from './category-details';
 import styles from '../../../styles';
@@ -138,7 +138,18 @@ export default class InviteePoll extends Component {
 
 
         </Modal>
-        <Text>{'Click the options below to vote on the poll '}</Text>
+
+
+        <View style={{ alignItems: 'center' }}>
+          <Image
+            source={{ uri: event.host_photo_url }}
+            style={{ marginHorizontal: 5, marginBottom: 5, width: 60, height: 60, resizeMode: 'contain' }}
+          />
+          <Text style={{ alignSelf: 'center', marginBottom: 5 }}>{event.firstname} has asked you to vote on:</Text>
+          <Text style={[styles.msg1, { alignSelf: 'center', marginBottom: 5 }]}>{event.name}</Text>
+          <Text>{'Tap the options below to vote'}</Text>
+        </View>
+
         <View style={styles.row}>
 
           <CategoryDetails

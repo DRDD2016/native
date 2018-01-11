@@ -9,6 +9,9 @@ import { store } from '../../init-store';
 export const GET_EVENT_REQUEST = 'GET_EVENT_REQUEST';
 export const GET_EVENT_SUCCESS = 'GET_EVENT_SUCCESS';
 export const GET_EVENT_FAILURE = 'GET_EVENT_FAILURE';
+export const GET_USERBYID_REQUEST = 'GET_USERBYID_REQUEST';
+export const GET_USERBYID_SUCCESS = 'GET_USERBYID_SUCCESS';
+export const GET_USERBYID_FAILURE = 'GET_USERBYID_FAILURE';
 export const SUBMIT_CODE_REQUEST = 'SUBMIT_CODE_REQUEST';
 export const SUBMIT_CODE_SUCCESS = 'SUBMIT_CODE_SUCCESS';
 export const SUBMIT_CODE_FAILURE = 'SUBMIT_CODE_FAILURE';
@@ -34,6 +37,20 @@ export const getEventSuccess = data => ({
 
 export const getEventFailure = error => ({
   type: GET_EVENT_FAILURE,
+  error
+});
+
+export const getUserByIdRequest = () => ({
+  type: GET_USERBYID_REQUEST
+});
+
+export const getUserByIdSuccess = data => ({
+  type: GET_USERBYID_SUCCESS,
+  data
+});
+
+export const getUserByIdFailure = error => ({
+  type: GET_USERBYID_FAILURE,
   error
 });
 
@@ -97,6 +114,46 @@ export const deleteEventFailure = error => ({
   type: DELETE_EVENT_FAILURE,
   error
 });
+
+export function getUserById (token, user_id) {
+  return (dispatch) => {
+
+    dispatch(getUserByIdRequest());
+    console.log('getUserById action for id: ', user_id);
+
+    fetch(`${Config.URI}/users/${user_id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        authorization: token,
+        'Cache-Control': 'no-cache',
+        Pragma: 'no-cache'
+      }
+    })
+    .then((res) => {
+      res.json()
+      .then((data) => {
+        console.log('getUser response data:', data);
+        const eventData = {
+          firstname: data.firstname,
+          surname: data.surname,
+          photo_url: data.photo_url
+        };
+        dispatch(getUserByIdSuccess(eventData));
+
+      })
+      .catch((err) => {
+        console.log('caught getUser error: ', err);
+        dispatch(getUserByIdFailure(err.message));
+      });
+    })
+    .catch((err) => {
+      console.log('caught getUser error: ', err);
+      dispatch(getUserByIdFailure(err.message));
+    });
+  };
+}
 
 export function getEvent (token, event_id, navigation) {
   return (dispatch) => {

@@ -49,18 +49,40 @@ export default class Event extends Component {
     });
   }
 
+  componentWillReceiveProps (nextProps) {
+
+    console.log('Event Thisprops: ', this.props);
+    console.log('Event Nextprops: ', nextProps);
+
+    if (this.props.event.host_user_id) {
+
+      if (this.props.event.host_user_id !== nextProps.event.host_user_id) {
+        console.log('hostids not equal');
+        console.log('this.props.event.host_user_id', this.props.event.host_user_id);
+        this.props.getUserById(this.props.event.host_user_id);
+      }
+      if (this.props.event.firstname === undefined) {
+        console.log('this.props.event.host_user_id', this.props.event.host_user_id);
+        this.props.getUserById(this.props.event.host_user_id);
+      }
+    }
+
+
+  }
+
   componentWillUpdate (nextProps) {
 
-    console.log('thisProps: ', this.props);
+    console.log('Event index will update thisProps: ', this.props);
 
     if (nextProps.event.name !== this.props.event.name) {
       this.props.navigation.setParams({
         name: nextProps.event.name,
         handleDelete: this.props.handleDeleteEvent
       });
+
     }
 
-    console.log('nextProps: ', nextProps);
+    console.log('Event index will update nextProps: ', nextProps);
     console.log('ThisPropsNavigation: ', this.props.navigation);
   }
 
