@@ -46,33 +46,32 @@ class Confirm extends Component {
     return (
       <View
         style={[
-          { backgroundColor: colours.white, flex: 1 }]}
+          { borderColor: 'red', borderWidth: 2, backgroundColor: colours.white, flex: 1 }]}
       >
         <HeaderBack />
-        <View>
-          { !isConnected && this.renderAlert() }
-          <ScrollView>
-            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={[styles.msg4, { backgroundColor: colours.transparent, paddingBottom: 5 }]}>{ description }</Text>
-              <Text style={[styles.msg4, { backgroundColor: colours.transparent, paddingBottom: 5 }]}>{ note }</Text>
-            </View>
-            <ConfirmWhat data={what} />
-            <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
-            <ConfirmWhere data={where} />
-            <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
-            <ConfirmWhen data={when} />
+        { !isConnected && this.renderAlert() }
+        <ScrollView>
+          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <Text style={[styles.msg4, { backgroundColor: colours.transparent, paddingBottom: 5 }]}>{ description }</Text>
+            <Text style={[styles.msg4, { backgroundColor: colours.transparent, paddingBottom: 5 }]}>{ note }</Text>
+          </View>
+          <ConfirmWhat data={what} />
+          <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
+          <ConfirmWhere data={where} />
+          <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
+          <ConfirmWhen data={when} />
 
-            <View style={[styles.rowCentered, { marginTop: 10 }]}>
-              <Button
-                buttonStyle={styles.confirmButton}
-                textStyle={styles.confirmButtonText}
-                onPress={ () => handleOnPress(this.props.navigation) }
-              >
-                Invite friends
-              </Button>
-            </View>
-          </ScrollView>
-        </View>
+          <View style={[styles.rowCentered, { marginTop: 10 }]}>
+            <Button
+              buttonStyle={styles.confirmButton}
+              textStyle={styles.confirmButtonText}
+              onPress={ () => handleOnPress(this.props.navigation) }
+            >
+              Invite friends
+            </Button>
+          </View>
+          <View style={[styles.rowCentered, { marginBottom: 30 }]} />
+        </ScrollView>
       </View>
     );
   }

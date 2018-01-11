@@ -19,7 +19,10 @@ export const initialState = {
   },
   isFetching: false,
   error: undefined,
-  cancelled: undefined
+  cancelled: undefined,
+  firstname: undefined,
+  surname: undefined,
+  photo_url: undefined
 };
 
 export default function data (state = initialState, action) {
@@ -27,6 +30,8 @@ export default function data (state = initialState, action) {
   switch (action.type) {
 
     case actions.GET_EVENT_REQUEST:
+      return { ...state, isFetching: true };
+    case actions.GET_USERBYID_REQUEST:
       return { ...state, isFetching: true };
 
     case actions.EDIT_EVENT_REQUEST:
@@ -39,6 +44,8 @@ export default function data (state = initialState, action) {
 
     case actions.GET_EVENT_SUCCESS:
       return { ...state, ...action.data, error: !action.data.error ? undefined : action.data.error, isFetching: false };
+    case actions.GET_USERBYID_SUCCESS:
+      return { ...state, ...action.data, error: !action.data.error ? undefined : action.data.error, isFetching: false };
     case actions.EDIT_EVENT_SUCCESS:
       return { ...state, ...action.data, isFetching: false };
     case actions.SUBMIT_CODE_SUCCESS:
@@ -50,6 +57,8 @@ export default function data (state = initialState, action) {
       return { ...state, ...action.data, isFetching: false };
 
     case actions.GET_EVENT_FAILURE:
+      return { ...state, isFetching: false };
+    case actions.GET_USERBYID_FAILURE:
       return { ...state, isFetching: false };
     case actions.EDIT_EVENT_FAILURE:
     case actions.SUBMIT_CODE_FAILURE:

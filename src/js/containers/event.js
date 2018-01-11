@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { store } from '../init-store';
 import Event from '../components/event';
-import { getEvent, updateRsvp, deleteEvent } from '../actions/event/data';
+import { getEvent, getUserById, updateRsvp, deleteEvent } from '../actions/event/data';
 import { postVote, finaliseEvent, dismissModal } from '../actions/event/poll';
 import { hydrateCreateEvent, clearCreateEvent } from '../actions/create';
 import { deleteIncomingLink } from '../actions/network';
@@ -34,6 +34,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     fetchEvent: (event_id) => {
 
       dispatch(getEvent(event_id));
+    },
+    getUserById: (user_id) => {
+      console.log('user_id: ', user_id);
+      AsyncStorage.getItem('spark_token')
+      .then((token) => {
+        if (token) {
+          dispatch(getUserById(token, user_id));
+        }
+      });
     },
     handleVote: (vote, event_id) => {
       console.log('handleVote: ', `${JSON.stringify(vote)} / event_id: ${event_id}`);

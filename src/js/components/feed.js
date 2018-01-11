@@ -171,7 +171,8 @@ class Feed extends Component {
       selectedFilter,
       isConnected,
       eventCodeError,
-      isFetchingBranch } = this.props;
+      isFetchingBranch,
+      createNewEvent } = this.props;
 
     const isLoading = isFetchingBranch || isFetching;
 
@@ -287,9 +288,26 @@ class Feed extends Component {
                   <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
                     You have no events.
                   </Text>
-                  <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
-                    (Why not create some?)
+                  <Text style={[styles.msg3, { marginTop: 30, marginHorizontal: 15 }]}>
+                    (Why not create one?)
                   </Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      marginTop: 20,
+                      marginBottom: 10,
+                      paddingLeft: 5,
+                      paddingRight: 5 }}
+                  >
+                    <TouchableHighlight
+                      onPress={ () => createNewEvent() }
+                      style={[styles.addButtonStyle, { backgroundColor: colours.orange }]}
+                    >
+                      <Text style={{ textAlign: 'center', fontWeight: '200', height: 50, fontSize: 36, color: colours.white }}>+</Text>
+                    </TouchableHighlight>
+
+                  </View>
+                  <View style={{ height: 80 }} />
                 </View>
             }
             {
