@@ -2,6 +2,7 @@ import Config from 'react-native-config';
 import { NavigationActions } from 'react-navigation';
 import { getVotes, clearPollState } from './poll';
 import { hydrateCreateEvent, clearCreateEvent, saveEventDone } from '../create';
+import { fetchingFeedItemSuccess, fetchingFeedItemFailure } from '../feed';
 import { linkDatafromBranch } from '../network';
 import { getCalendar } from '../calendar';
 import { store } from '../../init-store';
@@ -216,13 +217,17 @@ export function getEvent (token, event_id, navigation) {
 
         console.log('navigated to event so dispatch finished getting link from branch');
         dispatch(linkDatafromBranch());
+
+        dispatch(fetchingFeedItemSuccess());
       })
       .catch((err) => {
         dispatch(getEventFailure(err.message));
+        dispatch(fetchingFeedItemFailure());
       });
     })
     .catch((err) => {
       dispatch(getEventFailure(err.message));
+      dispatch(fetchingFeedItemFailure());
     });
   };
 }

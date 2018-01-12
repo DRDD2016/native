@@ -98,8 +98,8 @@ export default class Event extends Component {
 
     if (this.props.cancelled) {
       return (
-        <View>
-          <Text>This event has been cancelled!</Text>
+        <View style={{ alignItems: 'center' }}>
+          <Text style={styles.msg2}>This event has been cancelled!</Text>
         </View>
       );
     } else if (this.props.error === 'Event has been deleted') {
@@ -218,7 +218,7 @@ export default class Event extends Component {
 
           </Modal>
 
-          <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 70 : 150 }}>
+          <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 70 : 110 }}>
             {
               this.props.event && this.eventRouter()
             }

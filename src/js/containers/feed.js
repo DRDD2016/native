@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Feed from '../components/feed';
-import { applyFilter, clearFilter, feedItemTouched } from '../actions/feed';
+import { applyFilter, clearFilter, feedItemTouched, fetchingFeedItemRequest } from '../actions/feed';
 import { getEvent, submitCode } from '../actions/event/data';
 import { deleteIncomingLink, linkDatafromBranch } from '../actions/network';
 import filterFeed from '../lib/filter-feed';
@@ -37,6 +37,7 @@ const mapDispatchToProps = (dispatch, props) => {
     handleSelection: (event_id, viewed, feed_item_id) => {
       console.log(`feed item touched handleSelection: event_id: ${event_id}, viewed: ${viewed}, id: ${feed_item_id}`);
       // need to tell server this feed item was touched
+      dispatch(fetchingFeedItemRequest());
       AsyncStorage.getItem('spark_token')
       .then((token) => {
         if (token) {
