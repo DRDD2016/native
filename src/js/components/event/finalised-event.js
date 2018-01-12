@@ -64,7 +64,7 @@ const inlineStyle = {
 const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, handleEdit, handleInviteMoreFriends }) => {
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+      <View style={{ marginTop: 5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
 
         <Image source={{ uri: event.host_photo_url }} style={{ marginHorizontal: 5, width: 60, height: 60, resizeMode: 'contain' }} />
 

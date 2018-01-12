@@ -13,11 +13,30 @@ export default function feed (state = initialState, action) {
 
   switch (action.type) {
 
+    case actions.FETCHING_FEED_ITEM_REQUEST:
+      return {
+        ...state,
+        isFetching: true
+      };
+
+    case actions.FETCHING_FEED_ITEM_SUCCESS:
+      return {
+        ...state,
+        isFetching: false
+      };
+
+    case actions.FETCHING_FEED_ITEM_FAILURE:
+      return {
+        ...state,
+        isFetching: false
+      };
+
     case actions.GET_FEED_REQUEST:
       return {
         ...state,
         isFetching: true
       };
+
     case actions.FEED_ITEM_TOUCHED_REQUEST:
       return {
         ...state,

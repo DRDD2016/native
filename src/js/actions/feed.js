@@ -1,5 +1,8 @@
 import Config from 'react-native-config';
 
+export const FETCHING_FEED_ITEM_REQUEST = 'FETCHING_FEED_ITEM_REQUEST';
+export const FETCHING_FEED_ITEM_SUCCESS = 'FETCHING_FEED_ITEM_SUCCESS';
+export const FETCHING_FEED_ITEM_FAILURE = 'FETCHING_FEED_ITEM_FAILURE';
 export const GET_FEED_REQUEST = 'GET_FEED_REQUEST';
 export const GET_FEED_SUCCESS = 'GET_FEED_SUCCESS';
 export const GET_FEED_FAILURE = 'GET_FEED_FAILURE';
@@ -9,6 +12,18 @@ export const FEED_ITEM_TOUCHED_REQUEST = 'FEED_ITEM_TOUCHED_REQUEST';
 export const FEED_ITEM_TOUCHED_SUCCESS = 'FEED_ITEM_TOUCHED_SUCCESS';
 export const FEED_ITEM_TOUCHED_FAILURE = 'FEED_ITEM_TOUCHED_FAILURE';
 
+
+export const fetchingFeedItemRequest = () => ({
+  type: FETCHING_FEED_ITEM_REQUEST
+});
+
+export const fetchingFeedItemSuccess = () => ({
+  type: FETCHING_FEED_ITEM_SUCCESS
+});
+
+export const fetchingFeedItemFailure = () => ({
+  type: FETCHING_FEED_ITEM_FAILURE
+});
 
 export const getFeedRequest = () => ({
   type: GET_FEED_REQUEST
@@ -46,6 +61,7 @@ export const feedItemTouchedFailure = error => ({
   type: FEED_ITEM_TOUCHED_FAILURE,
   error
 });
+
 
 export function feedItemTouched (token, feed_item_id) {
 

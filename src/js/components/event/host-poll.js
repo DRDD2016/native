@@ -61,7 +61,7 @@ export default class HostPoll extends Component {
       .every(length => length === 1);
 
     return (
-      <ScrollView style={{ borderWidth: 2, borderColor: 'red' }}>
+      <ScrollView>
         <Modal transparent animationType={'slide'} visible={this.state.isModalVisible} onRequestClose={() => { alert('Modal has been closed.'); }}>
           {
             <View style={styles.modalWrapper}>
