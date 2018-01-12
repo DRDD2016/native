@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 /* eslint-disable max-len */
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
+import _ from 'lodash';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../../lib/format-date';
 import formatTime from '../../lib/format-time';
@@ -94,12 +95,17 @@ export default class CategoryDetails extends Component {
     // console.log('cat details Render Props: ', this.props);
     // console.log('voteCount: ', voteCount);
 
+    const totalVoteCount = _.sum(voteCount);
+
+    // console.log('totalVoteCount: ', totalVoteCount);
+
     const categoryTitle = `W${category.substring(1)}`;
     return (
       <View style={{ flex: 1 }}>
         {
           data.map((datum, index) => {
             const tally = voteCount && voteCount[index];
+
             return (
               <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
 
@@ -133,13 +139,16 @@ export default class CategoryDetails extends Component {
                   {
                     this.props.isHostPollView &&
                     <View style={{ flex: 1, marginTop: 5, marginBottom: 5, flexDirection: 'row', alignItems: 'center' }}>
-                      <View style={{ paddingLeft: 1, paddingVertical: 10, width: 1, backgroundColor: 'lightgray' }} />
+                      {
+                        (totalVoteCount !== 0) && <View style={{ paddingLeft: 1, paddingVertical: 10, width: 1, backgroundColor: 'lightgray' }} />
+                      }
 
                       <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
                         <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
                           <Text style={styles.msg4}>
                             { (tally !== 0) && (tally !== undefined) && (tally !== 1) && `${tally} votes` }
                             { (tally === 1) && `${tally} vote` }
+                            { (index === 0) && (totalVoteCount === 0) && 'No votes yet' }
                           </Text>
                         </View>
 
