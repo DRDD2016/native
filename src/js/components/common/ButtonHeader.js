@@ -8,7 +8,14 @@ export default function ButtonHeader ({ onPress, children, testDescription }) {
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={{ justifyContent: 'center', alignItems: 'center', width: Header.HEIGHT, height: Header.HEIGHT, borderColor: 'red', borderWidth: 2 }}
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: Header.HEIGHT,
+        height: Header.HEIGHT
+        // borderColor: 'red', // use for debugging style
+        // borderWidth: 2
+      }}
       accessibilityLabel={testDescription}
     >
       <Text style={{ color: colours.gray, fontWeight: '600' }}>

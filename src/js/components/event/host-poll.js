@@ -53,7 +53,7 @@ export default class HostPoll extends Component {
 
 
   render () {
-    
+
     const { event, voteCount, handleConfirmEvent, finalChoices, isFetching, navigator } = this.props;
 
     const allCategoriesSelected = Object.keys(this.state.eventdetails)
@@ -61,7 +61,7 @@ export default class HostPoll extends Component {
       .every(length => length === 1);
 
     return (
-      <ScrollView>
+      <ScrollView style={{ borderWidth: 2, borderColor: 'red' }}>
         <Modal transparent animationType={'slide'} visible={this.state.isModalVisible} onRequestClose={() => { alert('Modal has been closed.'); }}>
           {
             <View style={styles.modalWrapper}>
@@ -116,62 +116,70 @@ export default class HostPoll extends Component {
           isFetching && <Spinner />
         }
 
-        <View style={{ flexDirection: 'column' }}>
-          <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text>You created a Poll</Text>
-          </View>
+        {
+          !isFetching &&
 
-          <View style={ inlineStyle.row }>
-            <CategoryDetails
-              category={'what'}
-              data={event.what}
-              toggleSelection={this.toggleSelection}
-              voteCount={voteCount && voteCount.what}
-              userIsHost
-              isHostPollView
-            />
-          </View>
-          <View style={ inlineStyle.row }>
-            <CategoryDetails
-              category={'where'}
-              data={event.where}
-              toggleSelection={this.toggleSelection}
-              voteCount={voteCount && voteCount.where}
-              userIsHost
-              isHostPollView
-            />
-          </View>
-          <View style={ inlineStyle.row }>
-            <CategoryDetails
-              category={'when'}
-              data={event.when}
-              toggleSelection={this.toggleSelection}
-              voteCount={voteCount && voteCount.when}
-              userIsHost
-              isHostPollView
-            />
-          </View>
+          <View style={{ flexDirection: 'column' }}>
+            <View style={{ marginHorizontal: 5, marginBottom: 10, alignItems: 'center' }}>
+              <Text style={{ alignSelf: 'center', marginBottom: 5 }}>You created a poll for</Text>
+              <Text style={[styles.msg1, { alignSelf: 'center', marginBottom: 5 }]}>{event.name}</Text>
+              <Text style={[styles.msg5, { alignSelf: 'center' }]}>
+                You can review the responses and tap to select your final choices and tap &quot;Confirm&quot; when you are ready:
+              </Text>
+            </View>
 
-          <View style={[styles.row, { justifyContent: 'center' }]}>
-            {
-              allCategoriesSelected &&
-              <TouchableOpacity
-                style={ [styles.confirmButton, { marginBottom: 20 }] }
-                onPress={ () => {
-                  this.setState({
-                    isModalVisible: true
-                  });
-                  return (
-                    handleConfirmEvent(this.state.eventdetails, event.event_id)
-                  );
-                }}
-              >
-                <Text style={[styles.confirmButtonText, { textAlign: 'center' }]}>CONFIRM EVENT DETAILS</Text>
-              </TouchableOpacity>
-            }
-          </View>
+            <View style={ inlineStyle.row }>
+              <CategoryDetails
+                category={'what'}
+                data={event.what}
+                toggleSelection={this.toggleSelection}
+                voteCount={voteCount && voteCount.what}
+                userIsHost
+                isHostPollView
+              />
+            </View>
+            <View style={ inlineStyle.row }>
+              <CategoryDetails
+                category={'where'}
+                data={event.where}
+                toggleSelection={this.toggleSelection}
+                voteCount={voteCount && voteCount.where}
+                userIsHost
+                isHostPollView
+              />
+            </View>
+            <View style={ inlineStyle.row }>
+              <CategoryDetails
+                category={'when'}
+                data={event.when}
+                toggleSelection={this.toggleSelection}
+                voteCount={voteCount && voteCount.when}
+                userIsHost
+                isHostPollView
+              />
+            </View>
 
-        </View>
+            <View style={[styles.row, { justifyContent: 'center' }]}>
+              {
+                allCategoriesSelected &&
+                <TouchableOpacity
+                  style={ [styles.confirmButton, { marginBottom: 20 }] }
+                  onPress={ () => {
+                    this.setState({
+                      isModalVisible: true
+                    });
+                    return (
+                      handleConfirmEvent(this.state.eventdetails, event.event_id)
+                    );
+                  }}
+                >
+                  <Text style={[styles.confirmButtonText, { textAlign: 'center' }]}>CONFIRM EVENT DETAILS</Text>
+                </TouchableOpacity>
+              }
+            </View>
+
+          </View>
+        }
       </ScrollView>
     );
   }
