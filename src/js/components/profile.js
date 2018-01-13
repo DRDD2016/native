@@ -28,6 +28,19 @@ class Profile extends Component {
     this.selectPhotoTapped = this.selectPhotoTapped.bind(this);
   }
 
+  componentWillMount () {
+
+    console.log('ProfileWillMount');
+    console.log('ProfileWillMountThisProps: ', this.props);
+
+  }
+
+  componentWillReceiveProps (nextProps) {
+    console.log('ProfileWillReceiveThisProps: ', this.props);
+    console.log('ProfileWillReceiveNextProps: ', nextProps);
+
+  }
+
   saveChanges (firstname, surname) {
 
     let uploadSource = '';
@@ -36,7 +49,7 @@ class Profile extends Component {
       // console.log('this.state.avatarUri', this.state.avatarUri);
       uploadSource = { uri: this.state.avatarUri };
     } else {
-      // console.log(this.state.avatarUri);
+      // console.log('this.state.avatarUri: ', this.state.avatarUri);
       uploadSource = { uri: this.state.avatarUri.replace('file://', '') };
     }
     // console.log(uploadSource); // /var/mobile/Containers/Data/Application/1F15368F-4…ocuments/2BE4B05B-440A-41B6-8680-F4230E046902.jpg
