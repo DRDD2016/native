@@ -5,7 +5,8 @@ import { persistor, store } from '../init-store';
 import Profile from '../components/profile';
 import { changeName, editName, uploadPhoto, logout } from '../actions/profile';
 
-const mapStateToProps = ({ user, network }) => ({
+const mapStateToProps = ({ nav, user, network }) => ({
+  nav,
   photo_url: user.photo_url,
   user_id: user.user_id,
   email: user.email,

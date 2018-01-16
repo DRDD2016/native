@@ -303,7 +303,17 @@ class Feed extends Component {
                       onPress={ () => createNewEvent() }
                       style={[styles.addButtonStyle, { backgroundColor: colours.orange }]}
                     >
-                      <Text style={{ textAlign: 'center', fontWeight: '200', height: 50, fontSize: 36, color: colours.white }}>+</Text>
+                      <Text
+                        style={{
+                          textAlign: 'center',
+                          fontWeight: '200',
+                          height: 50,
+                          fontSize: 36,
+                          color: colours.white,
+                          backgroundColor: colours.transparent }}
+                      >
+                        +
+                      </Text>
                     </TouchableHighlight>
 
                   </View>
