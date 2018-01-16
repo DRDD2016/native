@@ -179,6 +179,7 @@ class Feed extends Component {
     console.log('isFetchingBranch: ', isFetchingBranch);
     console.log('isFetching: ', isFetching);
     console.log('isLoading: ', isLoading);
+    console.log('isConnected: ', isConnected);
 
     if (isLoading) {
       // return this if waiting for Branch, etc
@@ -186,7 +187,11 @@ class Feed extends Component {
         <View style={{ flex: 1 }}>
           <Modal
             transparent animationType={'slide'} visible={isLoading}
-            onRequestClose={() => { alert('Modal has been closed.'); }}
+            onRequestClose={() => {
+              this.setState({
+                isModalVisible: false
+              });
+            }}
           >
             {
               <View style={styles.modalWrapper}>
@@ -196,7 +201,9 @@ class Feed extends Component {
 
                     <Text style={[styles.msg1, { flex: 1 }]}>Loading</Text>
                     <Text style={[styles.msg2, { flex: 1 }]}>please wait...</Text>
-                    <Spinner size="large" />
+                    <View style={{ flex: 1 }}>
+                      <Spinner size="large" />
+                    </View>
                     <View style={{ flex: 1 }} />
 
                   </View>

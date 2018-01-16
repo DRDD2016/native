@@ -158,12 +158,12 @@ class App extends Component {
   }
 
   _handleConnectionChange = (isConnected) => {
+    console.log('isConnected changed to: ', isConnected);
     store.dispatch(setIsConnected(isConnected));
   };
 
   render () {
-    console.log('whoop');
-    console.log('render', this.state);
+    console.log('render index', this.state);
     if (!this.state) return <Spinner />;
     if (!this.state.rehydrated) return <Spinner />;
     console.log('statecheckdone');
