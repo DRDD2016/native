@@ -103,6 +103,7 @@ export default class CategoryDetails extends Component {
     return (
       <View style={{ flex: 1 }}>
         {
+          // need to sort array by date if CatDetails is "When" and keep Votes with associated dates
           data.map((datum, index) => {
             const tally = voteCount && voteCount[index];
 

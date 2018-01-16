@@ -8,7 +8,7 @@ import { postVote, finaliseEvent, dismissModal } from '../actions/event/poll';
 import { hydrateCreateEvent, clearCreateEvent } from '../actions/create';
 import { deleteIncomingLink } from '../actions/network';
 import normaliseVoteData from '../lib/normalise-vote-data';
-import { openWhatsApp, composeWhatsAppMessage } from '../lib/branchLink';
+import { shareLink, composeLinkToShare } from '../lib/branchLink';
 
 
 const mapStateToProps = ({ event, user, network }) => {
@@ -88,7 +88,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     handleInviteMoreFriends: () => {
       const event = store.getState().event.data;
-      openWhatsApp(composeWhatsAppMessage(store.getState().user, event, event.code));
+      composeLinkToShare(store.getState().user, event, event.code);
     },
     stopFetchingLink: () => { //eslint-disable-line
 

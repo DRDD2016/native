@@ -10,6 +10,11 @@ import styles from '../../../styles';
 import colours from '../../../styles/colours';
 
 const ConfirmWhen = ({ data }) => {
+
+  // console.log('data: ', data);
+  // const sortedData = _.sortBy(data, function(o) { return new moment(o); })
+  //
+  // console.log('sortedData: ', sortedData);
   const layout = data.map((timestamp, i) => {
     const hideTitle = i > 0;
     return (

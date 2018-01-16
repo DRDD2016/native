@@ -1,4 +1,4 @@
-import { Linking, AsyncStorage } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import branch, { RegisterViewEvent } from 'react-native-branch';
 import { store } from '../init-store';
 import { subscribeToBranch, linkDatafromBranch, saveIncomingLink, saveIncomingLinkError } from '../actions/network';
@@ -10,9 +10,9 @@ import { submitCode } from '../actions/event/data';
  * @returns {string}
  */
 
-function trimAndReplaceSpaces (text) {
-  return text.trim().replace(/ /g, '%20');
-}
+// function trimAndReplaceSpaces (text) {
+//   return text.trim().replace(/ /g, '%20');
+// }
 
 // export function composeBranchLink (user, event, code) {
 //
@@ -34,13 +34,14 @@ function trimAndReplaceSpaces (text) {
 //   return bUO;
 // }
 
-export async function composeWhatsAppMessage (user, event, code) {
+export async function composeLinkToShare (user, event, code) {
 
+  // creates the branch Link to share
   const bUO = await branch.createBranchUniversalObject(`invite to event ${code} by ${user}`, {
     // automaticallyListOnSpotlight: true, // ignored on Android
     // canonicalUrl: 'sparksocial://',
     title: event.name,
-    contentDescription: `Hi, ${trimAndReplaceSpaces(user.firstname)} ${trimAndReplaceSpaces(user.surname)} has invited you to the event ${trimAndReplaceSpaces(event.name)} on Spark. Open or download the app and enter the following code ${code}`, // eslint-disable-line max-len
+    contentDescription: `Hi, ${user.firstname} ${user.surname} has invited you to the event ${event.name} on Spark. Open or download the app and enter the following code ${code}`, // eslint-disable-line max-len
     contentImageUrl: user.photo_url,
     contentIndexingMode: 'private', // for Spotlight indexing
     contentMetadata: {
@@ -64,26 +65,44 @@ export async function composeWhatsAppMessage (user, event, code) {
     eventCode: `${code}`
   };
 
-  const url = await bUO.generateShortUrl(linkProperties, controlParams);
-  console.log('url ', url);
+  // old openWhatsApp sharing
+  // const url = await bUO.generateShortUrl(linkProperties, controlParams);
+  // const text = `Hi, ${trimAndReplaceSpaces(user.firstname)} ${trimAndReplaceSpaces(user.surname)} has invited you to the event ${trimAndReplaceSpaces(event.name)} using Spark. Click this link to RSVP or download the app: ${url.url}`; // eslint-disable-line max-len
 
-  const text = `Hi, ${trimAndReplaceSpaces(user.firstname)} ${trimAndReplaceSpaces(user.surname)} has invited you to the event ${trimAndReplaceSpaces(event.name)} using Spark. Click this link to RSVP or download the app: ${url.url}`; // eslint-disable-line max-len
+  const text = `Hi, ${user.firstname} ${user.surname} has invited you to the event ${event.name} using Spark. Click this link to RSVP or download the app: `; // eslint-disable-line max-len
   console.log('text ', text);
 
-  return text;
+  const shareOptions = {
+    messageHeader: 'New Invite',
+    messageBody: text,
+    emailSubject: `${user.firstname} ${user.surname} has invited you to ${event.name}`
+  };
+
+  const { channel, completed, error } = await bUO.showShareSheet(shareOptions, linkProperties, controlParams);
+
+  console.log('channel: ', channel);
+  console.log('completed: ', completed);
+  console.log('error: ', error);
+
+  if (error) {
+    alert('Error sharing link: ', error);
+  }
+
 }
 
-export async function openWhatsApp (text) {
-  console.log('text2 ', text);
 
-  const url = `whatsapp://send?text=${await text}`;
-  Linking.canOpenURL(url).then((supported) => {
-    if (!supported) {
-      console.log(`Can't handle url: ${text}`);
-    }
-    return Linking.openURL(url);
-  }).catch(() => console.log('An error occurred'));
-}
+// export async function openWhatsApp (text) {
+//   console.log('text2 ', text);
+//
+//   const url = `whatsapp://send?text=${await text}`;
+//   Linking.canOpenURL(url).then((supported) => {
+//     if (!supported) {
+//       console.log(`Can't handle url: ${text}`);
+//     }
+//     return Linking.openURL(url);
+//   }).catch(() => console.log('An error occurred'));
+// }
+
 
 export async function subscribeToBranchLinks (navigation) {
 

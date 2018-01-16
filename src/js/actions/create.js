@@ -1,7 +1,7 @@
 import Config from 'react-native-config';
 import { NavigationActions } from 'react-navigation';
 import { getCalendar } from './calendar';
-import { openWhatsApp, composeWhatsAppMessage } from '../lib/branchLink';
+import { composeLinkToShare } from '../lib/branchLink';
 import { store } from '../init-store';
 
 export const SET_DETAILS = 'SET_DETAILS';
@@ -85,7 +85,7 @@ export function saveEvent (token, eventData, navigation) { //eslint-disable-line
             dispatch(getCalendar(token));
           }
 
-          openWhatsApp(composeWhatsAppMessage(store.getState().user, eventData, data.code));
+          composeLinkToShare(store.getState().user, eventData, data.code);
           dispatch(clearCreateEvent());
 
           const resetAction = NavigationActions.reset({
