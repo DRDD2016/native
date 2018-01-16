@@ -37,7 +37,7 @@ import { submitCode } from '../actions/event/data';
 export async function composeLinkToShare (user, event, code) {
 
   // creates the branch Link to share
-  const bUO = await branch.createBranchUniversalObject(`invite to event ${code} by ${user}`, {
+  let bUO = await branch.createBranchUniversalObject(`invite to event ${code} by ${user}`, {
     // automaticallyListOnSpotlight: true, // ignored on Android
     // canonicalUrl: 'sparksocial://',
     title: event.name,
@@ -87,9 +87,12 @@ export async function composeLinkToShare (user, event, code) {
   if (error) {
     alert('Error sharing link: ', error);
   }
+  if (bUO) {
+    bUO.release();
+    bUO = null;
+  }
 
 }
-
 
 // export async function openWhatsApp (text) {
 //   console.log('text2 ', text);
