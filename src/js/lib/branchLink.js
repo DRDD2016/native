@@ -43,12 +43,15 @@ export async function composeLinkToShare (user, event, code) {
     title: event.name,
     contentDescription: `Hi, ${user.firstname} ${user.surname} has invited you to the event ${event.name} on Spark. Open or download the app and enter the following code ${code}`, // eslint-disable-line max-len
     contentImageUrl: user.photo_url,
-    contentIndexingMode: 'private', // for Spotlight indexing
-    contentMetadata: {
-      user,
-      eventName: event.name,
-      eventCode: code
-    }
+    contentIndexingMode: 'private', // for Spotlight indexing,
+    og_title: 'OG TITLE',
+    og_description: 'og description',
+    og_image_url: user.photo_url
+    // contentMetadata: {
+    //   user,
+    //   eventName: event.name,
+    //   eventCode: code
+    // }
   });
   bUO.userCompletedAction(RegisterViewEvent);
   console.log('Created Branch Universal Object and logged RegisterViewEvent.');
@@ -59,21 +62,30 @@ export async function composeLinkToShare (user, event, code) {
   };
 
   const controlParams = {
+    $fallback_url: 'http://spark-app.net', // Change the redirect endpoint for all platforms - so you don’t have to enable it by platform
+    // $desktop_url: '', // Change the redirect endpoint on desktops
+    $android_url: 'https://play.google.com/store/apps/details?id=net.wannaenterprises.spark', // Change the redirect endpoint for Android
+    // $ios_url: 'replace with iOS App Store page', // Change the redirect endpoint for iOS
+    // $ipad_url: '', // Change the redirect endpoint for iPads
     // $desktop_url: 'http://spark-app.net',
     // $ios_deepview: 'branch_default',
+    $uri_redirect_mode: 1, // looks to see if user has app from data and attempts to open app (Facebook messenger, etc);
     $deeplink_path: `sparksocial://Code/${code}`,
     eventCode: `${code}`
   };
+
+  // $og_title: 'OG TITLE',
+  // $og_description: 'og description',
+  // $og_image_url: user.photo_url
 
   // old openWhatsApp sharing
   // const url = await bUO.generateShortUrl(linkProperties, controlParams);
   // const text = `Hi, ${trimAndReplaceSpaces(user.firstname)} ${trimAndReplaceSpaces(user.surname)} has invited you to the event ${trimAndReplaceSpaces(event.name)} using Spark. Click this link to RSVP or download the app: ${url.url}`; // eslint-disable-line max-len
 
   const text = `Hi, ${user.firstname} ${user.surname} has invited you to the event ${event.name} using Spark. Click this link to RSVP or download the app: `; // eslint-disable-line max-len
-  console.log('text ', text);
 
   const shareOptions = {
-    messageHeader: 'New Invite',
+    messageHeader: `An invite from ${user.firstname}`,
     messageBody: text,
     emailSubject: `${user.firstname} ${user.surname} has invited you to ${event.name}`
   };

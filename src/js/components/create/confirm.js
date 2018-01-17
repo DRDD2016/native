@@ -46,7 +46,7 @@ class Confirm extends Component {
     return (
       <View
         style={[
-          { borderColor: 'red', borderWidth: 2, backgroundColor: colours.white, flex: 1 }]}
+          { backgroundColor: colours.white, flex: 1 }]}
       >
         <HeaderBack />
         { !isConnected && this.renderAlert() }
