@@ -2,7 +2,7 @@ import * as actions from '../actions/network';
 
 
 const initialState = {
-  isConnected: undefined,
+  isConnected: true, // isConnected flaky if undefined - review after offline
   socket: undefined,
   inComingLinkCode: 'none',
   inComingLinkError: undefined,

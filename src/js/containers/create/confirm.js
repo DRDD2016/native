@@ -22,6 +22,7 @@ const mapStateToProps = ({ nav, create, network }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleOnPress: (navigation) => {
+      console.log('handleOnPress storecreate: ', store.getState().create);
       const event = store.getState().create;
       const data = Object.assign({}, event,
         { when: mapToISOString(event.when) },
@@ -32,6 +33,7 @@ const mapDispatchToProps = (dispatch) => {
       AsyncStorage.getItem('spark_token')
       .then((token) => {
         if (token) {
+          console.log('saveEventDispatch');
           dispatch(saveEvent(token, data, navigation));
         }
       })
