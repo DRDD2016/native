@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Feed from '../components/feed';
 import { applyFilter, clearFilter, feedItemTouched, fetchingFeedItemRequest } from '../actions/feed';
 import { getEvent, submitCode } from '../actions/event/data';
-import { deleteIncomingLink, linkDatafromBranch } from '../actions/network';
+import { deleteIncomingLink, linkDatafromBranch, saveIncomingLinkError } from '../actions/network';
 import filterFeed from '../lib/filter-feed';
 
 
@@ -28,7 +28,7 @@ const mapStateToProps = ({ nav, feed, user, network, create, event }) => {
     push_info: user.push_info,
     eventCode: network.inComingLinkCode,
     eventCodeError: network.inComingLinkError,
-    saveEventDone: create.saveEventDone
+    saveEventStatus: create.saveEventStatus
   };
 };
 const mapDispatchToProps = (dispatch, props) => {
@@ -72,6 +72,9 @@ const mapDispatchToProps = (dispatch, props) => {
 
       dispatch(deleteIncomingLink()); // is this still used?
 
+    },
+    saveIncomingLinkError: (error) => {
+      dispatch(saveIncomingLinkError(error));
     },
     displaySome: (selectedFilter) => {
       dispatch(applyFilter(selectedFilter));

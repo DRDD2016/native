@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, Text, Image, TextInput, Platform, ScrollView, TouchableHighlight } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import Fabric from 'react-native-fabric';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from './common/Button';
 import Spinner from './common/Spinner';
@@ -10,6 +11,8 @@ import ImageHeader from './common/ImageHeader';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
+
+const { Answers } = Fabric;
 
 class Profile extends Component {
 
@@ -33,6 +36,10 @@ class Profile extends Component {
     console.log('ProfileWillMount');
     console.log('ProfileWillMountThisProps: ', this.props);
 
+  }
+
+  componentDidMount () {
+    Answers.logCustom('Profile.js Mounted', { additionalData: 'nothing' });
   }
 
   componentWillReceiveProps (nextProps) {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Platform } from 'react-native';
+import Fabric from 'react-native-fabric';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Field, reduxForm } from 'redux-form';
 import hoistNonReactStatic from 'hoist-non-react-statics';
@@ -12,6 +13,8 @@ import ImageHeader from './common/ImageHeader';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
+
+const { Answers } = Fabric;
 
 const inlineStyle = {
   buttonStyle: {
@@ -41,6 +44,10 @@ class Code extends Component {
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
     headerTintColor: colours.headerButtonColor,
     header: props => <ImageHeader {...props} />
+  }
+
+  componentDidMount () {
+    Answers.logCustom('Code.js Mounted', { additionalData: 'nothing' });
   }
 
 

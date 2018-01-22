@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Modal, TouchableHighlight, FlatList } from 'react-native';
+import Fabric from 'react-native-fabric';
 // import { OptimizedFlatList } from 'react-native-optimized-flatlist';
 // import { slowlog } from 'react-native-slowlog';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -11,6 +12,8 @@ import FeedHeader from './common/FeedHeader';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
+
+const { Answers } = Fabric;
 // import { subscribeToBranchLinks } from '../lib/branchLink';
 
 class Feed extends Component {
@@ -66,6 +69,10 @@ class Feed extends Component {
 
   }
 
+  componentDidMount () {
+    Answers.logCustom('Feed.js Mounted', { additionalData: 'nothing' });
+  }
+
 
   componentWillReceiveProps (nextProps) {
 
@@ -74,7 +81,11 @@ class Feed extends Component {
     console.log('NextProps', nextProps);
 
     const { handleSubmitCode } = this.props;
-    const { eventCode } = nextProps;
+    const { eventCode, saveEventStatus } = nextProps;
+
+    console.log('saveEventStatus thisprops: ', this.props.saveEventStatus);
+
+    console.log('saveEventStatus Nextprops: ', saveEventStatus);
 
     console.log('eventCode FeedNextProps:', eventCode);
 
@@ -88,6 +99,8 @@ class Feed extends Component {
         }
       }
     }
+
+    console.log('this.props.eventCodeError: ', this.props.eventCodeError);
 
     if (this.props.eventCodeError) {
       this.setState({ isModalVisible: true });
@@ -172,7 +185,8 @@ class Feed extends Component {
       isConnected,
       eventCodeError,
       isFetchingBranch,
-      createNewEvent } = this.props;
+      createNewEvent,
+      saveEventStatus } = this.props;
 
     const isLoading = isFetchingBranch || isFetching;
 
@@ -180,6 +194,42 @@ class Feed extends Component {
     console.log('isFetching: ', isFetching);
     console.log('isLoading: ', isLoading);
     console.log('isConnected: ', isConnected);
+
+    if (saveEventStatus === 'Started') {
+      // return this if waiting for Branch, etc
+      return (
+        <View style={{ flex: 1 }}>
+          <Modal
+            transparent animationType={'slide'} visible={isLoading}
+            onRequestClose={() => {
+              this.setState({
+                isModalVisible: false
+              });
+            }}
+          >
+            {
+              <View style={styles.modalWrapper}>
+
+                {
+                  <View style={styles.modalConfirm}>
+
+                    <Text style={[styles.msg1, { flex: 1 }]}>Sharing invite</Text>
+                    <Text style={[styles.msg2, { flex: 1 }]}>please wait...</Text>
+                    <View style={{ flex: 1 }}>
+                      <Spinner size="large" />
+                    </View>
+                    <View style={{ flex: 1 }} />
+
+                  </View>
+                }
+
+              </View>
+            }
+
+          </Modal>
+        </View>
+      );
+    }
 
     if (isLoading) {
       // return this if waiting for Branch, etc
@@ -204,6 +254,10 @@ class Feed extends Component {
                     <View style={{ flex: 1 }}>
                       <Spinner size="large" />
                     </View>
+                    {!isConnected && <Text style={[styles.msg2, { flex: 1 }]}>poor internet connection</Text>}
+                    {isFetchingBranch && <Text style={[styles.msg2, { flex: 1 }]}>{`isFetchingBranch: ${isFetchingBranch}`}</Text>}
+                    {isFetching && <Text style={[styles.msg2, { flex: 1 }]}>{`isFetching: ${isFetching}`}</Text>}
+
                     <View style={{ flex: 1 }} />
 
                   </View>
@@ -228,8 +282,9 @@ class Feed extends Component {
                 {
                   eventCodeError &&
                   <View style={styles.modalConfirm}>
-                    <Text style={[styles.msg1, { flex: 1 }]}>Error fetching invite</Text>
+                    <Text style={[styles.msg1, { flex: 1 }]}>Poor connectivity</Text>
                     <Text style={[styles.msg2, { flex: 1 }]}>please check your internet connection</Text>
+                    <Text style={[styles.msg2, { flex: 1 }]}>{`eventCodeError: ${eventCodeError}`}</Text>
                     <View style={{ flex: 1 }} />
 
                     <View style={{ flex: 1 }}>
@@ -239,6 +294,9 @@ class Feed extends Component {
                           this.setState({
                             isModalVisible: false
                           });
+
+                          this.props.saveIncomingLinkError(undefined);
+                          // and dispatch action to remove event code error?
 
                         }}
                       >

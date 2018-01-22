@@ -14,7 +14,7 @@ export const initialState = {
   is_poll: undefined,
   isFetching: false,
   error: undefined,
-  saveEventDone: false
+  saveEventStatus: 'notStarted'
 };
 
 export default function create (state = initialState, action) {
@@ -57,7 +57,7 @@ export default function create (state = initialState, action) {
     case actions.SAVE_EVENT_REQUEST:
       return update(state, {
         isFetching: { $set: true },
-        saveEventDone: { $set: false }
+        saveEventStatus: { $set: 'Started' }
       });
 
     case actions.SAVE_EVENT_SUCCESS:
@@ -73,7 +73,22 @@ export default function create (state = initialState, action) {
 
     case actions.SAVE_EVENT_DONE:
       return update(state, {
-        saveEventDone: { $set: true }
+        saveEventStatus: { $set: 'Finished' }
+      });
+
+    case actions.SHARE_INVITE_REQUEST:
+      return update(state, {
+        isFetching: { $set: true }
+      });
+
+    case actions.SHARE_INVITE_SUCCESS:
+      return update(state, {
+        isFetching: { $set: false }
+      });
+
+    case actions.SHARE_INVITE_FAILURE:
+      return update(state, {
+        isFetching: { $set: false }
       });
 
     case actions.HYDRATE_CREATE_EVENT: {

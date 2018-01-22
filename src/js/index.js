@@ -68,7 +68,7 @@ class App extends Component {
 
         let linkData = 'none';
 
-        console.info('Received link params from Branch');
+        console.info('Branch initialised');
 
         console.log('Branch params: ', JSON.stringify(params));
 
@@ -79,6 +79,7 @@ class App extends Component {
           linkData = 'none';
           store.dispatch(saveIncomingLinkError(error));
           store.dispatch(linkDatafromBranch());
+          Answers.logCustom(`Index.js CompDidMount error from Branch: ${error}`, { additionalData: 'nothing' });
           return;
         }
 
@@ -87,6 +88,8 @@ class App extends Component {
         if (params['+non_branch_link']) {
           const nonBranchUrl = params['+non_branch_link'];
           console.log('nonBranchUrl', nonBranchUrl);
+          Answers.logCustom(`Index.js CompDidMount non_branch_link: ${params}`, { additionalData: 'nothing' });
+
           // Route non-Branch URL if appropriate.
           return;
         }
@@ -108,6 +111,8 @@ class App extends Component {
           //
           const lstore2 = store.getState();
           console.log('store2: ', lstore2);
+          Answers.logCustom('Index.js CompDidMount clicked_branch_link params: none', { additionalData: 'nothing' });
+
           //
 
           return;
@@ -126,6 +131,8 @@ class App extends Component {
           //
 
           store.dispatch(saveIncomingLink(linkData));
+          Answers.logCustom(`Index.js CompDidMount branch eventCode: ${params}`, { additionalData: 'nothing' });
+
           // store.dispatch(linkDatafromBranch()); // dont do this until loading finished on Feed
           // return linkData;
 
@@ -138,6 +145,8 @@ class App extends Component {
 
           store.dispatch(saveIncomingLink(linkData));
           store.dispatch(linkDatafromBranch());
+          Answers.logCustom('Index.js CompDidMount branch else linkcode none', { additionalData: 'nothing' });
+
           // return linkData;
         }
 
@@ -155,6 +164,7 @@ class App extends Component {
     }
 
     NetInfo.isConnected.removeEventListener('change', this._handleConnectionChange);
+    Answers.logCustom('Index.js UnMounted', { additionalData: 'nothing' });
   }
 
   _handleConnectionChange = (isConnected) => {

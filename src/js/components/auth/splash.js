@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Image, View, AsyncStorage } from 'react-native';
+import Fabric from 'react-native-fabric';
 import { NavigationActions } from 'react-navigation';
 import initSocket from '../../socket-router';
 import Spinner from '../common/Spinner';
 import { store } from '../../init-store';
+
+const { Answers } = Fabric;
 
 const logo = require('../../../img/sparkLoginLogo.png');
 
@@ -17,7 +20,6 @@ export default class Splash extends Component {
   componentWillMount () {
 
     console.log('SplashWillMount', this.props);
-
 
     setTimeout(() => {
       AsyncStorage.getItem('spark_token')
@@ -37,9 +39,9 @@ export default class Splash extends Component {
           // could add container to bring this prop in.
 
 
-          if (splashStore.inComingLinkCode !== undefined) {
+          if (splashStore.network.inComingLinkCode !== undefined) {
 
-            if (splashStore.inComingLinkCode === 'none') {
+            if (splashStore.network.inComingLinkCode === 'none') {
               console.log('navigating to Feed because inComingLinkCode === none');
 
               const resetAction = NavigationActions.reset({
@@ -80,6 +82,10 @@ export default class Splash extends Component {
         }
       });
     }, 1000);
+  }
+
+  componentDidMount () {
+    Answers.logCustom('Splash.js Mounted', { additionalData: 'nothing' });
   }
 
   render () {

@@ -2,6 +2,7 @@ import { AsyncStorage, Share } from 'react-native';
 import branch, { RegisterViewEvent } from 'react-native-branch';
 import { store } from '../init-store';
 import { subscribeToBranch, linkDatafromBranch, saveIncomingLink, saveIncomingLinkError } from '../actions/network';
+import { shareInviteSuccess } from '../actions/create';
 import { submitCode } from '../actions/event/data';
 
 /**
@@ -35,6 +36,8 @@ import { submitCode } from '../actions/event/data';
 // }
 
 export async function composeLinkToShare (user, event, code) {
+
+  console.log('branchlink - creating BUO to share');
 
   // creates the branch Link to share
   let bUO = await branch.createBranchUniversalObject(`invite to event ${code} by ${user}`, {
@@ -87,7 +90,7 @@ export async function composeLinkToShare (user, event, code) {
 
   const url = await bUO.generateShortUrl(linkProperties, controlParams);
   const text = `${user.firstname} ${user.surname} has invited you to ${event.name} using Spark. Click this link to RSVP or download the app: ${url.url}`; // eslint-disable-line max-len
-
+  console.log('branchlink - sharing Link');
   Share.share({
     message: text,
     url,
@@ -100,6 +103,9 @@ export async function composeLinkToShare (user, event, code) {
       'com.apple.UIKit.activity.PostToTwitter'
     ]
   });
+
+  console.log('branchlink - shareInviteSuccess');
+  store.dispatch(shareInviteSuccess());
 
   // const { channel, completed, error } = await bUO.showShareSheet(shareOptions, linkProperties, controlParams);
   //

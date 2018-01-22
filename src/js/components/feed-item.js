@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 /* eslint-disable react/require-default-props */
 import React, { PureComponent } from 'react';
 import moment from 'moment';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../lib/format-date';
 import CardSection from './common/CardSection';
 import Card from './common/Card';
 import styles from '../../styles';
 import colours from '../../styles/colours';
+import ProgressiveImage from './common/ProgressiveImage';
 
 moment.locale('en-gb');
 
@@ -34,6 +35,7 @@ class FeedItem extends PureComponent {
           (when.length === 1 && when[0].date === '');
 
     const userIsSubject = subject_user_id === user_id;
+    const avatar = require('../../img/avatar.png');
 
     return (
       <Card style={[styles.cardStyle, !viewed && styles.viewedFeedItemStyle]}>
@@ -44,7 +46,13 @@ class FeedItem extends PureComponent {
           >
 
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
-              <Image style={styles.uiProfilePhotoCircularImage} source={{ uri: photo_url }} />
+
+              <ProgressiveImage
+                source={{ uri: photo_url }}
+                thumbnail={avatar}
+                style={styles.uiProfilePhotoCircularImage}
+              />
+
             </View>
             <View style={{ flex: 3, paddingBottom: 5, paddingRight: 3 }}>
               <Text style={[styles.timestamp, !viewed && styles.viewedFeedItemTimestamp]}>
