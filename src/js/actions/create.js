@@ -14,6 +14,10 @@ export const SAVE_EVENT_SUCCESS = 'SAVE_EVENT_SUCCESS';
 export const SAVE_EVENT_FAILURE = 'SAVE_EVENT_FAILURE';
 export const SAVE_EVENT_DONE = 'SAVE_EVENT_DONE';
 
+export const SHARE_INVITE_REQUEST = 'SHARE_INVITE_REQUEST';
+export const SHARE_INVITE_SUCCESS = 'SHARE_INVITE_SUCCESS';
+export const SHARE_INVITE_FAILURE = 'SHARE_INVITE_FAILURE';
+
 export const HYDRATE_CREATE_EVENT = 'HYDRATE_CREATE_EVENT';
 export const CLEAR_CREATE_EVENT = 'CLEAR_CREATE_EVENT';
 
@@ -84,9 +88,12 @@ export function saveEvent (token, eventData, navigation) { //eslint-disable-line
           if (eventData.is_poll === false) {
             dispatch(getCalendar(token));
           }
-
+          dispatch(shareInviteRequest());
+          console.log('create action - share request');
           composeLinkToShare(store.getState().user, eventData, data.code);
           dispatch(clearCreateEvent());
+
+          console.log('create action - Navigate to Feed');
 
           const resetAction = NavigationActions.reset({
             index: 0,
@@ -98,6 +105,7 @@ export function saveEvent (token, eventData, navigation) { //eslint-disable-line
 
           navigation.dispatch(resetAction);
 
+          console.log('create action - Save Event Done - update Feed');
           dispatch(saveEventDone()); // forces Feed to update after navigation.
 
         }
@@ -106,6 +114,25 @@ export function saveEvent (token, eventData, navigation) { //eslint-disable-line
     .catch((error) => {
       dispatch(saveEventFailure(error.message));
     });
+  };
+}
+
+export function shareInviteRequest () {
+  return {
+    type: SHARE_INVITE_REQUEST
+  };
+}
+
+export function shareInviteSuccess () {
+  return {
+    type: SHARE_INVITE_SUCCESS
+  };
+}
+
+export function shareInviteFailure (error) {
+  return {
+    type: SHARE_INVITE_FAILURE,
+    error
   };
 }
 

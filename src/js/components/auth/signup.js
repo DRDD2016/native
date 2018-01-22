@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Field, reduxForm } from 'redux-form';
 import hoistNonReactStatic from 'hoist-non-react-statics';
@@ -38,7 +38,7 @@ class Signup extends Component {
   }
 
   componentDidMount () {
-    Answers.logCustom('Visited SignUpScreen', { additionalData: 'nothing' });
+    Answers.logCustom('Signup.js Mounted', { additionalData: 'nothing' });
   }
 
   renderAlert = () => {
@@ -100,7 +100,7 @@ class Signup extends Component {
           >
 
             <View style={{ flex: 1, justifyContent: 'center', marginBottom: 20 }}>
-              <View style={{ marginTop: 80 }}>
+              <View style={{ marginTop: Platform.OS === 'ios' ? 0 : 80 }}>
 
                 <View style={ [styles.row, { backgroundColor: 'transparent', marginBottom: 0, justifyContent: 'flex-end' }] }>
                   <Text>* Mandatory fields</Text>

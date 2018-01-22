@@ -2,11 +2,10 @@ import * as actions from '../actions/feed';
 
 const initialState = {
   data: [],
-  isFetching: true, // maybe this shouldn't be true
+  isFetching: false, // maybe this shouldn't be true
   error: undefined,
   selectedFilter: undefined,
-  filterActive: false,
-  saveEventDone: false
+  filterActive: false
 };
 
 export default function feed (state = initialState, action) {

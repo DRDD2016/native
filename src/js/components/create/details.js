@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, Platform } from 'react-native';
+import Fabric from 'react-native-fabric';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Button from '../common/Button';
 import ButtonHeader from '../common/ButtonHeader';
@@ -10,6 +11,8 @@ import colours from '../../../styles/colours';
 import { store } from '../../init-store';
 import { clearCreateEvent } from '../../actions/create';
 import BackIcon from '../common/back-icon';
+
+const { Answers } = Fabric;
 
 export default class Details extends Component {
 
@@ -29,6 +32,10 @@ export default class Details extends Component {
     store.dispatch(clearCreateEvent());
     console.log('this.props: ', this.props);
 
+  }
+
+  componentDidMount () {
+    Answers.logCustom('Details.js Mounted', { additionalData: 'nothing' });
   }
 
   nextPage = (name) => {

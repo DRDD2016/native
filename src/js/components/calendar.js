@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 /* eslint-disable*/
 import React, { Component } from 'react';
 import { View, Text, FlatList, Dimensions, Platform } from 'react-native';
+import Fabric from 'react-native-fabric';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CalendarItem from './calendar-item';
 import FilterPanel from './general/filter-panel';
@@ -13,6 +14,8 @@ import FeedHeader from './common/FeedHeader';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
+
+const { Answers } = Fabric;
 
 class Calendar extends Component {
 
@@ -32,6 +35,10 @@ class Calendar extends Component {
     });
     this.createDataSource(sortedData);
 
+  }
+
+  componentDidMount () {
+    Answers.logCustom('Calendar.js Mounted', { additionalData: 'nothing' });
   }
 
   componentWillReceiveProps (nextProps) {

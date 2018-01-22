@@ -84,7 +84,7 @@ class Login extends Component {
   }
 
   componentDidMount () {
-    Answers.logCustom('Visited LoginScreen', { additionalData: 'nothing' });
+    Answers.logCustom('Login.js Mounted', { additionalData: 'nothing' });
   }
 
   componentWillUpdate (nextProps) {

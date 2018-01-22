@@ -5,22 +5,22 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: Verifying required fastlane version" time="0.002147">
+      <testcase classname="fastlane.lanes" name="0: Verifying required fastlane version" time="0.002549">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.001567">
+      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.001796">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: gradle" time="49.977164">
+      <testcase classname="fastlane.lanes" name="2: gradle" time="51.332534">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: supply" time="145.346354">
+      <testcase classname="fastlane.lanes" name="3: supply" time="146.823817">
         
       </testcase>
     
