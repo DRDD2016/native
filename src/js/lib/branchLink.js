@@ -1,9 +1,12 @@
 import { AsyncStorage, Share } from 'react-native';
 import branch, { RegisterViewEvent } from 'react-native-branch';
+import Fabric from 'react-native-fabric';
 import { store } from '../init-store';
 import { subscribeToBranch, linkDatafromBranch, saveIncomingLink, saveIncomingLinkError } from '../actions/network';
 import { shareInviteSuccess } from '../actions/create';
 import { submitCode } from '../actions/event/data';
+
+const { Answers } = Fabric;
 
 /**
  * trimAndReplaceSpaces trim the text and replaces spaces with %20
@@ -106,7 +109,10 @@ export async function composeLinkToShare (user, event, code) {
 
   console.log('branchlink - shareInviteSuccess');
   store.dispatch(shareInviteSuccess());
+  Answers.logCustom('Invite shared', { additionalData: url });
 
+  // if use branch sharesheet, can add an Answers Event to track which channels are shared via.
+  // check if this works for both android and IOS
   // const { channel, completed, error } = await bUO.showShareSheet(shareOptions, linkProperties, controlParams);
   //
   // console.log('channel: ', channel);
