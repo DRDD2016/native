@@ -9,6 +9,12 @@ import Spinner from '../common/Spinner';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import { connectAlert } from '../Alert';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Fabric from 'react-native-fabric';
+import FeedHeader from '../common/FeedHeader';
+import ButtonHeader from '../common/ButtonHeader';
+import BackIcon from '../common/back-icon';
+import ImageHeader from '../common/ImageHeader';
 
 const inlineStyle = {
   buttonStyle: {
