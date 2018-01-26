@@ -32,6 +32,14 @@ class ConfirmEmail extends Component {
 
   static navigationOptions = {
     title: 'Forgot your password?'
+    headerLeft: <ButtonHeader onPress={() => navigation.goBack(null)}>
+      <BackIcon />
+    </ButtonHeader>,
+    headerRight: <ButtonHeader />,
+    headerStyle: { backgroundColor: colours.transparent },
+    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerTintColor: colours.headerButtonColor,
+    header: props => <ImageHeader {...props} />
   }
 
   renderServerError = () => {
