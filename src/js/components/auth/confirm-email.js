@@ -57,7 +57,7 @@ class ConfirmEmail extends Component {
         textStyle={inlineStyle.textStyle}
         onPress={handleSubmit(handleSubmitForm)}
       >
-        <Text>SUBMIT</Text>
+        <Text>RESET PASSWORD</Text>
       </Button>
     );
   };
@@ -73,7 +73,7 @@ class ConfirmEmail extends Component {
       <View style={{ flex: 1 }}>
         { !this.props.isConnected && this.renderAlert() }
         <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 70 }}>
-          <Text>Explanation text</Text>
+          <Text>Please enter the email address you used to register and we will send an email link to reset your password</Text>
           { this.renderServerMessage() }
         </View>
         <View style={ styles.container }>
