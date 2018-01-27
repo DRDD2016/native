@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Calendar from '../components/calendar';
+import Albums from '../components/albums';
 import { applyFilter, clearFilter } from '../actions/calendar';
 import filterFeed from '../lib/filter-feed';
 import getPastEvents from '../lib/getPastEvents';
@@ -38,6 +38,6 @@ const mapDispatchToProps = dispatch => ({
 const AlbumsContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Calendar);
+)(Albums);
 
 export default AlbumsContainer;

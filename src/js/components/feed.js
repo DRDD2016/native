@@ -12,6 +12,8 @@ import FeedHeader from './common/FeedHeader';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
+import ButtonHeader from './common/ButtonHeader';
+import BurgerIcon from './common/burger-icon';
 
 const { Answers } = Fabric;
 // import { subscribeToBranchLinks } from '../lib/branchLink';
@@ -20,6 +22,10 @@ class Feed extends Component {
 
   static navigationOptions = {
     title: 'Feed',
+    headerLeft: <ButtonHeader />,
+    headerRight: <ButtonHeader>
+      <BurgerIcon />
+    </ButtonHeader>,
     tabBarIcon: ({ tintColor }) =>
       <Icon name="globe" size={32} color={tintColor} />,
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
@@ -71,8 +77,8 @@ class Feed extends Component {
 
   componentDidMount () {
     Answers.logCustom('Feed.js Mounted', { additionalData: 'nothing' });
+    console.log('FeedDidMount');
   }
-
 
   componentWillReceiveProps (nextProps) {
 
@@ -116,15 +122,19 @@ class Feed extends Component {
 
   }
 
-  // shouldComponentUpdate (nextProps) {
-  //
-  //   if (nextProps.nav.index === 1) {
-  //     if (nextProps.nav.routes[1].index === 2) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
+  componentDidUpdate () {
+    const { isFetching, allEvents, fetchFeedSuccess, fetchFeedFailure } = this.props;
+    console.log('isFetching: ', isFetching);
+    console.log('allEvents: ', allEvents);
+    if (isFetching) {
+      if (allEvents.length > 0) {
+        fetchFeedSuccess();
+      } else {
+        fetchFeedFailure();
+      }
+    }
+  }
+
 
   createDataSource (feed) {
     this.dataSource = feed;
@@ -255,8 +265,12 @@ class Feed extends Component {
                       <Spinner size="large" />
                     </View>
                     {!isConnected && <Text style={[styles.msg2, { flex: 1 }]}>poor internet connection</Text>}
-                    {isFetchingBranch && <Text style={[styles.msg2, { flex: 1 }]}>{`isFetchingBranch: ${isFetchingBranch}`}</Text>}
-                    {isFetching && <Text style={[styles.msg2, { flex: 1 }]}>{`isFetching: ${isFetching}`}</Text>}
+                    {
+                      // isFetchingBranch && <Text style={[styles.msg2, { flex: 1 }]}>{`isFetchingBranch: ${isFetchingBranch}`}</Text>
+                    }
+                    {
+                      // isFetching && <Text style={[styles.msg2, { flex: 1 }]}>{`isFetching: ${isFetching}`}</Text>
+                    }
 
                     <View style={{ flex: 1 }} />
 

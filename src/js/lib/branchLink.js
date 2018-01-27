@@ -77,8 +77,6 @@ export async function composeLinkToShare (user, event, code) {
     eventCode: `${code}`
   };
 
-  console.log();
-
   // old openWhatsApp sharing
 
   // const text = `Hi, ${trimAndReplaceSpaces(user.firstname)} ${trimAndReplaceSpaces(user.surname)} has invited you to the event ${trimAndReplaceSpaces(event.name)} using Spark. Click this link to RSVP or download the app: ${url.url}`; // eslint-disable-line max-len
