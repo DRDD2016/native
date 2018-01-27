@@ -1,7 +1,13 @@
 import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Feed from '../components/feed';
-import { applyFilter, clearFilter, feedItemTouched, fetchingFeedItemRequest } from '../actions/feed';
+import {
+  applyFilter,
+  clearFilter,
+  feedItemTouched,
+  fetchingFeedItemRequest,
+  fetchingFeedItemSuccess,
+  fetchingFeedItemFailure } from '../actions/feed';
 import { getEvent, submitCode } from '../actions/event/data';
 import { deleteIncomingLink, linkDatafromBranch, saveIncomingLinkError } from '../actions/network';
 import filterFeed from '../lib/filter-feed';
@@ -72,6 +78,12 @@ const mapDispatchToProps = (dispatch, props) => {
 
       dispatch(deleteIncomingLink()); // is this still used?
 
+    },
+    fetchFeedSuccess: () => {
+      dispatch(fetchingFeedItemSuccess());
+    },
+    fetchFeedFailure: () => {
+      dispatch(fetchingFeedItemFailure());
     },
     saveIncomingLinkError: (error) => {
       dispatch(saveIncomingLinkError(error));

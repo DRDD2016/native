@@ -2,15 +2,19 @@ import PropTypes from 'prop-types';
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/require-default-props */
 import React, { PureComponent } from 'react';
+// import {
+//     CachedImage,
+//     ImageCacheProvider
+// } from 'react-native-cached-image';
 import moment from 'moment';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../lib/format-date';
 import CardSection from './common/CardSection';
 import Card from './common/Card';
 import styles from '../../styles';
 import colours from '../../styles/colours';
-import ProgressiveImage from './common/ProgressiveImage';
+// import ProgressiveImage from './common/ProgressiveImage';
 
 moment.locale('en-gb');
 
@@ -47,9 +51,9 @@ class FeedItem extends PureComponent {
 
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
 
-              <ProgressiveImage
+              <Image
                 source={{ uri: photo_url }}
-                thumbnail={avatar}
+                defaultSource={avatar}
                 style={styles.uiProfilePhotoCircularImage}
               />
 

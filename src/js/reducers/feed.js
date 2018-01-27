@@ -2,7 +2,7 @@ import * as actions from '../actions/feed';
 
 const initialState = {
   data: [],
-  isFetching: false, // maybe this shouldn't be true
+  isFetching: true, // if not Connected or if feed populated
   error: undefined,
   selectedFilter: undefined,
   filterActive: false

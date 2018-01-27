@@ -8,7 +8,7 @@ import colours from '../styles/colours';
 import Index from './components/auth';
 import LoginContainer from './containers/auth/login';
 import SignupContainer from './containers/auth/signup';
-// import AlbumsContainer from './containers/albums';
+import AlbumsContainer from './containers/albums';
 import CalendarContainer from './containers/calendar';
 import FeedContainer from './containers/feed';
 import ProfileContainer from './containers/profile';
@@ -48,7 +48,7 @@ export const StackRoot = StackNavigator({
   },
   tabsMain: {
     screen: TabNavigator({
-      Code: { screen: StackNavigator({ ScreenCode: { screen: Code, path: 'code/:eventcode' } }) },
+      Albums: { screen: StackNavigator({ ScreenAlbums: { screen: AlbumsContainer } }) },
       Calendar: { screen: StackNavigator({ ScreenCalendar: { screen: CalendarContainer } }) },
       Feed: { screen: StackNavigator({ ScreenFeed: { screen: FeedContainer } }) },
       Profile: { screen: StackNavigator({ ScreenProfile: { screen: ProfileContainer } }) },
@@ -102,6 +102,9 @@ export const StackRoot = StackNavigator({
   event: { screen: StackNavigator({
     Event: { screen: EventContainer },
     Edit: { screen: EditContainer } })
+  },
+  code: { screen: StackNavigator({
+    Code: { screen: Code } })
   }
 }, {
   mode: 'modal',

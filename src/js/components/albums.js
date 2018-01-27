@@ -17,19 +17,19 @@ import { connectAlert } from './Alert';
 
 const { Answers } = Fabric;
 
-class Calendar extends Component {
+class Albums extends Component {
 
   static navigationOptions = {
-    title: 'Calendar',
+    title: 'Albums',
     tabBarIcon: ({ tintColor }) =>
-      <Icon name="calendar" size={32} color={tintColor} />,
+      <Icon name="photo" size={32} color={tintColor} />,
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
     headerTintColor: colours.headerButtonColor,
     header: props => <ImageHeader {...props} />
   }
 
   componentWillMount () {
-    console.log('calendar compWillMount', this.props);
+    console.log('albums compWillMount', this.props);
     const sortedData = this.props.filteredEvents.sort((a, b) => {
       return a.when[0] > b.when[0];
     });
@@ -38,11 +38,11 @@ class Calendar extends Component {
   }
 
   componentDidMount () {
-    Answers.logCustom('Calendar.js Mounted', { additionalData: 'nothing' });
+    Answers.logCustom('Albums.js Mounted', { additionalData: 'nothing' });
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log('calendar compWillReceiveNextprops', nextProps);
+    console.log('albums compWillReceiveNextprops', nextProps);
     const sortedData = nextProps.filteredEvents.sort((a, b) => {
       return a.when[0] > b.when[0];
     });
@@ -84,24 +84,13 @@ class Calendar extends Component {
 
   render () {
 
-    console.log('renderCalendar');
+    console.log('renderAlbums');
 
     const { allEvents, isFetching, displaySome, displayAll, filterActive, selectedFilter, user_id, isConnected } = this.props;
 
     return (
       <View style={{ flex: 1 }}>
-        <FeedHeader>
-          { !isConnected && this.renderAlert() }
-          {
-            !isFetching && allEvents.length > 0 &&
-            <FilterPanel
-              displayAll={ displayAll }
-              displaySome={ displaySome }
-              filterActive={ filterActive }
-              selectedFilter={ selectedFilter }
-            />
-          }
-        </FeedHeader>
+
         <View
           style={{
             flex: 1,
@@ -120,7 +109,7 @@ class Calendar extends Component {
                 this.props.filteredEvents.length === 0 && !isFetching &&
                 <View style={[styles.containerFeed, { alignItems: 'center' }]}>
                   <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
-                    You have no upcoming events.
+                    Albums are coming to Spark soon.
                   </Text>
                 </View>
               }
@@ -145,7 +134,7 @@ class Calendar extends Component {
 }
 
 
-Calendar.propTypes = {
+Albums.propTypes = {
   allEvents: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   displaySome: PropTypes.func.isRequired,
@@ -160,4 +149,4 @@ Calendar.propTypes = {
   handleOnPress: PropTypes.func.isRequired
 };
 
-export default connectAlert(Calendar);
+export default connectAlert(Albums);

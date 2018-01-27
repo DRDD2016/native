@@ -30,6 +30,7 @@ function initSocket () {
         console.log('initialising feed.  getting calendar');
         AsyncStorage.getItem('spark_token')
         .then((token) => {
+          console.log('token', token);
           if (token) {
             store.dispatch(getCalendar(token));
           }
