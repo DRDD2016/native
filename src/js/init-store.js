@@ -22,8 +22,7 @@ export function initStore (initialState) {
     rootReducer,
     initialState,
     compose(  // composeWithDevTools if debugging redux android
-      applyMiddleware(thunkMiddleware // , logger
-      ), // remove logger when not debugging
+      applyMiddleware(thunkMiddleware), // remove logger from last in chain when not debugging
       autoRehydrate({ log: true })
     )
   );
