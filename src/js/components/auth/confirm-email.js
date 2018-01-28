@@ -9,10 +9,11 @@ import Spinner from '../common/Spinner';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 import { connectAlert } from '../Alert';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Fabric from 'react-native-fabric';
-import FeedHeader from '../common/FeedHeader';
+// import Icon from 'react-native-vector-icons/FontAwesome';
+// import Fabric from 'react-native-fabric';
+// import FeedHeader from '../common/FeedHeader';
 import ButtonHeader from '../common/ButtonHeader';
+import FeedHeader from '../common/FeedHeader';
 import BackIcon from '../common/back-icon';
 import ImageHeader from '../common/ImageHeader';
 
@@ -36,8 +37,8 @@ const inlineStyle = {
 
 class ConfirmEmail extends Component {
 
-  static navigationOptions = {
-    title: 'Forgot your password?'
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Forgot your password?',
     headerLeft: <ButtonHeader onPress={() => navigation.goBack(null)}>
       <BackIcon />
     </ButtonHeader>,
@@ -46,7 +47,7 @@ class ConfirmEmail extends Component {
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
     headerTintColor: colours.headerButtonColor,
     header: props => <ImageHeader {...props} />
-  }
+  });
 
   renderServerError = () => {
     if (this.props.confirmEmailError) {
@@ -84,14 +85,16 @@ class ConfirmEmail extends Component {
 
   render () {
     return (
-      <View style={{ flex: 1 }}>
-        { !this.props.isConnected && this.renderAlert() }
-        <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 70 }}>
-          <Text>Please enter the email address you used to register and we will send an email link to reset your password</Text>
+      <View style={{ flex: 1, backgroundColor: colours.white }}>
+        <FeedHeader>
+          { !this.props.isConnected && this.renderAlert() }
+        </FeedHeader>
+        <View style={{ alignItems: 'center', marginHorizontal: 10, marginTop: 50, marginBottom: 70 }}>
+          <Text style={styles.msg3}>Please enter the email address you used to register and we will send an email link to reset your password</Text>
           { this.renderServerMessage() }
         </View>
         <View style={ styles.container }>
-          <Text style={inlineStyle.labelStyle}>Email</Text>
+          <Text style={inlineStyle.labelStyle}>Email address:</Text>
           <View style={ styles.row }>
             <Field name="email" component={ FormTextInput } isEmail />
           </View>
