@@ -77,24 +77,30 @@ export const StackRoot = StackNavigator({
         activeTintColor: colours.blue,
         inactiveTintColor: colours.gray,
         indicatorStyle: {
-          backgroundColor: colours.blue
+          backgroundColor: colours.blue,
+          height: 4
         },
         style: {
           backgroundColor: colours.white,
-          height: Platform.OS === 'ios' ? 60 : 100
+          borderTopColor: colours.lightgray,
+          borderTopWidth: 1,
+          height: Platform.OS === 'ios' ? 50 : 70
         },
         tabStyle: {
-
+          // backgroundColor: 'green',
+          paddingTop: 4
         },
         iconStyle: {
+          // backgroundColor: 'lightblue',
           width: Dimensions.get('window').width / 5,
-          height: 42
+          height: 38
         },
         labelStyle: {
+          // backgroundColor: 'red',
           fontSize: Platform.OS === 'ios' ? 12 : 14,
           fontWeight: Platform.OS === 'ios' ? '400' : '400',
           width: Dimensions.get('window').width / 5,
-          marginBottom: 0
+          marginTop: 3
         }
       }
     })
