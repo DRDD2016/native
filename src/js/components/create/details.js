@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Platform } from 'react-native';
+import { View, Text, TextInput, Platform, Image } from 'react-native';
 import Fabric from 'react-native-fabric';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Button from '../common/Button';
@@ -13,11 +13,15 @@ import { clearCreateEvent } from '../../actions/create';
 import BackIcon from '../common/back-icon';
 
 const { Answers } = Fabric;
+const logo = require('../../../img/sparkLogo.png');
 
 export default class Details extends Component {
 
   static navigationOptions = ({ navigation }) => ({
-    title: 'Create event',
+    title: <Text>
+      <Text>  Create event </Text>
+      <Image style={{ height: 80, width: 80 }} source={ logo } />
+    </Text>,
     headerLeft: <ButtonHeader onPress={() => navigation.goBack(null)}>
       <BackIcon />
     </ButtonHeader>,
