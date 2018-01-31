@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 /* eslint-disable*/
 import React, { Component } from 'react';
-import { View, Text, FlatList, Dimensions, Platform } from 'react-native';
+import { View, Text, FlatList, Dimensions, Platform, Image } from 'react-native';
 import Fabric from 'react-native-fabric';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CalendarItem from './calendar-item';
@@ -16,11 +16,12 @@ import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
 
 const { Answers } = Fabric;
+const logo = require('../../img/sparkLoginLogo.png');
 
 class Albums extends Component {
 
   static navigationOptions = {
-    title: 'Albums',
+    title: <Image style={{ height: 120, width: 360 }} source={ logo } />,
     tabBarIcon: ({ tintColor }) =>
       <Icon name="photo" size={32} color={tintColor} />,
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },

@@ -13,11 +13,12 @@ import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
 
 const { Answers } = Fabric;
+const logo = require('../../img/sparkLoginLogo.png');
 
 class Profile extends Component {
 
   static navigationOptions = {
-    title: 'Profile',
+    title: <Image style={{ height: 120, width: 360 }} source={ logo } />,
     tabBarIcon: ({ tintColor }) =>
       <Icon name="user" size={32} color={tintColor} />,
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },

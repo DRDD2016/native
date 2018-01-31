@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Modal, TouchableHighlight, FlatList } from 'react-native';
+import { View, Text, Modal, TouchableHighlight, FlatList, Image } from 'react-native';
 import Fabric from 'react-native-fabric';
 // import { OptimizedFlatList } from 'react-native-optimized-flatlist';
 // import { slowlog } from 'react-native-slowlog';
@@ -16,12 +16,14 @@ import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
 
 const { Answers } = Fabric;
+const logo = require('../../img/sparkLoginLogo.png');
+
 // import { subscribeToBranchLinks } from '../lib/branchLink';
 
 class Feed extends Component {
 
   static navigationOptions = {
-    title: 'Feed',
+    title: <Image style={{ height: 120, width: 360 }} source={ logo } />,
     headerLeft: <ButtonHeader />,
     headerRight: <ButtonHeader>
       <BurgerIcon />
