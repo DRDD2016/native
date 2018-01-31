@@ -650,10 +650,9 @@ const styles = {
 
   cardStyle: {
     backgroundColor: colours.white,
-    borderWidth: 0.5,
+    borderBottomWidth: 0.5,
     borderRadius: 2,
     borderColor: colours.main,
-    borderBottomWidth: 0,
     shadowColor: colours.main,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -661,12 +660,11 @@ const styles = {
     elevation: 1,
     marginLeft: 5,
     marginRight: 5,
-    marginBottom: 10
+    marginBottom: 5
   },
   cardSectionCalendar: {
-    borderBottomWidth: 1,
     padding: 5,
-    backgroundColor: '#fff',
+    backgroundColor: colours.white,
     justifyContent: 'flex-start',
     flexDirection: 'column',
     borderColor: colours.main,

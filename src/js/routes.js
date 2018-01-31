@@ -78,7 +78,7 @@ export const StackRoot = StackNavigator({
         inactiveTintColor: colours.gray,
         indicatorStyle: {
           backgroundColor: colours.blue,
-          height: 4
+          height: 3
         },
         style: {
           backgroundColor: colours.white,
