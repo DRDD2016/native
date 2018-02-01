@@ -9,11 +9,13 @@ export default class BurgerIcon extends Component {
 
     return (
       <Icon
-        name="ellipsis-v"
-        style={{ paddingLeft: 15, paddingRight: 15 }}
+        name="bars"
+        style={{ borderColor: 'red', borderWidth: 2, paddingLeft: 15, paddingRight: 15 }}
         size={ 24 }
         color={ colours.darkblue }
       />
     );
   }
 }
+
+// ellipsis-v is othe burger icon

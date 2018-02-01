@@ -33,7 +33,6 @@ export default class When extends Component {
   render () {
     const { name, data, addInput, handleDate, handleTime, removeInput } = this.props;
 
-
     const hideNext = data[0].date === '';
 
     return (

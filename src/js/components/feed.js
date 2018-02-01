@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, Modal, TouchableHighlight, FlatList, Image } from 'react-native';
+import { View, Text, Modal, TouchableHighlight, FlatList, Image, Platform } from 'react-native';
 import Fabric from 'react-native-fabric';
+import { Header } from 'react-navigation';
 // import { OptimizedFlatList } from 'react-native-optimized-flatlist';
 // import { slowlog } from 'react-native-slowlog';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -16,14 +17,16 @@ import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
 
 const { Answers } = Fabric;
+const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 2;
 const logo = require('../../img/sparkLoginLogo.png');
+
 
 // import { subscribeToBranchLinks } from '../lib/branchLink';
 
 class Feed extends Component {
 
   static navigationOptions = {
-    title: <Image style={{ height: 120, width: 360 }} source={ logo } />,
+    title: <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />,
     headerLeft: <ButtonHeader />,
     headerRight: <ButtonHeader>
       <BurgerIcon />

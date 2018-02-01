@@ -24,8 +24,16 @@ const mapDispatchToProps = (dispatch) => {
     handleOnPress: (navigation) => {
       console.log('handleOnPress storecreate: ', store.getState().create);
       const event = store.getState().create;
+
+      // sort the event.When dates
+      const iSODates = mapToISOString(event.when);
+      const sortedWhen = iSODates.sort((a, b) => {
+        return (a) > (b);
+      });
+      // console.log('sortedWhen', sortedWhen);
+
       const data = Object.assign({}, event,
-        { when: mapToISOString(event.when) },
+        { when: sortedWhen },
         { is_poll: event.what.concat(event.where, event.when).length > 3 }
       );
       delete data.error;
