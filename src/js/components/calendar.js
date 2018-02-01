@@ -31,6 +31,7 @@ class Calendar extends Component {
 
   componentWillMount () {
     console.log('calendar compWillMount', this.props);
+    console.log('calendar this.props.filteredEvents', this.props.filteredEvents);
     const sortedData = this.props.filteredEvents.sort((a, b) => {
       return a.when[0] > b.when[0];
     });
@@ -44,6 +45,7 @@ class Calendar extends Component {
 
   componentWillReceiveProps (nextProps) {
     console.log('calendar compWillReceiveNextprops', nextProps);
+    console.log('calendar this.props.filteredEvents', nextProps.filteredEvents);
     const sortedData = nextProps.filteredEvents.sort((a, b) => {
       return a.when[0] > b.when[0];
     });

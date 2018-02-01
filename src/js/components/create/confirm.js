@@ -13,6 +13,7 @@ import ButtonHeader from '../common/ButtonHeader';
 import BackIcon from '../common/back-icon';
 import CloseButton from '../common/CloseButton';
 import { connectAlert } from '../Alert';
+import mapToISOString from '../../lib/map-to-iso-string';
 
 class Confirm extends Component {
 
@@ -40,6 +41,14 @@ class Confirm extends Component {
 
     console.log('confirm Props', this.props);
     const { what, where, when, description, note, handleOnPress, isConnected, isFetching } = this.props;
+
+    const iSODates = mapToISOString(when);
+    const sortedDates = iSODates.sort((a, b) => {
+      return (a) > (b);
+    });
+
+    console.log('confirm sortedDates: ', sortedDates);
+
     if (isFetching) {
       return <Spinner size="large" />;
     }
@@ -59,7 +68,7 @@ class Confirm extends Component {
           <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
           <ConfirmWhere data={where} />
           <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
-          <ConfirmWhen data={when} />
+          <ConfirmWhen data={sortedDates} />
 
           <View style={[styles.rowCentered, { marginTop: 10 }]}>
             <Button

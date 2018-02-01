@@ -83,8 +83,8 @@ export const StackRoot = StackNavigator({
         style: {
           backgroundColor: colours.white,
           borderTopColor: colours.lightgray,
-          borderTopWidth: 1,
-          height: Platform.OS === 'ios' ? 50 : 70
+          borderTopWidth: 0,
+          height: Platform.OS === 'ios' ? 60 : 70
         },
         tabStyle: {
           // backgroundColor: 'green',
