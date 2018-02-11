@@ -156,7 +156,7 @@ class Feed extends Component {
     const { index } = item;
     const { feed_item, id } = item.item;
     const { user_id, handleSelection } = this.props;
-    // console.log('feed_item', feed_item);
+    console.log('feed_item', feed_item);
 
     console.log('renderItem', `${index} ${feed_item.name}`);
 

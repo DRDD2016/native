@@ -53,14 +53,54 @@ class FeedItem extends PureComponent {
 
               {
                 isCancelled &&
-                <Text>
-                Cancelled
-                </Text>
+                <Text
+                  style={[
+                    styles.title6, {
+                      position: 'absolute',
+                      left: -4,
+                      top: -9,
+                      zIndex: 1,
+                      padding: 2,
+                      backgroundColor: colours.red,
+                      color: colours.white
+                    }]}
+                >Cancelled</Text>
               }
+              {
+                !isCancelled && is_poll &&
+                <Text
+                  style={[
+                    styles.title6, {
+                      position: 'absolute',
+                      left: -4,
+                      top: -9,
+                      zIndex: 1,
+                      padding: 2,
+                      backgroundColor: colours.purple,
+                      color: colours.white
+                    }]}
+                >Polling</Text>
+              }
+              {
+                !isCancelled && !is_poll &&
+                <Text
+                  style={[
+                    styles.title6, {
+                      position: 'absolute',
+                      left: -4,
+                      top: -9,
+                      zIndex: 1,
+                      padding: 2,
+                      backgroundColor: colours.blue,
+                      color: colours.white
+                    }]}
+                >Confirmed</Text>
+              }
+
               <Image
                 source={{ uri: photo_url }}
                 defaultSource={avatar}
-                style={styles.uiProfilePhotoCircularImage}
+                style={[styles.uiProfilePhotoCircularImage, { marginTop: 5 }]}
               />
 
             </View>

@@ -51,6 +51,14 @@ const styles = {
     fontSize: 12,
     fontWeight: '500'
   },
+  title5: {
+    fontSize: 10,
+    fontWeight: '500'
+  },
+  title6: {
+    fontSize: 8,
+    fontWeight: '500'
+  },
   msg1: {
     fontSize: 18,
     color: colours.gray,
@@ -722,7 +730,7 @@ const styles = {
   },
   unConfirmedItemText: {
     color: colours.gray,
-    fontSize: 14
+    fontSize: 12
   },
   leftColumn: {
     flex: 1,
