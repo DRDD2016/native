@@ -29,7 +29,7 @@ class FeedItem extends PureComponent {
 
     const { user_id, timestamp, firstname, surname,
       photo_url, where, when, userIsHost, is_poll, subject_user_id,
-      viewed, name, edited } = this.props;
+      viewed, name, edited, isCancelled } = this.props;
 
     console.log('name: ', name);
     console.log('viewed: ', viewed);
@@ -51,6 +51,12 @@ class FeedItem extends PureComponent {
 
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
 
+              {
+                isCancelled &&
+                <Text>
+                Cancelled
+                </Text>
+              }
               <Image
                 source={{ uri: photo_url }}
                 defaultSource={avatar}

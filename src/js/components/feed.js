@@ -156,6 +156,7 @@ class Feed extends Component {
     const { index } = item;
     const { feed_item, id } = item.item;
     const { user_id, handleSelection } = this.props;
+    // console.log('feed_item', feed_item);
 
     console.log('renderItem', `${index} ${feed_item.name}`);
 
@@ -179,6 +180,7 @@ class Feed extends Component {
         subject_user_id={ feed_item.subject_user_id }
         viewed={ feed_item.viewed }
         edited={ feed_item.edited }
+        isCancelled={ feed_item.cancelled }
         handleSelection={ handleSelection }
         feed_item_id={ id }
       />
