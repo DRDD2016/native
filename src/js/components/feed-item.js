@@ -29,7 +29,7 @@ class FeedItem extends PureComponent {
 
     const { user_id, timestamp, firstname, surname,
       photo_url, where, when, userIsHost, is_poll, subject_user_id,
-      viewed, name, edited } = this.props;
+      viewed, name, edited, isCancelled } = this.props;
 
     console.log('name: ', name);
     console.log('viewed: ', viewed);
@@ -51,10 +51,77 @@ class FeedItem extends PureComponent {
 
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
 
+              {
+                isCancelled &&
+                <View
+                  style={{
+                    position: 'absolute',
+                    left: -4,
+                    top: -9,
+                    zIndex: 1,
+                    padding: 2,
+                    backgroundColor: colours.red,
+                    borderBottomRightRadius: 5,
+                    borderTopRightRadius: 5
+                  }}
+                >
+                  <Text
+                    style={[
+                      styles.title6, {
+                        color: colours.white
+                      }]}
+                  >Cancelled</Text>
+                </View>
+              }
+              {
+                !isCancelled && is_poll &&
+                <View
+                  style={{
+                    position: 'absolute',
+                    left: -4,
+                    top: -9,
+                    zIndex: 1,
+                    padding: 2,
+                    backgroundColor: colours.purple,
+                    borderBottomRightRadius: 5,
+                    borderTopRightRadius: 5
+                  }}
+                >
+                  <Text
+                    style={[
+                      styles.title6, {
+                        color: colours.white
+                      }]}
+                  >Polling</Text>
+                </View>
+              }
+              {
+                !isCancelled && !is_poll &&
+                <View
+                  style={{
+                    position: 'absolute',
+                    left: -4,
+                    top: -9,
+                    zIndex: 1,
+                    padding: 2,
+                    backgroundColor: colours.blue,
+                    borderBottomRightRadius: 5,
+                    borderTopRightRadius: 5
+                  }}
+                >
+                  <Text
+                    style={[
+                      styles.title6, {
+                        color: colours.white
+                      }]}
+                  >Confirmed</Text>
+                </View>
+              }
+
               <Image
                 source={{ uri: photo_url }}
                 defaultSource={avatar}
-                style={styles.uiProfilePhotoCircularImage}
+                style={[styles.uiProfilePhotoCircularImage, { marginTop: 5 }]}
               />
 
             </View>
@@ -67,16 +134,18 @@ class FeedItem extends PureComponent {
                   { !userIsSubject && `${firstname}  ${surname}` }
                 </Text>
                 <Text style={[styles.subjectAction, !viewed && styles.viewedFeedItemAction]}>
-                  { userIsSubject && is_poll && ' have created a poll ' }
-                  { userIsSubject && !is_poll && !edited && ' have created an event ' }
-                  { userIsSubject && !is_poll && edited && ' have edited an event' }
+                  { userIsSubject && is_poll && !isCancelled && ' have created a poll ' }
+                  { userIsSubject && !is_poll && !edited && !isCancelled && ' have created an event ' }
+                  { userIsSubject && !is_poll && edited && !isCancelled && ' have edited an event' }
+                  { userIsSubject && isCancelled && ' have cancelled an event' }
 
                   { !userIsSubject && userIsHost && is_poll && ' has voted on your poll' }
                   { !userIsSubject && userIsHost && !is_poll && ' has responded to your event' }
 
-                  { !userIsSubject && !userIsHost && is_poll && ' wants you to vote on their poll' }
-                  { !userIsSubject && !userIsHost && !is_poll && !edited && ' has invited you to their event' }
-                  { !userIsSubject && !userIsHost && !is_poll && edited && ' has edited an event' }
+                  { !userIsSubject && !userIsHost && is_poll && !isCancelled && ' wants you to vote on their poll' }
+                  { !userIsSubject && !userIsHost && !is_poll && !edited && !isCancelled && ' has invited you to their event' }
+                  { !userIsSubject && !userIsHost && !is_poll && edited && !isCancelled && ' has edited an event' }
+                  { !userIsSubject && !userIsHost && !is_poll && isCancelled && ' has cancelled an event' }
 
                 </Text>
               </Text>
