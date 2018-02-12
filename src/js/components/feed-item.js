@@ -53,48 +53,69 @@ class FeedItem extends PureComponent {
 
               {
                 isCancelled &&
-                <Text
-                  style={[
-                    styles.title6, {
-                      position: 'absolute',
-                      left: -4,
-                      top: -9,
-                      zIndex: 1,
-                      padding: 2,
-                      backgroundColor: colours.red,
-                      color: colours.white
-                    }]}
-                >Cancelled</Text>
+                <View
+                  style={{
+                    position: 'absolute',
+                    left: -4,
+                    top: -9,
+                    zIndex: 1,
+                    padding: 2,
+                    backgroundColor: colours.red,
+                    borderBottomRightRadius: 5,
+                    borderTopRightRadius: 5
+                  }}
+                >
+                  <Text
+                    style={[
+                      styles.title6, {
+                        color: colours.white
+                      }]}
+                  >Cancelled</Text>
+                </View>
               }
               {
                 !isCancelled && is_poll &&
-                <Text
-                  style={[
-                    styles.title6, {
-                      position: 'absolute',
-                      left: -4,
-                      top: -9,
-                      zIndex: 1,
-                      padding: 2,
-                      backgroundColor: colours.purple,
-                      color: colours.white
-                    }]}
-                >Polling</Text>
+                <View
+                  style={{
+                    position: 'absolute',
+                    left: -4,
+                    top: -9,
+                    zIndex: 1,
+                    padding: 2,
+                    backgroundColor: colours.purple,
+                    borderBottomRightRadius: 5,
+                    borderTopRightRadius: 5
+                  }}
+                >
+                  <Text
+                    style={[
+                      styles.title6, {
+                        color: colours.white
+                      }]}
+                  >Polling</Text>
+                </View>
               }
               {
                 !isCancelled && !is_poll &&
-                <Text
-                  style={[
-                    styles.title6, {
-                      position: 'absolute',
-                      left: -4,
-                      top: -9,
-                      zIndex: 1,
-                      padding: 2,
-                      backgroundColor: colours.blue,
-                      color: colours.white
-                    }]}
-                >Confirmed</Text>
+                <View
+                  style={{
+                    position: 'absolute',
+                    left: -4,
+                    top: -9,
+                    zIndex: 1,
+                    padding: 2,
+                    backgroundColor: colours.blue,
+                    borderBottomRightRadius: 5,
+                    borderTopRightRadius: 5
+                  }}
+                >
+                  <Text
+                    style={[
+                      styles.title6, {
+                        color: colours.white
+                      }]}
+                  >Confirmed</Text>
+                </View>
               }
 
               <Image
@@ -113,16 +134,18 @@ class FeedItem extends PureComponent {
                   { !userIsSubject && `${firstname}  ${surname}` }
                 </Text>
                 <Text style={[styles.subjectAction, !viewed && styles.viewedFeedItemAction]}>
-                  { userIsSubject && is_poll && ' have created a poll ' }
-                  { userIsSubject && !is_poll && !edited && ' have created an event ' }
-                  { userIsSubject && !is_poll && edited && ' have edited an event' }
+                  { userIsSubject && is_poll && !isCancelled && ' have created a poll ' }
+                  { userIsSubject && !is_poll && !edited && !isCancelled && ' have created an event ' }
+                  { userIsSubject && !is_poll && edited && !isCancelled && ' have edited an event' }
+                  { userIsSubject && isCancelled && ' have cancelled an event' }
 
                   { !userIsSubject && userIsHost && is_poll && ' has voted on your poll' }
                   { !userIsSubject && userIsHost && !is_poll && ' has responded to your event' }
 
-                  { !userIsSubject && !userIsHost && is_poll && ' wants you to vote on their poll' }
-                  { !userIsSubject && !userIsHost && !is_poll && !edited && ' has invited you to their event' }
-                  { !userIsSubject && !userIsHost && !is_poll && edited && ' has edited an event' }
+                  { !userIsSubject && !userIsHost && is_poll && !isCancelled && ' wants you to vote on their poll' }
+                  { !userIsSubject && !userIsHost && !is_poll && !edited && !isCancelled && ' has invited you to their event' }
+                  { !userIsSubject && !userIsHost && !is_poll && edited && !isCancelled && ' has edited an event' }
+                  { !userIsSubject && !userIsHost && !is_poll && isCancelled && ' has cancelled an event' }
 
                 </Text>
               </Text>
