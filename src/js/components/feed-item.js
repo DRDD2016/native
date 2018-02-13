@@ -42,7 +42,7 @@ class FeedItem extends PureComponent {
     const avatar = require('../../img/avatar.png');
 
     return (
-      <Card style={[styles.cardStyle, !viewed && styles.viewedFeedItemStyle]}>
+      <Card style={[styles.newCardStyle, !viewed && styles.newViewedFeedItemStyle]}>
         <CardSection style={styles.cardSectionFeedItem}>
           <TouchableOpacity
             style={styles.cardButtonStyle}

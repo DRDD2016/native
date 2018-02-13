@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Dimensions, Platform, BackHandler } from 'react-native';
 import { connect } from 'react-redux';
-import { StackNavigator, TabNavigator, addNavigationHelpers, NavigationActions } from 'react-navigation';
+import { StackNavigator, TabNavigator, DrawerNavigator, addNavigationHelpers, NavigationActions } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colours from '../styles/colours';
 
+import Drawer from './components/common/Drawer';
 import Index from './components/auth';
 import LoginContainer from './containers/auth/login';
 import SignupContainer from './containers/auth/signup';
@@ -47,63 +48,87 @@ export const StackRoot = StackNavigator({
     )
   },
   tabsMain: {
-    screen: TabNavigator({
-      Albums: { screen: StackNavigator({ ScreenAlbums: { screen: AlbumsContainer } }) },
-      Calendar: { screen: StackNavigator({ ScreenCalendar: { screen: CalendarContainer } }) },
-      Feed: { screen: StackNavigator({ ScreenFeed: { screen: FeedContainer } }) },
-      Profile: { screen: StackNavigator({ ScreenProfile: { screen: ProfileContainer } }) },
-      Create: { screen: StackNavigator({
-        ScreenCreate: { screen: DetailsContainer },
-        What: { screen: WhatContainer },
-        Where: { screen: WhereContainer },
-        When: { screen: WhenContainer },
-        Confirm: { screen: ConfirmContainer } }),
-        navigationOptions: {
-          tabBarLabel: 'Create',
-          tabBarIcon: ({ tintColor }) =>
-            <Icon name="pencil" size={32} color={tintColor} />
-        }
-      }
+    screen: DrawerNavigator({
+      Spark: {
+        screen: TabNavigator({
+          Albums: { screen: StackNavigator({ ScreenAlbums: { screen: AlbumsContainer } }) },
+          Calendar: { screen: StackNavigator({ ScreenCalendar: { screen: CalendarContainer } }) },
+          Feed: { screen: StackNavigator({ ScreenFeed: { screen: FeedContainer } }) },
+          Profile: { screen: StackNavigator({ ScreenProfile: { screen: ProfileContainer } }) },
+          Create: { screen: StackNavigator({
+            ScreenCreate: { screen: DetailsContainer },
+            What: { screen: WhatContainer },
+            Where: { screen: WhereContainer },
+            When: { screen: WhenContainer },
+            Confirm: { screen: ConfirmContainer } }),
+            navigationOptions: {
+              tabBarLabel: 'Create',
+              tabBarIcon: ({ tintColor }) =>
+                <Icon name="pencil" size={32} color={tintColor} />
+            }
+          }
+        }, {
+          // tabBarPosition: 'bottom',
+          swipeEnabled: true,
+          // lazy: true, // added to attempt to stop Code loading until Feed has initialised.
+          animationEnabled: true,
+          pressColor: colours.purple,
+          initialRouteName: 'Feed',
+          tabBarOptions: {
+            gesturesEnabled: false,
+            showIcon: true,
+            upperCaseLabel: false,
+            activeTintColor: colours.blue,
+            inactiveTintColor: colours.gray,
+            indicatorStyle: {
+              backgroundColor: colours.blue,
+              height: 3
+            },
+            style: {
+              backgroundColor: colours.white,
+              borderTopColor: colours.lightgray,
+              borderTopWidth: 0,
+              height: Platform.OS === 'ios' ? 60 : 70
+            },
+            tabStyle: {
+              // backgroundColor: 'green',
+              paddingTop: 4
+            },
+            iconStyle: {
+              // backgroundColor: 'lightblue',
+              width: Dimensions.get('window').width / 5,
+              height: 38
+            },
+            labelStyle: {
+              // backgroundColor: 'red',
+              fontSize: Platform.OS === 'ios' ? 12 : 14,
+              fontWeight: Platform.OS === 'ios' ? '400' : '400',
+              width: Dimensions.get('window').width / 5,
+              marginTop: 3
+            }
+          }
+        })
+      },
+      Settings: { screen: ProfileContainer },
+      Help: { screen: AlbumsContainer },
+      About: { screen: AlbumsContainer },
+      Feedback: { screen: AlbumsContainer },
+      Refer: { screen: AlbumsContainer },
+      SignOut: { screen: AlbumsContainer }
     }, {
-      tabBarPosition: 'bottom',
-      swipeEnabled: true,
-      // lazy: true, // added to attempt to stop Code loading until Feed has initialised.
-      animationEnabled: true,
-      pressColor: colours.purple,
-      initialRouteName: 'Feed',
-      tabBarOptions: {
-        showIcon: true,
-        upperCaseLabel: false,
+      headerMode: 'float',
+      title: 'Spark',
+      initialRouteName: 'Spark',
+      gesturesEnabled: false,
+      drawerPosition: 'right',
+      contentOptions: {
+        inactiveTintColor: colours.blue,
         activeTintColor: colours.blue,
-        inactiveTintColor: colours.gray,
-        indicatorStyle: {
-          backgroundColor: colours.blue,
-          height: 3
-        },
-        style: {
-          backgroundColor: colours.white,
-          borderTopColor: colours.lightgray,
-          borderTopWidth: 0,
-          height: Platform.OS === 'ios' ? 60 : 70
-        },
-        tabStyle: {
-          // backgroundColor: 'green',
-          paddingTop: 4
-        },
-        iconStyle: {
-          // backgroundColor: 'lightblue',
-          width: Dimensions.get('window').width / 5,
-          height: 38
-        },
-        labelStyle: {
-          // backgroundColor: 'red',
-          fontSize: Platform.OS === 'ios' ? 12 : 14,
-          fontWeight: Platform.OS === 'ios' ? '400' : '400',
-          width: Dimensions.get('window').width / 5,
-          marginTop: 3
-        }
-      }
+        activeBackgroundColor: colours.lightgray
+      },
+      contentComponent: Drawer
     })
+
   },
   event: { screen: StackNavigator({
     Event: { screen: EventContainer },

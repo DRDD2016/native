@@ -660,8 +660,22 @@ const styles = {
     backgroundColor: colours.white,
     borderBottomWidth: 0.5,
     borderRadius: 2,
-    borderColor: colours.main,
-    shadowColor: colours.main,
+    borderColor: colours.lightgray,
+    shadowColor: colours.gray,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+    marginLeft: 5,
+    marginRight: 5,
+    marginBottom: 5
+  },
+  newCardStyle: {
+    backgroundColor: colours.white,
+    borderBottomWidth: 0.5,
+    borderRadius: 2,
+    borderColor: colours.lightgray,
+    shadowColor: colours.gray,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
@@ -702,6 +716,11 @@ const styles = {
   },
   viewedFeedItemStyle: {
     backgroundColor: colours.blue,
+    shadowOpacity: 0.2,
+    shadowRadius: 3
+  },
+  newViewedFeedItemStyle: {
+    backgroundColor: colours.gray,
     shadowOpacity: 0.2,
     shadowRadius: 3
   },
