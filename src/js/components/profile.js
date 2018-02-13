@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { View, Text, Image, TextInput, Platform, ScrollView, TouchableHighlight } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import { Header } from 'react-navigation';
 import Fabric from 'react-native-fabric';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from './common/Button';
@@ -11,20 +12,29 @@ import ImageHeader from './common/ImageHeader';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
+import ButtonHeader from './common/ButtonHeader';
+import BurgerIcon from './common/burger-icon';
 
 const { Answers } = Fabric;
+const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 2;
 const logo = require('../../img/sparkLoginLogo.png');
 
 class Profile extends Component {
 
-  static navigationOptions = {
-    title: <Image style={{ height: 120, width: 360 }} source={ logo } />,
+  static navigationOptions = ({ navigation }) => ({
+    title: <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />,
+    headerLeft: <ButtonHeader />,
     tabBarIcon: ({ tintColor }) =>
       <Icon name="user" size={32} color={tintColor} />,
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
     headerTintColor: colours.headerButtonColor,
-    header: props => <ImageHeader {...props} />
-  }
+    header: props => <ImageHeader {...props} />,
+    headerRight: <ButtonHeader
+      onPress={() => navigation.navigate('DrawerOpen')}
+    >
+      <BurgerIcon />
+    </ButtonHeader>
+  });
 
   constructor (props) {
     super(props);

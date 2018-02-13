@@ -25,10 +25,12 @@ const logo = require('../../img/sparkLoginLogo.png');
 
 class Feed extends Component {
 
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     title: <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />,
     headerLeft: <ButtonHeader />,
-    headerRight: <ButtonHeader>
+    headerRight: <ButtonHeader
+      onPress={() => navigation.navigate('DrawerOpen')}
+    >
       <BurgerIcon />
     </ButtonHeader>,
     tabBarIcon: ({ tintColor }) =>
@@ -36,7 +38,7 @@ class Feed extends Component {
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
     headerTintColor: colours.headerButtonColor,
     header: props => <ImageHeader {...props} />
-  }
+  });
 
   constructor (props) {
     super(props);
