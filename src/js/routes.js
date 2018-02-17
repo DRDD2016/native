@@ -5,7 +5,7 @@ import { StackNavigator, TabNavigator, DrawerNavigator, addNavigationHelpers, Na
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colours from '../styles/colours';
 
-import Drawer from './components/common/Drawer';
+import DrawerContainer from './containers/drawer';
 import Index from './components/auth';
 import LoginContainer from './containers/auth/login';
 import SignupContainer from './containers/auth/signup';
@@ -68,7 +68,7 @@ export const StackRoot = StackNavigator({
             }
           }
         }, {
-          // tabBarPosition: 'bottom',
+          tabBarPosition: 'bottom',
           swipeEnabled: true,
           // lazy: true, // added to attempt to stop Code loading until Feed has initialised.
           animationEnabled: true,
@@ -126,7 +126,7 @@ export const StackRoot = StackNavigator({
         activeTintColor: colours.blue,
         activeBackgroundColor: colours.lightgray
       },
-      contentComponent: Drawer
+      contentComponent: DrawerContainer
     })
 
   },

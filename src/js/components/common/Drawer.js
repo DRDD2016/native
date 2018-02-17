@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, Platform } from 'react-native';
 import { Header } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -28,67 +28,92 @@ const inlineStyles = StyleSheet.create({
   }
 });
 
-export default function Drawer (navigation) {
+export default class Drawer extends Component {
 
-  return (
-    <View style={inlineStyles.container}>
-      <View style={inlineStyles.DrawerItem}>
-        <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />
-      </View>
-      <View style={inlineStyles.DrawerItem}>
-        <View style={{ marginRight: 10 }}><Icon name="cog" size={32} color={colours.gray} /></View>
-        <Text
-          onPress={() => navigation.navigate('Settings')}
-          style={inlineStyles.DrawerItemText}
+  render () {
+    console.log(this.props);
+    const { handleLogOut, navigation } = this.props;
+    return (
+      <View style={inlineStyles.container}>
+        <View style={inlineStyles.DrawerItem}>
+          <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />
+        </View>
+        <View style={inlineStyles.DrawerItem}>
+          <View style={{ marginRight: 10 }}><Icon name="cog" size={32} color={colours.gray} /></View>
+          <Text
+            onPress={() => navigation.navigate('Settings')}
+            style={inlineStyles.DrawerItemText}
+          >
+            Settings
+          </Text>
+        </View>
+        <View style={inlineStyles.DrawerItem}>
+          <View style={{ marginRight: 10 }}><Icon name="question-circle" size={32} color={colours.gray} /></View>
+          <Text
+            onPress={() => navigation.navigate('Help')}
+            style={inlineStyles.DrawerItemText}
+          >
+            Help
+          </Text>
+        </View>
+        <View style={inlineStyles.DrawerItem}>
+          <View style={{ marginRight: 10 }}><Icon name="info-circle" size={32} color={colours.gray} /></View>
+          <Text
+            onPress={() => navigation.navigate('About')}
+            style={inlineStyles.DrawerItemText}
+          >
+            About
+          </Text>
+        </View>
+        <View style={inlineStyles.DrawerItem}>
+          <View style={{ marginRight: 5 }}><Icon name="bullhorn" size={32} color={colours.gray} /></View>
+          <Text
+            onPress={() => navigation.navigate('Feedback')}
+            style={inlineStyles.DrawerItemText}
+          >
+            Feedback
+          </Text>
+        </View>
+        <View style={inlineStyles.DrawerItem}>
+          <View style={{ marginRight: 5 }}><Icon name="share" size={32} color={colours.gray} /></View>
+          <Text
+            onPress={() => navigation.navigate('Refer')}
+            style={inlineStyles.DrawerItemText}
+          >
+            Refer a friend
+          </Text>
+        </View>
+        <View style={inlineStyles.DrawerItem}>
+          <View style={{ marginRight: 7 }}><Icon name="sign-out" size={32} color={colours.gray} /></View>
+          <Text
+            onPress={ () => handleLogOut(navigation) }
+            style={inlineStyles.DrawerItemText}
+          >
+            Signout
+          </Text>
+        </View>
+        <View
+          style={[inlineStyles.DrawerItem,
+          { borderTopWidth: 1, borderTopColor: colours.lightgray, marginTop: 5, justifyContent: 'center' }]}
         >
-          Settings
-        </Text>
+          <View style={{ marginRight: 7 }} />
+          <Text
+            style={[inlineStyles.DrawerItemText, { fontSize: 10 }]}
+          >
+            Privacy policy
+          </Text>
+        </View>
+        <View style={[inlineStyles.DrawerItem, { justifyContent: 'center' }]}>
+          <View style={{ marginRight: 7 }} />
+          <Text
+            style={[inlineStyles.DrawerItemText, { fontSize: 10 }]}
+          >
+            Terms and conditions
+          </Text>
+        </View>
       </View>
-      <View style={inlineStyles.DrawerItem}>
-        <View style={{ marginRight: 10 }}><Icon name="question-circle" size={32} color={colours.gray} /></View>
-        <Text
-          onPress={() => navigation.navigate('Help')}
-          style={inlineStyles.DrawerItemText}
-        >
-          Help
-        </Text>
-      </View>
-      <View style={inlineStyles.DrawerItem}>
-        <View style={{ marginRight: 10 }}><Icon name="info-circle" size={32} color={colours.gray} /></View>
-        <Text
-          onPress={() => navigation.navigate('About')}
-          style={inlineStyles.DrawerItemText}
-        >
-          About
-        </Text>
-      </View>
-      <View style={inlineStyles.DrawerItem}>
-        <View style={{ marginRight: 5 }}><Icon name="bullhorn" size={32} color={colours.gray} /></View>
-        <Text
-          onPress={() => navigation.navigate('Feedback')}
-          style={inlineStyles.DrawerItemText}
-        >
-          Feedback
-        </Text>
-      </View>
-      <View style={inlineStyles.DrawerItem}>
-        <View style={{ marginRight: 5 }}><Icon name="share" size={32} color={colours.gray} /></View>
-        <Text
-          onPress={() => navigation.navigate('Refer')}
-          style={inlineStyles.DrawerItemText}
-        >
-          Refer a friend
-        </Text>
-      </View>
-      <View style={inlineStyles.DrawerItem}>
-        <View style={{ marginRight: 7 }}><Icon name="sign-out" size={32} color={colours.gray} /></View>
-        <Text
-          onPress={() => navigation.navigate('Signout')}
-          style={inlineStyles.DrawerItemText}
-        >
-          Signout
-        </Text>
-      </View>
-    </View>
-  );
+    );
+  }
+
+
 }
