@@ -29,10 +29,11 @@ class FeedItem extends PureComponent {
 
     const { user_id, timestamp, firstname, surname,
       photo_url, where, when, userIsHost, is_poll, subject_user_id,
-      viewed, name, edited, isCancelled } = this.props;
+      viewed, name, edited, isCancelled, action } = this.props;
 
     console.log('name: ', name);
     console.log('viewed: ', viewed);
+    console.log('action: ', action);
 
     const unConfirmedItem =
           (when.length > 1) ||
@@ -135,12 +136,17 @@ class FeedItem extends PureComponent {
                 </Text>
                 <Text style={[styles.subjectAction, !viewed && styles.viewedFeedItemAction]}>
                   { userIsSubject && is_poll && !isCancelled && ' have created a poll ' }
-                  { userIsSubject && !is_poll && !edited && !isCancelled && ' have created an event ' }
-                  { userIsSubject && !is_poll && edited && !isCancelled && ' have edited an event' }
+                  { userIsSubject && !is_poll && !edited && !isCancelled && (action === 'create') && ' have created an event ' }
+                  { userIsSubject && !is_poll && edited && !isCancelled && (action === 'edited') && ' have edited an event' }
                   { userIsSubject && isCancelled && ' have cancelled an event' }
 
-                  { !userIsSubject && userIsHost && is_poll && ' has voted on your poll' }
-                  { !userIsSubject && userIsHost && !is_poll && ' has responded to your event' }
+                  { !userIsSubject && userIsHost && is_poll && (action === 'vote') && ' has voted on your poll' }
+                  { !userIsSubject && userIsHost && !is_poll && (action === 'rsvp') && ' has responded to your event' }
+                  { !userIsSubject && userIsHost && !is_poll && (action === 'notResponded') && ' has joined but not responded to your event' }
+
+                  { userIsSubject && !userIsHost && is_poll && !isCancelled && (action === 'vote') && ' have voted on a poll' }
+                  { userIsSubject && !userIsHost && !is_poll && !isCancelled && (action === 'notResponded') && ' have been invited to' }
+                  { userIsSubject && !userIsHost && !is_poll && !isCancelled && (action === 'rsvp') && ' have responded to' }
 
                   { !userIsSubject && !userIsHost && is_poll && !isCancelled && ' wants you to vote on their poll' }
                   { !userIsSubject && !userIsHost && !is_poll && !edited && !isCancelled && ' has invited you to their event' }

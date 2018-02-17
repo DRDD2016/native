@@ -185,6 +185,7 @@ class Feed extends Component {
         isCancelled={ feed_item.cancelled }
         handleSelection={ handleSelection }
         feed_item_id={ id }
+        action={ feed_item.action }
       />
     );
   }

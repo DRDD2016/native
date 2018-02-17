@@ -11,8 +11,8 @@ const styles = {
 
 export default function Spinner ({ size }) {
   return (
-    <View style={styles.spinnerStyle}>
-      <ActivityIndicator size={size || 'large'} />
+    <View style={[styles.spinnerStyle, { borderWidth: 1, borderColor: 'red' }]}>
+      <ActivityIndicator animating size={size || 'large'} />
     </View>
   );
 }
