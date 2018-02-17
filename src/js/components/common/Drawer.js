@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Platform } from 'react-native';
+import { StyleSheet, Text, View, Image, Platform, Linking } from 'react-native';
 import { Header } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 // import styles from '../../../styles';
@@ -30,9 +30,19 @@ const inlineStyles = StyleSheet.create({
 
 export default class Drawer extends Component {
 
+  clickOpenURL (url) {
+    Linking.openURL(url).catch(err => console.error('An error occurred', err));
+  }
+
   render () {
     console.log(this.props);
     const { handleLogOut, navigation } = this.props;
+
+    const aboutURL = 'http://spark-app.net/index.html';
+    const helpURL = 'http://spark-app.net/faq.html';
+    const feedbackURL = 'mailto:hello@spark-app.net?subject=SparkFeedback';
+
+
     return (
       <View style={inlineStyles.container}>
         <View style={inlineStyles.DrawerItem}>
@@ -50,7 +60,7 @@ export default class Drawer extends Component {
         <View style={inlineStyles.DrawerItem}>
           <View style={{ marginRight: 10 }}><Icon name="question-circle" size={32} color={colours.gray} /></View>
           <Text
-            onPress={() => navigation.navigate('Help')}
+            onPress={() => this.clickOpenURL(helpURL)}
             style={inlineStyles.DrawerItemText}
           >
             Help
@@ -59,7 +69,7 @@ export default class Drawer extends Component {
         <View style={inlineStyles.DrawerItem}>
           <View style={{ marginRight: 10 }}><Icon name="info-circle" size={32} color={colours.gray} /></View>
           <Text
-            onPress={() => navigation.navigate('About')}
+            onPress={() => this.clickOpenURL(aboutURL)}
             style={inlineStyles.DrawerItemText}
           >
             About
@@ -68,7 +78,7 @@ export default class Drawer extends Component {
         <View style={inlineStyles.DrawerItem}>
           <View style={{ marginRight: 5 }}><Icon name="bullhorn" size={32} color={colours.gray} /></View>
           <Text
-            onPress={() => navigation.navigate('Feedback')}
+            onPress={() => this.clickOpenURL(feedbackURL)}
             style={inlineStyles.DrawerItemText}
           >
             Feedback
