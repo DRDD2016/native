@@ -4,6 +4,7 @@ import { View, ActivityIndicator } from 'react-native';
 const styles = {
   spinnerStyle: {
     flex: 1,
+    width: 100,
     justifyContent: 'center',
     alignItems: 'center'
   }
