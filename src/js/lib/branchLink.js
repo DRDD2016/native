@@ -1,4 +1,4 @@
-import { AsyncStorage, Share } from 'react-native';
+import { AsyncStorage, Share, Platform } from 'react-native';
 import branch, { RegisterViewEvent } from 'react-native-branch';
 import Fabric from 'react-native-fabric';
 import { store } from '../init-store';
@@ -7,6 +7,9 @@ import { shareInviteSuccess } from '../actions/create';
 import { submitCode } from '../actions/event/data';
 
 const { Answers } = Fabric;
+
+const android_url = 'https://play.google.com/store/apps/details?id=net.wannaenterprises.spark';
+const ios_url = 'http://spark-app.net';
 
 /**
  * trimAndReplaceSpaces trim the text and replaces spaces with %20
@@ -41,41 +44,89 @@ const { Answers } = Fabric;
 export async function composeLinkToShare (user, event, code) {
 
   console.log('branchlink - creating BUO to share');
+  console.log('event: ', event);
+  console.log('code: ', code);
 
+  let bUO = '';
   // creates the branch Link to share
-  let bUO = await branch.createBranchUniversalObject(`invite to event ${code} by ${user}`, {
-    // automaticallyListOnSpotlight: true, // ignored on Android
-    // canonicalUrl: 'sparksocial://',
-    title: `You are invited to ${event.name}`,
-    contentDescription: `${user.firstname} ${user.surname} has invited you to this event using Spark. Click this link to RSVP or download the app:`, // eslint-disable-line max-len
-    contentImageUrl: user.photo_url,
-    contentIndexingMode: 'private' // for Spotlight indexing
-    // contentMetadata: {
-    //   user,
-    //   eventName: event.name,
-    //   eventCode: code
-    // }
-  });
+
+  const title = event === undefined
+    ? `${user.firstname} ${user.surname} has invited you to use Spark`
+    : `You are invited to ${event.name}`;
+
+  console.log('title: ', title);
+  if (event === undefined) {
+
+    // create shareApp link if event args are undefined
+
+    const url = Platform.OS === 'ios' ? ios_url : android_url;
+
+    bUO = await branch.createBranchUniversalObject(`invite to use Spark by ${user}`, {
+      title,
+      contentDescription: `${user.firstname} ${user.surname} has invited you to use the Spark app to organise and plan social events. Click this link to download the app: ${url}`, // eslint-disable-line max-len
+      contentImageUrl: user.photo_url,
+      contentIndexingMode: 'private' // for Spotlight indexing
+    });
+  } else {
+
+    // create event link if event args are undefined
+
+    bUO = await branch.createBranchUniversalObject(`invite to event ${code} by ${user}`, {
+      // automaticallyListOnSpotlight: true, // ignored on Android
+      // canonicalUrl: 'sparksocial://',
+      title,
+      contentDescription: `${user.firstname} ${user.surname} has invited you to this event using Spark. Click this link to RSVP or download the app:`, // eslint-disable-line max-len
+      contentImageUrl: user.photo_url,
+      contentIndexingMode: 'private' // for Spotlight indexing
+      // contentMetadata: {
+      //   user,
+      //   eventName: event.name,
+      //   eventCode: code
+      // }
+    });
+  }
+
   bUO.userCompletedAction(RegisterViewEvent);
   console.log('Created Branch Universal Object and logged RegisterViewEvent.');
 
-  const linkProperties = {
-    feature: 'shareEventCode',
-    channel: 'RNApp'
-  };
+  let linkProperties = '';
+  let controlParams = '';
 
-  const controlParams = {
-    // $fallback_url: 'http://spark-app.net',
-    // $desktop_url: '', // Change the redirect endpoint on desktops
-    $android_url: 'https://play.google.com/store/apps/details?id=net.wannaenterprises.spark', // Change the redirect endpoint for Android
-    $ios_url: 'http://spark-app.net', // Change the redirect endpoint for iOS
-    // $ipad_url: '', // Change the redirect endpoint for iPads
-    // $desktop_url: 'http://spark-app.net',
-    // $ios_deepview: 'branch_default',
-    $uri_redirect_mode: 1, // looks to see if user has app from data and attempts to open app (Facebook messenger, etc);
-    $deeplink_path: `sparksocial://Code/${code}`,
-    eventCode: `${code}`
-  };
+  if (event === undefined) {
+    linkProperties = {
+      feature: 'shareApp',
+      channel: 'RNApp'
+    };
+    controlParams = {
+      // $fallback_url: 'http://spark-app.net',
+      // $desktop_url: '', // Change the redirect endpoint on desktops
+      $android_url: 'https://play.google.com/store/apps/details?id=net.wannaenterprises.spark', // Change the redirect endpoint for Android
+      $ios_url: 'http://spark-app.net', // Change the redirect endpoint for iOS
+      // $ipad_url: '', // Change the redirect endpoint for iPads
+      // $desktop_url: 'http://spark-app.net',
+      // $ios_deepview: 'branch_default',
+      $uri_redirect_mode: 1 // looks to see if user has app from data and attempts to open app (Facebook messenger, etc);
+      // $deeplink_path: `sparksocial://Code/${code}`,
+      // eventCode: `${code}`
+    };
+  } else {
+    linkProperties = {
+      feature: 'shareEventCode',
+      channel: 'RNApp'
+    };
+    controlParams = {
+      // $fallback_url: 'http://spark-app.net',
+      // $desktop_url: '', // Change the redirect endpoint on desktops
+      $android_url: 'https://play.google.com/store/apps/details?id=net.wannaenterprises.spark', // Change the redirect endpoint for Android
+      $ios_url: 'http://spark-app.net', // Change the redirect endpoint for iOS
+      // $ipad_url: '', // Change the redirect endpoint for iPads
+      // $desktop_url: 'http://spark-app.net',
+      // $ios_deepview: 'branch_default',
+      $uri_redirect_mode: 1, // looks to see if user has app from data and attempts to open app (Facebook messenger, etc);
+      $deeplink_path: `sparksocial://Code/${code}`,
+      eventCode: `${code}`
+    };
+  }
 
   // old openWhatsApp sharing
 
@@ -89,16 +140,28 @@ export async function composeLinkToShare (user, event, code) {
   //   emailSubject: `${user.firstname} ${user.surname} has invited you to ${event.name}`
   // };
 
-  const url = await bUO.generateShortUrl(linkProperties, controlParams);
-  const text = `${user.firstname} ${user.surname} has invited you to ${event.name} using Spark. Click this link to RSVP or download the app: ${url.url}`; // eslint-disable-line max-len
+  const shortURL = await bUO.generateShortUrl(linkProperties, controlParams);
+  const url = shortURL.url;
+  const eventText = `${user.firstname} ${user.surname} has invited you to ${event.name} using Spark. Click this link to RSVP or download the app: ${url}`; // eslint-disable-line max-len
+  const appText = `${user.firstname} ${user.surname} has invited you to use the Spark app to organise and plan social events. Click this link to download the app: ${url}`; // eslint-disable-line max-len
+  const text = event === undefined ? appText : eventText;
+
+  const dialogTitle = event === undefined
+    ? 'Invite friends to use Spark'
+    : 'Invite friends using';
+
   console.log('branchlink - sharing Link');
+  console.log('text: ', text);
+  console.log('url: ', url);
+  console.log('title: ', title);
+
   Share.share({
     message: text,
     url,
-    title: `You are invited to ${event.name}`
+    title
   }, {
   // Android only:
-    dialogTitle: 'Invite friends using',
+    dialogTitle,
     // iOS only:
     excludedActivityTypes: [
       'com.apple.UIKit.activity.PostToTwitter'
@@ -107,7 +170,13 @@ export async function composeLinkToShare (user, event, code) {
 
   console.log('branchlink - shareInviteSuccess');
   store.dispatch(shareInviteSuccess());
-  Answers.logCustom('Invite shared', { additionalData: url });
+
+  if (event === undefined) {
+    Answers.logCustom('App shared', { additionalData: url });
+  } else {
+    Answers.logCustom('Invite shared', { additionalData: url });
+  }
+
 
   // if use branch sharesheet, can add an Answers Event to track which channels are shared via.
   // check if this works for both android and IOS
