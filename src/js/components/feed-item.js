@@ -42,6 +42,16 @@ class FeedItem extends PureComponent {
     const userIsSubject = subject_user_id === user_id;
     const avatar = require('../../img/avatar.png');
 
+    if (!userIsSubject && userIsHost && !is_poll && (action === 'notResponded')) {
+      return null;
+      // do not show this: ' has joined but not responded to your event'
+    }
+
+    if (!userIsSubject && userIsHost && is_poll && (action === 'notResponded')) {
+      return null;
+      // do not show this: ' has joined but not responded to your poll'
+    }
+
     return (
       <Card style={[styles.newCardStyle, !viewed && styles.newViewedFeedItemStyle]}>
         <CardSection style={styles.cardSectionFeedItem}>
@@ -147,6 +157,7 @@ class FeedItem extends PureComponent {
 
                   { userIsSubject && !userIsHost && is_poll && !isCancelled && (action === 'vote') && ' have voted on a poll' }
                   { userIsSubject && !userIsHost && !is_poll && !isCancelled && (action === 'notResponded') && ' have been invited to' }
+                  { userIsSubject && !userIsHost && is_poll && !isCancelled && (action === 'notResponded') && ' were asked to vote on' }
                   { userIsSubject && !userIsHost && !is_poll && !isCancelled && (action === 'rsvp') && ' have responded to' }
 
                   { !userIsSubject && !userIsHost && is_poll && !isCancelled && (action === 'notResponded') && ' wants you to vote on their poll' }
