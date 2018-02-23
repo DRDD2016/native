@@ -91,13 +91,20 @@ export default class Splash extends Component {
   render () {
     console.log('splash render');
     return (
-      <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>
-        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 0.2 }}>
-          <Image style={{ height: 100, width: 300 }} source={ logo } />
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }} />
+        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
+          <Image style={{ width: 300, height: 100 }} source={ logo } />
+        </View>
+        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
           {
             this.props.isFetching && <Spinner />
           }
+          {
+            !this.props.isFetching && <Spinner />
+          }
         </View>
+        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }} />
 
       </View>
     );

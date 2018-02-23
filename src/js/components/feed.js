@@ -15,6 +15,8 @@ import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
+import { store } from '../init-store';
+import { getFeedFailure } from '../actions/feed';
 
 const { Answers } = Fabric;
 const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 2;
@@ -53,7 +55,7 @@ class Feed extends Component {
 
   componentWillMount () {
 
-    console.log('FeedWillMount');
+    console.log('FeedWillMountprops: ', this.props);
 
     const { handleSubmitCode, eventCode } = this.props;
 
@@ -64,6 +66,16 @@ class Feed extends Component {
         handleSubmitCode(eventCode);
       }
     }
+
+    console.log('Mount this.props.eventCodeError: ', this.props.eventCodeError);
+
+    if (this.props.eventCodeError) {
+      console.log('dispatching getFeedFailure: ');
+      store.dispatch(getFeedFailure(this.props.eventCodeError));
+      // this.setState({ isModalVisible: true });
+
+    }
+
 
     // subscribeToBranchLinks(this.props.navigation);
 
@@ -165,7 +177,7 @@ class Feed extends Component {
     return (
       <FeedItem
         user_id={ user_id }
-        // key={ Math.random() }
+        key={ `${id}${Math.random()}` }
         index={ index }
         event_id={ feed_item.event_id }
         timestamp={ feed_item.timestamp }
@@ -214,9 +226,12 @@ class Feed extends Component {
     console.log('isFetching: ', isFetching);
     console.log('isLoading: ', isLoading);
     console.log('isConnected: ', isConnected);
+    console.log('saveEventStatus: ', saveEventStatus);
 
     if (saveEventStatus === 'Started') {
       // return this if waiting for Branch, etc
+      console.log('saveEventStatus: ', 'Started');
+
       return (
         <View style={{ flex: 1 }}>
           <Modal
@@ -253,6 +268,9 @@ class Feed extends Component {
 
     if (isLoading) {
       // return this if waiting for Branch, etc
+
+      console.log('isLoading Spinner: ', isLoading);
+
       return (
         <View style={{ flex: 1 }}>
           <Modal
@@ -296,6 +314,7 @@ class Feed extends Component {
     }
 
     if (this.state.isModalVisible) {
+      console.log('isModalVisible Spinner: ', this.state.isModalVisible);
       // return this if error for Branch, etc
       return (
         <View style={{ flex: 1 }}>
