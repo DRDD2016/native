@@ -31,9 +31,9 @@ class FeedItem extends PureComponent {
       photo_url, where, when, userIsHost, is_poll, subject_user_id,
       viewed, name, edited, isCancelled, action } = this.props;
 
-    console.log('name: ', name);
-    console.log('viewed: ', viewed);
-    console.log('action: ', action);
+    // console.log('name: ', name);
+    // console.log('viewed: ', viewed);
+    // console.log('action: ', action);
 
     const unConfirmedItem =
           (when.length > 1) ||

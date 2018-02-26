@@ -13,7 +13,7 @@ const styles = {
 export default function Spinner ({ size }) {
 
   return (
-    <View style={[styles.spinnerStyle, { borderWidth: 1, borderColor: 'red' }]}>
+    <View style={styles.spinnerStyle}>
       <ActivityIndicator animating style={{ opacity: 1 }} size={size || 'large'} />
     </View>
   );

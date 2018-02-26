@@ -142,9 +142,12 @@ export async function composeLinkToShare (user, event, code) {
 
   const shortURL = await bUO.generateShortUrl(linkProperties, controlParams);
   const url = shortURL.url;
-  const eventText = `${user.firstname} ${user.surname} has invited you to ${event.name} using Spark. Click this link to RSVP or download the app: ${url}`; // eslint-disable-line max-len
-  const appText = `${user.firstname} ${user.surname} has invited you to use the Spark app to organise and plan social events. Click this link to download the app: ${url}`; // eslint-disable-line max-len
-  const text = event === undefined ? appText : eventText;
+  console.log('shortURL:', shortURL);
+  console.log('url:', url);
+
+  const text = event === undefined
+    ? `${user.firstname} ${user.surname} has invited you to use the Spark app to organise and plan social events. Click this link to download the app: ${url}` // eslint-disable-line max-len
+    : `${user.firstname} ${user.surname} has invited you to ${event.name} using Spark. Click this link to RSVP or download the app: ${url}`; // eslint-disable-line max-len
 
   const dialogTitle = event === undefined
     ? 'Invite friends to use Spark'

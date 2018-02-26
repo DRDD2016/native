@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 /* eslint-disable*/
 import React, { Component } from 'react';
 import { View, Text, FlatList, Dimensions, Platform, Image } from 'react-native';
@@ -144,19 +144,19 @@ class Albums extends Component {
 }
 
 
-Albums.propTypes = {
-  allEvents: PropTypes.array.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  displaySome: PropTypes.func.isRequired,
-  displayAll: PropTypes.func.isRequired,
-  filterActive: PropTypes.bool.isRequired,
-  selectedFilter: PropTypes.string,
-  filteredEvents: PropTypes.array.isRequired,
-  user_id: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]).isRequired,
-  handleOnPress: PropTypes.func.isRequired
-};
+// Albums.propTypes = {
+//   allEvents: PropTypes.array.isRequired,
+//   isFetching: PropTypes.bool.isRequired,
+//   displaySome: PropTypes.func.isRequired,
+//   displayAll: PropTypes.func.isRequired,
+//   filterActive: PropTypes.bool.isRequired,
+//   selectedFilter: PropTypes.string,
+//   filteredEvents: PropTypes.array.isRequired,
+//   user_id: PropTypes.oneOfType([
+//     PropTypes.string,
+//     PropTypes.number
+//   ]).isRequired,
+//   handleOnPress: PropTypes.func.isRequired
+// };
 
 export default connectAlert(Albums);

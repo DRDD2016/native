@@ -2,7 +2,7 @@ import Config from 'react-native-config';
 import { NavigationActions } from 'react-navigation';
 import { getVotes, clearPollState } from './poll';
 import { hydrateCreateEvent, clearCreateEvent, saveEventDone } from '../create';
-import { fetchingFeedItemSuccess, fetchingFeedItemFailure } from '../feed';
+import { fetchingFeedItemSuccess, fetchingFeedItemFailure, fetchingEventFromFeedItemSuccess, fetchingEventFromFeedItemFailure } from '../feed';
 import { linkDatafromBranch } from '../network';
 import { getCalendar } from '../calendar';
 import { store } from '../../init-store';
@@ -218,16 +218,21 @@ export function getEvent (token, event_id, navigation) {
         console.log('navigated to event so dispatch finished getting link from branch');
         dispatch(linkDatafromBranch());
 
-        dispatch(fetchingFeedItemSuccess());
+        console.log('fetchingFeedItemSuccess in Actions.Event.data');
+
+        dispatch(fetchingFeedItemSuccess()); // not sure if we still need this?
+        dispatch(fetchingEventFromFeedItemSuccess());
       })
       .catch((err) => {
         dispatch(getEventFailure(err.message));
-        dispatch(fetchingFeedItemFailure());
+        dispatch(fetchingFeedItemFailure()); // not sure if we still need this?
+        dispatch(fetchingEventFromFeedItemFailure());
       });
     })
     .catch((err) => {
       dispatch(getEventFailure(err.message));
-      dispatch(fetchingFeedItemFailure());
+      dispatch(fetchingFeedItemFailure()); // not sure if we still need this?
+      dispatch(fetchingEventFromFeedItemFailure());
     });
   };
 }
