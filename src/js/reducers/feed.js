@@ -3,6 +3,7 @@ import * as actions from '../actions/feed';
 const initialState = {
   data: [],
   isFetching: true, // if not Connected or if feed populated
+  isFetchingEvent: false,
   error: undefined,
   selectedFilter: undefined,
   filterActive: false
@@ -28,6 +29,24 @@ export default function feed (state = initialState, action) {
       return {
         ...state,
         isFetching: false
+      };
+
+    case actions.FETCHING_EVENT_FROM_FEEDITEM_REQUEST:
+      return {
+        ...state,
+        isFetchingEvent: true
+      };
+
+    case actions.FETCHING_EVENT_FROM_FEEDITEM_SUCCESS:
+      return {
+        ...state,
+        isFetchingEvent: false
+      };
+
+    case actions.FETCHING_EVENT_FROM_FEEDITEM_FAILURE:
+      return {
+        ...state,
+        isFetchingEvent: false
       };
 
     case actions.GET_FEED_REQUEST:

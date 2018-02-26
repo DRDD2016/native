@@ -7,13 +7,14 @@ import {
   feedItemTouched,
   fetchingFeedItemRequest,
   fetchingFeedItemSuccess,
-  fetchingFeedItemFailure } from '../actions/feed';
+  fetchingFeedItemFailure,
+  fetchingEventFromFeedItemRequest } from '../actions/feed';
 import { getEvent, submitCode } from '../actions/event/data';
 import { deleteIncomingLink, linkDatafromBranch, saveIncomingLinkError } from '../actions/network';
 import filterFeed from '../lib/filter-feed';
 
 
-const mapStateToProps = ({ nav, feed, user, network, create, event }) => {
+const mapStateToProps = ({ nav, feed, user, network, create }) => {
 
   const data = feed.data;
   const filterActive = feed.filterActive;
@@ -29,7 +30,7 @@ const mapStateToProps = ({ nav, feed, user, network, create, event }) => {
     feed: feedData,
     isFetching: feed.isFetching,
     networkIsFetching: network.isFetching,
-    eventIsFetching: event.data.isFetching,
+    isFetchingEvent: feed.isFetchingEvent,
     isFetchingBranch: network.isFetchingBranch,
     push_info: user.push_info,
     eventCode: network.inComingLinkCode,
@@ -43,7 +44,8 @@ const mapDispatchToProps = (dispatch, props) => {
     handleSelection: (event_id, viewed, feed_item_id) => {
       console.log(`feed item touched handleSelection: event_id: ${event_id}, viewed: ${viewed}, id: ${feed_item_id}`);
       // need to tell server this feed item was touched
-      dispatch(fetchingFeedItemRequest());
+      dispatch(fetchingFeedItemRequest()); // do we still need this?
+      dispatch(fetchingEventFromFeedItemRequest());
       AsyncStorage.getItem('spark_token')
       .then((token) => {
         if (token) {

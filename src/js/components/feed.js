@@ -170,9 +170,9 @@ class Feed extends Component {
     const { index } = item;
     const { feed_item, id } = item.item;
     const { user_id, handleSelection } = this.props;
-    console.log('feed_item', feed_item);
+    // console.log('feed_item', feed_item);
 
-    console.log('renderItem', `${index} ${feed_item.name}`);
+    // console.log('renderItem', `${index} ${feed_item.name}`);
 
     return (
       <FeedItem
@@ -218,12 +218,14 @@ class Feed extends Component {
       eventCodeError,
       isFetchingBranch,
       createNewEvent,
-      saveEventStatus } = this.props;
+      saveEventStatus,
+      isFetchingEvent } = this.props;
 
-    const isLoading = isFetchingBranch || isFetching;
+    const isLoading = isFetchingBranch || isFetching || isFetchingEvent;
 
     console.log('isFetchingBranch: ', isFetchingBranch);
     console.log('isFetching: ', isFetching);
+    console.log('isFetchingEvent: ', isFetchingEvent);
     console.log('isLoading: ', isLoading);
     console.log('isConnected: ', isConnected);
     console.log('saveEventStatus: ', saveEventStatus);
