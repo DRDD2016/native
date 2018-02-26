@@ -43,6 +43,7 @@
 		55BF393F1F4050E0000DBF54 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55BF393D1F4050E0000DBF54 /* FirebaseInstanceID.framework */; };
 		55BF39401F4050E0000DBF54 /* FirebaseNanoPB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55BF393E1F4050E0000DBF54 /* FirebaseNanoPB.framework */; };
 		55BF39421F40510A000DBF54 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55BF39411F40510A000DBF54 /* GoogleToolboxForMac.framework */; };
+		55D81A002044B0B800AF7E04 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D819FF2044B0B800AF7E04 /* LaunchScreen.xib */; };
 		55FE454B52CD4C2D8843B8C2 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC10FEAA35E144BAA72C03AE /* EvilIcons.ttf */; };
 		5AFC853895294C44B319F6AA /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 667565734A1048E98139A2BC /* MaterialCommunityIcons.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
@@ -365,6 +366,7 @@
 		55BF393D1F4050E0000DBF54 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseInstanceID.framework; sourceTree = "<group>"; };
 		55BF393E1F4050E0000DBF54 /* FirebaseNanoPB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseNanoPB.framework; sourceTree = "<group>"; };
 		55BF39411F40510A000DBF54 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = "<group>"; };
+		55D819FF2044B0B800AF7E04 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		667565734A1048E98139A2BC /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		6BF49FDCD16E455883BA9976 /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
@@ -521,6 +523,7 @@
 		13B07FAE1A68108700A75B9A /* Spark */ = {
 			isa = PBXGroup;
 			children = (
+				55D819FF2044B0B800AF7E04 /* LaunchScreen.xib */,
 				556FFCD21EC8F2E3005110CF /* Spark.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -1194,6 +1197,7 @@
 				5AFC853895294C44B319F6AA /* MaterialCommunityIcons.ttf in Resources */,
 				3E8C4C91161C42D4B3ECC6CA /* MaterialIcons.ttf in Resources */,
 				E91BA5CA1C434C74B4C720BD /* Octicons.ttf in Resources */,
+				55D81A002044B0B800AF7E04 /* LaunchScreen.xib in Resources */,
 				8C5FA1A849A7407297ED641A /* SimpleLineIcons.ttf in Resources */,
 				FA9BD33EDC2D48918858901B /* Zocial.ttf in Resources */,
 				55747F1B1F14FBC30095827B /* GoogleService-Info.plist in Resources */,
@@ -1338,7 +1342,7 @@
 				CODE_SIGN_ENTITLEMENTS = Spark/Spark.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: David Rickard (N83BEDBXB9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 28;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 26TVQPX48T;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1373,7 +1377,7 @@
 				CODE_SIGN_ENTITLEMENTS = Spark/Spark.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Wanna Enterprises Ltd (26TVQPX48T)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = 26TVQPX48T;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
