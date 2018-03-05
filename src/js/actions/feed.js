@@ -82,6 +82,7 @@ export function feedItemTouched (token, feed_item_id) {
 
   return (dispatch) => {
     dispatch(feedItemTouchedRequest());
+    dispatch(fetchingEventFromFeedItemRequest());
     fetch(`${Config.URI}/users/:user_id/feed`, {
       method: 'PATCH',
       headers: {
@@ -93,10 +94,10 @@ export function feedItemTouched (token, feed_item_id) {
     })
     .then(() => {
       dispatch(feedItemTouchedSuccess(feed_item_id));
-      dispatch(fetchingEventFromFeedItemRequest());
     })
     .catch((error) => {
       dispatch(feedItemTouchedFailure(error.message));
+      dispatch(fetchingEventFromFeedItemFailure());
     });
   };
 }

@@ -57,6 +57,8 @@ class Calendar extends Component {
     console.log('calendar compWillReceiveNextprops', nextProps);
     console.log('calendar this.props.filteredEvents', nextProps.filteredEvents);
     const sortedData = nextProps.filteredEvents.sort((a, b) => {
+      console.log('a:', a);
+      console.log('b:', b);
       return a.when[0] > b.when[0];
     });
     this.createDataSource(sortedData);
