@@ -8,7 +8,7 @@ import { persistStore } from 'redux-persist';
 // import { PersistGate } from 'redux-persist/es/integration/react';
 import { store } from './init-store';
 import { setIsConnected, subscribeToBranch, linkDatafromBranch, saveIncomingLink, saveIncomingLinkError } from './actions/network';
-import Spinner from './components/common/Spinner';
+import SplashView from './components/common/SplashView';
 import AppWithNavigationState from './routes';
 import { AlertProvider } from './components/Alert';
 import PushController from './lib/PushController';
@@ -90,6 +90,10 @@ class App extends Component {
           console.log('nonBranchUrl', nonBranchUrl);
           Answers.logCustom(`Index.js CompDidMount non_branch_link: ${params}`, { additionalData: 'nothing' });
 
+          linkData = 'none'; // replace with last string code
+
+          store.dispatch(saveIncomingLink(linkData));
+          store.dispatch(linkDatafromBranch());
           // Route non-Branch URL if appropriate.
           return;
         }
@@ -174,8 +178,8 @@ class App extends Component {
 
   render () {
     console.log('render index', this.state);
-    if (!this.state) return <Spinner />;
-    if (!this.state.rehydrated) return <Spinner />;
+    if (!this.state) return <SplashView />;
+    if (!this.state.rehydrated) return <SplashView />;
     console.log('statecheckdone');
 
     return (
