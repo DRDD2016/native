@@ -231,14 +231,50 @@ export async function subscribeToBranchLinks (navigation) {
 
     console.log('Branch params: ', JSON.stringify(params));
 
+    // new
+
     if (error) {
       // there was an error. this is a String
       console.info('Error from Branch: ', error);
       linkData = 'none';
       store.dispatch(saveIncomingLinkError(error));
       store.dispatch(linkDatafromBranch());
+      Answers.logCustom(`branchLink.js error from Branch: ${error}`, { additionalData: 'nothing' });
       // return linkData;
     }
+
+    // params will never be null if error is null
+
+    if (params['+non_branch_link']) {
+      const nonBranchUrl = params['+non_branch_link'];
+      console.log('nonBranchUrl', nonBranchUrl);
+      Answers.logCustom(`branchLink.js non_branch_link: ${params}`, { additionalData: 'nothing' });
+
+      linkData = 'none'; // replace with last string code
+
+      store.dispatch(saveIncomingLink(linkData));
+      store.dispatch(linkDatafromBranch());
+      // Route non-Branch URL if appropriate.
+      return;
+    }
+
+    if (!params['+clicked_branch_link']) {
+      // Indicates initialization success and some other conditions.
+      // No link was opened.
+
+      linkData = 'none';
+      console.log('No link opened, linkData: ', linkData);
+      store.dispatch(saveIncomingLink(linkData));
+      store.dispatch(linkDatafromBranch());
+
+      Answers.logCustom('branchLink.js !params +clicked_branch_link', { additionalData: 'nothing' });
+
+      return;
+    }
+
+    // A Branch link was opened.
+    // Route link based on data in params.
+
     if (params.eventCode) {
 
       linkData = params.eventCode;
@@ -251,8 +287,10 @@ export async function subscribeToBranchLinks (navigation) {
           const code = linkData;
           store.dispatch(saveIncomingLink(linkData));
           store.dispatch(submitCode(token, code, navigation));
-          // store.dispatch(linkDatafromBranch());
+          // store.dispatch(linkDatafromBranch()); // dont do this until loading finished on Feed
           // return linkData;
+          Answers.logCustom(`branchLink.js branch eventCode: ${params}`, { additionalData: 'nothing' });
+
         }
       })
       .catch(e => console.error(e));
@@ -262,10 +300,10 @@ export async function subscribeToBranchLinks (navigation) {
       console.log('saving linkData', linkData);
       store.dispatch(saveIncomingLink(linkData));
       store.dispatch(linkDatafromBranch());
+      Answers.logCustom('branchLink.js branch else linkcode none', { additionalData: 'nothing' });
+
       // return linkData;
     }
-
-    // can we add call to Submit_Code_directly here? remove from Feed?
 
   });
 

@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { Image, View, AsyncStorage } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import Fabric from 'react-native-fabric';
 import { NavigationActions } from 'react-navigation';
 import initSocket from '../../socket-router';
-import Spinner from '../common/Spinner';
+import SplashView from '../common/SplashView';
 import { store } from '../../init-store';
 
 const { Answers } = Fabric;
 
-const logo = require('../../../img/sparkLoginLogo.png');
 
 export default class Splash extends Component {
 
@@ -90,23 +89,12 @@ export default class Splash extends Component {
 
   render () {
     console.log('splash render');
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
-        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }} />
-        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-          <Image style={{ width: 300, height: 100 }} source={ logo } />
-        </View>
-        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-          {
-            this.props.isFetching && <Spinner />
-          }
-          {
-            !this.props.isFetching && <Spinner />
-          }
-        </View>
-        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }} />
 
-      </View>
+
+    return (
+
+      <SplashView />
+
     );
   }
 }
