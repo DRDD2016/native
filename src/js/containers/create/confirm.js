@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch) => {
       const sortedWhen = iSODates.sort((a, b) => {
         return (a) > (b);
       });
-      // console.log('sortedWhen', sortedWhen);
+      console.log('sortedWhen', sortedWhen);
 
       const data = Object.assign({}, event,
         { when: sortedWhen },

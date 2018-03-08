@@ -1,7 +1,7 @@
 import getEndTime from './get-end-time';
 
 export default function getPastEvents (event) {
-
+  
   if (event.when[0].date === '') {
     return false;
   }

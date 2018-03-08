@@ -670,6 +670,11 @@ const styles = {
     marginRight: 5,
     marginBottom: 5
   },
+  cardBottomBorder: {
+    borderBottomWidth: 1,
+    borderRadius: 2,
+    borderColor: colours.lightgray
+  },
   newCardStyle: {
     backgroundColor: colours.white,
     borderBottomWidth: 0.5,
@@ -683,14 +688,6 @@ const styles = {
     marginLeft: 5,
     marginRight: 5,
     marginBottom: 5
-  },
-  cardSectionCalendar: {
-    padding: 5,
-    backgroundColor: colours.white,
-    justifyContent: 'flex-start',
-    flexDirection: 'column',
-    borderColor: colours.main,
-    position: 'relative'
   },
   cardSectionInvite: {
     borderBottomWidth: 1,

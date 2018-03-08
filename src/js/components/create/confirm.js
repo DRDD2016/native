@@ -50,7 +50,9 @@ class Confirm extends Component {
     console.log('confirm sortedDates: ', sortedDates);
 
     if (isFetching) {
-      return <Spinner size="large" />;
+      return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}><Spinner size="large" /></View>
+      );
     }
     return (
       <View

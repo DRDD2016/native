@@ -77,8 +77,8 @@ class Calendar extends Component {
 
   renderItem = (item) => {
 
-    const { event_id, host_user_id, status, name, what, where, when } = item.item;
-    const { user_id, handleOnPress } = this.props;
+    const { event_id, host_user_id, status, name, what, where, when, cancelled, is_poll, host_firstname, host_photo_url } = item.item;
+    const { user_id, handleOnPress, feed } = this.props;
 
     return (
 
@@ -92,6 +92,10 @@ class Calendar extends Component {
           when={ when }
           event_id={ event_id }
           handleOnPress={ handleOnPress }
+          isCancelled={ cancelled }
+          is_poll={ is_poll }
+          host_firstname={host_firstname}
+          host_photo_url={host_photo_url}
         />
 
     );
