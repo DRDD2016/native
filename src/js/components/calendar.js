@@ -42,10 +42,8 @@ class Calendar extends Component {
   componentWillMount () {
     console.log('calendar compWillMount', this.props);
     console.log('calendar this.props.filteredEvents', this.props.filteredEvents);
-    const sortedData = this.props.filteredEvents.sort((a, b) => {
-      return a.when[0] > b.when[0];
-    });
-    this.createDataSource(sortedData);
+    const data = this.props.filteredEvents;
+    this.createDataSource(data);
 
   }
 
@@ -56,12 +54,8 @@ class Calendar extends Component {
   componentWillReceiveProps (nextProps) {
     console.log('calendar compWillReceiveNextprops', nextProps);
     console.log('calendar this.props.filteredEvents', nextProps.filteredEvents);
-    const sortedData = nextProps.filteredEvents.sort((a, b) => {
-      console.log('a:', a);
-      console.log('b:', b);
-      return a.when[0] > b.when[0];
-    });
-    this.createDataSource(sortedData);
+    const data = this.props.filteredEvents;
+    this.createDataSource(data);
 
   }
 
@@ -77,7 +71,7 @@ class Calendar extends Component {
 
   renderItem = (item) => {
 
-    const { event_id, host_user_id, status, name, what, where, when, cancelled, is_poll, host_firstname, host_photo_url } = item.item;
+    const { event_id, host_user_id, status, name, what, where, when, cancelled, is_poll, host_firstname, host_photo_url, rsvps } = item.item;
     const { user_id, handleOnPress, feed } = this.props;
 
     return (
@@ -96,6 +90,7 @@ class Calendar extends Component {
           is_poll={ is_poll }
           host_firstname={host_firstname}
           host_photo_url={host_photo_url}
+          rsvps={rsvps}
         />
 
     );

@@ -25,13 +25,25 @@ class CalendarItem extends PureComponent {
   render () {
     console.log('calendar-item props:', this.props);
 
-    const { name, where, when, rsvpStatus, userIsHost, isCancelled, host_firstname, host_photo_url } = this.props;
+    const { name, where, when, rsvpStatus, userIsHost, isCancelled, host_firstname, host_photo_url, rsvps } = this.props;
     // coverPhoto to be added as prop when used
-    console.log('where:', where);
-    console.log('when:', when);
-    console.log('photo_url:', host_photo_url);
+    // console.log('where:', where);
+    // console.log('when:', when);
+    // console.log('photo_url:', host_photo_url);
     console.log('host_firstname:', host_firstname);
-    console.log('name:', name);
+    // console.log('name:', name);
+
+    console.log('rsvps:', JSON.stringify(rsvps));
+
+    const array = rsvps;
+    const rsvpsObject = Object.assign({}, ...array);
+
+    const going = !rsvpsObject.going ? 0 : rsvpsObject.going.length;
+    const maybe = !rsvpsObject.maybe ? 0 : rsvpsObject.maybe.length;
+    // const not_going = !rsvpsObject.not_going ? 0 : rsvpsObject.not_going.length;
+    // const not_responded = !rsvpsObject.not_responded ? 0 : rsvpsObject.not_responded.length;
+    // console.log('not_going:', not_going);
+    // console.log('not_responded:', not_responded);
 
     let whenText = 'TBC';
 
@@ -248,13 +260,19 @@ class CalendarItem extends PureComponent {
                 borderColor: colours.lightgray,
                 paddingRight: 2 }}
             >
-
-              <View style={{ flex: 1, alignItems: 'center' }}>
-                <Text style={{ fontSize: 12, color: colours.green }}>X</Text>
-                <Text style={{ fontSize: 12, color: colours.green }}>going</Text>
-                <Text style={{ fontSize: 12, color: colours.orange }}>X</Text>
-                <Text style={{ fontSize: 12, color: colours.orange }}>maybe</Text>
-              </View>
+              {
+                (going + maybe === 0) &&
+                <View style={{ flex: 1, alignItems: 'center' }} />
+              }
+              {
+                (going + maybe !== 0) &&
+                <View style={{ flex: 1, alignItems: 'center' }}>
+                  <Text style={{ fontSize: 12, color: colours.green }}>{!going ? '-' : going}</Text>
+                  <Text style={{ fontSize: 12, color: colours.green }}>going</Text>
+                  <Text style={{ fontSize: 12, color: colours.orange }}>{!maybe ? '-' : maybe}</Text>
+                  <Text style={{ fontSize: 12, color: colours.orange }}>maybe</Text>
+                </View>
+              }
 
               <View
                 style={{
