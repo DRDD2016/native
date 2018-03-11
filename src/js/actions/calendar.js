@@ -21,6 +21,47 @@ export const getCalendarFailure = error => ({
   error
 });
 
+// export function getCalendarHostUserData (hostIDs) {
+//
+//   return (dispatch) => {
+//
+//     dispatch(getCalendarHostUserDataRequest());
+//     console.log('getArrayOfUsersByIdArray action for ids: ', hostIDs);
+//
+//     fetch(`${Config.URI}/users/${user_id}`, {
+//       method: 'GET',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         Accept: 'application/json',
+//         authorization: token,
+//         'Cache-Control': 'no-cache',
+//         Pragma: 'no-cache'
+//       }
+//     })
+//     .then((res) => {
+//       res.json()
+//       .then((data) => {
+//         console.log('getUser response data:', data);
+//         const eventData = {
+//           firstname: data.firstname,
+//           surname: data.surname,
+//           photo_url: data.photo_url
+//         };
+//         dispatch(getUserByIdSuccess(eventData));
+//
+//       })
+//       .catch((err) => {
+//         console.log('caught getUser error: ', err);
+//         dispatch(getUserByIdFailure(err.message));
+//       });
+//     })
+//     .catch((err) => {
+//       console.log('caught getUser error: ', err);
+//       dispatch(getUserByIdFailure(err.message));
+//     });
+//   }
+// }
+
 export function getCalendar (token) {
   return (dispatch) => {
     dispatch(getCalendarRequest());
@@ -39,6 +80,10 @@ export function getCalendar (token) {
       .then((data) => {
         if (data) {
           dispatch(getCalendarSuccess(data));
+          // const hostIDs = data.map(event => event.host_user_id);
+          // dispatch(getCalendarHostUserData(hostIDs));
+
+
         }
       })
       .catch(err => dispatch(getCalendarFailure(err.message)));

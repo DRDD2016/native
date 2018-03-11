@@ -8,12 +8,14 @@ import getFutureEvents from '../lib/get-future-events';
 
 
 const mapStateToProps = ({ nav, calendar, user, network }) => {
+  
   const futureEvents = calendar.data.filter(getFutureEvents);
   const data = calendar.data;
   const filterActive = calendar.filterActive;
   const selectedFilter = calendar.selectedFilter;
 
   const filteredEvents = filterFeed(futureEvents, filterActive, selectedFilter);
+
   return {
     nav,
     allEvents: data,

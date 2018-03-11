@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../lib/format-date';
 import CardSection from './common/CardSection';
 import Card from './common/Card';
+import StatusFlag from './general/statusFlag';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 // import ProgressiveImage from './common/ProgressiveImage';
@@ -62,72 +63,7 @@ class FeedItem extends PureComponent {
 
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
 
-              {
-                isCancelled &&
-                <View
-                  style={{
-                    position: 'absolute',
-                    left: -4,
-                    top: -9,
-                    zIndex: 1,
-                    padding: 2,
-                    backgroundColor: colours.red,
-                    borderBottomRightRadius: 5,
-                    borderTopRightRadius: 5
-                  }}
-                >
-                  <Text
-                    style={[
-                      styles.title6, {
-                        color: colours.white
-                      }]}
-                  >Cancelled</Text>
-                </View>
-              }
-              {
-                !isCancelled && is_poll &&
-                <View
-                  style={{
-                    position: 'absolute',
-                    left: -4,
-                    top: -9,
-                    zIndex: 1,
-                    padding: 2,
-                    backgroundColor: colours.purple,
-                    borderBottomRightRadius: 5,
-                    borderTopRightRadius: 5
-                  }}
-                >
-                  <Text
-                    style={[
-                      styles.title6, {
-                        color: colours.white
-                      }]}
-                  >Polling</Text>
-                </View>
-              }
-              {
-                !isCancelled && !is_poll &&
-                <View
-                  style={{
-                    position: 'absolute',
-                    left: -4,
-                    top: -9,
-                    zIndex: 1,
-                    padding: 2,
-                    backgroundColor: colours.blue,
-                    borderBottomRightRadius: 5,
-                    borderTopRightRadius: 5
-                  }}
-                >
-                  <Text
-                    style={[
-                      styles.title6, {
-                        color: colours.white
-                      }]}
-                  >Confirmed</Text>
-                </View>
-              }
+              <StatusFlag isCancelled={isCancelled} is_poll={is_poll} />
 
               <Image
                 source={{ uri: photo_url }}

@@ -8,6 +8,7 @@ import getEndTime from './get-end-time';
  */
 
 export default function getFutureEvents (event) {
+
   if (event.when[0] === '') {
     return false;
   }

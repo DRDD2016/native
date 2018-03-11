@@ -78,15 +78,7 @@ class Albums extends Component {
     return (
 
         <CalendarItem
-          key={ event_id }
-          userIsHost={ host_user_id === user_id }
-          rsvpStatus={ status }
-          name={ name }
-          what={ what }
-          where={ where }
-          when={ when }
-          event_id={ event_id }
-          handleOnPress={ handleOnPress }
+
         />
 
     );
