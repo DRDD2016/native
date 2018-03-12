@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, Modal, TouchableHighlight, FlatList, Image, Platform } from 'react-native';
 import Fabric from 'react-native-fabric';
 import { Header } from 'react-navigation';
-// import { OptimizedFlatList } from 'react-native-optimized-flatlist';
-// import { slowlog } from 'react-native-slowlog';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
@@ -45,8 +43,6 @@ class Feed extends Component {
   constructor (props) {
     super(props);
 
-    // slowlog(this, /.*/);
-
     this.state = {
       isModalVisible: false
     };
@@ -56,6 +52,8 @@ class Feed extends Component {
   componentWillMount () {
 
     console.log('FeedWillMountprops: ', this.props);
+    const timestamp = new Date();
+    console.log('Feed WillMount:', timestamp.getTime());
 
     const { handleSubmitCode, eventCode } = this.props;
 
@@ -76,27 +74,12 @@ class Feed extends Component {
 
     }
 
-
-    // subscribeToBranchLinks(this.props.navigation);
-
-
-    // if (this.props.user.push_info) {
-    //   this.props.handleSavePush(this.props.push_info);
-    // }
-
-    // initSocket();
-
-    // setTimeout(() => {
-
-      // code here will execute after time limit?
-
-    // }, 3000);
-
   }
 
   componentDidMount () {
     Answers.logCustom('Feed.js Mounted', { additionalData: 'nothing' });
-    console.log('FeedDidMount');
+    const timestamp = new Date();
+    console.log('FeedDidMount:', timestamp.getTime());
   }
 
   componentWillReceiveProps (nextProps) {
@@ -104,6 +87,8 @@ class Feed extends Component {
     console.log('Feed Receives NextProps');
     console.log('thisProps', this.props);
     console.log('NextProps', nextProps);
+    const timestamp = new Date();
+    console.log('Feed receivesProps:', timestamp.getTime());
 
     const { handleSubmitCode } = this.props;
     const { eventCode, saveEventStatus } = nextProps;
@@ -139,6 +124,7 @@ class Feed extends Component {
     const newData = [].concat(feed).reverse();
     this.createDataSource(newData);
 
+
   }
 
   componentDidUpdate () {
@@ -170,9 +156,7 @@ class Feed extends Component {
     const { index } = item;
     const { feed_item, id } = item.item;
     const { user_id, handleSelection } = this.props;
-    // console.log('feed_item', feed_item);
-
-    // console.log('renderItem', `${index} ${feed_item.name}`);
+    console.log('feed_item', feed_item);
 
     return (
       <FeedItem
@@ -204,7 +188,8 @@ class Feed extends Component {
 
   render () {
 
-    console.log('renderFeed');
+    const timestamp = new Date();
+    console.log('Feed render:', timestamp.getTime());
 
     const {
       allEvents,
@@ -458,7 +443,7 @@ class Feed extends Component {
               <FlatList
                 data={this.dataSource}
                 renderItem={this.renderItem}
-                keyExtractor={item => item.id}
+                keyExtractor={item => `${item.id}${Math.random()}`}
               />
             }
 

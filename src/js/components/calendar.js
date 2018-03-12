@@ -54,8 +54,13 @@ class Calendar extends Component {
   componentWillReceiveProps (nextProps) {
     console.log('calendar compWillReceiveNextprops', nextProps);
     console.log('calendar this.props.filteredEvents', nextProps.filteredEvents);
-    const data = this.props.filteredEvents;
+    let timestamp = new Date();
+    console.log('cal receivesProps:', timestamp.getTime());
+
+    const data = nextProps.filteredEvents;
     this.createDataSource(data);
+    timestamp = new Date();
+    console.log('cal receivesProps dataSource created:', timestamp.getTime());
 
   }
 
@@ -73,11 +78,12 @@ class Calendar extends Component {
 
     const { event_id, host_user_id, status, name, what, where, when, cancelled, is_poll, host_firstname, host_photo_url, rsvps } = item.item;
     const { user_id, handleOnPress, feed } = this.props;
+    console.log('event_id', event_id);
 
     return (
 
         <CalendarItem
-          key={ event_id }
+          key={ `${event_id}${Math.random()}` }
           userIsHost={ host_user_id === user_id }
           rsvpStatus={ status }
           name={ name }
@@ -98,7 +104,8 @@ class Calendar extends Component {
 
   render () {
 
-    console.log('renderCalendar');
+    timestamp = new Date();
+    console.log('renderCalendar:', timestamp.getTime());
 
     const { allEvents, isFetching, displaySome, displayAll, filterActive, selectedFilter, user_id, isConnected } = this.props;
 

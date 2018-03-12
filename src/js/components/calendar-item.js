@@ -25,7 +25,7 @@ class CalendarItem extends PureComponent {
   render () {
     console.log('calendar-item props:', this.props);
 
-    const { name, where, when, rsvpStatus, userIsHost, isCancelled, host_firstname, host_photo_url, rsvps } = this.props;
+    const { key, name, where, when, rsvpStatus, userIsHost, isCancelled, host_firstname, host_photo_url, rsvps } = this.props;
     // coverPhoto to be added as prop when used
     // console.log('where:', where);
     // console.log('when:', when);
@@ -34,6 +34,7 @@ class CalendarItem extends PureComponent {
     // console.log('name:', name);
 
     console.log('rsvps:', JSON.stringify(rsvps));
+    console.log('key cal item:', key);
 
     const array = rsvps;
     const rsvpsObject = Object.assign({}, ...array);
