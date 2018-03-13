@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Modal, TouchableHighlight, FlatList, Image, Platform } from 'react-native';
+import { View, Text, TouchableHighlight, FlatList, Image, Platform } from 'react-native';
 import Fabric from 'react-native-fabric';
 import _ from 'lodash';
 import { Header } from 'react-navigation';
@@ -14,6 +14,7 @@ import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
+import SpinnerModal from './common/SpinnerModal';
 import { store } from '../init-store';
 import { getFeedFailure } from '../actions/feed';
 
@@ -52,7 +53,7 @@ class Feed extends Component {
 
   componentWillMount () {
 
-    // console.log('FeedWillMountprops: ', this.props);
+    console.log('FeedWillMountprops: ', this.props);
     const timestamp = new Date();
     console.log('Feed WillMount:', timestamp.getTime());
 
@@ -224,90 +225,38 @@ class Feed extends Component {
     console.log('isFetching: ', isFetching);
     console.log('isFetchingEvent: ', isFetchingEvent);
     console.log('isLoading: ', isLoading);
-    console.log('isConnected: ', isConnected);
+    console.log('feed isConnected: ', isConnected);
     console.log('saveEventStatus: ', saveEventStatus);
 
     if (saveEventStatus === 'Started') {
       // return this if waiting for Branch, etc
       console.log('saveEventStatus: ', 'Started');
+      console.log('visible saveEventStatus Started', isLoading);
 
       return (
         <View style={{ flex: 1 }}>
-          <Modal
-            transparent animationType={'slide'} visible={isLoading}
-            onRequestClose={() => {
-              this.setState({
-                isModalVisible: false
-              });
-            }}
-          >
-            {
-              <View style={styles.modalWrapper}>
-
-                {
-                  <View style={styles.modalConfirm}>
-
-                    <Text style={[styles.msg1, { flex: 1 }]}>Sharing invite</Text>
-                    <Text style={[styles.msg2, { flex: 1 }]}>please wait...</Text>
-                    <View style={{ flex: 1 }}>
-                      <Spinner size="large" />
-                    </View>
-                    <View style={{ flex: 1 }} />
-
-                  </View>
-                }
-
-              </View>
-            }
-
-          </Modal>
+          <SpinnerModal
+            visible={isLoading}
+            type={ 'share_invite' }
+            isConnected={isConnected}
+            onClose={ () => { this.setState({ isModalVisible: false }); }}
+          />
         </View>
       );
     }
 
     if (isLoading) {
       // return this if waiting for Branch, etc
-
-      console.log('isLoading Spinner: ', isLoading);
+      console.log('visible isLoading', isLoading);
 
       return (
         <View style={{ flex: 1 }}>
-          <Modal
-            transparent animationType={'slide'} visible={isLoading}
-            onRequestClose={() => {
-              this.setState({
-                isModalVisible: false
-              });
-            }}
-          >
-            {
-              <View style={styles.modalWrapper}>
-
-                {
-                  <View style={styles.modalConfirm}>
-
-                    <Text style={[styles.msg1, { flex: 1 }]}>Loading</Text>
-                    <Text style={[styles.msg2, { flex: 1 }]}>please wait...</Text>
-                    <View style={{ flex: 1 }}>
-                      <Spinner size="large" />
-                    </View>
-                    {!isConnected && <Text style={[styles.msg2, { flex: 1 }]}>poor internet connection</Text>}
-                    {
-                      // isFetchingBranch && <Text style={[styles.msg2, { flex: 1 }]}>{`isFetchingBranch: ${isFetchingBranch}`}</Text>
-                    }
-                    {
-                      // isFetching && <Text style={[styles.msg2, { flex: 1 }]}>{`isFetching: ${isFetching}`}</Text>
-                    }
-
-                    <View style={{ flex: 1 }} />
-
-                  </View>
-                }
-
-              </View>
-            }
-
-          </Modal>
+          <SpinnerModal
+            visible={isLoading}
+            type={ 'loading' }
+            isConnected={isConnected}
+            onClose={ () => { this.setState({ isModalVisible: false }); }}
+          />
         </View>
       );
     }
@@ -317,42 +266,17 @@ class Feed extends Component {
       // return this if error for Branch, etc
       return (
         <View style={{ flex: 1 }}>
-          <Modal transparent animationType={'slide'} visible={this.state.isModalVisible} onRequestClose={() => { alert('Modal has been closed.'); }}>
-            {
-              <View style={styles.modalWrapper}>
+          {
+            eventCodeError &&
+            <SpinnerModal
+              visible={this.state.isModalVisible}
+              type={ 'event_code_error' }
+              isConnected={isConnected}
+              onClose={ () => { this.setState({ isModalVisible: false }); }}
+              eventCodeError={eventCodeError}
+            />
 
-                {
-                  eventCodeError &&
-                  <View style={styles.modalConfirm}>
-                    <Text style={[styles.msg1, { flex: 1 }]}>Poor connectivity</Text>
-                    <Text style={[styles.msg2, { flex: 1 }]}>please check your internet connection</Text>
-                    <Text style={[styles.msg2, { flex: 1 }]}>{`eventCodeError: ${eventCodeError}`}</Text>
-                    <View style={{ flex: 1 }} />
-
-                    <View style={{ flex: 1 }}>
-                      <TouchableHighlight
-                        style={ [styles.confirmButton, { marginBottom: 20, marginTop: 20 }] }
-                        onPress={ () => {
-                          this.setState({
-                            isModalVisible: false
-                          });
-
-                          this.props.saveIncomingLinkError(undefined);
-                          // and dispatch action to remove event code error?
-
-                        }}
-                      >
-                        <Text style={styles.confirmButtonText}>OK</Text>
-                      </TouchableHighlight>
-                    </View>
-
-                  </View>
-                }
-              </View>
-            }
-
-          </Modal>
-
+          }
         </View>
       );
     }

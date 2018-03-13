@@ -12,6 +12,7 @@ import Spinner from './common/Spinner';
 import ImageHeader from './common/ImageHeader';
 import HeaderBack from './common/FeedHeaderBackground';
 import FeedHeader from './common/FeedHeader';
+import SpinnerModal from './common/SpinnerModal';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
@@ -38,6 +39,15 @@ class Calendar extends Component {
       <BurgerIcon />
     </ButtonHeader>,
   });
+
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      isModalVisible: false
+    };
+
+  }
 
   componentWillMount () {
     // console.log('calendar compWillMount', this.props);
@@ -108,6 +118,44 @@ class Calendar extends Component {
     console.log('renderCalendar:', timestamp.getTime());
 
     const { allEvents, isFetching, displaySome, displayAll, filterActive, selectedFilter, user_id, isConnected } = this.props;
+
+    const isLoading = isFetching;
+
+    if (isLoading) {
+      // return this if waiting for Branch, etc
+      console.log('cal visible isLoading', isLoading);
+
+      return (
+        <View style={{ flex: 1 }}>
+          <SpinnerModal
+            visible={isLoading}
+            type={ 'loading' }
+            isConnected={isConnected}
+            onClose={ () => { this.setState({ isModalVisible: false }); }}
+          />
+        </View>
+      );
+    }
+
+    if (this.state.isModalVisible) {
+      console.log('cal isModalVisible Spinner: ', this.state.isModalVisible);
+      // return this if error for Branch, etc
+      return (
+        <View style={{ flex: 1 }}>
+          {
+            eventCodeError &&
+            <SpinnerModal
+              visible={this.state.isModalVisible}
+              type={ 'event_code_error' }
+              isConnected={isConnected}
+              onClose={ () => { this.setState({ isModalVisible: false }); }}
+              eventCodeError={eventCodeError}
+            />
+
+          }
+        </View>
+      );
+    }
 
     return (
       <View style={{ flex: 1 }}>
