@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Modal, TouchableHighlight, FlatList, Image, Platform } from 'react-native';
 import Fabric from 'react-native-fabric';
+import _ from 'lodash';
 import { Header } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeedItem from './feed-item';
@@ -51,21 +52,21 @@ class Feed extends Component {
 
   componentWillMount () {
 
-    console.log('FeedWillMountprops: ', this.props);
+    // console.log('FeedWillMountprops: ', this.props);
     const timestamp = new Date();
     console.log('Feed WillMount:', timestamp.getTime());
 
     const { handleSubmitCode, eventCode } = this.props;
 
-    console.log('eventCode FeedMount:', eventCode);
+    // console.log('eventCode FeedMount:', eventCode);
     if (eventCode) {
       if (eventCode !== 'none') {
-        console.log('submittingEventCode from Feed');
+        // console.log('submittingEventCode from Feed');
         handleSubmitCode(eventCode);
       }
     }
 
-    console.log('Mount this.props.eventCodeError: ', this.props.eventCodeError);
+    // console.log('Mount this.props.eventCodeError: ', this.props.eventCodeError);
 
     if (this.props.eventCodeError) {
       console.log('dispatching getFeedFailure: ');
@@ -122,7 +123,17 @@ class Feed extends Component {
 
     const { feed } = nextProps;
     const newData = [].concat(feed).reverse();
-    this.createDataSource(newData);
+    console.log('newData', newData);
+
+    const uniqueFeedData = _.uniqBy(newData, 'feed_item.feed_tag');
+      // const itemTag = `Tag_${item.event_id}_${item.subject_user_id}`;
+      // console.log('itemTag:', itemTag);
+      // console.log('index:', index);
+      // console.log('self:', self);
+
+    console.log('uniqueFeedData', uniqueFeedData);
+
+    this.createDataSource(uniqueFeedData);
 
 
   }
@@ -182,6 +193,7 @@ class Feed extends Component {
         handleSelection={ handleSelection }
         feed_item_id={ id }
         action={ feed_item.action }
+        feed_tag={ feed_item.feed_tag }
       />
     );
   }

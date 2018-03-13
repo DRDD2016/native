@@ -40,8 +40,8 @@ class Calendar extends Component {
   });
 
   componentWillMount () {
-    console.log('calendar compWillMount', this.props);
-    console.log('calendar this.props.filteredEvents', this.props.filteredEvents);
+    // console.log('calendar compWillMount', this.props);
+    // console.log('calendar this.props.filteredEvents', this.props.filteredEvents);
     const data = this.props.filteredEvents;
     this.createDataSource(data);
 
@@ -52,8 +52,8 @@ class Calendar extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log('calendar compWillReceiveNextprops', nextProps);
-    console.log('calendar this.props.filteredEvents', nextProps.filteredEvents);
+    // console.log('calendar compWillReceiveNextprops', nextProps);
+    // console.log('calendar this.props.filteredEvents', nextProps.filteredEvents);
     let timestamp = new Date();
     console.log('cal receivesProps:', timestamp.getTime());
 
@@ -78,12 +78,12 @@ class Calendar extends Component {
 
     const { event_id, host_user_id, status, name, what, where, when, cancelled, is_poll, host_firstname, host_photo_url, rsvps } = item.item;
     const { user_id, handleOnPress, feed } = this.props;
-    console.log('event_id', event_id);
+    // console.log('event_id', event_id);
 
     return (
 
         <CalendarItem
-          key={ `${event_id}${Math.random()}` }
+          oldKey={ `${event_id}${Math.random()}` }
           userIsHost={ host_user_id === user_id }
           rsvpStatus={ status }
           name={ name }

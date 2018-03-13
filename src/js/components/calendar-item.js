@@ -23,18 +23,9 @@ class CalendarItem extends PureComponent {
   };
 
   render () {
-    console.log('calendar-item props:', this.props);
+    // console.log('calendar-item props:', this.props);
 
-    const { key, name, where, when, rsvpStatus, userIsHost, isCancelled, host_firstname, host_photo_url, rsvps } = this.props;
-    // coverPhoto to be added as prop when used
-    // console.log('where:', where);
-    // console.log('when:', when);
-    // console.log('photo_url:', host_photo_url);
-    console.log('host_firstname:', host_firstname);
-    // console.log('name:', name);
-
-    console.log('rsvps:', JSON.stringify(rsvps));
-    console.log('key cal item:', key);
+    const { name, where, when, rsvpStatus, userIsHost, isCancelled, host_photo_url, rsvps } = this.props;
 
     const array = rsvps;
     const rsvpsObject = Object.assign({}, ...array);
@@ -111,8 +102,9 @@ class CalendarItem extends PureComponent {
               style={{ flex: 4,
                 paddingBottom: 5,
                 marginTop: 5,
-                marginLeft: 5,
-                paddingLeft: 10,
+                marginLeft: 2,
+                marginRight: 2,
+                paddingLeft: 5,
                 alignItems: 'flex-start',
                 justifyContent: 'center',
                 borderBottomWidth: 1,
@@ -251,9 +243,10 @@ class CalendarItem extends PureComponent {
 
             <View
               style={{
-                flex: 2,
+                flex: 2.5,
                 flexDirection: 'row',
                 justifyContent: 'space-between',
+                alignItems: 'center',
                 paddingLeft: 7,
                 paddingBottom: 5,
                 marginTop: 5,
@@ -263,13 +256,18 @@ class CalendarItem extends PureComponent {
             >
               {
                 (going + maybe === 0) &&
-                <View style={{ flex: 1, alignItems: 'center' }} />
+                <View style={{ flex: 1, marginHorizontal: 2, alignItems: 'center' }} />
               }
               {
-                (going + maybe !== 0) &&
-                <View style={{ flex: 1, alignItems: 'center' }}>
+                (going !== 0) &&
+                <View style={{ flex: 1, marginHorizontal: 2, alignItems: 'center' }}>
                   <Text style={{ fontSize: 12, color: colours.green }}>{!going ? '-' : going}</Text>
                   <Text style={{ fontSize: 12, color: colours.green }}>going</Text>
+                </View>
+              }
+              {
+                (maybe !== 0) &&
+                <View style={{ flex: 1, marginHorizontal: 2, alignItems: 'center' }}>
                   <Text style={{ fontSize: 12, color: colours.orange }}>{!maybe ? '-' : maybe}</Text>
                   <Text style={{ fontSize: 12, color: colours.orange }}>maybe</Text>
                 </View>
