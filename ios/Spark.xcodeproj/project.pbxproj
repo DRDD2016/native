@@ -1366,6 +1366,7 @@
 				PRODUCT_NAME = Spark;
 				PROVISIONING_PROFILE = "5bf3e239-75cb-4104-923a-5892cd03a8ee";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development net.wannaenterprises.Spark";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1399,6 +1400,7 @@
 				PRODUCT_NAME = Spark;
 				PROVISIONING_PROFILE = "96738b81-4f4a-4c39-8b4b-19cabb93740e";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore net.wannaenterprises.Spark";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
