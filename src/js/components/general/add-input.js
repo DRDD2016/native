@@ -9,10 +9,10 @@ const AddInput = ({ data, handler, testDescription, colour }) => {
 
   return (
     <View style={{ flexDirection: 'row', flex: 1 }}>
-      { (data.length >= 3) &&
+      { (data.length >= 4) &&
         <View />
       }
-      { (data.length < 3) &&
+      { (data.length < 4) &&
         <View style={[styles.row, { alignItems: 'center', justifyContent: 'center', marginTop: 0, marginBottom: 0, flex: 1 }]}>
           <View style={{ flex: 1 }} />
 

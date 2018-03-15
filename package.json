@@ -25,7 +25,6 @@
     "react": "^16.0.0-alpha.6",
     "react-native": "^0.44.3",
     "react-native-branch": "^2.0.0-beta.6",
-    "react-native-cached-image": "^1.4.3",
     "react-native-config": "^0.3.1",
     "react-native-datepicker": "^1.4.4",
     "react-native-dropdownalert": "^2.8.0",

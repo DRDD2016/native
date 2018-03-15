@@ -18,7 +18,8 @@ const styles = {
     backgroundColor: colours.verylightgray,
     margin: 20,
     padding: 10,
-    alignItems: 'center'
+    alignItems: 'center',
+    borderRadius: 30
   },
   headerBuffer: {
     flex: Platform.OS === 'ios' ? 1 : null,
@@ -661,10 +662,6 @@ const styles = {
     borderBottomWidth: 0.5,
     borderRadius: 2,
     borderColor: colours.lightgray,
-    shadowColor: colours.gray,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
     elevation: 1,
     marginLeft: 5,
     marginRight: 5,
@@ -680,11 +677,6 @@ const styles = {
     borderBottomWidth: 0.5,
     borderRadius: 2,
     borderColor: colours.lightgray,
-    shadowColor: colours.gray,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
     marginLeft: 5,
     marginRight: 5,
     marginBottom: 5
@@ -712,14 +704,10 @@ const styles = {
     alignItems: 'center'
   },
   viewedFeedItemStyle: {
-    backgroundColor: colours.blue,
-    shadowOpacity: 0.2,
-    shadowRadius: 3
+    backgroundColor: colours.blue
   },
   newViewedFeedItemStyle: {
-    backgroundColor: colours.gray,
-    shadowOpacity: 0.2,
-    shadowRadius: 3
+    backgroundColor: colours.gray
   },
   viewedFeedItemName: {
     fontSize: 14,
@@ -734,11 +722,11 @@ const styles = {
     fontWeight: '500'
   },
   viewedFeedItemDate: {
-    color: colours.black,
+    color: colours.when,
     fontWeight: '500'
   },
   viewedFeedItemPlaceName: {
-    color: colours.black,
+    color: colours.where,
     fontWeight: '500'
   },
   unConfirmedItemStyle: {

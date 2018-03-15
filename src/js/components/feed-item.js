@@ -2,20 +2,14 @@ import PropTypes from 'prop-types';
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/require-default-props */
 import React, { PureComponent } from 'react';
-// import {
-//     CachedImage,
-//     ImageCacheProvider
-// } from 'react-native-cached-image';
 import moment from 'moment';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../lib/format-date';
 import CardSection from './common/CardSection';
-import Card from './common/Card';
 import StatusFlag from './general/statusFlag';
 import styles from '../../styles';
 import colours from '../../styles/colours';
-// import ProgressiveImage from './common/ProgressiveImage';
 
 moment.locale('en-gb');
 
@@ -54,10 +48,26 @@ class FeedItem extends PureComponent {
     }
 
     return (
-      <Card style={[styles.newCardStyle, !viewed && styles.newViewedFeedItemStyle]}>
-        <CardSection style={styles.cardSectionFeedItem}>
+      <View
+        style={{
+          marginLeft: 2,
+          marginRight: 2,
+          backgroundColor: !viewed ? colours.darkgray : colours.white }}
+      >
+        <CardSection style={{ justifyContent: 'flex-start' }}>
           <TouchableOpacity
-            style={styles.cardButtonStyle}
+            style={{
+              flex: 1,
+              marginLeft: 2,
+              marginRight: 2,
+              paddingTop: 5,
+              paddingBottom: 5,
+              backgroundColor: colours.white,
+              borderTopWidth: !viewed ? 1 : 0,
+              borderBottomWidth: !viewed ? 2 : 1,
+              borderColor: !viewed ? colours.darkgray : colours.lightgray,
+              flexDirection: 'row',
+              justifyContent: 'space-around' }}
             onPress={this._onPress}
           >
 
@@ -121,13 +131,13 @@ class FeedItem extends PureComponent {
                       <View
                         style={{ marginLeft: 5, flex: 1, alignItems: 'center' }}
                       >
-                        <Icon name="calendar-o" size={14} color={colours.gray} />
+                        <Icon name="calendar-o" size={14} color={!viewed ? colours.when : colours.lightgray} />
                       </View>) ||
                     (when.length === 1 && when[0].date === '' &&
                       <View
                         style={{ marginLeft: 5, flex: 1, alignItems: 'center' }}
                       >
-                        <Icon name="calendar-o" size={14} color={colours.gray} />
+                        <Icon name="calendar-o" size={14} color={!viewed ? colours.when : colours.lightgray} />
                       </View>
                     )
                   }
@@ -152,13 +162,13 @@ class FeedItem extends PureComponent {
                       <View
                         style={{ marginLeft: 5, flex: 1, alignItems: 'center' }}
                       >
-                        <Icon name="map-marker" size={14} color={colours.gray} />
+                        <Icon name="map-marker" size={14} color={!viewed ? colours.where : colours.lightgray} />
                       </View>) ||
                     (where.length === 1 && where[0] === '' &&
                       <View
                         style={{ marginLeft: 5, flex: 1, alignItems: 'center' }}
                       >
-                        <Icon name="map-marker" size={14} color="gray" />
+                        <Icon name="map-marker" size={14} color={!viewed ? colours.where : colours.lightgray} />
                       </View>)
                   }
 
@@ -181,7 +191,7 @@ class FeedItem extends PureComponent {
 
           </TouchableOpacity>
         </CardSection>
-      </Card>
+      </View>
     );
   }
 }
