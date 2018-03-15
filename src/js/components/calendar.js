@@ -117,9 +117,9 @@ class Calendar extends Component {
     timestamp = new Date();
     console.log('renderCalendar:', timestamp.getTime());
 
-    const { allEvents, isFetching, displaySome, displayAll, filterActive, selectedFilter, user_id, isConnected } = this.props;
+    const { allEvents, calendarIsFetching, displaySome, displayAll, filterActive, selectedFilter, user_id, isConnected } = this.props;
 
-    const isLoading = isFetching;
+    const isLoading = calendarIsFetching;
 
     if (isLoading) {
       // return this if waiting for Branch, etc
@@ -162,7 +162,7 @@ class Calendar extends Component {
         <FeedHeader>
           { !isConnected && this.renderAlert() }
           {
-            !isFetching && allEvents.length > 0 &&
+            !calendarIsFetching && allEvents.length > 0 &&
             <FilterPanel
               displayAll={ displayAll }
               displaySome={ displaySome }
@@ -180,13 +180,13 @@ class Calendar extends Component {
         >
 
           {
-            isFetching && <Spinner />
+            calendarIsFetching && <Spinner />
           }
 
           <View>
 
               {
-                this.props.filteredEvents.length === 0 && !isFetching &&
+                this.props.filteredEvents.length === 0 && !calendarIsFetching &&
                 <View style={[styles.containerFeed, { alignItems: 'center' }]}>
                   <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
                     You have no upcoming events.
@@ -195,7 +195,7 @@ class Calendar extends Component {
               }
 
               {
-                !isFetching && this.dataSource &&
+                !calendarIsFetching && this.dataSource &&
                 <View style={styles.containerFeed}>
                 <FlatList
                   data={this.dataSource}
@@ -216,7 +216,7 @@ class Calendar extends Component {
 
 Calendar.propTypes = {
   allEvents: PropTypes.array.isRequired,
-  isFetching: PropTypes.bool.isRequired,
+  calendarIsFetching: PropTypes.bool.isRequired,
   displaySome: PropTypes.func.isRequired,
   displayAll: PropTypes.func.isRequired,
   filterActive: PropTypes.bool.isRequired,

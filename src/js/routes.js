@@ -13,6 +13,7 @@ import AlbumsContainer from './containers/albums';
 import CalendarContainer from './containers/calendar';
 import FeedContainer from './containers/feed';
 import ProfileContainer from './containers/profile';
+import SettingsContainer from './containers/settings';
 import DetailsContainer from './containers/create/details';
 import WhatContainer from './containers/create/what';
 import WhereContainer from './containers/create/where';
@@ -108,13 +109,8 @@ export const StackRoot = StackNavigator({
             }
           }
         })
-      },
-      Settings: { screen: ProfileContainer },
-      Help: { screen: AlbumsContainer },
-      About: { screen: AlbumsContainer },
-      Feedback: { screen: AlbumsContainer },
-      Refer: { screen: AlbumsContainer },
-      SignOut: { screen: AlbumsContainer }
+      }
+
     }, {
       headerMode: 'float',
       title: 'Spark',
@@ -133,6 +129,9 @@ export const StackRoot = StackNavigator({
   event: { screen: StackNavigator({
     Event: { screen: EventContainer },
     Edit: { screen: EditContainer } })
+  },
+  settings: { screen: StackNavigator({
+    Settings: { screen: SettingsContainer } })
   },
   code: { screen: StackNavigator({
     Code: { screen: Code } })

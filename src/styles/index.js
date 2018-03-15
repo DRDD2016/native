@@ -1,5 +1,6 @@
 import { Dimensions, Platform } from 'react-native';
 import colours from './colours';
+import { scale } from './scaling';
 
 
 const styles = {
@@ -34,12 +35,12 @@ const styles = {
   },
   titleHeader1: {
     color: colours.headerTitleColor,
-    fontSize: 20,
+    fontSize: scale(20),
     fontWeight: '600'
   },
   title1: {
     color: colours.white,
-    fontSize: 24
+    fontSize: scale(24)
   },
   title2: {
     flex: 1
