@@ -8,7 +8,7 @@ import getFutureEvents from '../lib/get-future-events';
 
 
 const mapStateToProps = ({ nav, calendar, user, network }) => {
-  
+
   const futureEvents = calendar.data.filter(getFutureEvents);
   const data = calendar.data;
   const filterActive = calendar.filterActive;
@@ -20,7 +20,7 @@ const mapStateToProps = ({ nav, calendar, user, network }) => {
     nav,
     allEvents: data,
     filteredEvents,
-    isFetching: calendar.isFetching,
+    calendarIsFetching: calendar.isFetching,
     filterActive,
     selectedFilter,
     user_id: user.user_id,

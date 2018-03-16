@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, Modal, TouchableHighlight, FlatList, Image, Platform } from 'react-native';
+import { View, Text, TouchableHighlight, FlatList, Image, Platform } from 'react-native';
 import Fabric from 'react-native-fabric';
+import _ from 'lodash';
 import { Header } from 'react-navigation';
-// import { OptimizedFlatList } from 'react-native-optimized-flatlist';
-// import { slowlog } from 'react-native-slowlog';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
@@ -15,6 +14,7 @@ import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
+import SpinnerModal from './common/SpinnerModal';
 import { store } from '../init-store';
 import { getFeedFailure } from '../actions/feed';
 
@@ -45,8 +45,6 @@ class Feed extends Component {
   constructor (props) {
     super(props);
 
-    // slowlog(this, /.*/);
-
     this.state = {
       isModalVisible: false
     };
@@ -56,18 +54,20 @@ class Feed extends Component {
   componentWillMount () {
 
     console.log('FeedWillMountprops: ', this.props);
+    const timestamp = new Date();
+    console.log('Feed WillMount:', timestamp.getTime());
 
     const { handleSubmitCode, eventCode } = this.props;
 
-    console.log('eventCode FeedMount:', eventCode);
+    // console.log('eventCode FeedMount:', eventCode);
     if (eventCode) {
       if (eventCode !== 'none') {
-        console.log('submittingEventCode from Feed');
+        // console.log('submittingEventCode from Feed');
         handleSubmitCode(eventCode);
       }
     }
 
-    console.log('Mount this.props.eventCodeError: ', this.props.eventCodeError);
+    // console.log('Mount this.props.eventCodeError: ', this.props.eventCodeError);
 
     if (this.props.eventCodeError) {
       console.log('dispatching getFeedFailure: ');
@@ -76,27 +76,12 @@ class Feed extends Component {
 
     }
 
-
-    // subscribeToBranchLinks(this.props.navigation);
-
-
-    // if (this.props.user.push_info) {
-    //   this.props.handleSavePush(this.props.push_info);
-    // }
-
-    // initSocket();
-
-    // setTimeout(() => {
-
-      // code here will execute after time limit?
-
-    // }, 3000);
-
   }
 
   componentDidMount () {
     Answers.logCustom('Feed.js Mounted', { additionalData: 'nothing' });
-    console.log('FeedDidMount');
+    const timestamp = new Date();
+    console.log('FeedDidMount:', timestamp.getTime());
   }
 
   componentWillReceiveProps (nextProps) {
@@ -104,6 +89,8 @@ class Feed extends Component {
     console.log('Feed Receives NextProps');
     console.log('thisProps', this.props);
     console.log('NextProps', nextProps);
+    const timestamp = new Date();
+    console.log('Feed receivesProps:', timestamp.getTime());
 
     const { handleSubmitCode } = this.props;
     const { eventCode, saveEventStatus } = nextProps;
@@ -137,7 +124,18 @@ class Feed extends Component {
 
     const { feed } = nextProps;
     const newData = [].concat(feed).reverse();
-    this.createDataSource(newData);
+    console.log('newData', newData);
+
+    const uniqueFeedData = _.uniqBy(newData, 'feed_item.feed_tag');
+      // const itemTag = `Tag_${item.event_id}_${item.subject_user_id}`;
+      // console.log('itemTag:', itemTag);
+      // console.log('index:', index);
+      // console.log('self:', self);
+
+    console.log('uniqueFeedData', uniqueFeedData);
+
+    this.createDataSource(uniqueFeedData);
+
 
   }
 
@@ -170,9 +168,7 @@ class Feed extends Component {
     const { index } = item;
     const { feed_item, id } = item.item;
     const { user_id, handleSelection } = this.props;
-    // console.log('feed_item', feed_item);
-
-    // console.log('renderItem', `${index} ${feed_item.name}`);
+    console.log('feed_item', feed_item);
 
     return (
       <FeedItem
@@ -198,13 +194,15 @@ class Feed extends Component {
         handleSelection={ handleSelection }
         feed_item_id={ id }
         action={ feed_item.action }
+        feed_tag={ feed_item.feed_tag }
       />
     );
   }
 
   render () {
 
-    console.log('renderFeed');
+    const timestamp = new Date();
+    console.log('Feed render:', timestamp.getTime());
 
     const {
       allEvents,
@@ -227,90 +225,38 @@ class Feed extends Component {
     console.log('isFetching: ', isFetching);
     console.log('isFetchingEvent: ', isFetchingEvent);
     console.log('isLoading: ', isLoading);
-    console.log('isConnected: ', isConnected);
+    console.log('feed isConnected: ', isConnected);
     console.log('saveEventStatus: ', saveEventStatus);
 
     if (saveEventStatus === 'Started') {
       // return this if waiting for Branch, etc
       console.log('saveEventStatus: ', 'Started');
+      console.log('visible saveEventStatus Started', isLoading);
 
       return (
         <View style={{ flex: 1 }}>
-          <Modal
-            transparent animationType={'slide'} visible={isLoading}
-            onRequestClose={() => {
-              this.setState({
-                isModalVisible: false
-              });
-            }}
-          >
-            {
-              <View style={styles.modalWrapper}>
-
-                {
-                  <View style={styles.modalConfirm}>
-
-                    <Text style={[styles.msg1, { flex: 1 }]}>Sharing invite</Text>
-                    <Text style={[styles.msg2, { flex: 1 }]}>please wait...</Text>
-                    <View style={{ flex: 1 }}>
-                      <Spinner size="large" />
-                    </View>
-                    <View style={{ flex: 1 }} />
-
-                  </View>
-                }
-
-              </View>
-            }
-
-          </Modal>
+          <SpinnerModal
+            visible={isLoading}
+            type={ 'share_invite' }
+            isConnected={isConnected}
+            onClose={ () => { this.setState({ isModalVisible: false }); }}
+          />
         </View>
       );
     }
 
     if (isLoading) {
       // return this if waiting for Branch, etc
-
-      console.log('isLoading Spinner: ', isLoading);
+      console.log('visible isLoading', isLoading);
 
       return (
         <View style={{ flex: 1 }}>
-          <Modal
-            transparent animationType={'slide'} visible={isLoading}
-            onRequestClose={() => {
-              this.setState({
-                isModalVisible: false
-              });
-            }}
-          >
-            {
-              <View style={styles.modalWrapper}>
-
-                {
-                  <View style={styles.modalConfirm}>
-
-                    <Text style={[styles.msg1, { flex: 1 }]}>Loading</Text>
-                    <Text style={[styles.msg2, { flex: 1 }]}>please wait...</Text>
-                    <View style={{ flex: 1 }}>
-                      <Spinner size="large" />
-                    </View>
-                    {!isConnected && <Text style={[styles.msg2, { flex: 1 }]}>poor internet connection</Text>}
-                    {
-                      // isFetchingBranch && <Text style={[styles.msg2, { flex: 1 }]}>{`isFetchingBranch: ${isFetchingBranch}`}</Text>
-                    }
-                    {
-                      // isFetching && <Text style={[styles.msg2, { flex: 1 }]}>{`isFetching: ${isFetching}`}</Text>
-                    }
-
-                    <View style={{ flex: 1 }} />
-
-                  </View>
-                }
-
-              </View>
-            }
-
-          </Modal>
+          <SpinnerModal
+            visible={isLoading}
+            type={ 'loading' }
+            isConnected={isConnected}
+            onClose={ () => { this.setState({ isModalVisible: false }); }}
+          />
         </View>
       );
     }
@@ -320,42 +266,17 @@ class Feed extends Component {
       // return this if error for Branch, etc
       return (
         <View style={{ flex: 1 }}>
-          <Modal transparent animationType={'slide'} visible={this.state.isModalVisible} onRequestClose={() => { alert('Modal has been closed.'); }}>
-            {
-              <View style={styles.modalWrapper}>
+          {
+            eventCodeError &&
+            <SpinnerModal
+              visible={this.state.isModalVisible}
+              type={ 'event_code_error' }
+              isConnected={isConnected}
+              onClose={ () => { this.setState({ isModalVisible: false }); }}
+              eventCodeError={eventCodeError}
+            />
 
-                {
-                  eventCodeError &&
-                  <View style={styles.modalConfirm}>
-                    <Text style={[styles.msg1, { flex: 1 }]}>Poor connectivity</Text>
-                    <Text style={[styles.msg2, { flex: 1 }]}>please check your internet connection</Text>
-                    <Text style={[styles.msg2, { flex: 1 }]}>{`eventCodeError: ${eventCodeError}`}</Text>
-                    <View style={{ flex: 1 }} />
-
-                    <View style={{ flex: 1 }}>
-                      <TouchableHighlight
-                        style={ [styles.confirmButton, { marginBottom: 20, marginTop: 20 }] }
-                        onPress={ () => {
-                          this.setState({
-                            isModalVisible: false
-                          });
-
-                          this.props.saveIncomingLinkError(undefined);
-                          // and dispatch action to remove event code error?
-
-                        }}
-                      >
-                        <Text style={styles.confirmButtonText}>OK</Text>
-                      </TouchableHighlight>
-                    </View>
-
-                  </View>
-                }
-              </View>
-            }
-
-          </Modal>
-
+          }
         </View>
       );
     }
@@ -458,7 +379,7 @@ class Feed extends Component {
               <FlatList
                 data={this.dataSource}
                 renderItem={this.renderItem}
-                keyExtractor={item => item.id}
+                keyExtractor={item => `${item.id}${Math.random()}`}
               />
             }
 

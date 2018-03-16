@@ -4,6 +4,7 @@ import { Header } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 // import styles from '../../../styles';
 import colours from '../../../styles/colours';
+import { moderateScale } from '../../../styles/scaling';
 import { composeLinkToShare } from '../../lib/branchLink';
 import { store } from '../../init-store';
 
@@ -17,14 +18,14 @@ const inlineStyles = StyleSheet.create({
     paddingTop: 10
   },
   DrawerItem: {
-    paddingHorizontal: 15,
+    paddingHorizontal: moderateScale(15),
     paddingVertical: 10,
     margin: 5,
     alignItems: 'center',
     flexDirection: 'row'
   },
   DrawerItemText: {
-    fontSize: 14,
+    fontSize: moderateScale(14),
     fontWeight: 'normal',
     color: colours.where
   }
@@ -57,7 +58,7 @@ export default class Drawer extends Component {
             <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={inlineStyles.DrawerItem} onPress={() => navigation.navigate('Settings')}>
+        <TouchableOpacity style={inlineStyles.DrawerItem} onPress={() => navigation.navigate('settings')}>
           <View style={{ marginRight: 10 }}><Icon name="cog" size={32} color={colours.gray} /></View>
           <Text
             style={inlineStyles.DrawerItemText}
@@ -112,7 +113,7 @@ export default class Drawer extends Component {
           <View style={{ marginRight: 7 }} />
           <TouchableOpacity onPress={() => this.clickOpenURL(PrivacyURL)}>
             <Text
-              style={[inlineStyles.DrawerItemText, { fontSize: 10 }]}
+              style={[inlineStyles.DrawerItemText, { fontSize: moderateScale(10) }]}
             >
               Privacy policy
             </Text>
@@ -122,7 +123,7 @@ export default class Drawer extends Component {
           <View style={{ marginRight: 7 }} />
           <TouchableOpacity onPress={() => this.clickOpenURL(TermsURL)}>
             <Text
-              style={[inlineStyles.DrawerItemText, { fontSize: 10 }]}
+              style={[inlineStyles.DrawerItemText, { fontSize: moderateScale(10) }]}
             >
               Terms and conditions
             </Text>

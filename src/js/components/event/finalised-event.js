@@ -66,7 +66,13 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, handleE
     <View style={{ flex: 1 }}>
       <View style={{ marginTop: 5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
 
-        <Image source={{ uri: event.host_photo_url }} style={{ marginHorizontal: 5, width: 60, height: 60, resizeMode: 'contain' }} />
+        <Image
+          source={{ uri: event.host_photo_url }} style={{ borderRadius: 15,
+            marginHorizontal: 5,
+            width: 60,
+            height: 60,
+            resizeMode: 'contain' }}
+        />
 
         { userIsHost ?
           <View>

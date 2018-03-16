@@ -3,6 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 import Button from '../common/Button';
 import colours from '../../../styles/colours';
+import { scale, moderateScale } from '../../../styles/scaling';
 
 const FilterPanel = ({ displaySome, displayAll, filterActive, selectedFilter }) => {
 
@@ -46,7 +47,9 @@ const styles = {
     marginTop: 10,
     marginBottom: 10,
     flexDirection: 'row',
-    height: 40
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: scale(50)
   },
   filterButton: {
     backgroundColor: 'white',
@@ -59,17 +62,18 @@ const styles = {
     marginRight: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1
+    flex: 1,
+    height: scale(40)
   },
   buttonText: {
-    fontSize: 12,
+    fontSize: moderateScale(14, 0.3),
     color: colours.main,
     fontWeight: '700',
     paddingTop: 5,
     paddingBottom: 5
   },
   buttonTextSelected: {
-    fontSize: 14,
+    fontSize: moderateScale(14, 0.3),
     color: 'white',
     fontWeight: '700',
     paddingTop: 5,
@@ -86,7 +90,8 @@ const styles = {
     marginRight: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1
+    flex: 1,
+    height: scale(40)
   }
 };
 
