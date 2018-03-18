@@ -21,6 +21,12 @@ jest.mock('react-native-branch', () => {
   };
 });
 
+jest.mock('styled-components', () => {
+  return {
+
+  };
+});
+
 describe('SIGNUP_USER actions', () => {
 
   describe('`signupUserRequest` action creator', () => {
