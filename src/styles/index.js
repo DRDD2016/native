@@ -4,7 +4,7 @@ import colours from './colours';
 import { scale } from './scaling';
 
 
-export const Button = styled.TouchableHighlight`
+export const Button = styled.TouchableOpacity`
   paddingTop: 4;
   paddingBottom: 4;
   paddingLeft: 15;
