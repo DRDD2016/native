@@ -70,6 +70,9 @@
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?react-native|react-navigation|react-native-branch)"
     ],
+    "moduleNameMapper": {
+      "styled-components": "<rootDir>/node_modules/styled-components/dist/styled-components.native.cjs.js"
+    },
     "modulePathIgnorePatterns": [
       "async"
     ],
