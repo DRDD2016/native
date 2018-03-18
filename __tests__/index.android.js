@@ -28,7 +28,12 @@ jest.mock('react-native-branch', () => {
 
 jest.mock('react-native-fcm', () => {
   return {
-    
+
+  };
+});
+jest.mock('styled-components', () => {
+  return {
+
   };
 });
 
