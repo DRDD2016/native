@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, TouchableHighlight, ScrollView, Modal } from 'react-native';
 import CategoryDetails from './category-details';
-import styles from '../../../styles';
+import { styles, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import Spinner from '../common/Spinner';
 import formatDate from '../../lib/format-date';
 import formatTime from '../../lib/format-time';
@@ -54,7 +54,7 @@ export default class HostPoll extends Component {
 
   render () {
 
-    const { event, voteCount, handleConfirmEvent, finalChoices, isFetching, navigator } = this.props;
+    const { event, voteCount, handleInviteMoreFriends, handleConfirmEvent, finalChoices, isFetching, navigator } = this.props;
     console.log('voteCount: ', voteCount);
     const allCategoriesSelected = Object.keys(this.state.eventdetails)
       .map(category => this.state.eventdetails[category].length)
@@ -126,6 +126,16 @@ export default class HostPoll extends Component {
               <Text style={[styles.msg5, { alignSelf: 'center' }]}>
                 You can review the responses and tap to select your final choices and tap &quot;Confirm&quot; when you are ready:
               </Text>
+            </View>
+
+            <View style={[styles.rowCentered, { marginTop: 5, marginBottom: 5 }]}>
+              <ConfirmButton
+                onPress={ () => handleInviteMoreFriends() }
+              >
+                <ConfirmButtonText>
+                Invite friends
+                </ConfirmButtonText>
+              </ConfirmButton>
             </View>
 
             <View style={ inlineStyle.row }>
