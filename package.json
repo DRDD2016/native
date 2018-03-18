@@ -73,6 +73,7 @@
     "moduleNameMapper": {
       "styled-components": "<rootDir>/node_modules/styled-components/dist/styled-components.native.cjs.js"
     },
+    "moduleFileExtensions": ["ios.js", "native.js", "js", "json", "jsx", "node"],
     "modulePathIgnorePatterns": [
       "async"
     ],

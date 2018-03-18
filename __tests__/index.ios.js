@@ -31,11 +31,6 @@ jest.mock('react-native-fcm', () => {
 
   };
 });
-jest.mock('styled-components', () => {
-  return {
-
-  };
-});
 
 it('renders correctly', () => {
   renderer.create(
