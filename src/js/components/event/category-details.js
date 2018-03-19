@@ -119,25 +119,27 @@ export default class CategoryDetails extends Component {
                     <Icon.Button
                       name={this.icons[category]}
                       size={16}
-                      borderRadius={100}
+                      borderRadius={15}
                       style={{ padding: 10 }}
                       color={(!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category]}
                       backgroundColor={(!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index] ? colours[category] : OFF_WHITE}
                       onPress={() => this._handleOnPress(category, datum, index)}
                     >
                       {
-                        <Text style={{ color: (!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category] }}>
-                          {category !== 'when' && (datum || 'TBC')}
-                          {category === 'when' && `${formatDate(datum, 'half')}, ${formatTime(datum) || 'TBC'}`}
-                        </Text>
+                        <View style={{ flex: 4 }}>
+                          <Text style={{ color: (!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category] }}>
+                            {category !== 'when' && (datum || 'TBC')}
+                            {category === 'when' && `${formatDate(datum, 'half')}, ${formatTime(datum) || 'TBC'}`}
+                          </Text>
+                        </View>
                       }
                       {
                         (!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index]
-                        ? <Text>Tick</Text>
-                        : <Text>No</Text>
+                        ? <View style={{ flex: 1 }}><Icon name="check" size={20} style={{ paddingLeft: 5 }} color={colours.white} /></View>
+                        : <Text />
                       }
 
-                        
+
                     </Icon.Button>
 
                   </View>

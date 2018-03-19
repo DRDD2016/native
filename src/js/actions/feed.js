@@ -3,10 +3,10 @@ import Config from 'react-native-config';
 export const FETCHING_EVENT_FROM_FEEDITEM_REQUEST = 'FETCHING_EVENT_FROM_FEEDITEM_REQUEST';
 export const FETCHING_EVENT_FROM_FEEDITEM_SUCCESS = 'FETCHING_EVENT_FROM_FEEDITEM_SUCCESS';
 export const FETCHING_EVENT_FROM_FEEDITEM_FAILURE = 'FETCHING_EVENT_FROM_FEEDITEM_FAILURE';
-export const HAVE_FEED_REQUEST = 'HAVE_FEED_REQUEST'; // checks if feed present (1st load)
+export const HAVE_FEED_REQUEST = 'HAVE_FEED_REQUEST';
 export const HAVE_FEED_SUCCESS = 'HAVE_FEED_SUCCESS';
 export const HAVE_FEED_FAILURE = 'HAVE_FEED_FAILURE';
-export const GET_FEED_REQUEST = 'GET_FEED_REQUEST'; // triggered by server via web-socket
+export const GET_FEED_REQUEST = 'GET_FEED_REQUEST';
 export const GET_FEED_SUCCESS = 'GET_FEED_SUCCESS';
 export const GET_FEED_FAILURE = 'GET_FEED_FAILURE';
 export const APPLY_FILTER = 'APPLY_FILTER';
@@ -29,15 +29,15 @@ export const fetchingEventFromFeedItemFailure = () => ({
 });
 
 export const haveFeedRequest = () => ({
-  type: GET_FEED_REQUEST
+  type: HAVE_FEED_REQUEST
 });
 
 export const haveFeedSuccess = () => ({
-  type: GET_FEED_SUCCESS
+  type: HAVE_FEED_SUCCESS
 });
 
 export const haveFeedFailure = () => ({
-  type: GET_FEED_FAILURE
+  type: HAVE_FEED_FAILURE
 });
 
 export const getFeedRequest = () => ({

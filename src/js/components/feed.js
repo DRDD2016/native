@@ -16,7 +16,7 @@ import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
 import SpinnerModal from './common/SpinnerModal';
 import { store } from '../init-store';
-import { getFeedRequest, getFeedFailure } from '../actions/feed';
+import { getFeedFailure } from '../actions/feed';
 
 const { Answers } = Fabric;
 const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 2;
@@ -55,8 +55,7 @@ class Feed extends Component {
 
     const { handleSubmitCode, eventCode, haveFeedRequest } = this.props;
 
-    store.dispatch(haveFeedRequest());
-    store.dispatch(getFeedRequest());
+    haveFeedRequest();
 
     console.log('FeedWillMountprops: ', this.props);
     const timestamp = new Date();
@@ -144,10 +143,10 @@ class Feed extends Component {
   }
 
   componentDidUpdate () {
-    const { isReceivingFeed, allEvents, haveFeedSuccess, haveFeedFailure } = this.props;
-    console.log('isReceivingFeed: ', isReceivingFeed);
+    const { isFetchingFeed, allEvents, haveFeedSuccess, haveFeedFailure } = this.props;
+    console.log('isFetchingFeed: ', isFetchingFeed);
     console.log('allEvents: ', allEvents);
-    if (isReceivingFeed) {
+    if (isFetchingFeed) {
       if (allEvents.length > 0) {
         console.log('fetchFeedSuccess');
         haveFeedSuccess();
@@ -297,7 +296,7 @@ class Feed extends Component {
         <FeedHeader>
           { !isConnected && this.renderAlert() }
           {
-            !isFetchingFeed && allEvents.length > 0 &&
+            !isReceivingFeed && allEvents.length > 0 &&
             <FilterPanel
               displayAll={ displayAll }
               displaySome={ displaySome }
@@ -314,7 +313,7 @@ class Feed extends Component {
             borderBottomColor: colours.lightgray }}
         >
           {
-            isFetchingFeed && <Spinner />
+            isReceivingFeed && <Spinner />
           }
 
 
@@ -322,7 +321,7 @@ class Feed extends Component {
             { !isConnected && this.renderAlert() }
 
             {
-              allEvents.length === 0 && !isFetchingFeed &&
+              allEvents.length === 0 && !isReceivingFeed &&
                 <View style={{ alignItems: 'center' }}>
                   <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
                     You have no events.
@@ -383,7 +382,7 @@ class Feed extends Component {
             }
 
             {
-              !isFetchingFeed && this.dataSource &&
+              !isReceivingFeed && this.dataSource &&
               <FlatList
                 data={this.dataSource}
                 renderItem={this.renderItem}
