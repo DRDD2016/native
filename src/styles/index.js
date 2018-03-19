@@ -1,9 +1,192 @@
 import { Dimensions, Platform } from 'react-native';
+import styled from 'styled-components';
 import colours from './colours';
 import { scale } from './scaling';
 
 
-const styles = {
+export const Button = styled.TouchableOpacity`
+  paddingTop: 4;
+  paddingBottom: 4;
+  paddingLeft: 15;
+  paddingRight: 15;
+  borderRadius: 3;
+`;
+
+export const ConfirmButton = styled.TouchableOpacity`
+  width: ${Dimensions.get('window').width * 0.5};
+  justifyContent: center;
+  alignItems: center;
+  backgroundColor: ${colours.confirm};
+  borderColor: ${colours.confirm};
+  borderWidth: 1;
+  paddingVertical: 8;
+  paddingHorizontal: 10;
+  marginHorizontal: 20;
+  height: ${scale(50)};
+`; // confirmButton
+
+export const ConfirmButtonText = styled.Text`
+  fontSize: ${scale(18)};
+  textAlign: center;
+  color: ${colours.offWhite};
+`; // confirmButtonText
+
+export const ButText = styled.Text.attrs({
+  color: props => props.color || colours.gray
+})`
+  fontSize: ${scale(12)};
+  color: ${props => props.color};
+`;
+
+export const HeaderText = styled.Text`
+  color: ${colours.headerTitleColor};
+  fontSize: ${scale(20)};
+  fontWeight: 600;
+`; // titleHeader1
+
+export const Title1 = styled.Text`
+  color: ${colours.white};
+  fontSize: ${scale(24)};
+`; // title1
+
+export const Title2 = styled.Text`
+  flex: 1;
+`; // title2
+
+export const Title3 = styled.Text.attrs({
+  color: props => props.color || colours.gray
+})`
+  fontSize: ${scale(12)};
+  fontWeight: 600;
+  color: ${props => props.color};
+`; // title3
+
+export const Title4 = styled.Text`
+  fontSize: ${scale(12)};
+  fontWeight: 500;
+`; // title4
+
+export const Title5 = styled.Text`
+  fontSize: ${scale(10)};
+  fontWeight: 500;
+`; // title5
+
+export const Title6 = styled.Text`
+  fontSize: ${scale(8)};
+  fontWeight: 500;
+`; // title6
+
+export const TitleInvited = styled.Text`
+  fontSize: ${scale(18)};
+  fontWeight: 700;
+  color: ${colours.gray};
+`; // invitedTitle
+
+export const Msg1 = styled.Text`
+  fontSize: ${scale(18)};
+  fontWeight: 600;
+  color: ${colours.gray};
+`; // msg1
+
+export const Msg2 = styled.Text`
+  fontSize: ${scale(16)};
+  fontWeight: 400;
+  color: ${colours.gray};
+`; // msg2
+
+export const Msg3 = styled.Text`
+  fontSize: ${scale(14)};
+  fontWeight: 700;
+  color: ${colours.gray};
+`; // msg3
+
+export const Msg4 = styled.Text`
+  fontSize: ${scale(12)};
+  fontWeight: 600;
+  color: ${colours.gray};
+`; // msg4
+
+export const SmMsg = styled.Text`
+  fontSize: ${scale(12)};
+  fontWeight: 300;
+  color: ${colours.gray};
+  paddingTop: 10;
+  paddingBottom: 10;
+`; // smallMessageText
+
+export const BigThinText = styled.Text`
+  fontSize: ${scale(16)};
+  fontWeight: 300;
+  color: ${colours.white};
+`; // topBarButtonText
+
+export const OpTextWhat = styled.Text`
+  fontSize: ${scale(12)};
+  fontWeight: 500;
+  color: ${colours.what};
+  flex: 1;
+  justifyContent: 'space-around';
+`; // optionTextInfoWhat
+
+export const OptionTextDeselectedWhat = styled.Text`
+  fontSize: ${scale(12)};
+  color: ${colours.what};
+  flex: 1;
+`; // optionTextDeselectedWhat
+
+export const OpTextSelected = styled.Text`
+  fontSize: ${scale(12)};
+  fontWeight: 500;
+  color: ${colours.white};
+  flex: 1;
+  justifyContent: 'space-around';
+`; // optionTextSelected
+
+export const OpTitleWhere = styled.Text`
+  fontSize: ${scale(12)};
+  fontWeight: 'bold';
+  color: ${colours.where};
+  flex: 1;
+  paddingTop: 10;
+`; // optionTitleWhere
+
+export const OpTextWhere = styled.Text`
+  fontSize: ${scale(12)};
+  fontWeight: 500;
+  color: ${colours.where};
+  flex: 1;
+  justifyContent: 'space-around';
+`; // optionTextInfoWhere
+
+export const OptionTextDeselectedWhere = styled.Text`
+  fontSize: ${scale(12)};
+  color: ${colours.where};
+  flex: 1;
+`; // optionTextDeselectedWhere
+
+export const OpTitleWhen = styled.Text`
+  fontSize: ${scale(12)};
+  fontWeight: 'bold';
+  color: ${colours.when};
+  flex: 1;
+  paddingTop: 10;
+`; // optionTitleWhen
+
+export const OpTextWhen = styled.Text`
+  fontSize: ${scale(12)};
+  fontWeight: 500;
+  color: ${colours.when};
+  flex: 1;
+  justifyContent: 'space-around';
+`; // optionTextInfoWhen
+
+export const OptionTextDeselectedWhen = styled.Text`
+  fontSize: ${scale(12)};
+  color: ${colours.when};
+  flex: 1;
+`; // optionTextDeselectedWhen
+
+export const styles = {
 
   // app Wide
   modalWrapper: {
@@ -33,22 +216,7 @@ const styles = {
     height: Platform.OS === 'ios' ? null : Dimensions.get('window').height * 1, // can remove if no problems on above
     top: Platform.OS === 'ios' ? null : -70
   },
-  titleHeader1: {
-    color: colours.headerTitleColor,
-    fontSize: scale(20),
-    fontWeight: '600'
-  },
-  title1: {
-    color: colours.white,
-    fontSize: scale(24)
-  },
-  title2: {
-    flex: 1
-  },
-  title3: {
-    fontSize: 12,
-    fontWeight: '600'
-  },
+
   title4: {
     fontSize: 12,
     fontWeight: '500'

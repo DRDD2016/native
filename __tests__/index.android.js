@@ -28,9 +28,10 @@ jest.mock('react-native-branch', () => {
 
 jest.mock('react-native-fcm', () => {
   return {
-    
+
   };
 });
+
 
 it('renders correctly', () => {
   renderer.create(

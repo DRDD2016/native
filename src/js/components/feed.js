@@ -53,11 +53,14 @@ class Feed extends Component {
 
   componentWillMount () {
 
+    const { handleSubmitCode, eventCode, haveFeedRequest } = this.props;
+
+    haveFeedRequest();
+
     console.log('FeedWillMountprops: ', this.props);
     const timestamp = new Date();
     console.log('Feed WillMount:', timestamp.getTime());
 
-    const { handleSubmitCode, eventCode } = this.props;
 
     // console.log('eventCode FeedMount:', eventCode);
     if (eventCode) {
@@ -140,14 +143,16 @@ class Feed extends Component {
   }
 
   componentDidUpdate () {
-    const { isFetching, allEvents, fetchFeedSuccess, fetchFeedFailure } = this.props;
-    console.log('isFetching: ', isFetching);
+    const { isFetchingFeed, allEvents, haveFeedSuccess, haveFeedFailure } = this.props;
+    console.log('isFetchingFeed: ', isFetchingFeed);
     console.log('allEvents: ', allEvents);
-    if (isFetching) {
+    if (isFetchingFeed) {
       if (allEvents.length > 0) {
-        fetchFeedSuccess();
+        console.log('fetchFeedSuccess');
+        haveFeedSuccess();
       } else {
-        fetchFeedFailure();
+        console.log('fetchFeedFailure');
+        haveFeedFailure();
       }
     }
   }
@@ -207,7 +212,8 @@ class Feed extends Component {
     const {
       allEvents,
       feed,
-      isFetching,
+      isReceivingFeed,
+      isFetchingFeed,
       displaySome,
       displayAll,
       filterActive,
@@ -219,10 +225,11 @@ class Feed extends Component {
       saveEventStatus,
       isFetchingEvent } = this.props;
 
-    const isLoading = isFetchingBranch || isFetching || isFetchingEvent;
+    const isLoading = isFetchingBranch || isReceivingFeed || isFetchingFeed || isFetchingEvent;
 
     console.log('isFetchingBranch: ', isFetchingBranch);
-    console.log('isFetching: ', isFetching);
+    console.log('isReceivingFeed: ', isReceivingFeed);
+    console.log('isFetchingFeed: ', isFetchingFeed);
     console.log('isFetchingEvent: ', isFetchingEvent);
     console.log('isLoading: ', isLoading);
     console.log('feed isConnected: ', isConnected);
@@ -289,7 +296,7 @@ class Feed extends Component {
         <FeedHeader>
           { !isConnected && this.renderAlert() }
           {
-            !isFetching && allEvents.length > 0 &&
+            !isReceivingFeed && allEvents.length > 0 &&
             <FilterPanel
               displayAll={ displayAll }
               displaySome={ displaySome }
@@ -306,7 +313,7 @@ class Feed extends Component {
             borderBottomColor: colours.lightgray }}
         >
           {
-            isFetching && <Spinner />
+            isReceivingFeed && <Spinner />
           }
 
 
@@ -314,7 +321,7 @@ class Feed extends Component {
             { !isConnected && this.renderAlert() }
 
             {
-              allEvents.length === 0 && !isFetching &&
+              allEvents.length === 0 && !isReceivingFeed &&
                 <View style={{ alignItems: 'center' }}>
                   <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
                     You have no events.
@@ -375,7 +382,7 @@ class Feed extends Component {
             }
 
             {
-              !isFetching && this.dataSource &&
+              !isReceivingFeed && this.dataSource &&
               <FlatList
                 data={this.dataSource}
                 renderItem={this.renderItem}

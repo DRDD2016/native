@@ -3,11 +3,11 @@ import { View, ScrollView, Text } from 'react-native';
 import ConfirmWhat from './confirm-what';
 import ConfirmWhere from './confirm-where';
 import ConfirmWhen from './confirm-when';
-import Button from '../common/Button';
+// import Button from '../common/Button';
 import ImageHeader from '../common/ImageHeader';
 import HeaderBack from '../common/CreateHeaderBackground';
 import Spinner from '../common/Spinner';
-import styles from '../../../styles';
+import { styles, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
 import ButtonHeader from '../common/ButtonHeader';
 import BackIcon from '../common/back-icon';
@@ -73,13 +73,13 @@ class Confirm extends Component {
           <ConfirmWhen data={sortedDates} />
 
           <View style={[styles.rowCentered, { marginTop: 10 }]}>
-            <Button
-              buttonStyle={styles.confirmButton}
-              textStyle={styles.confirmButtonText}
+            <ConfirmButton
               onPress={ () => handleOnPress(this.props.navigation) }
             >
+              <ConfirmButtonText>
               Invite friends
-            </Button>
+              </ConfirmButtonText>
+            </ConfirmButton>
           </View>
           <View style={[styles.rowCentered, { marginBottom: 30 }]} />
         </ScrollView>

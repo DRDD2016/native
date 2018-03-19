@@ -2,7 +2,9 @@ import * as actions from '../actions/feed';
 
 const initialState = {
   data: [],
-  isFetching: true, // if not Connected or if feed populated
+  isReceivingFeed: false,
+  isFetchingFeed: false,
+  isTouchedFetching: false,
   isFetchingEvent: false,
   error: undefined,
   selectedFilter: undefined,
@@ -12,24 +14,6 @@ const initialState = {
 export default function feed (state = initialState, action) {
 
   switch (action.type) {
-
-    case actions.FETCHING_FEED_ITEM_REQUEST:
-      return {
-        ...state,
-        isFetching: true
-      };
-
-    case actions.FETCHING_FEED_ITEM_SUCCESS:
-      return {
-        ...state,
-        isFetching: false
-      };
-
-    case actions.FETCHING_FEED_ITEM_FAILURE:
-      return {
-        ...state,
-        isFetching: false
-      };
 
     case actions.FETCHING_EVENT_FROM_FEEDITEM_REQUEST:
       return {
@@ -49,23 +33,48 @@ export default function feed (state = initialState, action) {
         isFetchingEvent: false
       };
 
+    case actions.HAVE_FEED_REQUEST:
+      return {
+        ...state,
+        isFetchingFeed: true
+      };
+
+    case actions.HAVE_FEED_SUCCESS:
+      return {
+        ...state,
+        isFetchingFeed: false
+      };
+
+    case actions.HAVE_FEED_FAILURE:
+      return {
+        ...state,
+        isFetchingFeed: false
+      };
+
     case actions.GET_FEED_REQUEST:
       return {
         ...state,
-        isFetching: true
-      };
-
-    case actions.FEED_ITEM_TOUCHED_REQUEST:
-      return {
-        ...state,
-        isFetching: true
+        isReceivingFeed: true
       };
 
     case actions.GET_FEED_SUCCESS:
       return {
         ...state,
-        isFetching: false,
+        isReceivingFeed: false,
         data: [...state.data, ...action.data]
+      };
+
+    case actions.GET_FEED_FAILURE:
+      return {
+        ...state,
+        isReceivingFeed: false,
+        error: action.error
+      };
+
+    case actions.FEED_ITEM_TOUCHED_REQUEST:
+      return {
+        ...state,
+        isTouchedFetching: true
       };
 
     case actions.FEED_ITEM_TOUCHED_SUCCESS: {
@@ -76,21 +85,15 @@ export default function feed (state = initialState, action) {
       newFeed[index].feed_item.viewed = true;
       return {
         ...state,
-        isFetching: false,
+        isTouchedFetching: false,
         data: newFeed
       };
     }
 
-    case actions.GET_FEED_FAILURE:
-      return {
-        ...state,
-        isFetching: false,
-        error: action.error
-      };
     case actions.FEED_ITEM_TOUCHED_FAILURE:
       return {
         ...state,
-        isFetching: false,
+        isTouchedFetching: false,
         error: action.error
       };
 

@@ -1,11 +1,11 @@
 import Config from 'react-native-config';
 
-export const FETCHING_FEED_ITEM_REQUEST = 'FETCHING_FEED_ITEM_REQUEST';
-export const FETCHING_FEED_ITEM_SUCCESS = 'FETCHING_FEED_ITEM_SUCCESS';
-export const FETCHING_FEED_ITEM_FAILURE = 'FETCHING_FEED_ITEM_FAILURE';
 export const FETCHING_EVENT_FROM_FEEDITEM_REQUEST = 'FETCHING_EVENT_FROM_FEEDITEM_REQUEST';
 export const FETCHING_EVENT_FROM_FEEDITEM_SUCCESS = 'FETCHING_EVENT_FROM_FEEDITEM_SUCCESS';
 export const FETCHING_EVENT_FROM_FEEDITEM_FAILURE = 'FETCHING_EVENT_FROM_FEEDITEM_FAILURE';
+export const HAVE_FEED_REQUEST = 'HAVE_FEED_REQUEST';
+export const HAVE_FEED_SUCCESS = 'HAVE_FEED_SUCCESS';
+export const HAVE_FEED_FAILURE = 'HAVE_FEED_FAILURE';
 export const GET_FEED_REQUEST = 'GET_FEED_REQUEST';
 export const GET_FEED_SUCCESS = 'GET_FEED_SUCCESS';
 export const GET_FEED_FAILURE = 'GET_FEED_FAILURE';
@@ -15,18 +15,6 @@ export const FEED_ITEM_TOUCHED_REQUEST = 'FEED_ITEM_TOUCHED_REQUEST';
 export const FEED_ITEM_TOUCHED_SUCCESS = 'FEED_ITEM_TOUCHED_SUCCESS';
 export const FEED_ITEM_TOUCHED_FAILURE = 'FEED_ITEM_TOUCHED_FAILURE';
 
-
-export const fetchingFeedItemRequest = () => ({
-  type: FETCHING_FEED_ITEM_REQUEST
-});
-
-export const fetchingFeedItemSuccess = () => ({
-  type: FETCHING_FEED_ITEM_SUCCESS
-});
-
-export const fetchingFeedItemFailure = () => ({
-  type: FETCHING_FEED_ITEM_FAILURE
-});
 
 export const fetchingEventFromFeedItemRequest = () => ({
   type: FETCHING_EVENT_FROM_FEEDITEM_REQUEST
@@ -38,6 +26,18 @@ export const fetchingEventFromFeedItemSuccess = () => ({
 
 export const fetchingEventFromFeedItemFailure = () => ({
   type: FETCHING_EVENT_FROM_FEEDITEM_FAILURE
+});
+
+export const haveFeedRequest = () => ({
+  type: HAVE_FEED_REQUEST
+});
+
+export const haveFeedSuccess = () => ({
+  type: HAVE_FEED_SUCCESS
+});
+
+export const haveFeedFailure = () => ({
+  type: HAVE_FEED_FAILURE
 });
 
 export const getFeedRequest = () => ({

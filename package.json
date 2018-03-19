@@ -48,7 +48,8 @@
     "redux-persist": "^4.4.0",
     "redux-persist-transform-filter": "0.0.16",
     "redux-thunk": "^2.1.0",
-    "socket.io-client": "^1.5.1"
+    "socket.io-client": "^1.5.1",
+    "styled-components": "^3.2.3"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
@@ -69,6 +70,10 @@
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?react-native|react-navigation|react-native-branch)"
     ],
+    "moduleNameMapper": {
+      "styled-components": "<rootDir>/node_modules/styled-components/dist/styled-components.native.cjs.js"
+    },
+    "moduleFileExtensions": ["ios.js", "native.js", "js", "json", "jsx", "node"],
     "modulePathIgnorePatterns": [
       "async"
     ],
