@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { AsyncStorage } from 'react-native';
 import { store } from './init-store';
 import { getCalendar } from './actions/calendar';
-import { getFeedSuccess, getFeedFailure } from './actions/feed';
+import { getFeedSuccess, getFeedFailure, getFeedRequest } from './actions/feed';
 import { storeSocket } from './actions/network';
 
 // export function stopSocket () {
@@ -37,6 +37,7 @@ function initSocket () {
         });
 
         socket.on(`feed:${user_id}`, (data) => {
+          store.dispatch(getFeedRequest);
           console.log('new feed item', data.length);
           const mostRecentFeedItem = _.last(store.getState().feed.data);
           if (mostRecentFeedItem && !_.isEqual(mostRecentFeedItem, data[0])) {
@@ -46,6 +47,7 @@ function initSocket () {
         });
 
         socket.on(`hydrateFeed:${user_id}`, (data) => {
+          store.dispatch(getFeedRequest);
           const existingFeed = store.getState().feed.data;
           if (!_.isEqual(data, existingFeed)) {
             console.log('hydrating feed');

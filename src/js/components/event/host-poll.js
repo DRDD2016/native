@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { View, Text, TouchableOpacity, TouchableHighlight, ScrollView, Modal } from 'react-native';
 import CategoryDetails from './category-details';
 import { styles, ConfirmButton, ConfirmButtonText } from '../../../styles';
+import colours from '../../../styles/colours';
 import Spinner from '../common/Spinner';
 import formatDate from '../../lib/format-date';
 import formatTime from '../../lib/format-time';
@@ -133,8 +135,10 @@ export default class HostPoll extends Component {
                 onPress={ () => handleInviteMoreFriends() }
               >
                 <ConfirmButtonText>
-                Invite friends
+                  {'Invite friends  '}
+                  <Icon name="user-plus" size={20} color={colours.offWhite} />
                 </ConfirmButtonText>
+
               </ConfirmButton>
             </View>
 

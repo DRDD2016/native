@@ -131,6 +131,13 @@ export default class CategoryDetails extends Component {
                           {category === 'when' && `${formatDate(datum, 'half')}, ${formatTime(datum) || 'TBC'}`}
                         </Text>
                       }
+                      {
+                        (!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index]
+                        ? <Text>Tick</Text>
+                        : <Text>No</Text>
+                      }
+
+                        
                     </Icon.Button>
 
                   </View>

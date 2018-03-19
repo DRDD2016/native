@@ -5,9 +5,9 @@ import {
   applyFilter,
   clearFilter,
   feedItemTouched,
-  fetchingFeedItemRequest,
-  fetchingFeedItemSuccess,
-  fetchingFeedItemFailure,
+  haveFeedRequest,
+  haveFeedSuccess,
+  haveFeedFailure,
   fetchingEventFromFeedItemRequest } from '../actions/feed';
 import { getEvent, submitCode } from '../actions/event/data';
 import { deleteIncomingLink, linkDatafromBranch, saveIncomingLinkError } from '../actions/network';
@@ -28,10 +28,12 @@ const mapStateToProps = ({ nav, feed, user, network, create }) => {
     isConnected: network.isConnected,
     allEvents: data,
     feed: feedData,
-    isFetching: feed.isFetching,
-    networkIsFetching: network.isFetching,
+    isFetchingFeed: feed.isFetchingFeed,
+    isReceivingFeed: feed.isReceivingFeed,
+    isTouchedFetching: feed.isTouchedFetching,
     isFetchingEvent: feed.isFetchingEvent,
     isFetchingBranch: network.isFetchingBranch,
+    networkIsFetching: network.isFetching,
     push_info: user.push_info,
     eventCode: network.inComingLinkCode,
     eventCodeError: network.inComingLinkError,
@@ -44,7 +46,7 @@ const mapDispatchToProps = (dispatch, props) => {
     handleSelection: (event_id, viewed, feed_item_id) => {
       console.log(`feed item touched handleSelection: event_id: ${event_id}, viewed: ${viewed}, id: ${feed_item_id}`);
       // need to tell server this feed item was touched
-      dispatch(fetchingFeedItemRequest()); // do we still need this?
+
       dispatch(fetchingEventFromFeedItemRequest());
       AsyncStorage.getItem('spark_token')
       .then((token) => {
@@ -81,11 +83,14 @@ const mapDispatchToProps = (dispatch, props) => {
       dispatch(deleteIncomingLink()); // is this still used?
 
     },
-    fetchFeedSuccess: () => {
-      dispatch(fetchingFeedItemSuccess());
+    haveFeedRequest: () => {
+      dispatch(haveFeedRequest());
     },
-    fetchFeedFailure: () => {
-      dispatch(fetchingFeedItemFailure());
+    haveFeedSuccess: () => {
+      dispatch(haveFeedSuccess());
+    },
+    haveFeedFailure: () => {
+      dispatch(haveFeedFailure());
     },
     saveIncomingLinkError: (error) => {
       dispatch(saveIncomingLinkError(error));

@@ -16,7 +16,7 @@ import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
 import SpinnerModal from './common/SpinnerModal';
 import { store } from '../init-store';
-import { getFeedFailure } from '../actions/feed';
+import { getFeedRequest, getFeedFailure } from '../actions/feed';
 
 const { Answers } = Fabric;
 const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 2;
@@ -53,11 +53,15 @@ class Feed extends Component {
 
   componentWillMount () {
 
+    const { handleSubmitCode, eventCode, haveFeedRequest } = this.props;
+
+    store.dispatch(haveFeedRequest());
+    store.dispatch(getFeedRequest());
+
     console.log('FeedWillMountprops: ', this.props);
     const timestamp = new Date();
     console.log('Feed WillMount:', timestamp.getTime());
 
-    const { handleSubmitCode, eventCode } = this.props;
 
     // console.log('eventCode FeedMount:', eventCode);
     if (eventCode) {
@@ -140,14 +144,16 @@ class Feed extends Component {
   }
 
   componentDidUpdate () {
-    const { isFetching, allEvents, fetchFeedSuccess, fetchFeedFailure } = this.props;
-    console.log('isFetching: ', isFetching);
+    const { isReceivingFeed, allEvents, haveFeedSuccess, haveFeedFailure } = this.props;
+    console.log('isReceivingFeed: ', isReceivingFeed);
     console.log('allEvents: ', allEvents);
-    if (isFetching) {
+    if (isReceivingFeed) {
       if (allEvents.length > 0) {
-        fetchFeedSuccess();
+        console.log('fetchFeedSuccess');
+        haveFeedSuccess();
       } else {
-        fetchFeedFailure();
+        console.log('fetchFeedFailure');
+        haveFeedFailure();
       }
     }
   }
@@ -207,7 +213,8 @@ class Feed extends Component {
     const {
       allEvents,
       feed,
-      isFetching,
+      isReceivingFeed,
+      isFetchingFeed,
       displaySome,
       displayAll,
       filterActive,
@@ -219,10 +226,11 @@ class Feed extends Component {
       saveEventStatus,
       isFetchingEvent } = this.props;
 
-    const isLoading = isFetchingBranch || isFetching || isFetchingEvent;
+    const isLoading = isFetchingBranch || isReceivingFeed || isFetchingFeed || isFetchingEvent;
 
     console.log('isFetchingBranch: ', isFetchingBranch);
-    console.log('isFetching: ', isFetching);
+    console.log('isReceivingFeed: ', isReceivingFeed);
+    console.log('isFetchingFeed: ', isFetchingFeed);
     console.log('isFetchingEvent: ', isFetchingEvent);
     console.log('isLoading: ', isLoading);
     console.log('feed isConnected: ', isConnected);
@@ -289,7 +297,7 @@ class Feed extends Component {
         <FeedHeader>
           { !isConnected && this.renderAlert() }
           {
-            !isFetching && allEvents.length > 0 &&
+            !isFetchingFeed && allEvents.length > 0 &&
             <FilterPanel
               displayAll={ displayAll }
               displaySome={ displaySome }
@@ -306,7 +314,7 @@ class Feed extends Component {
             borderBottomColor: colours.lightgray }}
         >
           {
-            isFetching && <Spinner />
+            isFetchingFeed && <Spinner />
           }
 
 
@@ -314,7 +322,7 @@ class Feed extends Component {
             { !isConnected && this.renderAlert() }
 
             {
-              allEvents.length === 0 && !isFetching &&
+              allEvents.length === 0 && !isFetchingFeed &&
                 <View style={{ alignItems: 'center' }}>
                   <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
                     You have no events.
@@ -375,7 +383,7 @@ class Feed extends Component {
             }
 
             {
-              !isFetching && this.dataSource &&
+              !isFetchingFeed && this.dataSource &&
               <FlatList
                 data={this.dataSource}
                 renderItem={this.renderItem}

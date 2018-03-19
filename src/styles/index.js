@@ -28,7 +28,7 @@ export const ConfirmButton = styled.TouchableOpacity`
 export const ConfirmButtonText = styled.Text`
   fontSize: ${scale(18)};
   textAlign: center;
-  color: ${colours.white};
+  color: ${colours.offWhite};
 `; // confirmButtonText
 
 export const ButText = styled.Text.attrs({
