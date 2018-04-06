@@ -121,6 +121,9 @@ class Calendar extends Component {
 
     const isLoading = calendarIsFetching;
 
+    Answers.logCustom('Calendar.js render', { calendarIsFetching, isConnected }); // eslint-disable-line max-len
+
+
     if (isLoading) {
       // return this if waiting for Branch, etc
       console.log('cal visible isLoading', isLoading);
