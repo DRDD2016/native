@@ -234,6 +234,7 @@ class Feed extends Component {
     console.log('isLoading: ', isLoading);
     console.log('feed isConnected: ', isConnected);
     console.log('saveEventStatus: ', saveEventStatus);
+    Answers.logCustom('Feed.js render', { isFetchingBranch, isReceivingFeed, isFetchingFeed, isFetchingEvent, isLoading, isConnected, saveEventStatus }); // eslint-disable-line max-len
 
     if (saveEventStatus === 'Started') {
       // return this if waiting for Branch, etc

@@ -84,6 +84,7 @@ export default class Event extends Component {
 
     console.log('Event index will update nextProps: ', nextProps);
     console.log('ThisPropsNavigation: ', this.props.navigation);
+    
   }
 
   handleDelete (event, event_id) {
