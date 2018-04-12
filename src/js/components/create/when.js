@@ -27,7 +27,7 @@ export default class When extends Component {
   });
 
   nextPage = (name) => {
-    this.props.navigation.navigate('Confirm', { name });
+    this.props.navigation.navigate('Note', { name });
   };
 
   render () {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text, Image } from 'react-native';
 import ConfirmWhat from './confirm-what';
 import ConfirmWhere from './confirm-where';
 import ConfirmWhen from './confirm-when';
@@ -7,7 +7,7 @@ import ConfirmWhen from './confirm-when';
 import ImageHeader from '../common/ImageHeader';
 import HeaderBack from '../common/CreateHeaderBackground';
 import Spinner from '../common/Spinner';
-import { styles, ConfirmButton, ConfirmButtonText } from '../../../styles';
+import { styles, ConfirmButton, ConfirmButtonText, ButText } from '../../../styles';
 import colours from '../../../styles/colours';
 import ButtonHeader from '../common/ButtonHeader';
 import BackIcon from '../common/back-icon';
@@ -38,9 +38,9 @@ class Confirm extends Component {
   }
 
   render () {
-
+    const avatar = require('../../../img/avatar.png');
     console.log('confirm Props', this.props);
-    const { what, where, when, description, note, handleOnPress, isConnected, isFetching } = this.props;
+    const { what, where, when, description, note, handleOnPress, photo_url, isConnected, isFetching } = this.props;
 
     const iSODates = mapToISOString(when);
     const sortedDates = iSODates.sort((a, b) => {
@@ -62,15 +62,48 @@ class Confirm extends Component {
         <HeaderBack />
         { !isConnected && this.renderAlert() }
         <ScrollView>
-          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-            <Text style={[styles.msg4, { backgroundColor: colours.transparent, paddingBottom: 5 }]}>{ description }</Text>
-            <Text style={[styles.msg4, { backgroundColor: colours.transparent, paddingBottom: 5 }]}>{ note }</Text>
+          <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 10 }}>
+            <Text style={[styles.msg3, { backgroundColor: colours.transparent, paddingBottom: 5 }]}>{ description }</Text>
+
           </View>
-          <ConfirmWhat data={what} />
           <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
-          <ConfirmWhere data={where} />
+          <View style={{ height: 40, justifyContent: 'center' }}>
+            <ConfirmWhat data={what} />
+          </View>
           <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
-          <ConfirmWhen data={sortedDates} />
+          <View style={{ height: 50, justifyContent: 'center' }}>
+            <ConfirmWhere data={where} />
+          </View>
+          <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
+          <View style={{ height: 40, justifyContent: 'center' }}>
+            <ConfirmWhen data={sortedDates} />
+          </View>
+          <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
+
+          <View
+            style={{
+              flexDirection: 'row',
+              borderRadius: 15,
+              backgroundColor: colours.lightgray,
+              paddingHorizontal: 5,
+              paddingVertical: 5,
+              marginTop: 10,
+              marginHorizontal: 5,
+              justifyContent: 'space-between',
+              alignItems: 'flex-start' }}
+          >
+            <View style={{ flex: 1, marginHorizontal: 5, backgroundColor: 'transparent' }}>
+              <ButText color={colours.blue}>{ note }</ButText>
+            </View>
+            <View style={{ backgroundColor: colours.white, borderRadius: 15, padding: 1 }}>
+              <Image
+                source={{ uri: photo_url }}
+                defaultSource={avatar}
+                style={[styles.uiProfilePhotoCircularImage, { }]}
+              />
+            </View>
+
+          </View>
 
           <View style={[styles.rowCentered, { marginTop: 10 }]}>
             <ConfirmButton
