@@ -19,6 +19,7 @@ export const ConfirmButton = styled.TouchableOpacity`
   backgroundColor: ${colours.confirm};
   borderColor: ${colours.confirm};
   borderWidth: 1;
+  borderRadius: 10;
   paddingVertical: 8;
   paddingHorizontal: 10;
   marginHorizontal: 20;

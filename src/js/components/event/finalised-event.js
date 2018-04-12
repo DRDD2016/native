@@ -9,12 +9,13 @@ import FinalisedWhen from '../create/confirm-when';
 import Button from '../common/Button';
 import EditIcon from '../common/edit-icon';
 import InviteeCard from './invitee-card';
-import styles from '../../../styles';
+import { styles, ButText, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
 
 const STATUS_GOING = 'going';
 const STATUS_MAYBE = 'maybe';
 const STATUS_NOT_GOING = 'not_going';
+const avatar = require('../../../img/avatar.png');
 
 const inlineStyle = {
   RSVPButton: {
@@ -62,25 +63,26 @@ const inlineStyle = {
 };
 
 const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, handleEdit, handleInviteMoreFriends }) => {
+
   return (
     <View style={{ flex: 1 }}>
       <View style={{ marginTop: 5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
 
         <Image
           source={{ uri: event.host_photo_url }} style={{ borderRadius: 15,
-            marginHorizontal: 5,
-            width: 60,
-            height: 60,
+            marginLeft: 5,
+            width: Header.HEIGHT,
+            height: Header.HEIGHT,
             resizeMode: 'contain' }}
         />
 
         { userIsHost ?
-          <View>
+          <View style={{ flex: 1 }}>
             <Text style={{ alignSelf: 'center' }}>You are hosting</Text>
             <Text style={[styles.msg1, { alignSelf: 'center' }]}>{event.name}</Text>
           </View>
           :
-          <View>
+          <View style={{ backgroundColor: 'red', flex: 1 }}>
             <Text style={{ alignSelf: 'center' }}>You have been invited to</Text>
             <Text style={[styles.msg1, { alignSelf: 'center' }]}>{event.name}</Text>
             <Text style={{ alignSelf: 'center' }}>please RSVP</Text>
@@ -116,30 +118,70 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, handleE
       <ScrollView>
 
         <View style={{ flexDirection: 'row' }}>
-          <View style={{ flex: 1, alignSelf: 'center', marginTop: 10, marginHorizontal: 10 }}>
+          <View style={{ flex: 1, alignSelf: 'center', marginVertical: 10, marginHorizontal: 10 }}>
             <View>
-              <Text>{event.description}</Text>
-            </View>
-            <View>
-              <Text>{ event.note }</Text>
+              <Text style={[styles.msg3, { alignSelf: 'center' }]}>{event.description}</Text>
             </View>
           </View>
         </View>
 
-        <FinalisedWhat data={ event.what } />
-        <FinalisedWhere data={ event.where } />
-        <FinalisedWhen data={ event.when } />
+        <View style={{ backgroundColor: colours.sectionBorder, height: 1, marginHorizontal: 5 }} />
+        <View style={{ height: 30, justifyContent: 'center' }}>
+          <FinalisedWhat data={ event.what } />
+        </View>
+        <View style={{ height: 40, justifyContent: 'center' }}>
+          <FinalisedWhere data={ event.where } />
+        </View>
+        <View style={{ height: 30, justifyContent: 'center' }}>
+          <FinalisedWhen data={ event.when } />
+        </View>
+        <View style={{ backgroundColor: colours.sectionBorder, height: 1, marginHorizontal: 5 }} />
 
-        <View style={{ marginTop: 5, marginHorizontal: 5, borderTopColor: '#efefef', borderTopWidth: 1, alignItems: 'center' }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            borderRadius: 15,
+            backgroundColor: colours.lightgray,
+            paddingHorizontal: 5,
+            paddingVertical: 5,
+            marginTop: 10,
+            marginBottom: 5,
+            marginHorizontal: 5,
+            justifyContent: 'space-between',
+            alignItems: 'flex-start' }}
+        >
+          <View style={{ flex: 1, marginHorizontal: 5, backgroundColor: 'transparent' }}>
+            <ButText color={colours.blue}>{ event.note }</ButText>
+          </View>
+          <View style={{ backgroundColor: colours.white, borderRadius: 15, padding: 1 }}>
+            <Image
+              source={{ uri: event.host_photo_url }}
+              defaultSource={avatar}
+              style={[styles.uiProfilePhotoCircularImage, { }]}
+            />
+          </View>
+
+        </View>
+
+        <View
+          style={{
+            marginTop: 5,
+            paddingTop: 5,
+            marginHorizontal: 5,
+            borderTopColor: colours.sectionBorder,
+            borderTopWidth: 1,
+            alignItems: 'center' }}
+        >
 
           { userIsHost &&
-            <Button
-              buttonStyle={[styles.inviteButton, { marginTop: 10, marginBottom: 5 }]}
-              textStyle={styles.inviteButtonText}
+            <ConfirmButton
               onPress={ handleInviteMoreFriends }
             >
-              Invite more friends
-            </Button>
+              <ConfirmButtonText>
+                {'Invite friends  '}
+                <Icon name="user-plus" size={20} color={colours.offWhite} />
+              </ConfirmButtonText>
+            </ConfirmButton>
           }
 
         </View>

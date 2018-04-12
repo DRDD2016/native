@@ -18,6 +18,7 @@ import DetailsContainer from './containers/create/details';
 import WhatContainer from './containers/create/what';
 import WhereContainer from './containers/create/where';
 import WhenContainer from './containers/create/when';
+import NoteContainer from './containers/create/note';
 import ConfirmContainer from './containers/create/confirm';
 import EventContainer from './containers/event';
 // import TabBar from './components/tab-bar';
@@ -61,6 +62,7 @@ export const StackRoot = StackNavigator({
             What: { screen: WhatContainer },
             Where: { screen: WhereContainer },
             When: { screen: WhenContainer },
+            Note: { screen: NoteContainer },
             Confirm: { screen: ConfirmContainer } }),
             navigationOptions: {
               tabBarLabel: 'Create',

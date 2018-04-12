@@ -1,7 +1,12 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { NetInfo, AsyncStorage } from 'react-native';
+import { NetInfo, AsyncStorage, Platform } from 'react-native';
+import {
+  setCustomView,
+  setCustomTextInput,
+  setCustomText
+} from 'react-native-global-props';
 import Fabric from 'react-native-fabric';
 import branch from 'react-native-branch';
 import { persistStore } from 'redux-persist';
@@ -12,8 +17,38 @@ import SplashView from './components/common/SplashView';
 import AppWithNavigationState from './routes';
 import { AlertProvider } from './components/Alert';
 import PushController from './lib/PushController';
+import colours from '../styles/colours';
 
 const { Answers } = Fabric;
+
+const customViewProps = {
+  style: {
+    // backgroundColor: colours.white
+  }
+};
+
+const customTextProps = {
+  style: {
+    fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto',
+    color: colours.darkgray
+  }
+};
+
+const customTextInputProps = {
+  underlineColorAndroid: 'rgba(0,0,0,0)',
+  style: {
+    borderWidth: 1,
+    borderColor: 'gray',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: colours.offWhite
+  }
+};
+
+
+setCustomText(customTextProps);
+setCustomView(customViewProps);
+setCustomTextInput(customTextInputProps);
 
 console.log((require('react-native-config').default));
 // disable remote debugger warning in a simulator
@@ -23,6 +58,7 @@ console.ignoredYellowBox = [
 ];
 
 let _unsubscribeFromBranch = null;
+
 
 class App extends Component {
 

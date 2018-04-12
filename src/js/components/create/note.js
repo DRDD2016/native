@@ -1,55 +1,37 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Platform, Image, Dimensions } from 'react-native';
-import Fabric from 'react-native-fabric';
+import { View, Text, TextInput, Dimensions, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Button from '../common/Button';
-import ButtonHeader from '../common/ButtonHeader';
 import ImageHeader from '../common/ImageHeader';
 import HeaderBack from '../common/CreateHeaderBackground';
+import ButtonHeader from '../common/ButtonHeader';
+import BackIcon from '../common/back-icon';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
-import { store } from '../../init-store';
-import { clearCreateEvent } from '../../actions/create';
-import BackIcon from '../common/back-icon';
 
-const { Answers } = Fabric;
-const logo = require('../../../img/sparkLogo.png');
-
-export default class Details extends Component {
+export default class Note extends Component {
 
   static navigationOptions = ({ navigation }) => ({
-    title: <Text>
-      <Text>  Create event </Text>
-      <Image style={{ height: 80, width: 80 }} source={ logo } />
-    </Text>,
-    headerLeft: <ButtonHeader onPress={() => navigation.goBack(null)}>
+    title: 'Add Message',
+    headerLeft: <ButtonHeader
+      onPress={() => navigation.goBack(null)}
+    >
       <BackIcon />
     </ButtonHeader>,
-    headerRight: <ButtonHeader />,
-    headerStyle: { backgroundColor: colours.transparent },
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
     headerTintColor: colours.headerButtonColor,
     header: props => <ImageHeader {...props} />
   });
 
-  componentWillMount () {
-    store.dispatch(clearCreateEvent());
-    console.log('this.props: ', this.props);
-
-  }
-
-  componentDidMount () {
-    Answers.logCustom('Details.js Mounted', { additionalData: 'nothing' });
-  }
-
   nextPage = (name) => {
-    this.props.navigation.navigate('What', { name });
-  }
+    this.props.navigation.navigate('Confirm', { name });
+  };
 
   render () {
-    console.log('render this.props: ', this.props);
-    const { name, description, handleChange } = this.props;
-    const hideNext = name === '' || description === '';
+    const { name, note, handleChange } = this.props;
+
+    const hideNext = note === '';
+
     return (
       <KeyboardAwareScrollView
         style={{ backgroundColor: colours.white, height: Dimensions.get('window').height * 2 }}
@@ -70,30 +52,20 @@ export default class Details extends Component {
               marginTop: Platform.OS === 'ios' ? null : 10 }}
           >
             <Text style={styles.msg3}>
-              Enter the name of your event and a description.
+              Add a message to your friends (optional).
             </Text>
 
             <View style={ styles.row }>
               <TextInput
-                accessibilityLabel="Event name"
+                accessibilityLabel="Note"
                 underlineColorAndroid="transparent"
-                style={ styles.inputStyle }
-                onChangeText={ text => handleChange(text, 'name') }
-                value={ name }
-                type="text"
-                placeholder="Event name"
-                // autoCorrect
-              />
-            </View>
-            <View style={ styles.row }>
-              <TextInput
-                accessibilityLabel="Event description"
-                underlineColorAndroid="transparent"
-                style={ styles.inputStyle }
-                onChangeText={ text => handleChange(text, 'description') }
-                value={ description }
-                type="text"
-                placeholder="Event description"
+                style={ [styles.inputStyle, { textAlignVertical: 'top', height: 100 }] }
+                onChangeText={ text => handleChange(text, 'note') }
+                value={ note }
+                multiline
+                numberOfLines={5}
+                returnKeyType="send"
+                placeholder="Enter your message here"
                 // autoCorrect
               />
             </View>
