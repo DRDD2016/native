@@ -13,8 +13,6 @@ export default function ButtonHeader ({ onPress, children, testDescription }) {
         alignItems: 'center',
         width: Header.HEIGHT,
         height: Header.HEIGHT
-        // borderColor: 'red', // use for debugging style
-        // borderWidth: 2
       }}
       accessibilityLabel={testDescription}
     >

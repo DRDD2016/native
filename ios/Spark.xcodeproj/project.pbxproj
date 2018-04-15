@@ -44,6 +44,7 @@
 		55BF39401F4050E0000DBF54 /* FirebaseNanoPB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55BF393E1F4050E0000DBF54 /* FirebaseNanoPB.framework */; };
 		55BF39421F40510A000DBF54 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55BF39411F40510A000DBF54 /* GoogleToolboxForMac.framework */; };
 		55D81A002044B0B800AF7E04 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D819FF2044B0B800AF7E04 /* LaunchScreen.xib */; };
+		55E27D632083EC2D001CFA7F /* libjschelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EAD1DF850E9000B6D8A /* libjschelpers.a */; };
 		55FE454B52CD4C2D8843B8C2 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC10FEAA35E144BAA72C03AE /* EvilIcons.ttf */; };
 		5AFC853895294C44B319F6AA /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 667565734A1048E98139A2BC /* MaterialCommunityIcons.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
@@ -398,6 +399,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55E27D632083EC2D001CFA7F /* libjschelpers.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				55AE25931F0AEE5B0014D62B /* libRCTPushNotification.a in Frameworks */,
@@ -1342,7 +1344,7 @@
 				CODE_SIGN_ENTITLEMENTS = Spark/Spark.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: David Rickard (N83BEDBXB9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 34;
+				CURRENT_PROJECT_VERSION = 35;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 26TVQPX48T;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1378,7 +1380,7 @@
 				CODE_SIGN_ENTITLEMENTS = Spark/Spark.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Wanna Enterprises Ltd (26TVQPX48T)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 34;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_TEAM = 26TVQPX48T;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -10,7 +10,7 @@ export default class BurgerIcon extends Component {
     return (
       <Icon
         name="bars"
-        style={{ borderColor: 'red', borderWidth: 2, paddingLeft: 15, paddingRight: 15 }}
+        style={{ paddingLeft: 15, paddingRight: 15 }}
         size={ 24 }
         color={ colours.darkblue }
       />

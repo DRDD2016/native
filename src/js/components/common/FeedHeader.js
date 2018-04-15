@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Header } from 'react-navigation';
 import HeaderBack from '../common/FeedHeaderBackground';
 import colours from '../../../styles/colours';
+import { scale } from '../../../styles/scaling';
 
 
 export default function FeedHeader ({ children }) {
@@ -14,7 +14,7 @@ export default function FeedHeader ({ children }) {
         backgroundColor: colours.white }}
     >
 
-      <View style={{ height: Header.HEIGHT, flexDirection: 'row', alignItems: 'flex-start' }}>
+      <View style={{ height: scale(50), flexDirection: 'row', alignItems: 'flex-start' }}>
         <HeaderBack>
           <View
             style={{

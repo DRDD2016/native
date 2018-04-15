@@ -13,7 +13,7 @@ import ImageHeader from './common/ImageHeader';
 import HeaderBack from './common/FeedHeaderBackground';
 import FeedHeader from './common/FeedHeader';
 import SpinnerModal from './common/SpinnerModal';
-import styles from '../../styles';
+import styles, { scaledWidth } from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
@@ -177,6 +177,8 @@ class Calendar extends Component {
         <View
           style={{
             flex: 1,
+            alignSelf: 'center',
+            width: scaledWidth,
             backgroundColor: colours.white,
             borderBottomWidth: 1,
             borderBottomColor: colours.lightgray }}

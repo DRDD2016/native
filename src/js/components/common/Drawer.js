@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, Platform, Linking, TouchableOpacity } from 'react-native';
 import { Header } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
-// import styles from '../../../styles';
+import { menuWidth } from '../../../styles';
 import colours from '../../../styles/colours';
+import BurgerIcon from '../common/burger-icon';
 import { moderateScale } from '../../../styles/scaling';
 import { composeLinkToShare } from '../../lib/branchLink';
 import { store } from '../../init-store';
@@ -14,12 +15,23 @@ const logo = require('../../../img/sparkLoginLogo.png');
 const inlineStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colours.offWhite,
-    paddingTop: 10
+    width: menuWidth,
+    backgroundColor: colours.offWhite
+  },
+  HeaderRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   DrawerItem: {
     paddingHorizontal: moderateScale(15),
     paddingVertical: 10,
+    margin: 5,
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  LogoWrapper: {
+    paddingHorizontal: moderateScale(15),
+    paddingVertical: 20,
     margin: 5,
     alignItems: 'center',
     flexDirection: 'row'
@@ -53,11 +65,25 @@ export default class Drawer extends Component {
 
     return (
       <View style={inlineStyles.container}>
-        <TouchableOpacity style={inlineStyles.DrawerItem}>
-          <View>
+
+        <TouchableOpacity style={inlineStyles.HeaderRow} onPress={() => navigation.navigate('DrawerClose')}>
+
+          <View style={inlineStyles.LogoWrapper}>
             <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />
           </View>
+
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: Header.HEIGHT,
+              height: Header.HEIGHT }}
+          >
+            <BurgerIcon />
+          </View>
+
         </TouchableOpacity>
+
         <TouchableOpacity style={inlineStyles.DrawerItem} onPress={() => navigation.navigate('settings')}>
           <View style={{ marginRight: 10 }}><Icon name="cog" size={32} color={colours.gray} /></View>
           <Text

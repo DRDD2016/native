@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight, FlatList, Image, Platform } from 'react-native';
+import { View, Text, TouchableHighlight, FlatList, Image, Platform, Dimensions } from 'react-native';
 import Fabric from 'react-native-fabric';
 import _ from 'lodash';
 import { Header } from 'react-navigation';
@@ -9,7 +9,7 @@ import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
 import ImageHeader from './common/ImageHeader';
 import FeedHeader from './common/FeedHeader';
-import styles from '../../styles';
+import styles, { scaledWidth } from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
@@ -19,9 +19,9 @@ import { store } from '../init-store';
 import { getFeedFailure } from '../actions/feed';
 
 const { Answers } = Fabric;
+
 const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 2;
 const logo = require('../../img/sparkLoginLogo.png');
-
 
 // import { subscribeToBranchLinks } from '../lib/branchLink';
 
@@ -209,6 +209,8 @@ class Feed extends Component {
     const timestamp = new Date();
     console.log('Feed render:', timestamp.getTime());
 
+    const screenWidth = Dimensions.width;
+    console.log('screenWidth', screenWidth);
     const {
       allEvents,
       feed,
@@ -234,8 +236,7 @@ class Feed extends Component {
     console.log('isLoading: ', isLoading);
     console.log('feed isConnected: ', isConnected);
     console.log('saveEventStatus: ', saveEventStatus);
-    Answers.logCustom('Feed.js render', { isFetchingBranch, isReceivingFeed, isFetchingFeed, isFetchingEvent, isLoading, isConnected, saveEventStatus }); // eslint-disable-line max-len
-
+    Answers.logCustom('Feed.js render', { additionalData: [{ isFetchingBranch }, { isReceivingFeed }, { isFetchingFeed }, { isFetchingEvent }, { isLoading }, { isConnected }, { saveEventStatus }] }); // eslint-disable-line max-len
     if (saveEventStatus === 'Started') {
       // return this if waiting for Branch, etc
       console.log('saveEventStatus: ', 'Started');
@@ -309,6 +310,8 @@ class Feed extends Component {
         <View
           style={{
             flex: 1,
+            alignSelf: 'center',
+            width: scaledWidth,
             backgroundColor: colours.white,
             borderBottomWidth: 1,
             borderBottomColor: colours.lightgray }}
