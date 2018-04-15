@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { StackNavigator, TabNavigator, DrawerNavigator, addNavigationHelpers, NavigationActions } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colours from '../styles/colours';
+import { menuWidth } from '../styles';
 
 import DrawerContainer from './containers/drawer';
 import Index from './components/auth';
@@ -119,6 +120,7 @@ export const StackRoot = StackNavigator({
       initialRouteName: 'Spark',
       gesturesEnabled: false,
       drawerPosition: 'right',
+      drawerWidth: menuWidth,
       contentOptions: {
         inactiveTintColor: colours.blue,
         activeTintColor: colours.blue,

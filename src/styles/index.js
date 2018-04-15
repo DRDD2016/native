@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import colours from './colours';
 import { scale } from './scaling';
 
+const { height, width } = Dimensions.get('window');
+export const scaledWidth = width > 700 ? (width * 0.90) : width;
+export const scaledHeight = height;
+export const menuWidth = width > 700 ? (width * 0.60) : width;
 
 export const Button = styled.TouchableOpacity`
   paddingTop: 4;

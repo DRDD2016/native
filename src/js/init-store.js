@@ -9,6 +9,7 @@ import rootReducer from './reducers/';
 
 export function initStore (initialState) {
   if (Platform.OS === 'ios') {
+
     return createStore(
       rootReducer,
       initialState,
