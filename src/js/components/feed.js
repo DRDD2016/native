@@ -265,6 +265,7 @@ class Feed extends Component {
             type={ 'loading' }
             isConnected={isConnected}
             onClose={ () => { this.setState({ isModalVisible: false }); }}
+            additionalInfo={`isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
           />
         </View>
       );
