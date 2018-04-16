@@ -6,11 +6,12 @@ import { saveIncomingLinkError } from '../../actions/network';
 import Spinner from '../common/Spinner';
 import styles from '../../../styles';
 
-export default function SpinnerModal ({ visible, type, isConnected, onClose, eventCodeError }) {
+export default function SpinnerModal ({ visible, type, isConnected, onClose, eventCodeError, additionalInfo }) {
 
   console.log('SpinnerModal visible:', visible);
   console.log('SpinnerModal type:', type);
   console.log('SpinnerModal isConnected:', isConnected);
+  console.log('SpinnerModal additionalInfo:', additionalInfo);
 
   return (
     <Modal
@@ -49,6 +50,9 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
               }
               {
                 // isFetching && <Text style={[styles.msg2, { flex: 1 }]}>{`isFetching: ${isFetching}`}</Text>
+              }
+              {
+                additionalInfo && <Text style={[styles.msg2, { flex: 1 }]}>{additionalInfo}</Text>
               }
 
               <View style={{ flex: 1 }} />

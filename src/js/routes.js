@@ -118,7 +118,7 @@ export const StackRoot = StackNavigator({
       headerMode: 'float',
       title: 'Spark',
       initialRouteName: 'Spark',
-      gesturesEnabled: false,
+      gesturesEnabled: true,
       drawerPosition: 'right',
       drawerWidth: menuWidth,
       contentOptions: {
