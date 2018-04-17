@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { View, Text, TouchableOpacity, TouchableHighlight, ScrollView, Modal } from 'react-native';
+import { View, Text, TouchableHighlight, ScrollView, Modal } from 'react-native';
 import CategoryDetails from './category-details';
-import { styles, ConfirmButton, ConfirmButtonText } from '../../../styles';
+import { styles, ConfirmButton, ConfirmButtonText, ButText } from '../../../styles';
 import colours from '../../../styles/colours';
 import Spinner from '../common/Spinner';
 import formatDate from '../../lib/format-date';
@@ -122,24 +122,41 @@ export default class HostPoll extends Component {
           !isFetching &&
 
           <View style={{ flexDirection: 'column' }}>
-            <View style={{ marginHorizontal: 5, marginBottom: 10, alignItems: 'center' }}>
-              <Text style={{ alignSelf: 'center', marginBottom: 5 }}>You created a poll for</Text>
-              <Text style={[styles.msg1, { alignSelf: 'center', marginBottom: 5 }]}>{event.name}</Text>
-              <Text style={[styles.msg5, { alignSelf: 'center' }]}>
+            <View style={{ marginHorizontal: 5, marginBottom: 20 }}>
+
+              <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+
+                <View
+                  style={{ paddingHorizontal: 20, width: 100, marginHorizontal: 5 }}
+                />
+
+                <View style={{ flexDirection: 'column' }}>
+                  <Text style={[styles.msg2, { alignSelf: 'center', marginBottom: 5 }]}>You created a poll for</Text>
+                  <Text style={[styles.msg1, { alignSelf: 'center', marginBottom: 5 }]}>{event.name}</Text>
+                </View>
+
+                <ConfirmButton
+                  style={{
+                    paddingHorizontal: 20,
+                    width: 100,
+                    marginHorizontal: 5,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center' }}
+                  onPress={ () => handleInviteMoreFriends() }
+                >
+                  <ButText style={{ color: colours.white, opacity: 0.8 }}>
+                    {'Invite friends  '}
+                  </ButText>
+                  <Icon name="user-plus" size={20} color={colours.white} opacity={0.8} />
+                </ConfirmButton>
+
+              </View>
+
+              <Text style={[styles.msg3, { marginTop: 10, textAlign: 'center' }]}>
                 You can review the responses and tap to select your final choices and tap &quot;Confirm&quot; when you are ready:
               </Text>
-            </View>
 
-            <View style={[styles.rowCentered, { marginTop: 5, marginBottom: 5 }]}>
-              <ConfirmButton
-                onPress={ () => handleInviteMoreFriends() }
-              >
-                <ConfirmButtonText>
-                  {'Invite friends  '}
-                  <Icon name="user-plus" size={20} color={colours.offWhite} />
-                </ConfirmButtonText>
-
-              </ConfirmButton>
             </View>
 
             <View style={ inlineStyle.row }>
@@ -176,8 +193,8 @@ export default class HostPoll extends Component {
             <View style={[styles.row, { justifyContent: 'center' }]}>
               {
                 allCategoriesSelected &&
-                <TouchableOpacity
-                  style={ [styles.confirmButton, { marginBottom: 20 }] }
+                <ConfirmButton
+                  style={{ marginBottom: 40 }}
                   onPress={ () => {
                     this.setState({
                       isModalVisible: true
@@ -187,8 +204,8 @@ export default class HostPoll extends Component {
                     );
                   }}
                 >
-                  <Text style={[styles.confirmButtonText, { textAlign: 'center' }]}>CONFIRM EVENT DETAILS</Text>
-                </TouchableOpacity>
+                  <ConfirmButtonText>CONFIRM EVENT DETAILS</ConfirmButtonText>
+                </ConfirmButton>
               }
             </View>
 

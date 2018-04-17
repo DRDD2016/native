@@ -13,7 +13,7 @@ import ImageHeader from './common/ImageHeader';
 import HeaderBack from './common/FeedHeaderBackground';
 import FeedHeader from './common/FeedHeader';
 import SpinnerModal from './common/SpinnerModal';
-import styles, { scaledWidth } from '../../styles';
+import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
@@ -116,6 +116,9 @@ class Calendar extends Component {
 
     timestamp = new Date();
     console.log('renderCalendar:', timestamp.getTime());
+
+    const { width } = Dimensions.get('window'); // inline style to force render on screen rotation
+    const scaledWidth = width > 700 ? (width * 0.90) : (width * 1);
 
     const { allEvents, calendarIsFetching, displaySome, displayAll, filterActive, selectedFilter, user_id, isConnected } = this.props;
 

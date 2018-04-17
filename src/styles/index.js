@@ -1,7 +1,7 @@
 import { Dimensions, Platform } from 'react-native';
 import styled from 'styled-components';
 import colours from './colours';
-import { scale } from './scaling';
+import { scale, moderateScale } from './scaling';
 
 
 // Buttons
@@ -15,8 +15,12 @@ export const Button = styled.TouchableOpacity`
   elevation: 1;
 `;
 
+export const BarButton = styled.TouchableOpacity`
+  elevation: 1;
+`;
+
 export const ConfirmButton = styled.TouchableOpacity`
-  width: ${Dimensions.get('window').width * 0.5};
+  width: 350;
   justifyContent: center;
   alignItems: center;
   backgroundColor: ${colours.confirm};
@@ -26,12 +30,12 @@ export const ConfirmButton = styled.TouchableOpacity`
   paddingVertical: 8;
   paddingHorizontal: 10;
   marginHorizontal: 20;
-  height: ${scale(50)};
+  height: 50;
   elevation: 1;
 `; // confirmButton
 
 export const ConfirmButtonText = styled.Text`
-  fontSize: ${scale(18)};
+  fontSize: ${moderateScale(18)};
   textAlign: center;
   color: ${colours.offWhite};
 `; // confirmButtonText
