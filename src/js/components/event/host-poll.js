@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { View, Text, TouchableHighlight, ScrollView, Modal } from 'react-native';
 import CategoryDetails from './category-details';
-import { styles, ConfirmButton, ConfirmButtonText, ButText } from '../../../styles';
+import { styles, Msg1, Msg2, Msg3, ConfirmButton, ConfirmButtonText, ButText } from '../../../styles';
 import colours from '../../../styles/colours';
 import Spinner from '../common/Spinner';
 import formatDate from '../../lib/format-date';
@@ -130,9 +130,9 @@ export default class HostPoll extends Component {
                   style={{ paddingHorizontal: 20, flex: 1, maxWidth: 150, marginHorizontal: 5 }}
                 />
 
-                <View style={{ flexDirection: 'column', marginHorizontal: 5 }}>
-                  <Text style={[styles.msg2, { alignSelf: 'center', marginBottom: 5 }]}>You created a poll for</Text>
-                  <Text style={[styles.msg1, { alignSelf: 'center', marginBottom: 5 }]}>{event.name}</Text>
+                <View style={{ flexDirection: 'column', alignItems: 'center', marginHorizontal: 5 }}>
+                  <Msg2>You created a poll for</Msg2>
+                  <Msg1>{event.name}</Msg1>
                 </View>
 
                 <ConfirmButton
@@ -154,9 +154,9 @@ export default class HostPoll extends Component {
 
               </View>
 
-              <Text style={[styles.msg3, { marginTop: 10, textAlign: 'center' }]}>
+              <Msg3>
                 You can review the responses and tap to select your final choices and tap &quot;Confirm&quot; when you are ready:
-              </Text>
+              </Msg3>
 
             </View>
 

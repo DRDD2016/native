@@ -129,6 +129,7 @@ export const Msg3 = styled.Text`
   fontSize: ${scale(14)};
   fontWeight: 700;
   color: ${colours.gray};
+  justifyContent: 'center';
 `; // msg3
 
 export const Msg4 = styled.Text`
@@ -715,11 +716,13 @@ export const styles = {
     height: 45,
     flexDirection: 'row',
     flex: 1,
-    elevation: 1, // replaces shadow on Android, shadow props IOS only
+    // elevation: 1, // replaces shadow on Android, shadow props IOS only
     shadowOpacity: 0.75,
     shadowRadius: 5,
-    shadowColor: 'red',
-    shadowOffset: { height: 4, width: 0 }
+    shadowColor: 'darkgray',
+    shadowOffset: { height: 2, width: 0 },
+    backgroundColor: 'transparent',
+    overflow: 'hidden'
   },
   inputStyleAuth: {
     color: colours.darkgray,
