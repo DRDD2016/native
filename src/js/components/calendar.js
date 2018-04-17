@@ -135,6 +135,7 @@ class Calendar extends Component {
             type={ 'loading' }
             isConnected={isConnected}
             onClose={ () => { this.setState({ isModalVisible: false }); }}
+            additionalInfo={ `cal loading --- calendarIsFetching:${calendarIsFetching}, isConnected:${isConnected}`} // eslint-disable-line max-len
           />
         </View>
       );
@@ -153,6 +154,7 @@ class Calendar extends Component {
               isConnected={isConnected}
               onClose={ () => { this.setState({ isModalVisible: false }); }}
               eventCodeError={eventCodeError}
+              additionalInfo={ `cal eventCodeError --- calendarIsFetching:${calendarIsFetching}, isConnected:${isConnected}`} // eslint-disable-line max-len
             />
 
           }
@@ -185,7 +187,7 @@ class Calendar extends Component {
         >
 
           {
-            calendarIsFetching && <Spinner />
+            // calendarIsFetching && <Spinner />
           }
 
           <View>

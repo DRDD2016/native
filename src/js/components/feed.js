@@ -249,6 +249,7 @@ class Feed extends Component {
             type={ 'share_invite' }
             isConnected={isConnected}
             onClose={ () => { this.setState({ isModalVisible: false }); }}
+            additionalInfo={ `feed share_invite --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
           />
         </View>
       );
@@ -265,7 +266,7 @@ class Feed extends Component {
             type={ 'loading' }
             isConnected={isConnected}
             onClose={ () => { this.setState({ isModalVisible: false }); }}
-            additionalInfo={`isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
+            additionalInfo={ `feed isLoading --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
           />
         </View>
       );
@@ -284,6 +285,7 @@ class Feed extends Component {
               isConnected={isConnected}
               onClose={ () => { this.setState({ isModalVisible: false }); }}
               eventCodeError={eventCodeError}
+              additionalInfo={ `feed eventCodeError --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
             />
 
           }

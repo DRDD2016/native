@@ -1,10 +1,13 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import { View, Text, Modal, TouchableHighlight } from 'react-native';
+import Fabric from 'react-native-fabric';
 import { store } from '../../init-store';
 import { saveIncomingLinkError } from '../../actions/network';
 import Spinner from '../common/Spinner';
 import styles from '../../../styles';
+
+const { Answers } = Fabric;
 
 export default function SpinnerModal ({ visible, type, isConnected, onClose, eventCodeError, additionalInfo }) {
 
@@ -12,6 +15,8 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
   console.log('SpinnerModal type:', type);
   console.log('SpinnerModal isConnected:', isConnected);
   console.log('SpinnerModal additionalInfo:', additionalInfo);
+  Answers.logCustom('Spinner activated', { additionalData: additionalInfo });
+
 
   return (
     <Modal
@@ -30,6 +35,9 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
               <View style={{ flex: 1 }}>
                 <Spinner size="large" />
               </View>
+              {
+                additionalInfo && <Text style={[styles.msg2, { flex: 1 }]}>{additionalInfo}</Text>
+              }
               <View style={{ flex: 1 }} />
 
             </View>
@@ -67,6 +75,10 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
               <Text style={[styles.msg2, { flex: 1 }]}>please check your internet connection</Text>
               <Text style={[styles.msg2, { flex: 1 }]}>{`eventCodeError: ${eventCodeError}`}</Text>
               <View style={{ flex: 1 }} />
+
+              {
+                additionalInfo && <Text style={[styles.msg2, { flex: 1 }]}>{additionalInfo}</Text>
+              }
 
               <View style={{ flex: 1 }}>
                 <TouchableHighlight
