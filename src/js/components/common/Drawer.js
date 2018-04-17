@@ -20,6 +20,8 @@ const inlineStyles = StyleSheet.create({
   },
   HeaderRow: {
     flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginTop: 10,
     justifyContent: 'space-between'
   },
   DrawerItem: {
@@ -30,8 +32,8 @@ const inlineStyles = StyleSheet.create({
     flexDirection: 'row'
   },
   LogoWrapper: {
-    paddingHorizontal: moderateScale(15),
-    paddingVertical: 20,
+    paddingLeft: moderateScale(15),
+    paddingRight: 0,
     margin: 5,
     alignItems: 'center',
     flexDirection: 'row'
@@ -76,7 +78,7 @@ export default class Drawer extends Component {
             style={{
               justifyContent: 'center',
               alignItems: 'center',
-              width: Header.HEIGHT,
+              width: BurgerIcon.WIDTH,
               height: Header.HEIGHT }}
           >
             <BurgerIcon />

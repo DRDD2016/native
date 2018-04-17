@@ -43,7 +43,7 @@ export const ConfirmButtonText = styled.Text`
 export const ButText = styled.Text.attrs({
   color: props => props.color || colours.gray
 })`
-  fontSize: ${scale(12)};
+  fontSize: ${moderateScale(12)};
   color: ${props => props.color};
 `;
 

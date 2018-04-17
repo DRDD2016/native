@@ -127,10 +127,10 @@ export default class HostPoll extends Component {
               <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
 
                 <View
-                  style={{ paddingHorizontal: 20, width: 100, marginHorizontal: 5 }}
+                  style={{ paddingHorizontal: 20, flex: 1, maxWidth: 150, marginHorizontal: 5 }}
                 />
 
-                <View style={{ flexDirection: 'column' }}>
+                <View style={{ flexDirection: 'column', marginHorizontal: 5 }}>
                   <Text style={[styles.msg2, { alignSelf: 'center', marginBottom: 5 }]}>You created a poll for</Text>
                   <Text style={[styles.msg1, { alignSelf: 'center', marginBottom: 5 }]}>{event.name}</Text>
                 </View>
@@ -138,7 +138,8 @@ export default class HostPoll extends Component {
                 <ConfirmButton
                   style={{
                     paddingHorizontal: 20,
-                    width: 100,
+                    flex: 1,
+                    maxWidth: 150,
                     marginHorizontal: 5,
                     flexDirection: 'row',
                     alignItems: 'center',
