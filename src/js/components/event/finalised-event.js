@@ -6,10 +6,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import FinalisedWhat from '../create/confirm-what';
 import FinalisedWhere from '../create/confirm-where';
 import FinalisedWhen from '../create/confirm-when';
-import Button from '../common/Button';
 import EditIcon from '../common/edit-icon';
 import InviteeCard from './invitee-card';
-import { styles, ButText, ConfirmButton, ConfirmButtonText } from '../../../styles';
+import { styles, ButText, ConfirmButton, ConfirmButtonText, RSVPButton, RSVPButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
 
 const STATUS_GOING = 'going';
@@ -18,17 +17,6 @@ const STATUS_NOT_GOING = 'not_going';
 const avatar = require('../../../img/avatar.png');
 
 const inlineStyle = {
-  RSVPButton: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colours.confirm,
-    borderColor: colours.confirm,
-    borderWidth: 1,
-    paddingVertical: 5,
-    paddingHorizontal: 8,
-    marginHorizontal: 5
-  },
   RSVPTitle: {
     flex: 1,
     justifyContent: 'center',
@@ -82,7 +70,7 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, handleE
             <Text style={[styles.msg1, { alignSelf: 'center' }]}>{event.name}</Text>
           </View>
           :
-          <View style={{ backgroundColor: 'red', flex: 1 }}>
+          <View style={{ flex: 1 }}>
             <Text style={{ alignSelf: 'center' }}>You have been invited to</Text>
             <Text style={[styles.msg1, { alignSelf: 'center' }]}>{event.name}</Text>
             <Text style={{ alignSelf: 'center' }}>please RSVP</Text>
@@ -191,27 +179,30 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, handleE
           <Text style={{ marginLeft: 5, marginVertical: 5, fontSize: 14 }}>RSVPs</Text>
 
           <View style={{ flexDirection: 'row' }}>
-            <Button
-              buttonStyle={[styles.RSVPButton, inlineStyle.greenButton]}
-              textStyle={styles.RSVPButtonText}
+            <RSVPButton
+              style={inlineStyle.greenButton}
               onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_GOING) }
             >
-              Going
-            </Button>
-            <Button
-              buttonStyle={[styles.RSVPButton, inlineStyle.orangeButton]}
-              textStyle={styles.RSVPButtonText}
+              <RSVPButtonText>
+                Going
+              </RSVPButtonText>
+            </RSVPButton>
+            <RSVPButton
+              style={inlineStyle.orangeButton}
               onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_MAYBE) }
             >
-              Maybe
-            </Button>
-            <Button
-              buttonStyle={[styles.RSVPButton, inlineStyle.redButton]}
-              textStyle={styles.RSVPButtonText}
+              <RSVPButtonText>
+                Maybe
+              </RSVPButtonText>
+            </RSVPButton>
+            <RSVPButton
+              style={inlineStyle.redButton}
               onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_NOT_GOING) }
             >
-              Not Going
-            </Button>
+              <RSVPButtonText>
+                Not Going
+              </RSVPButtonText>
+            </RSVPButton>
           </View>
 
         </View>

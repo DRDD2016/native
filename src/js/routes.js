@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { StackNavigator, TabNavigator, DrawerNavigator, addNavigationHelpers, NavigationActions } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colours from '../styles/colours';
-import { menuWidth } from '../styles';
 
 import DrawerContainer from './containers/drawer';
 import Index from './components/auth';
@@ -29,6 +28,9 @@ import EditContainer from './containers/edit';
 import Code from './containers/code';
 import Splash from './components/auth/splash';
 // import Modal from './components/modal';
+
+const { width } = Dimensions.get('window');
+export const menuWidth = width > 700 ? (width * 0.6) : (width * 0.7);
 
 export const StackRoot = StackNavigator({
   splash: {
