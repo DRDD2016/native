@@ -199,8 +199,7 @@ class Profile extends Component {
                   buttonStyle={ [hideEditButton, styles.confirmButton, {
                     backgroundColor: colours.purple,
                     borderColor: colours.purple,
-                    marginTop: 2,
-                    flex: 1
+                    marginTop: 2
                   }] }
                   textStyle={ styles.confirmButtonText }
                   onPress={ () => this.saveChanges(firstname, surname) }

@@ -30,7 +30,7 @@ import Splash from './components/auth/splash';
 // import Modal from './components/modal';
 
 const { width } = Dimensions.get('window');
-export const menuWidth = width > 700 ? (width * 0.6) : (width * 0.7);
+export const menuWidth = width > 700 ? (width * 0.6) : (width * 0.8);
 
 export const StackRoot = StackNavigator({
   splash: {
