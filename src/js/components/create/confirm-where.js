@@ -31,13 +31,13 @@ const ConfirmWhere = ({ data }) => { // eslint-disable-line react/prop-types
           style={{ flex: 250 }}
         >
           <View style={{ }}>
-            <Button>
+            <View>
               <ButText color={colours.where}>
                 <Icon name="map-marker" size={18} color={colours.where} />
                 {'  '}
                 { datum || 'TBC' }
               </ButText>
-            </Button>
+            </View>
           </View>
         </View>
       </View>

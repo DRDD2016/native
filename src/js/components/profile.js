@@ -5,11 +5,10 @@ import ImagePicker from 'react-native-image-picker';
 import { Header } from 'react-navigation';
 import Fabric from 'react-native-fabric';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Button from './common/Button';
+import { styles, ConfirmButton, ConfirmButtonText } from '../../styles';
 import Spinner from './common/Spinner';
 import FeedHeader from './common/FeedHeader';
 import ImageHeader from './common/ImageHeader';
-import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
@@ -117,7 +116,7 @@ class Profile extends Component {
 
   render () {
 
-    const { photo_url, firstname, surname, handleLogOut, handleChangeName, isConnected, navigation } = this.props;
+    const { photo_url, firstname, surname, handleChangeName, isConnected } = this.props;
     const hideEditButton = (firstname === '' ? styles.hideEditButton : [{ backgroundColor: 'green' }]);
     return (
       <View style={{ flex: 1 }}>
@@ -196,7 +195,7 @@ class Profile extends Component {
 
               <View style={styles.row}>
                 { this.props.isFetching ? <Spinner /> :
-                <Button
+                <ConfirmButton
                   buttonStyle={ [hideEditButton, styles.confirmButton, {
                     backgroundColor: colours.purple,
                     borderColor: colours.purple,
@@ -206,20 +205,13 @@ class Profile extends Component {
                   textStyle={ styles.confirmButtonText }
                   onPress={ () => this.saveChanges(firstname, surname) }
                 >
+                  <ConfirmButtonText>
                   Save changes
-                </Button>}
+                  </ConfirmButtonText>
+                </ConfirmButton>}
 
               </View>
 
-              <View style={styles.row}>
-                <Button
-                  buttonStyle={ [hideEditButton, styles.confirmButton, { backgroundColor: colours.white, borderColor: colours.gray, flex: 1 }] }
-                  textStyle={ [styles.confirmButtonText, { color: colours.gray }]}
-                  onPress={ () => handleLogOut(navigation) }
-                >
-                  Log Out
-                </Button>
-              </View>
             </View>
           </ScrollView>
         </View>
@@ -232,7 +224,6 @@ Profile.propTypes = {
   firstname: PropTypes.string.isRequired,
   surname: PropTypes.string.isRequired,
   photo_url: PropTypes.string.isRequired,
-  handleLogOut: PropTypes.func.isRequired,
   handleEditName: PropTypes.func.isRequired,
   handleChangeName: PropTypes.func.isRequired,
   handleUpload: PropTypes.func.isRequired

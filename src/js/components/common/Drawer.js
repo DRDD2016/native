@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, Platform, Linking, TouchableOpacity } from 'react-native';
 import { Header } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { menuWidth } from '../../../styles';
+// import { menuWidth } from '../../../styles';
 import colours from '../../../styles/colours';
 import BurgerIcon from '../common/burger-icon';
 import { moderateScale } from '../../../styles/scaling';
@@ -15,7 +15,7 @@ const logo = require('../../../img/sparkLoginLogo.png');
 const inlineStyles = StyleSheet.create({
   container: {
     flex: 1,
-    width: menuWidth,
+    // width: menuWidth,
     backgroundColor: colours.offWhite
   },
   HeaderRow: {

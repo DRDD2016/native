@@ -34,7 +34,7 @@ const ConfirmWhen = ({ data }) => {
         }
         <View style={{ flex: 800 }}>
           <View style={{ }}>
-            <Button>
+            <View>
               <ButText color={colours.when}>
                 <Icon name="calendar" size={18} color={colours.when} />
                 {'  '}
@@ -52,7 +52,7 @@ const ConfirmWhen = ({ data }) => {
                   formatTime(timestamp)
                 }
               </ButText>
-            </Button>
+            </View>
           </View>
         </View>
       </View>

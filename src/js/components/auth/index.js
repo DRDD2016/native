@@ -1,9 +1,8 @@
 import React from 'react';
 import { Image, Text, View, Platform } from 'react-native';
-import Button from '../common/Button';
+import { ConfirmButton, ConfirmButtonText } from '../../../styles';
 import Header from '../common/Header';
 import colours from '../../../styles/colours';
-import styles from '../../../styles';
 
 const logo = require('../../../img/sparkLoginLogo.png');
 
@@ -40,26 +39,28 @@ export default function Index ({ navigation }) {
         <View
           style={{ alignItems: 'center', justifyContent: 'center', flexDirection: 'column', flex: 1, marginBottom: 40 }}
         >
-          <Button
+          <ConfirmButton
             testDescription="LOG IN"
-            buttonStyle={ [styles.confirmButton, { flex: 0.2, backgroundColor: colours.green, marginTop: 2 }] }
-            textStyle={ styles.confirmButtonText }
+            style={{ backgroundColor: colours.green }}
             onPress={ goToLogin }
           >
-            LOG IN
-          </Button>
-          <View style={{ flex: 0.2, alignItems: 'center', justifyContent: 'center' }}>
+            <ConfirmButtonText>
+              LOG IN
+            </ConfirmButtonText>
+          </ConfirmButton>
+          <View style={{ height: 60, alignItems: 'center', justifyContent: 'center' }}>
             <Text style={{ fontSize: 16, fontWeight: '600', color: colours.darkgray }}>
               OR
             </Text>
           </View>
-          <Button
-            buttonStyle={ [styles.confirmButton, { flex: 0.2, backgroundColor: colours.orange, borderColor: colours.orange, marginTop: 2 }] }
-            textStyle={ [styles.confirmButtonText, { fontFamily: 'Helvetica Neue' }] }
+          <ConfirmButton
+            style={{ backgroundColor: colours.orange, borderColor: colours.orange }}
             onPress={ goToSignup }
           >
-            SIGN UP
-          </Button>
+            <ConfirmButtonText>
+              SIGN UP
+            </ConfirmButtonText>
+          </ConfirmButton>
         </View>
       </View>
     </View>

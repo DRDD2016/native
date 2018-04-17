@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../../lib/format-date';
 import formatTime from '../../lib/format-time';
 import BarChart from '../../components/event/bar-chart';
-import styles from '../../../styles';
+import { styles, BarButton } from '../../../styles';
 import colours from '../../../styles/colours';
 
 const OFF_WHITE = colours.offWhite;
@@ -115,7 +115,7 @@ export default class CategoryDetails extends Component {
                 </View>
 
                 <View style={{ flex: 500 }}>
-                  <View style={{ marginTop: 5, marginBottom: 5 }}>
+                  <View style={{ marginTop: 5, marginBottom: 5, elevation: 1 }}>
                     <Icon.Button
                       name={this.icons[category]}
                       size={16}
@@ -148,7 +148,8 @@ export default class CategoryDetails extends Component {
 
                   {
                     this.props.isHostPollView &&
-                    <View style={{ flex: 1, marginTop: 5, marginBottom: 5, flexDirection: 'row', alignItems: 'center' }}>
+                    <BarButton style={{ flex: 1, marginTop: 5, marginBottom: 5, flexDirection: 'row', alignItems: 'center' }}>
+
                       {
                         (totalVoteCount !== 0) && <View style={{ paddingLeft: 1, paddingVertical: 10, width: 1, backgroundColor: 'lightgray' }} />
                       }
@@ -158,7 +159,8 @@ export default class CategoryDetails extends Component {
                           <Text style={styles.msg4}>
                             { (tally !== 0) && (tally !== undefined) && (tally !== 1) && `${tally} votes` }
                             { (tally === 1) && `${tally} vote` }
-                            { (index === 0) && (totalVoteCount === 0) && 'No votes yet' }
+                            { this.state.isToggleable && (index === 0) && (totalVoteCount === 0) && 'No votes yet' }
+                            { this.state.isToggleable && (totalVoteCount !== 0) && (tally === 0) && 'No votes' }
                           </Text>
                         </View>
 
@@ -175,7 +177,7 @@ export default class CategoryDetails extends Component {
                         </View>
                       </View>
 
-                    </View>
+                    </BarButton>
                   }
                 </View>
 

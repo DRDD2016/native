@@ -13,7 +13,7 @@ import ImageHeader from '../common/ImageHeader';
 import Spinner from '../common/Spinner';
 import { loginValidator as validate } from './form-validation';
 import colours from '../../../styles/colours';
-import styles from '../../../styles';
+import { styles, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import { connectAlert } from '../Alert';
 
 const { Answers } = Fabric;
@@ -234,15 +234,14 @@ class Login extends Component {
               </View>
 
               <View style={{ alignItems: 'center', marginTop: 10 }}>
-                <TouchableOpacity
+                <ConfirmButton
                   accessibilityLabel="LOG IN Submit"
                   activeOpacity={ 0.5 }
                   disabled={isLoggingIn}
                   onPress={handleSubmit(handleSubmitForm)}
-                  style={styles.confirmButton}
                 >
-                  <Text style={styles.confirmButtonText}>LOG IN</Text>
-                </TouchableOpacity>
+                  <ConfirmButtonText>LOG IN</ConfirmButtonText>
+                </ConfirmButton>
                 <TouchableOpacity
                   style={{ marginTop: 5, paddingTop: 10 }} activeOpacity={ 0.5 } onPress={() => navigation.navigate('confirmEmail')}
                 >

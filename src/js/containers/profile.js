@@ -1,9 +1,7 @@
 import { connect } from 'react-redux';
 import { AsyncStorage } from 'react-native';
-import { NavigationActions } from 'react-navigation';
-import { persistor, store } from '../init-store';
 import Profile from '../components/profile';
-import { changeName, editName, uploadPhoto, logout } from '../actions/profile';
+import { changeName, editName, uploadPhoto } from '../actions/profile';
 
 const mapStateToProps = ({ nav, user, network }) => ({
   nav,
@@ -20,32 +18,6 @@ const mapStateToProps = ({ nav, user, network }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleLogOut: (navigation) => {
-    AsyncStorage.removeItem('spark_token')
-    .then(() => {
-      AsyncStorage.removeItem('spark_user_id')
-      .then(() => {
-
-        const resetAction = NavigationActions.reset({
-          index: 0,
-          key: null,
-          actions: [
-            NavigationActions.navigate({ routeName: 'splash' })
-          ]
-        });
-
-        navigation.dispatch(resetAction);
-
-        // const rootNavigator = nav.getNavigator('root');
-        // rootNavigator.replace('auth');
-        // clean up persisted state
-        persistor.purge();
-        store.getState().network.socket.disconnect();
-        dispatch(logout());
-        // redirect
-      });
-    });
-  },
   handleChangeName: (text, category) => {
     dispatch(changeName(text, category));
   },

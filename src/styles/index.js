@@ -1,12 +1,10 @@
 import { Dimensions, Platform } from 'react-native';
 import styled from 'styled-components';
 import colours from './colours';
-import { scale } from './scaling';
+import { scale, moderateScale } from './scaling';
 
-const { height, width } = Dimensions.get('window');
-export const scaledWidth = width > 700 ? (width * 0.90) : width;
-export const scaledHeight = height;
-export const menuWidth = width > 700 ? (width * 0.60) : width;
+
+// Buttons
 
 export const Button = styled.TouchableOpacity`
   paddingTop: 4;
@@ -14,24 +12,30 @@ export const Button = styled.TouchableOpacity`
   paddingLeft: 15;
   paddingRight: 15;
   borderRadius: 3;
+  elevation: 1;
+`;
+
+export const BarButton = styled.TouchableOpacity`
+  elevation: 1;
 `;
 
 export const ConfirmButton = styled.TouchableOpacity`
-  width: ${Dimensions.get('window').width * 0.5};
+  width: 350;
   justifyContent: center;
   alignItems: center;
   backgroundColor: ${colours.confirm};
   borderColor: ${colours.confirm};
   borderWidth: 1;
-  borderRadius: 10;
+  borderRadius: 5;
   paddingVertical: 8;
   paddingHorizontal: 10;
   marginHorizontal: 20;
-  height: ${scale(50)};
+  height: 50;
+  elevation: 1;
 `; // confirmButton
 
 export const ConfirmButtonText = styled.Text`
-  fontSize: ${scale(18)};
+  fontSize: ${moderateScale(18)};
   textAlign: center;
   color: ${colours.offWhite};
 `; // confirmButtonText
@@ -42,6 +46,28 @@ export const ButText = styled.Text.attrs({
   fontSize: ${scale(12)};
   color: ${props => props.color};
 `;
+
+export const RSVPButton = styled.TouchableOpacity`
+  flex: 1;
+  justifyContent: center;
+  alignItems: center;
+  backgroundColor: ${colours.confirm};
+  borderColor: ${colours.confirm};
+  borderWidth: 1;
+  paddingVertical: 5;
+  paddingHorizontal: 0;
+  marginHorizontal: 5;
+  borderRadius: 3;
+  elevation: 1;
+`; // RSVPButton
+
+export const RSVPButtonText = styled.Text`
+  fontSize: ${scale(16)};
+  color: ${colours.white};
+`; // RSVPButtonText
+
+
+// Text
 
 export const HeaderText = styled.Text`
   color: ${colours.headerTitleColor};
@@ -574,21 +600,6 @@ export const styles = {
     fontSize: 18,
     color: colours.white
   },
-  RSVPButton: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colours.confirm,
-    borderColor: colours.confirm,
-    borderWidth: 1,
-    paddingVertical: 5,
-    paddingHorizontal: 0,
-    marginHorizontal: 5
-  },
-  RSVPButtonText: {
-    fontSize: 16,
-    color: colours.white
-  },
 
   // login page
 
@@ -703,7 +714,12 @@ export const styles = {
     fontWeight: '400',
     height: 45,
     flexDirection: 'row',
-    flex: 1
+    flex: 1,
+    elevation: 1, // replaces shadow on Android, shadow props IOS only
+    shadowOpacity: 0.75,
+    shadowRadius: 5,
+    shadowColor: 'red',
+    shadowOffset: { height: 4, width: 0 }
   },
   inputStyleAuth: {
     color: colours.darkgray,

@@ -9,7 +9,7 @@ import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
 import ImageHeader from './common/ImageHeader';
 import FeedHeader from './common/FeedHeader';
-import styles, { scaledWidth } from '../../styles';
+import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
@@ -209,8 +209,9 @@ class Feed extends Component {
     const timestamp = new Date();
     console.log('Feed render:', timestamp.getTime());
 
-    const screenWidth = Dimensions.width;
-    console.log('screenWidth', screenWidth);
+    const { width } = Dimensions.get('window'); // inline style to force render on screen rotation
+    const scaledWidth = width > 700 ? (width * 0.90) : (width * 1);
+
     const {
       allEvents,
       feed,
