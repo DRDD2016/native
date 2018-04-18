@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { View, Text, TouchableHighlight, ScrollView, Modal } from 'react-native';
 import CategoryDetails from './category-details';
-import { styles, Msg1, Msg2, Msg3, ConfirmButton, ConfirmButtonText, ButText } from '../../../styles';
+import { styles, Msg1, Msg2, Msg3, InviteSmallButton, ConfirmButton, ConfirmButtonText, ButText } from '../../../styles';
 import colours from '../../../styles/colours';
 import Spinner from '../common/Spinner';
 import formatDate from '../../lib/format-date';
@@ -127,30 +127,35 @@ export default class HostPoll extends Component {
               <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
 
                 <View
-                  style={{ paddingHorizontal: 20, flex: 1, maxWidth: 150, marginHorizontal: 5 }}
+                  style={{ paddingHorizontal: 20, flex: 1, minWidth: 80, maxWidth: 150, marginHorizontal: 5 }}
                 />
 
-                <View style={{ flexDirection: 'column', alignItems: 'center', marginHorizontal: 5 }}>
-                  <Msg2>You created a poll for</Msg2>
-                  <Msg1>{event.name}</Msg1>
+                <View style={{ flexShrink: 1, flexDirection: 'column', alignItems: 'center', marginHorizontal: 5 }}>
+                  <Msg2 style={{ textAlign: 'center' }}>You created a poll for</Msg2>
+                  <Msg1 style={{ textAlign: 'center' }}>{event.name}</Msg1>
                 </View>
 
-                <ConfirmButton
+                <InviteSmallButton
                   style={{
-                    paddingHorizontal: 20,
-                    flex: 1,
+                    minWidth: 90,
                     maxWidth: 150,
                     marginHorizontal: 5,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center' }}
+                    paddingHorizontal: 10,
+                    flexDirection: 'row' }}
                   onPress={ () => handleInviteMoreFriends() }
                 >
-                  <ButText style={{ color: colours.white, opacity: 0.8 }}>
-                    {'Invite friends  '}
-                  </ButText>
-                  <Icon name="user-plus" size={20} color={colours.white} opacity={0.8} />
-                </ConfirmButton>
+                  <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ flexShrink: 1, flexDirection: 'column' }}>
+                      <ButText style={{ color: colours.white, opacity: 0.9 }}>
+                        {'Invite friends'}
+                      </ButText>
+                    </View>
+                    <View style={{ flexGrow: 1, opacity: 0.9 }}>
+                      <Icon name="user-plus" size={20} color={colours.white} />
+                    </View>
+                  </View>
+
+                </InviteSmallButton>
 
               </View>
 
