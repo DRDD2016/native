@@ -129,7 +129,7 @@ export const Msg3 = styled.Text`
   fontSize: ${scale(14)};
   fontWeight: 700;
   color: ${colours.gray};
-  justifyContent: 'center';
+  textAlign: center;
 `; // msg3
 
 export const Msg4 = styled.Text`
@@ -157,7 +157,7 @@ export const OpTextWhat = styled.Text`
   fontWeight: 500;
   color: ${colours.what};
   flex: 1;
-  justifyContent: 'space-around';
+  justifyContent: space-around;
 `; // optionTextInfoWhat
 
 export const OptionTextDeselectedWhat = styled.Text`
@@ -171,7 +171,7 @@ export const OpTextSelected = styled.Text`
   fontWeight: 500;
   color: ${colours.white};
   flex: 1;
-  justifyContent: 'space-around';
+  justifyContent: space-around;
 `; // optionTextSelected
 
 export const OpTitleWhere = styled.Text`
@@ -187,7 +187,7 @@ export const OpTextWhere = styled.Text`
   fontWeight: 500;
   color: ${colours.where};
   flex: 1;
-  justifyContent: 'space-around';
+  justifyContent: space-around;
 `; // optionTextInfoWhere
 
 export const OptionTextDeselectedWhere = styled.Text`
@@ -209,7 +209,7 @@ export const OpTextWhen = styled.Text`
   fontWeight: 500;
   color: ${colours.when};
   flex: 1;
-  justifyContent: 'space-around';
+  justifyContent: space-around;
 `; // optionTextInfoWhen
 
 export const OptionTextDeselectedWhen = styled.Text`

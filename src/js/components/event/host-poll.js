@@ -154,9 +154,11 @@ export default class HostPoll extends Component {
 
               </View>
 
-              <Msg3>
-                You can review the responses and tap to select your final choices and tap &quot;Confirm&quot; when you are ready:
-              </Msg3>
+              <View style={{ marginTop: 10 }}>
+                <Msg3>
+                  You can review the responses and tap to select your final choices and tap &quot;Confirm&quot; when you are ready:
+                </Msg3>
+              </View>
 
             </View>
 

@@ -51,6 +51,14 @@ const saveSubsetFilter2 = createFilter(
   ]
 );
 
+const saveSubsetFilter3 = createFilter(
+  'calendar',
+  [
+    'data'
+  ]
+);
+
+// add another subset filter for calendar
 
 export const persistor = persistStore(
   store,
@@ -58,9 +66,10 @@ export const persistor = persistStore(
     storage: AsyncStorage,
     transforms: [
       saveSubsetFilter1,
-      saveSubsetFilter2
+      saveSubsetFilter2,
+      saveSubsetFilter3
     ],
-    whitelist: ['user', 'feed'],
+    whitelist: ['user', 'feed', 'calendar'],
     debounce: 2000
   }
 );
