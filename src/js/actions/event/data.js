@@ -180,7 +180,7 @@ export function getEvent (token, event_id, navigation) {
         }
         dispatch(getEventSuccess(data));
         dispatch(clearPollState());
-        dispatch(getCalendar(token));
+        // dispatch(getCalendar(token));
         const params = {
           userIsHost: store.getState().user.user_id === data.host_user_id,
           isPoll: data.is_poll,
