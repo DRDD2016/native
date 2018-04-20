@@ -62,6 +62,7 @@ export const getCalendarFailure = error => ({
 //   }
 // }
 
+
 export function getCalendar (token) {
   return (dispatch) => {
     dispatch(getCalendarRequest());
