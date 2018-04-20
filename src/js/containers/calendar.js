@@ -2,6 +2,7 @@ import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Calendar from '../components/calendar';
 import { applyFilter, clearFilter } from '../actions/calendar';
+import { fetchingEventFromFeedItemRequest } from '../actions/feed';
 import { getEvent } from '../actions/event/data';
 import filterFeed from '../lib/filter-feed';
 import getFutureEvents from '../lib/get-future-events';
@@ -40,6 +41,7 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch(clearFilter());
   },
   handleOnPress: (event_id) => {
+    dispatch(fetchingEventFromFeedItemRequest());
     AsyncStorage.getItem('spark_token')
     .then((token) => {
       if (token) {
