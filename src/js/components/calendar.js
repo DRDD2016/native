@@ -120,11 +120,11 @@ class Calendar extends Component {
     const { width } = Dimensions.get('window'); // inline style to force render on screen rotation
     const scaledWidth = width > 700 ? (width * 0.90) : (width * 1);
 
-    const { allEvents, calendarIsFetching, displaySome, displayAll, filterActive, selectedFilter, user_id, isConnected } = this.props;
+    const { allEvents, calendarIsFetching, isFetchingEvent, displaySome, displayAll, filterActive, selectedFilter, user_id, isConnected } = this.props;
 
-    const isLoading = calendarIsFetching;
+    const isLoading = calendarIsFetching || isFetchingEvent;
 
-    Answers.logCustom('Calendar.js render', { calendarIsFetching, isConnected }); // eslint-disable-line max-len
+    Answers.logCustom('Calendar.js render', { calendarIsFetching, isFetchingEvent, isConnected }); // eslint-disable-line max-len
 
 
     if (isLoading) {
@@ -138,7 +138,7 @@ class Calendar extends Component {
             type={ 'loading' }
             isConnected={isConnected}
             onClose={ () => { this.setState({ isModalVisible: false }); }}
-            additionalInfo={ `cal loading --- calendarIsFetching:${calendarIsFetching}, isConnected:${isConnected}`} // eslint-disable-line max-len
+            additionalInfo={ `cal loading --- calendarIsFetching:${calendarIsFetching}, isFetchingEvent:${isFetchingEvent}, isConnected:${isConnected}`} // eslint-disable-line max-len
           />
         </View>
       );
@@ -157,7 +157,7 @@ class Calendar extends Component {
               isConnected={isConnected}
               onClose={ () => { this.setState({ isModalVisible: false }); }}
               eventCodeError={eventCodeError}
-              additionalInfo={ `cal eventCodeError --- calendarIsFetching:${calendarIsFetching}, isConnected:${isConnected}`} // eslint-disable-line max-len
+              additionalInfo={ `cal eventCodeError --- calendarIsFetching:${calendarIsFetching}, isFetchingEvent:${isFetchingEvent}, isConnected:${isConnected}`} // eslint-disable-line max-len
             />
 
           }

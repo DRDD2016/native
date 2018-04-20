@@ -7,7 +7,7 @@ import filterFeed from '../lib/filter-feed';
 import getFutureEvents from '../lib/get-future-events';
 
 
-const mapStateToProps = ({ nav, calendar, user, network }) => {
+const mapStateToProps = ({ nav, feed, calendar, user, network }) => {
 
   const futureEvents = calendar.data.filter(getFutureEvents);
   const data = calendar.data;
@@ -21,6 +21,7 @@ const mapStateToProps = ({ nav, calendar, user, network }) => {
     allEvents: data,
     filteredEvents,
     calendarIsFetching: calendar.isFetching,
+    isFetchingEvent: feed.isFetchingEvent,
     filterActive,
     selectedFilter,
     user_id: user.user_id,
