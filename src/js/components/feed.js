@@ -16,7 +16,7 @@ import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
 import { store } from '../init-store';
 import { getFeedFailure } from '../actions/feed';
-import { WhatsNew, appUpdateNo } from './onboarding/whatsnew';
+import { WhatsNew, app_updateNo } from './onboarding/whatsnew';
 
 const { Answers } = Fabric;
 
@@ -213,14 +213,14 @@ class Feed extends Component {
       selectedFilter,
       isConnected,
       createNewEvent,
-      userUpdateNo,
+      user_updateNo,
       eventCode } = this.props;
 
     if ((eventCode === 'none') || (!eventCode)) {
-      if (userUpdateNo < appUpdateNo) {
+      if (user_updateNo < app_updateNo) {
 
         return (
-          <WhatsNew appUpdateNo={appUpdateNo} />
+          <WhatsNew app_updateNo={app_updateNo} />
         );
       }
     }

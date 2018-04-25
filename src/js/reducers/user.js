@@ -13,7 +13,7 @@ export const initialState = {
   photo_url: '',
   user_id: '',
   push_info: '',
-  user_updateNo: undefined,
+  user_update_no: undefined,
   isFetching: false,
   isFetchingUpload: false,
   errorUpdate: undefined,
@@ -43,7 +43,8 @@ export default function user (state = initialState, action) {
       };
     case profile.GOT_IT_WHATS_NEW_REQUEST:
       return {
-        ...state
+        ...state,
+        user_update_no: action.data
       };
     case profile.UPLOAD_PHOTO_REQUEST:
       return {
@@ -88,8 +89,7 @@ export default function user (state = initialState, action) {
       };
     case profile.GOT_IT_WHATS_NEW_SUCCESS:
       return {
-        ...state,
-        user_updateNo: action.data
+        ...state
       };
     case signup.SIGNUP_USER_FAILURE:
     case login.LOGIN_USER_FAILURE:

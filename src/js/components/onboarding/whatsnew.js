@@ -7,13 +7,11 @@ import { gotItWhatsNew } from '../../actions/profile';
 import styles from '../../../styles';
 
 const { Answers } = Fabric;
-export const appUpdateNo = 1;
+export const app_updateNo = 1;
 
-export default function WhatsNew ({ visible, userUpdateNo, type, onClose, additionalInfo }) {
+export default function WhatsNew ({ visible, type, onClose, additionalInfo }) {
 
   Answers.logCustom('WhatsNew shown', { additionalData: additionalInfo });
-  
-  console.log('userUpdateNo:', userUpdateNo);
 
   return (
     <Modal
@@ -54,7 +52,7 @@ export default function WhatsNew ({ visible, userUpdateNo, type, onClose, additi
                       AsyncStorage.getItem('spark_user_id')
                       .then((user_id) => {
                         if (token && user_id) {
-                          store.dispatch(gotItWhatsNew(token, user_id, appUpdateNo));
+                          store.dispatch(gotItWhatsNew(token, user_id, app_updateNo));
                           // and dispatch action to set user Update No to current Update No
                         }
                       });

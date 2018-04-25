@@ -51,13 +51,13 @@ export const logout = () => ({
   type: LOGOUT
 });
 
-export const gotItWhatsNewRequest = () => ({
-  type: GOT_IT_WHATS_NEW_REQUEST
+export const gotItWhatsNewRequest = data => ({
+  type: GOT_IT_WHATS_NEW_REQUEST,
+  data
 });
 
-export const gotItWhatsNewSuccess = data => ({
-  type: GOT_IT_WHATS_NEW_SUCCESS,
-  data
+export const gotItWhatsNewSuccess = () => ({
+  type: GOT_IT_WHATS_NEW_SUCCESS
 });
 
 export const gotItWhatsNewFailure = error => ({
@@ -65,27 +65,32 @@ export const gotItWhatsNewFailure = error => ({
   error
 });
 
-export function gotItWhatsNew (token, user_id, updateNo) {
+export function gotItWhatsNew (token, user_id, update_no) {
   return (dispatch) => {
-    dispatch(gotItWhatsNewRequest());
-    fetch(`${Config.URI}/users/${user_id}`, { // update this when api built
+    dispatch(gotItWhatsNewRequest(update_no));
+    fetch(`${Config.URI}/savePush/${user_id}`, {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         authorization: token
       },
-      body: JSON.stringify({ user: { updateNo } })
+      body: JSON.stringify({ user: { update_no } })
     })
-    .then((res) => {
-      res.json()
-      .then(() => {
-        dispatch(gotItWhatsNewSuccess(updateNo));
-      })
-      .catch(err => dispatch(gotItWhatsNewFailure(err.message)));
+    .then((response) => {
+      console.log('response', response);
+      response.json()
+      .then((data) => {
+        if (data.error) {
+          dispatch(gotItWhatsNewFailure(data.error));
+        } else {
+          console.log('successfully saved push details to server');
+          dispatch(gotItWhatsNewSuccess());
+        }
+      });
     })
-    .catch((err) => {
-      dispatch(gotItWhatsNewFailure(err.message));
+    .catch((error) => {
+      dispatch(gotItWhatsNewFailure(error.message));
     });
   };
 }

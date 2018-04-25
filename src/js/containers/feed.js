@@ -38,7 +38,7 @@ const mapStateToProps = ({ nav, feed, user, network, create }) => {
     eventCode: network.inComingLinkCode,
     eventCodeError: network.inComingLinkError,
     saveEventStatus: create.saveEventStatus,
-    userUpdateNo: user.user_updateNo
+    user_updateNo: user.user_update_no
   };
 };
 const mapDispatchToProps = (dispatch, props) => {
