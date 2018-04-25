@@ -14,7 +14,6 @@ import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
-import SpinnerModal from './common/SpinnerModal';
 import { store } from '../init-store';
 import { getFeedFailure } from '../actions/feed';
 
@@ -117,13 +116,6 @@ class Feed extends Component {
 
     console.log('this.props.eventCodeError: ', this.props.eventCodeError);
 
-    if (this.props.eventCodeError) {
-      this.setState({ isModalVisible: true });
-    }
-
-    if (!nextProps.eventCodeError) {
-      this.setState({ isModalVisible: false });
-    }
 
     const { feed } = nextProps;
     const newData = [].concat(feed).reverse();
@@ -214,84 +206,14 @@ class Feed extends Component {
       allEvents,
       feed,
       isReceivingFeed,
-      isFetchingFeed,
       displaySome,
       displayAll,
       filterActive,
       selectedFilter,
       isConnected,
-      eventCodeError,
-      isFetchingBranch,
-      createNewEvent,
-      saveEventStatus,
-      isFetchingEvent } = this.props;
+      createNewEvent } = this.props;
 
-    const isLoading = isFetchingBranch || isReceivingFeed || isFetchingFeed || isFetchingEvent;
-
-    console.log('isFetchingBranch: ', isFetchingBranch);
-    console.log('isReceivingFeed: ', isReceivingFeed);
-    console.log('isFetchingFeed: ', isFetchingFeed);
-    console.log('isFetchingEvent: ', isFetchingEvent);
-    console.log('isLoading: ', isLoading);
-    console.log('feed isConnected: ', isConnected);
-    console.log('saveEventStatus: ', saveEventStatus);
-    Answers.logCustom('Feed.js render', { additionalData: [{ isFetchingBranch }, { isReceivingFeed }, { isFetchingFeed }, { isFetchingEvent }, { isLoading }, { isConnected }, { saveEventStatus }] }); // eslint-disable-line max-len
-    if (saveEventStatus === 'Started') {
-      // return this if waiting for Branch, etc
-      console.log('saveEventStatus: ', 'Started');
-      console.log('visible saveEventStatus Started', isLoading);
-
-      return (
-        <View style={{ flex: 1 }}>
-          <SpinnerModal
-            visible={isLoading}
-            type={ 'share_invite' }
-            isConnected={isConnected}
-            onClose={ () => { this.setState({ isModalVisible: false }); }}
-            additionalInfo={ `feed share_invite --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
-          />
-        </View>
-      );
-    }
-
-    if (isLoading) {
-      // return this if waiting for Branch, etc
-      console.log('visible isLoading', isLoading);
-
-      return (
-        <View style={{ flex: 1 }}>
-          <SpinnerModal
-            visible={isLoading}
-            type={ 'loading' }
-            isConnected={isConnected}
-            onClose={ () => { this.setState({ isModalVisible: false }); }}
-            additionalInfo={ `feed isLoading --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
-          />
-        </View>
-      );
-    }
-
-    if (this.state.isModalVisible) {
-      console.log('isModalVisible Spinner: ', this.state.isModalVisible);
-      // return this if error for Branch, etc
-      return (
-        <View style={{ flex: 1 }}>
-          {
-            eventCodeError &&
-            <SpinnerModal
-              visible={this.state.isModalVisible}
-              type={ 'event_code_error' }
-              isConnected={isConnected}
-              onClose={ () => { this.setState({ isModalVisible: false }); }}
-              eventCodeError={eventCodeError}
-              additionalInfo={ `feed eventCodeError --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
-            />
-
-          }
-        </View>
-      );
-    }
-
+    Answers.logCustom('Feed.js render'); // eslint-disable-line max-len
 
     return (
       <View style={{ flex: 1 }}>

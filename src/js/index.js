@@ -17,6 +17,7 @@ import SplashView from './components/common/SplashView';
 import AppWithNavigationState from './routes';
 import { AlertProvider } from './components/Alert';
 import PushController from './lib/PushController';
+import SpinnerContainer from './containers/common/SpinnerContainer';
 import colours from '../styles/colours';
 
 const { Answers } = Fabric;
@@ -223,7 +224,9 @@ class App extends Component {
 
         <AlertProvider>
           <PushController>
-            <AppWithNavigationState />
+            <SpinnerContainer>
+              <AppWithNavigationState />
+            </SpinnerContainer>
           </PushController>
         </AlertProvider>
 
