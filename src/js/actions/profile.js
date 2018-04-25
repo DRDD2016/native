@@ -8,6 +8,9 @@ export const UPLOAD_PHOTO_REQUEST = 'UPLOAD_PHOTO_REQUEST';
 export const UPLOAD_PHOTO_SUCCESS = 'UPLOAD_PHOTO_SUCCESS';
 export const UPLOAD_PHOTO_FAILURE = 'UPLOAD_PHOTO_FAILURE';
 export const LOGOUT = 'LOGOUT';
+export const GOT_IT_WHATS_NEW_REQUEST = 'GOT_IT_WHATS_NEW_REQUEST';
+export const GOT_IT_WHATS_NEW_SUCCESS = 'GOT_IT_WHATS_NEW_SUCCESS';
+export const GOT_IT_WHATS_NEW_FAILURE = 'GOT_IT_WHATS_NEW_FAILURE';
 
 
 export const changeName = (value, category) => ({
@@ -47,6 +50,45 @@ export const uploadPhotoFailure = error => ({
 export const logout = () => ({
   type: LOGOUT
 });
+
+export const gotItWhatsNewRequest = () => ({
+  type: GOT_IT_WHATS_NEW_REQUEST
+});
+
+export const gotItWhatsNewSuccess = data => ({
+  type: GOT_IT_WHATS_NEW_SUCCESS,
+  data
+});
+
+export const gotItWhatsNewFailure = error => ({
+  type: GOT_IT_WHATS_NEW_FAILURE,
+  error
+});
+
+export function gotItWhatsNew (token, user_id, updateNo) {
+  return (dispatch) => {
+    dispatch(gotItWhatsNewRequest());
+    fetch(`${Config.URI}/users/${user_id}`, { // update this when api built
+      method: 'PATCH',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        authorization: token
+      },
+      body: JSON.stringify({ user: { updateNo } })
+    })
+    .then((res) => {
+      res.json()
+      .then(() => {
+        dispatch(gotItWhatsNewSuccess(updateNo));
+      })
+      .catch(err => dispatch(gotItWhatsNewFailure(err.message)));
+    })
+    .catch((err) => {
+      dispatch(gotItWhatsNewFailure(err.message));
+    });
+  };
+}
 
 export function editName (token, user_id, firstname, surname) {
   return (dispatch) => {

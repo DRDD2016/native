@@ -16,6 +16,7 @@ import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
 import { store } from '../init-store';
 import { getFeedFailure } from '../actions/feed';
+import { WhatsNew, appUpdateNo } from './onboarding/whatsnew';
 
 const { Answers } = Fabric;
 
@@ -134,7 +135,7 @@ class Feed extends Component {
 
   componentDidUpdate () {
     const { isFetchingFeed, allEvents, haveFeedSuccess, haveFeedFailure } = this.props;
-    console.log('isFetchingFeed: ', isFetchingFeed);
+    console.log('feed didUpdate isFetchingFeed: ', isFetchingFeed);
     console.log('allEvents: ', allEvents);
     if (isFetchingFeed) {
       if (allEvents.length > 0) {
@@ -211,7 +212,18 @@ class Feed extends Component {
       filterActive,
       selectedFilter,
       isConnected,
-      createNewEvent } = this.props;
+      createNewEvent,
+      userUpdateNo,
+      eventCode } = this.props;
+
+    if ((eventCode === 'none') || (!eventCode)) {
+      if (userUpdateNo < appUpdateNo) {
+
+        return (
+          <WhatsNew appUpdateNo={appUpdateNo} />
+        );
+      }
+    }
 
     Answers.logCustom('Feed.js render'); // eslint-disable-line max-len
 
