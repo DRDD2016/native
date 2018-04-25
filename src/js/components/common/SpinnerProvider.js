@@ -4,13 +4,13 @@ import SpinnerModal from './SpinnerModal';
 
 
 export default class SpinnerProvider extends Component {
-  componentWillMount () {
-    console.log('Spinner props mount: ', this.props);
-  }
-
-  componentWillReceiveProps () {
-    console.log('Spinner props receive: ', this.props);
-  }
+  // componentWillMount () {
+  //   console.log('Spinner props mount: ', this.props);
+  // }
+  //
+  // componentWillReceiveProps () {
+  //   console.log('Spinner props receive: ', this.props);
+  // }
 
   render () {
 
@@ -47,7 +47,7 @@ export default class SpinnerProvider extends Component {
                 type={ 'share_invite' }
                 isConnected={isConnected}
                 onClose={ () => { this.setState({ isModalVisible: false }); }}
-                additionalInfo={ `SP feed share_invite --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
+                // additionalInfo={ `SP share_invite --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
               />
             </View>
 
@@ -61,7 +61,7 @@ export default class SpinnerProvider extends Component {
                 type={ 'loading' }
                 isConnected={isConnected}
                 onClose={ () => { this.setState({ isModalVisible: false }); }}
-                additionalInfo={ `SP feed isLoading --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
+                // additionalInfo={ `SP isLoading --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
               />
             </View>
 
@@ -77,7 +77,7 @@ export default class SpinnerProvider extends Component {
                 isConnected={isConnected}
                 onClose={ () => { this.setState({ isModalVisible: false }); }}
                 eventCodeError={eventCodeError}
-                additionalInfo={ `SP feed eventCodeError --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
+                // additionalInfo={ `SP eventCodeError --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
               />
 
             </View>
