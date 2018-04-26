@@ -217,6 +217,7 @@ class Feed extends Component {
       isConnected,
       createNewEvent,
       user_updateNo,
+      user_openNo,
       eventCode } = this.props;
 
     let showWhatsNew = false;
@@ -224,9 +225,6 @@ class Feed extends Component {
     if ((eventCode === 'none') || (!eventCode)) {
       if (user_updateNo !== undefined) {
         if (user_updateNo < app_updateNo) {
-
-          // console.log('showWhatsNew user_updateNo: ', user_updateNo);
-
           // if an old updateNo, then show whatsnew
           showWhatsNew = true;
         } else {
@@ -239,15 +237,11 @@ class Feed extends Component {
       showWhatsNew = false;
     }
 
-    // console.log('showWhatsNew', showWhatsNew);
     let showWelcome = false;
 
     if ((eventCode === 'none') || (!eventCode)) {
       if (user_updateNo === undefined) {
-
-        // console.log('showWelcome user_updateNo: ', user_updateNo);
-
-        // if no updateNo, then its a new user, so show intro (whatsnew for now)
+        // if no updateNo, then its a new user, so show welcome (in whatsnew for now)
         showWelcome = true;
       } else {
         showWelcome = false;
@@ -257,10 +251,25 @@ class Feed extends Component {
     }
     // console.log('showWelcome', showWelcome);
 
+    let showFeedback = false;
+
+    if ((eventCode === 'none') || (!eventCode)) {
+      if (user_updateNo !== undefined) {
+        if (user_openNo === 3 || 15) {
+          // if openNo is 3rd or 15th time, show feedback modal
+          showFeedback = true;
+        } else {
+          showFeedback = false;
+        }
+      } else {
+        showFeedback = false;
+      }
+    } else {
+      showFeedback = false;
+    }
+    console.log('showFeedback', showFeedback);
 
     Answers.logCustom('Feed.js render'); // eslint-disable-line max-len
-
-    // console.log('feed showWhatsNew', showWhatsNew);
 
     return (
       <View style={{ flex: 1 }}>
