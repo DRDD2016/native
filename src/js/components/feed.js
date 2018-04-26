@@ -51,9 +51,12 @@ class Feed extends Component {
 
   }
 
+
   componentWillMount () {
 
-    const { handleSubmitCode, eventCode, haveFeedRequest } = this.props;
+    const { handleSubmitCode, eventCode, haveFeedRequest, onAppLoad, user_openNo } = this.props;
+
+    onAppLoad(user_openNo);
 
     haveFeedRequest();
 

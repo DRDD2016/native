@@ -41,7 +41,8 @@ const saveSubsetFilter1 = createFilter(
     'photo_url',
     'user_id',
     'push_info',
-    'user_update_no'
+    'user_update_no',
+    'user_open_no'
   ]
 );
 
