@@ -14,11 +14,16 @@ export default class WhatsNew extends Component {
 
   onGotItClick () {
 
+    console.log('clicked');
+
     AsyncStorage.getItem('spark_token')
     .then((token) => {
       AsyncStorage.getItem('spark_user_id')
       .then((user_id) => {
         if (token && user_id) {
+          console.log('token: ', token);
+          console.log('user_id:', user_id);
+          console.log('app_updateNo:', app_updateNo);
           store.dispatch(gotItWhatsNew(token, user_id, app_updateNo));
           // and dispatch action to set user Update No to current Update No
         }
@@ -66,7 +71,7 @@ export default class WhatsNew extends Component {
                 <View style={[styles.rowCentered, { flex: 1 }]}>
                   <ConfirmButton
                     style={{ width: 150, marginBottom: 20, marginTop: 20 }}
-                    onPress={() => this.onGotItClick()}
+                    onPress={this.onGotItClick}
 
                   >
                     <ConfirmButtonText>Got it</ConfirmButtonText>
@@ -98,7 +103,7 @@ export default class WhatsNew extends Component {
                 <View style={[styles.rowCentered, { flex: 1 }]}>
                   <ConfirmButton
                     style={{ width: 150, marginBottom: 20, marginTop: 20 }}
-                    onPress={() => this.onGotItClick()}
+                    onPress={this.onGotItClick}
 
                   >
                     <ConfirmButtonText>Got it</ConfirmButtonText>

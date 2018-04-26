@@ -40,7 +40,8 @@ const saveSubsetFilter1 = createFilter(
     'email',
     'photo_url',
     'user_id',
-    'push_info'
+    'push_info',
+    'user_update_no'
   ]
 );
 
