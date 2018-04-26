@@ -12,11 +12,13 @@ export const initialState = {
   email: '',
   photo_url: '',
   user_id: '',
-  push_info: '', // new
+  push_info: '',
+  user_update_no: undefined,
   isFetching: false,
   isFetchingUpload: false,
   errorUpdate: undefined,
-  errorUpload: undefined
+  errorUpload: undefined,
+  errorUpdateNo: undefined
 };
 
 export default function user (state = initialState, action) {
@@ -38,6 +40,11 @@ export default function user (state = initialState, action) {
       return {
         ...state,
         isFetching: true
+      };
+    case profile.GOT_IT_WHATS_NEW_REQUEST:
+      return {
+        ...state,
+        user_update_no: action.data
       };
     case profile.UPLOAD_PHOTO_REQUEST:
       return {
@@ -80,6 +87,10 @@ export default function user (state = initialState, action) {
         firstname: action.data.firstname,
         surname: action.data.surname
       };
+    case profile.GOT_IT_WHATS_NEW_SUCCESS:
+      return {
+        ...state
+      };
     case signup.SIGNUP_USER_FAILURE:
     case login.LOGIN_USER_FAILURE:
       return {
@@ -93,6 +104,11 @@ export default function user (state = initialState, action) {
         ...state,
         isFetching: false,
         errorUpdate: action.error
+      };
+    case profile.GOT_IT_WHATS_NEW_FAILURE:
+      return {
+        ...state,
+        errorUpdateNo: action.error
       };
     case profile.UPLOAD_PHOTO_FAILURE:
       return {

@@ -16,6 +16,7 @@ import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
 import { store } from '../init-store';
 import { getFeedFailure } from '../actions/feed';
+import WhatsNew, { app_updateNo } from './onboarding/whatsnew';
 
 const { Answers } = Fabric;
 
@@ -134,7 +135,7 @@ class Feed extends Component {
 
   componentDidUpdate () {
     const { isFetchingFeed, allEvents, haveFeedSuccess, haveFeedFailure } = this.props;
-    console.log('isFetchingFeed: ', isFetchingFeed);
+    console.log('feed didUpdate isFetchingFeed: ', isFetchingFeed);
     console.log('allEvents: ', allEvents);
     if (isFetchingFeed) {
       if (allEvents.length > 0) {
@@ -211,13 +212,58 @@ class Feed extends Component {
       filterActive,
       selectedFilter,
       isConnected,
-      createNewEvent } = this.props;
+      createNewEvent,
+      user_updateNo,
+      eventCode } = this.props;
+
+    let showWhatsNew = false;
+
+    if ((eventCode === 'none') || (!eventCode)) {
+      if (user_updateNo !== undefined) {
+        if (user_updateNo < app_updateNo) {
+
+          // console.log('showWhatsNew user_updateNo: ', user_updateNo);
+
+          // if an old updateNo, then show whatsnew
+          showWhatsNew = true;
+        } else {
+          showWhatsNew = false;
+        }
+      } else {
+        showWhatsNew = false;
+      }
+    } else {
+      showWhatsNew = false;
+    }
+
+    // console.log('showWhatsNew', showWhatsNew);
+    let showWelcome = false;
+
+    if ((eventCode === 'none') || (!eventCode)) {
+      if (user_updateNo === undefined) {
+
+        // console.log('showWelcome user_updateNo: ', user_updateNo);
+
+        // if no updateNo, then its a new user, so show intro (whatsnew for now)
+        showWelcome = true;
+      } else {
+        showWelcome = false;
+      }
+    } else {
+      showWelcome = false;
+    }
+    // console.log('showWelcome', showWelcome);
+
 
     Answers.logCustom('Feed.js render'); // eslint-disable-line max-len
+
+    // console.log('feed showWhatsNew', showWhatsNew);
 
     return (
       <View style={{ flex: 1 }}>
 
+        <WhatsNew visible={showWhatsNew} type={'whats_new'} user_updateNo={user_updateNo} app_updateNo={app_updateNo} />
+        <WhatsNew visible={showWelcome} type={'welcome'} user_updateNo={user_updateNo} app_updateNo={app_updateNo} />
 
         <FeedHeader>
           { !isConnected && this.renderAlert() }

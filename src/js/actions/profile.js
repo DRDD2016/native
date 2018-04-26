@@ -8,6 +8,9 @@ export const UPLOAD_PHOTO_REQUEST = 'UPLOAD_PHOTO_REQUEST';
 export const UPLOAD_PHOTO_SUCCESS = 'UPLOAD_PHOTO_SUCCESS';
 export const UPLOAD_PHOTO_FAILURE = 'UPLOAD_PHOTO_FAILURE';
 export const LOGOUT = 'LOGOUT';
+export const GOT_IT_WHATS_NEW_REQUEST = 'GOT_IT_WHATS_NEW_REQUEST';
+export const GOT_IT_WHATS_NEW_SUCCESS = 'GOT_IT_WHATS_NEW_SUCCESS';
+export const GOT_IT_WHATS_NEW_FAILURE = 'GOT_IT_WHATS_NEW_FAILURE';
 
 
 export const changeName = (value, category) => ({
@@ -47,6 +50,50 @@ export const uploadPhotoFailure = error => ({
 export const logout = () => ({
   type: LOGOUT
 });
+
+export const gotItWhatsNewRequest = data => ({
+  type: GOT_IT_WHATS_NEW_REQUEST,
+  data
+});
+
+export const gotItWhatsNewSuccess = () => ({
+  type: GOT_IT_WHATS_NEW_SUCCESS
+});
+
+export const gotItWhatsNewFailure = error => ({
+  type: GOT_IT_WHATS_NEW_FAILURE,
+  error
+});
+
+export function gotItWhatsNew (token, user_id, update_no) {
+  return (dispatch) => {
+    dispatch(gotItWhatsNewRequest(update_no));
+    fetch(`${Config.URI}/savePush/${user_id}`, {
+      method: 'PATCH',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        authorization: token
+      },
+      body: JSON.stringify({ user: { update_no } })
+    })
+    .then((response) => {
+      console.log('response', response);
+      response.json()
+      .then((data) => {
+        if (data.error) {
+          dispatch(gotItWhatsNewFailure(data.error));
+        } else {
+          console.log('successfully saved push details to server');
+          dispatch(gotItWhatsNewSuccess());
+        }
+      });
+    })
+    .catch((error) => {
+      dispatch(gotItWhatsNewFailure(error.message));
+    });
+  };
+}
 
 export function editName (token, user_id, firstname, surname) {
   return (dispatch) => {
