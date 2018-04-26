@@ -14,11 +14,13 @@ export const initialState = {
   user_id: '',
   push_info: '',
   user_update_no: undefined,
+  user_open_no: undefined,
   isFetching: false,
   isFetchingUpload: false,
   errorUpdate: undefined,
   errorUpload: undefined,
-  errorUpdateNo: undefined
+  errorUpdateNo: undefined,
+  errorOpenNo: undefined
 };
 
 export default function user (state = initialState, action) {
@@ -45,6 +47,11 @@ export default function user (state = initialState, action) {
       return {
         ...state,
         user_update_no: action.data
+      };
+    case profile.UPDATE_OPEN_NO_REQUEST:
+      return {
+        ...state,
+        user_open_no: action.data
       };
     case profile.UPLOAD_PHOTO_REQUEST:
       return {
@@ -91,6 +98,10 @@ export default function user (state = initialState, action) {
       return {
         ...state
       };
+    case profile.UPDATE_OPEN_NO_SUCCESS:
+      return {
+        ...state
+      };
     case signup.SIGNUP_USER_FAILURE:
     case login.LOGIN_USER_FAILURE:
       return {
@@ -110,11 +121,30 @@ export default function user (state = initialState, action) {
         ...state,
         errorUpdateNo: action.error
       };
+    case profile.UPDATE_OPEN_NO_FAILURE:
+      return {
+        ...state,
+        errorOpenNo: action.error
+      };
     case profile.UPLOAD_PHOTO_FAILURE:
       return {
         ...state,
         isFetchingUpload: false,
         errorUpload: action.error
+      };
+    case profile.GET_USERNOS_REQUEST:
+      return {
+        ...state
+      };
+    case profile.GET_USERNOS_SUCCESS:
+      return {
+        ...state,
+        user_update_no: action.data.update_no,
+        user_open_no: action.data.open_no
+      };
+    case profile.GET_USERNOS_FAILURE:
+      return {
+        ...state
       };
     case push.EDIT_PUSHINFO_REQUEST:
       return {

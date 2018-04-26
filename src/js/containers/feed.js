@@ -10,6 +10,7 @@ import {
   haveFeedFailure,
   fetchingEventFromFeedItemRequest } from '../actions/feed';
 import { getEvent, submitCode } from '../actions/event/data';
+import { updateOpenNo } from '../actions/profile';
 import { deleteIncomingLink, linkDatafromBranch, saveIncomingLinkError } from '../actions/network';
 import filterFeed from '../lib/filter-feed';
 
@@ -38,7 +39,8 @@ const mapStateToProps = ({ nav, feed, user, network, create }) => {
     eventCode: network.inComingLinkCode,
     eventCodeError: network.inComingLinkError,
     saveEventStatus: create.saveEventStatus,
-    user_updateNo: user.user_update_no
+    user_updateNo: user.user_update_no,
+    user_openNo: user.user_open_no
   };
 };
 const mapDispatchToProps = (dispatch, props) => {
@@ -101,6 +103,23 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     displayAll: () => {
       dispatch(clearFilter());
+    },
+    onAppLoad: (prev_user_open_no) => {
+
+      AsyncStorage.getItem('spark_token')
+      .then((token) => {
+        AsyncStorage.getItem('spark_user_id')
+        .then((user_id) => {
+          if (token && user_id) {
+
+            const user_open_no = (prev_user_open_no !== undefined || null) ? prev_user_open_no + 1 : 1;
+            console.log('user_open_no updating to:', user_open_no);
+
+            dispatch(updateOpenNo(token, user_id, user_open_no));
+            // and dispatch action to set user Open No to current Open No + 1
+          }
+        });
+      });
     }
   };
 };

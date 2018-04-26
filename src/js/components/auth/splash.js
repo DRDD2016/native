@@ -4,6 +4,7 @@ import Fabric from 'react-native-fabric';
 import { NavigationActions } from 'react-navigation';
 import initSocket from '../../socket-router';
 import SplashView from '../common/SplashView';
+import { getUserNoById } from '../../actions/profile';
 import { store } from '../../init-store';
 
 const { Answers } = Fabric;
@@ -24,10 +25,19 @@ export default class Splash extends Component {
       AsyncStorage.getItem('spark_token')
       .then((token) => {
         if (token) {
-          // console.log('socket init');
+          
           initSocket();
 
-          // start isFetching here
+          AsyncStorage.getItem('spark_user_id')
+          .then((user_id) => {
+            if (token && user_id) {
+
+              console.log('getting_user_nos');
+
+              store.dispatch(getUserNoById(token, user_id));
+              // and dispatch action to get user updateNo and Open No for user
+            }
+          });
 
           console.log('this.props', this.props);
           console.log('this.props.isFetchingBranch', this.props.isFetchingBranch);
