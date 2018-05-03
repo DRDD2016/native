@@ -17,7 +17,8 @@ const mapStateToProps = ({ feed, user, network, create }) => {
     push_info: user.push_info,
     eventCode: network.inComingLinkCode,
     eventCodeError: network.inComingLinkError,
-    saveEventStatus: create.saveEventStatus
+    saveEventStatus: create.saveEventStatus,
+    isFetchingCreate: create.isFetching
   };
 };
 

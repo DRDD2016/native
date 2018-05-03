@@ -105,7 +105,7 @@ export async function composeLinkToShare (user, event, code) {
       // $ipad_url: '', // Change the redirect endpoint for iPads
       // $desktop_url: 'http://spark-app.net',
       // $ios_deepview: 'branch_default',
-      $uri_redirect_mode: 1 // looks to see if user has app from data and attempts to open app (Facebook messenger, etc);
+      $uri_redirect_mode: 1 // looks to see if user has app from data and attempts to open app (Facebook messenger, etc); set to 2 if iOS 11.2 issues
       // $deeplink_path: `sparksocial://Code/${code}`,
       // eventCode: `${code}`
     };
@@ -122,7 +122,7 @@ export async function composeLinkToShare (user, event, code) {
       // $ipad_url: '', // Change the redirect endpoint for iPads
       // $desktop_url: 'http://spark-app.net',
       // $ios_deepview: 'branch_default',
-      $uri_redirect_mode: 1, // looks to see if user has app from data and attempts to open app (Facebook messenger, etc);
+      $uri_redirect_mode: 1, // looks to see if user has app from data and attempts to open app (Facebook messenger, etc); set to 2 if iOS 11.2 issues
       $deeplink_path: `sparksocial://Code/${code}`,
       eventCode: `${code}`
     };

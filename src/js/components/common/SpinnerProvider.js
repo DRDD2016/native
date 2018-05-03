@@ -21,9 +21,10 @@ export default class SpinnerProvider extends Component {
       eventCodeError,
       isFetchingBranch,
       saveEventStatus,
-      isFetchingEvent } = this.props;
+      isFetchingEvent,
+      isFetchingCreate } = this.props;
 
-    const isLoading = isFetchingBranch || isReceivingFeed || isFetchingFeed || isFetchingEvent;
+    const isLoading = isFetchingBranch || isReceivingFeed || isFetchingFeed || isFetchingEvent || isFetchingCreate;
 
     const errorModalVisible = () => {
       if (eventCodeError) {
@@ -36,12 +37,12 @@ export default class SpinnerProvider extends Component {
     };
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, borderColor: 'red', borderWidth: 2 }}>
         {React.Children.only(this.props.children)}
         {
           (saveEventStatus === 'Started') &&
 
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, borderColor: 'green', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isLoading}
                 type={ 'share_invite' }
@@ -55,7 +56,7 @@ export default class SpinnerProvider extends Component {
         {
           (isLoading) &&
 
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, borderColor: 'blue', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isLoading}
                 type={ 'loading' }
@@ -69,7 +70,7 @@ export default class SpinnerProvider extends Component {
         {
           (eventCodeError) &&
 
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, borderColor: 'purple', borderWidth: 2 }}>
 
               <SpinnerModal
                 visible={errorModalVisible}

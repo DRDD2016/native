@@ -5,7 +5,7 @@ import { store } from '../init-store';
 import Event from '../components/event';
 import { getEvent, getUserById, updateRsvp, deleteEvent } from '../actions/event/data';
 import { postVote, finaliseEvent, dismissModal } from '../actions/event/poll';
-import { hydrateCreateEvent, clearCreateEvent, saveEvent } from '../actions/create';
+import { hydrateCreateEvent, clearCreateEvent, saveEvent, shareInviteRequest } from '../actions/create';
 import { deleteIncomingLink } from '../actions/network';
 import mapToISOString from '../lib/map-to-iso-string';
 import normaliseVoteData from '../lib/normalise-vote-data';
@@ -88,6 +88,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(clearCreateEvent());
     },
     handleInviteMoreFriends: () => {
+      dispatch(shareInviteRequest());
       const event = store.getState().event.data;
       composeLinkToShare(store.getState().user, event, event.code);
     },

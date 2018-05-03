@@ -64,7 +64,6 @@ export default class Note extends Component {
                 value={ note }
                 multiline
                 numberOfLines={5}
-                returnKeyType="send"
                 placeholder="Enter your message here"
                 // autoCorrect
               />
