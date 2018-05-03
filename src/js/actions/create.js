@@ -18,6 +18,14 @@ export const SHARE_INVITE_REQUEST = 'SHARE_INVITE_REQUEST';
 export const SHARE_INVITE_SUCCESS = 'SHARE_INVITE_SUCCESS';
 export const SHARE_INVITE_FAILURE = 'SHARE_INVITE_FAILURE';
 
+export const EVENT_CONFIRMING_REQUEST = 'EVENT_CONFIRMING_REQUEST';
+export const EVENT_CONFIRMING_SUCCESS = 'EVENT_CONFIRMING_SUCCESS';
+export const EVENT_CONFIRMING_FAILURE = 'EVENT_CONFIRMING_FAILURE';
+
+export const EVENT_CONFIRMED_REQUEST = 'EVENT_CONFIRMED_REQUEST';
+export const EVENT_CONFIRMED_SUCCESS = 'EVENT_CONFIRMED_SUCCESS';
+export const EVENT_CONFIRMED_FAILURE = 'EVENT_CONFIRMED_FAILURE';
+
 export const HYDRATE_CREATE_EVENT = 'HYDRATE_CREATE_EVENT';
 export const CLEAR_CREATE_EVENT = 'CLEAR_CREATE_EVENT';
 
@@ -132,6 +140,44 @@ export function shareInviteSuccess () {
 export function shareInviteFailure (error) {
   return {
     type: SHARE_INVITE_FAILURE,
+    error
+  };
+}
+
+export function eventConfirmedRequest () {
+  return {
+    type: EVENT_CONFIRMED_REQUEST
+  };
+}
+
+export function eventConfirmedSuccess () {
+  return {
+    type: EVENT_CONFIRMED_SUCCESS
+  };
+}
+
+export function eventConfirmedFailure (error) {
+  return {
+    type: EVENT_CONFIRMED_FAILURE,
+    error
+  };
+}
+
+export function eventConfirmingRequest () {
+  return {
+    type: EVENT_CONFIRMING_REQUEST
+  };
+}
+
+export function eventConfirmingSuccess () {
+  return {
+    type: EVENT_CONFIRMING_SUCCESS
+  };
+}
+
+export function eventConfirmingFailure (error) {
+  return {
+    type: EVENT_CONFIRMING_FAILURE,
     error
   };
 }

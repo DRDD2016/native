@@ -4,8 +4,12 @@ import { View, Text, Modal, TouchableHighlight } from 'react-native';
 import Fabric from 'react-native-fabric';
 import { store } from '../../init-store';
 import { saveIncomingLinkError } from '../../actions/network';
+import { eventConfirmedSuccess } from '../../actions/create';
 import Spinner from '../common/Spinner';
 import styles from '../../../styles';
+import formatDate from '../../lib/format-date';
+import formatTime from '../../lib/format-time';
+
 
 const { Answers } = Fabric;
 
@@ -25,6 +29,58 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
     >
       {
         <View style={styles.modalWrapper}>
+          {
+            (type === 'confirming_event') && // trigger dispatch(eventConfirmingRequest())
+            <View style={styles.modalConfirm}>
+
+              <Text style={[styles.msg1, { flex: 1 }]}>Confirming event</Text>
+              <Text style={[styles.msg2, { flex: 1 }]}>please wait...</Text>
+              <View style={{ flex: 1 }}>
+                <Spinner size="large" />
+              </View>
+              {
+                additionalInfo && <Text style={[styles.msg2, { flex: 1 }]}>{additionalInfo}</Text>
+              }
+              <View style={{ flex: 1 }} />
+
+            </View>
+          }
+
+          {
+            (type === 'event_confirmed') && // trigger dispatch(eventConfirmedRequest())
+            <View style={styles.modalConfirm}>
+
+              <Text style={[styles.msg1, { flex: 1 }]}>Event confirmed</Text>
+              <Text style={[styles.msg2, { flex: 1 }]}>Your event is now confirmed:</Text>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.msg3}>What: {additionalInfo.finalChoices.what}</Text>
+                <Text style={styles.msg3}>Where: {additionalInfo.finalChoices.where}</Text>
+                <Text style={styles.msg3}>
+                  When: {formatDate(additionalInfo.finalChoices.when[0])} {formatTime(additionalInfo.finalChoices.when[0])}
+                </Text>
+              </View>
+              <View style={{ flex: 1 }}>
+                <TouchableHighlight
+                  style={ [styles.confirmButton, { marginBottom: 20, marginTop: 20 }] }
+                  onPress={ () => {
+                    store.dispatch(eventConfirmedSuccess());
+
+                    navigator.goBack(null);
+
+                  }}
+                >
+                  <Text style={styles.confirmButtonText}>OK</Text>
+                </TouchableHighlight>
+              </View>
+
+              {
+                additionalInfo && <Text style={[styles.msg2, { flex: 1 }]}>{additionalInfo}</Text>
+              }
+              <View style={{ flex: 1 }} />
+
+            </View>
+          }
+
 
           {
             (type === 'share_invite') &&
