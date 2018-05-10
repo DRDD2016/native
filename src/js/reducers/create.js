@@ -15,7 +15,6 @@ export const initialState = {
   isFetching: false,
   error: undefined,
   saveEventStatus: 'notStarted',
-  isEventConfirming: false,
   isEventConfirmed: false
 };
 
@@ -106,21 +105,6 @@ export default function create (state = initialState, action) {
     case actions.EVENT_CONFIRMED_FAILURE:
       return update(state, {
         isEventConfirmed: { $set: false }
-      });
-
-    case actions.EVENT_CONFIRMING_REQUEST:
-      return update(state, {
-        isEventConfirming: { $set: true }
-      });
-
-    case actions.EVENT_CONFIRMING_SUCCESS:
-      return update(state, {
-        isEventConfirming: { $set: false }
-      });
-
-    case actions.EVENT_CONFIRMING_FAILURE:
-      return update(state, {
-        isEventConfirming: { $set: false }
       });
 
 

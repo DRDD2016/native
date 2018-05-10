@@ -1,6 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import { View, Text, Modal, TouchableHighlight } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import Fabric from 'react-native-fabric';
 import { store } from '../../init-store';
 import { saveIncomingLinkError } from '../../actions/network';
@@ -53,10 +54,10 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
               <Text style={[styles.msg1, { flex: 1 }]}>Event confirmed</Text>
               <Text style={[styles.msg2, { flex: 1 }]}>Your event is now confirmed:</Text>
               <View style={{ flex: 1 }}>
-                <Text style={styles.msg3}>What: {additionalInfo.finalChoices.what}</Text>
-                <Text style={styles.msg3}>Where: {additionalInfo.finalChoices.where}</Text>
+                <Text style={styles.msg3}>What: {additionalInfo.what}</Text>
+                <Text style={styles.msg3}>Where: {additionalInfo.where}</Text>
                 <Text style={styles.msg3}>
-                  When: {formatDate(additionalInfo.finalChoices.when[0])} {formatTime(additionalInfo.finalChoices.when[0])}
+                  When: {formatDate(additionalInfo.when[0])} {formatTime(additionalInfo.when[0])}
                 </Text>
               </View>
               <View style={{ flex: 1 }}>
@@ -65,7 +66,7 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
                   onPress={ () => {
                     store.dispatch(eventConfirmedSuccess());
 
-                    navigator.goBack(null);
+                    NavigationActions.goBack(null);
 
                   }}
                 >

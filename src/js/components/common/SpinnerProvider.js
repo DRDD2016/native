@@ -22,7 +22,10 @@ export default class SpinnerProvider extends Component {
       isFetchingBranch,
       saveEventStatus,
       isFetchingEvent,
-      isFetchingCreate } = this.props;
+      isFetchingCreate,
+      isConfirmingEvent,
+      isEventConfirmed,
+      finalChoices } = this.props;
 
     const isLoading = isFetchingBranch || isReceivingFeed || isFetchingFeed || isFetchingEvent || isFetchingCreate;
 
@@ -36,13 +39,44 @@ export default class SpinnerProvider extends Component {
       }
     };
 
+    console.log('isConfirmingEvent:', isConfirmingEvent);
+    console.log('isEventConfirmed:', isEventConfirmed);
+
     return (
       <View style={{ flex: 1, borderColor: 'red', borderWidth: 2 }}>
         {React.Children.only(this.props.children)}
         {
+          (isConfirmingEvent) &&
+
+            <View style={{ flex: 1, borderColor: 'purple', borderWidth: 2 }}>
+              <SpinnerModal
+                visible={isConfirmingEvent}
+                type={ 'confirming_event' }
+                isConnected={isConnected}
+                onClose={ () => { this.setState({ isModalVisible: false }); }}
+                // additionalInfo={ `SP share_invite --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
+              />
+            </View>
+
+        }
+        {
+          (isEventConfirmed) &&
+
+            <View style={{ flex: 1, borderColor: 'blue', borderWidth: 2 }}>
+              <SpinnerModal
+                visible={isEventConfirmed}
+                type={ 'event_confirmed' }
+                isConnected={isConnected}
+                onClose={ () => { this.setState({ isModalVisible: false }); }}
+                additionalInfo={ finalChoices } // eslint-disable-line max-len
+              />
+            </View>
+
+        }
+        {
           (saveEventStatus === 'Started') &&
 
-            <View style={{ flex: 1, borderColor: 'green', borderWidth: 2 }}>
+            <View style={{ flex: 1, borderColor: 'orange', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isLoading}
                 type={ 'share_invite' }
@@ -70,7 +104,7 @@ export default class SpinnerProvider extends Component {
         {
           (eventCodeError) &&
 
-            <View style={{ flex: 1, borderColor: 'purple', borderWidth: 2 }}>
+            <View style={{ flex: 1, borderColor: 'yellow', borderWidth: 2 }}>
 
               <SpinnerModal
                 visible={errorModalVisible}

@@ -5,7 +5,8 @@ const initialState = {
   voteSaved: false,
   voteCount: undefined,
   finalChoices: undefined,
-  error: undefined
+  error: undefined,
+  isConfirmingEvent: false
 };
 
 export default function poll (state = initialState, action) {
@@ -14,23 +15,20 @@ export default function poll (state = initialState, action) {
 
     case actions.GET_VOTES_REQUEST:
     case actions.POST_VOTE_REQUEST:
-    case actions.FINALISE_EVENT_REQUEST:
-      return { ...state, isSavingVote: true };
-
     case actions.GET_VOTES_SUCCESS:
       return { ...state, isSavingVote: false, voteCount: action.data };
-
     case actions.POST_VOTE_SUCCESS:
       return { ...state, isSavingVote: false, voteSaved: true };
 
+    case actions.FINALISE_EVENT_REQUEST:
+      return { ...state, isConfirmingEvent: true };
     case actions.FINALISE_EVENT_SUCCESS:
-      return { ...state, isSavingVote: false, finalChoices: action.data };
+      return { ...state, isConfirmingEvent: false, finalChoices: action.data };
+    case actions.FINALISE_EVENT_FAILURE:
+      return { ...state, isConfirmingEvent: false, error: action.error };
 
     case actions.GET_VOTES_FAILURE:
     case actions.POST_VOTE_FAILURE:
-    case actions.FINALISE_EVENT_FAILURE:
-      return { ...state, isSavingVote: false, error: action.error };
-
     case actions.CLEAR_POLL_STATE:
       return initialState;
 

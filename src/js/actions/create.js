@@ -18,10 +18,6 @@ export const SHARE_INVITE_REQUEST = 'SHARE_INVITE_REQUEST';
 export const SHARE_INVITE_SUCCESS = 'SHARE_INVITE_SUCCESS';
 export const SHARE_INVITE_FAILURE = 'SHARE_INVITE_FAILURE';
 
-export const EVENT_CONFIRMING_REQUEST = 'EVENT_CONFIRMING_REQUEST';
-export const EVENT_CONFIRMING_SUCCESS = 'EVENT_CONFIRMING_SUCCESS';
-export const EVENT_CONFIRMING_FAILURE = 'EVENT_CONFIRMING_FAILURE';
-
 export const EVENT_CONFIRMED_REQUEST = 'EVENT_CONFIRMED_REQUEST';
 export const EVENT_CONFIRMED_SUCCESS = 'EVENT_CONFIRMED_SUCCESS';
 export const EVENT_CONFIRMED_FAILURE = 'EVENT_CONFIRMED_FAILURE';
@@ -163,24 +159,6 @@ export function eventConfirmedFailure (error) {
   };
 }
 
-export function eventConfirmingRequest () {
-  return {
-    type: EVENT_CONFIRMING_REQUEST
-  };
-}
-
-export function eventConfirmingSuccess () {
-  return {
-    type: EVENT_CONFIRMING_SUCCESS
-  };
-}
-
-export function eventConfirmingFailure (error) {
-  return {
-    type: EVENT_CONFIRMING_FAILURE,
-    error
-  };
-}
 
 export function saveEventRequest () {
   return {

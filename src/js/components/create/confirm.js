@@ -80,30 +80,33 @@ class Confirm extends Component {
           </View>
           <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
 
-          <View
-            style={{
-              flexDirection: 'row',
-              borderRadius: 15,
-              backgroundColor: colours.lightgray,
-              paddingHorizontal: 5,
-              paddingVertical: 5,
-              marginTop: 10,
-              marginHorizontal: 5,
-              justifyContent: 'space-between',
-              alignItems: 'flex-start' }}
-          >
-            <View style={{ flex: 1, marginHorizontal: 5, backgroundColor: 'transparent' }}>
-              <ButText color={colours.blue}>{ note }</ButText>
-            </View>
-            <View style={{ backgroundColor: colours.white, borderRadius: 15, padding: 1 }}>
-              <Image
-                source={{ uri: photo_url }}
-                defaultSource={avatar}
-                style={[styles.uiProfilePhotoCircularImage, { }]}
-              />
-            </View>
 
-          </View>
+          { (note !== '') &&
+            <View
+              style={{
+                flexDirection: 'row',
+                borderRadius: 15,
+                backgroundColor: colours.lightgray,
+                paddingHorizontal: 5,
+                paddingVertical: 5,
+                marginTop: 10,
+                marginHorizontal: 5,
+                justifyContent: 'space-between',
+                alignItems: 'flex-start' }}
+            >
+              <View style={{ flex: 1, marginHorizontal: 5, backgroundColor: 'transparent' }}>
+                <ButText color={colours.blue}>{ note }</ButText>
+              </View>
+              <View style={{ backgroundColor: colours.white, borderRadius: 15, padding: 1 }}>
+                <Image
+                  source={{ uri: photo_url }}
+                  defaultSource={avatar}
+                  style={[styles.uiProfilePhotoCircularImage, { }]}
+                />
+              </View>
+
+            </View>
+          }
 
           <View style={[styles.rowCentered, { marginTop: 10 }]}>
             <ConfirmButton

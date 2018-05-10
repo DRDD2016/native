@@ -22,7 +22,7 @@ export default function Header (props) {
             top: Platform.OS === 'android' ? 0 : 10,
             backgroundColor: colours.white,
             borderWidth: 0,
-            borderColor: 'green'
+            borderColor: 'pink'
           }, props.style]}
         />
         <View

@@ -30,8 +30,6 @@ export default class Note extends Component {
   render () {
     const { name, note, handleChange } = this.props;
 
-    const hideNext = note === '';
-
     return (
       <KeyboardAwareScrollView
         style={{ backgroundColor: colours.white, height: Dimensions.get('window').height * 2 }}
@@ -70,19 +68,16 @@ export default class Note extends Component {
             </View>
 
             <View style={ styles.row }>
-              { (hideNext) &&
-                <View />
-              }
-              { (!hideNext) &&
-                <Button
-                  testDescription="Confirm Event Details"
-                  onPress={ () => this.nextPage(name) }
-                  buttonStyle={[styles.buttonStyle, { flex: 1 }]}
-                  textStyle={ styles.buttonTextStyle }
-                >
-                  Next
-                </Button>
-              }
+
+              <Button
+                testDescription="Confirm Event Details"
+                onPress={ () => this.nextPage(name) }
+                buttonStyle={[styles.buttonStyle, { flex: 1 }]}
+                textStyle={ styles.buttonTextStyle }
+              >
+                Next
+              </Button>
+
             </View>
             <View style={{ height: 60 }} />
           </View>
