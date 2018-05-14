@@ -26,26 +26,24 @@ export default class HostPoll extends Component {
     const { what, where, when } = this.props.event;
     console.log('what: ', what);
     this.state = {
-      eventdetails: {
-        what: what.length === 1 ? what : [],
-        where: where.length === 1 ? where : [],
-        when: when.length === 1 ? when : []
-      }
+      what: what.length === 1 ? what : [],
+      where: where.length === 1 ? where : [],
+      when: when.length === 1 ? when : []
     };
     this.toggleSelection = this.toggleSelection.bind(this);
   }
 
   toggleSelection (category, selection) {
 
-    if (!this.state.eventdetails[category].includes(selection)) {
+    if (!this.state[category].includes(selection)) {
 
       this.setState({
-        eventdetails: { ...this.state.eventdetails, [category]: [selection] }
+        [category]: [selection]
       });
 
     } else {
       this.setState({
-        eventdetails: { ...this.state.eventdetails, [category]: [] }
+        [category]: []
       });
     }
   }
@@ -55,26 +53,23 @@ export default class HostPoll extends Component {
 
     const { event,
       voteCount,
-      confirmedEvent,
       handleInviteMoreFriends,
       handleConfirmEvent,
       finalChoices,
       isFetching } = this.props;
     console.log('voteCount: ', voteCount);
-    const allCategoriesSelected = Object.keys(this.state.eventdetails)
-      .map(category => this.state.eventdetails[category].length)
+    const allCategoriesSelected = Object.keys(this.state)
+      .map(category => this.state[category].length)
       .every(length => length === 1);
 
     console.log('finalChoices: ', finalChoices);
-    console.log('confirmedEvent: ', confirmedEvent);
     console.log('this.state: ', this.state);
-    console.log('this.state.eventdetails: ', this.state.eventdetails);
 
     // if (!finalChoices && isConfirming) {
     //
     // }
     if (finalChoices) {
-      confirmedEvent();
+      this.props.confirmedEvent();
     }
 
     return (
@@ -169,9 +164,7 @@ export default class HostPoll extends Component {
                 allCategoriesSelected &&
                 <ConfirmButton
                   style={{ marginBottom: 40 }}
-                  onPress={ () => {
-                    handleConfirmEvent(this.state.eventdetails, event.event_id);
-                  }}
+                  onPress={ () => { handleConfirmEvent(this.state, event.event_id); }}
                 >
                   <ConfirmButtonText>CONFIRM EVENT DETAILS</ConfirmButtonText>
                 </ConfirmButton>

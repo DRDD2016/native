@@ -41,6 +41,7 @@ export default class SpinnerProvider extends Component {
 
     console.log('isConfirmingEvent:', isConfirmingEvent);
     console.log('isEventConfirmed:', isEventConfirmed);
+    console.log('finalChoices:', finalChoices);
 
     return (
       <View style={{ flex: 1, borderColor: 'red', borderWidth: 2 }}>

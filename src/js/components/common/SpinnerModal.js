@@ -40,7 +40,7 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
                 <Spinner size="large" />
               </View>
               {
-                additionalInfo && <Text style={[styles.msg2, { flex: 1 }]}>{additionalInfo}</Text>
+                // additionalInfo && <Text style={[styles.msg2, { flex: 1 }]}>{additionalInfo}</Text>
               }
               <View style={{ flex: 1 }} />
 
@@ -48,22 +48,26 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
           }
 
           {
+
             (type === 'event_confirmed') && // trigger dispatch(eventConfirmedRequest())
             <View style={styles.modalConfirm}>
 
               <Text style={[styles.msg1, { flex: 1 }]}>Event confirmed</Text>
               <Text style={[styles.msg2, { flex: 1 }]}>Your event is now confirmed:</Text>
               <View style={{ flex: 1 }}>
-                <Text style={styles.msg3}>What: {additionalInfo.what}</Text>
-                <Text style={styles.msg3}>Where: {additionalInfo.where}</Text>
+
+                <Text style={styles.msg3}>{additionalInfo.what[0] !== '' ? `What: ${additionalInfo.what[0]}` : ''}</Text>
+                <Text style={styles.msg3}>{additionalInfo.where[0] !== '' ? `Where: ${additionalInfo.where[0]}` : ''}</Text>
                 <Text style={styles.msg3}>
                   When: {formatDate(additionalInfo.when[0])} {formatTime(additionalInfo.when[0])}
                 </Text>
+
               </View>
               <View style={{ flex: 1 }}>
                 <TouchableHighlight
                   style={ [styles.confirmButton, { marginBottom: 20, marginTop: 20 }] }
                   onPress={ () => {
+                    console.log('OK clicked');
                     store.dispatch(eventConfirmedSuccess());
 
                     NavigationActions.goBack(null);
@@ -75,7 +79,7 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
               </View>
 
               {
-                additionalInfo && <Text style={[styles.msg2, { flex: 1 }]}>{additionalInfo}</Text>
+                // additionalInfo && <Text style={[styles.msg2, { flex: 1 }]}>{additionalInfo}</Text>
               }
               <View style={{ flex: 1 }} />
 
