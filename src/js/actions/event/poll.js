@@ -140,7 +140,7 @@ export function finaliseEvent (token, hostEventChoices, event_id) { // eslint-di
     .then((res) => {
       res.json()
       .then((data) => {
-        console.log('finaliseEvent data: ', data);
+        // console.log('finaliseEvent data: ', data);
         dispatch(finaliseEventSuccess(data));
         dispatch(getCalendar(token));
       })

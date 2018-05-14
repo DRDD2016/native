@@ -41,7 +41,7 @@ class Confirm extends Component {
     const avatar = require('../../../img/avatar.png');
     console.log('confirm Props', this.props);
     const { what, where, when, description, note, handleOnPress, photo_url, isConnected, isFetching } = this.props;
-
+    
     const iSODates = mapToISOString(when);
     const sortedDates = iSODates.sort((a, b) => {
       return (a) > (b);
@@ -81,7 +81,8 @@ class Confirm extends Component {
           <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
 
 
-          { (note !== '') &&
+          {
+            (note.trim() !== '') &&
             <View
               style={{
                 flexDirection: 'row',

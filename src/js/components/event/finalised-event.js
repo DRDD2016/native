@@ -125,31 +125,35 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, handleE
         </View>
         <View style={{ backgroundColor: colours.sectionBorder, height: 1, marginHorizontal: 5 }} />
 
-        <View
-          style={{
-            flexDirection: 'row',
-            borderRadius: 15,
-            backgroundColor: colours.lightgray,
-            paddingHorizontal: 5,
-            paddingVertical: 5,
-            marginTop: 10,
-            marginBottom: 5,
-            marginHorizontal: 5,
-            justifyContent: 'space-between',
-            alignItems: 'flex-start' }}
-        >
-          <View style={{ flex: 1, marginHorizontal: 5, backgroundColor: 'transparent' }}>
-            <ButText color={colours.blue}>{ event.note }</ButText>
-          </View>
-          <View style={{ backgroundColor: colours.white, borderRadius: 15, padding: 1 }}>
-            <Image
-              source={{ uri: event.host_photo_url }}
-              defaultSource={avatar}
-              style={[styles.uiProfilePhotoCircularImage, { }]}
-            />
-          </View>
+        {
+          (event.note.trim() !== '') &&
+          <View
+            style={{
+              flexDirection: 'row',
+              borderRadius: 15,
+              backgroundColor: colours.lightgray,
+              paddingHorizontal: 5,
+              paddingVertical: 5,
+              marginTop: 10,
+              marginBottom: 5,
+              marginHorizontal: 5,
+              justifyContent: 'space-between',
+              alignItems: 'flex-start' }}
+          >
+            <View style={{ flex: 1, marginHorizontal: 5, backgroundColor: 'transparent' }}>
+              <ButText color={colours.blue}>{ event.note }</ButText>
+            </View>
+            <View style={{ backgroundColor: colours.white, borderRadius: 15, padding: 1 }}>
+              <Image
+                source={{ uri: event.host_photo_url }}
+                defaultSource={avatar}
+                style={[styles.uiProfilePhotoCircularImage, { }]}
+              />
+            </View>
 
-        </View>
+          </View>
+        }
+
 
         <View
           style={{
@@ -270,7 +274,7 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, handleE
           </View>
         </View>
         <View style={{ marginTop: 10, marginBottom: 10, borderTopWidth: 1, borderTopColor: '#efefef' }}>
-          <Text style={[styles.msg4, { marginLeft: 10, marginTop: 5 }]}>Not responded</Text>
+          {(rsvps.not_responded.length > 1) && <Text style={[styles.msg4, { marginLeft: 10, marginTop: 5 }]}>Yet to respond:</Text>}
         </View>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
           {
