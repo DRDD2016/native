@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import SpinnerProvider from '../../components/common/SpinnerProvider';
 
 
-const mapStateToProps = ({ feed, user, network, create }) => {
+const mapStateToProps = ({ feed, user, network, create, event }) => {
 
   return {
     user_id: user.user_id,
@@ -17,7 +17,11 @@ const mapStateToProps = ({ feed, user, network, create }) => {
     push_info: user.push_info,
     eventCode: network.inComingLinkCode,
     eventCodeError: network.inComingLinkError,
-    saveEventStatus: create.saveEventStatus
+    saveEventStatus: create.saveEventStatus,
+    isFetchingCreate: create.isFetching,
+    isConfirmingEvent: event.poll.isConfirmingEvent,
+    finalChoices: event.poll.finalChoices,
+    isEventConfirmed: create.isEventConfirmed
   };
 };
 

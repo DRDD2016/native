@@ -18,6 +18,10 @@ export const SHARE_INVITE_REQUEST = 'SHARE_INVITE_REQUEST';
 export const SHARE_INVITE_SUCCESS = 'SHARE_INVITE_SUCCESS';
 export const SHARE_INVITE_FAILURE = 'SHARE_INVITE_FAILURE';
 
+export const EVENT_CONFIRMED_REQUEST = 'EVENT_CONFIRMED_REQUEST';
+export const EVENT_CONFIRMED_SUCCESS = 'EVENT_CONFIRMED_SUCCESS';
+export const EVENT_CONFIRMED_FAILURE = 'EVENT_CONFIRMED_FAILURE';
+
 export const HYDRATE_CREATE_EVENT = 'HYDRATE_CREATE_EVENT';
 export const CLEAR_CREATE_EVENT = 'CLEAR_CREATE_EVENT';
 
@@ -135,6 +139,26 @@ export function shareInviteFailure (error) {
     error
   };
 }
+
+export function eventConfirmedRequest () {
+  return {
+    type: EVENT_CONFIRMED_REQUEST
+  };
+}
+
+export function eventConfirmedSuccess () {
+  return {
+    type: EVENT_CONFIRMED_SUCCESS
+  };
+}
+
+export function eventConfirmedFailure (error) {
+  return {
+    type: EVENT_CONFIRMED_FAILURE,
+    error
+  };
+}
+
 
 export function saveEventRequest () {
   return {

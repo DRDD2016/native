@@ -14,7 +14,8 @@ export const initialState = {
   is_poll: undefined,
   isFetching: false,
   error: undefined,
-  saveEventStatus: 'notStarted'
+  saveEventStatus: 'notStarted',
+  isEventConfirmed: false
 };
 
 export default function create (state = initialState, action) {
@@ -90,6 +91,22 @@ export default function create (state = initialState, action) {
       return update(state, {
         isFetching: { $set: false }
       });
+
+    case actions.EVENT_CONFIRMED_REQUEST:
+      return update(state, {
+        isEventConfirmed: { $set: true }
+      });
+
+    case actions.EVENT_CONFIRMED_SUCCESS:
+      return update(state, {
+        isEventConfirmed: { $set: false }
+      });
+
+    case actions.EVENT_CONFIRMED_FAILURE:
+      return update(state, {
+        isEventConfirmed: { $set: false }
+      });
+
 
     case actions.HYDRATE_CREATE_EVENT: {
       const dateTime = {

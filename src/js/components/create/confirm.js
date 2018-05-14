@@ -41,7 +41,7 @@ class Confirm extends Component {
     const avatar = require('../../../img/avatar.png');
     console.log('confirm Props', this.props);
     const { what, where, when, description, note, handleOnPress, photo_url, isConnected, isFetching } = this.props;
-
+    
     const iSODates = mapToISOString(when);
     const sortedDates = iSODates.sort((a, b) => {
       return (a) > (b);
@@ -80,30 +80,34 @@ class Confirm extends Component {
           </View>
           <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
 
-          <View
-            style={{
-              flexDirection: 'row',
-              borderRadius: 15,
-              backgroundColor: colours.lightgray,
-              paddingHorizontal: 5,
-              paddingVertical: 5,
-              marginTop: 10,
-              marginHorizontal: 5,
-              justifyContent: 'space-between',
-              alignItems: 'flex-start' }}
-          >
-            <View style={{ flex: 1, marginHorizontal: 5, backgroundColor: 'transparent' }}>
-              <ButText color={colours.blue}>{ note }</ButText>
-            </View>
-            <View style={{ backgroundColor: colours.white, borderRadius: 15, padding: 1 }}>
-              <Image
-                source={{ uri: photo_url }}
-                defaultSource={avatar}
-                style={[styles.uiProfilePhotoCircularImage, { }]}
-              />
-            </View>
 
-          </View>
+          {
+            (note.trim() !== '') &&
+            <View
+              style={{
+                flexDirection: 'row',
+                borderRadius: 15,
+                backgroundColor: colours.lightgray,
+                paddingHorizontal: 5,
+                paddingVertical: 5,
+                marginTop: 10,
+                marginHorizontal: 5,
+                justifyContent: 'space-between',
+                alignItems: 'flex-start' }}
+            >
+              <View style={{ flex: 1, marginHorizontal: 5, backgroundColor: 'transparent' }}>
+                <ButText color={colours.blue}>{ note }</ButText>
+              </View>
+              <View style={{ backgroundColor: colours.white, borderRadius: 15, padding: 1 }}>
+                <Image
+                  source={{ uri: photo_url }}
+                  defaultSource={avatar}
+                  style={[styles.uiProfilePhotoCircularImage, { }]}
+                />
+              </View>
+
+            </View>
+          }
 
           <View style={[styles.rowCentered, { marginTop: 10 }]}>
             <ConfirmButton

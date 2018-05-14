@@ -95,7 +95,7 @@ class FeedItem extends PureComponent {
                   { userIsSubject && !is_poll && !edited && !isCancelled && (action === 'create') && ' have created an event ' }
                   { userIsSubject && userIsHost && !isCancelled && (action === 'finalised') && ' have confirmed an event' }
                   { userIsSubject && !is_poll && edited && !isCancelled && (action === 'edited') && ' have edited an event' }
-                  { userIsSubject && isCancelled && ' have cancelled an event' }
+                  { userIsSubject && userIsHost && isCancelled && ' have cancelled an event' }
 
                   { !userIsSubject && userIsHost && is_poll && (action === 'vote') && ' has voted on your poll' }
                   { !userIsSubject && userIsHost && !is_poll && (action === 'rsvp') && ' has responded to your event' }

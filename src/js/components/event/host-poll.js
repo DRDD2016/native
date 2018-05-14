@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { View, Text, TouchableHighlight, ScrollView, Modal } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import CategoryDetails from './category-details';
 import { styles, Msg1, Msg2, Msg3, InviteSmallButton, ConfirmButton, ConfirmButtonText, ButText } from '../../../styles';
 import colours from '../../../styles/colours';
 import Spinner from '../common/Spinner';
-import formatDate from '../../lib/format-date';
-import formatTime from '../../lib/format-time';
 
 
 const inlineStyle = {
@@ -28,27 +26,24 @@ export default class HostPoll extends Component {
     const { what, where, when } = this.props.event;
     console.log('what: ', what);
     this.state = {
-      eventdetails: {
-        what: what.length === 1 ? what : [],
-        where: where.length === 1 ? where : [],
-        when: when.length === 1 ? when : []
-      },
-      isModalVisible: false
+      what: what.length === 1 ? what : [],
+      where: where.length === 1 ? where : [],
+      when: when.length === 1 ? when : []
     };
     this.toggleSelection = this.toggleSelection.bind(this);
   }
 
   toggleSelection (category, selection) {
 
-    if (!this.state.eventdetails[category].includes(selection)) {
+    if (!this.state[category].includes(selection)) {
 
       this.setState({
-        eventdetails: { ...this.state.eventdetails, [category]: [selection] }
+        [category]: [selection]
       });
 
     } else {
       this.setState({
-        eventdetails: { ...this.state.eventdetails, [category]: [] }
+        [category]: []
       });
     }
   }
@@ -56,63 +51,29 @@ export default class HostPoll extends Component {
 
   render () {
 
-    const { event, voteCount, handleInviteMoreFriends, handleConfirmEvent, finalChoices, isFetching, navigator } = this.props;
+    const { event,
+      voteCount,
+      handleInviteMoreFriends,
+      handleConfirmEvent,
+      finalChoices,
+      isFetching } = this.props;
     console.log('voteCount: ', voteCount);
-    const allCategoriesSelected = Object.keys(this.state.eventdetails)
-      .map(category => this.state.eventdetails[category].length)
+    const allCategoriesSelected = Object.keys(this.state)
+      .map(category => this.state[category].length)
       .every(length => length === 1);
+
+    console.log('finalChoices: ', finalChoices);
+    console.log('this.state: ', this.state);
+
+    // if (!finalChoices && isConfirming) {
+    //
+    // }
+    if (finalChoices) {
+      this.props.confirmedEvent();
+    }
 
     return (
       <ScrollView>
-        <Modal transparent animationType={'slide'} visible={this.state.isModalVisible} onRequestClose={() => { alert('Modal has been closed.'); }}>
-          {
-            <View style={styles.modalWrapper}>
-
-              {
-                !finalChoices &&
-                <View style={styles.modalConfirm}>
-
-                  <Text style={[styles.msg1, { flex: 1 }]}>Confirming event</Text>
-                  <Text style={[styles.msg2, { flex: 1 }]}>please wait...</Text>
-                  <Spinner size="large" />
-                  <View style={{ flex: 1 }} />
-
-                </View>
-              }
-
-              {
-                finalChoices &&
-                <View style={styles.modalConfirm}>
-                  <Text style={[styles.msg1, { flex: 1 }]}>Event confirmed</Text>
-                  <Text style={[styles.msg2, { flex: 1 }]}>Your event is now confirmed:</Text>
-                  <View style={{ flex: 1 }}>
-                    <Text style={styles.msg3}>What: {finalChoices.what}</Text>
-                    <Text style={styles.msg3}>Where: {finalChoices.where}</Text>
-                    <Text style={styles.msg3}>When: {formatDate(finalChoices.when[0])} {formatTime(finalChoices.when[0])}</Text>
-                  </View>
-
-                  <View style={{ flex: 1 }}>
-                    <TouchableHighlight
-                      style={ [styles.confirmButton, { marginBottom: 20, marginTop: 20 }] }
-                      onPress={ () => {
-                        this.setState({
-                          isModalVisible: false
-                        });
-
-                        navigator.goBack(null);
-
-                      }}
-                    >
-                      <Text style={styles.confirmButtonText}>OK</Text>
-                    </TouchableHighlight>
-                  </View>
-
-                </View>
-              }
-            </View>
-          }
-
-        </Modal>
 
         {
           isFetching && <Spinner />
@@ -203,14 +164,7 @@ export default class HostPoll extends Component {
                 allCategoriesSelected &&
                 <ConfirmButton
                   style={{ marginBottom: 40 }}
-                  onPress={ () => {
-                    this.setState({
-                      isModalVisible: true
-                    });
-                    return (
-                      handleConfirmEvent(this.state.eventdetails, event.event_id)
-                    );
-                  }}
+                  onPress={ () => { handleConfirmEvent(this.state, event.event_id); }}
                 >
                   <ConfirmButtonText>CONFIRM EVENT DETAILS</ConfirmButtonText>
                 </ConfirmButton>

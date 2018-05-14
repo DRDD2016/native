@@ -84,7 +84,7 @@ export default class Event extends Component {
 
     console.log('Event index will update nextProps: ', nextProps);
     console.log('ThisPropsNavigation: ', this.props.navigation);
-    
+
   }
 
   handleDelete (event, event_id) {
@@ -126,6 +126,7 @@ export default class Event extends Component {
           handleConfirmEvent={ this.props.handleConfirmEvent }
           voteCount={ this.props.voteCount }
           handleInviteMoreFriends={ this.props.handleInviteMoreFriends }
+          confirmedEvent={ this.props.confirmedEvent }
         />
       );
     } else if (!this.props.userIsHost && this.props.isPoll) {

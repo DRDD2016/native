@@ -75,7 +75,7 @@ export function getVotesFailure (error) {
 ********/
 
 export function postVote (token, vote, event_id, navigation) { //eslint-disable-line
-  
+
   return (dispatch) => {
     dispatch(postVoteRequest());
 
@@ -140,6 +140,7 @@ export function finaliseEvent (token, hostEventChoices, event_id) { // eslint-di
     .then((res) => {
       res.json()
       .then((data) => {
+        // console.log('finaliseEvent data: ', data);
         dispatch(finaliseEventSuccess(data));
         dispatch(getCalendar(token));
       })

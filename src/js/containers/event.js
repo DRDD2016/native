@@ -5,14 +5,20 @@ import { store } from '../init-store';
 import Event from '../components/event';
 import { getEvent, getUserById, updateRsvp, deleteEvent } from '../actions/event/data';
 import { postVote, finaliseEvent, dismissModal } from '../actions/event/poll';
-import { hydrateCreateEvent, clearCreateEvent, saveEvent } from '../actions/create';
+import { hydrateCreateEvent,
+  clearCreateEvent,
+  saveEvent,
+  shareInviteRequest,
+  eventConfirmedRequest,
+  eventConfirmingRequest,
+  eventConfirmingSuccess } from '../actions/create';
 import { deleteIncomingLink } from '../actions/network';
 import mapToISOString from '../lib/map-to-iso-string';
 import normaliseVoteData from '../lib/normalise-vote-data';
 import { shareLink, composeLinkToShare } from '../lib/branchLink';
 
 
-const mapStateToProps = ({ event, user, network }) => {
+const mapStateToProps = ({ event, user, network, create }) => {
   return {
     isPoll: event.data.is_poll,
     event: event.data,
@@ -25,7 +31,9 @@ const mapStateToProps = ({ event, user, network }) => {
     voteCount: event.poll.voteCount,
     error: event.data.error,
     isConnected: network.isConnected,
-    cancelled: event.data.cancelled
+    cancelled: event.data.cancelled,
+    isConfirmingEvent: event.poll.isConfirmingEvent,
+    isEventConfirmed: create.isEventConfirmed
   };
 };
 
@@ -88,6 +96,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(clearCreateEvent());
     },
     handleInviteMoreFriends: () => {
+      dispatch(shareInviteRequest());
       const event = store.getState().event.data;
       composeLinkToShare(store.getState().user, event, event.code);
     },
@@ -95,6 +104,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
       dispatch(deleteIncomingLink());
 
+    },
+    confirmedEvent: () => {
+      dispatch(eventConfirmedRequest());
     }
   };
 };
