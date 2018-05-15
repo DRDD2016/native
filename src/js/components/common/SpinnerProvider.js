@@ -25,6 +25,7 @@ export default class SpinnerProvider extends Component {
       isFetchingCreate,
       isConfirmingEvent,
       isEventConfirmed,
+      isFinishedUpdatingRsvp,
       finalChoices } = this.props;
 
     const isLoading = isFetchingBranch || isReceivingFeed || isFetchingFeed || isFetchingEvent || isFetchingCreate;
@@ -70,6 +71,20 @@ export default class SpinnerProvider extends Component {
                 isConnected={isConnected}
                 onClose={ () => { this.setState({ isModalVisible: false }); }}
                 additionalInfo={ finalChoices } // eslint-disable-line max-len
+              />
+            </View>
+
+        }
+        {
+          (isFinishedUpdatingRsvp) &&
+
+            <View style={{ flex: 1, borderColor: 'lightblue', borderWidth: 2 }}>
+              <SpinnerModal
+                visible={isFinishedUpdatingRsvp}
+                type={ 'rsvp_finished' }
+                isConnected={isConnected}
+                onClose={ () => { this.setState({ isModalVisible: false }); }}
+                // additionalInfo={ } // eslint-disable-line max-len
               />
             </View>
 

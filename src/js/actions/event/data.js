@@ -23,6 +23,9 @@ export const EDIT_EVENT_FAILURE = 'EDIT_EVENT_FAILURE';
 export const UPDATE_RSVP_REQUEST = 'UPDATE_RSVP_REQUEST';
 export const UPDATE_RSVP_SUCCESS = 'UPDATE_RSVP_SUCCESS';
 export const UPDATE_RSVP_FAILURE = 'UPDATE_RSVP_FAILURE';
+export const FINISHED_UPDATE_RSVP_REQUEST = 'FINISHED_UPDATE_RSVP_REQUEST';
+export const FINISHED_UPDATE_RSVP_SUCCESS = 'FINISHED_UPDATE_RSVP_SUCCESS';
+export const FINISHED_UPDATE_RSVP_FAILURE = 'FINISHED_UPDATE_RSVP_FAILURE';
 export const DELETE_EVENT_REQUEST = 'DELETE_EVENT_REQUEST';
 export const DELETE_EVENT_SUCCESS = 'DELETE_EVENT_SUCCESS';
 export const DELETE_EVENT_FAILURE = 'DELETE_EVENT_FAILURE';
@@ -99,6 +102,20 @@ export const updateRsvpSuccess = data => ({
 
 export const updateRsvpFailure = error => ({
   type: UPDATE_RSVP_FAILURE,
+  error
+});
+
+export const finishedUpdateRsvpRequest = () => ({
+  type: FINISHED_UPDATE_RSVP_REQUEST
+});
+
+export const finishedUpdateRsvpSuccess = data => ({
+  type: FINISHED_UPDATE_RSVP_SUCCESS,
+  data
+});
+
+export const finishedUpdateRsvpFailure = error => ({
+  type: FINISHED_UPDATE_RSVP_FAILURE,
   error
 });
 
@@ -362,6 +379,7 @@ export function updateRsvp (token, event_id, status) {
           dispatch(updateRsvpFailure(data.error));
         } else {
           dispatch(updateRsvpSuccess(data));
+          dispatch(finishedUpdateRsvpRequest());
           dispatch(getCalendar(token));
         }
       })
