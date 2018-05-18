@@ -87,7 +87,7 @@ class App extends Component {
   componentDidMount () {
 
     NetInfo.isConnected.fetch().then().done(() => {
-      NetInfo.isConnected.addEventListener('change', this._handleConnectionChange);
+      NetInfo.isConnected.addEventListener('connectionChange', this._handleConnectionChange);
     });
     Answers.logCustom('Index.js Mounted', { additionalData: 'nothing' });
 
@@ -204,7 +204,7 @@ class App extends Component {
       _unsubscribeFromBranch = null;
     }
 
-    NetInfo.isConnected.removeEventListener('change', this._handleConnectionChange);
+    NetInfo.isConnected.removeEventListener('connectionChange', this._handleConnectionChange);
     Answers.logCustom('Index.js UnMounted', { additionalData: 'nothing' });
   }
 

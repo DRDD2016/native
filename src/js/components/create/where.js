@@ -75,15 +75,15 @@ export default class Where extends Component {
   render () {
     const { data, name, addInput, removeInput } = this.props;
     const inputs = data.map((value, inputKey) => {
-      console.log('data: ', data);
-      console.log('name: ', name);
-      console.log('inputKey: ', inputKey);
-      console.log('this.state.inputFocussed: ', this.state.inputFocussed);
-      console.log('this.state.inputKeyFocussed: ', this.state.inputKeyFocussed);
-      console.log('this.state.listViewDisplayed: ', this.state.listViewDisplayed);
+      // console.log('data: ', data);
+      // console.log('name: ', name);
+      // console.log('inputKey: ', inputKey);
+      // console.log('this.state.inputFocussed: ', this.state.inputFocussed);
+      // console.log('this.state.inputKeyFocussed: ', this.state.inputKeyFocussed);
+      // console.log('this.state.listViewDisplayed: ', this.state.listViewDisplayed);
 
       if (this.state.inputFocussed !== false && inputKey !== this.state.inputKeyFocussed && this.state.inputKeyFocussed !== '') {
-        console.log('inputsNOTFocussed');
+        // console.log('inputsNOTFocussed');
         return (
           <View
             accessibilityLabel={`Where option ${inputKey + 1}`}

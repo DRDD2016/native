@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Dimensions, Image } from 'react-native';
+import { View, Dimensions, ImageBackground } from 'react-native';
 import { Header } from 'react-navigation';
 import colours from '../../../styles/colours';
 
@@ -18,7 +18,7 @@ export default function ImageHeader (props) {
       }}
     >
 
-      <Image
+      <ImageBackground
         source={require('../../../img/AppBannerDiagTop.png')}
         style={{
           flex: 1,
@@ -33,7 +33,7 @@ export default function ImageHeader (props) {
 
       >
         <Header {...props} style={{ flex: 1, zIndex: 1, backgroundColor: 'rgba(255, 255, 255, 0.6)' }} />
-      </Image>
+      </ImageBackground>
 
 
     </View>

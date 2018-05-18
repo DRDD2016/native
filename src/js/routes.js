@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Dimensions, Platform, BackHandler } from 'react-native';
 import { connect } from 'react-redux';
 import { StackNavigator, TabNavigator, DrawerNavigator, addNavigationHelpers, NavigationActions } from 'react-navigation';
+import { createReduxBoundAddListener, createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colours from '../styles/colours';
 
@@ -149,6 +150,12 @@ export const StackRoot = StackNavigator({
   initialRouteName: 'splash'
 });
 
+export const navMiddleware = createReactNavigationReduxMiddleware(
+  'root',
+  state => state.nav
+);
+
+export const addListener = createReduxBoundAddListener('root');
 
 class AppWithNavigationState extends Component {
 
@@ -176,7 +183,8 @@ class AppWithNavigationState extends Component {
     console.log('nav: ', nav);
     const navigation = addNavigationHelpers({
       dispatch,
-      state: nav
+      state: nav,
+      addListener
     });
 
     return <StackRoot navigation={navigation} />;
@@ -186,5 +194,6 @@ class AppWithNavigationState extends Component {
 const mapStateToProps = state => ({
   nav: state.nav
 });
+
 
 export default connect(mapStateToProps)(AppWithNavigationState);

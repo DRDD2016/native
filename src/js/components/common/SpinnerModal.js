@@ -1,7 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import { View, Text, Modal, TouchableHighlight } from 'react-native';
-import { NavigationActions } from 'react-navigation';
 import Fabric from 'react-native-fabric';
 import { store } from '../../init-store';
 import { saveIncomingLinkError } from '../../actions/network';
@@ -15,7 +14,7 @@ import formatTime from '../../lib/format-time';
 
 const { Answers } = Fabric;
 
-export default function SpinnerModal ({ visible, type, isConnected, onClose, eventCodeError, additionalInfo }) {
+export default function SpinnerModal ({ visible, type, isConnected, onClose, eventCodeError, additionalInfo, goBack }) {
 
   console.log('SpinnerModal visible:', visible);
   console.log('SpinnerModal type:', type);
@@ -32,7 +31,7 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
       {
         <View style={styles.modalWrapper}>
           {
-            (type === 'confirming_event') && // trigger dispatch(eventConfirmingRequest())
+            (type === 'confirming_event') &&
             <View style={styles.modalConfirm}>
 
               <Text style={[styles.msg1, { flex: 1 }]}>Confirming event</Text>
@@ -50,7 +49,7 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
 
           {
 
-            (type === 'event_confirmed') && // trigger dispatch(eventConfirmedRequest())
+            (type === 'event_confirmed') &&
             <View style={styles.modalConfirm}>
 
               <Text style={[styles.msg1, { flex: 1 }]}>Event confirmed</Text>
@@ -71,7 +70,7 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
                     console.log('OK clicked');
                     store.dispatch(eventConfirmedSuccess());
 
-                    NavigationActions.goBack(null);
+                    goBack();
 
                   }}
                 >
@@ -103,7 +102,7 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
                     console.log('OK clicked');
                     store.dispatch(finishedUpdateRsvpSuccess());
 
-                    NavigationActions.goBack(null); // check this
+                    goBack(); // check this
 
                   }}
                 >

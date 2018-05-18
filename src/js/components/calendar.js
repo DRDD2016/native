@@ -162,7 +162,7 @@ class Calendar extends Component {
                   data={this.dataSource}
                   extraData={this.state}
                   renderItem={this.renderItem}
-                  keyExtractor={item => item.event_id}
+                  keyExtractor={item => item.event_id.toString()}
                 />
               </View>
             }

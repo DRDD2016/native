@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Platform } from 'react-native';
+import { ImageBackground, Platform } from 'react-native';
 import { Header } from 'react-navigation';
 import colours from '../../../styles/colours';
 import { scale } from '../../../styles/scaling';
@@ -7,7 +7,7 @@ import { scale } from '../../../styles/scaling';
 export default function HeaderBack ({ children }) {
   return (
 
-    <Image
+    <ImageBackground
       style={{
         flexDirection: 'row',
         flex: 1,
@@ -20,7 +20,7 @@ export default function HeaderBack ({ children }) {
 
     >
       {children}
-    </Image>
+    </ImageBackground>
 
 
   );

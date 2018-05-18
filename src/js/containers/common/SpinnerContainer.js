@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 import SpinnerProvider from '../../components/common/SpinnerProvider';
 
 
@@ -26,9 +27,14 @@ const mapStateToProps = ({ feed, user, network, create, event }) => {
 };
 
 
-const mapDispatchToProps = (/* dispatch, props */) => {
+const mapDispatchToProps = (dispatch) => {
   // const { navigation } = props;
+
   return {
+
+    goBack: () => { //eslint-disable-line
+      dispatch(NavigationActions.back(null));
+    }
 
   };
 };

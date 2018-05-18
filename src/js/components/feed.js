@@ -372,7 +372,7 @@ class Feed extends Component {
               <FlatList
                 data={this.dataSource}
                 renderItem={this.renderItem}
-                keyExtractor={item => `${item.id}${Math.random()}`}
+                keyExtractor={item => `${item.id}${Math.random().toString()}`}
               />
             }
 

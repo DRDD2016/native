@@ -48,7 +48,13 @@ const inlineStyles = StyleSheet.create({
 export default class Drawer extends Component {
 
   clickOpenURL (url) {
-    Linking.openURL(url).catch(err => console.error('An error occurred', err));
+    Linking.canOpenURL(url).then((supported) => {
+      if (!supported) {
+        console.log(`Can't handle url: ${url}`);
+      } else {
+        return Linking.openURL(url);
+      }
+    }).catch(err => console.error('An error occurred', err));
   }
   shareApp () {
     composeLinkToShare(store.getState().user);

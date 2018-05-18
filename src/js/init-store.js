@@ -1,11 +1,12 @@
 import { AsyncStorage, Platform } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-// import logger from 'redux-logger';
+import logger from 'redux-logger';
 // import { composeWithDevTools } from 'remote-redux-devtools';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import { createFilter } from 'redux-persist-transform-filter';
 import rootReducer from './reducers/';
+import { navMiddleware } from './routes';
 
 export function initStore (initialState) {
   if (Platform.OS === 'ios') {
@@ -14,7 +15,7 @@ export function initStore (initialState) {
       rootReducer,
       initialState,
         compose(
-          applyMiddleware(thunkMiddleware),
+          applyMiddleware(thunkMiddleware, navMiddleware, logger),
           autoRehydrate({ log: true })
         )
     );
@@ -23,7 +24,7 @@ export function initStore (initialState) {
     rootReducer,
     initialState,
     compose(  // composeWithDevTools if debugging redux android
-      applyMiddleware(thunkMiddleware), // remove logger from last in chain when not debugging
+      applyMiddleware(thunkMiddleware, navMiddleware, logger), // remove logger from last in chain when not debugging
       autoRehydrate({ log: true })
     )
   );
