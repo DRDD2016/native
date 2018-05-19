@@ -21,6 +21,9 @@ export default function ImageHeader (props) {
       <ImageBackground
         source={require('../../../img/AppBannerDiagTop.png')}
         style={{
+          borderColor: 'blue',
+          borderWidth: 1,
+          opacity: 0.6,
           flex: 1,
           zIndex: 0,
           // position: 'absolute',

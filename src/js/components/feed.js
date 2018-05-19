@@ -202,6 +202,7 @@ class Feed extends Component {
 
     const timestamp = new Date();
     console.log('Feed render:', timestamp.getTime());
+    console.log('Feed render props:', this.props);
 
     const { width } = Dimensions.get('window'); // inline style to force render on screen rotation
     const scaledWidth = width > 700 ? (width * 0.90) : (width * 1);
@@ -272,7 +273,7 @@ class Feed extends Component {
     Answers.logCustom('Feed.js render'); // eslint-disable-line max-len
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, borderColor: 'green', borderWidth: 1 }}>
 
         <WhatsNew visible={showWhatsNew} type={'whats_new'} user_updateNo={user_updateNo} app_updateNo={app_updateNo} />
         <WhatsNew visible={showWelcome} type={'welcome'} user_updateNo={user_updateNo} app_updateNo={app_updateNo} />
@@ -295,6 +296,8 @@ class Feed extends Component {
             alignSelf: 'center',
             width: scaledWidth,
             backgroundColor: colours.white,
+            borderColor: 'orange',
+            borderWidth: 1,
             borderBottomWidth: 1,
             borderBottomColor: colours.lightgray }}
         >
@@ -303,7 +306,7 @@ class Feed extends Component {
           }
 
 
-          <View>
+          <View style={{ borderColor: 'green', borderWidth: 1 }}>
             { !isConnected && this.renderAlert() }
 
             {

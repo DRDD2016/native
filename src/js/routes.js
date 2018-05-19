@@ -180,7 +180,7 @@ class AppWithNavigationState extends Component {
 
   render () {
     const { dispatch, nav } = this.props;
-    console.log('nav: ', nav);
+    console.log('render routes nav: ', nav);
     const navigation = addNavigationHelpers({
       dispatch,
       state: nav,

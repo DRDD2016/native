@@ -44,9 +44,11 @@ export default class SpinnerProvider extends Component {
     console.log('isConfirmingEvent:', isConfirmingEvent);
     console.log('isEventConfirmed:', isEventConfirmed);
     console.log('finalChoices:', finalChoices);
+    console.log('isLoading:', isLoading);
+    console.log('this.props.children:', this.props.children);
 
     return (
-      <View style={{ flex: 1, borderColor: 'red', borderWidth: 2 }}>
+      <View style={{ flex: 1, borderColor: 'pink', borderWidth: 1 }}>
         {React.Children.only(this.props.children)}
         {
           (isConfirmingEvent) &&
