@@ -110,7 +110,7 @@ class Code extends Component {
                 style={styles.input}
                 name="code"
                 component={ FormTextInput }
-                placeholder={ 'Enter code here' }
+                placeholder="Enter code here"
               />
             </View>
             { this.renderButton() }

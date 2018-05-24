@@ -1,5 +1,5 @@
 import Config from 'react-native-config';
-import { NavigationActions } from 'react-navigation';
+import { StackActions, NavigationActions } from 'react-navigation';
 import { getVotes, clearPollState } from './poll';
 import { hydrateCreateEvent, clearCreateEvent, saveEventDone } from '../create';
 import { fetchingEventFromFeedItemSuccess, fetchingEventFromFeedItemFailure } from '../feed';
@@ -218,7 +218,7 @@ export function getEvent (token, event_id, navigation) {
         console.log('params', params);
 
 
-        // const resetAction = NavigationActions.reset({
+        // const resetAction = StackActions.reset({
         //   index: 0,
         //   key: null,
         //   actions: [
@@ -304,7 +304,7 @@ export function submitCode (token, code) {
           console.log('resetting route to event in submit code data action creator');
 
 
-          // const resetAction = NavigationActions.reset({
+          // const resetAction = StackActions.reset({
           //   index: 0,
           //   key: null,
           //   actions: [
@@ -408,7 +408,7 @@ export function deleteEvent (token, event, event_id, navigation) {
         dispatch(deleteEventSuccess(data));
         dispatch(getCalendar(token));
 
-        const resetAction = NavigationActions.reset({
+        const resetAction = StackActions.reset({
           index: 0,
           key: null,
           actions: [

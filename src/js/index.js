@@ -15,7 +15,7 @@ import { store } from './init-store';
 import { setIsConnected, subscribeToBranch, linkDatafromBranch, saveIncomingLink, saveIncomingLinkError } from './actions/network';
 import SplashView from './components/common/SplashView';
 import AppWithNavigationState from './routes';
-import { AlertProvider } from './components/Alert';
+// import { AlertProvider } from './components/Alert';
 import PushController from './lib/PushController';
 import SpinnerContainer from './containers/common/SpinnerContainer';
 import colours from '../styles/colours';
@@ -222,13 +222,13 @@ class App extends Component {
     return (
       <Provider store={ store }>
 
-        <AlertProvider>
-          <PushController>
-            <SpinnerContainer>
-              <AppWithNavigationState />
-            </SpinnerContainer>
-          </PushController>
-        </AlertProvider>
+
+        <PushController>
+          <SpinnerContainer>
+            <AppWithNavigationState />
+          </SpinnerContainer>
+        </PushController>
+
 
       </Provider>
     );

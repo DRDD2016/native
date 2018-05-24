@@ -56,9 +56,9 @@ export default class SpinnerProvider extends Component {
             <View style={{ flex: 1, borderColor: 'purple', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isConfirmingEvent}
-                type={ 'confirming_event' }
+                type="confirming_event"
                 isConnected={isConnected}
-                onClose={ () => { this.setState({ isModalVisible: false }); }}
+                onClose={ () => { }}
                 // additionalInfo={ `SP share_invite --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
               />
             </View>
@@ -70,10 +70,10 @@ export default class SpinnerProvider extends Component {
             <View style={{ flex: 1, borderColor: 'blue', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isEventConfirmed}
-                type={ 'event_confirmed' }
+                type="event_confirmed"
                 isConnected={isConnected}
                 goBack={goBack}
-                onClose={ () => { this.setState({ isModalVisible: false }); }}
+                onClose={ () => { }}
                 additionalInfo={ finalChoices } // eslint-disable-line max-len
               />
             </View>
@@ -85,10 +85,10 @@ export default class SpinnerProvider extends Component {
             <View style={{ flex: 1, borderColor: 'lightblue', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isFinishedUpdatingRsvp}
-                type={ 'rsvp_finished' }
+                type="rsvp_finished"
                 isConnected={isConnected}
                 goBack={goBack}
-                onClose={ () => { this.setState({ isModalVisible: false }); }}
+                onClose={ () => { }}
                 // additionalInfo={ } // eslint-disable-line max-len
               />
             </View>
@@ -100,9 +100,9 @@ export default class SpinnerProvider extends Component {
             <View style={{ flex: 1, borderColor: 'orange', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isLoading}
-                type={ 'share_invite' }
+                type="share_invite"
                 isConnected={isConnected}
-                onClose={ () => { this.setState({ isModalVisible: false }); }}
+                onClose={ () => { }}
                 // additionalInfo={ `SP share_invite --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
               />
             </View>
@@ -114,9 +114,9 @@ export default class SpinnerProvider extends Component {
             <View style={{ flex: 1, borderColor: 'blue', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isLoading}
-                type={ 'loading' }
+                type="loading"
                 isConnected={isConnected}
-                onClose={ () => { this.setState({ isModalVisible: false }); }}
+                onClose={ () => { }}
                 // additionalInfo={ `SP isLoading --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
               />
             </View>
@@ -129,9 +129,9 @@ export default class SpinnerProvider extends Component {
 
               <SpinnerModal
                 visible={errorModalVisible}
-                type={ 'event_code_error' }
+                type="event_code_error"
                 isConnected={isConnected}
-                onClose={ () => { this.setState({ isModalVisible: false }); }}
+                onClose={ () => { }}
                 eventCodeError={eventCodeError}
                 // additionalInfo={ `SP eventCodeError --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
               />

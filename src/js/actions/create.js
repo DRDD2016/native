@@ -1,5 +1,5 @@
 import Config from 'react-native-config';
-import { NavigationActions } from 'react-navigation';
+import { StackActions, NavigationActions } from 'react-navigation';
 import { getCalendar } from './calendar';
 import { composeLinkToShare } from '../lib/branchLink';
 import { store } from '../init-store';
@@ -99,7 +99,7 @@ export function saveEvent (token, eventData, navigation) { //eslint-disable-line
 
           console.log('create action - Navigate to Feed');
 
-          const resetAction = NavigationActions.reset({
+          const resetAction = StackActions.reset({
             index: 0,
             key: null,
             actions: [

@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import Config from 'react-native-config';
 import React, { Component } from 'react';
-import { View, Text, Dimensions, Platform } from 'react-native';
+import { StatusBar, View, Text, Dimensions, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -104,6 +104,10 @@ export default class Where extends Component {
             // zIndex: 999999
           }}
         >
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor={colours.where}
+          />
           <GooglePlacesAutocomplete
             ref={ (googlePlaces) => {
               this.googlePlaces = googlePlaces;
@@ -185,7 +189,7 @@ export default class Where extends Component {
                 backgroundColor: colours.verylightgray
               }
             }}
-            nearbyPlacesAPI={'GooglePlacesSearch'}
+            nearbyPlacesAPI="GooglePlacesSearch"
             filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
           />
           { inputKey !== 0 &&

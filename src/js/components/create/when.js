@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { StatusBar, View, Text, ScrollView } from 'react-native';
 import AddInput from '../general/add-input';
 import Button from '../common/Button';
 import ImageHeader from '../common/ImageHeader';
@@ -39,6 +39,10 @@ export default class When extends Component {
       <View
         style={{ flex: 1, backgroundColor: colours.white }}
       >
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={colours.when}
+        />
         <HeaderBack />
         <ScrollView>
           <View style={{ flexDirection: 'column', alignItems: 'center', marginHorizontal: 15 }}>

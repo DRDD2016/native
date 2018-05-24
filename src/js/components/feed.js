@@ -3,7 +3,7 @@ import { View, Text, TouchableHighlight, FlatList, Image, Platform, Dimensions }
 import Fabric from 'react-native-fabric';
 import _ from 'lodash';
 import { Header } from 'react-navigation';
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
@@ -31,26 +31,14 @@ class Feed extends Component {
     title: <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />,
     headerLeft: <ButtonHeader />,
     headerRight: <ButtonHeader
-      onPress={() => navigation.navigate('DrawerOpen')}
+      onPress={() => navigation.openDrawer()}
     >
       <BurgerIcon />
     </ButtonHeader>,
-    tabBarIcon: ({ tintColor }) =>
-      <Icon name="globe" size={32} color={tintColor} />,
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
     headerTintColor: colours.headerButtonColor,
     header: props => <ImageHeader {...props} />
   });
-
-  constructor (props) {
-    super(props);
-
-    this.state = {
-      isModalVisible: false
-    };
-
-  }
-
 
   componentWillMount () {
 
@@ -275,8 +263,8 @@ class Feed extends Component {
     return (
       <View style={{ flex: 1, borderColor: 'green', borderWidth: 1 }}>
 
-        <WhatsNew visible={showWhatsNew} type={'whats_new'} user_updateNo={user_updateNo} app_updateNo={app_updateNo} />
-        <WhatsNew visible={showWelcome} type={'welcome'} user_updateNo={user_updateNo} app_updateNo={app_updateNo} />
+        <WhatsNew visible={showWhatsNew} type="whats_new" user_updateNo={user_updateNo} app_updateNo={app_updateNo} />
+        <WhatsNew visible={showWelcome} type="welcome" user_updateNo={user_updateNo} app_updateNo={app_updateNo} />
 
         <FeedHeader>
           { !isConnected && this.renderAlert() }

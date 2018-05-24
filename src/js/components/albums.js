@@ -32,7 +32,7 @@ class Albums extends Component {
     headerTintColor: colours.headerButtonColor,
     header: props => <ImageHeader {...props} />,
     headerRight: <ButtonHeader
-      onPress={() => navigation.navigate('DrawerOpen')}
+      onPress={() => navigation.openDrawer()}
     >
       <BurgerIcon />
     </ButtonHeader>,

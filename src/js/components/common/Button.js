@@ -5,7 +5,8 @@ export default function Button ({ onPress, children, buttonStyle, textStyle, tes
 
   return (
     <TouchableOpacity
-      onPress={onPress} style={buttonStyle}
+      onPress={onPress}
+      style={buttonStyle}
       accessibilityLabel={testDescription}
     >
       <Text style={textStyle}>

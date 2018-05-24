@@ -25,7 +25,9 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
 
   return (
     <Modal
-      transparent animationType={'slide'} visible={visible}
+      transparent
+      animationType="slide"
+      visible={visible}
       onRequestClose={onClose}
     >
       {

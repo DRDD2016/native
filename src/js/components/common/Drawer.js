@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, Platform, Linking, TouchableOpacity } from 'react-native';
-import { Header } from 'react-navigation';
+import { Header, DrawerActions } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 // import { menuWidth } from '../../../styles';
 import colours from '../../../styles/colours';
@@ -74,7 +74,7 @@ export default class Drawer extends Component {
     return (
       <View style={inlineStyles.container}>
 
-        <TouchableOpacity style={inlineStyles.HeaderRow} onPress={() => navigation.navigate('DrawerClose')}>
+        <TouchableOpacity style={inlineStyles.HeaderRow} onPress={() => navigation.dispatch(DrawerActions.closeDrawer())}>
 
           <View style={inlineStyles.LogoWrapper}>
             <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />
