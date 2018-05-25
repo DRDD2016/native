@@ -92,7 +92,7 @@ export default class InviteePoll extends Component {
     return (
 
       <ScrollView>
-        <Modal transparent animationType={'slide'} visible={this.state.isModalVisible} onRequestClose={() => { alert('Modal has been closed.'); }}>
+        <Modal transparent animationType="slide" visible={this.state.isModalVisible} onRequestClose={() => { }}>
           {
             <View style={styles.modalWrapper}>
 
@@ -147,13 +147,13 @@ export default class InviteePoll extends Component {
           />
           <Text style={{ alignSelf: 'center', marginBottom: 5 }}>{event.firstname} has asked you to vote on:</Text>
           <Text style={[styles.msg1, { alignSelf: 'center', marginBottom: 5 }]}>{event.name}</Text>
-          <Text>{'Tap the options below to vote'}</Text>
+          <Text>Tap the options below to vote</Text>
         </View>
 
         <View style={styles.row}>
 
           <CategoryDetails
-            category={'what'}
+            category="what"
             data={event.what}
             toggleSelection={this.toggleSelection}
             voteCount={voteCount && voteCount.what}
@@ -162,7 +162,7 @@ export default class InviteePoll extends Component {
 
         <View style={styles.row}>
           <CategoryDetails
-            category={'where'}
+            category="where"
             data={event.where}
             toggleSelection={this.toggleSelection}
             voteCount={voteCount && voteCount.where}
@@ -171,7 +171,7 @@ export default class InviteePoll extends Component {
 
         <View style={styles.row}>
           <CategoryDetails
-            category={'when'}
+            category="when"
             data={event.when}
             toggleSelection={this.toggleSelection}
             voteCount={voteCount && voteCount.when}

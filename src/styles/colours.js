@@ -23,7 +23,8 @@ const colours = {
   modalBackground: 'rgba(52, 52, 52, 0.8)',
   headerButtonColor: this.gray,
   headerTitleColor: this.darkgray,
-  sectionBorder: '#efefef'
+  sectionBorder: '#efefef',
+  spacerColour: this.lightgray
 };
 
 export default colours;

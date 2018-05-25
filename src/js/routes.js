@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Dimensions, Platform, BackHandler } from 'react-native';
 import { connect } from 'react-redux';
-import { StackNavigator, TabNavigator, DrawerNavigator, addNavigationHelpers, NavigationActions } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator, createDrawerNavigator, NavigationActions } from 'react-navigation';
+import { createReduxBoundAddListener, createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colours from '../styles/colours';
 
@@ -32,11 +33,11 @@ import Splash from './components/auth/splash';
 const { width } = Dimensions.get('window');
 export const menuWidth = width > 700 ? (width * 0.6) : (width * 0.8);
 
-export const StackRoot = StackNavigator({
+export const AppNavigator = createStackNavigator({
   splash: {
-    screen: StackNavigator({
+    screen: createStackNavigator({
       splash1: { screen: Splash },
-      authMain: { screen: StackNavigator({
+      authMain: { screen: createStackNavigator({
         auth: { screen: Index },
         login: { screen: LoginContainer },
         signup: { screen: SignupContainer },
@@ -53,14 +54,54 @@ export const StackRoot = StackNavigator({
     )
   },
   tabsMain: {
-    screen: DrawerNavigator({
+    screen: createDrawerNavigator({
       Spark: {
-        screen: TabNavigator({
-          Albums: { screen: StackNavigator({ ScreenAlbums: { screen: AlbumsContainer } }) },
-          Calendar: { screen: StackNavigator({ ScreenCalendar: { screen: CalendarContainer } }) },
-          Feed: { screen: StackNavigator({ ScreenFeed: { screen: FeedContainer } }) },
-          Profile: { screen: StackNavigator({ ScreenProfile: { screen: ProfileContainer } }) },
-          Create: { screen: StackNavigator({
+        screen: createBottomTabNavigator({
+          Albums: { screen: createStackNavigator({ ScreenAlbums: { screen: AlbumsContainer } }),
+            navigationOptions: () => ({
+              tabBarIcon: ({ tintColor }) => (
+                <Icon
+                  name="photo"
+                  color={tintColor}
+                  size={32}
+                  />
+              )
+            })
+          },
+          Calendar: { screen: createStackNavigator({ ScreenCalendar: { screen: CalendarContainer } }),
+            navigationOptions: () => ({
+              tabBarIcon: ({ tintColor }) => (
+                <Icon
+                  name="calendar"
+                  color={tintColor}
+                  size={32}
+                  />
+              )
+            })
+          },
+          Feed: { screen: createStackNavigator({ ScreenFeed: { screen: FeedContainer } }),
+            navigationOptions: () => ({
+              tabBarIcon: ({ tintColor }) => (
+                <Icon
+                  name="globe"
+                  color={tintColor}
+                  size={32}
+                  />
+              )
+            })
+          },
+          Profile: { screen: createStackNavigator({ ScreenProfile: { screen: ProfileContainer } }),
+            navigationOptions: () => ({
+              tabBarIcon: ({ tintColor }) => (
+                <Icon
+                  name="user"
+                  color={tintColor}
+                  size={32}
+                  />
+              )
+            })
+          },
+          Create: { screen: createStackNavigator({
             ScreenCreate: { screen: DetailsContainer },
             What: { screen: WhatContainer },
             Where: { screen: WhereContainer },
@@ -69,27 +110,27 @@ export const StackRoot = StackNavigator({
             Confirm: { screen: ConfirmContainer } }),
             navigationOptions: {
               tabBarLabel: 'Create',
+              tabBarVisible: false,
               tabBarIcon: ({ tintColor }) =>
                 <Icon name="pencil" size={32} color={tintColor} />
             }
           }
         }, {
-          tabBarPosition: 'bottom',
-          swipeEnabled: true,
+          // swipeEnabled: true,
           // lazy: true, // added to attempt to stop Code loading until Feed has initialised.
-          animationEnabled: true,
-          pressColor: colours.purple,
+          // animationEnabled: true,
+          // pressColor: colours.purple,
           initialRouteName: 'Feed',
           tabBarOptions: {
-            gesturesEnabled: false,
+            // gesturesEnabled: false,
             showIcon: true,
-            upperCaseLabel: false,
+            // upperCaseLabel: false,
             activeTintColor: colours.blue,
             inactiveTintColor: colours.gray,
-            indicatorStyle: {
-              backgroundColor: colours.blue,
-              height: 3
-            },
+            // indicatorStyle: {
+            //   backgroundColor: colours.blue,
+            //   height: 3
+            // },
             style: {
               backgroundColor: colours.white,
               borderTopColor: colours.lightgray,
@@ -100,11 +141,11 @@ export const StackRoot = StackNavigator({
               // backgroundColor: 'green',
               paddingTop: 4
             },
-            iconStyle: {
-              // backgroundColor: 'lightblue',
-              width: Dimensions.get('window').width / 5,
-              height: 38
-            },
+            // iconStyle: {
+            //   // backgroundColor: 'lightblue',
+            //   width: Dimensions.get('window').width / 5,
+            //   height: 18
+            // },
             labelStyle: {
               // backgroundColor: 'red',
               fontSize: Platform.OS === 'ios' ? 12 : 14,
@@ -132,14 +173,14 @@ export const StackRoot = StackNavigator({
     })
 
   },
-  event: { screen: StackNavigator({
+  event: { screen: createStackNavigator({
     Event: { screen: EventContainer },
     Edit: { screen: EditContainer } })
   },
-  settings: { screen: StackNavigator({
+  settings: { screen: createStackNavigator({
     Settings: { screen: SettingsContainer } })
   },
-  code: { screen: StackNavigator({
+  code: { screen: createStackNavigator({
     Code: { screen: Code } })
   }
 }, {
@@ -149,6 +190,12 @@ export const StackRoot = StackNavigator({
   initialRouteName: 'splash'
 });
 
+export const navMiddleware = createReactNavigationReduxMiddleware(
+  'root',
+  state => state.nav
+);
+
+export const addListener = createReduxBoundAddListener('root');
 
 class AppWithNavigationState extends Component {
 
@@ -173,18 +220,20 @@ class AppWithNavigationState extends Component {
 
   render () {
     const { dispatch, nav } = this.props;
-    console.log('nav: ', nav);
-    const navigation = addNavigationHelpers({
-      dispatch,
-      state: nav
-    });
 
-    return <StackRoot navigation={navigation} />;
+    return (
+      <AppNavigator navigation = {{
+        dispatch,
+        state: nav,
+        addListener
+      }} />
+    );
   }
 }
 
 const mapStateToProps = state => ({
   nav: state.nav
 });
+
 
 export default connect(mapStateToProps)(AppWithNavigationState);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
 import Fabric from 'react-native-fabric';
-import { NavigationActions } from 'react-navigation';
+import { StackActions, NavigationActions } from 'react-navigation';
 import initSocket from '../../socket-router';
 import SplashView from '../common/SplashView';
 import { getUserNoById } from '../../actions/profile';
@@ -25,7 +25,7 @@ export default class Splash extends Component {
       AsyncStorage.getItem('spark_token')
       .then((token) => {
         if (token) {
-          
+
           initSocket();
 
           AsyncStorage.getItem('spark_user_id')
@@ -53,7 +53,7 @@ export default class Splash extends Component {
             if (splashStore.network.inComingLinkCode === 'none') {
               console.log('navigating to Feed because inComingLinkCode === none');
 
-              const resetAction = NavigationActions.reset({
+              const resetAction = StackActions.reset({
                 index: 0,
                 key: null,
                 actions: [
@@ -72,7 +72,7 @@ export default class Splash extends Component {
           } else {
             console.log('inComingLinkCode === undefined so navigating to Feed');
 
-            const resetAction = NavigationActions.reset({
+            const resetAction = StackActions.reset({
               index: 0,
               key: null,
               actions: [

@@ -17,7 +17,7 @@ const ConfirmWhat = ({ data }) => {
 
     return (
       <View
-        style={{ flexDirection: 'row', alignItems: 'center' }}
+        style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 1 }}
         key={ i }
       >
         { (hideTitle) &&

@@ -76,20 +76,20 @@ export function getCalendar (token) {
         Pragma: 'no-cache'
       }
     })
-    .then((res) => {
-      res.json()
-      .then((data) => {
-        if (data) {
-          dispatch(getCalendarSuccess(data));
-          // const hostIDs = data.map(event => event.host_user_id);
-          // dispatch(getCalendarHostUserData(hostIDs));
+      .then((res) => {
+        res.json()
+          .then((data) => {
+            if (data) {
+              dispatch(getCalendarSuccess(data));
+              // const hostIDs = data.map(event => event.host_user_id);
+              // dispatch(getCalendarHostUserData(hostIDs));
 
 
-        }
+            }
+          })
+          .catch(err => dispatch(getCalendarFailure(err.message)));
       })
       .catch(err => dispatch(getCalendarFailure(err.message)));
-    })
-    .catch(err => dispatch(getCalendarFailure(err.message)));
   };
 }
 

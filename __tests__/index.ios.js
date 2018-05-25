@@ -28,6 +28,28 @@ jest.mock('react-native-branch', () => {
 
 jest.mock('react-native-fcm', () => {
   return {
+    on: jest.fn(),
+    requestPermissions: jest.fn(),
+    getFCMToken: jest.fn(() => new Promise(accept => accept('FakeToken'))),
+    getAPNSToken: jest.fn(() => new Promise(accept => accept('FakeToken'))),
+    FCMEvent: {
+      Notification: 'fakeNotification'
+    }
+  };
+});
+
+
+// jest.mock('react-native-fcm', () => ({
+//   on: jest.fn(),
+//   requestPermissions: jest.fn(),
+//   getFCMToken: jest.fn(() => new Promise((accept, resolve) => accept('FakeToken'))),
+//   FCMEvent: {
+//     Notification: 'fakeNotification'
+//   }
+// }));
+
+jest.mock('react-native-dropdownalert', () => {
+  return {
 
   };
 });

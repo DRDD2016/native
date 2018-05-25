@@ -65,7 +65,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Our custom Camera message</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Our custom Mic message</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -82,6 +82,7 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>Feather.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

@@ -1,11 +1,11 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import { View, Text, Modal, TouchableHighlight } from 'react-native';
-import { NavigationActions } from 'react-navigation';
 import Fabric from 'react-native-fabric';
 import { store } from '../../init-store';
 import { saveIncomingLinkError } from '../../actions/network';
 import { eventConfirmedSuccess } from '../../actions/create';
+import { finishedUpdateRsvpSuccess } from '../../actions/event/data';
 import Spinner from '../common/Spinner';
 import styles from '../../../styles';
 import formatDate from '../../lib/format-date';
@@ -14,7 +14,7 @@ import formatTime from '../../lib/format-time';
 
 const { Answers } = Fabric;
 
-export default function SpinnerModal ({ visible, type, isConnected, onClose, eventCodeError, additionalInfo }) {
+export default function SpinnerModal ({ visible, type, isConnected, onClose, eventCodeError, additionalInfo, goBack }) {
 
   console.log('SpinnerModal visible:', visible);
   console.log('SpinnerModal type:', type);
@@ -25,13 +25,15 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
 
   return (
     <Modal
-      transparent animationType={'slide'} visible={visible}
+      transparent
+      animationType="slide"
+      visible={visible}
       onRequestClose={onClose}
     >
       {
         <View style={styles.modalWrapper}>
           {
-            (type === 'confirming_event') && // trigger dispatch(eventConfirmingRequest())
+            (type === 'confirming_event') &&
             <View style={styles.modalConfirm}>
 
               <Text style={[styles.msg1, { flex: 1 }]}>Confirming event</Text>
@@ -49,7 +51,7 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
 
           {
 
-            (type === 'event_confirmed') && // trigger dispatch(eventConfirmedRequest())
+            (type === 'event_confirmed') &&
             <View style={styles.modalConfirm}>
 
               <Text style={[styles.msg1, { flex: 1 }]}>Event confirmed</Text>
@@ -70,7 +72,39 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
                     console.log('OK clicked');
                     store.dispatch(eventConfirmedSuccess());
 
-                    NavigationActions.goBack(null);
+                    goBack();
+
+                  }}
+                >
+                  <Text style={styles.confirmButtonText}>OK</Text>
+                </TouchableHighlight>
+              </View>
+
+              {
+                // additionalInfo && <Text style={[styles.msg2, { flex: 1 }]}>{additionalInfo}</Text>
+              }
+              <View style={{ flex: 1 }} />
+
+            </View>
+          }
+
+          {
+
+            (type === 'rsvp_finished') &&
+            <View style={styles.modalConfirm}>
+
+              <Text style={[styles.msg1, { flex: 1 }]}>Response sent</Text>
+              <Text style={[styles.msg2, { flex: 1 }]}>Your response has been sent</Text>
+              <View style={{ flex: 1 }} />
+
+              <View style={{ flex: 1 }}>
+                <TouchableHighlight
+                  style={ [styles.confirmButton, { marginBottom: 20, marginTop: 20 }] }
+                  onPress={ () => {
+                    console.log('OK clicked');
+                    store.dispatch(finishedUpdateRsvpSuccess());
+
+                    goBack(); // check this
 
                   }}
                 >

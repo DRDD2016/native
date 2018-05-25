@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { AsyncStorage } from 'react-native';
-import { NavigationActions } from 'react-navigation';
+import { StackActions, NavigationActions } from 'react-navigation';
 import { persistor, store } from '../init-store';
 import Drawer from '../components/common/Drawer';
 import { logout } from '../actions/profile';
@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => ({
       AsyncStorage.removeItem('spark_user_id')
       .then(() => {
 
-        const resetAction = NavigationActions.reset({
+        const resetAction = StackActions.reset({
           index: 0,
           key: null,
           actions: [

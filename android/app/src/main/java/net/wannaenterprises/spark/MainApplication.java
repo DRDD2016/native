@@ -5,6 +5,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+import com.evollu.react.fcm.FIRMessagingPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import io.branch.rnbranch.*;
 import io.branch.referral.Branch;
@@ -21,7 +23,7 @@ import io.fabric.sdk.android.Fabric;
 import com.crashlytics.android.Crashlytics;
 import java.util.Arrays;
 import java.util.List;
-import com.evollu.react.fcm.FIRMessagingPackage;
+
 
 
 public class MainApplication extends Application implements ReactApplication {
@@ -38,6 +40,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new FabricPackage(),
           new MainReactPackage(),
+            new ReactNativePushNotificationPackage(),
             new RNFetchBlobPackage(),
           new RNBranchPackage(),
           new ReactNativeConfigPackage(),

@@ -19,13 +19,13 @@ const CancelConfirmedEventModal = ({ handleDeleteEvent, handleCloseModal }) => {
       <View>
         <View>
           <Button onClick={ handleCloseModal }>
-            <Icon name="remove icon" size={14} color={'red'} />
+            <Icon name="remove icon" size={14} color="red" />
             <Text>
               No
             </Text>
           </Button>
           <Button onClick={ handleDeleteEvent }>
-            <Icon name="checkmark icon" size={14} color={'green'} />
+            <Icon name="checkmark icon" size={14} color="green" />
             <Text>
               Yes
             </Text>

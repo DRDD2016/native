@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Dimensions, Image, Platform } from 'react-native';
+import { View, Dimensions, ImageBackground, Platform } from 'react-native';
 import colours from '../../../styles/colours';
 
 export default function Header (props) {
@@ -11,7 +11,7 @@ export default function Header (props) {
         position: 'absolute'
       }, props.style]}
     >
-      <Image
+      <ImageBackground
         style={{ height: Platform.OS === 'ios' ? 150 : 170, width: Dimensions.get('window').width * 1 }}
         source={require('../../../img/AppBannerDiagBottom.png')}
       >
@@ -34,7 +34,7 @@ export default function Header (props) {
             opacity: 0.6
           }, props.style]}
         />
-      </Image>
+      </ImageBackground>
 
     </View>
   );
