@@ -23,13 +23,11 @@ class Profile extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />,
     headerLeft: <ButtonHeader />,
-    tabBarIcon: ({ tintColor }) =>
-      <Icon name="user" size={32} color={tintColor} />,
     headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
     headerTintColor: colours.headerButtonColor,
     header: props => <ImageHeader {...props} />,
     headerRight: <ButtonHeader
-      onPress={() => navigation.navigate('DrawerOpen')}
+      onPress={() => navigation.openDrawer()}
     >
       <BurgerIcon />
     </ButtonHeader>

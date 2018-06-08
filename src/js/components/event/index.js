@@ -168,7 +168,7 @@ export default class Event extends Component {
         >
           <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
 
-          <Modal transparent animationType={'slide'} visible={this.state.isModalVisible} onRequestClose={() => { alert('Modal has been closed.'); }}>
+          <Modal transparent animationType="slide" visible={this.state.isModalVisible} onRequestClose={() => { }}>
 
             <View style={styles.modalWrapper}>
 
@@ -208,7 +208,7 @@ export default class Event extends Component {
                     }}
                   >
                     <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                      <Icon name="check-circle" size={24} color={'green'} />
+                      <Icon name="check-circle" size={24} color="green" />
                       <Text style={styles.confirmButtonText}> DELETE</Text>
                     </View>
                   </TouchableHighlight>

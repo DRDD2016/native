@@ -41,7 +41,7 @@ class Confirm extends Component {
     const avatar = require('../../../img/avatar.png');
     console.log('confirm Props', this.props);
     const { what, where, when, description, note, handleOnPress, photo_url, isConnected, isFetching } = this.props;
-    
+
     const iSODates = mapToISOString(when);
     const sortedDates = iSODates.sort((a, b) => {
       return (a) > (b);
@@ -66,19 +66,19 @@ class Confirm extends Component {
             <Text style={[styles.msg3, { backgroundColor: colours.transparent, paddingBottom: 5 }]}>{ description }</Text>
 
           </View>
-          <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
-          <View style={{ height: 40, justifyContent: 'center' }}>
+          <View style={{ backgroundColor: colours.spacerColour, height: 1, marginHorizontal: 5 }} />
+          <View style={{ marginVertical: 2, justifyContent: 'center' }}>
             <ConfirmWhat data={what} />
           </View>
-          <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
-          <View style={{ height: 50, justifyContent: 'center' }}>
+          <View style={{ backgroundColor: colours.spacerColour, height: 1, marginHorizontal: 5 }} />
+          <View style={{ marginVertical: 2, justifyContent: 'center' }}>
             <ConfirmWhere data={where} />
           </View>
-          <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
-          <View style={{ height: 40, justifyContent: 'center' }}>
+          <View style={{ backgroundColor: colours.spacerColour, height: 1, marginHorizontal: 5 }} />
+          <View style={{ marginVertical: 2, justifyContent: 'center' }}>
             <ConfirmWhen data={sortedDates} />
           </View>
-          <View style={{ backgroundColor: 'lightgray', height: 1, marginHorizontal: 5 }} />
+          <View style={{ backgroundColor: colours.spacerColour, height: 1, marginHorizontal: 5 }} />
 
 
           {

@@ -20,6 +20,11 @@ export default class BarChart extends Component {
    * Calculate width of each bar
   */
 
+
+  componentDidMount () {
+    this.handleAnimation();
+  }
+
   getWidth (data, maxTally) {
     const deviceWidth = Dimensions.get('window').width;
     const maxWidth = deviceWidth / 4;
@@ -35,11 +40,6 @@ export default class BarChart extends Component {
 
     return width;
   }
-
-  ComponentDidMount () {
-    this.handleAnimation();
-  }
-
   handleAnimation () {
     const width = this.getWidth(this.props.tallyData);
     const timing = Animated.timing;

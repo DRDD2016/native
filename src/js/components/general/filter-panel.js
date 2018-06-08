@@ -21,19 +21,22 @@ const FilterPanel = ({ displaySome, displayAll, filterActive, selectedFilter }) 
 
       <Button
         buttonStyle={ [allButtonButton, { borderTopRightRadius: 0, borderBottomRightRadius: 0 }]}
-        textStyle={allButtonText} onPress={ displayAll }
+        textStyle={allButtonText}
+        onPress={ displayAll }
       >
         All
       </Button>
       <Button
         buttonStyle={ [receivedButtonButton, { borderRadius: 0 }] }
-        textStyle={receivedButtonText} onPress={ () => displaySome('received') }
+        textStyle={receivedButtonText}
+        onPress={ () => displaySome('received') }
       >
         Received
       </Button>
       <Button
         buttonStyle={ [hostingButtonButton, { borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }] }
-        textStyle={hostingButtonText} onPress={ () => displaySome('hosting') }
+        textStyle={hostingButtonText}
+        onPress={ () => displaySome('hosting') }
       >
         Hosting
       </Button>

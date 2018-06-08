@@ -40,6 +40,7 @@
       "function-paren-newline": "off",
       "prefer-destructuring": "off",
       "no-multi-space": "off",
-      "no-restricted-globals": 0
+      "no-restricted-globals": 0,
+      "react/jsx-first-prop-new-line": 0
     }
 }

@@ -35,7 +35,7 @@ export default class Edit extends Component {
     super();
     this.state = {
       listViewDisplayed: 'auto',
-      tbcSwitch: undefined,
+      // tbcSwitch: undefined,
       inputFocussed: false
     };
   }
@@ -184,7 +184,7 @@ export default class Edit extends Component {
                     backgroundColor: colours.verylightgray
                   }
                 }}
-                nearbyPlacesAPI={'GooglePlacesSearch'}
+                nearbyPlacesAPI="GooglePlacesSearch"
                 filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
               />
             </View>

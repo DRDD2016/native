@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { StatusBar, View, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Input from '../general/input';
 // import Router from '../../router';
@@ -62,6 +62,10 @@ export default class What extends Component {
         resetScrollToCoords={{ x: 0, y: 0 }}
         contentContainerStyle={{ }}
       >
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={colours.what}
+        />
         <HeaderBack />
         <View
           style={{ backgroundColor: colours.transparent }}

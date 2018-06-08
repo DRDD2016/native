@@ -57,7 +57,8 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, handleE
       <View style={{ marginTop: 5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
 
         <Image
-          source={{ uri: event.host_photo_url }} style={{ borderRadius: 15,
+          source={{ uri: event.host_photo_url }}
+          style={{ borderRadius: 15,
             marginLeft: 5,
             width: Header.HEIGHT,
             height: Header.HEIGHT,

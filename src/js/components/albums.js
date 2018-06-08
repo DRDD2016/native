@@ -32,7 +32,7 @@ class Albums extends Component {
     headerTintColor: colours.headerButtonColor,
     header: props => <ImageHeader {...props} />,
     headerRight: <ButtonHeader
-      onPress={() => navigation.navigate('DrawerOpen')}
+      onPress={() => navigation.openDrawer()}
     >
       <BurgerIcon />
     </ButtonHeader>,
@@ -123,7 +123,7 @@ class Albums extends Component {
                   data={this.dataSource}
                   extraData={this.state}
                   renderItem={this.renderItem}
-                  keyExtractor={item => item.event_id}
+                  keyExtractor={item => item.event_id.toString()}
                 />
                 </View>
               }

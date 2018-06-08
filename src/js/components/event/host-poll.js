@@ -130,7 +130,7 @@ export default class HostPoll extends Component {
 
             <View style={ inlineStyle.row }>
               <CategoryDetails
-                category={'what'}
+                category="what"
                 data={event.what}
                 toggleSelection={this.toggleSelection}
                 voteCount={voteCount && voteCount.what}
@@ -140,7 +140,7 @@ export default class HostPoll extends Component {
             </View>
             <View style={ inlineStyle.row }>
               <CategoryDetails
-                category={'where'}
+                category="where"
                 data={event.where}
                 toggleSelection={this.toggleSelection}
                 voteCount={voteCount && voteCount.where}
@@ -150,7 +150,7 @@ export default class HostPoll extends Component {
             </View>
             <View style={ inlineStyle.row }>
               <CategoryDetails
-                category={'when'}
+                category="when"
                 data={event.when}
                 toggleSelection={this.toggleSelection}
                 voteCount={voteCount && voteCount.when}

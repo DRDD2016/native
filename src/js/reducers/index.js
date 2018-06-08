@@ -1,4 +1,7 @@
 import { combineReducers } from 'redux';
+import {
+  createNavigationReducer
+} from 'react-navigation-redux-helpers';
 import { reducer as form } from 'redux-form';
 import calendar from './calendar';
 import event from './event/index';
@@ -7,11 +10,12 @@ import create from './create';
 import user from './user';
 import confirmUserEmail from './confirm-email';
 import network from './network';
-import { StackRoot } from '../routes';
+import { AppNavigator } from '../routes';
 
+const navReducer = createNavigationReducer(AppNavigator);
 
 const appReducer = combineReducers({
-  nav: (state, action) => StackRoot.router.getStateForAction(action, state),
+  nav: navReducer,
   calendar,
   event,
   feed,

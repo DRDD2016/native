@@ -42,7 +42,9 @@ export default class WhatsNew extends Component {
 
     return (
       <Modal
-        transparent animationType={'slide'} visible={visible}
+        transparent
+        animationType="slide"
+        visible={visible}
         onRequestClose={() => this.onGotItClick()}
       >
         {

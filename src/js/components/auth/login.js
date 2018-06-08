@@ -133,7 +133,7 @@ class Login extends Component {
 
             <Modal
               transparent
-              animationType={'slide'}
+              animationType="slide"
               visible={this.state.isModalVisible}
               onRequestClose={() => {
                 this.setState({
@@ -221,7 +221,12 @@ class Login extends Component {
                   <Icon name="envelope-o" size={15} color="rgba(255, 255, 255, 0.76)" />
                 </View>
                 <Field
-                  style={inlineStyles.input} name="email" component={ FormTextInput } isEmail isLoginView placeholder="email address"
+                  style={inlineStyles.input}
+                  name="email"
+                  component={ FormTextInput }
+                  isEmail
+                  isLoginView
+                  placeholder="email address"
                 />
               </View>
               <View style={inlineStyles.inputWrap}>
@@ -229,7 +234,11 @@ class Login extends Component {
                   <Icon name="lock" size={20} color="rgba(255, 255, 255, 0.76)" />
                 </View>
                 <Field
-                  style={inlineStyles.input} name="password" component={ FormPasswordInput } isLoginView placeholder="password"
+                  style={inlineStyles.input}
+                  name="password"
+                  component={ FormPasswordInput }
+                  isLoginView
+                  placeholder="password"
                 />
               </View>
 
@@ -243,7 +252,9 @@ class Login extends Component {
                   <ConfirmButtonText>LOG IN</ConfirmButtonText>
                 </ConfirmButton>
                 <TouchableOpacity
-                  style={{ marginTop: 5, paddingTop: 10 }} activeOpacity={ 0.5 } onPress={() => navigation.navigate('confirmEmail')}
+                  style={{ marginTop: 5, paddingTop: 10 }}
+                  activeOpacity={ 0.5 }
+                  onPress={() => navigation.navigate('confirmEmail')}
                 >
                   <View>
                     <Text style={inlineStyles.forgotPasswordText}>Forgot Password?</Text>
