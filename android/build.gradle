@@ -24,3 +24,14 @@ allprojects {
         maven { url 'https://maven.fabric.io/public' }
     }
 }
+
+subprojects {
+    afterEvaluate {project ->
+        if (project.hasProperty("android")) {
+            android {
+                compileSdkVersion 25
+                buildToolsVersion '25.0.0'
+            }
+        }
+    }
+}
