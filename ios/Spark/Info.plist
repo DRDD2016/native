@@ -63,7 +63,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Our custom Camera message</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Our custom Mic message</string>
 	<key>NSPhotoLibraryUsageDescription</key>

@@ -190,6 +190,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-push-notification')
     compile project(':react-native-fetch-blob')
     compile project(':react-native-branch')
     compile project(':react-native-config')
