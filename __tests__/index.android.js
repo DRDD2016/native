@@ -35,6 +35,14 @@ jest.mock('react-native-fcm', () => {
     FCMEvent: {
       Notification: 'fakeNotification'
     }
+
+  };
+});
+
+jest.mock('react-native-dropdownalert', () => {
+  return {
+
+
   };
 });
 

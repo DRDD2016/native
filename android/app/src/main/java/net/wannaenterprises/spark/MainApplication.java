@@ -8,6 +8,7 @@ import com.facebook.react.ReactApplication;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
+import com.evollu.react.fcm.FIRMessagingPackage;
 import io.branch.rnbranch.*;
 import io.branch.referral.Branch;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
@@ -49,6 +50,12 @@ public class MainApplication extends Application implements ReactApplication {
           new FIRMessagingPackage()
       );
     }
+
+    @Override
+    protected String getJSMainModuleName() {
+      return "index";
+    }
+
   };
 
   @Override

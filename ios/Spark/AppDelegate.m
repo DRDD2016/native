@@ -8,6 +8,7 @@
  */
 
 #import "AppDelegate.h"
+#import "RNFIRMessaging.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <asl.h>
@@ -15,8 +16,8 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <react-native-branch/RNBranch.h>
-#import <React/RCTPushNotificationManager.h>
-#import "RNFIRMessaging.h"
+
+
 
 @implementation AppDelegate
 
@@ -35,7 +36,7 @@
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil]; // use this for debugging on simulator
-  
+
   // jsCodeLocation = [NSURL URLWithString:@"http://192.168.1.74:8081/index.ios.bundle?platform=ios&dev=true&minify=false"];  // use this for debugging on device
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
@@ -49,10 +50,10 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  
+
   [FIRApp configure];
   [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
-  
+
   return YES;
 }
 
@@ -111,21 +112,21 @@ RCTLogFunction CrashlyticsReactLogFunction = ^(
 };
 
 // Required to register for notifications
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
-{
-  [RCTPushNotificationManager didRegisterUserNotificationSettings:notificationSettings];
-}
+//- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+//{
+//  [RCTPushNotificationManager didRegisterUserNotificationSettings:notificationSettings];
+//}
 // Required for the register event.
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-  [RCTPushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
-}
+//- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+//{
+//  [RCTPushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+//}
 // Required for the notification event. You must call the completion handler after handling the remote notification.
 // Required for the registrationError event.
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
-{
-  [RCTPushNotificationManager didFailToRegisterForRemoteNotificationsWithError:error];
-}
+//- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+//{
+//  [RCTPushNotificationManager didFailToRegisterForRemoteNotificationsWithError:error];
+//}
 // Required for the localNotification event.
 
 // fcm push stuff
