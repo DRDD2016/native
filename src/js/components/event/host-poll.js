@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { View, ScrollView } from 'react-native';
 import CategoryDetails from './category-details';
-import { styles, Msg1, Msg2, Msg3, InviteSmallButton, ConfirmButton, ConfirmButtonText, ButText } from '../../../styles';
+import { styles, Msg1, Msg2, Msg3, InviteSmallButton, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
 import Spinner from '../common/Spinner';
 
@@ -106,12 +106,7 @@ export default class HostPoll extends Component {
                   onPress={ () => handleInviteMoreFriends() }
                 >
                   <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    <View style={{ flexShrink: 1, flexDirection: 'column' }}>
-                      <ButText style={{ color: colours.white, opacity: 0.9 }}>
-                        {'Invite friends'}
-                      </ButText>
-                    </View>
-                    <View style={{ flexGrow: 1, opacity: 0.9 }}>
+                    <View style={{ flexGrow: 1, opacity: 0.9, alignItems: 'center' }}>
                       <Icon name="user-plus" size={20} color={colours.white} />
                     </View>
                   </View>
@@ -165,6 +160,15 @@ export default class HostPoll extends Component {
                 <ConfirmButton
                   style={{ marginBottom: 40 }}
                   onPress={ () => { handleConfirmEvent(this.state, event.event_id); }}
+                >
+                  <ConfirmButtonText>CONFIRM EVENT DETAILS</ConfirmButtonText>
+                </ConfirmButton>
+              }
+              {
+                !allCategoriesSelected &&
+                <ConfirmButton
+                  style={{ marginBottom: 40, backgroundColor: colours.lightgray, borderColor: colours.lightgray }}
+                  onPress={ () => { }}
                 >
                   <ConfirmButtonText>CONFIRM EVENT DETAILS</ConfirmButtonText>
                 </ConfirmButton>
