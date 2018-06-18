@@ -52,7 +52,9 @@ class FeedItem extends PureComponent {
         style={{
           marginLeft: 2,
           marginRight: 2,
-          backgroundColor: !viewed ? colours.darkgray : colours.white }}
+          backgroundColor: !viewed ? colours.white : colours.white,
+          opacity: !viewed ? 1 : 0.3 }}
+
       >
         <CardSection style={{ justifyContent: 'flex-start' }}>
           <TouchableOpacity
@@ -63,9 +65,9 @@ class FeedItem extends PureComponent {
               paddingTop: 5,
               paddingBottom: 5,
               backgroundColor: colours.white,
-              borderTopWidth: !viewed ? 1 : 0,
-              borderBottomWidth: !viewed ? 2 : 1,
-              borderColor: !viewed ? colours.darkgray : colours.lightgray,
+              borderTopWidth: !viewed ? 0.5 : 0.5,
+              borderBottomWidth: !viewed ? 0.5 : 0.5,
+              borderColor: !viewed ? colours.lightgray : colours.lightgray,
               flexDirection: 'row',
               justifyContent: 'space-around' }}
             onPress={this._onPress}
