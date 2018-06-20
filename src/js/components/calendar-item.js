@@ -84,16 +84,24 @@ class CalendarItem extends PureComponent {
                 <View style={{ flex: 1, width: 3, backgroundColor: colours.when }} />
                 <View
                   style={{
-                    padding: 5,
+                    marginLeft: 5,
+                    padding: 2,
                     height: 55,
-                    width: 55,
+                    width: 65,
                     alignItems: 'center',
                     justifyContent: 'center',
-                    borderRadius: 30,
-                    backgroundColor: colours.when }}
+                    borderRadius: 10,
+                    backgroundColor: colours.white,
+                    borderColor: colours.when,
+                    borderWidth: 3 }}
                 >
-                  {when[1] && <Text style={{ fontSize: 10, color: colours.white }}>from</Text>}
-                  <Text numberOfLines={1} style={{ fontSize: 12, color: colours.white }}>{formatDate(when[0]).toUpperCase()}</Text>
+                  {when[1] && <Text style={{ fontSize: 10, color: colours.darkgray }}>from</Text>}
+                  <Text
+                    numberOfLines={1}
+                    style={{ fontSize: 14, color: colours.darkgray, fontWeight: '600' }}
+                  >
+                    {formatDate(when[0]).toUpperCase()}
+                  </Text>
                 </View>
                 <View style={{ flex: 1, width: 3, backgroundColor: colours.when }} />
               </View>
@@ -102,7 +110,7 @@ class CalendarItem extends PureComponent {
               style={{ flex: 4,
                 paddingBottom: 5,
                 marginTop: 5,
-                marginLeft: 2,
+                marginLeft: 5,
                 marginRight: 2,
                 paddingLeft: 5,
                 alignItems: 'flex-start',
@@ -112,55 +120,8 @@ class CalendarItem extends PureComponent {
             >
 
               <View style={{ alignItems: 'flex-start', marginBottom: 3 }}>
+
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-
-                  {!isCancelled &&
-                    <View>
-                      {(userIsHost && rsvpStatus === 'going') &&
-                        <Text style={{ alignItems: 'center', fontSize: 12, fontWeight: '500', color: colours.gray, paddingLeft: 3 }}>
-                          You are hosting
-                        </Text>
-                      }
-                      {(!userIsHost && rsvpStatus === 'going') &&
-                        <Text style={{ alignItems: 'center', fontSize: 12, fontWeight: '500', color: colours.gray, paddingLeft: 3 }}>
-                          You are going to
-                        </Text>
-                      }
-                      {!userIsHost && rsvpStatus === 'maybe' &&
-                        <Text style={{ alignItems: 'center', fontSize: 12, fontWeight: '500', color: colours.gray, paddingLeft: 3 }}>
-                          You are maybe for
-                        </Text>
-                      }
-                      {!userIsHost && rsvpStatus === 'not_going' &&
-                        <Text style={{ alignItems: 'center', fontSize: 12, fontWeight: '500', color: colours.gray, paddingLeft: 3 }}>
-                          You are not going to
-                        </Text>
-                      }
-                      {!userIsHost && rsvpStatus === 'not_responded' &&
-                        <Text style={{ alignItems: 'center', fontSize: 12, fontWeight: '500', color: colours.gray, paddingLeft: 3 }}>
-                          You have not responded to
-                        </Text>
-                      }
-                    </View>
-                  }
-
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-
-                  <View>
-                    {(userIsHost || rsvpStatus === 'going') &&
-                      <Icon name="check-circle" size={20} color={colours.green} />
-                    }
-                    {!userIsHost && rsvpStatus === 'maybe' &&
-                      <Icon name="question-circle" size={20} color={colours.orange} />
-                    }
-                    {!userIsHost && rsvpStatus === 'not_going' &&
-                      <Icon name="times-circle" size={20} color={colours.red} />
-                    }
-                    {!userIsHost && rsvpStatus === 'not_responded' &&
-                      <Icon name="exclamation-circle" size={20} color={colours.gray} />
-                    }
-                  </View>
 
                   {!isCancelled &&
                     <Text style={{ alignItems: 'center', fontSize: 16, fontWeight: '700', color: colours.black, paddingLeft: 3 }}>
@@ -172,9 +133,7 @@ class CalendarItem extends PureComponent {
                       <Text style={{ textDecorationLine: 'line-through', fontSize: 16, fontWeight: '700', color: colours.red, paddingLeft: 3 }}>
                         { `${name}` }
                       </Text>
-                      <Text style={{ fontSize: 12, fontWeight: '500', color: colours.red, paddingLeft: 3 }}>
-                        cancelled
-                      </Text>
+
                     </View>
                   }
 
@@ -183,31 +142,74 @@ class CalendarItem extends PureComponent {
 
               <View>
 
-                { (when[0] && when[1]) ?
+                { ((!isCancelled) && when[0] && when[1]) ?
                   <View style={{ flexDirection: 'row', marginRight: 5 }}>
                     <View style={{ width: 14, justifyContent: 'center', alignItems: 'center' }}>
                       <Icon name="calendar-o" size={14} color={colours.when} />
                     </View>
                     <View>
-                      <Text style={{ fontSize: 14, marginLeft: 5, marginRight: 5, color: colours.when, fontWeight: '600' }}>
+                      <Text style={{ fontSize: 12, marginLeft: 5, marginRight: 5, color: colours.when, fontWeight: '600' }}>
                         {whenText}
                       </Text>
                     </View>
                   </View>
                 :
                   <View style={{ flexDirection: 'row', marginRight: 5 }}>
-                    <View style={{ width: 14, justifyContent: 'center', alignItems: 'center' }}>
-                      <Icon name="calendar-o" size={14} color={colours.when} />
+
+                    <View>
+                      {(userIsHost || rsvpStatus === 'going') && !isCancelled &&
+                        <Icon name="check-circle" size={16} color={colours.green} />
+                      }
+                      {!userIsHost && rsvpStatus === 'maybe' && !isCancelled &&
+                        <Icon name="question-circle" size={16} color={colours.orange} />
+                      }
+                      {!userIsHost && rsvpStatus === 'not_going' && !isCancelled &&
+                        <Icon name="times-circle" size={16} color={colours.red} />
+                      }
+                      {!userIsHost && rsvpStatus === 'not_responded' && !isCancelled &&
+                        <Icon name="exclamation-circle" size={16} color={colours.gray} />
+                      }
                     </View>
                     <View>
-                      <Text style={{ fontSize: 14, marginLeft: 5, marginRight: 5, color: colours.darkgray, fontWeight: '600' }}>
-                        {whenText}
-                      </Text>
+
+                      {(userIsHost || rsvpStatus === 'going') && !isCancelled &&
+                        <Text numberOfLines={2} style={{ fontSize: 12, fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.green }}>
+                          You are going
+                        </Text>
+                      }
+                      {(!isCancelled && !userIsHost && rsvpStatus === 'maybe') &&
+                        <Text numberOfLines={2} style={{ fontSize: 12, fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.orange }}>
+                          You are a maybe
+                        </Text>
+                      }
+                      {(!isCancelled && !userIsHost && rsvpStatus === 'not_going') &&
+                        <Text numberOfLines={2} style={{ fontSize: 12, fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.red }}>
+                          You are not going
+                        </Text>
+                      }
+                      {(!isCancelled && !userIsHost && rsvpStatus === 'not_responded') &&
+                        <Text numberOfLines={2} style={{ fontSize: 12, fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.green }}>
+                          You have not responded
+                        </Text>
+                      }
+                      {(isCancelled && !userIsHost) &&
+                        <Text numberOfLines={2} style={{ fontSize: 12, fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.red }}>
+                          This event has been cancelled
+                        </Text>
+                      }
+                      {(isCancelled && userIsHost) &&
+                        <Text numberOfLines={2} style={{ fontSize: 12, fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.red }}>
+                          You cancelled this event
+                        </Text>
+                      }
+
                     </View>
+
                   </View>
                 }
 
-                { whereText === 'POLLING' ?
+
+                { (!isCancelled) && whereText === 'POLLING' ?
                   <View style={{ flexDirection: 'row', marginTop: 2 }}>
 
                     <View style={{ width: 14, justifyContent: 'flex-start', alignItems: 'center' }}>
@@ -215,7 +217,7 @@ class CalendarItem extends PureComponent {
                     </View>
                     <View>
 
-                      <Text numberOfLines={2} style={{ fontSize: 14, fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.where }}>
+                      <Text numberOfLines={2} style={{ fontSize: 12, fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.where }}>
                         {`${whereText}`}
                       </Text>
 
@@ -223,15 +225,18 @@ class CalendarItem extends PureComponent {
 
                   </View>
                 :
+                  (!isCancelled) &&
                   <View style={{ flexDirection: 'row', marginTop: 2 }}>
 
                     <View style={{ width: 14, justifyContent: 'flex-start', alignItems: 'center' }}>
                       <Icon name="map-marker" size={16} color={colours.where} />
                     </View>
                     <View>
+
                       <Text numberOfLines={2} style={{ fontSize: 12, fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.darkgray }}>
                         {whereText}
                       </Text>
+
                     </View>
 
                   </View>
@@ -319,3 +324,37 @@ CalendarItem.propTypes = {
 };
 
 export default CalendarItem;
+
+// <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+//
+//   {!isCancelled &&
+//     <View>
+//       {(userIsHost && rsvpStatus === 'going') &&
+//         <Text style={{ alignItems: 'center', fontSize: 12, fontWeight: '500', color: colours.gray, paddingLeft: 3 }}>
+//           You are hosting
+//         </Text>
+//       }
+//       {(!userIsHost && rsvpStatus === 'going') &&
+//         <Text style={{ alignItems: 'center', fontSize: 12, fontWeight: '500', color: colours.gray, paddingLeft: 3 }}>
+//           You are going to
+//         </Text>
+//       }
+//       {!userIsHost && rsvpStatus === 'maybe' &&
+//         <Text style={{ alignItems: 'center', fontSize: 12, fontWeight: '500', color: colours.gray, paddingLeft: 3 }}>
+//           You are maybe for
+//         </Text>
+//       }
+//       {!userIsHost && rsvpStatus === 'not_going' &&
+//         <Text style={{ alignItems: 'center', fontSize: 12, fontWeight: '500', color: colours.gray, paddingLeft: 3 }}>
+//           You are not going to
+//         </Text>
+//       }
+//       {!userIsHost && rsvpStatus === 'not_responded' &&
+//         <Text style={{ alignItems: 'center', fontSize: 12, fontWeight: '500', color: colours.gray, paddingLeft: 3 }}>
+//           You have not responded to
+//         </Text>
+//       }
+//     </View>
+//   }
+//
+// </View>
