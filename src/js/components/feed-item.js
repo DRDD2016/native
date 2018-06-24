@@ -53,7 +53,9 @@ class FeedItem extends PureComponent {
           marginLeft: 2,
           marginRight: 2,
           backgroundColor: !viewed ? colours.white : colours.white,
-          opacity: !viewed ? 1 : 0.3 }}
+          opacity: !viewed ? 1 : 0.3,
+          borderColor: 'red',
+          borderWidth: 2 }}
 
       >
         <CardSection style={{ justifyContent: 'flex-start' }}>

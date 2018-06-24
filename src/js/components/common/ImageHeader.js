@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Dimensions, ImageBackground } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import { Header } from 'react-navigation';
 import colours from '../../../styles/colours';
 
@@ -14,16 +14,18 @@ export default function ImageHeader (props) {
         // marginTop: -5,
         height: Header.HEIGHT,
         flexDirection: 'column',
-        alignItems: 'flex-end'
+        alignItems: 'center',
+        borderWidth: 4,
+        borderColor: 'green'
       }}
     >
 
-      <ImageBackground
-        source={require('../../../img/AppBannerDiagTop.png')}
+      <View
         style={{
+          backgroundColor: colours.orange,
           borderColor: 'blue',
           borderWidth: 1,
-          opacity: 0.6,
+          opacity: 1,
           flex: 1,
           zIndex: 0,
           // position: 'absolute',
@@ -35,8 +37,13 @@ export default function ImageHeader (props) {
         }}
 
       >
-        <Header {...props} style={{ flex: 1, zIndex: 1, backgroundColor: 'rgba(255, 255, 255, 0.6)' }} />
-      </ImageBackground>
+        <Header {...props}
+          style={{
+            flex: 1,
+            backgroundColor: colours.orange,
+            borderWidth: 2,
+            borderColor: 'black' }} />
+      </View>
 
 
     </View>

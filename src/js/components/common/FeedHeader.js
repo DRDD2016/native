@@ -4,6 +4,8 @@ import HeaderBack from '../common/FeedHeaderBackground';
 import colours from '../../../styles/colours';
 import { scale } from '../../../styles/scaling';
 
+const NAVBAR_HEIGHT = scale(50);
+// const STATUS_BAR_HEIGHT = Platform.select({ ios: 20, android: 24 });
 
 export default function FeedHeader ({ children }) {
   return (
@@ -14,7 +16,7 @@ export default function FeedHeader ({ children }) {
         backgroundColor: colours.white }}
     >
 
-      <View style={{ height: scale(50), flexDirection: 'row', alignItems: 'flex-start' }}>
+      <View style={{ height: NAVBAR_HEIGHT, flexDirection: 'row', alignItems: 'flex-start' }}>
         <HeaderBack>
           <View
             style={{

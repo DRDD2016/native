@@ -16,7 +16,7 @@ export default function ButtonHeader ({ onPress, children, testDescription }) {
       }}
       accessibilityLabel={testDescription}
     >
-      <Text style={{ color: colours.gray, fontWeight: '600' }}>
+      <Text style={{ color: colours.headerButtonColor, fontWeight: '600' }}>
         {children}
       </Text>
     </TouchableOpacity>

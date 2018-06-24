@@ -13,6 +13,7 @@ export const Button = styled.TouchableOpacity`
   paddingRight: 15;
   borderRadius: 3;
   elevation: 1;
+
 `;
 
 export const BarButton = styled.TouchableOpacity`
@@ -32,6 +33,10 @@ export const ConfirmButton = styled.TouchableOpacity`
   marginHorizontal: 20;
   height: 50;
   elevation: 1;
+  shadowOpacity: 0.8;
+  shadowRadius: 2;
+  shadowColor: ${colours.gray};
+  shadowOffset: { width: 0, height: 2 };
 `; // confirmButton
 
 export const InviteSmallButton = styled.TouchableOpacity`

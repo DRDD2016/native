@@ -21,8 +21,9 @@ const colours = {
   transparent: 'transparent',
   background: this.offWhite,
   modalBackground: 'rgba(52, 52, 52, 0.8)',
-  headerButtonColor: this.gray,
+  headerButtonColor: '#939598',
   headerTitleColor: this.darkgray,
+  headerBackgroundColor: '#ffffff',
   sectionBorder: '#efefef',
   spacerColour: this.lightgray
 };

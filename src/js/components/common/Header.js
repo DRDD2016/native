@@ -8,7 +8,9 @@ export default function Header (props) {
       style={[{
         width: Dimensions.get('window').width * 1,
         top: Platform.OS === 'ios' ? -80 : -80,
-        position: 'absolute'
+        position: 'absolute',
+        borderWidth: 2,
+        borderColor: 'blue'
       }, props.style]}
     >
       <ImageBackground
