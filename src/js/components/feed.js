@@ -20,7 +20,7 @@ import { scale } from '../../styles/scaling';
 
 const { Answers } = Fabric;
 
-const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 2;
+const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 0.8;
 const logo = require('../../img/sparkLoginLogo.png');
 
 const NAVBAR_HEIGHT = scale(50);
@@ -38,10 +38,12 @@ class Feed extends Component {
     >
       <BurgerIcon />
     </ButtonHeader>,
-    headerStyle: { backgroundColor: colours.headerBackgroundColor },
-    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerStyle: { justifyContent: 'center', alignItems: 'center', backgroundColor: colours.headerBackgroundColor },
+    headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
-    headerTitle: <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />
+    headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
+      <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />
+    </View>
   });
 
   constructor (props) {
