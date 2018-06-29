@@ -8,29 +8,30 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { styles, ConfirmButton, ConfirmButtonText } from '../../styles';
 import Spinner from './common/Spinner';
 import FeedHeader from './common/FeedHeader';
-import ImageHeader from './common/ImageHeader';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
 
 const { Answers } = Fabric;
-const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 2;
+const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 0.8;
 const logo = require('../../img/sparkLoginLogo.png');
 
 class Profile extends Component {
 
   static navigationOptions = ({ navigation }) => ({
-    title: <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />,
     headerLeft: <ButtonHeader />,
-    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
-    headerTintColor: colours.headerButtonColor,
-    header: props => <ImageHeader {...props} />,
     headerRight: <ButtonHeader
       onPress={() => navigation.openDrawer()}
     >
       <BurgerIcon />
-    </ButtonHeader>
+    </ButtonHeader>,
+    headerStyle: { backgroundColor: colours.headerBackgroundColor },
+    headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
+    headerTintColor: colours.headerButtonColor,
+    headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
+      <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />
+    </View>
   });
 
   constructor (props) {

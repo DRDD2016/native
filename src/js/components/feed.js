@@ -11,6 +11,7 @@ import Spinner from './common/Spinner';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
+import DropdownView from './common/DropdownView';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
 import { store } from '../init-store';
@@ -38,7 +39,7 @@ class Feed extends Component {
     >
       <BurgerIcon />
     </ButtonHeader>,
-    headerStyle: { justifyContent: 'center', alignItems: 'center', backgroundColor: colours.headerBackgroundColor },
+    headerStyle: { backgroundColor: colours.headerBackgroundColor },
     headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
     headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
@@ -352,7 +353,7 @@ class Feed extends Component {
     Answers.logCustom('Feed.js render'); // eslint-disable-line max-len
 
     return (
-      <View style={{ flex: 1, borderColor: 'purple', borderWidth: 3 }}>
+      <View style={{ flex: 1 }}>
 
         <WhatsNew visible={showWhatsNew} type="whats_new" user_updateNo={user_updateNo} app_updateNo={app_updateNo} />
         <WhatsNew visible={showWelcome} type="welcome" user_updateNo={user_updateNo} app_updateNo={app_updateNo} />
@@ -364,8 +365,6 @@ class Feed extends Component {
             alignSelf: 'center',
             width: scaledWidth,
             backgroundColor: colours.white,
-            borderColor: 'orange',
-            borderWidth: 3,
             borderBottomWidth: 1,
             borderBottomColor: colours.lightgray }}
         >
@@ -437,22 +436,12 @@ class Feed extends Component {
 
           {
             !isReceivingFeed && this.dataSource &&
-            <View style={{ borderColor: 'blue', borderWidth: 2 }}>
+            <View style={{ backgroundColor: colours.filterPanelBackgroundColor }}>
 
-              <Animated.View
-                style={[{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: NAVBAR_HEIGHT,
-                  flexDirection: 'row',
-                  alignItems: 'flex-start',
-                  borderWidth: 2,
-                  borderColor: 'yellow',
-                  opacity: navbarOpacity
-                },
-                { transform: [{ translateY: navbarTranslate }] }]}
+              <DropdownView
+                navbarHeight={NAVBAR_HEIGHT}
+                navbarOpacity={navbarOpacity}
+                navbarTranslate={navbarTranslate}
               >
 
                 {
@@ -465,7 +454,7 @@ class Feed extends Component {
                   />
                 }
 
-              </Animated.View>
+              </DropdownView>
 
               <AnimatedFlatList
                 data={this.dataSource}
@@ -479,7 +468,7 @@ class Feed extends Component {
                 onMomentumScrollBegin={this._onMomentumScrollBegin}
                 onMomentumScrollEnd={this._onMomentumScrollEnd}
                 onScrollEndDrag={this._onScrollEndDrag}
-                contentContainerStyle={{ paddingTop: NAVBAR_HEIGHT }}
+                contentContainerStyle={{ backgroundColor: colours.white, paddingTop: NAVBAR_HEIGHT }}
               />
             </View>
 

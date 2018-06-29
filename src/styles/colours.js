@@ -24,6 +24,7 @@ const colours = {
   headerButtonColor: '#939598',
   headerTitleColor: this.darkgray,
   headerBackgroundColor: '#ffffff',
+  filterPanelBackgroundColor: '#ffffff',
   sectionBorder: '#efefef',
   spacerColour: this.lightgray
 };

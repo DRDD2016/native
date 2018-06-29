@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
-import { View, Text, Platform } from 'react-native';
+import { View, Text, Platform, Image } from 'react-native';
 import Fabric from 'react-native-fabric';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Field, reduxForm } from 'redux-form';
+import { Header } from 'react-navigation';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import { FormTextInput } from './auth/form-components';
 import { codeValidator as validate } from './auth/form-validation';
 import Button from './common/Button';
 import Spinner from './common/Spinner';
 import FeedHeader from './common/FeedHeader';
-import ImageHeader from './common/ImageHeader';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
 
 const { Answers } = Fabric;
+const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 0.8;
+const logo = require('../../img/sparkLoginLogo.png');
 
 const inlineStyle = {
   buttonStyle: {
@@ -41,9 +43,12 @@ class Code extends Component {
     tabBarLabel: 'RSVP',
     tabBarIcon: ({ tintColor }) =>
       <Icon name="barcode" size={32} color={tintColor} />,
-    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerStyle: { backgroundColor: colours.headerBackgroundColor },
+    headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
-    header: props => <ImageHeader {...props} />
+    headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
+      <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />
+    </View>
   }
 
   componentDidMount () {

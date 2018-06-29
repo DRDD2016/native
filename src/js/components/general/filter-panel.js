@@ -3,7 +3,9 @@ import React from 'react';
 import { View } from 'react-native';
 import Button from '../common/Button';
 import colours from '../../../styles/colours';
-import { moderateScale } from '../../../styles/scaling';
+import { moderateScale, scale } from '../../../styles/scaling';
+
+const NAVBAR_HEIGHT = scale(50);
 
 const FilterPanel = ({ displaySome, displayAll, filterActive, selectedFilter }) => {
 
@@ -18,8 +20,7 @@ const FilterPanel = ({ displaySome, displayAll, filterActive, selectedFilter }) 
 
   return (
     <View style={{
-      borderColor: 'red',
-      borderWidth: 1,
+      flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center' }}
@@ -65,7 +66,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    height: moderateScale(40),
+    height: NAVBAR_HEIGHT - 12,
     paddingTop: 4,
     paddingBottom: 4,
     elevation: 1,
@@ -100,7 +101,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    height: moderateScale(40),
+    height: NAVBAR_HEIGHT - 12,
     paddingTop: 4,
     paddingBottom: 4,
     elevation: 1,
