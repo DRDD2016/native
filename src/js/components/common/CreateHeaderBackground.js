@@ -14,9 +14,10 @@ export default function HeaderBack ({ children }) {
         width: Dimensions.get('window').width * 1,
         // resizeMode: Image.resizeMode.contain,
         height: Platform.OS === 'ios' ? Header.HEIGHT : Header.HEIGHT,
-        backgroundColor: colours.transparent
+        backgroundColor: colours.transparent,
+        opacity: 0.5
       }}
-      source={require('../../../img/AppBannerDiagBottom.png')}
+      
 
     >
       {children}

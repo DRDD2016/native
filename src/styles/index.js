@@ -59,6 +59,24 @@ export const ConfirmButtonText = styled.Text`
   color: ${colours.offWhite};
 `; // confirmButtonText
 
+export const AddButton = styled.TouchableOpacity.attrs({
+  color: props => props.color || colours.gray
+})`
+  justifyContent: center;
+  alignItems: center;
+  backgroundColor: ${props => props.color};
+  borderColor: ${props => props.color};
+  borderWidth: 1;
+  borderRadius: 30;
+  elevation: 1;
+  marginTop: 0;
+  marginHorizontal: 10;
+  maxHeight: 60;
+  width: 50;
+  height: 50;
+`;
+
+
 export const ButText = styled.Text.attrs({
   color: props => props.color || colours.gray
 })`

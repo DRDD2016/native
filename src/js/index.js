@@ -8,6 +8,7 @@ import {
   setCustomText
 } from 'react-native-global-props';
 import Fabric from 'react-native-fabric';
+import crashlytics from 'react-native-fabric-crashlytics';
 import branch from 'react-native-branch';
 import { persistStore } from 'redux-persist';
 // import { PersistGate } from 'redux-persist/es/integration/react';
@@ -19,6 +20,8 @@ import AppWithNavigationState from './routes';
 import PushController from './lib/PushController';
 import SpinnerContainer from './containers/common/SpinnerContainer';
 import colours from '../styles/colours';
+
+crashlytics.init();
 
 const { Answers } = Fabric;
 

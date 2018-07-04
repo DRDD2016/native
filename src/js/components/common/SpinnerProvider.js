@@ -48,7 +48,7 @@ export default class SpinnerProvider extends Component {
     console.log('this.props.children:', this.props.children);
 
     return (
-      <View style={{ flex: 1, borderColor: 'pink', borderWidth: 1 }}>
+      <View style={{ flex: 1, borderColor: 'pink', borderWidth: 0 }}>
         {React.Children.only(this.props.children)}
         {
           (isConfirmingEvent) &&

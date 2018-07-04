@@ -22,7 +22,7 @@ const colours = {
   background: this.offWhite,
   modalBackground: 'rgba(52, 52, 52, 0.8)',
   headerButtonColor: '#939598',
-  headerTitleColor: this.darkgray,
+  headerTitleColor: '#939598',
   headerBackgroundColor: '#ffffff',
   filterPanelBackgroundColor: '#ffffff',
   sectionBorder: '#efefef',
