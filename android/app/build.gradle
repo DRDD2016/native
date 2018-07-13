@@ -127,13 +127,13 @@ def enableProguardInReleaseBuilds = false
 def pass = getPassword("my-key-alias","android_keystore")
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "net.wannaenterprises.spark"
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 27
         versionCode project.hasProperty('versionCode') ? project.property('versionCode') as int : 1
 
         ndk {
