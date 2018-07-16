@@ -109,5 +109,7 @@
 		<key>test</key>
 		<string>key_test_gozDB6oc4opRT89o76zBJnmhACezJxiH</string>
 	</dict>
+	<key>BugsnagAPIKey</key>
+	<string>899465e8e5166f09f584f57cf5282edd</string>
 </dict>
 </plist>

@@ -1,12 +1,13 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { NetInfo, AsyncStorage, Platform } from 'react-native';
-import {
-  setCustomView,
-  setCustomTextInput,
-  setCustomText
-} from 'react-native-global-props';
+import { Client } from 'bugsnag-react-native';
+import { NetInfo, AsyncStorage } from 'react-native';
+// import {
+//   setCustomView,
+//   setCustomTextInput,
+//   setCustomText
+// } from 'react-native-global-props';
 import Fabric from 'react-native-fabric';
 import crashlytics from 'react-native-fabric-crashlytics';
 import branch from 'react-native-branch';
@@ -19,40 +20,45 @@ import AppWithNavigationState from './routes';
 // import { AlertProvider } from './components/Alert';
 import PushController from './lib/PushController';
 import SpinnerContainer from './containers/common/SpinnerContainer';
-import colours from '../styles/colours';
+// import colours from '../styles/colours';
+
+const bugsnag = new Client();
+bugsnag.leaveBreadcrumb('index.js starting', {
+                  type: 'user'
+                });
 
 crashlytics.init();
 
 const { Answers } = Fabric;
 
-const customViewProps = {
-  style: {
-    // backgroundColor: colours.white
-  }
-};
-
-const customTextProps = {
-  style: {
-    fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto',
-    color: colours.darkgray
-  }
-};
-
-const customTextInputProps = {
-  underlineColorAndroid: 'rgba(0,0,0,0)',
-  style: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    backgroundColor: colours.offWhite
-  }
-};
-
-
-setCustomText(customTextProps);
-setCustomView(customViewProps);
-setCustomTextInput(customTextInputProps);
+// const customViewProps = {
+//   style: {
+//     // backgroundColor: colours.white
+//   }
+// };
+//
+// const customTextProps = {
+//   style: {
+//     fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto',
+//     color: colours.darkgray
+//   }
+// };
+//
+// const customTextInputProps = {
+//   underlineColorAndroid: 'rgba(0,0,0,0)',
+//   style: {
+//     borderWidth: 1,
+//     borderColor: 'gray',
+//     paddingVertical: 5,
+//     paddingHorizontal: 10,
+//     backgroundColor: colours.offWhite
+//   }
+// };
+//
+//
+// setCustomText(customTextProps);
+// setCustomView(customViewProps);
+// setCustomTextInput(customTextInputProps);
 
 console.log((require('react-native-config').default));
 // disable remote debugger warning in a simulator

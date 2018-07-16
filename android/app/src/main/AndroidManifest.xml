@@ -73,6 +73,9 @@
             android:name="io.branch.sdk.BranchKey.test"
             android:value="key_test_gozDB6oc4opRT89o76zBJnmhACezJxiH" />
 
+      <meta-data android:name="com.bugsnag.android.API_KEY"
+            android:value="899465e8e5166f09f584f57cf5282edd"/>
+
       <receiver android:name="io.branch.referral.InstallListener" android:exported="true">
         <intent-filter>
           <action android:name="com.android.vending.INSTALL_REFERRER" />

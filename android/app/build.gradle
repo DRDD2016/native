@@ -127,13 +127,13 @@ def enableProguardInReleaseBuilds = false
 def pass = getPassword("my-key-alias","android_keystore")
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 23
+    buildToolsVersion '23.0.1'
 
     defaultConfig {
         applicationId "net.wannaenterprises.spark"
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 22
         versionCode project.hasProperty('versionCode') ? project.property('versionCode') as int : 1
 
         ndk {
@@ -190,9 +190,9 @@ android {
 }
 
 dependencies {
-
-    compile project(':react-native-fetch-blob')
     compile project(':react-native-branch')
+    compile project(':bugsnag-react-native')
+    compile project(':react-native-fetch-blob')
     compile project(':react-native-config')
     compile project(':react-native-image-picker')
     compile project(':react-native-vector-icons')
@@ -224,3 +224,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.bugsnag.android.gradle'
