@@ -48,6 +48,12 @@ jest.mock('react-native-dropdownalert', () => {
   };
 });
 
+jest.mock('react-native-vector-icons', () => {
+  return {
+
+  };
+});
+
 it('renders correctly', () => {
   renderer.create(
     <Index />

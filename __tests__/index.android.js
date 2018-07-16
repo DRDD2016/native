@@ -31,6 +31,12 @@ jest.mock('react-native', () => ({
     NativeModules: { BugsnagReactNative: null }
   }), { virtual: true });
 
+jest.mock('react-native-vector-icons', () => {
+  return {
+
+  };
+});
+
 jest.mock('react-native-fcm', () => {
   return {
     on: jest.fn(),
