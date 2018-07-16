@@ -48,7 +48,7 @@ jest.mock('react-native-dropdownalert', () => {
   };
 });
 
-jest.mock('react-native-vector-icons', () => {
+jest.mock('react-native-vector-icons/FontAwesome', () => {
   return {
 
   };

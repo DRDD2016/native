@@ -38,7 +38,7 @@ jest.mock('react-native', () => ({
     NativeModules: { BugsnagReactNative: null }
   }), { virtual: true });
 
-jest.mock('react-native-vector-icons', () => {
+jest.mock('react-native-vector-icons/FontAwesome', () => {
   return {
 
   };
