@@ -33,3 +33,7 @@ jest.mock('react-native-fcm', () => {
     }
   };
 });
+
+jest.mock('react-native', () => ({
+    NativeModules: { BugsnagReactNative: null }
+  }), { virtual: true });
