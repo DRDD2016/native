@@ -13,6 +13,7 @@ export const Button = styled.TouchableOpacity`
   paddingRight: 15;
   borderRadius: 3;
   elevation: 1;
+
 `;
 
 export const BarButton = styled.TouchableOpacity`
@@ -32,7 +33,17 @@ export const ConfirmButton = styled.TouchableOpacity`
   marginHorizontal: 20;
   height: 50;
   elevation: 1;
+  shadowOpacity: 0.8;
+  shadowRadius: 2;
+  shadowColor: ${colours.gray};
+  shadowOffset: { width: 0, height: 2 };
 `; // confirmButton
+
+
+export const SignupButton = ConfirmButton.extend`
+  backgroundColor: ${colours.orange};
+  borderColor: ${colours.orange};
+`;
 
 export const InviteSmallButton = styled.TouchableOpacity`
   justifyContent: center;
@@ -53,6 +64,24 @@ export const ConfirmButtonText = styled.Text`
   textAlign: center;
   color: ${colours.offWhite};
 `; // confirmButtonText
+
+export const AddButton = styled.TouchableOpacity.attrs({
+  color: props => props.color || colours.gray
+})`
+  justifyContent: center;
+  alignItems: center;
+  backgroundColor: ${props => props.color};
+  borderColor: ${props => props.color};
+  borderWidth: 1;
+  borderRadius: 30;
+  elevation: 1;
+  marginTop: 0;
+  marginHorizontal: 10;
+  maxHeight: 60;
+  width: 50;
+  height: 50;
+`;
+
 
 export const ButText = styled.Text.attrs({
   color: props => props.color || colours.gray
@@ -249,7 +278,15 @@ export const styles = {
     margin: 20,
     padding: 10,
     alignItems: 'center',
-    borderRadius: 30
+    borderRadius: 30,
+    borderColor: colours.main,
+    borderWidth: 4,
+    elevation: 1,
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    shadowColor: colours.gray,
+    shadowOffset: { width: 0, height: 2 }
+
   },
   headerBuffer: {
     flex: Platform.OS === 'ios' ? 1 : null,

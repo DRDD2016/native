@@ -5,11 +5,9 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Input from '../general/input';
 // import Router from '../../router';
 import AddInput from '../general/add-input';
-import Button from '../common/Button';
 import ButtonHeader from '../common/ButtonHeader';
-import ImageHeader from '../common/ImageHeader';
 import HeaderBack from '../common/CreateHeaderBackground';
-import styles from '../../../styles';
+import styles, { HeaderText, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
 // import discardEvent from '../../lib/discard-event';
 import BackIcon from '../common/back-icon';
@@ -18,16 +16,18 @@ import CloseButton from '../common/CloseButton';
 export default class What extends Component {
 
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.state.params.name,
     headerLeft: <ButtonHeader
       onPress={() => navigation.goBack(null)}
     >
       <BackIcon />
     </ButtonHeader>,
     headerRight: <CloseButton stack="ScreenCreate" nav={navigation} />,
-    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerStyle: { borderTopWidth: 4, borderTopColor: colours.what, backgroundColor: colours.headerBackgroundColor, elevation: 0 },
+    headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
-    header: props => <ImageHeader {...props} />
+    headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
+      <HeaderText>{navigation.state.params.name}</HeaderText>
+    </View>
   });
 
   nextPage = (name) => {
@@ -64,7 +64,7 @@ export default class What extends Component {
       >
         <StatusBar
           barStyle="light-content"
-          backgroundColor={colours.what}
+          backgroundColor={colours.darkgray}
         />
         <HeaderBack />
         <View
@@ -100,14 +100,17 @@ export default class What extends Component {
                 paddingLeft: 5,
                 paddingRight: 5 }}
             >
-              <Button
+              <ConfirmButton
                 testDescription="Confirm What"
                 onPress={ () => this.nextPage(name) }
-                buttonStyle={ [styles.buttonStyle, { flex: 1 }] }
-                textStyle={ styles.buttonTextStyle }
+                style={{ backgroundColor: colours.green }}
               >
-                Next
-              </Button>
+                <ConfirmButtonText>
+                  NEXT
+                </ConfirmButtonText>
+
+              </ConfirmButton>
+
             </View>
             <View style={{ height: 80 }} />
           </View>

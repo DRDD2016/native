@@ -5,7 +5,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+import io.branch.rnbranch.RNBranchPackage;
+import com.bugsnag.BugsnagReactNative;
 import com.evollu.react.fcm.FIRMessagingPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
@@ -41,9 +42,9 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new FabricPackage(),
           new MainReactPackage(),
-            new ReactNativePushNotificationPackage(),
+            new RNBranchPackage(),
+            BugsnagReactNative.getPackage(),
             new RNFetchBlobPackage(),
-          new RNBranchPackage(),
           new ReactNativeConfigPackage(),
           new ImagePickerPackage(),
           new VectorIconsPackage(),
@@ -67,6 +68,7 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     Fabric.with(this, new Crashlytics());
+    BugsnagReactNative.start(this);
     SoLoader.init(this, /* native exopackage */ false);
     Branch.getAutoInstance(this);
   }

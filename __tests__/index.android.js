@@ -26,6 +26,37 @@ jest.mock('react-native-branch', () => {
   };
 });
 
+
+// jest.mock('react-native', () => ({
+//     NativeModules: {
+//       BugsnagReactNative: null
+//     }
+// }), {
+//     virtual: true
+// });
+
+jest.mock('bugsnag-react-native', () => {
+  return {
+    Client: jest.fn(),
+    leaveBreadcrumb: 'stuff'
+
+  };
+});
+
+// jest.mock('../src/js/index.js', () => {
+//     return {
+//       bugsnag: {
+//         leaveBreadcrumb: 'stuff'
+//       }
+//     };
+// });
+
+jest.mock('react-native-vector-icons/FontAwesome', () => {
+  return {
+
+  };
+});
+
 jest.mock('react-native-fcm', () => {
   return {
     on: jest.fn(),

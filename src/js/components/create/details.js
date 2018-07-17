@@ -1,36 +1,33 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Platform, Image, Dimensions } from 'react-native';
+import { View, Text, TextInput, Platform, Dimensions } from 'react-native';
 import Fabric from 'react-native-fabric';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Button from '../common/Button';
 import ButtonHeader from '../common/ButtonHeader';
-import ImageHeader from '../common/ImageHeader';
 import HeaderBack from '../common/CreateHeaderBackground';
-import styles from '../../../styles';
+import styles, { HeaderText, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
 import { store } from '../../init-store';
 import { clearCreateEvent } from '../../actions/create';
 import BackIcon from '../common/back-icon';
 
 const { Answers } = Fabric;
-const logo = require('../../../img/sparkLogo.png');
 
 export default class Details extends Component {
 
   static navigationOptions = ({ navigation }) => ({
-    title: <Text>
-      <Text>  Create event </Text>
-      <Image style={{ height: 80, width: 80 }} source={ logo } />
-    </Text>,
+
     headerLeft: <ButtonHeader onPress={() => navigation.goBack(null)}>
       <BackIcon />
     </ButtonHeader>,
     headerRight: <ButtonHeader />,
-    headerStyle: { backgroundColor: colours.transparent },
-    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerStyle: { borderTopWidth: 4, borderTopColor: colours.main, backgroundColor: colours.headerBackgroundColor, elevation: 0 },
+    headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
-    header: props => <ImageHeader {...props} />
+    headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
+      <HeaderText> Create event </HeaderText>
+    </View>
   });
+
 
   componentWillMount () {
     store.dispatch(clearCreateEvent());
@@ -103,14 +100,17 @@ export default class Details extends Component {
                 <View />
               }
               { (!hideNext) &&
-                <Button
+                <ConfirmButton
                   testDescription="Confirm Event Details"
                   onPress={ () => this.nextPage(name) }
-                  buttonStyle={[styles.buttonStyle, { flex: 1 }]}
-                  textStyle={ styles.buttonTextStyle }
+                  style={{ backgroundColor: colours.green }}
                 >
-                  Next
-                </Button>
+                  <ConfirmButtonText>
+                    NEXT
+                  </ConfirmButtonText>
+
+                </ConfirmButton>
+
               }
             </View>
             <View style={{ height: 60 }} />

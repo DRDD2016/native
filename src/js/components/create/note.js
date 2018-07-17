@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, Dimensions, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Button from '../common/Button';
-import ImageHeader from '../common/ImageHeader';
 import HeaderBack from '../common/CreateHeaderBackground';
 import ButtonHeader from '../common/ButtonHeader';
 import BackIcon from '../common/back-icon';
-import styles from '../../../styles';
+import styles, { HeaderText, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
+import CloseButton from '../common/CloseButton';
 
 export default class Note extends Component {
 
   static navigationOptions = ({ navigation }) => ({
-    title: 'Add Message',
     headerLeft: <ButtonHeader
       onPress={() => navigation.goBack(null)}
     >
       <BackIcon />
     </ButtonHeader>,
-    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerRight: <CloseButton stack="ScreenCreate" nav={navigation} />,
+    headerStyle: { borderTopWidth: 4, borderTopColor: colours.main, backgroundColor: colours.headerBackgroundColor, elevation: 0 },
+    headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
-    header: props => <ImageHeader {...props} />
+    headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
+      <HeaderText>Add Message</HeaderText>
+    </View>
   });
 
   nextPage = (name) => {
@@ -69,14 +71,17 @@ export default class Note extends Component {
 
             <View style={ styles.row }>
 
-              <Button
-                testDescription="Confirm Event Details"
+              <ConfirmButton
+                testDescription="Confirm Event Note"
                 onPress={ () => this.nextPage(name) }
-                buttonStyle={[styles.buttonStyle, { flex: 1 }]}
-                textStyle={ styles.buttonTextStyle }
+                style={{ backgroundColor: colours.green }}
               >
-                Next
-              </Button>
+
+                <ConfirmButtonText>
+                  NEXT
+                </ConfirmButtonText>
+
+              </ConfirmButton>
 
             </View>
             <View style={{ height: 60 }} />

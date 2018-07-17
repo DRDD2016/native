@@ -4,10 +4,9 @@ import ConfirmWhat from './confirm-what';
 import ConfirmWhere from './confirm-where';
 import ConfirmWhen from './confirm-when';
 // import Button from '../common/Button';
-import ImageHeader from '../common/ImageHeader';
 import HeaderBack from '../common/CreateHeaderBackground';
 import Spinner from '../common/Spinner';
-import { styles, ConfirmButton, ConfirmButtonText, ButText } from '../../../styles';
+import { styles, HeaderText, ConfirmButton, ConfirmButtonText, ButText } from '../../../styles';
 import colours from '../../../styles/colours';
 import ButtonHeader from '../common/ButtonHeader';
 import BackIcon from '../common/back-icon';
@@ -18,17 +17,18 @@ import mapToISOString from '../../lib/map-to-iso-string';
 class Confirm extends Component {
 
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.state.params.name,
     headerLeft: <ButtonHeader
       onPress={() => navigation.goBack(null)}
     >
       <BackIcon />
     </ButtonHeader>,
     headerRight: <CloseButton stack="ScreenCreate" nav={navigation} />,
-    headerStyle: { backgroundColor: colours.transparent },
-    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerStyle: { borderTopWidth: 4, borderTopColor: colours.where, backgroundColor: colours.headerBackgroundColor, elevation: 0 },
+    headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
-    header: props => <ImageHeader {...props} />
+    headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
+      <HeaderText>{navigation.state.params.name}</HeaderText>
+    </View>
   });
 
   renderAlert = () => {

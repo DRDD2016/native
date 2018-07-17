@@ -128,7 +128,7 @@ def pass = getPassword("my-key-alias","android_keystore")
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '25.0.2'
+    buildToolsVersion '23.0.1'
 
     defaultConfig {
         applicationId "net.wannaenterprises.spark"
@@ -190,9 +190,9 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-push-notification')
-    compile project(':react-native-fetch-blob')
     compile project(':react-native-branch')
+    compile project(':bugsnag-react-native')
+    compile project(':react-native-fetch-blob')
     compile project(':react-native-config')
     compile project(':react-native-image-picker')
     compile project(':react-native-vector-icons')
@@ -224,3 +224,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.bugsnag.android.gradle'

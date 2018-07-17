@@ -8,12 +8,10 @@ import { persistor } from '../../init-store';
 import { FormTextInput, FormPasswordInput } from './form-components';
 import { signupValidator as validate } from './form-validation';
 import Spinner from '../common/Spinner';
-import Button from '../common/Button';
-import FeedHeader from '../common/FeedHeader';
+import HeaderBack from '../common/CreateHeaderBackground';
 import ButtonHeader from '../common/ButtonHeader';
 import BackIcon from '../common/back-icon';
-import ImageHeader from '../common/ImageHeader';
-import styles from '../../../styles';
+import { styles, HeaderText, ConfirmButtonText, SignupButton } from '../../../styles';
 import colours from '../../../styles/colours';
 import { connectAlert } from '../Alert';
 
@@ -21,16 +19,19 @@ const { Answers } = Fabric;
 
 class Signup extends Component {
 
+
   static navigationOptions = ({ navigation }) => ({
     title: 'Sign up',
     headerLeft: <ButtonHeader onPress={() => navigation.goBack(null)}>
       <BackIcon />
     </ButtonHeader>,
     headerRight: <ButtonHeader />,
-    headerStyle: { backgroundColor: colours.transparent },
-    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerStyle: { borderTopWidth: 4, borderTopColor: colours.main, backgroundColor: colours.headerBackgroundColor, elevation: 0 },
+    headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
-    header: props => <ImageHeader {...props} />
+    headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
+      <HeaderText>Sign up</HeaderText>
+    </View>
   });
 
   componentWillMount () {
@@ -54,14 +55,17 @@ class Signup extends Component {
     }
     return (
       <View style={{ alignItems: 'center', marginTop: 10 }}>
-        <Button
-          buttonStyle={ [styles.confirmButton, { backgroundColor: colours.orange, borderColor: colours.orange }] }
-          textStyle={ styles.confirmButtonText }
+        <SignupButton
+          accessibilityLabel="SIGN UP Submit"
+          activeOpacity={ 0.5 }
+          disabled={isSigningUp}
           onPress={handleSubmit(handleSubmitForm)}
         >
-          <Text>SIGN UP</Text>
-        </Button>
+          <ConfirmButtonText>SIGN UP</ConfirmButtonText>
+        </SignupButton>
+
       </View>
+
     );
   };
 
@@ -77,13 +81,10 @@ class Signup extends Component {
 
   render () {
 
-    const { isConnected } = this.props;
 
     return (
       <View style={{ flex: 1 }}>
-        <FeedHeader>
-          { !isConnected && this.renderAlert() }
-        </FeedHeader>
+
         <View
           style={{
             flex: 1,
@@ -98,7 +99,7 @@ class Signup extends Component {
             enableOnAndroid
             resetScrollToCoords={{ x: 0, y: 0 }}
           >
-
+            <HeaderBack />
             <View style={{ flex: 1, justifyContent: 'center', marginBottom: 20 }}>
               <View style={{ marginTop: Platform.OS === 'ios' ? 0 : 80 }}>
 

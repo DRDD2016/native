@@ -9,10 +9,12 @@ export default function Header (props) {
         width: Dimensions.get('window').width * 1,
         top: Platform.OS === 'ios' ? -80 : -80,
         position: 'absolute'
+        // borderWidth: 2
+        // borderColor: 'blue'
       }, props.style]}
     >
       <ImageBackground
-        style={{ height: Platform.OS === 'ios' ? 150 : 170, width: Dimensions.get('window').width * 1 }}
+        style={{ height: Platform.OS === 'ios' ? 150 : 190, width: Dimensions.get('window').width * 1 }}
         source={require('../../../img/AppBannerDiagBottom.png')}
       >
         <View

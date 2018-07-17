@@ -7,13 +7,11 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import Icon from 'react-native-vector-icons/FontAwesome';
 // import Router from '../../router';
 import AddInput from '../general/add-input';
-import Button from '../common/Button';
-import ImageHeader from '../common/ImageHeader';
 import ButtonHeader from '../common/ButtonHeader';
 import BackIcon from '../common/back-icon';
 import CloseButton from '../common/CloseButton';
 import HeaderBack from '../common/CreateHeaderBackground';
-import styles from '../../../styles';
+import styles, { HeaderText, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
 
 const windowSize = Dimensions.get('window');
@@ -21,16 +19,18 @@ const windowSize = Dimensions.get('window');
 export default class Where extends Component {
 
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.state.params.name,
     headerLeft: <ButtonHeader
       onPress={() => navigation.goBack(null)}
     >
       <BackIcon />
     </ButtonHeader>,
     headerRight: <CloseButton stack="ScreenCreate" nav={navigation} />,
-    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerStyle: { borderTopWidth: 4, borderTopColor: colours.where, backgroundColor: colours.headerBackgroundColor, elevation: 0 },
+    headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
-    header: props => <ImageHeader {...props} />
+    headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
+      <HeaderText>{navigation.state.params.name}</HeaderText>
+    </View>
   });
 
   constructor () {
@@ -280,14 +280,17 @@ export default class Where extends Component {
                     paddingLeft: 5,
                     paddingRight: 5 }}
                 >
-                  <Button
+                  <ConfirmButton
                     testDescription="Confirm Where"
-                    buttonStyle={ [styles.confirmButton, { backgroundColor: colours.next, borderColor: colours.next }] }
-                    textStyle={ styles.confirmButtonText }
                     onPress={ () => this.nextPage(name) }
+                    style={{ backgroundColor: colours.green }}
                   >
-                    Next
-                  </Button>
+
+                    <ConfirmButtonText>
+                      NEXT
+                    </ConfirmButtonText>
+
+                  </ConfirmButton>
                 </View>
               </View>
 

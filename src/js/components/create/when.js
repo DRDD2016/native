@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
 import { StatusBar, View, Text, ScrollView } from 'react-native';
 import AddInput from '../general/add-input';
-import Button from '../common/Button';
-import ImageHeader from '../common/ImageHeader';
 import HeaderBack from '../common/CreateHeaderBackground';
 import ButtonHeader from '../common/ButtonHeader';
 import BackIcon from '../common/back-icon';
 import CloseButton from '../common/CloseButton';
 import DateTime from '../common/date-time';
-import styles from '../../../styles';
+import styles, { HeaderText, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
 
 export default class When extends Component {
 
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.state.params.name,
     headerLeft: <ButtonHeader
       onPress={() => navigation.goBack(null)}
     >
       <BackIcon />
     </ButtonHeader>,
     headerRight: <CloseButton stack="ScreenCreate" nav={navigation} />,
-    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerStyle: { borderTopWidth: 4, borderTopColor: colours.when, backgroundColor: colours.headerBackgroundColor, elevation: 0 },
+    headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
-    header: props => <ImageHeader {...props} />
+    headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
+      <HeaderText>{navigation.state.params.name}</HeaderText>
+    </View>
   });
 
   nextPage = (name) => {
@@ -93,14 +93,16 @@ export default class When extends Component {
                 <View />
               }
               { (!hideNext) &&
-                <Button
+                <ConfirmButton
                   testDescription="Confirm When"
-                  buttonStyle={ [styles.buttonStyle, { flex: 1 }] }
-                  textStyle={ styles.buttonTextStyle }
                   onPress={ () => this.nextPage(name) }
+                  style={{ backgroundColor: colours.green }}
                 >
-                  Next
-                </Button>
+                  <ConfirmButtonText>
+                    NEXT
+                  </ConfirmButtonText>
+
+                </ConfirmButton>
               }
             </View>
           </View>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight, FlatList, Image, Platform, Dimensions } from 'react-native';
+import { Animated, View, Text, TouchableHighlight, FlatList, Image, Platform, Dimensions } from 'react-native';
 import Fabric from 'react-native-fabric';
 import _ from 'lodash';
 import { Header } from 'react-navigation';
@@ -7,38 +7,69 @@ import { Header } from 'react-navigation';
 import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
-import ImageHeader from './common/ImageHeader';
-import FeedHeader from './common/FeedHeader';
+// import ImageHeader from './common/ImageHeader';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
+import DropdownView from './common/DropdownView';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
 import { store } from '../init-store';
 import { getFeedFailure } from '../actions/feed';
 import WhatsNew, { app_updateNo } from './onboarding/whatsnew';
+import { scale } from '../../styles/scaling';
 
 const { Answers } = Fabric;
 
-const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 2;
+const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 0.8;
 const logo = require('../../img/sparkLoginLogo.png');
+
+const NAVBAR_HEIGHT = scale(50);
+const STATUS_BAR_HEIGHT = Platform.select({ ios: 20, android: 24 });
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 // import { subscribeToBranchLinks } from '../lib/branchLink';
 
 class Feed extends Component {
 
   static navigationOptions = ({ navigation }) => ({
-    title: <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />,
     headerLeft: <ButtonHeader />,
     headerRight: <ButtonHeader
       onPress={() => navigation.openDrawer()}
     >
       <BurgerIcon />
     </ButtonHeader>,
-    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerStyle: { backgroundColor: colours.headerBackgroundColor },
+    headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
-    header: props => <ImageHeader {...props} />
+    headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
+      <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />
+    </View>
   });
+
+  constructor (props) {
+    super(props);
+
+    const scrollAnim = new Animated.Value(0);
+    const offsetAnim = new Animated.Value(0);
+
+    this.state = {
+      scrollAnim,
+      offsetAnim,
+      clampedScroll: Animated.diffClamp(
+        Animated.add(
+          scrollAnim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 1],
+            extrapolateLeft: 'clamp'
+          }),
+          offsetAnim,
+        ),
+        0,
+        NAVBAR_HEIGHT - STATUS_BAR_HEIGHT,
+      )
+    };
+  }
 
   componentWillMount () {
 
@@ -73,9 +104,24 @@ class Feed extends Component {
   }
 
   componentDidMount () {
+
     Answers.logCustom('Feed.js Mounted', { additionalData: 'nothing' });
     const timestamp = new Date();
     console.log('FeedDidMount:', timestamp.getTime());
+
+    this.state.scrollAnim.addListener(({ value }) => {
+      // This is the same calculations that diffClamp does.
+      const diff = value - this._scrollValue;
+      this._scrollValue = value;
+      this._clampedScrollValue = Math.min(
+        Math.max(this._clampedScrollValue + diff, 0),
+        NAVBAR_HEIGHT - STATUS_BAR_HEIGHT,
+      );
+    });
+    this.state.offsetAnim.addListener(({ value }) => {
+      this._offsetValue = value;
+    });
+
   }
 
   componentWillReceiveProps (nextProps) {
@@ -139,10 +185,41 @@ class Feed extends Component {
     }
   }
 
+  componentWillUnmount () {
+    // Don't forget to remove the listeners!
+    this.state.scrollAnim.removeAllListeners();
+    this.state.offsetAnim.removeAllListeners();
+  }
+
+  _clampedScrollValue = 0;
+  _offsetValue = 0;
+  _scrollValue = 0;
 
   createDataSource (feed) {
     this.dataSource = feed;
   }
+
+
+  _onScrollEndDrag = () => {
+    this._scrollEndTimer = setTimeout(this._onMomentumScrollEnd, 250);
+  };
+
+  _onMomentumScrollBegin = () => {
+    clearTimeout(this._scrollEndTimer);
+  };
+
+  _onMomentumScrollEnd = () => {
+    const toValue = this._scrollValue > NAVBAR_HEIGHT &&
+      this._clampedScrollValue > (NAVBAR_HEIGHT - STATUS_BAR_HEIGHT) / 2
+      ? this._offsetValue + NAVBAR_HEIGHT
+      : this._offsetValue - NAVBAR_HEIGHT;
+
+    Animated.timing(this.state.offsetAnim, {
+      toValue,
+      duration: 350,
+      useNativeDriver: true
+    }).start();
+  };
 
   renderAlert = () => {
     setTimeout(() => {
@@ -186,6 +263,7 @@ class Feed extends Component {
     );
   }
 
+
   render () {
 
     const timestamp = new Date();
@@ -195,6 +273,19 @@ class Feed extends Component {
     const { width } = Dimensions.get('window'); // inline style to force render on screen rotation
     const scaledWidth = width > 700 ? (width * 0.90) : (width * 1);
 
+    const { clampedScroll } = this.state;
+
+    const navbarTranslate = clampedScroll.interpolate({
+      inputRange: [0, NAVBAR_HEIGHT - STATUS_BAR_HEIGHT],
+      outputRange: [0, -(NAVBAR_HEIGHT - STATUS_BAR_HEIGHT)],
+      extrapolate: 'clamp'
+    });
+    const navbarOpacity = clampedScroll.interpolate({
+      inputRange: [0, NAVBAR_HEIGHT - STATUS_BAR_HEIGHT],
+      outputRange: [1, 0],
+      extrapolate: 'clamp'
+    });
+
     const {
       allEvents,
       feed,
@@ -203,11 +294,12 @@ class Feed extends Component {
       displayAll,
       filterActive,
       selectedFilter,
-      isConnected,
       createNewEvent,
       user_updateNo,
       user_openNo,
-      eventCode } = this.props;
+      eventCode
+      // isConnected
+    } = this.props;
 
     let showWhatsNew = false;
 
@@ -261,31 +353,18 @@ class Feed extends Component {
     Answers.logCustom('Feed.js render'); // eslint-disable-line max-len
 
     return (
-      <View style={{ flex: 1, borderColor: 'green', borderWidth: 1 }}>
+      <View style={{ flex: 1 }}>
 
         <WhatsNew visible={showWhatsNew} type="whats_new" user_updateNo={user_updateNo} app_updateNo={app_updateNo} />
         <WhatsNew visible={showWelcome} type="welcome" user_updateNo={user_updateNo} app_updateNo={app_updateNo} />
 
-        <FeedHeader>
-          { !isConnected && this.renderAlert() }
-          {
-            !isReceivingFeed && allEvents.length > 0 &&
-            <FilterPanel
-              displayAll={ displayAll }
-              displaySome={ displaySome }
-              filterActive={ filterActive }
-              selectedFilter={ selectedFilter }
-            />
-          }
-        </FeedHeader>
+
         <View
           style={{
             flex: 1,
             alignSelf: 'center',
             width: scaledWidth,
             backgroundColor: colours.white,
-            borderColor: 'orange',
-            borderWidth: 1,
             borderBottomWidth: 1,
             borderBottomColor: colours.lightgray }}
         >
@@ -294,80 +373,107 @@ class Feed extends Component {
           }
 
 
-          <View style={{ borderColor: 'green', borderWidth: 1 }}>
-            { !isConnected && this.renderAlert() }
-
-            {
-              allEvents.length === 0 && !isReceivingFeed &&
-                <View style={{ alignItems: 'center' }}>
-                  <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
-                    You have no events.
-                  </Text>
-                  <Text style={[styles.msg3, { marginTop: 30, marginHorizontal: 15 }]}>
-                    (Why not create one?)
-                  </Text>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      marginTop: 20,
-                      marginBottom: 10,
-                      paddingLeft: 5,
-                      paddingRight: 5 }}
+          {
+            allEvents.length === 0 && !isReceivingFeed &&
+              <View style={{ alignItems: 'center' }}>
+                <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
+                  You have no events.
+                </Text>
+                <Text style={[styles.msg3, { marginTop: 30, marginHorizontal: 15 }]}>
+                  (Why not create one?)
+                </Text>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    marginTop: 20,
+                    marginBottom: 10,
+                    paddingLeft: 5,
+                    paddingRight: 5 }}
+                >
+                  <TouchableHighlight
+                    onPress={ () => createNewEvent() }
+                    style={[styles.addButtonStyle, { backgroundColor: colours.orange }]}
                   >
-                    <TouchableHighlight
-                      onPress={ () => createNewEvent() }
-                      style={[styles.addButtonStyle, { backgroundColor: colours.orange }]}
+                    <Text
+                      style={{
+                        textAlign: 'center',
+                        fontWeight: '200',
+                        height: 50,
+                        fontSize: 36,
+                        color: colours.white,
+                        backgroundColor: colours.transparent }}
                     >
-                      <Text
-                        style={{
-                          textAlign: 'center',
-                          fontWeight: '200',
-                          height: 50,
-                          fontSize: 36,
-                          color: colours.white,
-                          backgroundColor: colours.transparent }}
-                      >
-                        +
-                      </Text>
-                    </TouchableHighlight>
+                      +
+                    </Text>
+                  </TouchableHighlight>
 
-                  </View>
-                  <View style={{ height: 80 }} />
                 </View>
-            }
-            {
-              feed.length === 0 && selectedFilter === 'hosting' &&
-                <View style={{ alignItems: 'center' }}>
-                  <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
-                    You are not hosting any events.
-                  </Text>
-                  <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
-                    (Why not create some?)
-                  </Text>
-                </View>
-            }
-            {
-              feed.length === 0 && selectedFilter === 'received' &&
-                <View style={{ alignItems: 'center' }}>
-                  <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
-                    You have not been invited to any events.
-                  </Text>
-                  <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
-                    Tap { '"Code"' } below to enter to join an event using an invite code.
-                  </Text>
-                </View>
-            }
+                <View style={{ height: 80 }} />
+              </View>
+          }
+          {
+            feed.length === 0 && selectedFilter === 'hosting' &&
+              <View style={{ alignItems: 'center' }}>
+                <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
+                  You are not hosting any events.
+                </Text>
+                <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
+                  (Why not create some?)
+                </Text>
+              </View>
+          }
+          {
+            feed.length === 0 && selectedFilter === 'received' &&
+              <View style={{ alignItems: 'center' }}>
+                <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
+                  You have not been invited to any events.
+                </Text>
+                <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
+                  Tap { '"Code"' } below to enter to join an event using an invite code.
+                </Text>
+              </View>
+          }
 
-            {
-              !isReceivingFeed && this.dataSource &&
-              <FlatList
+          {
+            !isReceivingFeed && this.dataSource &&
+            <View style={{ backgroundColor: colours.filterPanelBackgroundColor }}>
+
+              <DropdownView
+                navbarHeight={NAVBAR_HEIGHT}
+                navbarOpacity={navbarOpacity}
+                navbarTranslate={navbarTranslate}
+              >
+
+                {
+                  !isReceivingFeed && allEvents.length > 0 &&
+                  <FilterPanel
+                    displayAll={ displayAll }
+                    displaySome={ displaySome }
+                    filterActive={ filterActive }
+                    selectedFilter={ selectedFilter }
+                  />
+                }
+
+              </DropdownView>
+
+              <AnimatedFlatList
                 data={this.dataSource}
                 renderItem={this.renderItem}
                 keyExtractor={item => `${item.id}${Math.random().toString()}`}
+                scrollEventThrottle={1}
+                onScroll={Animated.event(
+                  [{ nativeEvent: { contentOffset: { y: this.state.scrollAnim } } }],
+                  { useNativeDriver: true },
+                )}
+                onMomentumScrollBegin={this._onMomentumScrollBegin}
+                onMomentumScrollEnd={this._onMomentumScrollEnd}
+                onScrollEndDrag={this._onScrollEndDrag}
+                contentContainerStyle={{ backgroundColor: colours.white, paddingTop: NAVBAR_HEIGHT }}
               />
-            }
+            </View>
 
-          </View>
+          }
+
 
         </View>
       </View>

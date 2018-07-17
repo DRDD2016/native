@@ -6,14 +6,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Fabric from 'react-native-fabric';
 import { persistor } from '../../init-store';
 import { FormTextInput, FormPasswordInput } from './form-components';
-import FeedHeader from '../common/FeedHeader';
+import HeaderBack from '../common/CreateHeaderBackground';
 import ButtonHeader from '../common/ButtonHeader';
 import BackIcon from '../common/back-icon';
-import ImageHeader from '../common/ImageHeader';
 import Spinner from '../common/Spinner';
 import { loginValidator as validate } from './form-validation';
 import colours from '../../../styles/colours';
-import { styles, ConfirmButton, ConfirmButtonText } from '../../../styles';
+import { styles, ConfirmButton, ConfirmButtonText, HeaderText } from '../../../styles';
 import { connectAlert } from '../Alert';
 
 const { Answers } = Fabric;
@@ -58,16 +57,19 @@ const inlineStyles = {
 
 class Login extends Component {
 
+
   static navigationOptions = ({ navigation }) => ({
     title: 'Login',
     headerLeft: <ButtonHeader onPress={() => navigation.goBack(null)}>
       <BackIcon />
     </ButtonHeader>,
     headerRight: <ButtonHeader />,
-    headerStyle: { backgroundColor: colours.transparent },
-    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
+    headerStyle: { borderTopWidth: 4, borderTopColor: colours.main, backgroundColor: colours.headerBackgroundColor, elevation: 0 },
+    headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
-    header: props => <ImageHeader {...props} />
+    headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
+      <HeaderText>Login</HeaderText>
+    </View>
   });
 
   constructor (props) {
@@ -115,9 +117,7 @@ class Login extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <FeedHeader>
-          { !isConnected && this.renderAlert() }
-        </FeedHeader>
+
         <View
           style={{
             flex: 1,
@@ -130,6 +130,7 @@ class Login extends Component {
             behavior="padding"
           >
             <View />
+            <HeaderBack />
 
             <Modal
               transparent

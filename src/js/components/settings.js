@@ -8,7 +8,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from './common/Button';
 import Spinner from './common/Spinner';
 import FeedHeader from './common/FeedHeader';
-import ImageHeader from './common/ImageHeader';
 import styles from '../../styles';
 import colours from '../../styles/colours';
 import { connectAlert } from './Alert';
@@ -24,11 +23,11 @@ class Settings extends Component {
     headerLeft: <ButtonHeader onPress={() => navigation.goBack(null)}>
       <BackIcon />
     </ButtonHeader>,
-    headerTitleStyle: { color: colours.headerTitleColor, alignSelf: 'center' },
-    headerTintColor: colours.headerButtonColor,
-    header: props => <ImageHeader {...props} />,
     headerRight: <ButtonHeader />,
-    headerStyle: { backgroundColor: colours.transparent }
+    headerStyle: { backgroundColor: colours.headerBackgroundColor },
+    headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
+    headerTintColor: colours.headerButtonColor
+
   });
 
   constructor (props) {

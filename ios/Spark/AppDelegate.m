@@ -8,21 +8,24 @@
  */
 
 #import "AppDelegate.h"
+
 #import "RNFIRMessaging.h"
+#import <react-native-branch/RNBranch.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <BugsnagReactNative/BugsnagReactNative.h>
 #import <asl.h>
 #import <React/RCTLog.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-#import <react-native-branch/RNBranch.h>
-
 
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [BugsnagReactNative start];
+  
   [Fabric with:@[[Crashlytics class]]];
   RCTSetLogThreshold(RCTLogLevelInfo);
   RCTSetLogFunction(CrashlyticsReactLogFunction);

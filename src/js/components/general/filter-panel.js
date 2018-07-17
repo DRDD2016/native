@@ -3,7 +3,9 @@ import React from 'react';
 import { View } from 'react-native';
 import Button from '../common/Button';
 import colours from '../../../styles/colours';
-import { moderateScale } from '../../../styles/scaling';
+import { moderateScale, scale } from '../../../styles/scaling';
+
+const NAVBAR_HEIGHT = scale(50);
 
 const FilterPanel = ({ displaySome, displayAll, filterActive, selectedFilter }) => {
 
@@ -17,24 +19,29 @@ const FilterPanel = ({ displaySome, displayAll, filterActive, selectedFilter }) 
   const hostingButtonText = (filterActive && selectedFilter === 'hosting' ? styles.buttonTextSelected : styles.buttonText);
 
   return (
-    <View style={styles.rowFilterPanel}>
+    <View style={{
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center' }}
+    >
 
       <Button
-        buttonStyle={ [allButtonButton, { borderTopRightRadius: 0, borderBottomRightRadius: 0 }]}
+        buttonStyle={ [allButtonButton, { borderTopRightRadius: 3, borderBottomRightRadius: 3 }]}
         textStyle={allButtonText}
         onPress={ displayAll }
       >
         All
       </Button>
       <Button
-        buttonStyle={ [receivedButtonButton, { borderRadius: 0 }] }
+        buttonStyle={ [receivedButtonButton, { borderRadius: 3 }] }
         textStyle={receivedButtonText}
         onPress={ () => displaySome('received') }
       >
         Received
       </Button>
       <Button
-        buttonStyle={ [hostingButtonButton, { borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }] }
+        buttonStyle={ [hostingButtonButton, { borderTopLeftRadius: 3, borderBottomLeftRadius: 3 }] }
         textStyle={hostingButtonText}
         onPress={ () => displaySome('hosting') }
       >
@@ -46,17 +53,45 @@ const FilterPanel = ({ displaySome, displayAll, filterActive, selectedFilter }) 
 };
 
 const styles = {
-  rowFilterPanel: {
-    marginTop: 10,
-    marginBottom: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: moderateScale(50)
-  },
+
   filterButton: {
     backgroundColor: 'white',
-    borderRadius: 0,
+    borderWidth: 1,
+    borderRadius: 3,
+    borderColor: colours.gray,
+    paddingRight: 10,
+    paddingLeft: 10,
+    marginLeft: 5,
+    marginRight: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    height: NAVBAR_HEIGHT - 12,
+    paddingTop: 4,
+    paddingBottom: 4,
+    elevation: 1,
+    shadowOpacity: 0.8,
+    shadowRadius: 1,
+    shadowColor: 'gray',
+    shadowOffset: { height: 2, width: 0 }
+  },
+  buttonText: {
+    fontSize: moderateScale(14, 0.3),
+    color: colours.gray,
+    fontWeight: '400',
+    paddingTop: 5,
+    paddingBottom: 5
+  },
+  buttonTextSelected: {
+    fontSize: moderateScale(14, 0.3),
+    color: colours.main,
+    fontWeight: '400',
+    paddingTop: 5,
+    paddingBottom: 5
+  },
+  filterButtonSelected: {
+    backgroundColor: colours.white,
+    borderRadius: 3,
     borderWidth: 1,
     borderColor: colours.main,
     paddingRight: 10,
@@ -66,35 +101,14 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    height: moderateScale(40)
-  },
-  buttonText: {
-    fontSize: moderateScale(14, 0.3),
-    color: colours.main,
-    fontWeight: '700',
-    paddingTop: 5,
-    paddingBottom: 5
-  },
-  buttonTextSelected: {
-    fontSize: moderateScale(14, 0.3),
-    color: 'white',
-    fontWeight: '700',
-    paddingTop: 5,
-    paddingBottom: 5
-  },
-  filterButtonSelected: {
-    backgroundColor: colours.main,
-    borderRadius: 0,
-    borderWidth: 1,
-    borderColor: colours.gray,
-    paddingRight: 10,
-    paddingLeft: 10,
-    marginLeft: 5,
-    marginRight: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-    height: moderateScale(40)
+    height: NAVBAR_HEIGHT - 12,
+    paddingTop: 4,
+    paddingBottom: 4,
+    elevation: 1,
+    shadowOpacity: 0.8,
+    shadowRadius: 1,
+    shadowColor: 'gray',
+    shadowOffset: { height: 2, width: 0 }
   }
 };
 
