@@ -68,7 +68,7 @@
   "jest": {
     "preset": "react-native",
     "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|react-navigation|react-native-branch)"
+      "node_modules/(?!(jest-)?react-native|react-navigation|react-native-branch|bugsnag-react-native)"
     ],
     "moduleNameMapper": {
       "styled-components": "<rootDir>/node_modules/styled-components/dist/styled-components.native.cjs.js"
