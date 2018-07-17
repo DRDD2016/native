@@ -39,6 +39,12 @@ export const ConfirmButton = styled.TouchableOpacity`
   shadowOffset: { width: 0, height: 2 };
 `; // confirmButton
 
+
+export const SignupButton = ConfirmButton.extend`
+  backgroundColor: ${colours.orange};
+  borderColor: ${colours.orange};
+`;
+
 export const InviteSmallButton = styled.TouchableOpacity`
   justifyContent: center;
   alignItems: center;
@@ -272,7 +278,15 @@ export const styles = {
     margin: 20,
     padding: 10,
     alignItems: 'center',
-    borderRadius: 30
+    borderRadius: 30,
+    borderColor: colours.main,
+    borderWidth: 4,
+    elevation: 1,
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    shadowColor: colours.gray,
+    shadowOffset: { width: 0, height: 2 }
+
   },
   headerBuffer: {
     flex: Platform.OS === 'ios' ? 1 : null,
