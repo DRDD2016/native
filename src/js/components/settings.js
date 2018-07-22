@@ -10,7 +10,7 @@ import Spinner from './common/Spinner';
 import FeedHeader from './common/FeedHeader';
 import styles from '../../styles';
 import colours from '../../styles/colours';
-import { connectAlert } from './Alert';
+// import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
 import BackIcon from './common/back-icon';
 
@@ -232,4 +232,5 @@ Settings.propTypes = {
   handleUpload: PropTypes.func.isRequired
 };
 
-export default connectAlert(Settings);
+// export default connectAlert(Settings);
+export default Settings;

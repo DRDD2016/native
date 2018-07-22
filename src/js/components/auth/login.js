@@ -13,7 +13,7 @@ import Spinner from '../common/Spinner';
 import { loginValidator as validate } from './form-validation';
 import colours from '../../../styles/colours';
 import { styles, ConfirmButton, ConfirmButtonText, HeaderText } from '../../../styles';
-import { connectAlert } from '../Alert';
+// import { connectAlert } from '../Alert';
 
 const { Answers } = Fabric;
 
@@ -273,4 +273,5 @@ class Login extends Component {
 }
 
 const decoratedComponent = reduxForm({ form: 'login', validate })(Login);
-export default connectAlert(hoistNonReactStatic(decoratedComponent, Login));
+export default hoistNonReactStatic(decoratedComponent, Login);
+// export default connectAlert(hoistNonReactStatic(decoratedComponent, Login));

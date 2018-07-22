@@ -10,7 +10,7 @@ import Spinner from './common/Spinner';
 // import ImageHeader from './common/ImageHeader';
 import styles from '../../styles';
 import colours from '../../styles/colours';
-import { connectAlert } from './Alert';
+// import { connectAlert } from './Alert';
 import DropdownView from './common/DropdownView';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
@@ -482,4 +482,5 @@ class Feed extends Component {
   }
 }
 
-export default connectAlert(Feed);
+// export default connectAlert(Feed);
+export default Feed;

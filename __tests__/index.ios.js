@@ -62,11 +62,11 @@ jest.mock('bugsnag-react-native', () => {
 //     };
 // });
 
-jest.mock('react-native-dropdownalert', () => {
-  return {
-
-  };
-});
+// jest.mock('react-native-dropdownalert', () => {
+//   return {
+//
+//   };
+// });
 
 jest.mock('react-native-vector-icons/FontAwesome', () => {
   return {

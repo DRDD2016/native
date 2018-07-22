@@ -13,7 +13,7 @@ import ButtonHeader from '../common/ButtonHeader';
 import BackIcon from '../common/back-icon';
 import { styles, HeaderText, ConfirmButtonText, SignupButton } from '../../../styles';
 import colours from '../../../styles/colours';
-import { connectAlert } from '../Alert';
+// import { connectAlert } from '../Alert';
 
 const { Answers } = Fabric;
 
@@ -144,4 +144,5 @@ class Signup extends Component {
 }
 
 const decoratedComponent = reduxForm({ form: 'signup', validate })(Signup);
-export default connectAlert(hoistNonReactStatic(decoratedComponent, Signup));
+export default hoistNonReactStatic(decoratedComponent, Signup);
+// export default connectAlert(hoistNonReactStatic(decoratedComponent, Signup));

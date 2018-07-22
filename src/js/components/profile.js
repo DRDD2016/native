@@ -9,7 +9,7 @@ import { styles, ConfirmButton, ConfirmButtonText } from '../../styles';
 import Spinner from './common/Spinner';
 import FeedHeader from './common/FeedHeader';
 import colours from '../../styles/colours';
-import { connectAlert } from './Alert';
+// import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
 
@@ -227,4 +227,5 @@ Profile.propTypes = {
   handleUpload: PropTypes.func.isRequired
 };
 
-export default connectAlert(Profile);
+// export default connectAlert(Profile);
+export default Profile;
