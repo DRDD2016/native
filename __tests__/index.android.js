@@ -70,12 +70,12 @@ jest.mock('react-native-fcm', () => {
   };
 });
 
-jest.mock('react-native-dropdownalert', () => {
-  return {
-
-
-  };
-});
+// jest.mock('react-native-dropdownalert', () => {
+//   return {
+//
+//
+//   };
+// });
 
 // jest.mock('react-native-fcm', () => ({
 //   on: jest.fn(),
