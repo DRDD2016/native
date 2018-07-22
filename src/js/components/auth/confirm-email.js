@@ -8,7 +8,7 @@ import Button from '../common/Button';
 import Spinner from '../common/Spinner';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
-import { connectAlert } from '../Alert';
+// import { connectAlert } from '../Alert';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 // import Fabric from 'react-native-fabric';
 // import FeedHeader from '../common/FeedHeader';
@@ -109,4 +109,5 @@ class ConfirmEmail extends Component {
 }
 
 const decoratedComponent = reduxForm({ form: 'confirmEmail', validate })(ConfirmEmail);
-export default connectAlert(hoistNonReactStatic(decoratedComponent, ConfirmEmail));
+export default hoistNonReactStatic(decoratedComponent, ConfirmEmail);
+// export default connectAlert(hoistNonReactStatic(decoratedComponent, ConfirmEmail));

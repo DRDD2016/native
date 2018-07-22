@@ -11,7 +11,7 @@ import colours from '../../../styles/colours';
 import ButtonHeader from '../common/ButtonHeader';
 import BackIcon from '../common/back-icon';
 import CloseButton from '../common/CloseButton';
-import { connectAlert } from '../Alert';
+// import { connectAlert } from '../Alert';
 import mapToISOString from '../../lib/map-to-iso-string';
 
 class Confirm extends Component {
@@ -125,4 +125,5 @@ class Confirm extends Component {
   }
 }
 
-export default connectAlert(Confirm);
+// export default connectAlert(Confirm);
+export default Confirm;

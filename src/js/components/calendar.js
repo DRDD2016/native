@@ -11,7 +11,7 @@ import ImageHeader from './common/ImageHeader';
 import FeedHeader from './common/FeedHeader';
 import styles from '../../styles';
 import colours from '../../styles/colours';
-import { connectAlert } from './Alert';
+// import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
 
@@ -191,4 +191,5 @@ Calendar.propTypes = {
   handleOnPress: PropTypes.func.isRequired
 };
 
-export default connectAlert(Calendar);
+// export default connectAlert(Calendar);
+export default Calendar;

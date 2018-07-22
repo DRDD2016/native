@@ -45,7 +45,7 @@ export default class SpinnerProvider extends Component {
     console.log('isEventConfirmed:', isEventConfirmed);
     console.log('finalChoices:', finalChoices);
     console.log('isLoading:', isLoading);
-    console.log('this.props.children:', this.props.children);
+    // console.log('this.props.children:', this.props.children);
 
     return (
       <View style={{ flex: 1, borderColor: 'pink', borderWidth: 0 }}>

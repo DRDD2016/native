@@ -43,6 +43,11 @@ def getPassword(String currentUser, String keyChain) {
  * `apply from: "../../node_modules/react-native/react.gradle"` line.
  *
  * project.ext.react = [
+ *
+ *   bundleInRelease: true,
+ *   resourcesDirRelease   : "release/res"
+ * ]
+ * project.ext.react = [
  *   // the name of the generated asset file containing your JS bundle
  *   bundleAssetName: "index.android.bundle",
  *
@@ -102,7 +107,6 @@ def getPassword(String currentUser, String keyChain) {
  *   extraPackagerArgs: []
  * ]
  */
-
 
 
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"

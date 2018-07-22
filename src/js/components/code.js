@@ -12,7 +12,7 @@ import Spinner from './common/Spinner';
 import FeedHeader from './common/FeedHeader';
 import styles from '../../styles';
 import colours from '../../styles/colours';
-import { connectAlert } from './Alert';
+// import { connectAlert } from './Alert';
 
 const { Answers } = Fabric;
 const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 0.8;
@@ -132,4 +132,5 @@ class Code extends Component {
 }
 
 const decoratedComponent = reduxForm({ form: 'code', validate })(Code);
-export default connectAlert(hoistNonReactStatic(decoratedComponent, Code));
+export default hoistNonReactStatic(decoratedComponent, Code);
+// export default connectAlert(hoistNonReactStatic(decoratedComponent, Code));
