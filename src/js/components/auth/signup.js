@@ -42,12 +42,7 @@ class Signup extends Component {
     Answers.logCustom('Signup.js Mounted', { additionalData: 'nothing' });
   }
 
-  renderAlert = () => {
-    setTimeout(() => {
-      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
-    }, 2000);
-  }
-
+  
   renderButton = () => {
     const { handleSubmit, handleSubmitForm, isSigningUp } = this.props;
     if (isSigningUp) {

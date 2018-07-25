@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Animated, View, Text, TouchableHighlight, FlatList, Image, Platform, Dimensions } from 'react-native';
+import { InteractionManager, Animated, View, Text, TouchableHighlight, FlatList, Image, Platform, Dimensions } from 'react-native';
 import Fabric from 'react-native-fabric';
 import _ from 'lodash';
 import { Header } from 'react-navigation';
@@ -54,6 +54,7 @@ class Feed extends Component {
     const offsetAnim = new Animated.Value(0);
 
     this.state = {
+      isReady: false,
       scrollAnim,
       offsetAnim,
       clampedScroll: Animated.diffClamp(
@@ -105,68 +106,112 @@ class Feed extends Component {
 
   componentDidMount () {
 
-    Answers.logCustom('Feed.js Mounted', { additionalData: 'nothing' });
-    const timestamp = new Date();
-    console.log('FeedDidMount:', timestamp.getTime());
+    console.log('feed DidMount');
 
-    this.state.scrollAnim.addListener(({ value }) => {
-      // This is the same calculations that diffClamp does.
-      const diff = value - this._scrollValue;
-      this._scrollValue = value;
-      this._clampedScrollValue = Math.min(
-        Math.max(this._clampedScrollValue + diff, 0),
-        NAVBAR_HEIGHT - STATUS_BAR_HEIGHT,
-      );
+    // 1: Component is mounted off-screen
+    InteractionManager.runAfterInteractions(() => {
+      // 2: Component is done animating
+      // 3: Start fetching the team / or render the view
+      // this.props.dispatchTeamFetchStart();
+
+      console.log('feed Did Mount - interactions finished - expensive code starts');
+
+      // expensive code starting
+
+      Answers.logCustom('Feed.js Mounted', { additionalData: 'nothing' });
+
+      this.state.scrollAnim.addListener(({ value }) => {
+        // This is the same calculations that diffClamp does.
+        const diff = value - this._scrollValue;
+        this._scrollValue = value;
+        this._clampedScrollValue = Math.min(
+          Math.max(this._clampedScrollValue + diff, 0),
+          NAVBAR_HEIGHT - STATUS_BAR_HEIGHT,
+        );
+      });
+      this.state.offsetAnim.addListener(({ value }) => {
+        this._offsetValue = value;
+      });
+
+      // expensive code finished
+
+      console.log('feed Did Mount - expensive code finished');
+
+      this.setState({
+        isReady: true
+      });
     });
-    this.state.offsetAnim.addListener(({ value }) => {
-      this._offsetValue = value;
-    });
+
 
   }
 
   componentWillReceiveProps (nextProps) {
 
-    console.log('Feed Receives NextProps');
-    console.log('thisProps', this.props);
-    console.log('NextProps', nextProps);
-    const timestamp = new Date();
-    console.log('Feed receivesProps:', timestamp.getTime());
 
-    const { handleSubmitCode } = this.props;
-    const { eventCode, saveEventStatus } = nextProps;
+    console.log('feed WillReceiveProps');
+    this.setState({
+       isReady: false
+    });
+    // 1: Component is mounted off-screen
+    InteractionManager.runAfterInteractions(() => {
+      // 2: Component is done animating
+      // 3: Start fetching the team / or render the view
+      // this.props.dispatchTeamFetchStart();
 
-    console.log('saveEventStatus thisprops: ', this.props.saveEventStatus);
+      console.log('feed WillReceiveProps - interactions finished - expensive code starts');
 
-    console.log('saveEventStatus Nextprops: ', saveEventStatus);
+      // expensive code starting after interactions finished
 
-    console.log('eventCode FeedNextProps:', eventCode);
+      console.log('Feed Receives NextProps');
+      console.log('thisProps', this.props);
+      console.log('NextProps', nextProps);
+      const timestamp = new Date();
+      console.log('Feed receivesProps:', timestamp.getTime());
+
+      const { handleSubmitCode } = this.props;
+      const { eventCode, saveEventStatus } = nextProps;
+
+      console.log('saveEventStatus thisprops: ', this.props.saveEventStatus);
+
+      console.log('saveEventStatus Nextprops: ', saveEventStatus);
+
+      console.log('eventCode FeedNextProps:', eventCode);
 
 
-    if (eventCode) {
-      if (this.props.eventCode !== eventCode) {
-        if (eventCode !== 'none') {
-          console.log('submittingEventCode from Feed nextProps');
-          handleSubmitCode(eventCode);
-          // linkDatafromBranch(); // should we delay this until after submitCode has started?
+      if (eventCode) {
+        if (this.props.eventCode !== eventCode) {
+          if (eventCode !== 'none') {
+            console.log('submittingEventCode from Feed nextProps');
+            handleSubmitCode(eventCode);
+            // linkDatafromBranch(); // should we delay this until after submitCode has started?
+          }
         }
       }
-    }
 
-    console.log('this.props.eventCodeError: ', this.props.eventCodeError);
+      console.log('this.props.eventCodeError: ', this.props.eventCodeError);
 
 
-    const { feed } = nextProps;
-    const newData = [].concat(feed).reverse();
-    console.log('newData', newData);
+      const { feed } = nextProps;
+      const newData = [].concat(feed).reverse();
+      console.log('newData', newData);
 
-    const uniqueFeedData = _.uniqBy(newData, 'feed_item.feed_tag');
-      // const itemTag = `Tag_${item.event_id}_${item.subject_user_id}`;
-      // console.log('itemTag:', itemTag);
-      // console.log('index:', index);
-      // console.log('self:', self);
+      const uniqueFeedData = _.uniqBy(newData, 'feed_item.feed_tag');
+        // const itemTag = `Tag_${item.event_id}_${item.subject_user_id}`;
+        // console.log('itemTag:', itemTag);
+        // console.log('index:', index);
+        // console.log('self:', self);
 
-    this.createDataSource(uniqueFeedData);
+      this.createDataSource(uniqueFeedData);
 
+      // expensive code finished
+
+      console.log('feed WillReceiveProps - expensive code finished');
+
+
+      this.setState({
+         isReady: true
+      });
+    });
 
   }
 
@@ -221,11 +266,6 @@ class Feed extends Component {
     }).start();
   };
 
-  renderAlert = () => {
-    setTimeout(() => {
-      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
-    }, 2000);
-  }
 
   renderItem = (item) => {
 
@@ -265,6 +305,17 @@ class Feed extends Component {
 
 
   render () {
+
+    console.log('renderFeed');
+
+    if (!this.state.isReady) {
+      console.log('renderFeedActivityIndicator');
+      return (
+        <View style={{ backgroundColor: colours.background, flex: 1, alignItems: 'center', justifyContent: 'center' }}><Spinner /></View>
+      );
+    }
+
+    console.log('renderFeedContent');
 
     const timestamp = new Date();
     console.log('Feed render:', timestamp.getTime());
@@ -457,6 +508,7 @@ class Feed extends Component {
               </DropdownView>
 
               <AnimatedFlatList
+                initialNumToRender={10}
                 data={this.dataSource}
                 renderItem={this.renderItem}
                 keyExtractor={item => `${item.id}${Math.random().toString()}`}
