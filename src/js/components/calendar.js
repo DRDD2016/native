@@ -75,12 +75,7 @@ class Calendar extends Component {
     this.dataSource = calendar;
   }
 
-  renderAlert = () => {
-    setTimeout(() => {
-      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
-    }, 2000);
-  }
-
+  
   renderItem = (item) => {
 
     const { event_id, host_user_id, status, name, what, where, when, cancelled, is_poll, host_firstname, host_photo_url, rsvps } = item.item;
@@ -160,6 +155,7 @@ class Calendar extends Component {
               !calendarIsFetching && this.dataSource &&
               <View style={styles.containerFeed}>
                 <FlatList
+                  initialNumToRender={10}
                   data={this.dataSource}
                   extraData={this.state}
                   renderItem={this.renderItem}

@@ -105,12 +105,7 @@ class Login extends Component {
 
   }
 
-  renderAlert = () => {
-    setTimeout(() => {
-      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
-    }, 2000);
-  }
-
+  
   render () {
 
     const { handleSubmit, handleSubmitForm, handleResetLogin, isConnected, isLoggingIn, serverError, navigation } = this.props;

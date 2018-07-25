@@ -68,6 +68,9 @@ platform :android do
     versionName = "1.0.#{versionCode}"
 
     gradle(
+      task: "clean"
+    )
+    gradle(
       task: "assemble",
       build_type: "Release",
       properties: {

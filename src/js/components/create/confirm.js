@@ -31,12 +31,7 @@ class Confirm extends Component {
     </View>
   });
 
-  renderAlert = () => {
-    setTimeout(() => {
-      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
-    }, 2000);
-  }
-
+  
   render () {
     const avatar = require('../../../img/avatar.png');
     console.log('confirm Props', this.props);

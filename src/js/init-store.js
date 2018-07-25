@@ -1,7 +1,7 @@
 import { AsyncStorage, Platform } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 // import { composeWithDevTools } from 'remote-redux-devtools';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import { createFilter } from 'redux-persist-transform-filter';
@@ -15,7 +15,7 @@ export function initStore (initialState) {
       rootReducer,
       initialState,
         compose(
-          applyMiddleware(thunkMiddleware, navMiddleware, logger),
+          applyMiddleware(thunkMiddleware, navMiddleware),
           autoRehydrate({ log: true })
         )
     );
@@ -29,6 +29,8 @@ export function initStore (initialState) {
     )
   );
 }
+
+
 export const store = initStore();
 // initialise store with previous app state
 

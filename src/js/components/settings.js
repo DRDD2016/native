@@ -103,11 +103,6 @@ class Settings extends Component {
     });
   }
 
-  renderAlert = () => {
-    setTimeout(() => {
-      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
-    }, 2000);
-  }
 
   render () {
 

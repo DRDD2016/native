@@ -1,7 +1,7 @@
 // import PropTypes from 'prop-types';
 /* eslint-disable*/
 import React, { Component } from 'react';
-import { View, Text, FlatList, Dimensions, Platform, Image } from 'react-native';
+import { InteractionManager, ActivityIndicator, View, Text, FlatList, Dimensions, Platform, Image } from 'react-native';
 import Fabric from 'react-native-fabric';
 import { Header } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -40,6 +40,10 @@ class Albums extends Component {
     </View>
   });
 
+  state = {
+    isReady : false
+  }
+
   componentWillMount () {
     console.log('albums compWillMount', this.props);
     const sortedData = this.props.filteredEvents.sort((a, b) => {
@@ -50,26 +54,64 @@ class Albums extends Component {
   }
 
   componentDidMount () {
+    console.log('albums DidMount');
     Answers.logCustom('Albums.js Mounted', { additionalData: 'nothing' });
+    // 1: Component is mounted off-screen
+    InteractionManager.runAfterInteractions(() => {
+      // 2: Component is done animating
+      // 3: Start fetching the team / or render the view
+      // this.props.dispatchTeamFetchStart();
+
+      console.log('albums Did Mount - interactions finished - expensive code starts');
+
+      // expensive code starting
+
+
+      // expensive code finished
+
+      console.log('albums Did Mount - expensive code finished');
+
+      this.setState({
+         isReady: true
+      })
+    });
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log('albums compWillReceiveNextprops', nextProps);
-    const sortedData = nextProps.filteredEvents.sort((a, b) => {
-      return a.when[0] > b.when[0];
+    console.log('albums WillReceiveProps');
+    this.setState({
+       isReady: false
+    })
+    // 1: Component is mounted off-screen
+    InteractionManager.runAfterInteractions(() => {
+      // 2: Component is done animating
+      // 3: Start fetching the team / or render the view
+      // this.props.dispatchTeamFetchStart();
+
+      console.log('albums Will Receive Props - interactions finished - expensive code starts');
+
+      // expensive code starting
+
+      console.log('albums compWillReceiveNextprops', nextProps);
+      const sortedData = nextProps.filteredEvents.sort((a, b) => {
+        return a.when[0] > b.when[0];
+      });
+      this.createDataSource(sortedData);
+
+
+      // expensive code finished
+
+      console.log('albums WillReceiveProps - expensive code finished');
+
+      this.setState({
+         isReady: true
+      })
     });
-    this.createDataSource(sortedData);
 
   }
 
   createDataSource (calendar) {
     this.dataSource = calendar;
-  }
-
-  renderAlert = () => {
-    setTimeout(() => {
-      this.props.alertWithType('error', 'No connection', 'You are not connected to Internet!');
-    }, 2000);
   }
 
   renderItem = (item) => {
@@ -89,6 +131,13 @@ class Albums extends Component {
   render () {
 
     console.log('renderAlbums');
+
+    if (!this.state.isReady) {
+      console.log('renderAlbumsActivityIndicator');
+      return <ActivityIndicator />;
+    }
+
+    console.log('renderAlbumsContent');
 
     const { allEvents, isFetching, displaySome, displayAll, filterActive, selectedFilter, user_id, isConnected } = this.props;
 
@@ -122,6 +171,7 @@ class Albums extends Component {
                 !isFetching && this.dataSource &&
                 <View style={styles.containerFeed}>
                 <FlatList
+                  initialNumToRender={10}
                   data={this.dataSource}
                   extraData={this.state}
                   renderItem={this.renderItem}

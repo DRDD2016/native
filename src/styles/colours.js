@@ -19,7 +19,7 @@ const colours = {
   next: '#8DC744',
   main: '#316AB3', // tabbar, card borders, etc
   transparent: 'transparent',
-  background: this.offWhite,
+  background: '#ffffff',
   modalBackground: 'rgba(52, 52, 52, 0.8)',
   headerButtonColor: '#939598',
   headerTitleColor: '#939598',
