@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Animated, Dimensions } from 'react-native';
-import styles from '../../../styles';
+import { View, Dimensions } from 'react-native';
+// import styles from '../../../styles';
+import GrowingView from './grow-view';
 
 export default class BarChart extends Component {
 
@@ -22,7 +23,9 @@ export default class BarChart extends Component {
 
 
   componentDidMount () {
-    this.handleAnimation();
+    // this.handleAnimation();
+
+    // move out Animated Bar into its own component
   }
 
   getWidth (data, maxTally) {
@@ -40,18 +43,24 @@ export default class BarChart extends Component {
 
     return width;
   }
-  handleAnimation () {
-    const width = this.getWidth(this.props.tallyData);
-    const timing = Animated.timing;
-
-    const indicators = ['poll1'];
-    Animated.parallel(indicators.map((item) => {
-      return timing(this.state[item], { toValue: width[item] });
-    })).start();
-  }
+  // handleAnimation () {
+  //   console.log('handleAnim');
+  //   const width = this.getWidth(this.props.tallyData);
+  //   console.log('handleAnim getWidth done');
+  //   const timing = Animated.timing;
+  //   console.log('handleAnim timing done');
+  //
+  //   const indicators = ['poll1'];
+  //   console.log('finsih indicators');
+  //   Animated.parallel(indicators.map((item) => {
+  //     return timing(this.state[item], { toValue: width[item] });
+  //   })).start();
+  //   console.log('finsih handleAnim');
+  // }
 
   render () {
     const { barWidth } = this.state;
+    console.log('barWidth', barWidth);
 
     return (
       <View
@@ -70,7 +79,7 @@ export default class BarChart extends Component {
               alignItems: 'center' }}
           >
             {barWidth &&
-              <Animated.View style={[styles.bar, { backgroundColor: this.props.chartColor }, { width: barWidth }]} />
+              <GrowingView barColor={this.props.chartColor} barWidth={barWidth} />
             }
           </View>
         </View>

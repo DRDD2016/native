@@ -77,7 +77,7 @@ export async function composeLinkToShare (user, event, code) {
       title,
       contentDescription: `${user.firstname} ${user.surname} has invited you to this event using Spark. Click this link to RSVP or download the app:`, // eslint-disable-line max-len
       contentImageUrl: user.photo_url,
-      contentIndexingMode: 'private' // for Spotlight indexing
+      locallyIndex: true // for Spotlight indexing
       // contentMetadata: {
       //   user,
       //   eventName: event.name,
@@ -86,7 +86,7 @@ export async function composeLinkToShare (user, event, code) {
     });
   }
 
-  bUO.userCompletedAction(RegisterViewEvent);
+  bUO.logEvent(RegisterViewEvent);
   console.log('Created Branch Universal Object and logged RegisterViewEvent.');
 
   let linkProperties = '';
@@ -169,6 +169,11 @@ export async function composeLinkToShare (user, event, code) {
     excludedActivityTypes: [
       'com.apple.UIKit.activity.PostToTwitter'
     ]
+  }).then(({ action, activityType }) => {
+    console.log('action', action);
+    if (action === Share.dismissedAction) console.log('Share dismissed', activityType);
+    else if (action === Share.sharedAction) console.log('Shared action', activityType);
+    else console.log('Share successful - other', activityType);
   });
 
   console.log('branchlink - shareInviteSuccess');

@@ -41,6 +41,9 @@ export default class SpinnerProvider extends Component {
       }
     };
 
+    console.log('errorModalVisible', errorModalVisible);
+
+
     console.log('isConfirmingEvent:', isConfirmingEvent);
     console.log('isEventConfirmed:', isEventConfirmed);
     console.log('finalChoices:', finalChoices);
@@ -117,7 +120,7 @@ export default class SpinnerProvider extends Component {
                 type="loading"
                 isConnected={isConnected}
                 onClose={ () => { }}
-                // additionalInfo={ `SP isLoading --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
+                additionalInfo={ `SP isLoading --- isFetchingBranch:${isFetchingBranch}, isReceivingFeed:${isReceivingFeed}, isFetchingFeed:${isFetchingFeed}, isFetchingEvent:${isFetchingEvent}, isLoading:${isLoading}, isConnected:${isConnected}, saveEventStatus:${saveEventStatus}`} // eslint-disable-line max-len
               />
             </View>
 

@@ -50,6 +50,8 @@ class Feed extends Component {
   constructor (props) {
     super(props);
 
+    // animated scrolling filterPanel
+
     const scrollAnim = new Animated.Value(0);
     const offsetAnim = new Animated.Value(0);
 
@@ -147,11 +149,35 @@ class Feed extends Component {
 
   componentWillReceiveProps (nextProps) {
 
+    console.log('feed WillReceiveProps:', nextProps);
 
-    console.log('feed WillReceiveProps');
     this.setState({
        isReady: false
     });
+
+    const { handleSubmitCode } = this.props;
+    const { eventCode, saveEventStatus } = nextProps;
+
+    console.log('saveEventStatus thisprops: ', this.props.saveEventStatus);
+
+    console.log('saveEventStatus Nextprops: ', saveEventStatus);
+
+    console.log('eventCode FeedNextProps:', eventCode);
+
+
+    if (eventCode) {
+      if (this.props.eventCode !== eventCode) {
+        if (eventCode !== 'none') {
+          console.log('submittingEventCode from Feed nextProps');
+          handleSubmitCode(eventCode);
+          // linkDatafromBranch(); // should we delay this until after submitCode has started?
+        }
+      }
+    }
+
+    console.log('this.props.eventCodeError: ', this.props.eventCodeError);
+
+    
     // 1: Component is mounted off-screen
     InteractionManager.runAfterInteractions(() => {
       // 2: Component is done animating
@@ -165,30 +191,6 @@ class Feed extends Component {
       console.log('Feed Receives NextProps');
       console.log('thisProps', this.props);
       console.log('NextProps', nextProps);
-      const timestamp = new Date();
-      console.log('Feed receivesProps:', timestamp.getTime());
-
-      const { handleSubmitCode } = this.props;
-      const { eventCode, saveEventStatus } = nextProps;
-
-      console.log('saveEventStatus thisprops: ', this.props.saveEventStatus);
-
-      console.log('saveEventStatus Nextprops: ', saveEventStatus);
-
-      console.log('eventCode FeedNextProps:', eventCode);
-
-
-      if (eventCode) {
-        if (this.props.eventCode !== eventCode) {
-          if (eventCode !== 'none') {
-            console.log('submittingEventCode from Feed nextProps');
-            handleSubmitCode(eventCode);
-            // linkDatafromBranch(); // should we delay this until after submitCode has started?
-          }
-        }
-      }
-
-      console.log('this.props.eventCodeError: ', this.props.eventCodeError);
 
 
       const { feed } = nextProps;
