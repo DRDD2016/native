@@ -1,6 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Feather';
 import colours from '../../../styles/colours';
 
 export default class OfflineIcon extends Component {
@@ -9,11 +9,14 @@ export default class OfflineIcon extends Component {
 
     return (
       <Icon
-        name="wifi"
-        style={{ textDecorationColor: colours.headerButtonColor, textDecorationLine: 'line-through', paddingLeft: 5, paddingRight: 5 }}
+        name="cloud-off" // Feather
+        style={{ paddingLeft: 5, paddingRight: 5 }}
         size={ 20 }
         color={ colours.headerButtonColor }
       />
     );
   }
 }
+
+// name="signal" // entypo
+// style={{ textDecorationColor: colours.headerButtonColor, textDecorationLine: 'line-through', paddingLeft: 5, paddingRight: 5 }}

@@ -16,6 +16,7 @@ import colours from '../../styles/colours';
 // import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
+import OfflineIcon from './common/offline-icon';
 
 const { Answers } = Fabric;
 const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 0.8;
@@ -23,11 +24,24 @@ const logo = require('../../img/sparkLoginLogo.png');
 
 class Albums extends Component {
 
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = ({ navigation, isConnected }) => ({
     tabBarIcon: ({ tintColor }) =>
       <Icon name="photo" size={32} color={tintColor} />,
     headerLeft: <ButtonHeader />,
-    headerRight: <ButtonHeader
+    headerRight: !isConnected ? <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <View
+        style={{ flexDirection: 'column', alignItems: 'center' }}
+      >
+        <OfflineIcon />
+        <Text style={{ color: colours.headerButtonColor, fontSize: 10 }}>offline</Text>
+      </View>
+      <ButtonHeader
+        onPress={() => navigation.openDrawer()}
+      >
+        <BurgerIcon />
+      </ButtonHeader>
+    </View>
+    : <ButtonHeader
       onPress={() => navigation.openDrawer()}
     >
       <BurgerIcon />

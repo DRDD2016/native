@@ -123,7 +123,9 @@ class FeedItem extends PureComponent {
 
             </View>
 
-            <View style={{ flex: 1.5, flexDirection: 'column', borderLeftColor: colours.lightgray, borderLeftWidth: 0.5 }}>
+            <View
+              style={{ opacity: !viewed ? 1 : 0.6, flex: 1.5, flexDirection: 'column', borderLeftColor: colours.lightgray, borderLeftWidth: 0.5 }}
+            >
               <View style={[{ flex: 1, justifyContent: 'space-around' }, unConfirmedItem && styles.unConfirmedItemStyle]}>
 
                 <View style={{ flexDirection: 'row', marginBottom: 5, alignItems: 'center' }}>
