@@ -169,15 +169,24 @@ export async function composeLinkToShare (user, event, code) {
     excludedActivityTypes: [
       'com.apple.UIKit.activity.PostToTwitter'
     ]
-  }).then(({ action, activityType }) => {
-    console.log('action', action);
-    if (action === Share.dismissedAction) console.log('Share dismissed', activityType);
-    else if (action === Share.sharedAction) console.log('Shared action', activityType);
-    else console.log('Share successful - other', activityType);
-  });
+  }).then((result) => {
+    console.log(result);
+    console.log('branchlink - shareInviteSuccess');
+    store.dispatch(shareInviteSuccess());
+    Answers.logCustom('App shared', { additionalData: result });
+  })
+  .catch(err => console.log(err));
 
-  console.log('branchlink - shareInviteSuccess');
-  store.dispatch(shareInviteSuccess());
+  // .then(({ action, activityType }) => {
+  //   console.log('action', action);
+  //   if (action === Share.dismissedAction) console.log('Share dismissed', activityType);
+  //   else if (action === Share.sharedAction) console.log('Shared action', activityType);
+  //   else console.log('Share successful - other', activityType);
+  // });
+
+  // .then(result => console.log(result))
+  // .catch(err => console.log(err))
+
 
   if (event === undefined) {
     Answers.logCustom('App shared', { additionalData: url });
