@@ -10,9 +10,9 @@ export default class OfflineIcon extends Component {
     return (
       <Icon
         name="wifi"
-        style={{ textDecorationLine: 'line-through', paddingLeft: 15, paddingRight: 15 }}
+        style={{ textDecorationColor: colours.headerButtonColor, textDecorationLine: 'line-through', paddingLeft: 5, paddingRight: 5 }}
         size={ 20 }
-        color={ colours.gray }
+        color={ colours.headerButtonColor }
       />
     );
   }

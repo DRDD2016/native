@@ -29,7 +29,12 @@ class Calendar extends Component {
   static navigationOptions = ({ navigation, isConnected }) => ({
     headerLeft: <ButtonHeader />,
     headerRight: !isConnected ? <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      <View style={{ flexDirection: 'column', alignItems: 'center' }}><OfflineIcon /><Text style={{ fontSize: 10 }}>offline</Text></View>
+      <View
+        style={{ flexDirection: 'column', alignItems: 'center' }}
+      >
+        <OfflineIcon />
+        <Text style={{ color: colours.headerButtonColor, fontSize: 10 }}>offline</Text>
+      </View>
       <ButtonHeader
         onPress={() => navigation.openDrawer()}
       >
@@ -257,7 +262,7 @@ class Calendar extends Component {
     });
 
 
-    const { allEvents, calendarIsFetching, displaySome, displayAll, filterActive, selectedFilter, isConnected } = this.props;
+    const { allEvents, calendarIsFetching, displaySome, displayAll, filterActive, selectedFilter } = this.props;
 
     Answers.logCustom('Calendar.js render'); // eslint-disable-line max-len
 
@@ -302,7 +307,6 @@ class Calendar extends Component {
                       selectedFilter={ selectedFilter }
                     />
                   }
-                  { !isConnected && <View><Text>offline</Text></View> }
 
                 </DropdownView>
 

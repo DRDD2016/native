@@ -14,6 +14,7 @@ import colours from '../../styles/colours';
 import DropdownView from './common/DropdownView';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
+import OfflineIcon from './common/offline-icon';
 import { store } from '../init-store';
 import { getFeedFailure } from '../actions/feed';
 import WhatsNew, { app_updateNo } from './onboarding/whatsnew';
@@ -32,9 +33,22 @@ const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 class Feed extends Component {
 
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = ({ navigation, isConnected }) => ({
     headerLeft: <ButtonHeader />,
-    headerRight: <ButtonHeader
+    headerRight: !isConnected ? <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <View
+        style={{ flexDirection: 'column', alignItems: 'center' }}
+      >
+        <OfflineIcon />
+        <Text style={{ color: colours.headerButtonColor, fontSize: 10 }}>offline</Text>
+      </View>
+      <ButtonHeader
+        onPress={() => navigation.openDrawer()}
+      >
+        <BurgerIcon />
+      </ButtonHeader>
+    </View>
+    : <ButtonHeader
       onPress={() => navigation.openDrawer()}
     >
       <BurgerIcon />
@@ -177,7 +191,7 @@ class Feed extends Component {
 
     console.log('this.props.eventCodeError: ', this.props.eventCodeError);
 
-    
+
     // 1: Component is mounted off-screen
     InteractionManager.runAfterInteractions(() => {
       // 2: Component is done animating
