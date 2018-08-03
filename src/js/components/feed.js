@@ -14,7 +14,7 @@ import colours from '../../styles/colours';
 import DropdownView from './common/DropdownView';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
-import OfflineIcon from './common/offline-icon';
+import OfflineIconContainer from '../containers/common/OfflineIconContainer';
 import { store } from '../init-store';
 import { getFeedFailure } from '../actions/feed';
 import WhatsNew, { app_updateNo } from './onboarding/whatsnew';
@@ -33,26 +33,18 @@ const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 class Feed extends Component {
 
-  static navigationOptions = ({ navigation, isConnected }) => ({
+  static navigationOptions = ({ navigation }) => ({
+
     headerLeft: <ButtonHeader />,
-    headerRight: !isConnected ? <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      <View
-        style={{ flexDirection: 'column', alignItems: 'center' }}
-      >
-        <OfflineIcon />
-        <Text style={{ color: colours.headerButtonColor, fontSize: 10 }}>offline</Text>
-      </View>
+    headerRight: <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+      <OfflineIconContainer />
       <ButtonHeader
         onPress={() => navigation.openDrawer()}
       >
         <BurgerIcon />
       </ButtonHeader>
-    </View>
-    : <ButtonHeader
-      onPress={() => navigation.openDrawer()}
-    >
-      <BurgerIcon />
-    </ButtonHeader>,
+    </View>,
     headerStyle: { backgroundColor: colours.headerBackgroundColor },
     headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
@@ -91,6 +83,7 @@ class Feed extends Component {
   componentWillMount () {
 
     const { handleSubmitCode, eventCode, haveFeedRequest, onAppLoad, user_openNo } = this.props;
+
 
     onAppLoad(user_openNo);
 
@@ -163,14 +156,16 @@ class Feed extends Component {
 
   componentWillReceiveProps (nextProps) {
 
+    const { handleSubmitCode } = this.props;
+    const { eventCode, saveEventStatus } = nextProps;
+
+
     console.log('feed WillReceiveProps:', nextProps);
 
     this.setState({
        isReady: false
     });
 
-    const { handleSubmitCode } = this.props;
-    const { eventCode, saveEventStatus } = nextProps;
 
     console.log('saveEventStatus thisprops: ', this.props.saveEventStatus);
 

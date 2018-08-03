@@ -12,7 +12,7 @@ import colours from '../../styles/colours';
 // import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
-import OfflineIcon from './common/offline-icon';
+import OfflineIconContainer from '../containers/common/OfflineIconContainer';
 
 const { Answers } = Fabric;
 const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 0.8;
@@ -20,26 +20,17 @@ const logo = require('../../img/sparkLoginLogo.png');
 
 class Profile extends Component {
 
-  static navigationOptions = ({ navigation, isConnected }) => ({
+  static navigationOptions = ({ navigation }) => ({
     headerLeft: <ButtonHeader />,
-    headerRight: !isConnected ? <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      <View
-        style={{ flexDirection: 'column', alignItems: 'center' }}
-      >
-        <OfflineIcon />
-        <Text style={{ color: colours.headerButtonColor, fontSize: 10 }}>offline</Text>
-      </View>
+    headerRight: <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+      <OfflineIconContainer />
       <ButtonHeader
         onPress={() => navigation.openDrawer()}
       >
         <BurgerIcon />
       </ButtonHeader>
-    </View>
-    : <ButtonHeader
-      onPress={() => navigation.openDrawer()}
-    >
-      <BurgerIcon />
-    </ButtonHeader>,
+    </View>,
     headerStyle: { backgroundColor: colours.headerBackgroundColor },
     headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,

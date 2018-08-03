@@ -1,4 +1,4 @@
-import { Dimensions, Platform } from 'react-native';
+import { Dimensions, Platform, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 import colours from './colours';
 import { scale, moderateScale } from './scaling';
@@ -20,24 +20,43 @@ export const BarButton = styled.TouchableOpacity`
   elevation: 1;
 `;
 
-export const ConfirmButton = styled.TouchableOpacity`
-  width: 350;
-  justifyContent: center;
-  alignItems: center;
-  backgroundColor: ${colours.confirm};
-  borderColor: ${colours.confirm};
-  borderWidth: 1;
-  borderRadius: 5;
-  paddingVertical: 8;
-  paddingHorizontal: 10;
-  marginHorizontal: 20;
-  height: 50;
-  elevation: 1;
-  shadowOpacity: 0.8;
-  shadowRadius: 2;
-  shadowColor: ${colours.gray};
-  shadowOffset: { width: 0, height: 2 };
-`; // confirmButton
+// export const ConfirmButton = styled.TouchableOpacity`
+//   width: 350;
+//   justifyContent: center;
+//   alignItems: center;
+//   backgroundColor: ${colours.confirm};
+//   borderColor: ${colours.confirm};
+//   borderWidth: 1;
+//   borderRadius: 5;
+//   paddingVertical: 8;
+//   paddingHorizontal: 10;
+//   marginHorizontal: 20;
+//   height: 50;
+//   elevation: 1;
+//   shadowOpacity: 0.8;
+//   shadowRadius: 2;
+//   shadowColor: ${colours.gray};
+//   shadowOffset: { width: 0, height: 0 };
+// `; // confirmButton
+
+export const ConfirmButton = styled(TouchableOpacity)({
+  width: 350,
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: colours.confirm,
+  borderColor: colours.confirm,
+  borderWidth: 1,
+  borderRadius: 5,
+  paddingVertical: 8,
+  paddingHorizontal: 10,
+  marginHorizontal: 20,
+  height: 50,
+  elevation: 1,
+  shadowOpacity: 0.8,
+  shadowRadius: 2,
+  shadowColor: colours.gray,
+  shadowOffset: { width: 0, height: 2 }
+}); // confirmButton
 
 
 export const SignupButton = ConfirmButton.extend`

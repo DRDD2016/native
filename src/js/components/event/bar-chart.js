@@ -22,12 +22,6 @@ export default class BarChart extends Component {
   */
 
 
-  componentDidMount () {
-    // this.handleAnimation();
-
-    // move out Animated Bar into its own component
-  }
-
   getWidth (data, maxTally) {
     const deviceWidth = Dimensions.get('window').width;
     const maxWidth = deviceWidth / 4;
@@ -60,6 +54,8 @@ export default class BarChart extends Component {
 
   render () {
     const { barWidth } = this.state;
+    const { chartColor } = this.props;
+
     console.log('barWidth', barWidth);
 
     return (
@@ -79,7 +75,7 @@ export default class BarChart extends Component {
               alignItems: 'center' }}
           >
             {barWidth &&
-              <GrowingView barColor={this.props.chartColor} barWidth={barWidth} />
+              <GrowingView barColor={chartColor} barWidth={barWidth} />
             }
           </View>
         </View>

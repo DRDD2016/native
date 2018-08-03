@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Animated } from 'react-native';
-import styles from '../../../styles';
+import { bar } from '../../../styles';
 
 export default class GrowingView extends Component {
 
@@ -26,11 +26,10 @@ export default class GrowingView extends Component {
   render () {
     const { barColor } = this.props;
 
-
     return (
 
       <Animated.View
-        style={[styles.bar,
+        style={[bar,
         { backgroundColor: barColor, width: this._barWidth }
 
       ]} />
