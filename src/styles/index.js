@@ -6,6 +6,11 @@ import { scale, moderateScale } from './scaling';
 
 // Buttons
 
+export const Statusbar = styled.StatusBar`
+  backgroundColor: ${colours.main};
+
+`;
+
 export const Button = styled.TouchableOpacity`
   paddingTop: 4;
   paddingBottom: 4;

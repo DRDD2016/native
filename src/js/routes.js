@@ -118,7 +118,7 @@ export const AppNavigator = createStackNavigator({
         }, {
           // swipeEnabled: false,
           // lazy: true, // added to attempt to stop Code loading until Feed has initialised.
-          animationEnabled: true,
+          // animationEnabled: true,
           // pressColor: colours.purple,
           initialRouteName: 'Feed',
           tabBarOptions: {
