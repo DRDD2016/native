@@ -1,10 +1,11 @@
 import React from 'react';
-import { Image, Text, View, Platform } from 'react-native';
+import { Image, Text, View, Platform, StatusBar } from 'react-native';
 import { ConfirmButton, ConfirmButtonText } from '../../../styles';
 import Header from '../common/Header';
 import colours from '../../../styles/colours';
 
 const logo = require('../../../img/sparkLoginLogo.png');
+
 
 Index.navigationOptions = () => {
   return {
@@ -24,7 +25,12 @@ export default function Index ({ navigation }) {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={colours.where}
+      />
       <Header style={{ top: Platform.OS === 'ios' ? -25 : -30 }} />
+
       <View style={{ flex: 0.2 }} />
       <View style={{ justifyContent: 'center', alignItems: 'center', flex: 0.2 }}>
         <Image style={{ height: 100, width: 300 }} source={ logo } />

@@ -14,7 +14,7 @@ export default function Header (props) {
       }, props.style]}
     >
       <ImageBackground
-        style={{ height: Platform.OS === 'ios' ? 150 : 190, width: Dimensions.get('window').width * 1 }}
+        style={{ height: Platform.OS === 'ios' ? 190 : 190, width: Dimensions.get('window').width * 1 }}
         source={require('../../../img/AppBannerDiagBottom.png')}
       >
         <View

@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import Config from 'react-native-config';
 import React, { Component } from 'react';
-import { StatusBar, View, Text, Dimensions, Platform } from 'react-native';
+import { StatusBar, View, Text, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -14,7 +14,7 @@ import HeaderBack from '../common/CreateHeaderBackground';
 import styles, { HeaderText, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
 
-const windowSize = Dimensions.get('window');
+// const windowSize = Dimensions.get('window');
 
 export default class Where extends Component {
 
@@ -99,6 +99,7 @@ export default class Where extends Component {
           key={ inputKey }
           style={{
             flexDirection: 'row',
+            flex: 1,
             marginTop: !this.state.inputFocussed ? 10 : null,
             paddingHorizontal: !this.state.inputFocussed ? 10 : null // #fff
             // zIndex: 999999
@@ -155,30 +156,63 @@ export default class Where extends Component {
               language: 'en'
             }}
             getDefaultValue={() => value }
+            renderLeftButton={() => {
+              return (
+                inputKey === this.state.inputKeyFocussed && this.state.inputFocussed &&
+                <View style={{ marginLeft: 5 }}><Icon
+                  name="search"
+                  size={18}
+                  color={colours.verylightgray}
+                  style={{ }}
+                  onPress={{}}
+                /></View>
+              );
+            }}
+            renderRightButton={() => {
+
+              return (
+                inputKey === this.state.inputKeyFocussed && this.state.inputFocussed &&
+                <View style={{ marginRight: 5 }}><Icon
+                  name="chevron-down"
+                  size={18}
+                  color={colours.verylightgray}
+                  style={{ }}
+                  onPress={() => {
+                    this.setState({ inputKeyFocussed: -1, inputFocussed: false });
+                    // check IOS inputFocussed not causing bugs
+                  }}
+                /></View>
+              );
+            }}
             styles={{
               container: {
-                flex: !this.state.inputFocussed ? 10 : null,
-                width: this.state.inputFocussed ? windowSize.width : null
-                // borderRadius: 5
-                // borderColor: colours.where
+                flex: !this.state.inputFocussed ? 10 : 1,
+                borderRadius: 5
+                // borderColor: 'yellow',
                 // borderWidth: 1
                 // backgroundColor: 'purple' // '#fff'
                 // zIndex: 999999
               },
               textInputContainer: {
                 backgroundColor: inputKey === this.state.inputKeyFocussed && this.state.inputFocussed ? colours.where : colours.white,
-                height: 42,
+                flex: this.state.listViewDisplayed ? null : 1,
+                height: 44,
                 alignItems: 'center',
-                borderRadius: 5,
-                borderColor: colours.where,
-                borderWidth: 1,
-                maxWidth: !this.state.inputFocussed ? windowSize.width - (windowSize.width / 5) : null
+                borderRadius: 7,
+                borderTopColor: 'transparent', // remove default styling
+                borderTopWidth: 0, // remove default styling
+                borderBottomColor: 'transparent', // remove default styling
+                borderBottomWidth: 0 // remove default styling
+                // maxWidth: !this.state.inputFocussed ? windowSize.width - (windowSize.width / 4) : null
               },
               textInput: {
                 height: 34,
                 marginTop: 4,
                 marginBottom: 4,
-                flex: 1
+                flex: 1,
+                borderColor: inputKey === this.state.inputKeyFocussed && this.state.inputFocussed ? colours.where : colours.where,
+                borderWidth: 1,
+                borderRadius: inputKey === this.state.inputKeyFocussed && this.state.inputFocussed ? 10 : 5
               },
               listView: {
                 // height: deviceHeight,
@@ -187,12 +221,13 @@ export default class Where extends Component {
                 // right: 5,
                 // top: 10, // 40
                 backgroundColor: colours.verylightgray
+                // flex: 1
               }
             }}
             nearbyPlacesAPI="GooglePlacesSearch"
             filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
           />
-          { inputKey !== 0 &&
+          { inputKey !== 0 && inputKey !== this.state.inputKeyFocussed && !this.state.inputFocussed &&
             <View
               style={{ flexDirection: 'row', alignItems: 'center', flex: 1, paddingLeft: 5 }}
             >
@@ -207,7 +242,7 @@ export default class Where extends Component {
               </View>
             </View>
           }
-          { inputKey === 0 &&
+          { inputKey === 0 && inputKey !== this.state.inputKeyFocussed && !this.state.inputFocussed &&
             <View
               style={{ flex: 1, paddingLeft: 5, justifyContent: 'center' }}
             />
