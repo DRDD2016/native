@@ -10,6 +10,7 @@ const mapStateToProps = ({ create }) => ({
 const mapDispatchToProps = dispatch => ({
 
   handleChange: (text, inputKey) => {
+    console.log(`handleChange: text:${text} inputKey: ${inputKey}`);
     dispatch(setWhere(text, inputKey));
   },
 
@@ -17,8 +18,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(addInput(nextInputKey, 'where'));
   },
 
-  removeInput: (lastInputKey) => {
-    dispatch(removeInput(lastInputKey, 'where'));
+  removeInput: (inputKey) => {
+    dispatch(removeInput(inputKey, 'where'));
   },
 
   discardEvent: () => {
