@@ -57,7 +57,7 @@ class CalendarItem extends PureComponent {
     }
 
     return (
-      <View>
+      <View style={{ backgroundColor: colours.background }}>
         <CardSection style={{ justifyContent: 'flex-start' }}>
           <TouchableOpacity
             style={{

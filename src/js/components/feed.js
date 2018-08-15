@@ -14,6 +14,7 @@ import colours from '../../styles/colours';
 import DropdownView from './common/DropdownView';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
+import OfflineIconContainer from '../containers/common/OfflineIconContainer';
 import { store } from '../init-store';
 import { getFeedFailure } from '../actions/feed';
 import WhatsNew, { app_updateNo } from './onboarding/whatsnew';
@@ -33,12 +34,17 @@ const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 class Feed extends Component {
 
   static navigationOptions = ({ navigation }) => ({
+
     headerLeft: <ButtonHeader />,
-    headerRight: <ButtonHeader
-      onPress={() => navigation.openDrawer()}
-    >
-      <BurgerIcon />
-    </ButtonHeader>,
+    headerRight: <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+      <OfflineIconContainer />
+      <ButtonHeader
+        onPress={() => navigation.openDrawer()}
+      >
+        <BurgerIcon />
+      </ButtonHeader>
+    </View>,
     headerStyle: { backgroundColor: colours.headerBackgroundColor },
     headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
@@ -49,6 +55,8 @@ class Feed extends Component {
 
   constructor (props) {
     super(props);
+
+    // animated scrolling filterPanel
 
     const scrollAnim = new Animated.Value(0);
     const offsetAnim = new Animated.Value(0);
@@ -75,6 +83,7 @@ class Feed extends Component {
   componentWillMount () {
 
     const { handleSubmitCode, eventCode, haveFeedRequest, onAppLoad, user_openNo } = this.props;
+
 
     onAppLoad(user_openNo);
 
@@ -147,11 +156,37 @@ class Feed extends Component {
 
   componentWillReceiveProps (nextProps) {
 
+    const { handleSubmitCode } = this.props;
+    const { eventCode, saveEventStatus } = nextProps;
 
-    console.log('feed WillReceiveProps');
+
+    console.log('feed WillReceiveProps:', nextProps);
+
     this.setState({
        isReady: false
     });
+
+
+    console.log('saveEventStatus thisprops: ', this.props.saveEventStatus);
+
+    console.log('saveEventStatus Nextprops: ', saveEventStatus);
+
+    console.log('eventCode FeedNextProps:', eventCode);
+
+
+    if (eventCode) {
+      if (this.props.eventCode !== eventCode) {
+        if (eventCode !== 'none') {
+          console.log('submittingEventCode from Feed nextProps');
+          handleSubmitCode(eventCode);
+          // linkDatafromBranch(); // should we delay this until after submitCode has started?
+        }
+      }
+    }
+
+    console.log('this.props.eventCodeError: ', this.props.eventCodeError);
+
+
     // 1: Component is mounted off-screen
     InteractionManager.runAfterInteractions(() => {
       // 2: Component is done animating
@@ -165,30 +200,6 @@ class Feed extends Component {
       console.log('Feed Receives NextProps');
       console.log('thisProps', this.props);
       console.log('NextProps', nextProps);
-      const timestamp = new Date();
-      console.log('Feed receivesProps:', timestamp.getTime());
-
-      const { handleSubmitCode } = this.props;
-      const { eventCode, saveEventStatus } = nextProps;
-
-      console.log('saveEventStatus thisprops: ', this.props.saveEventStatus);
-
-      console.log('saveEventStatus Nextprops: ', saveEventStatus);
-
-      console.log('eventCode FeedNextProps:', eventCode);
-
-
-      if (eventCode) {
-        if (this.props.eventCode !== eventCode) {
-          if (eventCode !== 'none') {
-            console.log('submittingEventCode from Feed nextProps');
-            handleSubmitCode(eventCode);
-            // linkDatafromBranch(); // should we delay this until after submitCode has started?
-          }
-        }
-      }
-
-      console.log('this.props.eventCodeError: ', this.props.eventCodeError);
 
 
       const { feed } = nextProps;

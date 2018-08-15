@@ -16,6 +16,8 @@ import colours from '../../styles/colours';
 // import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
+import OfflineIconContainer from '../containers/common/OfflineIconContainer';
+
 
 const { Answers } = Fabric;
 const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 0.8;
@@ -27,11 +29,15 @@ class Albums extends Component {
     tabBarIcon: ({ tintColor }) =>
       <Icon name="photo" size={32} color={tintColor} />,
     headerLeft: <ButtonHeader />,
-    headerRight: <ButtonHeader
-      onPress={() => navigation.openDrawer()}
-    >
-      <BurgerIcon />
-    </ButtonHeader>,
+    headerRight: <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+      <OfflineIconContainer />
+      <ButtonHeader
+        onPress={() => navigation.openDrawer()}
+      >
+        <BurgerIcon />
+      </ButtonHeader>
+    </View>,
     headerStyle: { backgroundColor: colours.headerBackgroundColor },
     headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,

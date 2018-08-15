@@ -105,13 +105,14 @@ class Login extends Component {
 
   }
 
-  
+
   render () {
 
     const { handleSubmit, handleSubmitForm, handleResetLogin, isConnected, isLoggingIn, serverError, navigation } = this.props;
 
     return (
       <View style={{ flex: 1 }}>
+
 
         <View
           style={{
@@ -124,6 +125,7 @@ class Login extends Component {
             style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 70 : 40 }}
             behavior="padding"
           >
+
             <View />
             <HeaderBack />
 

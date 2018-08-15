@@ -6,6 +6,11 @@ import { scale, moderateScale } from './scaling';
 
 // Buttons
 
+export const Statusbar = styled.StatusBar`
+  backgroundColor: ${colours.main};
+
+`;
+
 export const Button = styled.TouchableOpacity`
   paddingTop: 4;
   paddingBottom: 4;
@@ -13,11 +18,13 @@ export const Button = styled.TouchableOpacity`
   paddingRight: 15;
   borderRadius: 3;
   elevation: 1;
+  box-shadow: 2px 2px 2px ${colours.gray};
 
 `;
 
 export const BarButton = styled.TouchableOpacity`
   elevation: 1;
+  box-shadow: 2px 2px 2px ${colours.gray};
 `;
 
 export const ConfirmButton = styled.TouchableOpacity`
@@ -33,11 +40,32 @@ export const ConfirmButton = styled.TouchableOpacity`
   marginHorizontal: 20;
   height: 50;
   elevation: 1;
-  shadowOpacity: 0.8;
-  shadowRadius: 2;
-  shadowColor: ${colours.gray};
-  shadowOffset: { width: 0, height: 2 };
+  box-shadow: 2px 2px 2px ${colours.gray};
 `; // confirmButton
+
+// shadowOpacity: 0.8;
+// shadowRadius: 8;
+// shadowColor: ${colours.red};
+// shadow-offset: { width: -8, height: -8 };
+
+// export const ConfirmButton = styled(TouchableOpacity)({
+//   width: 350,
+//   justifyContent: 'center',
+//   alignItems: 'center',
+//   backgroundColor: colours.confirm,
+//   borderColor: colours.confirm,
+//   borderWidth: 1,
+//   borderRadius: 5,
+//   paddingVertical: 8,
+//   paddingHorizontal: 10,
+//   marginHorizontal: 20,
+//   height: 50,
+//   elevation: 1,
+//   shadowOpacity: 0.8,
+//   shadowRadius: 1,
+//   shadowColor: colours.gray,
+//   shadowOffset: { width: -8, height: 8 }
+// }); // confirmButton
 
 
 export const SignupButton = ConfirmButton.extend`
@@ -57,6 +85,7 @@ export const InviteSmallButton = styled.TouchableOpacity`
   marginHorizontal: 20;
   height: 50;
   elevation: 1;
+  box-shadow: 2px 2px 2px ${colours.gray};
 `;
 
 export const ConfirmButtonText = styled.Text`
@@ -74,12 +103,13 @@ export const AddButton = styled.TouchableOpacity.attrs({
   borderColor: ${props => props.color};
   borderWidth: 1;
   borderRadius: 30;
-  elevation: 1;
   marginTop: 0;
   marginHorizontal: 10;
   maxHeight: 60;
   width: 50;
   height: 50;
+  elevation: 1;
+  box-shadow: 2px 2px 2px ${colours.gray};
 `;
 
 
@@ -102,6 +132,7 @@ export const RSVPButton = styled.TouchableOpacity`
   marginHorizontal: 5;
   borderRadius: 3;
   elevation: 1;
+  box-shadow: 2px 2px 2px ${colours.gray};
 `; // RSVPButton
 
 export const RSVPButtonText = styled.Text`

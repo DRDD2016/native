@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
-import { saveEvent, clearCreateEvent } from '../../actions/create';
+import { saveEvent, clearCreateEvent, shareInviteRequest } from '../../actions/create';
 import Confirm from '../../components/create/confirm';
 import mapToISOString from '../../lib/map-to-iso-string';
 import { store } from '../../init-store';
@@ -23,6 +23,7 @@ const mapStateToProps = ({ nav, create, network, user }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleOnPress: (navigation) => {
+      dispatch(shareInviteRequest());
       console.log('handleOnPress storecreate: ', store.getState().create);
       const event = store.getState().create;
 

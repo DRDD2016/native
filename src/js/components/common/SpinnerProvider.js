@@ -41,6 +41,9 @@ export default class SpinnerProvider extends Component {
       }
     };
 
+    console.log('errorModalVisible', errorModalVisible);
+
+
     console.log('isConfirmingEvent:', isConfirmingEvent);
     console.log('isEventConfirmed:', isEventConfirmed);
     console.log('finalChoices:', finalChoices);
