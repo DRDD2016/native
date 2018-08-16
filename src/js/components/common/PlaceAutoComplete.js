@@ -164,14 +164,16 @@ export default class PlaceAutoComplete extends Component {
             },
             textInputContainer: {
               backgroundColor: inputFocussed ? colours.where : colours.white,
+              maxHeight: 44,
               flex: this.state.listViewDisplayed ? null : 1,
-              // height: 44,
               alignItems: 'center',
               borderRadius: 7,
               borderTopColor: 'transparent', // remove default styling
               borderTopWidth: 0, // remove default styling
               borderBottomColor: 'transparent', // remove default styling
-              borderBottomWidth: 0 // remove default styling
+              borderBottomWidth: 0 // remove default styling,
+              // borderColor: 'red',
+              // borderWidth: 2
               // maxWidth: !this.state.inputFocussed ? windowSize.width - (windowSize.width / 4) : null
             },
             textInput: {

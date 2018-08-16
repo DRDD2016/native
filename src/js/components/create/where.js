@@ -91,23 +91,9 @@ export default class Where extends Component {
   render () {
     const { data, name, addInput, removeInput } = this.props;
     const inputs = data.map((value, inputKey) => {
-      // console.log('data: ', data);
-      // console.log('name: ', name);
+
       console.log('where map inputKey: ', inputKey);
       console.log(`value for ${inputKey}: `, value);
-      // console.log('this.state.inputFocussed: ', this.state.inputFocussed);
-      // console.log('this.state.inputKeyFocussed: ', this.state.inputKeyFocussed);
-      // console.log('this.state.listViewDisplayed: ', this.state.listViewDisplayed);
-
-      // if (this.state.inputFocussed !== false && inputKey !== this.state.inputKeyFocussed && this.state.inputKeyFocussed !== '') {
-      //   // console.log('inputsNOTFocussed');
-      //   return (
-      //     <View
-      //       accessibilityLabel={`Where option ${inputKey + 1}`}
-      //       key={ inputKey }
-      //     />
-      //   );
-      // }
 
       if (this.state.inputFocussed && this.state.inputKeyFocussed !== inputKey) {
         return null;
@@ -144,116 +130,6 @@ export default class Where extends Component {
               inputKeyFocussed={this.state.inputKeyFocussed}
               inputFocussed={this.state.inputFocussed}
               handleChange={(place, i) => this.props.handleChange(place, i)}
-              // ref={ (googlePlaces) => {
-              //   this.googlePlaces = googlePlaces;
-              // }}
-              // listViewDisplayed={this.state.inputFocussed && this.state.inputKeyFocussed === inputKey}
-              // textInputProps={{
-              //   returnKeyType: 'done',
-              //   underlineColorAndroid: 'white',
-              //   onKeyPress: (e) => { // IOS only
-              //     if (e.nativeEvent.key === 'Enter') {
-              //       this.setState({ inputFocussed: false, inputKeyFocussed: -1 });
-              //     }
-              //   },
-              //   onChangeText: (text) => {
-              //     this.checkForData();
-              //     this.props.handleChange(text, inputKey);
-              //   },
-              //   onFocus: () => {
-              //     this.setState({ inputFocussed: true, inputKeyFocussed: inputKey });
-              //   },
-              //   onSubmitEditing: () => {
-              //     // when IOS return key is pressed
-              //     this.setState({ inputKeyFocussed: -1, inputFocussed: false }); // check IOS inputFocussed not causing bugs
-              //   },
-              //   onEndEditing: () => {
-              //     // when textinput loses focus, NOT when item in list is clicked
-              //
-              //     console.log('onEndEditing: ');
-              //     if (Platform === 'IOS') {
-              //       this.setState({ inputFocussed: false, inputKeyFocussed: -1 });
-              //     }
-              //
-              //   }
-              // }}
-              // onPress={(searchData, details, index = inputKey) => this.onPlaceSearch(searchData, details, index)}
-              // query={{
-              //   types: ['establishment', 'geocode'],
-              //   key: Config.GOOGLE_PLACES_API_KEY,
-              //   language: 'en'
-              // }}
-              // getDefaultValue={() => value }
-              // renderLeftButton={() => {
-              //   return (
-              //     inputKey === this.state.inputKeyFocussed && this.state.inputFocussed &&
-              //     <View style={{ marginLeft: 5 }}><Icon
-              //       name="search"
-              //       size={18}
-              //       color={colours.verylightgray}
-              //       style={{ }}
-              //       onPress={{}}
-              //     /></View>
-              //   );
-              // }}
-              // renderRightButton={() => {
-              //
-              //   return (
-              //     inputKey === this.state.inputKeyFocussed && this.state.inputFocussed &&
-              //     <View style={{ marginRight: 5 }}><Icon
-              //       name="chevron-down"
-              //       size={18}
-              //       color={colours.verylightgray}
-              //       style={{ }}
-              //       onPress={() => {
-              //         this.setState({ inputKeyFocussed: -1, inputFocussed: false });
-              //         // check IOS inputFocussed not causing bugs
-              //       }}
-              //     /></View>
-              //   );
-              // }}
-              // styles={{
-              //   container: {
-              //     flex: !this.state.inputFocussed ? 10 : 1,
-              //     borderRadius: 5
-              //     // borderColor: 'yellow',
-              //     // borderWidth: 1
-              //     // backgroundColor: 'purple' // '#fff'
-              //     // zIndex: 999999
-              //   },
-              //   textInputContainer: {
-              //     backgroundColor: inputKey === this.state.inputKeyFocussed && this.state.inputFocussed ? colours.where : colours.white,
-              //     flex: this.state.listViewDisplayed ? null : 1,
-              //     height: 44,
-              //     alignItems: 'center',
-              //     borderRadius: 7,
-              //     borderTopColor: 'transparent', // remove default styling
-              //     borderTopWidth: 0, // remove default styling
-              //     borderBottomColor: 'transparent', // remove default styling
-              //     borderBottomWidth: 0 // remove default styling
-              //     // maxWidth: !this.state.inputFocussed ? windowSize.width - (windowSize.width / 4) : null
-              //   },
-              //   textInput: {
-              //     height: 34,
-              //     marginTop: 4,
-              //     marginBottom: 4,
-              //     flex: 1,
-              //     borderColor: inputKey === this.state.inputKeyFocussed && this.state.inputFocussed ? colours.where : colours.where,
-              //     borderWidth: 1,
-              //     borderRadius: inputKey === this.state.inputKeyFocussed && this.state.inputFocussed ? 10 : 5
-              //   },
-              //   listView: {
-              //     // height: deviceHeight,
-              //     // ios - position: 'absolute',
-              //     // left: 5,
-              //     // right: 5,
-              //     // top: 10, // 40
-              //     backgroundColor: colours.verylightgray
-              //     // flex: 1
-              //   }
-              // }}
-              // nearbyPlacesAPI="GooglePlacesSearch"
-              // filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
             />
           </View>
           { inputKey !== 0 && inputKey !== this.state.inputKeyFocussed && !this.state.inputFocussed &&

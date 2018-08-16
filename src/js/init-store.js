@@ -1,4 +1,4 @@
-import { AsyncStorage, Platform } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import logger from 'redux-logger';
@@ -9,25 +9,57 @@ import rootReducer from './reducers/';
 import { navMiddleware } from './routes';
 
 export function initStore (initialState) {
-  if (Platform.OS === 'ios') {
+  // if (Platform.OS === 'ios') {
+
+    // ios code
+
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+      // dev code
+      return createStore(
+        rootReducer,
+        initialState,
+          compose(
+            applyMiddleware(thunkMiddleware, navMiddleware, logger),
+            autoRehydrate({ log: true })
+          )
+      );
+    }
+
+    // production code
 
     return createStore(
       rootReducer,
       initialState,
         compose(
-          applyMiddleware(thunkMiddleware, navMiddleware, logger),
+          applyMiddleware(thunkMiddleware, navMiddleware),
           autoRehydrate({ log: true })
         )
     );
-  }
-  return createStore(
-    rootReducer,
-    initialState,
-    compose( // composeWithDevTools if debugging redux android
-      applyMiddleware(thunkMiddleware, navMiddleware), // remove logger from last in chain when not debugging
-      autoRehydrate({ log: true })
-    )
-  );
+  // }
+
+  // // android code
+  //
+  // if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  //   // dev code
+  //   return createStore(
+  //     rootReducer,
+  //     initialState,
+  //       compose(
+  //         applyMiddleware(thunkMiddleware, navMiddleware, logger),
+  //         autoRehydrate({ log: true })
+  //       )
+  //   );
+  // }
+  //
+  // // production code
+  // return createStore(
+  //   rootReducer,
+  //   initialState,
+  //   compose( // composeWithDevTools if debugging redux android
+  //     applyMiddleware(thunkMiddleware, navMiddleware), // remove logger from last in chain when not debugging
+  //     autoRehydrate({ log: true })
+  //   )
+  // );
 }
 
 
