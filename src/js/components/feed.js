@@ -498,7 +498,13 @@ class Feed extends Component {
 
           {
             !isReceivingFeed && this.dataSource &&
-            <View style={{ backgroundColor: colours.filterPanelBackgroundColor }}>
+            <View style={{
+              backgroundColor: colours.filterPanelBackgroundColor,
+              elevation: 1,
+              shadowOpacity: 0.8,
+              shadowRadius: 1,
+              shadowColor: 'gray',
+              shadowOffset: { height: 1, width: 0 } }}>
 
               <DropdownView
                 navbarHeight={NAVBAR_HEIGHT}

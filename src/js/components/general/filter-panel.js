@@ -19,11 +19,7 @@ const FilterPanel = ({ displaySome, displayAll, filterActive, selectedFilter }) 
   const hostingButtonText = (filterActive && selectedFilter === 'hosting' ? styles.buttonTextSelected : styles.buttonText);
 
   return (
-    <View style={{
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center' }}
+    <View style={styles.filterPanel}
     >
 
       <Button
@@ -54,9 +50,16 @@ const FilterPanel = ({ displaySome, displayAll, filterActive, selectedFilter }) 
 
 const styles = {
 
+  filterPanel: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colours.filterPanelBackgroundColor
+  },
   filterButton: {
     backgroundColor: 'white',
-    borderWidth: 1,
+    borderWidth: 0,
     borderRadius: 3,
     borderColor: colours.gray,
     paddingRight: 10,
@@ -73,7 +76,7 @@ const styles = {
     shadowOpacity: 0.8,
     shadowRadius: 1,
     shadowColor: 'gray',
-    shadowOffset: { height: 2, width: 0 }
+    shadowOffset: { height: 1, width: 0 }
   },
   buttonText: {
     fontSize: moderateScale(14, 0.3),
@@ -92,7 +95,7 @@ const styles = {
   filterButtonSelected: {
     backgroundColor: colours.white,
     borderRadius: 3,
-    borderWidth: 1,
+    borderWidth: 0,
     borderColor: colours.main,
     paddingRight: 10,
     paddingLeft: 10,
@@ -108,7 +111,7 @@ const styles = {
     shadowOpacity: 0.8,
     shadowRadius: 1,
     shadowColor: 'gray',
-    shadowOffset: { height: 2, width: 0 }
+    shadowOffset: { height: 0, width: 0 }
   }
 };
 
