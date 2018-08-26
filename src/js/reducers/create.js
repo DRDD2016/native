@@ -62,9 +62,7 @@ export default function create (state = initialState, action) {
       });
 
     case actions.SAVE_EVENT_SUCCESS:
-      return update(state, {
-        isFetching: { $set: false }
-      });
+      return state;
 
     case actions.SAVE_EVENT_FAILURE:
       return update(state, {

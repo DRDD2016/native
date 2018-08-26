@@ -1,6 +1,20 @@
 import React, { Component } from 'react';
 import { Animated } from 'react-native';
-import { bar } from '../../../styles';
+import colours from '../../../styles/colours';
+
+const barstyle = {
+
+  borderBottomLeftRadius: 0,
+  borderTopLeftRadius: 0,
+  borderBottomRightRadius: 15,
+  borderTopRightRadius: 15,
+  height: 12,
+  elevation: 1,
+  shadowColor: colours.shadowColour,
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.8,
+  shadowRadius: 2
+};
 
 export default class GrowingView extends Component {
 
@@ -14,7 +28,7 @@ export default class GrowingView extends Component {
   componentDidMount () {
 
     const { barWidth } = this.props;
-    console.log('barWidth', barWidth);
+    console.log('GrowView DidMount barWidth', barWidth);
 
     Animated.timing(this._barWidth, {
       toValue: barWidth,
@@ -24,12 +38,13 @@ export default class GrowingView extends Component {
   }
 
   render () {
-    const { barColor } = this.props;
+    const { barColor, barWidth } = this.props;
+    console.log('GrowingView render', barWidth);
 
     return (
 
       <Animated.View
-        style={[bar,
+        style={[barstyle,
         { backgroundColor: barColor, width: this._barWidth }
 
       ]} />

@@ -8,9 +8,10 @@ export default class SpinnerProvider extends Component {
   //   console.log('Spinner props mount: ', this.props);
   // }
   //
-  // componentWillReceiveProps () {
-  //   console.log('Spinner props receive: ', this.props);
-  // }
+  componentWillReceiveProps (nextProps) {
+    console.log('Spinner props this props: ', this.props);
+    console.log('Spinner props nextProps: ', nextProps);
+  }
 
   render () {
 
@@ -42,8 +43,8 @@ export default class SpinnerProvider extends Component {
     };
 
     console.log('errorModalVisible', errorModalVisible);
-
-
+    console.log('isFetchingCreate:', isFetchingCreate);
+    console.log('isReceivingFeed:', isReceivingFeed);
     console.log('isConfirmingEvent:', isConfirmingEvent);
     console.log('isEventConfirmed:', isEventConfirmed);
     console.log('finalChoices:', finalChoices);

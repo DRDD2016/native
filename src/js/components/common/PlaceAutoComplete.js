@@ -154,7 +154,12 @@ export default class PlaceAutoComplete extends Component {
           styles={{
             container: {
               flex: !inputFocussed ? 10 : 1,
-              borderRadius: 5
+              borderRadius: 5,
+              elevation: 1,
+              shadowColor: inputFocussed ? colours.shadowColour : null,
+              shadowOffset: inputFocussed ? { width: 0, height: 2 } : null,
+              shadowOpacity: inputFocussed ? 0.8 : null,
+              shadowRadius: inputFocussed ? 2 : null
               // borderColor: 'red',
               // borderWidth: 1
               // visible: inputKeyFocussed === inputKey
@@ -164,14 +169,16 @@ export default class PlaceAutoComplete extends Component {
             },
             textInputContainer: {
               backgroundColor: inputFocussed ? colours.where : colours.white,
+              maxHeight: 44,
               flex: this.state.listViewDisplayed ? null : 1,
-              // height: 44,
               alignItems: 'center',
               borderRadius: 7,
               borderTopColor: 'transparent', // remove default styling
               borderTopWidth: 0, // remove default styling
               borderBottomColor: 'transparent', // remove default styling
-              borderBottomWidth: 0 // remove default styling
+              borderBottomWidth: 0 // remove default styling,
+              // borderColor: 'red',
+              // borderWidth: 2
               // maxWidth: !this.state.inputFocussed ? windowSize.width - (windowSize.width / 4) : null
             },
             textInput: {

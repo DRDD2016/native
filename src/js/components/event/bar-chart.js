@@ -37,20 +37,7 @@ export default class BarChart extends Component {
 
     return width;
   }
-  // handleAnimation () {
-  //   console.log('handleAnim');
-  //   const width = this.getWidth(this.props.tallyData);
-  //   console.log('handleAnim getWidth done');
-  //   const timing = Animated.timing;
-  //   console.log('handleAnim timing done');
-  //
-  //   const indicators = ['poll1'];
-  //   console.log('finsih indicators');
-  //   Animated.parallel(indicators.map((item) => {
-  //     return timing(this.state[item], { toValue: width[item] });
-  //   })).start();
-  //   console.log('finsih handleAnim');
-  // }
+
 
   render () {
     const { barWidth } = this.state;

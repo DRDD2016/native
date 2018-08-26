@@ -95,7 +95,7 @@ export function saveEvent (token, eventData, navigation) { //eslint-disable-line
           dispatch(shareInviteRequest());
           console.log('create action - share request');
           composeLinkToShare(store.getState().user, eventData, data.code);
-          dispatch(clearCreateEvent());
+
 
           console.log('create action - Navigate to Feed');
 
@@ -127,7 +127,14 @@ export function shareInviteRequest () {
   };
 }
 
-export function shareInviteSuccess () {
+export function shareInviteSuccess () { //eslint-disable-line
+  return function (dispatch) {
+    dispatch(shareInviteSharedSuccess());
+    dispatch(clearCreateEvent());
+  };
+}
+
+export function shareInviteSharedSuccess () {
   return {
     type: SHARE_INVITE_SUCCESS
   };

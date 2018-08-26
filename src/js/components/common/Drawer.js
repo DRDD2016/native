@@ -64,11 +64,11 @@ export default class Drawer extends Component {
     console.log(this.props);
     const { handleLogOut, navigation } = this.props;
 
-    const aboutURL = 'http://www.spark-app.net/index.html';
-    const helpURL = 'http://www.spark-app.net/faq.html';
+    const aboutURL = 'http://www.spark-app.net';
+    const helpURL = 'http://www.spark-app.net/help';
     const feedbackURL = 'mailto:hello@spark-app.net?subject=SparkFeedback';
-    const PrivacyURL = 'http://www.spark-app.net/privacy-policy.html';
-    const TermsURL = 'http://www.spark-app.net/terms-and-conditions.html';
+    const PrivacyURL = 'http://www.spark-app.net/privacy';
+    const TermsURL = 'http://www.spark-app.net/terms';
 
 
     return (

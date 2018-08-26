@@ -115,7 +115,15 @@ export default class CategoryDetails extends Component {
                 </View>
 
                 <View style={{ flex: 500 }}>
-                  <View style={{ marginTop: 5, marginBottom: 5, elevation: 1 }}>
+                  <View style={{
+                    marginTop: 5,
+                    marginBottom: 5,
+                    elevation: 1,
+                    shadowColor: colours.shadowColour,
+                    shadowOffset: { width: 0, height: 1 },
+                    shadowOpacity: 0.8,
+                    shadowRadius: 2
+                  }}>
                     <Icon.Button
                       name={this.icons[category]}
                       size={16}
@@ -148,7 +156,7 @@ export default class CategoryDetails extends Component {
 
                   {
                     this.props.isHostPollView &&
-                    <BarButton style={{ flex: 1, marginTop: 5, marginBottom: 5, flexDirection: 'row', alignItems: 'center' }}>
+                    <BarButton style={{ flex: 1, marginTop: 5, marginBottom: 5, flexDirection: 'row', alignItems: 'center', backgroundColor: 'white' }}>
 
                       {
                         (totalVoteCount !== 0) && <View style={{ paddingLeft: 1, paddingVertical: 10, width: 1, backgroundColor: 'lightgray' }} />

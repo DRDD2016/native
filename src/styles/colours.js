@@ -24,9 +24,10 @@ const colours = {
   headerButtonColor: '#939598',
   headerTitleColor: '#939598',
   headerBackgroundColor: '#ffffff',
-  filterPanelBackgroundColor: 'transparent',
+  filterPanelBackgroundColor: '#ffffff',
   sectionBorder: '#efefef',
-  spacerColour: this.lightgray
+  spacerColour: 'lightgray',
+  shadowColour: 'rgba(128,128,128,0.8)'
 };
 
 export default colours;

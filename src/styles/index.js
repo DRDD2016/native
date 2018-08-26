@@ -18,13 +18,12 @@ export const Button = styled.TouchableOpacity`
   paddingRight: 15;
   borderRadius: 3;
   elevation: 1;
-  box-shadow: 2px 2px 2px ${colours.gray};
+  box-shadow: 0px 1px 2px ${colours.shadowColour}; // width, height, radius, colour
 
 `;
 
 export const BarButton = styled.TouchableOpacity`
-  elevation: 1;
-  box-shadow: 2px 2px 2px ${colours.gray};
+
 `;
 
 export const ConfirmButton = styled.TouchableOpacity`
@@ -40,33 +39,8 @@ export const ConfirmButton = styled.TouchableOpacity`
   marginHorizontal: 20;
   height: 50;
   elevation: 1;
-  box-shadow: 2px 2px 2px ${colours.gray};
+  box-shadow: 0px 1px 2px ${colours.shadowColour}; // width, height, radius, colour
 `; // confirmButton
-
-// shadowOpacity: 0.8;
-// shadowRadius: 8;
-// shadowColor: ${colours.red};
-// shadow-offset: { width: -8, height: -8 };
-
-// export const ConfirmButton = styled(TouchableOpacity)({
-//   width: 350,
-//   justifyContent: 'center',
-//   alignItems: 'center',
-//   backgroundColor: colours.confirm,
-//   borderColor: colours.confirm,
-//   borderWidth: 1,
-//   borderRadius: 5,
-//   paddingVertical: 8,
-//   paddingHorizontal: 10,
-//   marginHorizontal: 20,
-//   height: 50,
-//   elevation: 1,
-//   shadowOpacity: 0.8,
-//   shadowRadius: 1,
-//   shadowColor: colours.gray,
-//   shadowOffset: { width: -8, height: 8 }
-// }); // confirmButton
-
 
 export const SignupButton = ConfirmButton.extend`
   backgroundColor: ${colours.orange};
@@ -85,7 +59,7 @@ export const InviteSmallButton = styled.TouchableOpacity`
   marginHorizontal: 20;
   height: 50;
   elevation: 1;
-  box-shadow: 2px 2px 2px ${colours.gray};
+  box-shadow: 0px 1px 2px ${colours.shadowColour}; // width, height, radius, colour
 `;
 
 export const ConfirmButtonText = styled.Text`
@@ -109,7 +83,7 @@ export const AddButton = styled.TouchableOpacity.attrs({
   width: 50;
   height: 50;
   elevation: 1;
-  box-shadow: 2px 2px 2px ${colours.gray};
+  box-shadow: 0px 1px 2px ${colours.shadowColour}; // width, height, radius, colour
 `;
 
 
@@ -132,7 +106,7 @@ export const RSVPButton = styled.TouchableOpacity`
   marginHorizontal: 5;
   borderRadius: 3;
   elevation: 1;
-  box-shadow: 2px 2px 2px ${colours.gray};
+  box-shadow: 0px 1px 2px ${colours.shadowColour}; // width, height, radius, colour
 `; // RSVPButton
 
 export const RSVPButtonText = styled.Text`
@@ -291,6 +265,7 @@ export const OptionTextDeselectedWhen = styled.Text`
   color: ${colours.when};
   flex: 1;
 `; // optionTextDeselectedWhen
+
 
 export const styles = {
 
@@ -1321,13 +1296,6 @@ export const styles = {
   },
   RSVPButtonNotResponded: {
 
-  },
-  bar: {
-    borderBottomLeftRadius: 0,
-    borderTopLeftRadius: 0,
-    borderBottomRightRadius: 15,
-    borderTopRightRadius: 15,
-    height: 12
   }
 
 };
