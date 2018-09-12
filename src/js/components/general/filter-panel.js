@@ -1,11 +1,14 @@
 /* eslint-disable no-use-before-define */
 import React from 'react';
-import { View } from 'react-native';
+import { StatusBar, View, Platform } from 'react-native';
+import { Header } from 'react-navigation';
 import Button from '../common/Button';
 import colours from '../../../styles/colours';
-import { moderateScale, scale } from '../../../styles/scaling';
+import { moderateScale } from '../../../styles/scaling';
 
-const NAVBAR_HEIGHT = scale(50);
+const NAVBAR_HEIGHT = Header.HEIGHT;
+const STATUS_BAR_HEIGHT = Platform.select({ ios: 20, android: StatusBar.currentHeight });
+const FILTER_PANEL_HEIGHT = Platform.select({ ios: NAVBAR_HEIGHT - STATUS_BAR_HEIGHT, android: NAVBAR_HEIGHT });
 
 const FilterPanel = ({ displaySome, displayAll, filterActive, selectedFilter }) => {
 
@@ -51,6 +54,8 @@ const FilterPanel = ({ displaySome, displayAll, filterActive, selectedFilter }) 
 const styles = {
 
   filterPanel: {
+    marginLeft: 5,
+    marginRight: 5,
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
@@ -58,10 +63,10 @@ const styles = {
     backgroundColor: colours.filterPanelBackgroundColor
   },
   filterButton: {
-    backgroundColor: 'white',
+    backgroundColor: colours.offWhite,
     borderWidth: 0,
     borderRadius: 3,
-    borderColor: colours.gray,
+    borderColor: colours.offWhite,
     paddingRight: 10,
     paddingLeft: 10,
     marginLeft: 5,
@@ -69,7 +74,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    height: NAVBAR_HEIGHT - 12,
+    height: FILTER_PANEL_HEIGHT * 0.7,
     paddingTop: 4,
     paddingBottom: 4,
     elevation: 1,
@@ -95,7 +100,7 @@ const styles = {
   filterButtonSelected: {
     backgroundColor: colours.white,
     borderRadius: 3,
-    borderWidth: 0,
+    borderWidth: 1,
     borderColor: colours.main,
     paddingRight: 10,
     paddingLeft: 10,
@@ -104,14 +109,14 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    height: NAVBAR_HEIGHT - 12,
+    height: FILTER_PANEL_HEIGHT * 0.7,
     paddingTop: 4,
-    paddingBottom: 4,
-    elevation: 1,
-    shadowOpacity: 0.8,
-    shadowRadius: 1,
-    shadowColor: 'gray',
-    shadowOffset: { height: 0, width: 0 }
+    paddingBottom: 4
+    // elevation: 1,
+    // shadowOpacity: 0.8,
+    // shadowRadius: 1,
+    // shadowColor: colours.main,
+    // shadowOffset: { height: 1, width: 0 }
   }
 };
 

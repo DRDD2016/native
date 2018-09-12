@@ -57,12 +57,12 @@ class CalendarItem extends PureComponent {
     }
 
     return (
-      <View style={{ backgroundColor: colours.background }}>
+      <View style={{ marginLeft: 5, marginRight: 5, backgroundColor: colours.background }}>
         <CardSection style={{ justifyContent: 'flex-start' }}>
           <TouchableOpacity
             style={{
               flex: 1,
-              marginLeft: 5,
+              paddingLeft: 5,
               marginRight: 5,
               flexDirection: 'row',
               justifyContent: 'space-around'

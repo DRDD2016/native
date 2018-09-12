@@ -1,7 +1,7 @@
 // import PropTypes from 'prop-types';
 /* eslint-disable*/
 import React, { Component } from 'react';
-import { InteractionManager, ActivityIndicator, View, Text, FlatList, Dimensions, Platform, Image } from 'react-native';
+import { StatusBar, InteractionManager, ActivityIndicator, View, Text, FlatList, Dimensions, Platform, Image } from 'react-native';
 import Fabric from 'react-native-fabric';
 import { Header } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -149,6 +149,7 @@ class Albums extends Component {
 
     return (
       <View style={{ flex: 1 }}>
+        
 
         <View
           style={{

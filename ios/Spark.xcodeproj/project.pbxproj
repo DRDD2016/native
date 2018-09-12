@@ -63,6 +63,7 @@
 		E91BA5CA1C434C74B4C720BD /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02C22524056F47B79F2F9471 /* Octicons.ttf */; };
 		EC0D572736CE47F1AAAAF046 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BF49FDCD16E455883BA9976 /* libRNImagePicker.a */; };
 		FA9BD33EDC2D48918858901B /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C2BE23B743B544C7834AEAFF /* Zocial.ttf */; };
+		295E5AFB97D941EB96933696 /* libRNViewOverflow.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 043CE2998944439DBFDE5E15 /* libRNViewOverflow.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -477,6 +478,8 @@
 		E8C5F4B37EFB42E8BC53B15B /* libSMXCrashlytics.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSMXCrashlytics.a; sourceTree = "<group>"; };
 		EC10FEAA35E144BAA72C03AE /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		FC173056A60B462B96D9C65D /* libBugsnagReactNative.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBugsnagReactNative.a; sourceTree = "<group>"; };
+		F9C18FC753EB450F865BCB18 /* RNViewOverflow.xcodeproj */ = {isa = PBXFileReference; name = "RNViewOverflow.xcodeproj"; path = "../node_modules/react-native-view-overflow/ios/RNViewOverflow.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		043CE2998944439DBFDE5E15 /* libRNViewOverflow.a */ = {isa = PBXFileReference; name = "libRNViewOverflow.a"; path = "libRNViewOverflow.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -530,6 +533,7 @@
 				4F2B62219E864DE8913075AB /* ReactNativeGlobalProps.app in Frameworks */,
 				066157998AB044909357C7A0 /* ReactNativeGlobalPropsTests.xctest in Frameworks */,
 				316DF6E9DEE94061971E2C29 /* libreact-native-branch.a in Frameworks */,
+				295E5AFB97D941EB96933696 /* libRNViewOverflow.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -821,6 +825,7 @@
 				09E6E8AD4F284B979E0A994B /* SMXCrashlytics.xcodeproj */,
 				6F8D23B241AB49DCB681AED1 /* RNFetchBlob.xcodeproj */,
 				79A8C38EF8D24327B60ACAB7 /* BugsnagReactNative.xcodeproj */,
+				F9C18FC753EB450F865BCB18 /* RNViewOverflow.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1529,6 +1534,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1546,6 +1552,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1560,7 +1567,7 @@
 				CODE_SIGN_ENTITLEMENTS = Spark/Spark.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: David Rickard (N83BEDBXB9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 56;
+				CURRENT_PROJECT_VERSION = 57;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 26TVQPX48T;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1576,6 +1583,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-branch/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-branch/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-view-overflow/ios",
 				);
 				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/../node_modules/react-native-fcm/ios";
 				INFOPLIST_FILE = Spark/Info.plist;
@@ -1601,7 +1609,7 @@
 				CODE_SIGN_ENTITLEMENTS = Spark/Spark.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Wanna Enterprises Ltd (26TVQPX48T)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 56;
+				CURRENT_PROJECT_VERSION = 57;
 				DEVELOPMENT_TEAM = 26TVQPX48T;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1615,6 +1623,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-branch/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-branch/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-view-overflow/ios",
 				);
 				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/../node_modules/react-native-fcm/ios";
 				INFOPLIST_FILE = Spark/Info.plist;
@@ -1649,6 +1658,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.wannaenterprises.SparkUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1677,6 +1687,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.wannaenterprises.SparkUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

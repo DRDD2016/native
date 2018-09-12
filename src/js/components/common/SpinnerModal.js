@@ -1,13 +1,14 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
-import { View, Text, Modal, TouchableHighlight } from 'react-native';
+import { View, Text, Modal } from 'react-native';
 import Fabric from 'react-native-fabric';
 import { store } from '../../init-store';
 import { saveIncomingLinkError } from '../../actions/network';
 import { eventConfirmedSuccess } from '../../actions/create';
 import { finishedUpdateRsvpSuccess } from '../../actions/event/data';
 import Spinner from '../common/Spinner';
-import styles from '../../../styles';
+import styles, { ConfirmButton, ConfirmButtonText } from '../../../styles';
+import colours from '../../../styles/colours';
 import formatDate from '../../lib/format-date';
 import formatTime from '../../lib/format-time';
 
@@ -20,6 +21,7 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
   console.log('SpinnerModal type:', type);
   console.log('SpinnerModal isConnected:', isConnected);
   console.log('SpinnerModal additionalInfo:', additionalInfo);
+  console.log('eventCodeError', eventCodeError);
   Answers.logCustom('Spinner activated', { additionalData: additionalInfo });
 
 
@@ -66,8 +68,9 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
 
               </View>
               <View style={{ flex: 1 }}>
-                <TouchableHighlight
-                  style={ [styles.confirmButton, { marginBottom: 20, marginTop: 20 }] }
+                <ConfirmButton
+                  testDescription="EVENT CONFIRMED OK"
+                  style={{ backgroundColor: colours.green }}
                   onPress={ () => {
                     console.log('OK clicked');
                     store.dispatch(eventConfirmedSuccess());
@@ -76,8 +79,10 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
 
                   }}
                 >
-                  <Text style={styles.confirmButtonText}>OK</Text>
-                </TouchableHighlight>
+                  <ConfirmButtonText>
+                    OK
+                  </ConfirmButtonText>
+                </ConfirmButton>
               </View>
 
               {
@@ -98,8 +103,10 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
               <View style={{ flex: 1 }} />
 
               <View style={{ flex: 1 }}>
-                <TouchableHighlight
-                  style={ [styles.confirmButton, { marginBottom: 20, marginTop: 20 }] }
+
+                <ConfirmButton
+                  testDescription="RSVP FINISHED OK"
+                  style={{ backgroundColor: colours.green }}
                   onPress={ () => {
                     console.log('OK clicked');
                     store.dispatch(finishedUpdateRsvpSuccess());
@@ -108,8 +115,10 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
 
                   }}
                 >
-                  <Text style={styles.confirmButtonText}>OK</Text>
-                </TouchableHighlight>
+                  <ConfirmButtonText>
+                    OK
+                  </ConfirmButtonText>
+                </ConfirmButton>
               </View>
 
               {
@@ -168,7 +177,9 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
             <View style={styles.modalConfirm}>
               <Text style={[styles.msg1, { flex: 1 }]}>Poor connectivity</Text>
               <Text style={[styles.msg2, { flex: 1 }]}>please check your internet connection</Text>
-              <Text style={[styles.msg2, { flex: 1 }]}>{`eventCodeError: ${eventCodeError}`}</Text>
+              {
+                // <Text style={[styles.msg2, { flex: 1 }]}>{`eventCodeError: ${eventCodeError}`}</Text>
+              }
               <View style={{ flex: 1 }} />
 
               {
@@ -176,8 +187,9 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
               }
 
               <View style={{ flex: 1 }}>
-                <TouchableHighlight
-                  style={ [styles.confirmButton, { marginBottom: 20, marginTop: 20 }] }
+                <ConfirmButton
+                  testDescription="EVENT CODE ERROR OK"
+                  style={{ backgroundColor: colours.green }}
                   onPress={ () => {
                     onClose();
                     store.dispatch(saveIncomingLinkError(undefined));
@@ -185,8 +197,10 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
 
                   }}
                 >
-                  <Text style={styles.confirmButtonText}>OK</Text>
-                </TouchableHighlight>
+                  <ConfirmButtonText>
+                    OK
+                  </ConfirmButtonText>
+                </ConfirmButton>
               </View>
 
             </View>
