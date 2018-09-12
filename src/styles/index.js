@@ -1,7 +1,7 @@
 import { Dimensions, Platform } from 'react-native';
 import styled from 'styled-components';
 import colours from './colours';
-import { scale, moderateScale } from './scaling';
+import { scale, moderateScale, verticalScale2, horizontalScale2 } from './scaling';
 
 
 // Buttons
@@ -27,7 +27,7 @@ export const BarButton = styled.TouchableOpacity`
 `;
 
 export const ConfirmButton = styled.TouchableOpacity`
-  width: 350;
+  width: ${horizontalScale2(350)};
   justifyContent: center;
   alignItems: center;
   backgroundColor: ${colours.confirm};
@@ -42,10 +42,21 @@ export const ConfirmButton = styled.TouchableOpacity`
   box-shadow: 0px 1px 2px ${colours.shadowColour}; // width, height, radius, colour
 `; // confirmButton
 
-export const SignupButton = ConfirmButton.extend`
+export const SignupButton = styled.TouchableOpacity`
+  width: 350;
+  justifyContent: center;
+  alignItems: center;
   backgroundColor: ${colours.orange};
   borderColor: ${colours.orange};
-`;
+  borderWidth: 1;
+  borderRadius: 5;
+  paddingVertical: 8;
+  paddingHorizontal: 10;
+  marginHorizontal: 20;
+  height: 50;
+  elevation: 1;
+  box-shadow: 0px 1px 2px ${colours.shadowColour}; // width, height, radius, colour
+`; // confirmButton
 
 export const InviteSmallButton = styled.TouchableOpacity`
   justifyContent: center;
@@ -86,6 +97,20 @@ export const AddButton = styled.TouchableOpacity.attrs({
   box-shadow: 0px 1px 2px ${colours.shadowColour}; // width, height, radius, colour
 `;
 
+export const AddCreateButton = styled.View`
+  position: absolute;
+  top: ${verticalScale2(-20)};
+  height: ${verticalScale2(90)};
+  width: ${verticalScale2(90)};
+  backgroundColor: ${colours.main};
+  alignItems: center;
+  justifyContent: center;
+  borderRadius: 45;
+  elevation: 1;
+  zIndex: 99
+  box-shadow: 0px 1px 2px ${colours.shadowColour}; // width, height, radius, colour
+`;
+
 
 export const ButText = styled.Text.attrs({
   color: props => props.color || colours.gray
@@ -119,7 +144,7 @@ export const RSVPButtonText = styled.Text`
 
 export const HeaderText = styled.Text`
   color: ${colours.headerTitleColor};
-  fontSize: ${scale(20)};
+  fontSize: ${moderateScale(20)};
   fontWeight: 600;
 `; // titleHeader1
 
@@ -162,26 +187,26 @@ export const TitleInvited = styled.Text`
 `; // invitedTitle
 
 export const Msg1 = styled.Text`
-  fontSize: ${scale(18)};
+  fontSize: ${moderateScale(18)};
   fontWeight: 600;
   color: ${colours.gray};
 `; // msg1
 
 export const Msg2 = styled.Text`
-  fontSize: ${scale(16)};
+  fontSize: ${moderateScale(16)};
   fontWeight: 400;
   color: ${colours.gray};
 `; // msg2
 
 export const Msg3 = styled.Text`
-  fontSize: ${scale(14)};
+  fontSize: ${moderateScale(14)};
   fontWeight: 700;
   color: ${colours.gray};
   textAlign: center;
 `; // msg3
 
 export const Msg4 = styled.Text`
-  fontSize: ${scale(12)};
+  fontSize: ${moderateScale(12)};
   fontWeight: 600;
   color: ${colours.gray};
 `; // msg4
@@ -273,7 +298,7 @@ export const styles = {
   modalWrapper: {
     height: Dimensions.get('window').height * 1,
     width: Dimensions.get('window').width * 1,
-    backgroundColor: colours.modalBackground,
+    backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -286,11 +311,11 @@ export const styles = {
     alignItems: 'center',
     borderRadius: 30,
     borderColor: colours.main,
-    borderWidth: 4,
-    elevation: 1,
+    borderWidth: 2,
+    elevation: 2,
     shadowOpacity: 0.8,
-    shadowRadius: 2,
-    shadowColor: colours.gray,
+    shadowRadius: 4,
+    shadowColor: colours.main,
     shadowOffset: { width: 0, height: 2 }
 
   },

@@ -25,10 +25,8 @@ export default function Index ({ navigation }) {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>
-      <StatusBar
-        barStyle="dark-content"
-        backgroundColor={colours.where}
-      />
+      <StatusBar backgroundColor={colours.gray} barStyle="light-content" />
+      
       <Header style={{ top: Platform.OS === 'ios' ? -25 : -30 }} />
 
       <View style={{ flex: 0.2 }} />

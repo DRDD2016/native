@@ -19,6 +19,7 @@ const { Answers } = Fabric;
 
 const inlineStyles = {
   inputWrap: {
+    maxWidth: 800,
     flexDirection: 'row',
     marginVertical: 5,
     // height: 70,
@@ -51,7 +52,8 @@ const inlineStyles = {
   },
   forgotPasswordText: {
     color: colours.blue,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 18
   }
 };
 
@@ -213,7 +215,7 @@ class Login extends Component {
             </Modal>
 
 
-            <View style={{ paddingHorizontal: 15, flex: 1 }}>
+            <View style={{ paddingHorizontal: 15, flex: 1, alignItems: 'center' }}>
               <View style={inlineStyles.inputWrap}>
                 <View style={inlineStyles.iconWrap}>
                   <Icon name="envelope-o" size={15} color="rgba(255, 255, 255, 0.76)" />
@@ -250,7 +252,7 @@ class Login extends Component {
                   <ConfirmButtonText>LOG IN</ConfirmButtonText>
                 </ConfirmButton>
                 <TouchableOpacity
-                  style={{ marginTop: 5, paddingTop: 10 }}
+                  style={{ marginTop: 10, paddingTop: 10 }}
                   activeOpacity={ 0.5 }
                   onPress={() => navigation.navigate('confirmEmail')}
                 >

@@ -194,6 +194,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-view-overflow')
     implementation project(':react-native-branch')
     implementation project(':bugsnag-react-native')
     implementation project(':react-native-fetch-blob')

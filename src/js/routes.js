@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { Dimensions, Platform, BackHandler } from 'react-native';
+import { Dimensions, Platform, BackHandler, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
-import { createStackNavigator, createBottomTabNavigator, createDrawerNavigator, NavigationActions } from 'react-navigation';
+import ViewOverflow from 'react-native-view-overflow';
+import { Header, createStackNavigator, createBottomTabNavigator, createDrawerNavigator, NavigationActions } from 'react-navigation';
+// import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { createReduxBoundAddListener, createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colours from '../styles/colours';
-
+import { AddCreateButton } from '../styles';
+import { moderateScale, verticalScale2, verticalScale } from '../styles/scaling';
+// import CustomTabBar from './components//general/customTabBar';
 import DrawerContainer from './containers/drawer';
 import Index from './components/auth';
 import LoginContainer from './containers/auth/login';
@@ -28,8 +32,10 @@ import ConfirmEmailContainer from './containers/auth/confirm-email';
 import EditContainer from './containers/edit';
 import Code from './containers/code';
 import Splash from './components/auth/splash';
+// import CreateButton from './components/general/create-button';
 // import Modal from './components/modal';
 
+const NAVBAR_HEIGHT = Header.HEIGHT;
 const { width } = Dimensions.get('window');
 export const menuWidth = width > 700 ? (width * 0.6) : (width * 0.8);
 
@@ -61,9 +67,9 @@ export const AppNavigator = createStackNavigator({
             navigationOptions: () => ({
               tabBarIcon: ({ tintColor }) => (
                 <Icon
-                  name="photo"
+                  name="image"
                   color={tintColor}
-                  size={32}
+                  size={verticalScale(32)}
                   />
               )
             })
@@ -74,29 +80,7 @@ export const AppNavigator = createStackNavigator({
                 <Icon
                   name="calendar"
                   color={tintColor}
-                  size={32}
-                  />
-              )
-            })
-          },
-          Feed: { screen: createStackNavigator({ ScreenFeed: { screen: FeedContainer } }),
-            navigationOptions: () => ({
-              tabBarIcon: ({ tintColor }) => (
-                <Icon
-                  name="globe"
-                  color={tintColor}
-                  size={32}
-                  />
-              )
-            })
-          },
-          Profile: { screen: createStackNavigator({ ScreenProfile: { screen: ProfileContainer } }),
-            navigationOptions: () => ({
-              tabBarIcon: ({ tintColor }) => (
-                <Icon
-                  name="user"
-                  color={tintColor}
-                  size={32}
+                  size={verticalScale(32)}
                   />
               )
             })
@@ -111,19 +95,97 @@ export const AppNavigator = createStackNavigator({
             navigationOptions: {
               tabBarLabel: 'Create',
               tabBarVisible: false,
-              tabBarIcon: ({ tintColor }) =>
-                <Icon name="pencil" size={32} color={tintColor} />
+              tabBarIcon: () =>
+                (
+                  <AddCreateButton style={{ position: 'absolute', alignItems: 'center', zIndex: 97 }}>
+                    <Icon name="plus" size={verticalScale(32)} color={colours.white} />
+                  </AddCreateButton>
+                )
             }
+          },
+          Feed: { screen: createStackNavigator({ ScreenFeed: { screen: FeedContainer } }),
+            navigationOptions: () => ({
+              tabBarIcon: ({ tintColor }) => (
+                <Icon
+                  name="envelope"
+                  color={tintColor}
+                  size={verticalScale(32)}
+                  />
+              )
+            })
+          },
+          Profile: { screen: createStackNavigator({ ScreenProfile: { screen: ProfileContainer } }),
+            navigationOptions: () => ({
+              tabBarIcon: ({ tintColor }) => (
+                <Icon
+                  name="user"
+                  color={tintColor}
+                  size={verticalScale(32)}
+                  />
+              )
+            })
           }
+
         }, {
           // swipeEnabled: false,
           // lazy: true, // added to attempt to stop Code loading until Feed has initialised.
           // animationEnabled: true,
-          // pressColor: colours.purple,
+          pressColor: colours.purple,
           initialRouteName: 'Feed',
+          labeled: false,
+          tabBarComponent: (props) => {
+            const {
+                navigation: { state: { index, routes } },
+                style,
+                activeTintColor,
+                inactiveTintColor,
+                renderIcon,
+                jumpTo
+            } = props;
+
+            return (
+              <ViewOverflow style={{
+                  ...style,
+                  flexDirection: 'row',
+                  width: '100%',
+                  backgroundColor: colours.white,
+                  // height: 60,
+                  borderTopColor: colours.lightgray,
+                  borderTopWidth: 0,
+                  height: verticalScale2(NAVBAR_HEIGHT * 1.3)
+              }}>
+
+                {
+                  routes.map((route, idx) => (
+                    <ViewOverflow
+                      key={route.key}
+                      style={{
+                          flex: 1,
+                          alignItems: 'center',
+                          justifyContent: 'center'
+                      }}
+                    >
+                      <TouchableWithoutFeedback
+                        style={{ }}
+                        onPress={() => jumpTo(route.key)}
+                      >
+                        {renderIcon({
+                          route,
+                          focused: index === idx,
+                          tintColor: index === idx ? activeTintColor : inactiveTintColor
+                        })}
+                      </TouchableWithoutFeedback>
+                    </ViewOverflow>
+                  ))
+                }
+
+              </ViewOverflow>
+            );
+          }, // new code
           tabBarOptions: {
             // gesturesEnabled: false,
             showIcon: true,
+            showLabel: false,
             // upperCaseLabel: false,
             activeTintColor: colours.blue,
             inactiveTintColor: colours.gray,
@@ -132,27 +194,40 @@ export const AppNavigator = createStackNavigator({
             //   height: 3
             // },
             style: {
-              backgroundColor: colours.white,
-              borderTopColor: colours.lightgray,
-              borderTopWidth: 0,
-              height: Platform.OS === 'ios' ? 60 : 70
+
+
             },
             tabStyle: {
               // backgroundColor: 'green',
-              paddingTop: 4
+              paddingTop: 4,
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              // borderWidth: 2,
+              // borderColor: 'blue',
+              flex: 1
             },
-            // iconStyle: {
-            //   // backgroundColor: 'lightblue',
-            //   width: Dimensions.get('window').width / 5,
-            //   height: 18
-            // },
+            iconStyle: {
+              // color: 'lightblue',
+              // // width: Dimensions.get('window').width / 5,
+              // // height: 18,
+              // borderWidth: 2,
+              // borderColor: 'red',
+              // alignItems: 'center',
+              // justifyContent: 'center'
+            }, // has no effect
             labelStyle: {
-              // backgroundColor: 'red',
-              fontSize: Platform.OS === 'ios' ? 12 : 14,
+              backgroundColor: 'red',
+              fontSize: Platform.OS === 'ios' ? moderateScale(12) : 14,
               fontWeight: Platform.OS === 'ios' ? '400' : '400',
-              width: Dimensions.get('window').width / 5,
-              marginTop: 3
-            }
+              marginTop: 3,
+              flex: 1,
+              borderWidth: 2,
+              borderColor: 'green',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center'
+            } // doesn't center properly
           }
         })
       }

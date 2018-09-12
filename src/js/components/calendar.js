@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Header } from 'react-navigation';
-import { View, Text, FlatList, Dimensions, Platform, Image, Animated, InteractionManager } from 'react-native';
+import { StatusBar, View, Text, FlatList, Dimensions, Platform, Image, Animated, InteractionManager } from 'react-native';
 import Fabric from 'react-native-fabric';
 import CalendarItem from './calendar-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
-import FeedHeader from './common/FeedHeader';
+// import FeedHeader from './common/FeedHeader';
 import DropdownView from './common/DropdownView';
 import styles from '../../styles';
 import colours from '../../styles/colours';
@@ -14,14 +14,15 @@ import colours from '../../styles/colours';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
 import OfflineIconContainer from '../containers/common/OfflineIconContainer';
-import { scale } from '../../styles/scaling';
+import { } from '../../styles/scaling';
 
 const { Answers } = Fabric;
 const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 0.8;
 const logo = require('../../img/sparkLoginLogo.png');
 
-const NAVBAR_HEIGHT = scale(50);
-const STATUS_BAR_HEIGHT = Platform.select({ ios: 20, android: 24 });
+const NAVBAR_HEIGHT = Header.HEIGHT;
+const STATUS_BAR_HEIGHT = Platform.select({ ios: 20, android: StatusBar.currentHeight });
+const FILTER_PANEL_HEIGHT = Platform.select({ ios: NAVBAR_HEIGHT - STATUS_BAR_HEIGHT, android: NAVBAR_HEIGHT });
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 class Calendar extends Component {
@@ -69,7 +70,7 @@ class Calendar extends Component {
           offsetAnim,
         ),
         0,
-        NAVBAR_HEIGHT - STATUS_BAR_HEIGHT,
+        FILTER_PANEL_HEIGHT,
       )
     };
   }
@@ -106,7 +107,7 @@ class Calendar extends Component {
         this._scrollValue = value;
         this._clampedScrollValue = Math.min(
           Math.max(this._clampedScrollValue + diff, 0),
-          NAVBAR_HEIGHT - STATUS_BAR_HEIGHT,
+          FILTER_PANEL_HEIGHT,
         );
       });
       this.state.offsetAnim.addListener(({ value }) => {
@@ -180,7 +181,7 @@ class Calendar extends Component {
 
   _onMomentumScrollEnd = () => {
     const toValue = this._scrollValue > NAVBAR_HEIGHT &&
-      this._clampedScrollValue > (NAVBAR_HEIGHT - STATUS_BAR_HEIGHT) / 2
+      this._clampedScrollValue > (FILTER_PANEL_HEIGHT) / 2
       ? this._offsetValue + NAVBAR_HEIGHT
       : this._offsetValue - NAVBAR_HEIGHT;
 
@@ -237,20 +238,20 @@ class Calendar extends Component {
     console.log('renderCalendar:', timestamp.getTime());
 
     const { width } = Dimensions.get('window'); // inline style to force render on screen rotation
-    const scaledWidth = width > 700 ? (width * 0.90) : (width * 1);
+    const scaledWidth = width > 700 ? (width * 1) : (width * 1);
 
     const { clampedScroll } = this.state;
 
     const navbarTranslate = clampedScroll.interpolate({
-      inputRange: [0, NAVBAR_HEIGHT - STATUS_BAR_HEIGHT],
-      outputRange: [0, -(NAVBAR_HEIGHT - STATUS_BAR_HEIGHT)],
+      inputRange: [0, FILTER_PANEL_HEIGHT],
+      outputRange: [0, -(FILTER_PANEL_HEIGHT)],
       extrapolate: 'clamp'
     });
-    const navbarOpacity = clampedScroll.interpolate({
-      inputRange: [0, NAVBAR_HEIGHT - STATUS_BAR_HEIGHT],
-      outputRange: [1, 0],
-      extrapolate: 'clamp'
-    });
+    // const navbarOpacity = clampedScroll.interpolate({
+    //   inputRange: [0, FILTER_PANEL_HEIGHT],
+    //   outputRange: [1, 0],
+    //   extrapolate: 'clamp'
+    // });
 
 
     const { allEvents, calendarIsFetching, displaySome, displayAll, filterActive, selectedFilter } = this.props;
@@ -259,15 +260,7 @@ class Calendar extends Component {
 
     return (
       <View style={{ flex: 1, backgroundColor: colours.background }}>
-        <View style={{
-          position: 'absolute',
-          top: 0,
-          left: 0
-        }}>
 
-          <FeedHeader />
-
-        </View>
         <View
           style={{
             flex: 1,
@@ -285,8 +278,8 @@ class Calendar extends Component {
               !calendarIsFetching && this.dataSource &&
               <View style={{ backgroundColor: 'transparent' }}>
                 <DropdownView
-                  navbarHeight={NAVBAR_HEIGHT}
-                  navbarOpacity={navbarOpacity}
+                  navbarHeight={FILTER_PANEL_HEIGHT}
+                  navbarOpacity={1} // or {navbarOpacity}
                   navbarTranslate={navbarTranslate}
                 >
                   {
@@ -315,7 +308,7 @@ class Calendar extends Component {
                   onMomentumScrollBegin={this._onMomentumScrollBegin}
                   onMomentumScrollEnd={this._onMomentumScrollEnd}
                   onScrollEndDrag={this._onScrollEndDrag}
-                  contentContainerStyle={{ backgroundColor: 'transparent', paddingTop: NAVBAR_HEIGHT }}
+                  contentContainerStyle={{ backgroundColor: 'transparent', paddingTop: FILTER_PANEL_HEIGHT }}
                 />
               </View>
 

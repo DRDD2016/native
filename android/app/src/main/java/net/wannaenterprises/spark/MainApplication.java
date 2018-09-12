@@ -5,6 +5,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.entria.views.RNViewOverflowPackage;
 import io.branch.rnbranch.RNBranchPackage;
 import com.bugsnag.BugsnagReactNative;
 import com.evollu.react.fcm.FIRMessagingPackage;
@@ -42,6 +43,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new FabricPackage(),
           new MainReactPackage(),
+            new RNViewOverflowPackage(),
             new RNBranchPackage(),
             BugsnagReactNative.getPackage(),
             new RNFetchBlobPackage(),
