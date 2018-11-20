@@ -7,7 +7,7 @@ import { Header, createStackNavigator, createBottomTabNavigator, createDrawerNav
 import { createReduxBoundAddListener, createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colours from '../styles/colours';
-import MyStatusBar from './components/common/StatusBar';
+import MyStatusBar, { STATUSBAR_HEIGHT } from './components/common/StatusBar';
 import { AddCreateButton } from '../styles';
 import { moderateScale, verticalScale } from '../styles/scaling';
 // import CustomTabBar from './components//general/customTabBar';
@@ -37,6 +37,8 @@ import Splash from './components/auth/splash';
 // import Modal from './components/modal';
 
 const NAVBAR_HEIGHT = Header.HEIGHT;
+const TABBAR_HEIGHT = NAVBAR_HEIGHT - STATUSBAR_HEIGHT;
+
 const { width } = Dimensions.get('window');
 export const menuWidth = width > 700 ? (width * 0.6) : (width * 0.8);
 
@@ -153,7 +155,7 @@ export const AppNavigator = createStackNavigator({
                   // height: 60,
                   borderTopColor: colours.main,
                   borderTopWidth: 2,
-                  height: NAVBAR_HEIGHT * 1.3
+                  height: TABBAR_HEIGHT
               }}>
 
 
