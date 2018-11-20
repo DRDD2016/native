@@ -6,15 +6,17 @@ import HostPoll from './host-poll';
 import FinalisedEvent from './finalised-event';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
-import Header from '../common/Header';
+// import Header from '../common/Header';
 import CloseButton from '../common/CloseButton';
 import Button from '../common/Button';
 import DeleteIcon from '../common/delete-icon';
+import BannerBar from '../common/BannerBar';
+// import HeaderBack from '../common/CreateHeaderBackground';
 
 export default class Event extends Component {
 
   static navigationOptions = ({ navigation }) => ({
-
+    headerForceInset: { top: 'never', bottom: 'never' }, // workaround to remove padding at top of header
     title: (navigation.state.params.name === undefined) ? 'Sorry...' : navigation.state.params.name,
     headerStyle: { backgroundColor: colours.transparent },
     headerRight: (
@@ -161,12 +163,9 @@ export default class Event extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <View
-          style={[
-            styles.headerBuffer2,
-            { backgroundColor: colours.white }]}
-        >
-          <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
+        <View style={{ backgroundColor: colours.white, flex: 1 }}>
+
+          <BannerBar />
 
           <Modal transparent animationType="slide" visible={this.state.isModalVisible} onRequestClose={() => { }}>
 

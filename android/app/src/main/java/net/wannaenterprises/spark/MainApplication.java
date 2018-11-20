@@ -5,6 +5,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.entria.views.RNViewOverflowPackage;
 import io.branch.rnbranch.RNBranchPackage;
 import com.bugsnag.BugsnagReactNative;
@@ -21,6 +22,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.BV.LinearGradient.LinearGradientPackage;
 
 import io.fabric.sdk.android.Fabric;
 import com.crashlytics.android.Crashlytics;
@@ -43,6 +45,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new FabricPackage(),
           new MainReactPackage(),
+            new RNFetchBlobPackage(),
             new RNViewOverflowPackage(),
             new RNBranchPackage(),
             BugsnagReactNative.getPackage(),
@@ -50,7 +53,8 @@ public class MainApplication extends Application implements ReactApplication {
           new ReactNativeConfigPackage(),
           new ImagePickerPackage(),
           new VectorIconsPackage(),
-          new FIRMessagingPackage()
+          new FIRMessagingPackage(),
+          new LinearGradientPackage()
       );
     }
 

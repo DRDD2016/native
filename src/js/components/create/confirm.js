@@ -3,10 +3,11 @@ import { View, ScrollView, Text, Image } from 'react-native';
 import ConfirmWhat from './confirm-what';
 import ConfirmWhere from './confirm-where';
 import ConfirmWhen from './confirm-when';
+import BannerBar from '../common/BannerBar';
 // import Button from '../common/Button';
 import HeaderBack from '../common/CreateHeaderBackground';
 import Spinner from '../common/Spinner';
-import { styles, HeaderText, ConfirmButton, ConfirmButtonText, ButText } from '../../../styles';
+import { styles, TitleCreate, HeaderText, ConfirmButton, ConfirmButtonText, ButText } from '../../../styles';
 import colours from '../../../styles/colours';
 import ButtonHeader from '../common/ButtonHeader';
 import BackIcon from '../common/back-icon';
@@ -17,6 +18,7 @@ import mapToISOString from '../../lib/map-to-iso-string';
 class Confirm extends Component {
 
   static navigationOptions = ({ navigation }) => ({
+    headerForceInset: { top: 'never', bottom: 'never' }, // workaround to remove padding at top of header
     headerLeft: <ButtonHeader
       onPress={() => navigation.goBack(null)}
     >
@@ -31,11 +33,11 @@ class Confirm extends Component {
     </View>
   });
 
-  
+
   render () {
     const avatar = require('../../../img/avatar.png');
     console.log('confirm Props', this.props);
-    const { what, where, when, description, note, handleOnPress, photo_url, isConnected, isFetching } = this.props;
+    const { what, where, when, description, note, handleOnPress, photo_url, isFetching } = this.props;
 
     const iSODates = mapToISOString(when);
     const sortedDates = iSODates.sort((a, b) => {
@@ -54,11 +56,19 @@ class Confirm extends Component {
         style={[
           { backgroundColor: colours.white, flex: 1 }]}
       >
+        <BannerBar />
         <HeaderBack />
-        { !isConnected && this.renderAlert() }
+
+
         <ScrollView>
-          <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 10 }}>
-            <Text style={[styles.msg3, { backgroundColor: colours.transparent, paddingBottom: 5 }]}>{ description }</Text>
+
+          <View style={{ flexDirection: 'column', alignItems: 'center', marginHorizontal: 15 }}>
+            <TitleCreate color={colours.main} >
+              Check your invite
+            </TitleCreate>
+            <Text style={ [styles.msg3, { paddingTop: 10, paddingBottom: 10 }] }>
+              { description }
+            </Text>
 
           </View>
           <View style={{ backgroundColor: colours.spacerColour, height: 1, marginHorizontal: 5 }} />

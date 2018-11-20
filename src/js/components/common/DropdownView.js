@@ -16,7 +16,7 @@ export default class DropdownView extends Component {
           top: 0,
           left: 0,
           right: 0,
-          flex: 1,
+          // flex: 1,
           zIndex: 1,
           height: navbarHeight,
           flexDirection: 'row',

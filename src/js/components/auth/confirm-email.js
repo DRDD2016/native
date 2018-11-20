@@ -13,7 +13,6 @@ import colours from '../../../styles/colours';
 // import Fabric from 'react-native-fabric';
 // import FeedHeader from '../common/FeedHeader';
 import ButtonHeader from '../common/ButtonHeader';
-import FeedHeader from '../common/FeedHeader';
 import BackIcon from '../common/back-icon';
 import ImageHeader from '../common/ImageHeader';
 
@@ -77,13 +76,14 @@ class ConfirmEmail extends Component {
     );
   };
 
+  // <FeedHeader>
+  //   { !this.props.isConnected && this.renderAlert() }
+  // </FeedHeader>
 
   render () {
     return (
       <View style={{ flex: 1, backgroundColor: colours.white }}>
-        <FeedHeader>
-          { !this.props.isConnected && this.renderAlert() }
-        </FeedHeader>
+
         <View style={{ alignItems: 'center', marginHorizontal: 10, marginTop: 50, marginBottom: 70 }}>
           <Text style={styles.msg3}>Please enter the email address you used to register and we will send an email link to reset your password</Text>
           { this.renderServerMessage() }

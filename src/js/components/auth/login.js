@@ -6,8 +6,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Fabric from 'react-native-fabric';
 import { persistor } from '../../init-store';
 import { FormTextInput, FormPasswordInput } from './form-components';
-import HeaderBack from '../common/CreateHeaderBackground';
+// import HeaderBack from '../common/CreateHeaderBackground';
 import ButtonHeader from '../common/ButtonHeader';
+import BannerBar from '../common/BannerBar';
 import BackIcon from '../common/back-icon';
 import Spinner from '../common/Spinner';
 import { loginValidator as validate } from './form-validation';
@@ -61,12 +62,13 @@ class Login extends Component {
 
 
   static navigationOptions = ({ navigation }) => ({
+    headerForceInset: { top: 'never', bottom: 'never' },
     title: 'Login',
     headerLeft: <ButtonHeader onPress={() => navigation.goBack(null)}>
       <BackIcon />
     </ButtonHeader>,
     headerRight: <ButtonHeader />,
-    headerStyle: { borderTopWidth: 4, borderTopColor: colours.main, backgroundColor: colours.headerBackgroundColor, elevation: 0 },
+    headerStyle: { backgroundColor: colours.headerBackgroundColor },
     headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
     headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
@@ -115,6 +117,7 @@ class Login extends Component {
     return (
       <View style={{ flex: 1 }}>
 
+        <BannerBar />
 
         <View
           style={{
@@ -129,7 +132,7 @@ class Login extends Component {
           >
 
             <View />
-            <HeaderBack />
+
 
             <Modal
               transparent

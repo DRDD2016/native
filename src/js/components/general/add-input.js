@@ -12,7 +12,7 @@ const AddInput = ({ data, handler, testDescription, colour }) => {
         <View />
       }
       { (data.length < 4) &&
-        <View style={[styles.row, { alignItems: 'center', justifyContent: 'center', marginTop: 0, marginBottom: 0, flex: 1 }]}>
+        <View style={[styles.row, { alignItems: 'center', justifyContent: 'center', marginTop: 0, marginBottom: 10, flex: 1 }]}>
           <View style={{ flex: 1 }} />
 
           <AddButton

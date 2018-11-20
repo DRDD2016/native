@@ -16,7 +16,7 @@ class CreateButton extends Component {
                alignItems: 'center'
       }}>
         <AddCreateButton style={{ }}>
-          <Icon name="plus" size={verticalScale(32)} color={colours.white} />
+          <Icon name="plus" size={verticalScale(28)} color={colours.white} />
         </AddCreateButton>
 
       </View>

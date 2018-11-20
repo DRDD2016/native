@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Dimensions, Platform } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import HeaderBack from '../common/CreateHeaderBackground';
+// import HeaderBack from '../common/CreateHeaderBackground';
 import ButtonHeader from '../common/ButtonHeader';
+import InputField from '../general/inputField';
+import BannerBar from '../common/BannerBar';
 import BackIcon from '../common/back-icon';
-import styles, { HeaderText, ConfirmButton, ConfirmButtonText } from '../../../styles';
+import styles, { TitleCreate, HeaderText, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
 import CloseButton from '../common/CloseButton';
 
 export default class Note extends Component {
 
   static navigationOptions = ({ navigation }) => ({
+    headerForceInset: { top: 'never', bottom: 'never' }, // workaround to remove padding at top of header
     headerLeft: <ButtonHeader
       onPress={() => navigation.goBack(null)}
     >
@@ -33,62 +36,68 @@ export default class Note extends Component {
     const { name, note, handleChange } = this.props;
 
     return (
-      <KeyboardAwareScrollView
-        style={{ backgroundColor: colours.white, height: Dimensions.get('window').height * 2 }}
-        enableOnAndroid
-        extraHeight={125}
-        resetScrollToCoords={{ x: 0, y: 0 }}
-        contentContainerStyle={{ }}
-      >
-        <HeaderBack />
-        <View
-          style={{ backgroundColor: colours.transparent }}
+      <View style={{ backgroundColor: colours.white }}>
+        <BannerBar />
+        <KeyboardAwareScrollView
+          style={{ backgroundColor: colours.white, height: Dimensions.get('window').height * 2 }}
+          enableOnAndroid
+          extraHeight={125}
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          contentContainerStyle={{ }}
         >
+
           <View
-            style={{
-              flexDirection: 'column',
-              alignItems: 'center',
-              marginHorizontal: 10,
-              marginTop: Platform.OS === 'ios' ? null : 10 }}
+            style={{ backgroundColor: colours.transparent }}
           >
-            <Text style={styles.msg3}>
-              Add a message to your friends (optional).
-            </Text>
+            <View style={{ flexDirection: 'column', alignItems: 'center', marginHorizontal: 15 }}>
+              <TitleCreate color={colours.what} >
+                Do you want to add a message to your friends?
+              </TitleCreate>
+              <Text style={ [styles.msg3, { paddingTop: 10, paddingBottom: 10 }] }>
+                (optional)
+              </Text>
 
-            <View style={ styles.row }>
-              <TextInput
-                accessibilityLabel="Note"
-                underlineColorAndroid="transparent"
-                style={ [styles.inputStyle, { textAlignVertical: 'top', height: 100 }] }
-                onChangeText={ text => handleChange(text, 'note') }
-                value={ note }
-                multiline
-                numberOfLines={5}
-                placeholder="Enter your message here"
-                // autoCorrect
-              />
+              <View style={ styles.row }>
+                <InputField
+                  accessibilityLabel="Note"
+                  underlineColorAndroid="transparent"
+                  style={ [styles.inputStyle, { textAlignVertical: 'top', height: 400 }] }
+                  onChangeText={ text => handleChange(text, 'note') }
+                  value={ note }
+                  type="text"
+                  placeholder="eg. Meet in the bar, bring salad, dress code, etc"
+                  inputKey={0}
+                  label="Your message"
+                  showLabel
+                  // optional
+                  multiline
+                  numberOfLines={5}
+                  // autoCorrect
+                />
+
+              </View>
+
+              <View style={ styles.row }>
+
+                <ConfirmButton
+                  testDescription="Confirm Event Note"
+                  onPress={ () => this.nextPage(name) }
+                  style={{ backgroundColor: colours.green }}
+                >
+
+                  <ConfirmButtonText>
+                    NEXT
+                  </ConfirmButtonText>
+
+                </ConfirmButton>
+
+              </View>
+              <View style={{ height: 60 }} />
             </View>
-
-            <View style={ styles.row }>
-
-              <ConfirmButton
-                testDescription="Confirm Event Note"
-                onPress={ () => this.nextPage(name) }
-                style={{ backgroundColor: colours.green }}
-              >
-
-                <ConfirmButtonText>
-                  NEXT
-                </ConfirmButtonText>
-
-              </ConfirmButton>
-
-            </View>
-            <View style={{ height: 60 }} />
           </View>
-        </View>
 
-      </KeyboardAwareScrollView>
+        </KeyboardAwareScrollView>
+      </View>
     );
   }
 }

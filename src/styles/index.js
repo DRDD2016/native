@@ -6,10 +6,6 @@ import { scale, moderateScale, verticalScale2, horizontalScale2 } from './scalin
 
 // Buttons
 
-export const Statusbar = styled.StatusBar`
-  backgroundColor: ${colours.main};
-
-`;
 
 export const Button = styled.TouchableOpacity`
   paddingTop: 4;
@@ -100,12 +96,12 @@ export const AddButton = styled.TouchableOpacity.attrs({
 export const AddCreateButton = styled.View`
   position: absolute;
   top: ${verticalScale2(-20)};
-  height: ${verticalScale2(90)};
-  width: ${verticalScale2(90)};
+  height: ${verticalScale2(80)};
+  width: ${verticalScale2(80)};
   backgroundColor: ${colours.main};
   alignItems: center;
   justifyContent: center;
-  borderRadius: 45;
+  borderRadius: ${verticalScale2(40)};
   elevation: 1;
   zIndex: 99
   box-shadow: 0px 1px 2px ${colours.shadowColour}; // width, height, radius, colour
@@ -180,6 +176,15 @@ export const Title6 = styled.Text`
   fontWeight: 500;
 `; // title6
 
+export const TitleCreate = styled.Text.attrs({
+  color: props => props.color || colours.gray
+})`
+  fontSize: ${scale(14)};
+  fontWeight: 600;
+  color: ${props => props.color};
+  marginTop: 15;
+`; // title3
+
 export const TitleInvited = styled.Text`
   fontSize: ${scale(18)};
   fontWeight: 700;
@@ -189,7 +194,7 @@ export const TitleInvited = styled.Text`
 export const Msg1 = styled.Text`
   fontSize: ${moderateScale(18)};
   fontWeight: 600;
-  color: ${colours.gray};
+  color: ${colours.main};
 `; // msg1
 
 export const Msg2 = styled.Text`
@@ -311,7 +316,7 @@ export const styles = {
     alignItems: 'center',
     borderRadius: 30,
     borderColor: colours.main,
-    borderWidth: 2,
+    borderWidth: 1,
     elevation: 2,
     shadowOpacity: 0.8,
     shadowRadius: 4,
@@ -790,14 +795,16 @@ export const styles = {
   inputStyle: {
     color: colours.darkgray,
     borderRadius: 0,
-    borderWidth: 0.5,
-    borderColor: colours.gray,
+    marginTop: 2,
+    marginBottom: 2,
+    borderWidth: 1,
+    borderColor: colours.main,
     paddingHorizontal: 10,
     fontSize: 16,
     fontWeight: '400',
     height: 45,
     flexDirection: 'row',
-    flex: 1,
+    maxWidth: 700,
     // elevation: 1, // replaces shadow on Android, shadow props IOS only
     shadowOpacity: 0.75,
     shadowRadius: 5,
