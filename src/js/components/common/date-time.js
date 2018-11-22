@@ -9,7 +9,7 @@ import moment from 'moment';
 import colours from '../../../styles/colours';
 import Button from '../common/Button';
 import styles from '../../../styles';
-import { scale } from '../../../styles/scaling';
+import { scale, moderateScale } from '../../../styles/scaling';
 
 const inputCardStyle = {
     marginTop: 10,
@@ -37,8 +37,8 @@ const labelStyle = {
 const containerStyle = {
   width: '85%',
   flexDirection: 'row',
-  borderColor: 'red',
-  borderWidth: 1,
+  // borderColor: 'red',
+  // borderWidth: 1,
   alignItems: 'center',
   justifyContent: 'center',
   maxWidth: 700
@@ -95,8 +95,8 @@ class DateTime extends Component {
         >
           <View style={{
             width: '100%',
-            borderColor: 'green',
-            borderWidth: 1,
+            // borderColor: 'green',
+            // borderWidth: 1,
             flexDirection: 'column',
             alignItems: 'center'
           }}>
@@ -115,21 +115,22 @@ class DateTime extends Component {
               justifyContent: 'center',
               alignItems: 'flex-start',
               marginTop: 5,
-              borderColor: 'purple',
-              borderWidth: 1,
+              // borderColor: 'purple',
+              // borderWidth: 1,
               paddingLeft: 0,
               paddingRight: 0
             }}>
 
               <View
                 accessibilityLabel={`Date option ${index + 1}`}
-                style={{ width: '50%', borderColor: 'blue',
-                borderWidth: 1, justifyContent: 'flex-start', flexDirection: 'row' }}
+                style={{
+                  width: '50%',
+                  justifyContent: 'flex-start',
+                  flexDirection: 'row' }}
               >
-                <View style={{ borderColor: 'red',
-                borderWidth: 1, width: '100%', justifyContent: 'flex-start', flexDirection: 'row', alignItems: 'center' }}>
-                  <View style={{ width: '30%', borderColor: 'pink',
-                  borderWidth: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{
+                  width: '100%', justifyContent: 'flex-start', flexDirection: 'row', alignItems: 'center' }}>
+                  <View style={{ width: '30%', justifyContent: 'center', alignItems: 'center' }}>
                     <IconM name="calendar-blank" size={scale(24)} color={colours.when} />
                   </View>
                   <DatePicker
@@ -146,6 +147,12 @@ class DateTime extends Component {
                       dateIcon: {
 
                       },
+                      dateText: {
+                        fontSize: moderateScale(12)
+                      },
+                      placeholderText: {
+                        fontSize: moderateScale(12)
+                      },
                       dateInput: {
                         marginLeft: 5,
                         borderWidth: 0,
@@ -161,11 +168,9 @@ class DateTime extends Component {
 
               <View
                 accessibilityLabel={`Time option ${index + 1}`}
-                style={{ borderColor: 'red',
-                borderWidth: 1, width: '50%', justifyContent: 'flex-start', flexDirection: 'column', alignItems: 'flex-end' }}
+                style={{ width: '50%', justifyContent: 'flex-start', flexDirection: 'column', alignItems: 'flex-end' }}
               >
-                <View style={{ borderColor: 'red',
-                borderWidth: 1, width: '100%', justifyContent: 'flex-start', flexDirection: 'row', alignItems: 'center' }}>
+                <View style={{ width: '100%', justifyContent: 'flex-start', flexDirection: 'row', alignItems: 'center' }}>
                   <View style={{ width: '30%', justifyContent: 'center', alignItems: 'center' }}>
                     <IconM name="clock" size={scale(24)} color={colours.when} />
                   </View>
@@ -183,6 +188,12 @@ class DateTime extends Component {
                       dateIcon: {
 
                       },
+                      dateText: {
+                        fontSize: moderateScale(12)
+                      },
+                      placeholderText: {
+                        fontSize: moderateScale(12)
+                      },
                       dateInput: {
                         marginLeft: 5,
                         borderWidth: 0,
@@ -198,12 +209,18 @@ class DateTime extends Component {
 
                 </View>
 
-                <View style={{ borderColor: 'purple',
-                borderWidth: 1, width: '100%', flexDirection: 'row', paddingLeft: 5, alignItems: 'center', justifyContent: 'center' }}>
-                  <Text style={[styles.msg3, { borderColor: 'blue',
-                  borderWidth: 1, width: '20%', fontSize: scale(12), textAlign: 'right' }]}>or</Text>
-                  <View style={{ borderColor: 'blue',
-                  borderWidth: 1, width: '40%', alignItems: 'center', justifyContent: 'center' }} >
+                <View style={{
+                  // borderColor: 'purple',
+                  // borderWidth: 1,
+                  width: '70%', flexDirection: 'row', paddingLeft: 5, alignItems: 'center', justifyContent: 'center' }}>
+                  <Text style={[styles.msg3, {
+                    // borderColor: 'blue',
+                    // borderWidth: 1,
+                    width: '20%', fontSize: moderateScale(12), textAlign: 'right' }]}>or</Text>
+                  <View style={{
+                    // borderColor: 'blue',
+                    // borderWidth: 1,
+                    flex: 1, alignItems: 'center', justifyContent: 'center' }} >
                     <Switch
                       onValueChange={ (switchValue) => {
                         this.setState({ tbcSwitch: switchValue });
@@ -211,15 +228,18 @@ class DateTime extends Component {
                         handleTime(newTimeValue, index);
                       }}
                       value={ this.state.tbcSwitch }
-                      style={{ padding: 0, margin: 0, transform: [{ scaleX: 0.6 }, { scaleY: 0.6 }] }}
+                      style={{ padding: 0, margin: 0, transform: [{ scaleX: moderateScale(0.6) }, { scaleY: moderateScale(0.6) }] }}
                       // tintColor={colours.gray}
                       // thumbTintColor={colours.when}
                       onTintColor={colours.when}
 
                     />
                   </View>
-                  <Text style={[styles.msg3, { color: this.state.tbcSwitch ? colours.when : colours.gray, borderColor: 'blue',
-                  borderWidth: 1, width: '30%', fontSize: scale(12), textAlign: 'left' }]}>TBC</Text>
+                  <Text numberOfLines={1}
+                    style={[styles.msg3, { color: this.state.tbcSwitch ? colours.when : colours.gray,
+                    // borderColor: 'blue',
+                    // borderWidth: 1,
+                    width: '35%', fontSize: moderateScale(12), textAlign: 'left' }]}>TBC</Text>
                 </View>
 
               </View>
@@ -227,8 +247,7 @@ class DateTime extends Component {
             </View>
           </View>
         </View>
-        <View style={ [styles.shortRow, { borderColor: 'red',
-        borderWidth: 1, width: '15%', alignItems: 'center', justifyContent: 'center' }] }>
+        <View style={ [styles.shortRow, { width: '15%', alignItems: 'center', justifyContent: 'center' }] }>
 
           { (inputKey === 0) &&
             <View />

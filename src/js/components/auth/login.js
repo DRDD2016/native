@@ -13,7 +13,7 @@ import BackIcon from '../common/back-icon';
 import Spinner from '../common/Spinner';
 import { loginValidator as validate } from './form-validation';
 import colours from '../../../styles/colours';
-import { styles, ConfirmButton, ConfirmButtonText, HeaderText } from '../../../styles';
+import styles, { ConfirmButton, ConfirmButtonText, HeaderText } from '../../../styles';
 // import { connectAlert } from '../Alert';
 
 const { Answers } = Fabric;
@@ -224,12 +224,14 @@ class Login extends Component {
                   <Icon name="envelope-o" size={15} color="rgba(255, 255, 255, 0.76)" />
                 </View>
                 <Field
-                  style={inlineStyles.input}
+                  style={ styles.inputStyle }
                   name="email"
                   component={ FormTextInput }
                   isEmail
                   isLoginView
                   placeholder="email address"
+                  focussedColor={colours.what}
+                  unfocussedColor={colours.lightgray}
                 />
               </View>
               <View style={inlineStyles.inputWrap}>

@@ -18,11 +18,11 @@ export default class Event extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerForceInset: { top: 'never', bottom: 'never' }, // workaround to remove padding at top of header
     title: (navigation.state.params.name === undefined) ? 'Sorry...' : navigation.state.params.name,
-    headerStyle: { backgroundColor: colours.transparent },
+    headerStyle: { backgroundColor: colours.headerBackgroundColor, elevation: 0 },
     headerRight: (
       navigation.state.params.userIsHost &&
         <Button
-          buttonStyle={{ paddingLeft: 20, paddingRight: 20, flexDirection: 'row', alignSelf: 'flex-end' }}
+          buttonStyle={{ paddingLeft: 20, paddingRight: 20, flexDirection: 'row', alignSelf: 'center' }}
           textStyle={{ color: colours.gray }}
           onPress={ () => navigation.state.params.handleDelete(navigation.state.params.event, navigation.state.params.event.event_id) }
         >
@@ -219,7 +219,7 @@ export default class Event extends Component {
 
           </Modal>
 
-          <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 70 : 110 }}>
+          <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 20 : 110 }}>
             {
               this.props.event && this.eventRouter()
             }

@@ -37,7 +37,10 @@ import Splash from './components/auth/splash';
 // import Modal from './components/modal';
 
 const NAVBAR_HEIGHT = Header.HEIGHT;
-const TABBAR_HEIGHT = NAVBAR_HEIGHT - STATUSBAR_HEIGHT;
+const TABBAR_HEIGHT = verticalScale(NAVBAR_HEIGHT - STATUSBAR_HEIGHT);
+console.log('NAVBAR_HEIGHT', NAVBAR_HEIGHT);
+console.log('STATUSBAR_HEIGHT', STATUSBAR_HEIGHT);
+console.log('TABBAR_HEIGHT', TABBAR_HEIGHT);
 
 const { width } = Dimensions.get('window');
 export const menuWidth = width > 700 ? (width * 0.6) : (width * 0.8);

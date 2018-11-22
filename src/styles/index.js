@@ -23,7 +23,7 @@ export const BarButton = styled.TouchableOpacity`
 `;
 
 export const ConfirmButton = styled.TouchableOpacity`
-  width: ${horizontalScale2(350)};
+  width: ${horizontalScale2(360)};
   justifyContent: center;
   alignItems: center;
   backgroundColor: ${colours.confirm};
@@ -315,12 +315,12 @@ export const styles = {
     padding: 10,
     alignItems: 'center',
     borderRadius: 30,
-    borderColor: colours.main,
-    borderWidth: 1,
+    borderColor: colours.gray,
+    borderWidth: 0,
     elevation: 2,
     shadowOpacity: 0.8,
     shadowRadius: 4,
-    shadowColor: colours.main,
+    shadowColor: colours.gray,
     shadowOffset: { width: 0, height: 2 }
 
   },

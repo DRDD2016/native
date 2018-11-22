@@ -24,7 +24,7 @@ export default class What extends Component {
       <BackIcon />
     </ButtonHeader>,
     headerRight: <CloseButton stack="ScreenCreate" nav={navigation} />,
-    headerStyle: { borderTopWidth: 4, borderTopColor: colours.what, backgroundColor: colours.headerBackgroundColor, elevation: 0 },
+    headerStyle: { backgroundColor: colours.headerBackgroundColor, elevation: 0 },
     headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
     headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
@@ -68,7 +68,7 @@ export default class What extends Component {
     });
 
     return (
-      <View style={{ backgroundColor: colours.white, flex: 1 }}>
+      <View style={{ borderBottomWidth: 8, borderBottomColor: colours.what, backgroundColor: colours.white, flex: 1 }}>
         <BannerBar />
         <KeyboardAwareScrollView
           style={{ backgroundColor: colours.white }}
