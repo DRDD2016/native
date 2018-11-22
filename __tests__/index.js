@@ -2,8 +2,20 @@ import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Index from '../src/js/';
-
 // Note: test renderer must be required after react-native.
+
+it('renders correctly', () => {
+  renderer.create(
+    <Index />
+  );
+});
+
+// it('renders correctly', () => {
+//   const tree = renderer.create(
+//     <Index />
+//   );
+// });
+
 
 jest.mock('react-native-fabric', () => {
   return {
@@ -26,55 +38,65 @@ jest.mock('react-native-branch', () => {
   };
 });
 
-// jest.mock('react-native', () => ({
-//     NativeModules: {
-//       BugsnagReactNative: null
-//     }
-// }), {
-//     virtual: true
-// });
+jest.mock('react-native', () => ({
 
-jest.mock('bugsnag-react-native', () => {
-  return {
-    Client: jest.fn()
-  };
-});
-
-// jest.mock('../src/js/index.js', () => {
-//     return {
-//       bugsnag: {
-//         leaveBreadcrumb: 'stuff'
-//       }
-//     };
-// });
-
-
-jest.mock('react-native-fcm', () => {
-  return {
-    on: jest.fn(),
-    requestPermissions: jest.fn(),
-    getFCMToken: jest.fn(() => new Promise(accept => accept('FakeToken'))),
-    getAPNSToken: jest.fn(() => new Promise(accept => accept('FakeToken'))),
-    FCMEvent: {
-      Notification: 'fakeNotification'
+    Dimensions: {
+      get: jest.fn()
+    },
+    NativeModules: {
+      BugsnagReactNative: null
     }
+}), {
+    virtual: true
+});
+//
+// jest.mock('bugsnag-react-native', () => {
+//   return {
+//     Client: jest.fn()
+//   };
+// });
+//
+jest.mock('react-native-config', () => {
+  return {
+
   };
 });
-
-// jest.mock('react-native-dropdownalert', () => {
+//
+// // jest.mock('../src/js/index.js', () => {
+// //     return {
+// //       bugsnag: {
+// //         leaveBreadcrumb: 'stuff'
+// //       }
+// //     };
+// // });
+//
+//
+// jest.mock('react-native-fcm', () => {
+//   return {
+//     on: jest.fn(),
+//     requestPermissions: jest.fn(),
+//     getFCMToken: jest.fn(() => new Promise(accept => accept('FakeToken'))),
+//     getAPNSToken: jest.fn(() => new Promise(accept => accept('FakeToken'))),
+//     FCMEvent: {
+//       Notification: 'fakeNotification'
+//     }
+//   };
+// });
+//
+// // jest.mock('react-native-dropdownalert', () => {
+// //   return {
+// //
+// //   };
+// // });
+//
+// jest.mock('react-native-vector-icons/FontAwesome', () => {
 //   return {
 //
 //   };
 // });
-
-jest.mock('react-native-vector-icons/FontAwesome', () => {
-  return {
-
-  };
-});
-
-it('renders correctly', () => {
-  renderer.create(
-    <Index />
-  );
-});
+//
+// it('renders correctly', () => {
+//   renderer.create(
+//     <Index />
+//   );
+// });

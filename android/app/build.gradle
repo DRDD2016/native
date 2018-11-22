@@ -10,6 +10,7 @@ buildscript {
     // The Fabric Gradle plugin uses an open ended version to react
     // quickly to Android tooling updates
     classpath 'io.fabric.tools:gradle:1.+'
+    compile project(':react-native-linear-gradient')
   }
 }
 apply plugin: 'io.fabric'
@@ -194,10 +195,10 @@ android {
 }
 
 dependencies {
+    implementation project(':rn-fetch-blob')
     implementation project(':react-native-view-overflow')
     implementation project(':react-native-branch')
     implementation project(':bugsnag-react-native')
-    implementation project(':react-native-fetch-blob')
     implementation project(':react-native-config')
     implementation project(':react-native-image-picker')
     implementation project(':react-native-vector-icons')

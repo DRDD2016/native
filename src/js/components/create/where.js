@@ -9,24 +9,45 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import AddInput from '../general/add-input';
 import ButtonHeader from '../common/ButtonHeader';
 import BackIcon from '../common/back-icon';
+import BannerBar from '../common/BannerBar';
 import PlaceAutoComplete from '../common/PlaceAutoComplete';
 import CloseButton from '../common/CloseButton';
-import HeaderBack from '../common/CreateHeaderBackground';
-import styles, { HeaderText, ConfirmButton, ConfirmButtonText } from '../../../styles';
+// import HeaderBack from '../common/CreateHeaderBackground';
+import styles, { TitleCreate, HeaderText, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
 
 // const windowSize = Dimensions.get('window');
 
+const inputCardStyle = {
+    marginTop: 10,
+    marginBottom: 10,
+    paddingRight: 15,
+    minHeight: 32,
+    padding: 10,
+    paddingLeft: 15,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 1,
+    shadowOpacity: 0.75,
+    shadowRadius: 5,
+    shadowColor: 'darkgray',
+    shadowOffset: { height: 2, width: 0 },
+    flex: 1 // makes card expand to accomodate listView
+};
+
 export default class Where extends Component {
 
   static navigationOptions = ({ navigation }) => ({
+    headerForceInset: { top: 'never', bottom: 'never' }, // workaround to remove padding at top of header
     headerLeft: <ButtonHeader
       onPress={() => navigation.goBack(null)}
     >
       <BackIcon />
     </ButtonHeader>,
     headerRight: <CloseButton stack="ScreenCreate" nav={navigation} />,
-    headerStyle: { borderTopWidth: 4, borderTopColor: colours.where, backgroundColor: colours.headerBackgroundColor, elevation: 0 },
+    headerStyle: { backgroundColor: colours.headerBackgroundColor, elevation: 0 },
     headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
     headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
@@ -90,6 +111,8 @@ export default class Where extends Component {
 
   render () {
     const { data, name, addInput, removeInput } = this.props;
+    const labelText = 'Place or venue';
+    const labelType = data.length > 1 ? 'poll' : 'notPoll';
     const inputs = data.map((value, inputKey) => {
 
       console.log('where map inputKey: ', inputKey);
@@ -99,30 +122,39 @@ export default class Where extends Component {
         return null;
       }
 
+      // <View
+      //   accessibilityLabel={`Where option ${inputKey + 1}`}
+      //   key={ inputKey }
+      //   style={{
+      //     flexDirection: 'row',
+      //     flex: 1,
+      //     // height: 44,
+      //     // borderColor: 'yellow',
+      //     // borderWidth: 1,
+      //     marginTop: !this.state.inputFocussed ? 10 : null,
+      //     paddingHorizontal: !this.state.inputFocussed ? 10 : null // #fff
+      //     // zIndex: 999999
+      //   }}
       return (
-
         <View
           accessibilityLabel={`Where option ${inputKey + 1}`}
           key={ inputKey }
-          style={{
-            flexDirection: 'row',
-            flex: 1,
-            // height: 44,
-            // borderColor: 'yellow',
-            // borderWidth: 1,
-            marginTop: !this.state.inputFocussed ? 10 : null,
-            paddingHorizontal: !this.state.inputFocussed ? 10 : null // #fff
-            // zIndex: 999999
-          }}
+          style={[inputCardStyle, {
+            borderRadius: this.state.inputFocussed ? null : 10 }]}
         >
+
+
           <View style={{
             flexDirection: 'row',
-            flex: 1
+            flex: 1,
+            maxWidth: 700
             // borderColor: 'blue',
             // borderWidth: 2
           }}
           >
             <PlaceAutoComplete
+              labelType={ labelType }
+              labelText={ labelText }
               inputKey={ inputKey }
               value={ value }
               onFocus={() => this.setInputKeyFocussed(inputKey)}
@@ -161,10 +193,11 @@ export default class Where extends Component {
       <View
         accessibilityLabel="Where"
         style={[
-          { backgroundColor: colours.white, flex: 1 }]}
+          { borderBottomWidth: 8, borderBottomColor: colours.where, backgroundColor: colours.white, flex: 1 }]}
       >
+        <BannerBar />
         {
-          !this.state.inputFocussed && <HeaderBack />
+          // !this.state.inputFocussed && <HeaderBack />
         }
         <KeyboardAwareScrollView
           style={{ backgroundColor: colours.transparent }}
@@ -172,7 +205,8 @@ export default class Where extends Component {
           extraHeight={0}
           resetScrollToCoords={{ x: 0, y: 0 }}
           contentContainerStyle={{ }}
-          keyboardShouldPersistTaps="always"
+          // keyboardShouldPersistTaps="always"
+          keyboardShouldPersistTaps="handled"
         >
           <View
             accessibilityLabel="Where options"
@@ -184,12 +218,12 @@ export default class Where extends Component {
           >
             {
               !this.state.inputFocussed &&
-              <View>
-                <Text style={ styles.smallMessageText } >
-                  Enter where the event will take place (or leave blank to decide it later).
-                </Text>
-                <Text style={ styles.smallMessageText }>
-                  You can add more than one option to create a poll.
+              <View style={{ flexDirection: 'column', alignItems: 'center', marginHorizontal: 15 }}>
+                <TitleCreate color={colours.where} >
+                  Where will it be?
+                </TitleCreate>
+                <Text style={ [styles.msg4, { paddingTop: 10, paddingBottom: 10 }] }>
+                  Enter an city, town or address (or leave blank to decide it later)
                 </Text>
               </View>
 
@@ -200,8 +234,10 @@ export default class Where extends Component {
             {
               !this.state.inputFocussed &&
 
-              <View>
-
+              <View style={{ flexDirection: 'column', alignItems: 'center', marginHorizontal: 15 }}>
+                <Text style={ [styles.msg4, { paddingTop: 10, paddingBottom: 10 }] }>
+                  You can add more than one option to create a poll.
+                </Text>
                 <View
                   accessibilityLabel="Add Where"
                   style={{

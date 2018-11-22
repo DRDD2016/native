@@ -21,12 +21,13 @@ class Signup extends Component {
 
 
   static navigationOptions = ({ navigation }) => ({
+    headerForceInset: { top: 'never', bottom: 'never' }, // workaround to remove padding at top of header
     title: 'Sign up',
     headerLeft: <ButtonHeader onPress={() => navigation.goBack(null)}>
       <BackIcon />
     </ButtonHeader>,
     headerRight: <ButtonHeader />,
-    headerStyle: { borderTopWidth: 4, borderTopColor: colours.main, backgroundColor: colours.headerBackgroundColor, elevation: 0 },
+    headerStyle: { backgroundColor: colours.headerBackgroundColor, elevation: 0 },
     headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
     headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
@@ -42,7 +43,7 @@ class Signup extends Component {
     Answers.logCustom('Signup.js Mounted', { additionalData: 'nothing' });
   }
 
-  
+
   renderButton = () => {
     const { handleSubmit, handleSubmitForm, isSigningUp } = this.props;
     if (isSigningUp) {

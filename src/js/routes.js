@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dimensions, Platform, BackHandler, TouchableWithoutFeedback } from 'react-native';
+import { Dimensions, Platform, BackHandler, TouchableWithoutFeedback, View } from 'react-native';
 import { connect } from 'react-redux';
 import ViewOverflow from 'react-native-view-overflow';
 import { Header, createStackNavigator, createBottomTabNavigator, createDrawerNavigator, NavigationActions } from 'react-navigation';
@@ -7,8 +7,9 @@ import { Header, createStackNavigator, createBottomTabNavigator, createDrawerNav
 import { createReduxBoundAddListener, createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colours from '../styles/colours';
+import MyStatusBar, { STATUSBAR_HEIGHT } from './components/common/StatusBar';
 import { AddCreateButton } from '../styles';
-import { moderateScale, verticalScale2, verticalScale } from '../styles/scaling';
+import { moderateScale, verticalScale } from '../styles/scaling';
 // import CustomTabBar from './components//general/customTabBar';
 import DrawerContainer from './containers/drawer';
 import Index from './components/auth';
@@ -36,6 +37,11 @@ import Splash from './components/auth/splash';
 // import Modal from './components/modal';
 
 const NAVBAR_HEIGHT = Header.HEIGHT;
+const TABBAR_HEIGHT = verticalScale(NAVBAR_HEIGHT - STATUSBAR_HEIGHT);
+console.log('NAVBAR_HEIGHT', NAVBAR_HEIGHT);
+console.log('STATUSBAR_HEIGHT', STATUSBAR_HEIGHT);
+console.log('TABBAR_HEIGHT', TABBAR_HEIGHT);
+
 const { width } = Dimensions.get('window');
 export const menuWidth = width > 700 ? (width * 0.6) : (width * 0.8);
 
@@ -69,7 +75,7 @@ export const AppNavigator = createStackNavigator({
                 <Icon
                   name="image"
                   color={tintColor}
-                  size={verticalScale(32)}
+                  size={verticalScale(28)}
                   />
               )
             })
@@ -80,7 +86,7 @@ export const AppNavigator = createStackNavigator({
                 <Icon
                   name="calendar"
                   color={tintColor}
-                  size={verticalScale(32)}
+                  size={verticalScale(28)}
                   />
               )
             })
@@ -98,7 +104,7 @@ export const AppNavigator = createStackNavigator({
               tabBarIcon: () =>
                 (
                   <AddCreateButton style={{ position: 'absolute', alignItems: 'center', zIndex: 97 }}>
-                    <Icon name="plus" size={verticalScale(32)} color={colours.white} />
+                    <Icon name="plus" size={verticalScale(28)} color={colours.white} />
                   </AddCreateButton>
                 )
             }
@@ -109,7 +115,7 @@ export const AppNavigator = createStackNavigator({
                 <Icon
                   name="envelope"
                   color={tintColor}
-                  size={verticalScale(32)}
+                  size={verticalScale(28)}
                   />
               )
             })
@@ -120,7 +126,7 @@ export const AppNavigator = createStackNavigator({
                 <Icon
                   name="user"
                   color={tintColor}
-                  size={verticalScale(32)}
+                  size={verticalScale(28)}
                   />
               )
             })
@@ -150,10 +156,11 @@ export const AppNavigator = createStackNavigator({
                   width: '100%',
                   backgroundColor: colours.white,
                   // height: 60,
-                  borderTopColor: colours.lightgray,
-                  borderTopWidth: 0,
-                  height: verticalScale2(NAVBAR_HEIGHT * 1.3)
+                  borderTopColor: colours.main,
+                  borderTopWidth: 2,
+                  height: TABBAR_HEIGHT
               }}>
+
 
                 {
                   routes.map((route, idx) => (
@@ -297,11 +304,15 @@ class AppWithNavigationState extends Component {
     const { dispatch, nav } = this.props;
 
     return (
-      <AppNavigator navigation = {{
-        dispatch,
-        state: nav,
-        addListener
-      }} />
+      <View style={{ flex: 1 }}>
+        <MyStatusBar backgroundColor={colours.main} barStyle="light-content" />
+        <AppNavigator navigation = {{
+          dispatch,
+          state: nav,
+          addListener
+        }} />
+      </View>
+
     );
   }
 }

@@ -3,6 +3,7 @@ import React from 'react';
 import moment from 'moment';
 import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 import formatDate from '../../lib/format-date';
 import formatTime from '../../lib/format-time';
 import styles from '../../../styles';
@@ -34,9 +35,11 @@ const ConfirmWhen = ({ data }) => {
         }
         <View style={{ flex: 800 }}>
           <View style={{ }}>
-            <View>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View style={{ marginLeft: 5, width: 20, alignItems: 'center' }}>
+                <IconM name="calendar-blank" size={22} color={colours.when} />
+              </View>
               <ButText color={colours.when}>
-                <Icon name="calendar" size={18} color={colours.when} />
                 {'  '}
                 {
                   // in create/confirm view, timestamp will be an object: { date: DD-MM-YYYY, time: HH:mm }
@@ -44,7 +47,12 @@ const ConfirmWhen = ({ data }) => {
                   formatDate(timestamp)
                 }
                 {'  '}
-                <Icon name="clock-o" size={18} color={colours.when} />
+              </ButText>
+              <View style={{ marginLeft: 5, width: 20, alignItems: 'center' }}>
+                <IconM name="clock" size={22} color={colours.when} />
+              </View>
+              <ButText color={colours.when}>
+
                 {'  '}
                 {
                   // in create/confirm view, timestamp will be an object: { date: DD-MM-YYYY, time: HH:mm }

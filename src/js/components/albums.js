@@ -1,12 +1,13 @@
 // import PropTypes from 'prop-types';
 /* eslint-disable*/
 import React, { Component } from 'react';
-import { StatusBar, InteractionManager, ActivityIndicator, View, Text, FlatList, Dimensions, Platform, Image } from 'react-native';
+import { InteractionManager, ActivityIndicator, View, Text, FlatList, Dimensions, Platform, Image } from 'react-native';
 import Fabric from 'react-native-fabric';
 import { Header } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CalendarItem from './calendar-item';
 import FilterPanel from './general/filter-panel';
+import BannerBar from './common/BannerBar';
 import Spinner from './common/Spinner';
 import ImageHeader from './common/ImageHeader';
 import HeaderBack from './common/FeedHeaderBackground';
@@ -26,6 +27,7 @@ const logo = require('../../img/sparkLoginLogo.png');
 class Albums extends Component {
 
   static navigationOptions = ({ navigation }) => ({
+    headerForceInset: { top: 'never', bottom: 'never' },
     tabBarIcon: ({ tintColor }) =>
       <Icon name="photo" size={32} color={tintColor} />,
     headerLeft: <ButtonHeader />,
@@ -149,7 +151,9 @@ class Albums extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        
+        <BannerBar style={{ marginTop: 0 }} />
+
+
 
         <View
           style={{
