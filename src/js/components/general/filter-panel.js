@@ -6,8 +6,11 @@ import Button from '../common/Button';
 import colours from '../../../styles/colours';
 import { moderateScale } from '../../../styles/scaling';
 
+console.log('STATUSBAR_HEIGHT', StatusBar.currentHeight);
+console.log('NAVBAR_HEIGHT', Header.HEIGHT);
+
 const NAVBAR_HEIGHT = Header.HEIGHT;
-const STATUS_BAR_HEIGHT = Platform.select({ ios: 20, android: StatusBar.currentHeight });
+const STATUS_BAR_HEIGHT = Platform.select({ ios: 5, android: StatusBar.currentHeight });
 const FILTER_PANEL_HEIGHT = Platform.select({ ios: NAVBAR_HEIGHT - STATUS_BAR_HEIGHT, android: NAVBAR_HEIGHT });
 
 const FilterPanel = ({ displaySome, displayAll, filterActive, selectedFilter }) => {
@@ -54,9 +57,11 @@ const FilterPanel = ({ displaySome, displayAll, filterActive, selectedFilter }) 
 const styles = {
 
   filterPanel: {
-    marginLeft: 5,
-    marginRight: 5,
+
+    paddingLeft: 5,
+    paddingRight: 5,
     flex: 1,
+    height: FILTER_PANEL_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -71,10 +76,13 @@ const styles = {
     paddingLeft: 10,
     marginLeft: 5,
     marginRight: 5,
+    marginTop: 1,
+    marginBottom: 1,
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    height: FILTER_PANEL_HEIGHT * 0.7,
+    // height: FILTER_PANEL_HEIGHT * 0.7,
+    // minHeight: NAVBAR_HEIGHT,
     paddingTop: 4,
     paddingBottom: 4,
     elevation: 1,
@@ -109,7 +117,8 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    height: FILTER_PANEL_HEIGHT * 0.7,
+    // height: FILTER_PANEL_HEIGHT * 0.7,
+    // minHeight: NAVBAR_HEIGHT,
     paddingTop: 4,
     paddingBottom: 4
     // elevation: 1,

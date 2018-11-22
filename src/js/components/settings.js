@@ -6,6 +6,7 @@ import ImagePicker from 'react-native-image-picker';
 import Fabric from 'react-native-fabric';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from './common/Button';
+import BannerBar from './common/BannerBar';
 import Spinner from './common/Spinner';
 import FeedHeader from './common/FeedHeader';
 import styles from '../../styles';
@@ -19,6 +20,7 @@ const { Answers } = Fabric;
 class Settings extends Component {
 
   static navigationOptions = ({ navigation }) => ({
+    headerForceInset: { top: 'never', bottom: 'never' },
     title: 'Settings',
     headerLeft: <ButtonHeader onPress={() => navigation.goBack(null)}>
       <BackIcon />
@@ -106,13 +108,14 @@ class Settings extends Component {
 
   render () {
 
-    const { photo_url, firstname, surname, handleLogOut, handleChangeName, isConnected, navigation } = this.props;
+    const { photo_url, firstname, surname, handleLogOut, handleChangeName, navigation } = this.props;
     const hideEditButton = (firstname === '' ? styles.hideEditButton : [{ backgroundColor: 'green' }]);
     return (
       <View style={{ flex: 1 }}>
-        <FeedHeader>
-          { !isConnected && this.renderAlert() }
-        </FeedHeader>
+        <BannerBar style={{ marginTop: 0 }} />
+
+        <FeedHeader />
+
         <View
           style={{
             flex: 1,

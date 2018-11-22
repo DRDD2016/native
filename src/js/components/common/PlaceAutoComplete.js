@@ -1,10 +1,57 @@
 /* eslint-disable react/prefer-stateless-function */
 import Config from 'react-native-config';
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colours from '../../../styles/colours';
+
+const labelStyle = {
+  color: colours.main
+};
+
+// const containerStyle = {
+//   flex: 1,
+//   flexDirection: 'row',
+//   // borderColor: 'red',
+//   // borderWidth: 1,
+//   alignItems: 'center',
+//   justifyContent: 'center',
+//   maxWidth: 700
+// };
+
+const inputStyle = {
+  color: colours.darkgray,
+  marginTop: 2,
+  marginBottom: 2,
+  paddingHorizontal: 10,
+  fontSize: 16,
+  fontWeight: '400',
+  height: 45,
+  width: '100%',
+  flexDirection: 'row',
+  // elevation: 1, // replaces shadow on Android, shadow props IOS only
+  // shadowOpacity: 0.75,
+  // shadowRadius: 5,
+  // shadowColor: 'darkgray',
+  // shadowOffset: { height: 2, width: 0 },
+  backgroundColor: 'transparent',
+  overflow: 'hidden',
+  borderWidth: 0, // can be 2 to make full border
+  borderBottomColor: colours.main, // remove 'Bottom' to make full border
+  borderBottomWidth: 2, // remove 'Bottom' to make full border
+  borderRadius: 0, // 5
+  alignSelf: 'flex-start',
+  justifyContent: 'center'
+  // flex: 1
+
+};
+
+// height: 40,
+
+//
+// borderColor: inputFocussed ? colours.where : colours.where,
+// borderRadius: inputFocussed ? 10 : 5
 
 export default class PlaceAutoComplete extends Component {
 
@@ -50,9 +97,10 @@ export default class PlaceAutoComplete extends Component {
 
   render () {
 
-    const { inputKey, inputKeyFocussed, inputFocussed, value, onFocus, onLostFocus } = this.props;
+    const { labelType, labelText, inputKey, inputKeyFocussed, inputFocussed, value, onFocus, onLostFocus } = this.props;
     console.log(`inputKey ${inputKey} autocomplete render, listViewDisplayed ${this.state.listViewDisplayed}, inputFocussed ${inputFocussed}, inputKeyFocussed ${inputKeyFocussed}, value ${value}`); // eslint-disable-line max-len
 
+    const label = labelType === 'poll' ? `${labelText} - Option ${inputKey + 1}` : `${labelText}`;
     // if (inputFocussed === false) {
     //   console.log('inputsNOTFocussed');
     //   return (
@@ -65,6 +113,13 @@ export default class PlaceAutoComplete extends Component {
 
     return (
       <View style={{ flex: 1 }}>
+        <View style={{ flexDirection: 'row', alignSelf: 'flex-start' }}>
+          {
+            <Text style={labelStyle}>
+              {label}
+            </Text>
+          }
+        </View>
 
         <GooglePlacesAutocomplete
           ref={ (googlePlaces) => {
@@ -72,7 +127,7 @@ export default class PlaceAutoComplete extends Component {
           }}
           enablePoweredByContainer
           keyboardShouldPersistTaps="handled"
-          placeholder="Enter a venue"
+          placeholder="eg. London, Shoreditch, The O2 Arena, 29 Acacia Road, etc"
           minLength={2}
           autoFocus={false}
           fetchDetails
@@ -153,8 +208,33 @@ export default class PlaceAutoComplete extends Component {
           }}
           styles={{
             container: {
+              color: colours.darkgray,
+              marginTop: 2,
+              marginBottom: 2,
+              // paddingHorizontal: 10,
+              fontSize: 16,
+              fontWeight: '400',
+              // height: 45,
+
+
+              // elevation: 1, // replaces shadow on Android, shadow props IOS only
+              // shadowOpacity: 0.75,
+              // shadowRadius: 5,
+              // shadowColor: 'darkgray',
+              // shadowOffset: { height: 2, width: 0 },
+              backgroundColor: 'transparent',
+              overflow: 'hidden',
+              borderWidth: 0, // can be 2 to make full border
+              borderBottomColor: inputFocussed ? colours.where : 'transparent', // remove 'Bottom' to make full border
+              borderBottomWidth: inputFocussed ? 0 : 2, // remove 'Bottom' to make full border
+              borderRadius: 0, // 5
+              alignSelf: 'flex-start',
+              justifyContent: 'center',
+
+              width: '100%',
+              // flexDirection: 'row',
               flex: !inputFocussed ? 10 : 1,
-              borderRadius: 5,
+              // borderRadius: 5,
               elevation: 1,
               shadowColor: inputFocussed ? colours.shadowColour : null,
               shadowOffset: inputFocussed ? { width: 0, height: 2 } : null,
@@ -162,6 +242,7 @@ export default class PlaceAutoComplete extends Component {
               shadowRadius: inputFocussed ? 2 : null
               // borderColor: 'red',
               // borderWidth: 1
+
               // visible: inputKeyFocussed === inputKey
               // width: 200
               // backgroundColor: 'purple' // '#fff'
@@ -169,27 +250,38 @@ export default class PlaceAutoComplete extends Component {
             },
             textInputContainer: {
               backgroundColor: inputFocussed ? colours.where : colours.white,
-              maxHeight: 44,
+              maxHeight: 45,
               flex: this.state.listViewDisplayed ? null : 1,
               alignItems: 'center',
-              borderRadius: 7,
+              borderRadius: 15,
               borderTopColor: 'transparent', // remove default styling
               borderTopWidth: 0, // remove default styling
               borderBottomColor: 'transparent', // remove default styling
               borderBottomWidth: 0 // remove default styling,
-              // borderColor: 'red',
+
+              // borderColor: 'yellow',
               // borderWidth: 2
               // maxWidth: !this.state.inputFocussed ? windowSize.width - (windowSize.width / 4) : null
             },
-            textInput: {
-              height: 40,
-              marginTop: 4,
-              marginBottom: 4,
-              flex: 1,
-              borderColor: inputFocussed ? colours.where : colours.where,
-              borderWidth: 1,
-              borderRadius: inputFocussed ? 10 : 5
-            },
+            textInput: [inputStyle, {
+              backgroundColor: inputFocussed ? colours.white : colours.white,
+              borderBottomColor: colours.where,
+              borderWidth: inputFocussed ? 0 : null,
+              borderRadius: inputFocussed ? 15 : 5,
+              // flex: inputFocussed ? 1 : null,
+
+              marginLeft: inputFocussed ? 7 : 0,
+              marginRight: inputFocussed ? 7 : 0,
+              marginTop: inputFocussed ? 2 : 0,
+              marginBottom: inputFocussed ? 2 : 0,
+
+              height: 42, // original
+
+              flex: 1
+              // borderColor: inputFocussed ? colours.where : colours.where,
+              // borderWidth: 0
+
+            }],
             listView: {
               // height: deviceHeight,
               // ios - position: 'absolute',

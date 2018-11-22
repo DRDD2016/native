@@ -35,12 +35,21 @@ jest.mock('react-native-fcm', () => {
 });
 
 // jest.mock('react-native', () => ({
+//     Dimensions: {
+//       get: jest.fn()
+//     },
 //     NativeModules: {
 //       BugsnagReactNative: null
 //     }
 // }), {
 //     virtual: true
 // });
+
+jest.mock('react-native-vector-icons/FontAwesome', () => {
+  return {
+
+  };
+});
 
 jest.mock('bugsnag-react-native', () => {
   return {

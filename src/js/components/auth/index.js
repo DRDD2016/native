@@ -1,12 +1,14 @@
 import React from 'react';
-import { Image, Text, View, Platform, StatusBar } from 'react-native';
+import { Image, Text, View } from 'react-native';
+// import { Header } from 'react-navigation';
+import BannerBar from '../common/BannerBar';
 import { ConfirmButton, ConfirmButtonText } from '../../../styles';
-import Header from '../common/Header';
 import colours from '../../../styles/colours';
 
 const logo = require('../../../img/sparkLoginLogo.png');
 
-
+// const HEADER_HEIGHT = Header.HEIGHT;
+// const STATUSBAR_HEIGHT = StatusBar.HEIGHT;
 Index.navigationOptions = () => {
   return {
     header: null
@@ -24,10 +26,10 @@ export default function Index ({ navigation }) {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>
-      <StatusBar backgroundColor={colours.gray} barStyle="light-content" />
-      
-      <Header style={{ top: Platform.OS === 'ios' ? -25 : -30 }} />
+    <View testID="welcome" style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>
+
+      <BannerBar />
+
 
       <View style={{ flex: 0.2 }} />
       <View style={{ justifyContent: 'center', alignItems: 'center', flex: 0.2 }}>
@@ -44,7 +46,7 @@ export default function Index ({ navigation }) {
           style={{ alignItems: 'center', justifyContent: 'center', flexDirection: 'column', flex: 1, marginBottom: 40 }}
         >
           <ConfirmButton
-            testDescription="LOG IN"
+            testID="log_in_button"
             style={{ backgroundColor: colours.green }}
             onPress={ goToLogin }
           >
