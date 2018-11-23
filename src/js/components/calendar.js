@@ -6,6 +6,7 @@ import Fabric from 'react-native-fabric';
 import CalendarItem from './calendar-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
+import BannerBar from './common/BannerBar';
 // import FeedHeader from './common/FeedHeader';
 import DropdownView from './common/DropdownView';
 import styles from '../../styles';
@@ -21,13 +22,14 @@ const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT *
 const logo = require('../../img/sparkLoginLogo.png');
 
 const NAVBAR_HEIGHT = Header.HEIGHT;
-const STATUS_BAR_HEIGHT = Platform.select({ ios: 20, android: StatusBar.currentHeight });
+const STATUS_BAR_HEIGHT = Platform.select({ ios: 5, android: StatusBar.currentHeight }); // ios height was 20
 const FILTER_PANEL_HEIGHT = Platform.select({ ios: NAVBAR_HEIGHT - STATUS_BAR_HEIGHT, android: NAVBAR_HEIGHT });
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 class Calendar extends Component {
 
   static navigationOptions = ({ navigation }) => ({
+    headerForceInset: { top: 'never', bottom: 'never' },
     headerLeft: <ButtonHeader />,
     headerRight: <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
@@ -38,7 +40,14 @@ class Calendar extends Component {
         <BurgerIcon />
       </ButtonHeader>
     </View>,
-    headerStyle: { backgroundColor: colours.headerBackgroundColor },
+    headerStyle: {
+      paddingBottom: 5,
+      backgroundColor: colours.headerBackgroundColor,
+      elevation: 1,
+      shadowOpacity: 0.8,
+      shadowRadius: 1,
+      shadowColor: 'gray',
+      shadowOffset: { height: 1, width: 0 } },
     headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
     headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
@@ -260,6 +269,8 @@ class Calendar extends Component {
 
     return (
       <View style={{ flex: 1, backgroundColor: colours.background }}>
+        <BannerBar style={{ marginTop: 0 }} />
+
 
         <View
           style={{

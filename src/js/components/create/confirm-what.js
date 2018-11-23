@@ -35,9 +35,12 @@ const ConfirmWhat = ({ data }) => {
           key={ i }
         >
           <View style={{}}>
-            <View>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View style={{ marginLeft: 5, width: 20, alignItems: 'center' }}>
+                <Icon name="star" size={22} color={colours.what} />
+              </View>
               <ButText color={colours.what}>
-                <Icon name="star" size={18} color={colours.what} />
+
                 {'  '}
                 { datum || 'TBC' }
               </ButText>

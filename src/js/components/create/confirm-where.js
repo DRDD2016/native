@@ -18,22 +18,25 @@ const ConfirmWhere = ({ data }) => { // eslint-disable-line react/prop-types
         key={ i }
       >
         { (hideTitle) &&
-          <View style={{ flex: 50, marginHorizontal: 5 }} />
+          <View style={{ flex: 150, marginHorizontal: 5 }} />
         }
         { (!hideTitle) &&
-          <View style={{ flex: 50, marginHorizontal: 5 }}>
+          <View style={{ flex: 150, marginHorizontal: 5 }}>
             <Title3 color={colours.where}>
               Where
             </Title3>
           </View>
         }
         <View
-          style={{ flex: 250 }}
+          style={{ flex: 800 }}
         >
           <View style={{ }}>
-            <View>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View style={{ marginLeft: 5, width: 20, alignItems: 'center' }}>
+                <Icon name="map-marker" size={22} color={colours.where} />
+              </View>
               <ButText color={colours.where}>
-                <Icon name="map-marker" size={18} color={colours.where} />
+
                 {'  '}
                 { datum || 'TBC' }
               </ButText>

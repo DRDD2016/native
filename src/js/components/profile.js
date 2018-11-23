@@ -7,6 +7,7 @@ import Fabric from 'react-native-fabric';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { styles, ConfirmButton, ConfirmButtonText } from '../../styles';
 import Spinner from './common/Spinner';
+import BannerBar from './common/BannerBar';
 import FeedHeader from './common/FeedHeader';
 import colours from '../../styles/colours';
 // import { connectAlert } from './Alert';
@@ -21,6 +22,7 @@ const logo = require('../../img/sparkLoginLogo.png');
 class Profile extends Component {
 
   static navigationOptions = ({ navigation }) => ({
+    headerForceInset: { top: 'never', bottom: 'never' },
     headerLeft: <ButtonHeader />,
     headerRight: <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
@@ -115,13 +117,14 @@ class Profile extends Component {
 
   render () {
 
-    const { photo_url, firstname, surname, handleChangeName, isConnected } = this.props;
+    const { photo_url, firstname, surname, handleChangeName } = this.props;
     const hideEditButton = (firstname === '' ? styles.hideEditButton : [{ backgroundColor: 'green' }]);
     return (
       <View style={{ flex: 1 }}>
-        <FeedHeader>
-          { !isConnected && this.renderAlert() }
-        </FeedHeader>
+        <BannerBar style={{ marginTop: 0 }} />
+
+        <FeedHeader />
+
         <View
           style={{
             flex: 1,

@@ -79,17 +79,16 @@ class Code extends Component {
     );
   };
 
-  
+
   render () {
     console.log('renderCode');
 
-    const { codeError, isConnected } = this.props;
+    const { codeError } = this.props;
 
     return (
       <View style={{ flex: 1 }}>
-        <FeedHeader>
-          { !isConnected && this.renderAlert() }
-        </FeedHeader>
+        <FeedHeader />
+
         <View
           style={{
             flex: 1,

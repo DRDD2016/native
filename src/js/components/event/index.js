@@ -6,21 +6,23 @@ import HostPoll from './host-poll';
 import FinalisedEvent from './finalised-event';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
-import Header from '../common/Header';
+// import Header from '../common/Header';
 import CloseButton from '../common/CloseButton';
 import Button from '../common/Button';
 import DeleteIcon from '../common/delete-icon';
+import BannerBar from '../common/BannerBar';
+// import HeaderBack from '../common/CreateHeaderBackground';
 
 export default class Event extends Component {
 
   static navigationOptions = ({ navigation }) => ({
-
+    headerForceInset: { top: 'never', bottom: 'never' }, // workaround to remove padding at top of header
     title: (navigation.state.params.name === undefined) ? 'Sorry...' : navigation.state.params.name,
-    headerStyle: { backgroundColor: colours.transparent },
+    headerStyle: { backgroundColor: colours.headerBackgroundColor, elevation: 0 },
     headerRight: (
       navigation.state.params.userIsHost &&
         <Button
-          buttonStyle={{ paddingLeft: 20, paddingRight: 20, flexDirection: 'row', alignSelf: 'flex-end' }}
+          buttonStyle={{ paddingLeft: 20, paddingRight: 20, flexDirection: 'row', alignSelf: 'center' }}
           textStyle={{ color: colours.gray }}
           onPress={ () => navigation.state.params.handleDelete(navigation.state.params.event, navigation.state.params.event.event_id) }
         >
@@ -161,12 +163,9 @@ export default class Event extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <View
-          style={[
-            styles.headerBuffer2,
-            { backgroundColor: colours.white }]}
-        >
-          <Header style={{ marginTop: Platform.OS === 'ios' ? null : 70 }} />
+        <View style={{ backgroundColor: colours.white, flex: 1 }}>
+
+          <BannerBar />
 
           <Modal transparent animationType="slide" visible={this.state.isModalVisible} onRequestClose={() => { }}>
 
@@ -220,7 +219,7 @@ export default class Event extends Component {
 
           </Modal>
 
-          <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 70 : 110 }}>
+          <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 20 : 110 }}>
             {
               this.props.event && this.eventRouter()
             }
