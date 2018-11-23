@@ -107,8 +107,8 @@
       "./jest/setup.js"
     ],
     "testMatch": [
-    "<rootDir>/__tests__/**/*.test.js?(x)",
-    "<rootDir>/src/**/*.test.js"
+      "<rootDir>/__tests__/**/*.test.js?(x)",
+      "<rootDir>/src/**/*.test.js"
     ]
   }
 }
