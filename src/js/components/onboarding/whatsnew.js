@@ -92,11 +92,9 @@ export default class WhatsNew extends Component {
                 <Text style={[styles.msg1, { flex: 1 }]}>{`${''}Welcome to Spark${''}`}</Text>
 
                 <View style={{ flex: 1.3 }}>
+
                   <Text style={[styles.msg2, { flex: 1 }]}>
-                    The app that helps you sort your social life
-                  </Text>
-                  <Text style={[styles.msg2, { flex: 1 }]}>
-                    To get started, tap Create to begin organising an event.
+                    To get started, tap + to begin organising an event.
                   </Text>
                 </View>
 

@@ -783,7 +783,7 @@ export const styles = {
   uiProfilePagePhotoCircularImage: {
     height: 130,
     width: 130,
-    borderRadius: 5,
+    borderRadius: 1,
     marginBottom: 10,
     alignSelf: 'center'
   },
