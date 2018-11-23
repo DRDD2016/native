@@ -80,7 +80,7 @@ class FeedItem extends PureComponent {
               <Image
                 source={{ uri: photo_url }}
                 defaultSource={avatar}
-                style={[styles.uiProfilePhotoCircularImage, { marginTop: 5 }]}
+                style={[styles.uiProfilePhotoCircularImage, { borderRadius: 3, marginTop: 5 }]}
               />
 
             </View>
