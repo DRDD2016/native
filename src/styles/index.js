@@ -103,7 +103,7 @@ export const AddCreateButton = styled.View`
   justifyContent: center;
   borderRadius: ${verticalScale2(40)};
   elevation: 1;
-  zIndex: 99
+  zIndex: 99;
   box-shadow: 0px 1px 2px ${colours.shadowColour}; // width, height, radius, colour
 `;
 
@@ -113,6 +113,15 @@ export const ButText = styled.Text.attrs({
 })`
   fontSize: ${moderateScale(12)};
   color: ${props => props.color};
+`;
+
+export const TabBarText = styled.Text.attrs({
+  color: props => props.color || colours.gray
+})`
+  fontSize: ${moderateScale(12)};
+  color: ${props => props.color};
+  textAlign: center;
+
 `;
 
 export const RSVPButton = styled.TouchableOpacity`
@@ -1024,8 +1033,9 @@ export const styles = {
     alignItems: 'flex-start'
   },
   uiProfilePhotoCircularImage: {
-    width: 40,
-    height: 40,
+    width: '100%',
+    aspectRatio: 1 / 1,
+    // height: 40,
     alignSelf: 'center',
     borderRadius: 15
   },

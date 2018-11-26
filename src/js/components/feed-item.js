@@ -50,10 +50,11 @@ class FeedItem extends PureComponent {
     return (
       <View
         style={{
+
           marginLeft: 2,
           marginRight: 2,
           backgroundColor: !viewed ? colours.white : colours.white,
-          opacity: !viewed ? 1 : 0.6 }}
+          opacity: !viewed ? 1 : 1 }}
 
       >
         <CardSection style={{ justifyContent: 'flex-start' }}>
@@ -62,29 +63,29 @@ class FeedItem extends PureComponent {
               flex: 1,
               marginLeft: 2,
               marginRight: 2,
-              paddingTop: 5,
-              paddingBottom: 5,
+              paddingTop: 4,
+              paddingBottom: 4,
               backgroundColor: colours.white,
-              borderTopWidth: !viewed ? 0.5 : 0.5,
-              borderBottomWidth: !viewed ? 0.5 : 0.5,
+              borderTopWidth: !viewed ? 0.0 : 0.0,
+              borderBottomWidth: !viewed ? 1 : 1,
               borderColor: !viewed ? colours.lightgray : colours.lightgray,
               flexDirection: 'row',
               justifyContent: 'space-around' }}
             onPress={this._onPress}
           >
 
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
+            <View style={{ paddingLeft: 0, paddingRight: 0, flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
 
               <StatusFlag isCancelled={isCancelled} is_poll={is_poll} />
 
               <Image
                 source={{ uri: photo_url }}
                 defaultSource={avatar}
-                style={[styles.uiProfilePhotoCircularImage, { borderRadius: 3, marginTop: 5 }]}
+                style={[styles.uiProfilePhotoCircularImage, { borderRadius: 3, marginTop: 4 }]}
               />
 
             </View>
-            <View style={{ flex: 3, paddingBottom: 5, paddingRight: 3 }}>
+            <View style={{ opacity: !viewed ? 1 : 0.6, flex: 3, paddingBottom: 5, paddingLeft: 4, paddingRight: 4 }}>
               <Text style={[styles.timestamp, !viewed && styles.viewedFeedItemTimestamp]}>
                 { moment(timestamp).startOf().fromNow() } </Text>
               <Text>

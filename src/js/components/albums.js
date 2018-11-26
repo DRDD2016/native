@@ -21,7 +21,7 @@ import OfflineIconContainer from '../containers/common/OfflineIconContainer';
 
 
 const { Answers } = Fabric;
-const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 0.8;
+const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.6 : Header.HEIGHT * 0.6;
 const logo = require('../../img/sparkLoginLogo.png');
 
 class Albums extends Component {
@@ -30,7 +30,9 @@ class Albums extends Component {
     headerForceInset: { top: 'never', bottom: 'never' },
     tabBarIcon: ({ tintColor }) =>
       <Icon name="photo" size={32} color={tintColor} />,
-    headerLeft: <ButtonHeader />,
+    headerLeft: <View style={{ paddingLeft: 1, alignItems: 'center', flex: 1 }}>
+      <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />
+    </View>,
     headerRight: <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
       <OfflineIconContainer />
@@ -42,10 +44,7 @@ class Albums extends Component {
     </View>,
     headerStyle: { backgroundColor: colours.headerBackgroundColor },
     headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
-    headerTintColor: colours.headerButtonColor,
-    headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
-      <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />
-    </View>
+    headerTintColor: colours.headerButtonColor
   });
 
   state = {
@@ -151,9 +150,7 @@ class Albums extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <BannerBar style={{ marginTop: 0 }} />
-
-
+        
 
         <View
           style={{

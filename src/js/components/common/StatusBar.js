@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StatusBar } from 'react-native';
+// import BannerBar from './BannerBar';
 // import colours from '../../../styles/colours';
 // console.log('Platform.OS:', Platform.OS);
 
@@ -21,7 +22,9 @@ export default function MyStatusBar ({ backgroundColor, ...props }) {
   return (
     <View style={[styles.statusBar, { backgroundColor }]}>
       <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+
     </View>
   );
 
 }
+// <BannerBar style={{ marginTop: 0, height: STATUSBAR_HEIGHT, alignSelf: 'flex-start' }} />

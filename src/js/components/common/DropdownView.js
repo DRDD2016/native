@@ -24,11 +24,13 @@ export default class DropdownView extends Component {
           backgroundColor: colours.filterPanelBackgroundColor,
           borderBottomWidth: 1,
           borderBottomColor: colours.lightgray,
-          opacity: navbarOpacity,
-          shadowOpacity: 0.8,
-          shadowRadius: 1,
-          shadowColor: colours.gray,
-          shadowOffset: { height: 1, width: 0 }
+          opacity: navbarOpacity
+          // shadowOpacity: 0.8,
+          // shadowRadius: 1,
+          // shadowColor: colours.gray,
+          // shadowOffset: { height: 1, width: 0 }
+          // borderColor: 'red',
+          // borderWidth: 1
         },
         { transform: [{ translateY: navbarTranslate }] }]}
       >
