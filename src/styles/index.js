@@ -1036,6 +1036,13 @@ export const styles = {
     alignSelf: 'center',
     borderRadius: 15
   },
+  uiProfilePhotoMessage: {
+    width: '100%',
+    aspectRatio: 1 / 1,
+    // height: 40,
+    alignSelf: 'center',
+    borderRadius: 3
+  },
   numberOfInvites: {
     // fontSize: 10,
     // fontWeight: '300',

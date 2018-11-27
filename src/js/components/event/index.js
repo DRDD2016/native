@@ -8,7 +8,7 @@ import FinalisedEvent from './finalised-event';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 // import Header from '../common/Header';
-import CloseButton from '../common/CloseButton';
+import BackButton from '../common/BackButton';
 import Button from '../common/Button';
 import DeleteIcon from '../common/delete-icon';
 import BannerBar from '../common/BannerBar';
@@ -30,7 +30,7 @@ export default class Event extends Component {
           <DeleteIcon />
         </Button>
     ),
-    headerLeft: <CloseButton stack="Event" nav={navigation} />,
+    headerLeft: <BackButton stack="Event" nav={navigation} />,
     headerTintColor: colours.headerButtonColor
   });
 
@@ -45,8 +45,48 @@ export default class Event extends Component {
 
     // console.log('stopFetching Link');
     this.props.stopFetchingLink();
+    const { userIsHost, isPoll, error, cancelled } = this.props;
 
-    const eventTitle = (this.props.userIsHost && this.props.isPoll) ? 'Your poll' : 'other';
+    const chooseEventTitle = () => {
+      if (userIsHost && isPoll) {
+        return (
+          'Your poll'
+        );
+      } else if (userIsHost) {
+        return (
+          'You are hosting'
+        );
+      } else if (!userIsHost && isPoll) {
+        return (
+          'Vote'
+        );
+      } else if (!userIsHost) {
+        return (
+          'You are invited'
+        );
+
+      } else if (error === 'Event has been deleted') {
+        return (
+          'Sorry'
+        );
+
+      } else if (error) {
+        return (
+          'Error'
+        );
+
+      } else if (cancelled) {
+        return (
+          'Sorry'
+        );
+      }
+      return (
+        'Other'
+      );
+
+    };
+    const eventTitle = chooseEventTitle();
+
     console.log('eventTitle: ', eventTitle);
 
     const { setParams } = this.props.navigation;
@@ -233,7 +273,7 @@ export default class Event extends Component {
 
           </Modal>
 
-          <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 20 : 110 }}>
+          <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 0 : 110 }}>
             {
               this.props.event && this.eventRouter()
             }

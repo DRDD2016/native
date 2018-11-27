@@ -110,88 +110,90 @@ export default class CategoryDetails extends Component {
             const key = (JSON.stringify(datum) === 0) ? JSON.stringify(`${index}${Math.random()}`) : JSON.stringify(`${datum}${Math.random()}`);
 
             return (
-              <View key={key} style={{ flexDirection: 'row' }}>
-
+              <View key={key} style={{ flexDirection: 'column' }}>
                 <View style={{ flex: 150 }}>
                   <Text style={styles[`optionTitle${categoryTitle}`]}>{ index === 0 && categoryTitle }</Text>
                 </View>
+                <View style={{ flexDirection: 'row' }}>
 
-                <View style={{ flex: 500 }}>
-                  <View style={{
-                    marginTop: 5,
-                    marginBottom: 5,
-                    elevation: 1,
-                    shadowColor: colours.shadowColour,
-                    shadowOffset: { width: 0, height: 1 },
-                    shadowOpacity: 0.8,
-                    shadowRadius: 2
-                  }}>
-                    <Icon.Button
-                      name={this.icons[category]}
-                      size={16}
-                      borderRadius={15}
-                      style={{ padding: 10 }}
-                      color={(!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category]}
-                      backgroundColor={(!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index] ? colours[category] : OFF_WHITE}
-                      onPress={() => this._handleOnPress(category, datum, index)}
-                    >
-                      {
-                        <View style={{ flex: 4 }}>
-                          <Text style={{ color: (!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category] }}>
-                            {category !== 'when' && (datum || 'TBC')}
-                            {category === 'when' && `${formatDate(datum, 'half')}, ${formatTime(datum) || 'TBC'}`}
-                          </Text>
-                        </View>
-                      }
-                      {
-                        (!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index]
-                        ? <View style={{ flex: 1 }}><Icon name="check" size={20} style={{ paddingLeft: 5 }} color={colours.white} /></View>
-                        : <Text />
-                      }
+                  
+                  <View style={{ flex: 500 }}>
+                    <View style={{
+                      marginTop: 5,
+                      marginBottom: 5,
+                      elevation: 1,
+                      shadowColor: colours.shadowColour,
+                      shadowOffset: { width: 0, height: 1 },
+                      shadowOpacity: 0.8,
+                      shadowRadius: 2
+                    }}>
+                      <Icon.Button
+                        name={this.icons[category]}
+                        size={16}
+                        borderRadius={15}
+                        style={{ padding: 10 }}
+                        color={(!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category]}
+                        backgroundColor={(!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index] ? colours[category] : OFF_WHITE}
+                        onPress={() => this._handleOnPress(category, datum, index)}
+                      >
+                        {
+                          <View style={{ flex: 4 }}>
+                            <Text style={{ color: (!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category] }}>
+                              {category !== 'when' && (datum || 'TBC')}
+                              {category === 'when' && `${formatDate(datum, 'half')}, ${formatTime(datum) || 'TBC'}`}
+                            </Text>
+                          </View>
+                        }
+                        {
+                          (!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index]
+                          ? <View style={{ flex: 1 }}><Icon name="check" size={20} style={{ paddingLeft: 5 }} color={colours.white} /></View>
+                          : <Text />
+                        }
 
 
-                    </Icon.Button>
+                      </Icon.Button>
 
+                    </View>
                   </View>
+                  <View style={{ flex: 300, paddingLeft: 5, justifyContent: 'center' }}>
+
+                    {
+                      this.props.isHostPollView &&
+                      <BarButton style={{ flex: 1, marginTop: 5, marginBottom: 5, flexDirection: 'row', alignItems: 'center', backgroundColor: 'white' }}>
+
+                        {
+                          (totalVoteCount !== 0) && <View style={{ paddingLeft: 1, paddingVertical: 10, width: 1, backgroundColor: 'lightgray' }} />
+                        }
+
+                        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
+                          <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
+                            <Text style={styles.msg4}>
+                              { (tally !== 0) && (tally !== undefined) && (tally !== 1) && `${tally} votes` }
+                              { (tally === 1) && `${tally} vote` }
+                              { this.state.isToggleable && (index === 0) && (totalVoteCount === 0) && 'No votes yet' }
+                              { this.state.isToggleable && (totalVoteCount !== 0) && (tally === 0) && 'No votes' }
+                            </Text>
+                          </View>
+
+                          <View style={{ flex: 1, justifyContent: 'center' }}>
+
+                            {
+                              (tally !== 0) && (tally !== undefined) &&
+                              <BarChart tally={tally} allData={voteCount} chartColor={colours[category]} />
+                            }
+
+                          </View>
+                          <View style={{ flex: 1 }}>
+                            <Text style={styles.msg4} />
+                          </View>
+                        </View>
+
+                      </BarButton>
+                    }
+                  </View>
+
+
                 </View>
-                <View style={{ flex: 300, paddingLeft: 5, justifyContent: 'center' }}>
-
-                  {
-                    this.props.isHostPollView &&
-                    <BarButton style={{ flex: 1, marginTop: 5, marginBottom: 5, flexDirection: 'row', alignItems: 'center', backgroundColor: 'white' }}>
-
-                      {
-                        (totalVoteCount !== 0) && <View style={{ paddingLeft: 1, paddingVertical: 10, width: 1, backgroundColor: 'lightgray' }} />
-                      }
-
-                      <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
-                        <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
-                          <Text style={styles.msg4}>
-                            { (tally !== 0) && (tally !== undefined) && (tally !== 1) && `${tally} votes` }
-                            { (tally === 1) && `${tally} vote` }
-                            { this.state.isToggleable && (index === 0) && (totalVoteCount === 0) && 'No votes yet' }
-                            { this.state.isToggleable && (totalVoteCount !== 0) && (tally === 0) && 'No votes' }
-                          </Text>
-                        </View>
-
-                        <View style={{ flex: 1, justifyContent: 'center' }}>
-
-                          {
-                            (tally !== 0) && (tally !== undefined) &&
-                            <BarChart tally={tally} allData={voteCount} chartColor={colours[category]} />
-                          }
-
-                        </View>
-                        <View style={{ flex: 1 }}>
-                          <Text style={styles.msg4} />
-                        </View>
-                      </View>
-
-                    </BarButton>
-                  }
-                </View>
-
-
               </View>
             );
           })

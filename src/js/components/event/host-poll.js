@@ -88,7 +88,7 @@ export default class HostPoll extends Component {
           !isFetching &&
 
           <View style={{ flexDirection: 'column' }}>
-            <View style={{ marginBottom: 20 }}>
+            <View style={{ marginTop: 10, marginBottom: 10 }}>
 
               <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
 
@@ -122,7 +122,7 @@ export default class HostPoll extends Component {
 
               <View style={{ marginTop: 20 }}>
                 <Msg3>
-                  You can review the responses and tap to select your final choices and tap &quot;Confirm&quot; when you are ready:
+                  You can review the responses and tap to select your final choices when ready
                 </Msg3>
               </View>
 

@@ -27,7 +27,8 @@ const colours = {
   filterPanelBackgroundColor: '#ffffff',
   sectionBorder: '#efefef',
   spacerColour: 'lightgray',
-  shadowColour: 'rgba(128,128,128,0.8)'
+  shadowColour: 'rgba(128,128,128,0.8)',
+  messageColor: '#efefef'
 };
 
 export default colours;

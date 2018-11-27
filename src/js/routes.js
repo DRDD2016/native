@@ -281,7 +281,10 @@ export const AppNavigator = createStackNavigator({
   },
   event: { screen: createStackNavigator({
     Event: { screen: EventContainer },
-    Edit: { screen: EditContainer } })
+    Edit: { screen: EditContainer } }, {
+      mode: 'modal'
+
+    })
   },
   settings: { screen: createStackNavigator({
     Settings: { screen: SettingsContainer } })

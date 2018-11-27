@@ -24,19 +24,19 @@ const ConfirmWhen = ({ data }) => {
         key={ i }
       >
         { (hideTitle) &&
-          <View style={{ flex: 150, marginHorizontal: 5 }} />
+          <View style={{ flex: 150, marginHorizontal: 4 }} />
         }
         { (!hideTitle) &&
-          <View style={{ flex: 150, marginHorizontal: 5 }}>
-            <Title3 color={colours.when}>
+          <View style={{ flex: 150, marginHorizontal: 4 }}>
+            <Text style={{ color: colours.when }}>
               When
-            </Title3>
+            </Text>
           </View>
         }
         <View style={{ flex: 800 }}>
           <View style={{ }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <View style={{ marginLeft: 5, width: 20, alignItems: 'center' }}>
+              <View style={{ marginLeft: 4, width: 20, alignItems: 'center' }}>
                 <IconM name="calendar-blank" size={22} color={colours.when} />
               </View>
               <ButText color={colours.when}>
@@ -48,7 +48,7 @@ const ConfirmWhen = ({ data }) => {
                 }
                 {'  '}
               </ButText>
-              <View style={{ marginLeft: 5, width: 20, alignItems: 'center' }}>
+              <View style={{ marginLeft: 4, width: 20, alignItems: 'center' }}>
                 <IconM name="clock" size={22} color={colours.when} />
               </View>
               <ButText color={colours.when}>

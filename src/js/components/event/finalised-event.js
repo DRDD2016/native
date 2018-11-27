@@ -8,7 +8,7 @@ import FinalisedWhere from '../create/confirm-where';
 import FinalisedWhen from '../create/confirm-when';
 import EditIcon from '../common/edit-icon';
 import InviteeCard from './invitee-card';
-import { styles, ButText, ConfirmButton, ConfirmButtonText, RSVPButton, RSVPButtonText } from '../../../styles';
+import { styles, Msg1, Msg4, ButText, ConfirmButton, ConfirmButtonText, RSVPButton, RSVPButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
 
 const STATUS_GOING = 'going';
@@ -67,14 +67,13 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, handleE
 
         { userIsHost ?
           <View style={{ flex: 1 }}>
-            <Text style={{ alignSelf: 'center' }}>You are hosting</Text>
-            <Text style={[styles.msg1, { alignSelf: 'center' }]}>{event.name}</Text>
+            <Msg1 style={{ alignSelf: 'center' }}>{event.name}</Msg1>
           </View>
           :
           <View style={{ flex: 1 }}>
-            <Text style={{ alignSelf: 'center' }}>You have been invited to</Text>
-            <Text style={[styles.msg1, { alignSelf: 'center' }]}>{event.name}</Text>
-            <Text style={{ alignSelf: 'center' }}>please RSVP</Text>
+            <Msg4 style={{ alignSelf: 'center' }}>You have been invited to</Msg4>
+            <Msg1 style={[styles.msg1, { alignSelf: 'center' }]}>{event.name}</Msg1>
+            <Msg4 style={{ alignSelf: 'center' }}>please RSVP</Msg4>
           </View>
         }
 

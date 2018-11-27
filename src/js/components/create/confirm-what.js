@@ -21,13 +21,13 @@ const ConfirmWhat = ({ data }) => {
         key={ i }
       >
         { (hideTitle) &&
-          <View style={{ flex: 150, marginHorizontal: 5 }} />
+          <View style={{ flex: 150, marginHorizontal: 4 }} />
         }
         { (!hideTitle) &&
-          <View style={{ flex: 150, marginHorizontal: 5 }}>
-            <Title3 color={colours.what}>
+          <View style={{ flex: 150, marginHorizontal: 4 }}>
+            <Text style={{ color: colours.what }}>
               What
-            </Title3>
+            </Text>
           </View>
         }
         <View
@@ -36,7 +36,7 @@ const ConfirmWhat = ({ data }) => {
         >
           <View style={{}}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <View style={{ marginLeft: 5, width: 20, alignItems: 'center' }}>
+              <View style={{ marginLeft: 4, width: 20, alignItems: 'center' }}>
                 <Icon name="star" size={22} color={colours.what} />
               </View>
               <ButText color={colours.what}>

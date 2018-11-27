@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Text, Image, View, TouchableHighlight, ScrollView, Modal } from 'react-native';
 import update from 'immutability-helper';
 import CategoryDetails from './category-details';
-import styles from '../../../styles';
+import styles, { Msg1, Msg4 } from '../../../styles';
 import Spinner from '../common/Spinner';
 
 export default class InviteePoll extends Component {
@@ -140,14 +140,17 @@ export default class InviteePoll extends Component {
         </Modal>
 
 
-        <View style={{ alignItems: 'center' }}>
+        <View style={{ paddingTop: 10, alignItems: 'center' }}>
+
           <Image
             source={{ uri: event.host_photo_url }}
-            style={{ marginHorizontal: 5, marginBottom: 5, width: 60, height: 60, resizeMode: 'contain' }}
+            style={{ borderRadius: 3, marginHorizontal: 5, marginBottom: 5, width: 60, height: 60 }}
           />
-          <Text style={{ alignSelf: 'center', marginBottom: 5 }}>{event.firstname} has asked you to vote on:</Text>
-          <Text style={[styles.msg1, { alignSelf: 'center', marginBottom: 5 }]}>{event.name}</Text>
-          <Text>Tap the options below to vote</Text>
+
+          <Msg4 style={{ alignSelf: 'center', marginBottom: 5 }}>{event.firstname} has asked you to vote on:</Msg4>
+          <Msg1 style={{ alignSelf: 'center', marginBottom: 5 }}>{event.name}</Msg1>
+          <Msg4>Tap all the options that you like below and send your vote</Msg4>
+
         </View>
 
         <View style={styles.row}>
