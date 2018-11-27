@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { View, ScrollView } from 'react-native';
+import { Header } from 'react-navigation';
 import CategoryDetails from './category-details';
-import { styles, Msg1, Msg2, Msg3, InviteSmallButton, ConfirmButton, ConfirmButtonText } from '../../../styles';
+import ButtonSmall from '../common/ButtonSmall';
+import { styles, Msg1, Msg3, Msg4, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
 import Spinner from '../common/Spinner';
 
+const headerHeight = Header.HEIGHT;
+console.log('Header height: ', Header.HEIGHT);
 
 const inlineStyle = {
   row: {
@@ -65,6 +69,7 @@ export default class HostPoll extends Component {
     console.log('finalChoices: ', finalChoices);
     console.log('this.state: ', this.state);
 
+
     // if (!finalChoices && isConfirming) {
     //
     // }
@@ -83,39 +88,39 @@ export default class HostPoll extends Component {
           !isFetching &&
 
           <View style={{ flexDirection: 'column' }}>
-            <View style={{ marginHorizontal: 5, marginBottom: 20 }}>
+            <View style={{ marginBottom: 20 }}>
 
               <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
 
                 <View
-                  style={{ paddingHorizontal: 20, flex: 1, minWidth: 80, maxWidth: 150, marginHorizontal: 5 }}
+                  style={{ width: '20%', paddingHorizontal: 2 }}
                 />
 
-                <View style={{ flexShrink: 1, flexDirection: 'column', alignItems: 'center', marginHorizontal: 5 }}>
-                  <Msg2 style={{ textAlign: 'center' }}>You created a poll for</Msg2>
-                  <Msg1 style={{ textAlign: 'center' }}>{event.name}</Msg1>
+                <View style={{ width: '60%', flexDirection: 'column', alignItems: 'center' }}>
+
+                  <Msg1 style={{ textAlign: 'center', marginBottom: 5 }}>{event.name}</Msg1>
+                  <Msg4 style={{ textAlign: 'left' }}>created on: XX/XX/XX</Msg4>
+                  <Msg4 style={{ textAlign: 'left' }}>voting closes: XX/XX/XX</Msg4>
+
                 </View>
 
-                <InviteSmallButton
-                  style={{
-                    minWidth: 90,
-                    maxWidth: 150,
-                    marginHorizontal: 5,
-                    paddingHorizontal: 10,
-                    flexDirection: 'row' }}
-                  onPress={ () => handleInviteMoreFriends() }
-                >
-                  <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    <View style={{ flexGrow: 1, opacity: 0.9, alignItems: 'center' }}>
+                <View style={{ width: '20%', paddingRight: 0, flexDirection: 'row', justifyContent: 'flex-end' }}>
+                  <ButtonSmall
+                    onPress={ () => handleInviteMoreFriends() }
+                    backgroundColor={colours.green}
+                    headerHeight={headerHeight}
+
+                  >
+                    <View style={{ opacity: 0.9, justifyContent: 'center', alignSelf: 'center' }}>
                       <Icon name="user-plus" size={20} color={colours.white} />
                     </View>
-                  </View>
 
-                </InviteSmallButton>
+                  </ButtonSmall>
+                </View>
 
               </View>
 
-              <View style={{ marginTop: 10 }}>
+              <View style={{ marginTop: 20 }}>
                 <Msg3>
                   You can review the responses and tap to select your final choices and tap &quot;Confirm&quot; when you are ready:
                 </Msg3>

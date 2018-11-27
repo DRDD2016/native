@@ -3,6 +3,8 @@ import { Text, TouchableOpacity } from 'react-native';
 import { Header } from 'react-navigation';
 import colours from '../../../styles/colours';
 
+console.log('Header Button height: ', Header.HEIGHT);
+
 export default function ButtonHeader ({ onPress, children, testDescription }) {
 
   return (

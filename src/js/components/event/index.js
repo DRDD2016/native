@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Platform, TouchableHighlight, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Header } from 'react-navigation';
 import InviteePoll from './invitee-poll';
 import HostPoll from './host-poll';
 import FinalisedEvent from './finalised-event';
@@ -17,12 +18,12 @@ export default class Event extends Component {
 
   static navigationOptions = ({ navigation }) => ({
     headerForceInset: { top: 'never', bottom: 'never' }, // workaround to remove padding at top of header
-    title: (navigation.state.params.name === undefined) ? 'Sorry...' : navigation.state.params.name,
+    title: (navigation.state.params.eventTitle === undefined) ? 'Sorry...' : navigation.state.params.eventTitle,
     headerStyle: { backgroundColor: colours.headerBackgroundColor, elevation: 0 },
     headerRight: (
       navigation.state.params.userIsHost &&
         <Button
-          buttonStyle={{ paddingLeft: 20, paddingRight: 20, flexDirection: 'row', alignSelf: 'center' }}
+          buttonStyle={{ width: Header.HEIGHT, paddingLeft: 20, paddingRight: 20, flexDirection: 'row', alignSelf: 'center' }}
           textStyle={{ color: colours.gray }}
           onPress={ () => navigation.state.params.handleDelete(navigation.state.params.event, navigation.state.params.event.event_id) }
         >
@@ -41,8 +42,16 @@ export default class Event extends Component {
   }
 
   componentWillMount () {
+
     // console.log('stopFetching Link');
     this.props.stopFetchingLink();
+
+    const eventTitle = (this.props.userIsHost && this.props.isPoll) ? 'Your poll' : 'other';
+    console.log('eventTitle: ', eventTitle);
+
+    const { setParams } = this.props.navigation;
+    setParams({ eventTitle });
+
   }
 
   componentDidMount () {
@@ -55,6 +64,11 @@ export default class Event extends Component {
 
     console.log('Event Thisprops: ', this.props);
     console.log('Event Nextprops: ', nextProps);
+
+
+    // created on: XX/XX/XXXX
+    // deadline to vote: XX/XX/XXXX
+
 
     if (this.props.event.host_user_id) {
 

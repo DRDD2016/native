@@ -19,7 +19,6 @@ import SignupContainer from './containers/auth/signup';
 import AlbumsContainer from './containers/albums';
 import CalendarContainer from './containers/calendar';
 import FeedContainer from './containers/feed';
-import ProfileContainer from './containers/profile';
 import SettingsContainer from './containers/settings';
 import DetailsContainer from './containers/create/details';
 import WhatContainer from './containers/create/what';
@@ -130,7 +129,7 @@ export const AppNavigator = createStackNavigator({
               )
             })
           },
-          Profile: { screen: createStackNavigator({ ScreenProfile: { screen: ProfileContainer } }),
+          Profile: { screen: createStackNavigator({ ScreenProfile: { screen: SettingsContainer } }),
             navigationOptions: () => ({
               tabBarIcon: ({ tintColor }) => (
                 <View style={{ height: TABBAR_HEIGHT, alignItems: 'center', justifyContent: 'center' }}>

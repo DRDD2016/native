@@ -107,8 +107,10 @@ export default class CategoryDetails extends Component {
           data.map((datum, index) => {
             const tally = voteCount && voteCount[index];
 
+            const key = (JSON.stringify(datum) === 0) ? JSON.stringify(`${index}${Math.random()}`) : JSON.stringify(`${datum}${Math.random()}`);
+
             return (
-              <View key={JSON.stringify(datum)} style={{ flexDirection: 'row' }}>
+              <View key={key} style={{ flexDirection: 'row' }}>
 
                 <View style={{ flex: 150 }}>
                   <Text style={styles[`optionTitle${categoryTitle}`]}>{ index === 0 && categoryTitle }</Text>

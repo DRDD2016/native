@@ -63,8 +63,6 @@ export const InviteSmallButton = styled.TouchableOpacity`
   borderRadius: 5;
   paddingVertical: 8;
   paddingHorizontal: 10;
-  marginHorizontal: 20;
-  height: 50;
   elevation: 1;
   box-shadow: 0px 1px 2px ${colours.shadowColour}; // width, height, radius, colour
 `;
@@ -509,11 +507,10 @@ export const styles = {
     alignItems: 'flex-start'
   },
   optionTitleWhat: {
-    flex: 1,
-    fontSize: 12,
-    fontWeight: 'bold',
-    color: colours.what,
-    paddingTop: 0
+    // flex: 1,
+    // fontSize: 12,
+    // fontWeight: 'bold',
+    color: colours.what
   },
   optionSelectedWhat: {
     flex: 1,
@@ -566,11 +563,11 @@ export const styles = {
     color: colours.what
   },
   optionTitleWhere: {
-    flex: 1,
-    fontSize: 12,
-    fontWeight: 'bold',
-    color: colours.where,
-    paddingTop: 10
+    // flex: 1,
+    // fontSize: 12,
+    // fontWeight: 'bold',
+    color: colours.where
+    // paddingTop: 10
   },
   optionSelectedWhere: {
     flex: 1,
@@ -617,11 +614,11 @@ export const styles = {
     color: colours.where
   },
   optionTitleWhen: {
-    flex: 1,
-    fontSize: 12,
-    fontWeight: 'bold',
-    color: colours.when,
-    paddingTop: 10
+    // flex: 1,
+    // fontSize: 12,
+    // fontWeight: 'bold',
+    color: colours.when
+    // paddingTop: 10
   },
   optionSelectedWhen: {
     flex: 1,
@@ -790,9 +787,9 @@ export const styles = {
     color: colours.gray
   },
   uiProfilePagePhotoCircularImage: {
-    height: 130,
-    width: 130,
-    borderRadius: 1,
+    height: 100,
+    width: 100,
+    borderRadius: 3,
     marginBottom: 10,
     alignSelf: 'center'
   },
