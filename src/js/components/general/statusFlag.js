@@ -10,15 +10,17 @@ const StatusFlag = ({ isCancelled, is_poll }) => {
       <View
         style={{
           padding: 2,
-          backgroundColor: colours.red,
-          borderBottomRightRadius: 5,
-          borderTopRightRadius: 5
+          backgroundColor: colours.verylightgray,
+          borderBottomRightRadius: 3,
+          borderTopRightRadius: 3,
+          borderBottomLeftRadius: 3,
+          borderTopLeftRadius: 3
         }}
       >
         <Text
           style={[
             styles.title6, {
-              color: colours.white
+              color: colours.red
             }]}
         >Cancelled</Text>
       </View>
@@ -31,15 +33,20 @@ const StatusFlag = ({ isCancelled, is_poll }) => {
       <View
         style={{
           padding: 2,
-          backgroundColor: colours.purple,
-          borderBottomRightRadius: 5,
-          borderTopRightRadius: 5
+          backgroundColor: colours.verylightgray,
+          borderBottomRightRadius: 3,
+          borderTopRightRadius: 3,
+          borderBottomLeftRadius: 3,
+          borderTopLeftRadius: 3
+
         }}
       >
         <Text
           style={[
             styles.title6, {
-              color: colours.white
+
+              fontSize: 12,
+              color: colours.main
             }]}
         >Polling</Text>
       </View>
@@ -52,15 +59,18 @@ const StatusFlag = ({ isCancelled, is_poll }) => {
       <View
         style={{
           padding: 2,
-          backgroundColor: colours.blue,
-          borderBottomRightRadius: 5,
-          borderTopRightRadius: 5
+          backgroundColor: colours.verylightgray,
+          borderBottomRightRadius: 3,
+          borderTopRightRadius: 3,
+          borderBottomLeftRadius: 3,
+          borderTopLeftRadius: 3
         }}
       >
         <Text
           style={[
             styles.title6, {
-              color: colours.white
+              fontSize: 12,
+              color: colours.green
             }]}
         >Confirmed</Text>
       </View>

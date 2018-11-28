@@ -1009,12 +1009,12 @@ export const styles = {
     color: colours.darkgray,
     fontWeight: '500'
   },
-  viewedFeedItemDate: {
-    color: colours.when,
+  unviewedFeedItemDate: {
+    color: colours.darkgray,
     fontWeight: '500'
   },
-  viewedFeedItemPlaceName: {
-    color: colours.where,
+  unviewedFeedItemPlaceName: {
+    color: colours.darkgray,
     fontWeight: '500'
   },
   unConfirmedItemStyle: {

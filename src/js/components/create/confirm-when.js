@@ -20,7 +20,7 @@ const ConfirmWhen = ({ data }) => {
     const hideTitle = i > 0;
     return (
       <View
-        style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 1 }}
+        style={{ flexDirection: 'column', alignItems: 'flex-start', marginVertical: 1 }}
         key={ i }
       >
         { (hideTitle) &&
@@ -28,19 +28,18 @@ const ConfirmWhen = ({ data }) => {
         }
         { (!hideTitle) &&
           <View style={{ flex: 150, marginHorizontal: 4 }}>
-            <Text style={{ color: colours.when }}>
+            <Text style={{ color: colours.main }}>
               When
             </Text>
           </View>
         }
-        <View style={{ flex: 800 }}>
+        <View style={{ flex: 800, paddingHorizontal: 10 }}>
           <View style={{ }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <View style={{ marginLeft: 4, width: 20, alignItems: 'center' }}>
+              <View style={{ marginLeft: 4, width: 24, justifyContent: 'center', alignItems: 'center', marginRight: 4  }}>
                 <IconM name="calendar-blank" size={22} color={colours.when} />
               </View>
               <ButText color={colours.when}>
-                {'  '}
                 {
                   // in create/confirm view, timestamp will be an object: { date: DD-MM-YYYY, time: HH:mm }
                   // everywhere else will be ISO string
@@ -48,12 +47,11 @@ const ConfirmWhen = ({ data }) => {
                 }
                 {'  '}
               </ButText>
-              <View style={{ marginLeft: 4, width: 20, alignItems: 'center' }}>
+              <View style={{ marginLeft: 4, width: 24, justifyContent: 'center', alignItems: 'center', marginRight: 4 }}>
                 <IconM name="clock" size={22} color={colours.when} />
               </View>
               <ButText color={colours.when}>
 
-                {'  '}
                 {
                   // in create/confirm view, timestamp will be an object: { date: DD-MM-YYYY, time: HH:mm }
                   // everywhere else will be ISO string, or for 'TBC' a modified ISO string with `:TBC` appended

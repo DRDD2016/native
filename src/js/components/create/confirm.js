@@ -6,7 +6,7 @@ import ConfirmWhen from './confirm-when';
 import BannerBar from '../common/BannerBar';
 // import Button from '../common/Button';
 import Spinner from '../common/Spinner';
-import { styles, Msg4, HeaderText, ConfirmButton, ConfirmButtonText, ButText } from '../../../styles';
+import { styles, Msg1, HeaderText, ConfirmButton, ConfirmButtonText, ButText } from '../../../styles';
 import colours from '../../../styles/colours';
 import ButtonHeader from '../common/ButtonHeader';
 import BackIcon from '../common/back-icon';
@@ -29,15 +29,15 @@ class Confirm extends Component {
     headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
     headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
-      <HeaderText>{navigation.state.params.name}</HeaderText>
+      <HeaderText>Check your invite</HeaderText>
     </View>
   });
 
 
   render () {
-    
+
     console.log('confirm Props', this.props);
-    const { firstname, what, where, when, description, note, handleOnPress, photo_url, isFetching } = this.props;
+    const { name, firstname, what, where, when, description, note, handleOnPress, photo_url, isFetching } = this.props;
 
     const iSODates = mapToISOString(when);
     const sortedDates = iSODates.sort((a, b) => {
@@ -62,15 +62,13 @@ class Confirm extends Component {
 
           <View style={{ flexDirection: 'column', alignItems: 'center', paddingHorizontal: 4 }}>
             <View style={{ paddingTop: 10 }}>
-              <Msg4 color={colours.main} >
-                Check your invite
-              </Msg4>
+              <Msg1>{name}</Msg1>
             </View>
             {
 
               <View style={{ width: '100%', paddingVertical: 10, justifyContent: 'flex-start' }}>
                 <Text style={{ color: colours.main }}>Description</Text>
-                <ButText style={{ color: description ? colours.main : colours.gray, paddingTop: 10 }}>
+                <ButText style={{ color: description ? colours.gray : colours.lightgray, paddingTop: 10, paddingHorizontal: 10 }}>
                   { description && description }
                   { !description && 'no description' }
                 </ButText>
@@ -79,15 +77,15 @@ class Confirm extends Component {
 
 
           </View>
-          <View style={{ marginTop: 5, backgroundColor: colours.spacerColour, height: 1, marginHorizontal: 4 }} />
+          <View style={{ backgroundColor: colours.spacerColour, height: 1, marginHorizontal: 4 }} />
           <View style={{ marginVertical: 2, justifyContent: 'center' }}>
             <ConfirmWhat data={what} />
           </View>
-          <View style={{ backgroundColor: colours.spacerColour, height: 1, marginHorizontal: 4 }} />
+          <View style={{ backgroundColor: colours.spacerColour, height: 0, marginHorizontal: 4 }} />
           <View style={{ marginVertical: 2, justifyContent: 'center' }}>
             <ConfirmWhere data={where} />
           </View>
-          <View style={{ backgroundColor: colours.spacerColour, height: 1, marginHorizontal: 4 }} />
+          <View style={{ backgroundColor: colours.spacerColour, height: 0, marginHorizontal: 4 }} />
           <View style={{ marginVertical: 2, justifyContent: 'center' }}>
             <ConfirmWhen data={sortedDates} />
           </View>
@@ -102,6 +100,8 @@ class Confirm extends Component {
               </ConfirmButtonText>
             </ConfirmButton>
           </View>
+
+          <View style={{ marginTop: 10, backgroundColor: colours.spacerColour, height: 1, marginHorizontal: 4 }} />
 
           {
             (note.trim() !== '') &&
