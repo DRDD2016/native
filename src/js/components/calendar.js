@@ -6,7 +6,6 @@ import Fabric from 'react-native-fabric';
 import CalendarItem from './calendar-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
-import BannerBar from './common/BannerBar';
 // import FeedHeader from './common/FeedHeader';
 import DropdownView from './common/DropdownView';
 import styles from '../../styles';
@@ -18,19 +17,21 @@ import OfflineIconContainer from '../containers/common/OfflineIconContainer';
 import { } from '../../styles/scaling';
 
 const { Answers } = Fabric;
-const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 0.8;
+const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.6 : Header.HEIGHT * 0.6;
 const logo = require('../../img/sparkLoginLogo.png');
 
 const NAVBAR_HEIGHT = Header.HEIGHT;
 const STATUS_BAR_HEIGHT = Platform.select({ ios: 5, android: StatusBar.currentHeight }); // ios height was 20
-const FILTER_PANEL_HEIGHT = Platform.select({ ios: NAVBAR_HEIGHT - STATUS_BAR_HEIGHT, android: NAVBAR_HEIGHT });
+const FILTER_PANEL_HEIGHT = Platform.select({ ios: (NAVBAR_HEIGHT - STATUS_BAR_HEIGHT) - 15, android: NAVBAR_HEIGHT });
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 class Calendar extends Component {
 
   static navigationOptions = ({ navigation }) => ({
     headerForceInset: { top: 'never', bottom: 'never' },
-    headerLeft: <ButtonHeader />,
+    headerLeft: <View style={{ paddingLeft: 1, alignItems: 'center', flex: 1 }}>
+      <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />
+    </View>,
     headerRight: <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
       <OfflineIconContainer />
@@ -41,18 +42,16 @@ class Calendar extends Component {
       </ButtonHeader>
     </View>,
     headerStyle: {
-      paddingBottom: 5,
-      backgroundColor: colours.headerBackgroundColor,
-      elevation: 1,
-      shadowOpacity: 0.8,
-      shadowRadius: 1,
-      shadowColor: 'gray',
-      shadowOffset: { height: 1, width: 0 } },
+      paddingBottom: 0,
+      backgroundColor: colours.headerBackgroundColor
+      // elevation: 1,
+      // shadowOpacity: 0.8,
+      // shadowRadius: 1,
+      // shadowColor: 'gray',
+      // shadowOffset: { height: 1, width: 0 }
+    },
     headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
-    headerTintColor: colours.headerButtonColor,
-    headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
-      <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />
-    </View>
+    headerTintColor: colours.headerButtonColor
 
   });
 
@@ -269,8 +268,6 @@ class Calendar extends Component {
 
     return (
       <View style={{ flex: 1, backgroundColor: colours.background }}>
-        <BannerBar style={{ marginTop: 0 }} />
-
 
         <View
           style={{

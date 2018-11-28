@@ -16,7 +16,8 @@ const mapStateToProps = ({ nav, create, network, user }) => {
     when: create.when,
     photo_url: user.photo_url,
     isFetching: create.isFetching,
-    isConnected: network.isConnected
+    isConnected: network.isConnected,
+    firstname: user.firstname
   };
 };
 

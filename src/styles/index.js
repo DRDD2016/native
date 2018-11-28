@@ -63,8 +63,6 @@ export const InviteSmallButton = styled.TouchableOpacity`
   borderRadius: 5;
   paddingVertical: 8;
   paddingHorizontal: 10;
-  marginHorizontal: 20;
-  height: 50;
   elevation: 1;
   box-shadow: 0px 1px 2px ${colours.shadowColour}; // width, height, radius, colour
 `;
@@ -103,7 +101,7 @@ export const AddCreateButton = styled.View`
   justifyContent: center;
   borderRadius: ${verticalScale2(40)};
   elevation: 1;
-  zIndex: 99
+  zIndex: 99;
   box-shadow: 0px 1px 2px ${colours.shadowColour}; // width, height, radius, colour
 `;
 
@@ -113,6 +111,15 @@ export const ButText = styled.Text.attrs({
 })`
   fontSize: ${moderateScale(12)};
   color: ${props => props.color};
+`;
+
+export const TabBarText = styled.Text.attrs({
+  color: props => props.color || colours.gray
+})`
+  fontSize: ${moderateScale(12)};
+  color: ${props => props.color};
+  textAlign: center;
+
 `;
 
 export const RSVPButton = styled.TouchableOpacity`
@@ -500,11 +507,10 @@ export const styles = {
     alignItems: 'flex-start'
   },
   optionTitleWhat: {
-    flex: 1,
-    fontSize: 12,
-    fontWeight: 'bold',
-    color: colours.what,
-    paddingTop: 0
+    // flex: 1,
+    // fontSize: 12,
+    // fontWeight: 'bold',
+    color: colours.what
   },
   optionSelectedWhat: {
     flex: 1,
@@ -557,11 +563,11 @@ export const styles = {
     color: colours.what
   },
   optionTitleWhere: {
-    flex: 1,
-    fontSize: 12,
-    fontWeight: 'bold',
-    color: colours.where,
-    paddingTop: 10
+    // flex: 1,
+    // fontSize: 12,
+    // fontWeight: 'bold',
+    color: colours.where
+    // paddingTop: 10
   },
   optionSelectedWhere: {
     flex: 1,
@@ -608,11 +614,11 @@ export const styles = {
     color: colours.where
   },
   optionTitleWhen: {
-    flex: 1,
-    fontSize: 12,
-    fontWeight: 'bold',
-    color: colours.when,
-    paddingTop: 10
+    // flex: 1,
+    // fontSize: 12,
+    // fontWeight: 'bold',
+    color: colours.when
+    // paddingTop: 10
   },
   optionSelectedWhen: {
     flex: 1,
@@ -781,9 +787,9 @@ export const styles = {
     color: colours.gray
   },
   uiProfilePagePhotoCircularImage: {
-    height: 130,
-    width: 130,
-    borderRadius: 1,
+    height: 100,
+    width: 100,
+    borderRadius: 3,
     marginBottom: 10,
     alignSelf: 'center'
   },
@@ -1003,12 +1009,12 @@ export const styles = {
     color: colours.darkgray,
     fontWeight: '500'
   },
-  viewedFeedItemDate: {
-    color: colours.when,
+  unviewedFeedItemDate: {
+    color: colours.darkgray,
     fontWeight: '500'
   },
-  viewedFeedItemPlaceName: {
-    color: colours.where,
+  unviewedFeedItemPlaceName: {
+    color: colours.darkgray,
     fontWeight: '500'
   },
   unConfirmedItemStyle: {
@@ -1024,10 +1030,18 @@ export const styles = {
     alignItems: 'flex-start'
   },
   uiProfilePhotoCircularImage: {
-    width: 40,
-    height: 40,
+    width: '100%',
+    aspectRatio: 1 / 1,
+    // height: 40,
     alignSelf: 'center',
     borderRadius: 15
+  },
+  uiProfilePhotoMessage: {
+    width: '100%',
+    aspectRatio: 1 / 1,
+    // height: 40,
+    alignSelf: 'center',
+    borderRadius: 3
   },
   numberOfInvites: {
     // fontSize: 10,
@@ -1037,11 +1051,6 @@ export const styles = {
   middleColumn: {
     flex: 3.5,
     paddingBottom: 5
-  },
-  timestamp: {
-    // fontSize: 10,
-    // fontWeight: '300',
-    color: 'lightgray'
   },
   subjectName: {
     fontSize: 14,

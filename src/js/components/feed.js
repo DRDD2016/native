@@ -7,7 +7,6 @@ import { Header } from 'react-navigation';
 import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
-import BannerBar from './common/BannerBar';
 // import ImageHeader from './common/ImageHeader';
 import styles from '../../styles';
 import colours from '../../styles/colours';
@@ -23,12 +22,12 @@ import { } from '../../styles/scaling';
 
 const { Answers } = Fabric;
 
-const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 0.8;
+const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.6 : Header.HEIGHT * 0.6;
 const logo = require('../../img/sparkLoginLogo.png');
 
 const NAVBAR_HEIGHT = Header.HEIGHT;
 const STATUS_BAR_HEIGHT = Platform.select({ ios: 5, android: StatusBar.currentHeight }); // ios height was 20
-const FILTER_PANEL_HEIGHT = Platform.select({ ios: NAVBAR_HEIGHT - STATUS_BAR_HEIGHT, android: NAVBAR_HEIGHT });
+const FILTER_PANEL_HEIGHT = Platform.select({ ios: (NAVBAR_HEIGHT - STATUS_BAR_HEIGHT) - 15, android: NAVBAR_HEIGHT });
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 // import { subscribeToBranchLinks } from '../lib/branchLink';
@@ -37,7 +36,9 @@ class Feed extends Component {
 
   static navigationOptions = ({ navigation }) => ({
     headerForceInset: { top: 'never', bottom: 'never' }, // workaround to remove padding at top of header
-    headerLeft: <ButtonHeader />,
+    headerLeft: <View style={{ paddingLeft: 1, alignItems: 'center', flex: 1 }}>
+      <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />
+    </View>,
     headerRight: <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
       <OfflineIconContainer />
@@ -50,18 +51,15 @@ class Feed extends Component {
     headerStyle: {
 
       paddingBottom: 0,
-      backgroundColor: colours.headerBackgroundColor,
-      elevation: 1,
-      shadowOpacity: 0.8,
-      shadowRadius: 1,
-      shadowColor: 'gray',
-      shadowOffset: { height: 1, width: 0 }
+      backgroundColor: colours.headerBackgroundColor
+      // elevation: 1,
+      // shadowOpacity: 0.8,
+      // shadowRadius: 1,
+      // shadowColor: 'gray',
+      // shadowOffset: { height: 1, width: 0 }
     },
     headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
-    headerTintColor: colours.headerButtonColor,
-    headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>
-      <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />
-    </View>
+    headerTintColor: colours.headerButtonColor
   });
 
   constructor (props) {
@@ -427,7 +425,6 @@ class Feed extends Component {
 
     return (
       <View testID="feed" style={{ flex: 1, backgroundColor: colours.white }}>
-        <BannerBar style={{ marginTop: 0 }} />
 
 
         <WhatsNew visible={showWhatsNew} type="whats_new" user_updateNo={user_updateNo} app_updateNo={app_updateNo} />

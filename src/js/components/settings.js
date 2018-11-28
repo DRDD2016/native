@@ -1,19 +1,23 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput, Platform, ScrollView, TouchableHighlight } from 'react-native';
+import { View, Text, Image, Platform, ScrollView, TouchableHighlight, Dimensions } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 // import { Header } from 'react-navigation';
 import Fabric from 'react-native-fabric';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Button from './common/Button';
 import BannerBar from './common/BannerBar';
 import Spinner from './common/Spinner';
-import FeedHeader from './common/FeedHeader';
-import styles from '../../styles';
+import InputField from './general/inputField';
+import styles, { ConfirmButton, ConfirmButtonText } from '../../styles';
 import colours from '../../styles/colours';
 // import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
 import BackIcon from './common/back-icon';
+
+const { width } = Dimensions.get('window');
+const imageWidth = styles.uiProfilePagePhotoCircularImage.width;
+const cameraIconRight = (width / 2) - (imageWidth / 2) - 30;
+
 
 const { Answers } = Fabric;
 
@@ -108,13 +112,12 @@ class Settings extends Component {
 
   render () {
 
-    const { photo_url, firstname, surname, handleLogOut, handleChangeName, navigation } = this.props;
+    const { photo_url, firstname, surname, handleChangeName } = this.props;
     const hideEditButton = (firstname === '' ? styles.hideEditButton : [{ backgroundColor: 'green' }]);
     return (
       <View style={{ flex: 1 }}>
         <BannerBar style={{ marginTop: 0 }} />
 
-        <FeedHeader />
 
         <View
           style={{
@@ -124,7 +127,7 @@ class Settings extends Component {
             borderBottomColor: colours.lightgray }}
         >
 
-          <ScrollView style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 50 : null }}>
+          <ScrollView style={{ flex: 1, marginTop: Platform.OS === 'ios' ? null : null }}>
 
             <View
               style={{
@@ -133,85 +136,89 @@ class Settings extends Component {
                 marginTop: 5 }}
             >
 
-              <View style={[styles.row, { backgroundColor: colours.transparent }]}>
-                <Text style={styles.userName}> { `${firstname} ${surname}` } </Text>
-              </View>
-
-              <View>
-
-                <Image style={styles.uiProfilePagePhotoCircularImage} source={ this.state.avatarSource || { uri: photo_url } } />
-
-                <TouchableHighlight
-                  style={ [hideEditButton, {
-                    position: 'absolute',
-                    right: -24,
-                    bottom: 6,
-                    padding: 5,
-                    backgroundColor: 'transparent',
-                    borderColor: 'transparent',
-                    alignItems: 'flex-end'
-                  }] }
-                  onPress={ this.selectPhotoTapped }
-                >
-                  <View>
-                    <View>
-                      <Icon name="camera" size={36} color={colours.white} />
-                    </View>
-                    <View style={{ position: 'absolute', top: 10, left: 10, width: 20, height: 20, backgroundColor: colours.white }} />
-                    <View style={{ position: 'absolute', top: 3, left: 3 }}>
-                      <Icon name="camera" size={30} color={colours.gray} />
-                    </View>
+              <View style={{ flexDirection: 'row' }} >
+                <View style={{ flex: 1, flexDirection: 'column' }} >
+                  <View style={{ flexDirection: 'row' }}>
+                    <Text style={{ paddingLeft: 4, textAlign: 'center', color: colours.main }}>
+                      Profile picture
+                    </Text>
                   </View>
-                </TouchableHighlight>
+                  <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 5 }}>
 
+                    <Image style={styles.uiProfilePagePhotoCircularImage} source={ this.state.avatarSource || { uri: photo_url } } />
+
+                    <TouchableHighlight
+                      style={ [hideEditButton, {
+                        position: 'absolute',
+                        right: cameraIconRight,
+                        bottom: 6,
+                        padding: 5,
+                        backgroundColor: 'transparent',
+                        borderColor: 'transparent',
+                        alignItems: 'flex-end'
+                      }] }
+                      onPress={ this.selectPhotoTapped }
+                    >
+                      <View>
+                        <View>
+                          <Icon name="camera" size={36} color={colours.white} />
+                        </View>
+                        <View style={{ position: 'absolute', top: 10, left: 10, width: 20, height: 20, backgroundColor: colours.white }} />
+                        <View style={{ position: 'absolute', top: 3, left: 3 }}>
+                          <Icon name="camera" size={30} color={colours.gray} />
+                        </View>
+                      </View>
+                    </TouchableHighlight>
+                  </View>
+
+                </View>
               </View>
 
               <View style={styles.row}>
-                <TextInput
+
+                <InputField
                   underlineColorAndroid="transparent"
-                  value={ firstname }
                   placeholder="First name"
+                  autoCorrect={ false }
+                  value={ firstname }
+                  labelType="notPoll"
+                  label="First name"
                   onChangeText={ text => handleChangeName(text, 'firstname') }
-                  style={styles.inputStyle}
+                  focussedColor={ colours.main }
+                  unfocussedColor={ colours.lightgray }
                 />
+
               </View>
 
               <View style={styles.row}>
-                <TextInput
+                <InputField
                   underlineColorAndroid="transparent"
-                  value={ surname }
                   placeholder="Surname"
+                  autoCorrect={ false }
+                  value={ surname }
+                  labelType="notPoll"
+                  label="Surname"
                   onChangeText={ text => handleChangeName(text, 'surname')}
-                  style={styles.inputStyle}
+                  focussedColor={ colours.main }
+                  unfocussedColor={ colours.lightgray }
                 />
+
               </View>
 
               <View style={styles.row}>
                 { this.props.isFetching ? <Spinner /> :
-                <Button
-                  buttonStyle={ [hideEditButton, styles.confirmButton, {
-                    backgroundColor: colours.purple,
-                    borderColor: colours.purple,
-                    marginTop: 2,
-                    flex: 1
-                  }] }
-                  textStyle={ styles.confirmButtonText }
+                <ConfirmButton
+
                   onPress={ () => this.saveChanges(firstname, surname) }
                 >
-                  Save changes
-                </Button>}
+                  <ConfirmButtonText>
+                    Save changes
+                  </ConfirmButtonText>
+                </ConfirmButton>}
 
               </View>
 
-              <View style={styles.row}>
-                <Button
-                  buttonStyle={ [hideEditButton, styles.confirmButton, { backgroundColor: colours.white, borderColor: colours.gray, flex: 1 }] }
-                  textStyle={ [styles.confirmButtonText, { color: colours.gray }]}
-                  onPress={ () => handleLogOut(navigation) }
-                >
-                  Log Out
-                </Button>
-              </View>
+
             </View>
           </ScrollView>
         </View>
@@ -224,7 +231,6 @@ Settings.propTypes = {
   firstname: PropTypes.string.isRequired,
   surname: PropTypes.string.isRequired,
   photo_url: PropTypes.string.isRequired,
-  handleLogOut: PropTypes.func.isRequired,
   handleEditName: PropTypes.func.isRequired,
   handleChangeName: PropTypes.func.isRequired,
   handleUpload: PropTypes.func.isRequired

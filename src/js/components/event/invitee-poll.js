@@ -1,10 +1,10 @@
 
 /* eslint-disable no-else-return */
 import React, { Component } from 'react';
-import { Text, Image, View, TouchableHighlight, ScrollView, Modal } from 'react-native';
+import { Text, Image, View, ScrollView, Modal } from 'react-native';
 import update from 'immutability-helper';
 import CategoryDetails from './category-details';
-import styles from '../../../styles';
+import styles, { Msg1, Msg4, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import Spinner from '../common/Spinner';
 
 export default class InviteePoll extends Component {
@@ -115,8 +115,8 @@ export default class InviteePoll extends Component {
                   <Text style={[styles.msg1, { flex: 1 }]}>Vote Sent</Text>
                   <Text style={[styles.msg2, { flex: 1 }]}>Thanks for voting!</Text>
                   <View style={{ flex: 1 }}>
-                    <TouchableHighlight
-                      style={ [styles.confirmButton, { marginBottom: 20, marginTop: 20 }] }
+                    <ConfirmButton
+                      style={{ marginBottom: 20, marginTop: 20 }}
                       onPress={ () => {
 
                         this.setState({
@@ -127,8 +127,8 @@ export default class InviteePoll extends Component {
 
                       }}
                     >
-                      <Text style={styles.confirmButtonText}>OK</Text>
-                    </TouchableHighlight>
+                      <ConfirmButtonText style={styles.confirmButtonText}>OK</ConfirmButtonText>
+                    </ConfirmButton>
                   </View>
 
                 </View>
@@ -140,14 +140,18 @@ export default class InviteePoll extends Component {
         </Modal>
 
 
-        <View style={{ alignItems: 'center' }}>
+        <View style={{ paddingTop: 10, alignItems: 'center' }}>
+
           <Image
             source={{ uri: event.host_photo_url }}
-            style={{ marginHorizontal: 5, marginBottom: 5, width: 60, height: 60, resizeMode: 'contain' }}
+            style={{ borderRadius: 3, marginHorizontal: 5, marginBottom: 5, width: 60, height: 60 }}
           />
-          <Text style={{ alignSelf: 'center', marginBottom: 5 }}>{event.firstname} has asked you to vote on:</Text>
-          <Text style={[styles.msg1, { alignSelf: 'center', marginBottom: 5 }]}>{event.name}</Text>
-          <Text>Tap the options below to vote</Text>
+
+          <Msg4 style={{ alignSelf: 'center', marginBottom: 5 }}>{event.firstname} has asked you to vote on:</Msg4>
+          <Msg1 style={{ alignSelf: 'center', marginBottom: 5 }}>{event.name}</Msg1>
+          <Msg4>Tap all the options that you</Msg4>
+          <Msg4>like and send your vote</Msg4>
+
         </View>
 
         <View style={styles.row}>
@@ -181,8 +185,8 @@ export default class InviteePoll extends Component {
         <View style={[styles.row, { justifyContent: 'center' }]}>
           {
             allCategoriesSelected &&
-            <TouchableHighlight
-              style={ [styles.confirmButton, { marginBottom: 20 }] }
+            <ConfirmButton
+              style={{ marginBottom: 20 }}
               onPress={ () => {
                 this.setState({
                   isModalVisible: true
@@ -192,8 +196,8 @@ export default class InviteePoll extends Component {
                 );
               }}
             >
-              <Text style={styles.confirmButtonText}>VOTE</Text>
-            </TouchableHighlight>
+              <ConfirmButtonText style={styles.confirmButtonText}>SEND VOTE</ConfirmButtonText>
+            </ConfirmButton>
           }
         </View>
 

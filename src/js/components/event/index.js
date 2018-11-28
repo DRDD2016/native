@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, Platform, TouchableHighlight, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Header } from 'react-navigation';
 import InviteePoll from './invitee-poll';
 import HostPoll from './host-poll';
 import FinalisedEvent from './finalised-event';
 import styles from '../../../styles';
 import colours from '../../../styles/colours';
 // import Header from '../common/Header';
-import CloseButton from '../common/CloseButton';
+import BackButton from '../common/BackButton';
 import Button from '../common/Button';
 import DeleteIcon from '../common/delete-icon';
 import BannerBar from '../common/BannerBar';
@@ -17,19 +18,19 @@ export default class Event extends Component {
 
   static navigationOptions = ({ navigation }) => ({
     headerForceInset: { top: 'never', bottom: 'never' }, // workaround to remove padding at top of header
-    title: (navigation.state.params.name === undefined) ? 'Sorry...' : navigation.state.params.name,
+    title: (navigation.state.params.eventTitle === undefined) ? 'Sorry...' : navigation.state.params.eventTitle,
     headerStyle: { backgroundColor: colours.headerBackgroundColor, elevation: 0 },
     headerRight: (
       navigation.state.params.userIsHost &&
         <Button
-          buttonStyle={{ paddingLeft: 20, paddingRight: 20, flexDirection: 'row', alignSelf: 'center' }}
+          buttonStyle={{ width: Header.HEIGHT, paddingLeft: 20, paddingRight: 20, flexDirection: 'row', alignSelf: 'center' }}
           textStyle={{ color: colours.gray }}
           onPress={ () => navigation.state.params.handleDelete(navigation.state.params.event, navigation.state.params.event.event_id) }
         >
           <DeleteIcon />
         </Button>
     ),
-    headerLeft: <CloseButton stack="Event" nav={navigation} />,
+    headerLeft: <BackButton stack="Event" nav={navigation} />,
     headerTintColor: colours.headerButtonColor
   });
 
@@ -41,8 +42,56 @@ export default class Event extends Component {
   }
 
   componentWillMount () {
+
     // console.log('stopFetching Link');
     this.props.stopFetchingLink();
+    const { userIsHost, isPoll, error, cancelled } = this.props;
+
+    const chooseEventTitle = () => {
+      if (userIsHost && isPoll) {
+        return (
+          'Your poll'
+        );
+      } else if (userIsHost) {
+        return (
+          'You are hosting'
+        );
+      } else if (!userIsHost && isPoll) {
+        return (
+          'Vote'
+        );
+      } else if (!userIsHost) {
+        return (
+          'You are invited'
+        );
+
+      } else if (error === 'Event has been deleted') {
+        return (
+          'Sorry'
+        );
+
+      } else if (error) {
+        return (
+          'Error'
+        );
+
+      } else if (cancelled) {
+        return (
+          'Sorry'
+        );
+      }
+      return (
+        'Other'
+      );
+
+    };
+    const eventTitle = chooseEventTitle();
+
+    console.log('eventTitle: ', eventTitle);
+
+    const { setParams } = this.props.navigation;
+    setParams({ eventTitle });
+
   }
 
   componentDidMount () {
@@ -55,6 +104,11 @@ export default class Event extends Component {
 
     console.log('Event Thisprops: ', this.props);
     console.log('Event Nextprops: ', nextProps);
+
+
+    // created on: XX/XX/XXXX
+    // deadline to vote: XX/XX/XXXX
+
 
     if (this.props.event.host_user_id) {
 
@@ -219,7 +273,7 @@ export default class Event extends Component {
 
           </Modal>
 
-          <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 20 : 110 }}>
+          <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 0 : 110 }}>
             {
               this.props.event && this.eventRouter()
             }

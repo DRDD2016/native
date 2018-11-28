@@ -20,7 +20,7 @@ export default class Note extends Component {
       <BackIcon />
     </ButtonHeader>,
     headerRight: <CloseButton stack="ScreenCreate" nav={navigation} />,
-    headerStyle: { borderTopWidth: 4, borderTopColor: colours.main, backgroundColor: colours.headerBackgroundColor, elevation: 0 },
+    headerStyle: { backgroundColor: colours.headerBackgroundColor, elevation: 0 },
     headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: colours.headerTitleColor },
     headerTintColor: colours.headerButtonColor,
     headerTitle: <View style={{ alignItems: 'center', flex: 1 }}>

@@ -7,7 +7,7 @@ import colours from '../../../styles/colours';
 const gradientStyles = {
   linearGradient: {
     marginTop: 0, // 15,
-    borderRadius: 5,
+    borderRadius: 0,
     width: '100%',
     height: 3
   },

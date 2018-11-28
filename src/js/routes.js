@@ -8,7 +8,8 @@ import { createReduxBoundAddListener, createReactNavigationReduxMiddleware } fro
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colours from '../styles/colours';
 import MyStatusBar, { STATUSBAR_HEIGHT } from './components/common/StatusBar';
-import { AddCreateButton } from '../styles';
+import BannerBar from './components/common/BannerBar';
+import { AddCreateButton, TabBarText } from '../styles';
 import { moderateScale, verticalScale } from '../styles/scaling';
 // import CustomTabBar from './components//general/customTabBar';
 import DrawerContainer from './containers/drawer';
@@ -18,7 +19,6 @@ import SignupContainer from './containers/auth/signup';
 import AlbumsContainer from './containers/albums';
 import CalendarContainer from './containers/calendar';
 import FeedContainer from './containers/feed';
-import ProfileContainer from './containers/profile';
 import SettingsContainer from './containers/settings';
 import DetailsContainer from './containers/create/details';
 import WhatContainer from './containers/create/what';
@@ -37,7 +37,7 @@ import Splash from './components/auth/splash';
 // import Modal from './components/modal';
 
 const NAVBAR_HEIGHT = Header.HEIGHT;
-const TABBAR_HEIGHT = verticalScale(NAVBAR_HEIGHT - STATUSBAR_HEIGHT);
+const TABBAR_HEIGHT = verticalScale(NAVBAR_HEIGHT - STATUSBAR_HEIGHT) + 8;
 console.log('NAVBAR_HEIGHT', NAVBAR_HEIGHT);
 console.log('STATUSBAR_HEIGHT', STATUSBAR_HEIGHT);
 console.log('TABBAR_HEIGHT', TABBAR_HEIGHT);
@@ -72,22 +72,28 @@ export const AppNavigator = createStackNavigator({
           Albums: { screen: createStackNavigator({ ScreenAlbums: { screen: AlbumsContainer } }),
             navigationOptions: () => ({
               tabBarIcon: ({ tintColor }) => (
-                <Icon
-                  name="image"
-                  color={tintColor}
-                  size={verticalScale(28)}
+                <View style={{ height: TABBAR_HEIGHT, alignItems: 'center', justifyContent: 'center' }}>
+                  <Icon
+                    name="image"
+                    color={tintColor}
+                    size={verticalScale(28)}
                   />
+                  <TabBarText color={tintColor} >Albums</TabBarText>
+                </View>
               )
             })
           },
           Calendar: { screen: createStackNavigator({ ScreenCalendar: { screen: CalendarContainer } }),
             navigationOptions: () => ({
               tabBarIcon: ({ tintColor }) => (
-                <Icon
-                  name="calendar"
-                  color={tintColor}
-                  size={verticalScale(28)}
+                <View style={{ height: TABBAR_HEIGHT, alignItems: 'center', justifyContent: 'center' }}>
+                  <Icon
+                    name="calendar-o"
+                    color={tintColor}
+                    size={verticalScale(28)}
                   />
+                  <TabBarText color={tintColor} >Calendar</TabBarText>
+                </View>
               )
             })
           },
@@ -112,22 +118,28 @@ export const AppNavigator = createStackNavigator({
           Feed: { screen: createStackNavigator({ ScreenFeed: { screen: FeedContainer } }),
             navigationOptions: () => ({
               tabBarIcon: ({ tintColor }) => (
-                <Icon
-                  name="envelope"
-                  color={tintColor}
-                  size={verticalScale(28)}
+                <View style={{ height: TABBAR_HEIGHT, alignItems: 'center', justifyContent: 'center' }}>
+                  <Icon
+                    name="envelope"
+                    color={tintColor}
+                    size={verticalScale(28)}
                   />
+                  <TabBarText color={tintColor} >Feed</TabBarText>
+                </View>
               )
             })
           },
-          Profile: { screen: createStackNavigator({ ScreenProfile: { screen: ProfileContainer } }),
+          Profile: { screen: createStackNavigator({ ScreenProfile: { screen: SettingsContainer } }),
             navigationOptions: () => ({
               tabBarIcon: ({ tintColor }) => (
-                <Icon
-                  name="user"
-                  color={tintColor}
-                  size={verticalScale(28)}
+                <View style={{ height: TABBAR_HEIGHT, alignItems: 'center', justifyContent: 'center' }}>
+                  <Icon
+                    name="user"
+                    color={tintColor}
+                    size={verticalScale(28)}
                   />
+                  <TabBarText color={tintColor} >Profile</TabBarText>
+                </View>
               )
             })
           }
@@ -157,34 +169,46 @@ export const AppNavigator = createStackNavigator({
                   backgroundColor: colours.white,
                   // height: 60,
                   borderTopColor: colours.main,
-                  borderTopWidth: 2,
-                  height: TABBAR_HEIGHT
+                  borderTopWidth: 0,
+                  height: TABBAR_HEIGHT + 4,
+                  alignItems: 'stretch'
               }}>
+                <View style={{
+                  width: '100%', flexDirection: 'column', alignItems: 'center' }}
+                >
+                  <BannerBar style={{ marginTop: 0, alignSelf: 'flex-start' }} />
+                  <View style={{
+                    width: '100%', flex: 1, flexDirection: 'row' }}
+                  >
 
 
-                {
-                  routes.map((route, idx) => (
-                    <ViewOverflow
-                      key={route.key}
-                      style={{
-                          flex: 1,
-                          alignItems: 'center',
-                          justifyContent: 'center'
-                      }}
-                    >
-                      <TouchableWithoutFeedback
-                        style={{ }}
-                        onPress={() => jumpTo(route.key)}
-                      >
-                        {renderIcon({
-                          route,
-                          focused: index === idx,
-                          tintColor: index === idx ? activeTintColor : inactiveTintColor
-                        })}
-                      </TouchableWithoutFeedback>
-                    </ViewOverflow>
-                  ))
-                }
+                    {
+                      routes.map((route, idx) => (
+                        <ViewOverflow
+                          key={route.key}
+                          style={{
+                              flex: 1,
+                              alignItems: 'center',
+                              justifyContent: 'center'
+
+                          }}
+                        >
+                          <TouchableWithoutFeedback
+                            style={{ }}
+                            onPress={() => jumpTo(route.key)}
+                          >
+                            {renderIcon({
+                              route,
+                              focused: index === idx,
+                              tintColor: index === idx ? activeTintColor : inactiveTintColor
+                            })}
+
+                          </TouchableWithoutFeedback>
+                        </ViewOverflow>
+                      ))
+                    }
+                  </View>
+                </View>
 
               </ViewOverflow>
             );
@@ -257,7 +281,10 @@ export const AppNavigator = createStackNavigator({
   },
   event: { screen: createStackNavigator({
     Event: { screen: EventContainer },
-    Edit: { screen: EditContainer } })
+    Edit: { screen: EditContainer } }, {
+      mode: 'modal'
+
+    })
   },
   settings: { screen: createStackNavigator({
     Settings: { screen: SettingsContainer } })
