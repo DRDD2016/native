@@ -85,7 +85,7 @@ class FeedItem extends PureComponent {
 
             <View style={{ flex: 3, paddingBottom: 5, paddingLeft: 4, paddingRight: 4 }}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text style={[styles.timestamp, !viewed && styles.viewedFeedItemTimestamp, { opacity: !viewed ? 1 : 1 }]}>
+                <Text style={{ fontWeight: '500', color: !viewed ? colours.gray : colours.gray, opacity: !viewed ? 1 : 1 }}>
                   { moment(timestamp).startOf().fromNow() }
                 </Text>
 
@@ -129,7 +129,7 @@ class FeedItem extends PureComponent {
 
             <View
               style={{
-                opacity: !viewed ? 1 : 0.6,
+                opacity: !viewed ? 1 : 1,
                 flex: 1.5,
                 backgroundColor: colours.verylightgray,
                 flexDirection: 'column',
@@ -148,21 +148,24 @@ class FeedItem extends PureComponent {
                       <View
                         style={{ width: 14, marginLeft: 4, alignItems: 'center', justifyContent: 'center' }}
                       >
-                        <Icon name="calendar-o" style={{ width: 14, textAlign: 'center' }} color={!viewed ? colours.when : colours.lightgray} />
+                        <Icon name="calendar-o" style={{ width: 14, textAlign: 'center' }} color={!viewed ? colours.when : colours.when} />
                       </View>) ||
                     (when.length === 1 && when[0].date === '' &&
                       <View
                         style={{ width: 14, marginLeft: 4, alignItems: 'center', justifyContent: 'center' }}
                       >
-                        <Icon name="calendar-o" style={{ width: 14, textAlign: 'center' }} color={!viewed ? colours.when : colours.lightgray} />
+                        <Icon name="calendar-o" style={{ width: 14, textAlign: 'center' }} color={!viewed ? colours.when : colours.when} />
                       </View>
                     )
                   }
 
                   <Text
-                    style={[{ fontSize: 16, marginLeft: 4, marginRight: 4 },
-                      unConfirmedItem && styles.unConfirmedItemText,
-                      !viewed && styles.unviewedFeedItemDate]}
+                    style={[{
+                      fontSize: unConfirmedItem ? 12 : 16,
+                      fontWeight: '500',
+                      marginLeft: 4,
+                      marginRight: 4,
+                      color: !viewed ? colours.darkgray : colours.darkgray }]}
                   >
                     {
                       (when.length > 1 && 'VOTE') ||
@@ -179,21 +182,25 @@ class FeedItem extends PureComponent {
                       <View
                         style={{ width: 14, marginLeft: 4, justifyContent: 'center', alignItems: 'center' }}
                       >
-                        <Icon2 name="location" style={{ width: 14, textAlign: 'center' }} color={!viewed ? colours.where : colours.lightgray} />
+                        <Icon2 name="location" style={{ width: 14, textAlign: 'center' }} color={!viewed ? colours.where : colours.where} />
                       </View>) ||
                     (where.length === 1 && where[0] === '' &&
                       <View
                         style={{ marginLeft: 4, alignItems: 'center', justifyContent: 'center' }}
                       >
-                        <Icon2 name="location" style={{ width: 14, textAlign: 'center' }} color={!viewed ? colours.where : colours.lightgray} />
+                        <Icon2 name="location" style={{ width: 14, textAlign: 'center' }} color={!viewed ? colours.where : colours.where} />
                       </View>)
                   }
 
                   <Text
                     numberOfLines={2}
-                    style={[{ fontSize: 12, textAlign: 'center', marginLeft: 4, marginRight: 4 },
-                      unConfirmedItem && styles.unConfirmedItemText,
-                      !viewed && styles.unviewedFeedItemPlaceName]}
+                    style={[{
+                      fontSize: unConfirmedItem ? 12 : 12,
+                      fontWeight: '500',
+                      textAlign: 'center',
+                      marginLeft: 4,
+                      marginRight: 4,
+                      color: !viewed ? colours.darkgray : colours.darkgray }]}
                   >
                     {
                       (where.length > 1 && 'VOTE') ||

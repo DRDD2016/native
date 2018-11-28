@@ -1052,11 +1052,6 @@ export const styles = {
     flex: 3.5,
     paddingBottom: 5
   },
-  timestamp: {
-    // fontSize: 10,
-    // fontWeight: '300',
-    color: 'lightgray'
-  },
   subjectName: {
     fontSize: 14,
     color: colours.darkgray,
