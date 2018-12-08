@@ -61,32 +61,53 @@ class Confirm extends Component {
         <ScrollView>
 
           <View style={{ flexDirection: 'column', alignItems: 'center', paddingHorizontal: 4 }}>
-            <View style={{ paddingTop: 10 }}>
+            <View style={{ paddingTop: 10, paddingBottom: 10 }}>
               <Msg1>{name}</Msg1>
             </View>
             {
-
-              <View style={{ width: '100%', paddingVertical: 10, justifyContent: 'flex-start' }}>
-                <Text style={{ color: colours.main }}>Description</Text>
-                <ButText style={{ color: description ? colours.gray : colours.lightgray, paddingTop: 10, paddingHorizontal: 10 }}>
-                  { description && description }
-                  { !description && 'no description' }
-                </ButText>
+              <View style={{ width: '100%', justifyContent: 'flex-start' }}>
+                <View style={{ backgroundColor: colours.spacerColour, height: 1, marginHorizontal: 4 }} />
+                <View style={{ paddingVertical: 4 }}>
+                  <Text style={{ textAlign: 'center', color: colours.main }}>Description</Text>
+                  <ButText style={{
+                    textAlign: 'center',
+                    color: description ? colours.gray : colours.lightgray,
+                    paddingTop: 4,
+                    paddingHorizontal: 10 }}>
+                    { description && description }
+                    { !description && 'no description' }
+                  </ButText>
+                </View>
               </View>
             }
 
 
           </View>
           <View style={{ backgroundColor: colours.spacerColour, height: 1, marginHorizontal: 4 }} />
-          <View style={{ marginVertical: 2, justifyContent: 'center' }}>
+          <View style={{ marginVertical: 4, justifyContent: 'center' }}>
+            <View style={{ marginHorizontal: 4 }}>
+              <Text style={{ textAlign: 'center', color: colours.main }}>
+                What
+              </Text>
+            </View>
             <ConfirmWhat data={what} />
           </View>
-          <View style={{ backgroundColor: colours.spacerColour, height: 0, marginHorizontal: 4 }} />
-          <View style={{ marginVertical: 2, justifyContent: 'center' }}>
+          <View style={{ backgroundColor: colours.spacerColour, height: 1, marginHorizontal: 4 }} />
+          <View style={{ marginVertical: 4, justifyContent: 'center' }}>
+            <View style={{ marginHorizontal: 4 }}>
+              <Text style={{ textAlign: 'center', color: colours.main }}>
+                Where
+              </Text>
+            </View>
             <ConfirmWhere data={where} />
           </View>
-          <View style={{ backgroundColor: colours.spacerColour, height: 0, marginHorizontal: 4 }} />
-          <View style={{ marginVertical: 2, justifyContent: 'center' }}>
+          <View style={{ backgroundColor: colours.spacerColour, height: 1, marginHorizontal: 4 }} />
+          <View style={{ marginVertical: 4, justifyContent: 'center' }}>
+            <View style={{ marginHorizontal: 4 }}>
+              <Text style={{ textAlign: 'center', color: colours.main }}>
+                When
+              </Text>
+            </View>
             <ConfirmWhen data={sortedDates} />
           </View>
           <View style={{ backgroundColor: colours.spacerColour, height: 1, marginHorizontal: 4 }} />
@@ -109,7 +130,7 @@ class Confirm extends Component {
               marginTop: 10,
               paddingLeft: 4 }}
             >
-              <Text style={{ color: colours.main }}>Messages</Text>
+              <Text style={{ textAlign: 'center', color: colours.main }}>Messages</Text>
             </View>
           }
 

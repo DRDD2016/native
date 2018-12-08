@@ -17,15 +17,16 @@ const containerStyle = {
   // borderWidth: 1,
   alignItems: 'center',
   justifyContent: 'center',
+  marginBottom: 0,
   maxWidth: 700
 };
 
 const inputStyle = {
   color: colours.darkgray,
-  marginTop: 8,
+  marginTop: 4,
   marginBottom: 2,
   paddingHorizontal: 10,
-  paddingBottom: 10,
+  paddingBottom: 4,
   fontSize: 16,
   fontWeight: '400',
   height: 45,
@@ -69,7 +70,7 @@ class InputField extends Component {
     const {
       multiline, numberOfLines, labelType, value, placeholder,
       onChangeText, testDescription, label, inputKey, optional,
-      focussedColor, unfocussedColor
+      focussedColor, unfocussedColor, autoCapitalize
     } = this.props;
     const focusedColor = !focussedColor ? colours.main : focussedColor;
     const unfocusedColor = !unfocussedColor ? colours.lightgray : unfocussedColor;
@@ -109,6 +110,7 @@ class InputField extends Component {
             autoCorrect={ false }
             value={ value }
             onChangeText={onChangeText}
+            autoCapitalize={autoCapitalize}
             style={[inputStyle, {
               borderColor: this.state.isFocused ? focusedColor : unfocusedColor,
               height: multiline ? null : null

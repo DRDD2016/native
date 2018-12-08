@@ -62,7 +62,7 @@ export default class Event extends Component {
         );
       } else if (!userIsHost) {
         return (
-          'You are invited'
+          'You are invited to'
         );
 
       } else if (error === 'Event has been deleted') {
@@ -208,6 +208,7 @@ export default class Event extends Component {
           handleDeleteEvent={ this.props.handleDeleteEvent }
           handleEdit={ this.props.navigation.state.params.handleEdit }
           handleInviteMoreFriends={ this.props.handleInviteMoreFriends }
+          userID={ this.props.userID }
         />
       );
     }

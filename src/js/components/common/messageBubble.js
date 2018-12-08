@@ -40,20 +40,31 @@ export default class MessageBubble extends Component {
             <Text style={{ textAlign: 'center', color: colours.main }}>
               {sender}
             </Text>
-            <ButText style={{ textAlign: 'center' }} color={colours.lightgray}>
+            <ButText style={{ textAlign: 'center' }} color={colours.gray}>
               {messageDate}
             </ButText>
           </View>
         }
         <View
-          style={{
+          style={{ // bubble container
             width: '80%',
             flexDirection: 'row',
             paddingRight: messageDirection === 'left' ? 8 : 0,
             paddingLeft: messageDirection === 'right' ? 8 : 0,
-            alignItems: 'flex-start' }}
+            alignItems: 'flex-start',
+            marginTop: 1,
+            // borderTopWidth: 0.5,
+            // borderTopColor: colours.lightgray,
+            // borderTopLeftRadius: 5,
+
+            elevation: 1,
+            shadowOpacity: 0.8,
+            shadowRadius: 0.25,
+            shadowColor: colours.lightgray,
+            shadowOffset: { width: 0, height: -1 }
+          }}
         >
-          <View style={{
+          <View style={{ // message rectangle
             flex: 1,
             borderBottomRightRadius: 5,
             borderBottomLeftRadius: 5,
@@ -61,10 +72,21 @@ export default class MessageBubble extends Component {
             borderTopRightRadius: messageDirection === 'right' ? 5 : 0,
             paddingHorizontal: 6,
             paddingVertical: 4,
+
+            elevation: 1,
+            shadowOpacity: 0.8,
+            shadowRadius: 1,
+            shadowColor: colours.gray,
+            shadowOffset: { width: 0, height: 1 },
+
             backgroundColor: colours.messageColor }}>
 
-            <View style={{ flex: 1, backgroundColor: 'transparent' }}>
-              <ButText color={colours.blue}>{ messageText }</ButText>
+            <View style={{
+              paddingBottom: 2,
+              // borderColor: 'red',
+              // borderWidth: 1,
+              backgroundColor: 'transparent' }}>
+              <ButText color={colours.darkgray}>{ messageText }</ButText>
             </View>
           </View>
           <View style={{ // triangle
@@ -80,7 +102,13 @@ export default class MessageBubble extends Component {
             borderRightColor: messageDirection === 'left' ? 'transparent' : null,
             borderLeftWidth: messageDirection === 'right' ? 8 : 0,
             borderLeftColor: messageDirection === 'right' ? 'transparent' : null,
-            borderTopColor: colours.messageColor
+            borderTopColor: colours.messageColor,
+
+            elevation: 1,
+            shadowOpacity: 0.8,
+            shadowRadius: 0.25,
+            shadowColor: colours.lightgray,
+            shadowOffset: { width: 1, height: 1 }
 
           }}
           />
@@ -101,10 +129,10 @@ export default class MessageBubble extends Component {
                 borderRadius: 3
               }]}
             />
-            <Text style={{ textAlign: 'center', color: colours.main }}>
+            <Text style={{ fontSize: 12, paddingTop: 2, textAlign: 'center', color: colours.main }}>
               {sender}
             </Text>
-            <ButText style={{ textAlign: 'center' }} color={colours.lightgray}>
+            <ButText style={{ fontSize: 12, textAlign: 'center' }} color={colours.gray}>
               {messageDate}
             </ButText>
           </View>

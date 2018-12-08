@@ -4,11 +4,13 @@ import { Header } from 'react-navigation';
 import { StatusBar, View, Text, FlatList, Dimensions, Platform, Image, Animated, InteractionManager } from 'react-native';
 import Fabric from 'react-native-fabric';
 import CalendarItem from './calendar-item';
+import LastCalendarItem from './last-calendar-item';
+import FirstCalendarItem from './first-calendar-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
 // import FeedHeader from './common/FeedHeader';
 import DropdownView from './common/DropdownView';
-import styles from '../../styles';
+import styles, { ConfirmButton, ConfirmButtonText } from '../../styles';
 import colours from '../../styles/colours';
 // import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
@@ -201,12 +203,31 @@ class Calendar extends Component {
   };
 
 
-  renderItem = (item) => {
+  renderItem = ({ item, index }) => {
+    console.log('item', item);
+    console.log('index', index);
+    console.log('item.event_id', item.event_id);
 
-    const { event_id, host_user_id, status, name, what, where, when, cancelled, is_poll, host_firstname, host_photo_url, rsvps } = item.item;
+    if (item.event_id === 'firstItem') {
+      console.log('its first Item');
+      return (
+        <FirstCalendarItem showMonth={item.showMonth} calendarMonth={item.calendarMonth} />
+      );
+    }
+
+    if (item.event_id === 'lastItem') {
+      console.log('its last Item');
+      console.log('its last Item it really is');
+      return (
+        <LastCalendarItem />
+      );
+    }
+    console.log('its last Item it really is carry on:', item.event_id);
+
+    const { event_id, host_user_id, status, name, what, where, when, cancelled, is_poll, host_firstname, host_photo_url, rsvps, calendarMonth, showMonth } = item; // eslint-disable-line max-len
     const { user_id, handleOnPress } = this.props;
-    // console.log('event_id', event_id);
-
+    console.log('event_id', event_id);
+    console.log('its neither');
     return (
 
       <CalendarItem
@@ -224,6 +245,8 @@ class Calendar extends Component {
         host_firstname={host_firstname}
         host_photo_url={host_photo_url}
         rsvps={rsvps}
+        calendarMonth={calendarMonth}
+        showMonth={showMonth}
       />
 
     );
@@ -262,7 +285,7 @@ class Calendar extends Component {
     // });
 
 
-    const { allEvents, calendarIsFetching, displaySome, displayAll, filterActive, selectedFilter } = this.props;
+    const { allEvents, calendarIsFetching, displaySome, displayAll, filterActive, selectedFilter, createNewEvent } = this.props;
 
     Answers.logCustom('Calendar.js render'); // eslint-disable-line max-len
 
@@ -278,13 +301,18 @@ class Calendar extends Component {
             borderBottomWidth: 1,
             borderBottomColor: colours.lightgray }}
         >
-
+          {
+            calendarIsFetching &&
+            <View style={{ backgroundColor: colours.background, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+              <Spinner />
+            </View>
+          }
           <View>
 
 
             {
-              !calendarIsFetching && this.dataSource &&
-              <View style={{ backgroundColor: 'transparent' }}>
+              !calendarIsFetching && this.dataSource && allEvents.length > 0 &&
+              <View style={{ backgroundColor: 'transparent', height: '100%' }}>
                 <DropdownView
                   navbarHeight={FILTER_PANEL_HEIGHT}
                   navbarOpacity={1} // or {navbarOpacity}
@@ -302,12 +330,13 @@ class Calendar extends Component {
 
                 </DropdownView>
 
+
                 <AnimatedFlatList
                   initialNumToRender={10}
                   data={this.dataSource}
                   extraData={this.state}
                   renderItem={this.renderItem}
-                  keyExtractor={item => item.event_id.toString()}
+                  keyExtractor={item => `${item.event_id.toString()}${item.when.toString()}`}
                   scrollEventThrottle={1}
                   onScroll={Animated.event(
                     [{ nativeEvent: { contentOffset: { y: this.state.scrollAnim } } }],
@@ -318,6 +347,8 @@ class Calendar extends Component {
                   onScrollEndDrag={this._onScrollEndDrag}
                   contentContainerStyle={{ backgroundColor: 'transparent', paddingTop: FILTER_PANEL_HEIGHT }}
                 />
+
+
               </View>
 
             }
@@ -325,9 +356,20 @@ class Calendar extends Component {
             {
               this.props.filteredEvents.length === 0 && !calendarIsFetching &&
               <View style={[styles.containerFeed, { alignItems: 'center' }]}>
-                <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
+                <Text style={{ color: colours.main, fontSize: 16, marginTop: 50, marginHorizontal: 15 }}>
                   You have no upcoming events.
                 </Text>
+                <Text style={[styles.msg3, { marginTop: 20, marginHorizontal: 15 }]}>
+                  Why not create one?
+                </Text>
+                <ConfirmButton
+                  onPress={ () => createNewEvent() }
+                  style={{ marginTop: 20, backgroundColor: colours.orange, borderColor: colours.orange }}
+                >
+                  <ConfirmButtonText>
+                    Get Started
+                  </ConfirmButtonText>
+                </ConfirmButton>
               </View>
             }
 

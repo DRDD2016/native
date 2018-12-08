@@ -105,6 +105,19 @@ export const AddCreateButton = styled.View`
   box-shadow: 0px 1px 2px ${colours.shadowColour}; // width, height, radius, colour
 `;
 
+export const AddCreateButtonNoTab = styled.View`
+
+  height: ${verticalScale2(80)};
+  width: ${verticalScale2(80)};
+  backgroundColor: ${colours.main};
+  alignItems: center;
+  justifyContent: center;
+  borderRadius: ${verticalScale2(40)};
+  elevation: 1;
+  zIndex: 99;
+  box-shadow: 0px 1px 2px ${colours.shadowColour}; // width, height, radius, colour
+`;
+
 
 export const ButText = styled.Text.attrs({
   color: props => props.color || colours.gray
@@ -212,7 +225,7 @@ export const Msg2 = styled.Text`
 
 export const Msg3 = styled.Text`
   fontSize: ${moderateScale(14)};
-  fontWeight: 700;
+  fontWeight: 600;
   color: ${colours.gray};
   textAlign: center;
 `; // msg3
@@ -367,7 +380,7 @@ export const styles = {
   },
   msg3: {
     fontSize: 14,
-    fontWeight: '700',
+    fontWeight: '600',
     color: colours.gray
   },
   msg4: {

@@ -108,19 +108,22 @@ export default class CategoryDetails extends Component {
             const tally = voteCount && voteCount[index];
 
             const key = (JSON.stringify(datum) === 0) ? JSON.stringify(`${index}${Math.random()}`) : JSON.stringify(`${datum}${Math.random()}`);
+            const categoryTitleColour = colours.main; // colours[`${categoryTitle}`.toLowerCase()];
 
             return (
-              <View key={key} style={{ flexDirection: 'column' }}>
-                <View style={{ flex: 150 }}>
-                  <Text style={styles[`optionTitle${categoryTitle}`]}>{ index === 0 && categoryTitle }</Text>
-                </View>
+              <View key={key} style={{ paddingBottom: 8, flexDirection: 'column' }}>
+                { index === 0 &&
+                  <View style={{ paddingBottom: 2, paddingTop: 4 }}>
+                    <Text style={{ color: categoryTitleColour }}>{ index === 0 && categoryTitle }</Text>
+                  </View>
+                }
                 <View style={{ flexDirection: 'row' }}>
 
-                  
-                  <View style={{ flex: 500 }}>
+
+                  <View style={{ flex: this.props.isHostPollView ? 5 : 1 }}>
                     <View style={{
-                      marginTop: 5,
-                      marginBottom: 5,
+                      marginTop: 0,
+                      marginBottom: 0,
                       elevation: 1,
                       shadowColor: colours.shadowColour,
                       shadowOffset: { width: 0, height: 1 },
@@ -130,8 +133,8 @@ export default class CategoryDetails extends Component {
                       <Icon.Button
                         name={this.icons[category]}
                         size={16}
-                        borderRadius={15}
-                        style={{ padding: 10 }}
+                        borderRadius={5}
+                        style={{ paddingHorizontal: 10, paddingVertical: 8 }}
                         color={(!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category]}
                         backgroundColor={(!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index] ? colours[category] : OFF_WHITE}
                         onPress={() => this._handleOnPress(category, datum, index)}
@@ -155,7 +158,7 @@ export default class CategoryDetails extends Component {
 
                     </View>
                   </View>
-                  <View style={{ flex: 300, paddingLeft: 5, justifyContent: 'center' }}>
+                  <View style={{ flex: this.props.isHostPollView ? 3 : 0, paddingLeft: this.props.isHostPollView ? 5 : 0, justifyContent: 'center' }}>
 
                     {
                       this.props.isHostPollView &&

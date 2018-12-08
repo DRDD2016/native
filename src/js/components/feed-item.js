@@ -69,7 +69,7 @@ class FeedItem extends PureComponent {
               backgroundColor: colours.white,
               borderTopWidth: !viewed ? 0.0 : 0.0,
               borderBottomWidth: !viewed ? 1 : 1,
-              borderColor: !viewed ? colours.lightgray : colours.lightgray,
+              borderColor: !viewed ? colours.sectionBorder : colours.sectionBorder,
               flexDirection: 'row',
               justifyContent: 'space-around' }}
             onPress={this._onPress}
@@ -121,7 +121,8 @@ class FeedItem extends PureComponent {
 
                 </Text>
               </Text>
-              <Text style={[styles.eventName, !viewed && styles.viewedFeedItemName, { opacity: !viewed ? 1 : 0.6 }]}>
+              <Text style={[styles.eventName, !viewed && styles.viewedFeedItemName, { fontWeight: '700', color: colours.main, opacity: !viewed ? 1 : 0.6 }]} // eslint-disable-line max-len
+              >
                 { name }
               </Text>
 

@@ -154,7 +154,13 @@ export default class InviteePoll extends Component {
 
         </View>
 
-        <View style={styles.row}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            paddingLeft: 4,
+            paddingRight: 4 }}
+        >
 
           <CategoryDetails
             category="what"
@@ -164,7 +170,13 @@ export default class InviteePoll extends Component {
           />
         </View>
 
-        <View style={styles.row}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            paddingLeft: 4,
+            paddingRight: 4 }}
+        >
           <CategoryDetails
             category="where"
             data={event.where}
@@ -173,7 +185,13 @@ export default class InviteePoll extends Component {
           />
         </View>
 
-        <View style={styles.row}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            paddingLeft: 4,
+            paddingRight: 4 }}
+        >
           <CategoryDetails
             category="when"
             data={event.when}
@@ -181,8 +199,14 @@ export default class InviteePoll extends Component {
             voteCount={voteCount && voteCount.when}
           />
         </View>
-
-        <View style={[styles.row, { justifyContent: 'center' }]}>
+        <View
+          style={{
+            flexDirection: 'row',
+            paddingTop: 10,
+            paddingLeft: 4,
+            paddingRight: 4,
+            justifyContent: 'center' }}
+        >
           {
             allCategoriesSelected &&
             <ConfirmButton

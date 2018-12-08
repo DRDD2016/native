@@ -8,10 +8,11 @@ import { persistor } from '../../init-store';
 import { FormTextInput, FormPasswordInput } from './form-components';
 import { signupValidator as validate } from './form-validation';
 import Spinner from '../common/Spinner';
-import HeaderBack from '../common/CreateHeaderBackground';
+import BannerBar from '../common/BannerBar';
+// import HeaderBack from '../common/CreateHeaderBackground';
 import ButtonHeader from '../common/ButtonHeader';
 import BackIcon from '../common/back-icon';
-import { styles, HeaderText, ConfirmButtonText, SignupButton } from '../../../styles';
+import { styles, HeaderText, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
 // import { connectAlert } from '../Alert';
 
@@ -47,18 +48,20 @@ class Signup extends Component {
   renderButton = () => {
     const { handleSubmit, handleSubmitForm, isSigningUp } = this.props;
     if (isSigningUp) {
-      return <Spinner size="large" />;
+      return <View style={{ justifyContent: 'center', alignItems: 'center' }}><Spinner size="large" /></View>;
     }
     return (
-      <View style={{ alignItems: 'center', marginTop: 10 }}>
-        <SignupButton
+      <View style={{ alignItems: 'center', marginTop: 8 }}>
+        <ConfirmButton
+          testID="sign up_button"
+          style={{ backgroundColor: colours.orange, borderColor: colours.orange }}
           accessibilityLabel="SIGN UP Submit"
           activeOpacity={ 0.5 }
           disabled={isSigningUp}
           onPress={handleSubmit(handleSubmitForm)}
         >
           <ConfirmButtonText>SIGN UP</ConfirmButtonText>
-        </SignupButton>
+        </ConfirmButton>
 
       </View>
 
@@ -81,6 +84,7 @@ class Signup extends Component {
     return (
       <View style={{ flex: 1 }}>
 
+        <BannerBar />
         <View
           style={{
             flex: 1,
@@ -95,35 +99,75 @@ class Signup extends Component {
             enableOnAndroid
             resetScrollToCoords={{ x: 0, y: 0 }}
           >
-            <HeaderBack />
+
             <View style={{ flex: 1, justifyContent: 'center', marginBottom: 20 }}>
               <View style={{ marginTop: Platform.OS === 'ios' ? 0 : 80 }}>
 
-                <View style={ [styles.row, { backgroundColor: 'transparent', marginBottom: 0, justifyContent: 'flex-end' }] }>
+                <View style={{ flexDirection: 'row', paddingBottom: 4, paddingTop: 8, paddingRight: 4, backgroundColor: 'transparent', justifyContent: 'flex-end', alignItems: 'center' }} // eslint-disable-line max-len
+                >
                   <Text>* Mandatory fields</Text>
                 </View>
 
-                <View style={ [styles.row, { marginHorizontal: 10, marginBottom: 0 }] }>
-                  <Field name="firstname" component={ FormTextInput } placeholder="* First name" />
+                <View style={{ paddingVertical: 4, paddingHorizontal: 10 }}>
+                  <Field
+                    name="firstname"
+                    labelText="First name"
+                    component={ FormTextInput }
+                    placeholder="Joe"
+                    focussedColor={ colours.main }
+                    unfocussedColor={ colours.lightgray }
+                  />
+
+
                 </View>
 
 
-                <View style={ [styles.row, { marginHorizontal: 10, marginBottom: 0 }] }>
-                  <Field name="surname" component={ FormTextInput } placeholder="* Surname" />
+                <View style={{ paddingVertical: 4, paddingHorizontal: 10 }}>
+                  <Field
+                    name="surname"
+                    labelText="Surname"
+                    component={ FormTextInput }
+                    placeholder="Bloggs"
+                    focussedColor={ colours.main }
+                    unfocussedColor={ colours.lightgray }
+                  />
+
                 </View>
 
 
-                <View style={ [styles.row, { marginHorizontal: 10, marginBottom: 0 }] }>
-                  <Field name="email" component={ FormTextInput } placeholder="* Email" isEmail />
+                <View style={{ paddingVertical: 4, paddingHorizontal: 10 }}>
+                  <Field
+                    name="email"
+                    labelText="Email *"
+                    component={ FormTextInput }
+                    placeholder="eg. joebloggs@example.com"
+                    focussedColor={ colours.main }
+                    unfocussedColor={ colours.lightgray }
+                    isEmail
+                  />
                 </View>
 
 
-                <View style={ [styles.row, { marginHorizontal: 10, marginBottom: 0 }] }>
-                  <Field name="password" component={ FormPasswordInput } placeholder="* Password" />
+                <View style={{ paddingVertical: 4, paddingHorizontal: 10 }}>
+                  <Field
+                    name="password"
+                    labelText="Password"
+                    component={ FormPasswordInput }
+                    placeholder=""
+                    focussedColor={ colours.main }
+                    unfocussedColor={ colours.lightgray }
+                  />
                 </View>
 
-                <View style={ [styles.row, { marginHorizontal: 10 }] }>
-                  <Field name="confirmPassword" component={ FormPasswordInput } placeholder="* Confirm password" />
+                <View style={{ paddingVertical: 4, paddingHorizontal: 10 }}>
+                  <Field
+                    name="confirmPassword"
+                    labelText="Confirm Password"
+                    component={ FormPasswordInput }
+                    placeholder=""
+                    focussedColor={ colours.main }
+                    unfocussedColor={ colours.lightgray }
+                  />
                 </View>
 
                 { this.renderServerError() }
