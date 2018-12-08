@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { StatusBar, InteractionManager, Animated, View, Text, TouchableHighlight, FlatList, Image, Platform, Dimensions } from 'react-native';
+import { StatusBar, InteractionManager, Animated, View, Text, FlatList, Image, Platform, Dimensions } from 'react-native';
 import Fabric from 'react-native-fabric';
 import _ from 'lodash';
 import { Header } from 'react-navigation';
-// import Icon from 'react-native-vector-icons/FontAwesome';
 import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
 // import ImageHeader from './common/ImageHeader';
-import styles from '../../styles';
+import styles, { ConfirmButton, ConfirmButtonText } from '../../styles';
 import colours from '../../styles/colours';
 // import { connectAlert } from './Alert';
 import DropdownView from './common/DropdownView';
@@ -18,7 +17,7 @@ import OfflineIconContainer from '../containers/common/OfflineIconContainer';
 import { store } from '../init-store';
 import { getFeedFailure } from '../actions/feed';
 import WhatsNew, { app_updateNo } from './onboarding/whatsnew';
-import { } from '../../styles/scaling';
+// import { verticalScale } from '../../styles/scaling';
 
 const { Answers } = Fabric;
 
@@ -64,6 +63,7 @@ class Feed extends Component {
 
   constructor (props) {
     super(props);
+
 
     // animated scrolling filterPanel
 
@@ -158,6 +158,7 @@ class Feed extends Component {
       this.setState({
         isReady: true
       });
+
     });
 
 
@@ -448,51 +449,43 @@ class Feed extends Component {
 
           {
             allEvents.length === 0 && !isReceivingFeed &&
-              <View style={{ alignItems: 'center' }}>
-                <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
+              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
+                <Text style={{ color: colours.main, fontSize: 16, marginTop: 50, marginHorizontal: 15 }}>
                   You have no events.
                 </Text>
-                <Text style={[styles.msg3, { marginTop: 30, marginHorizontal: 15 }]}>
-                  (Why not create one?)
+                <Text style={[styles.msg3, { marginTop: 20, marginHorizontal: 15 }]}>
+                  Why not create one?
                 </Text>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    marginTop: 20,
-                    marginBottom: 10,
-                    paddingLeft: 5,
-                    paddingRight: 5 }}
+                <ConfirmButton
+                  onPress={ () => createNewEvent() }
+                  style={{ marginTop: 20, backgroundColor: colours.orange, borderColor: colours.orange }}
                 >
-                  <TouchableHighlight
-                    onPress={ () => createNewEvent() }
-                    style={[styles.addButtonStyle, { backgroundColor: colours.orange }]}
-                  >
-                    <Text
-                      style={{
-                        textAlign: 'center',
-                        fontWeight: '200',
-                        height: 50,
-                        fontSize: 36,
-                        color: colours.white,
-                        backgroundColor: colours.transparent }}
-                    >
-                      +
-                    </Text>
-                  </TouchableHighlight>
+                  <ConfirmButtonText>
+                    Get Started
+                  </ConfirmButtonText>
+                </ConfirmButton>
 
-                </View>
-                <View style={{ height: 80 }} />
+
               </View>
           }
           {
             feed.length === 0 && selectedFilter === 'hosting' &&
               <View style={{ alignItems: 'center' }}>
-                <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
+                <Text style={{ color: colours.main, fontSize: 16, marginTop: 50, marginHorizontal: 15 }}>
                   You are not hosting any events.
                 </Text>
                 <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
-                  (Why not create some?)
+                  Why not create some?
                 </Text>
+                <ConfirmButton
+                  onPress={ () => createNewEvent() }
+                  style={{ marginTop: 20, backgroundColor: colours.orange, borderColor: colours.orange }}
+                >
+                  <ConfirmButtonText>
+                    Get Started
+                  </ConfirmButtonText>
+                </ConfirmButton>
+
               </View>
           }
           {
@@ -502,20 +495,16 @@ class Feed extends Component {
                   You have not been invited to any events.
                 </Text>
                 <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
-                  Tap { '"Code"' } below to enter to join an event using an invite code.
+                  Tap { '"Join"' } below to enter to join an event using an invite code.
                 </Text>
               </View>
           }
 
           {
-            !isReceivingFeed && this.dataSource &&
+            !isReceivingFeed && this.dataSource && feed.length > 0 &&
             <View style={{
               backgroundColor: colours.filterPanelBackgroundColor,
-              elevation: 1,
-              shadowOpacity: 0.8,
-              shadowRadius: 1,
-              shadowColor: 'gray',
-              shadowOffset: { height: 1, width: 0 }
+              flex: 1 // added
 
             }}>
 

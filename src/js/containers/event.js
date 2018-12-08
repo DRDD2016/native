@@ -19,6 +19,8 @@ import { shareLink, composeLinkToShare } from '../lib/branchLink';
 
 
 const mapStateToProps = ({ event, user, network, create }) => {
+
+  
   return {
     isPoll: event.data.is_poll,
     event: event.data,
@@ -33,7 +35,8 @@ const mapStateToProps = ({ event, user, network, create }) => {
     isConnected: network.isConnected,
     cancelled: event.data.cancelled,
     isConfirmingEvent: event.poll.isConfirmingEvent,
-    isEventConfirmed: create.isEventConfirmed
+    isEventConfirmed: create.isEventConfirmed,
+    userID: user.user_id
   };
 };
 

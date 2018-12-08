@@ -6,9 +6,12 @@ import { Header, createStackNavigator, createBottomTabNavigator, createDrawerNav
 // import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { createReduxBoundAddListener, createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
 import Icon from 'react-native-vector-icons/FontAwesome';
+// import Icon2 from 'react-native-vector-icons/Entypo';
+// import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons';
 import colours from '../styles/colours';
 import MyStatusBar, { STATUSBAR_HEIGHT } from './components/common/StatusBar';
 import BannerBar from './components/common/BannerBar';
+import CreateButton from './components/common/createButton';
 import { AddCreateButton, TabBarText } from '../styles';
 import { moderateScale, verticalScale } from '../styles/scaling';
 // import CustomTabBar from './components//general/customTabBar';
@@ -16,7 +19,7 @@ import DrawerContainer from './containers/drawer';
 import Index from './components/auth';
 import LoginContainer from './containers/auth/login';
 import SignupContainer from './containers/auth/signup';
-import AlbumsContainer from './containers/albums';
+// import AlbumsContainer from './containers/albums';
 import CalendarContainer from './containers/calendar';
 import FeedContainer from './containers/feed';
 import SettingsContainer from './containers/settings';
@@ -31,7 +34,7 @@ import EventContainer from './containers/event';
 import UploadPhoto from './containers/upload-photo';
 import ConfirmEmailContainer from './containers/auth/confirm-email';
 import EditContainer from './containers/edit';
-import Code from './containers/code';
+import CodeContainer from './containers/code';
 import Splash from './components/auth/splash';
 // import CreateButton from './components/general/create-button';
 // import Modal from './components/modal';
@@ -69,16 +72,30 @@ export const AppNavigator = createStackNavigator({
     screen: createDrawerNavigator({
       Spark: {
         screen: createBottomTabNavigator({
-          Albums: { screen: createStackNavigator({ ScreenAlbums: { screen: AlbumsContainer } }),
+          // Albums: { screen: createStackNavigator({ ScreenAlbums: { screen: AlbumsContainer } }),
+          //   navigationOptions: () => ({
+          //     tabBarIcon: ({ tintColor }) => (
+          //       <View style={{ height: TABBAR_HEIGHT, alignItems: 'center', justifyContent: 'center' }}>
+          //         <Icon
+          //           name="image"
+          //           color={tintColor}
+          //           size={verticalScale(28)}
+          //         />
+          //         <TabBarText color={tintColor} >Albums</TabBarText>
+          //       </View>
+          //     )
+          //   })
+          // },
+          settings: { screen: createStackNavigator({ ScreenSettings: { screen: SettingsContainer } }),
             navigationOptions: () => ({
               tabBarIcon: ({ tintColor }) => (
                 <View style={{ height: TABBAR_HEIGHT, alignItems: 'center', justifyContent: 'center' }}>
                   <Icon
-                    name="image"
+                    name="user"
                     color={tintColor}
                     size={verticalScale(28)}
                   />
-                  <TabBarText color={tintColor} >Albums</TabBarText>
+                  <TabBarText color={tintColor} >Profile</TabBarText>
                 </View>
               )
             })
@@ -107,12 +124,12 @@ export const AppNavigator = createStackNavigator({
             navigationOptions: {
               tabBarLabel: 'Create',
               tabBarVisible: false,
-              tabBarIcon: () =>
-                (
-                  <AddCreateButton style={{ position: 'absolute', alignItems: 'center', zIndex: 97 }}>
-                    <Icon name="plus" size={verticalScale(28)} color={colours.white} />
-                  </AddCreateButton>
-                )
+              tabBarIcon: () => (
+                <AddCreateButton style={{ position: 'absolute', alignItems: 'center', zIndex: 97 }}>
+                  <Icon name="plus" size={verticalScale(28)} color={colours.white} />
+                </AddCreateButton>
+              )
+
             }
           },
           Feed: { screen: createStackNavigator({ ScreenFeed: { screen: FeedContainer } }),
@@ -129,16 +146,16 @@ export const AppNavigator = createStackNavigator({
               )
             })
           },
-          Profile: { screen: createStackNavigator({ ScreenProfile: { screen: SettingsContainer } }),
+          Code: { screen: createStackNavigator({ ScreenRsvp: { screen: CodeContainer } }),
             navigationOptions: () => ({
               tabBarIcon: ({ tintColor }) => (
                 <View style={{ height: TABBAR_HEIGHT, alignItems: 'center', justifyContent: 'center' }}>
                   <Icon
-                    name="user"
+                    name="link"
                     color={tintColor}
                     size={verticalScale(28)}
                   />
-                  <TabBarText color={tintColor} >Profile</TabBarText>
+                  <TabBarText color={tintColor} >RSVP</TabBarText>
                 </View>
               )
             })
@@ -182,29 +199,56 @@ export const AppNavigator = createStackNavigator({
                   >
 
 
-                    {
+                    { // maybe add Tips here if +
                       routes.map((route, idx) => (
-                        <ViewOverflow
-                          key={route.key}
-                          style={{
-                              flex: 1,
-                              alignItems: 'center',
-                              justifyContent: 'center'
 
-                          }}
-                        >
-                          <TouchableWithoutFeedback
-                            style={{ }}
-                            onPress={() => jumpTo(route.key)}
+                        (route === 'Create') ?
+                          <ViewOverflow
+                            key={route.key}
+                            style={{
+                                flex: 1,
+                                alignItems: 'center',
+                                justifyContent: 'center'
+
+                            }}
                           >
-                            {renderIcon({
-                              route,
-                              focused: index === idx,
-                              tintColor: index === idx ? activeTintColor : inactiveTintColor
-                            })}
 
-                          </TouchableWithoutFeedback>
-                        </ViewOverflow>
+                            <CreateButton onPress={() => jumpTo(route.key)}>
+                              {renderIcon({
+                                route,
+                                focused: index === idx,
+                                tintColor: index === idx ? activeTintColor : inactiveTintColor
+                              })}
+                            </CreateButton>
+
+                          </ViewOverflow>
+
+                        :
+                          <ViewOverflow
+                            key={route.key}
+                            style={{
+                                flex: 1,
+                                alignItems: 'center',
+                                justifyContent: 'center'
+
+                            }}
+                          >
+                            <TouchableWithoutFeedback
+                              style={{ }}
+                              onPress={() => jumpTo(route.key)}
+                            >
+                              {renderIcon({
+                                route,
+                                focused: index === idx,
+                                tintColor: index === idx ? activeTintColor : inactiveTintColor
+                              })}
+
+                            </TouchableWithoutFeedback>
+
+
+                          </ViewOverflow>
+
+
                       ))
                     }
                   </View>
@@ -288,9 +332,6 @@ export const AppNavigator = createStackNavigator({
   },
   settings: { screen: createStackNavigator({
     Settings: { screen: SettingsContainer } })
-  },
-  code: { screen: createStackNavigator({
-    Code: { screen: Code } })
   }
 }, {
   mode: 'modal',

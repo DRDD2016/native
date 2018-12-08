@@ -42,6 +42,7 @@ export default class What extends Component {
     const labelType = data.length > 1 ? 'poll' : 'notPoll';
     console.log('inputCount', inputCount);
     console.log('showLabel', labelType);
+
     const inputs = data.map((value, i) => {
       console.log('i', i);
       const labelText = 'Activity';

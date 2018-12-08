@@ -1,25 +1,42 @@
 import React from 'react';
-import { Text, TextInput, View } from 'react-native';
-import styles from '../../../styles';
+import { Text, View } from 'react-native';
+import InputField from '../general/inputField';
+// import styles from '../../../styles';
 
-export function FormTextInput ({ placeholder, isEmail, isLoginView, input: { value, onChange, onBlur }, meta: { touched, error } }) {
+export function FormTextInput ({
+  labelText,
+  focussedColor,
+  unfocussedColor,
+  placeholder,
+  isEmail,
+  input: { value, onChange, onBlur },
+  meta: { touched, error } }) {
+
   console.log('touched: ', touched);
   console.log('error: ', error);
 
   return (
     <View style={{ flex: 1 }}>
-      <TextInput
-        accessibilityLabel="Email"
-        style={ isLoginView ? [styles.inputStyleAuth, { borderRadius: 0 }] : [styles.inputStyleAuth] }
+
+      <InputField
+        // testDescription={testDescription}
+        underlineColorAndroid="transparent"
+        placeholder={ placeholder }
+        autoCorrect={ false }
+        autoCapitalize={ isEmail ? 'none' : 'words' }
         onChangeText={ text => onChange(text) }
         onBlur={ text => onBlur(text) }
         value={ value }
         type="text"
-        underlineColorAndroid="transparent"
-        placeholder={ placeholder }
-        autoCapitalize={ isEmail ? 'none' : 'words' }
-        autoCorrect={ false }
+        labelType="notPoll"
+        label={ labelText }
+        // inputKey= { inputKey }
+        // onChangeText={ text => handleChange(text, inputKey) }
+        focussedColor={ focussedColor }
+        unfocussedColor={ unfocussedColor }
       />
+
+
       {
         touched && error && <Text style={{ height: 25, color: 'red', fontSize: 16, marginVertical: 2 }}>{error}</Text>
       }
@@ -27,20 +44,29 @@ export function FormTextInput ({ placeholder, isEmail, isLoginView, input: { val
   );
 }
 
-export function FormPasswordInput ({ placeholder, isLoginView, input: { value, onChange, onBlur }, meta: { touched, error } }) {
+export function FormPasswordInput ({ labelText, focussedColor, unfocussedColor, placeholder, input: { value, onChange, onBlur }, meta: { touched, error } }) { // eslint-disable-line max-len
   return (
     <View style={{ flex: 1 }}>
-      <TextInput
-        accessibilityLabel="Password"
-        style={ isLoginView ? [styles.inputStyleAuth, { borderRadius: 0 }] : [styles.inputStyleAuth] }
+      <InputField
+        // testDescription={testDescription}
+        underlineColorAndroid="transparent"
+        placeholder={ placeholder }
+        autoCorrect={ false }
+        autoCapitalize="none"
         onChangeText={ text => onChange(text) }
         onBlur={ text => onBlur(text) }
         value={ value }
         type="password"
-        underlineColorAndroid="transparent"
-        placeholder={ placeholder }
+        labelType="notPoll"
+        label={ labelText }
+        // inputKey= { inputKey }
+        // onChangeText={ text => handleChange(text, inputKey) }
+        focussedColor={ focussedColor }
+        unfocussedColor={ unfocussedColor }
         secureTextEntry
       />
+
+
       {
         touched && error && <Text style={{ color: '#ec3811', fontSize: 16, marginVertical: 2 }}>{error}</Text>
       }

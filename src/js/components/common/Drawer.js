@@ -93,7 +93,7 @@ export default class Drawer extends Component {
         </TouchableOpacity>
 
         <TouchableOpacity style={inlineStyles.DrawerItem} onPress={() => navigation.navigate('settings')}>
-          <View style={{ marginRight: 10 }}><Icon name="cog" size={32} color={colours.gray} /></View>
+          <View style={{ marginRight: 10 }}><Icon name="user" size={32} color={colours.gray} /></View>
           <Text
             style={inlineStyles.DrawerItemText}
           >

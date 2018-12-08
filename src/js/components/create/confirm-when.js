@@ -19,57 +19,45 @@ const ConfirmWhen = ({ data }) => {
   const layout = data.map((timestamp, i) => {
     const hideTitle = i > 0;
     return (
-      <View
-        style={{ flexDirection: 'column', alignItems: 'flex-start', marginVertical: 1 }}
-        key={ i }
-      >
-        { (hideTitle) &&
-          <View style={{ flex: 150, marginHorizontal: 4 }} />
-        }
-        { (!hideTitle) &&
-          <View style={{ flex: 150, marginHorizontal: 4 }}>
-            <Text style={{ color: colours.main }}>
-              When
-            </Text>
-          </View>
-        }
-        <View style={{ flex: 800, paddingHorizontal: 10 }}>
-          <View style={{ }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <View style={{ marginLeft: 4, width: 24, justifyContent: 'center', alignItems: 'center', marginRight: 4  }}>
-                <IconM name="calendar-blank" size={22} color={colours.when} />
-              </View>
-              <ButText color={colours.when}>
-                {
-                  // in create/confirm view, timestamp will be an object: { date: DD-MM-YYYY, time: HH:mm }
-                  // everywhere else will be ISO string
-                  formatDate(timestamp)
-                }
-                {'  '}
-              </ButText>
-              <View style={{ marginLeft: 4, width: 24, justifyContent: 'center', alignItems: 'center', marginRight: 4 }}>
-                <IconM name="clock" size={22} color={colours.when} />
-              </View>
-              <ButText color={colours.when}>
-
-                {
-                  // in create/confirm view, timestamp will be an object: { date: DD-MM-YYYY, time: HH:mm }
-                  // everywhere else will be ISO string, or for 'TBC' a modified ISO string with `:TBC` appended
-                  formatTime(timestamp)
-                }
-              </ButText>
-            </View>
-          </View>
+      <View key={ i } style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 1 }} >
+        <View style={{ marginLeft: 4, width: 24, justifyContent: 'center', alignItems: 'center', marginRight: 4  }}>
+          <IconM name="calendar-blank" size={22} color={colours.when} />
         </View>
+        <ButText color={colours.when}>
+          {
+            // in create/confirm view, timestamp will be an object: { date: DD-MM-YYYY, time: HH:mm }
+            // everywhere else will be ISO string
+            formatDate(timestamp)
+          }
+          {'  '}
+        </ButText>
+        <View style={{ marginLeft: 4, width: 24, justifyContent: 'center', alignItems: 'center', marginRight: 4 }}>
+          <IconM name="clock" size={22} color={colours.when} />
+        </View>
+        <ButText color={colours.when}>
+
+          {
+            // in create/confirm view, timestamp will be an object: { date: DD-MM-YYYY, time: HH:mm }
+            // everywhere else will be ISO string, or for 'TBC' a modified ISO string with `:TBC` appended
+            formatTime(timestamp)
+          }
+        </ButText>
       </View>
+
     );
   });
 
   console.log('confirmWhen finished');
 
   return (
-    <View style={{ marginTop: 3, marginRight: 10 }}>
-      { layout }
+    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+
+      <View style={{ flexDirection: 'column' }} >
+
+        { layout }
+
+      </View>
+
     </View>
   );
 };

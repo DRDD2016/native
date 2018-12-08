@@ -141,7 +141,10 @@ class Albums extends Component {
 
     if (!this.state.isReady) {
       console.log('renderAlbumsActivityIndicator');
-      return <ActivityIndicator />;
+
+      return (
+        <View style={{ backgroundColor: colours.background, flex: 1, alignItems: 'center', justifyContent: 'center' }}><Spinner /></View>
+      );
     }
 
     console.log('renderAlbumsContent');
@@ -150,7 +153,7 @@ class Albums extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        
+
 
         <View
           style={{
@@ -161,7 +164,7 @@ class Albums extends Component {
         >
 
           {
-            isFetching && <Spinner />
+            isFetching && <View style={{ backgroundColor: colours.background, flex: 1, alignItems: 'center', justifyContent: 'center' }}><Spinner /></View>
           }
 
           <View>

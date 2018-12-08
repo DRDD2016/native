@@ -218,36 +218,44 @@ class Login extends Component {
             </Modal>
 
 
-            <View style={{ paddingHorizontal: 15, flex: 1, alignItems: 'center' }}>
+            <View style={{ paddingHorizontal: 10, flex: 1, alignItems: 'center' }}>
               <View style={inlineStyles.inputWrap}>
                 <View style={inlineStyles.iconWrap}>
                   <Icon name="envelope-o" size={15} color="rgba(255, 255, 255, 0.76)" />
                 </View>
-                <Field
-                  style={ styles.inputStyle }
-                  name="email"
-                  component={ FormTextInput }
-                  isEmail
-                  isLoginView
-                  placeholder="email address"
-                  focussedColor={colours.what}
-                  unfocussedColor={colours.lightgray}
-                />
+                <View style={{ flex: 1, paddingLeft: 4 }}>
+                  <Field
+                    name="email"
+                    labelText="Email"
+                    component={ FormTextInput }
+                    isEmail
+                    isLoginView
+                    placeholder="joe.bloggs@example.com"
+                    focussedColor={ colours.main }
+                    unfocussedColor={ colours.lightgray }
+                  />
+                </View>
+
               </View>
               <View style={inlineStyles.inputWrap}>
                 <View style={inlineStyles.iconWrap}>
                   <Icon name="lock" size={20} color="rgba(255, 255, 255, 0.76)" />
                 </View>
-                <Field
-                  style={inlineStyles.input}
-                  name="password"
-                  component={ FormPasswordInput }
-                  isLoginView
-                  placeholder="password"
-                />
+                <View style={{ flex: 1, paddingLeft: 4 }}>
+                  <Field
+                    name="password"
+                    labelText="Password"
+                    component={ FormPasswordInput }
+                    isLoginView
+                    placeholder="password"
+                    focussedColor={ colours.main }
+                    unfocussedColor={ colours.lightgray }
+                  />
+
+                </View>
               </View>
 
-              <View style={{ alignItems: 'center', marginTop: 10 }}>
+              <View style={{ alignItems: 'center', marginTop: 8 }}>
                 <ConfirmButton
                   accessibilityLabel="LOG IN Submit"
                   activeOpacity={ 0.5 }

@@ -29,8 +29,6 @@ export default class DropdownView extends Component {
           // shadowRadius: 1,
           // shadowColor: colours.gray,
           // shadowOffset: { height: 1, width: 0 }
-          // borderColor: 'red',
-          // borderWidth: 1
         },
         { transform: [{ translateY: navbarTranslate }] }]}
       >

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Text, View, Image, Dimensions } from 'react-native';
+import colours from '../../../styles/colours';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -21,12 +22,13 @@ const cardStyle = {
 const imageStyle = {
   width: 30,
   height: 30,
-  borderRadius: 15,
-  marginRight: 5
+  borderRadius: 3,
+  marginRight: 4
 };
 const textStyle = {
   fontSize: 12,
-  flex: 2
+  flex: 2,
+  color: colours.main
 };
 
 export default function InviteeCard ({ firstname, photo_url }) {
