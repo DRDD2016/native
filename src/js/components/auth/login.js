@@ -20,17 +20,14 @@ const { Answers } = Fabric;
 
 const inlineStyles = {
   inputWrap: {
-    maxWidth: 800,
+    maxWidth: '100%',
     flexDirection: 'row',
-    marginVertical: 5,
+    marginVertical: 4,
     // height: 70,
-    backgroundColor: 'transparent'
-  },
-  input: {
-    flex: 1,
-    paddingHorizontal: 10,
-    backgroundColor: '#FFF',
-    borderRadius: 20
+    backgroundColor: 'transparent',
+    borderColor: 'red',
+    borderWidth: 1,
+    marginHorizontal: 4
   },
   iconWrap: {
     width: 40,
@@ -127,7 +124,7 @@ class Login extends Component {
             borderBottomColor: colours.lightgray }}
         >
           <KeyboardAvoidingView
-            style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 70 : 40 }}
+            style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 70 : 70 }}
             behavior="padding"
           >
 
@@ -223,7 +220,7 @@ class Login extends Component {
                 <View style={inlineStyles.iconWrap}>
                   <Icon name="envelope-o" size={15} color="rgba(255, 255, 255, 0.76)" />
                 </View>
-                <View style={{ flex: 1, paddingLeft: 4 }}>
+                <View style={{ paddingVertical: 4, paddingHorizontal: 10 }}>
                   <Field
                     name="email"
                     labelText="Email"
@@ -241,7 +238,7 @@ class Login extends Component {
                 <View style={inlineStyles.iconWrap}>
                   <Icon name="lock" size={20} color="rgba(255, 255, 255, 0.76)" />
                 </View>
-                <View style={{ flex: 1, paddingLeft: 4 }}>
+                <View style={{ paddingVertical: 4, paddingHorizontal: 10 }}>
                   <Field
                     name="password"
                     labelText="Password"

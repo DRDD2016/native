@@ -87,7 +87,7 @@ export default class HostPoll extends Component {
         {
           !isFetching &&
 
-          <View style={{ flexDirection: 'column' }}>
+          <View style={{ flexDirection: 'column', borderWidth: 2, borderColor: 'red' }}>
             <View style={{ marginTop: 10, marginBottom: 10 }}>
 
               <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
