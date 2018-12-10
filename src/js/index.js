@@ -1,9 +1,10 @@
 /* eslint-disable react/prefer-stateless-function */
-/* global __DEV__ */
+// /* global __DEV__ */
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { Client } from 'bugsnag-react-native';
-import { NetInfo, AsyncStorage, NativeModules } from 'react-native';
+import { NetInfo, AsyncStorage } from 'react-native';
+// , NativeModules
 // import {
 //   setCustomView,
 //   setCustomTextInput,
@@ -24,9 +25,9 @@ import SpinnerContainer from './containers/common/SpinnerContainer';
 // import colours from '../styles/colours';
 
 
-if (__DEV__) {
-  NativeModules.DevSettings.setIsDebuggingRemotely(true);
-}
+// if (__DEV__) {
+//   NativeModules.DevSettings.setIsDebuggingRemotely(true);
+// }
 
 const bugsnag = new Client();
 // bugsnag.leaveBreadcrumb('index.js starting', {

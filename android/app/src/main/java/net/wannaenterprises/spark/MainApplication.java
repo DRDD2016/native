@@ -3,27 +3,23 @@ package net.wannaenterprises.spark;
 import com.smixx.fabric.FabricPackage;
 import android.app.Application;
 import android.util.Log;
-
 import com.facebook.react.ReactApplication;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.entria.views.RNViewOverflowPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.evollu.react.fcm.FIRMessagingPackage;
+import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import io.branch.rnbranch.RNBranchPackage;
 import com.bugsnag.BugsnagReactNative;
-import com.evollu.react.fcm.FIRMessagingPackage;
-import com.RNFetchBlob.RNFetchBlobPackage;
-import com.evollu.react.fcm.FIRMessagingPackage;
 import io.branch.rnbranch.*;
 import io.branch.referral.Branch;
-import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
-import com.imagepicker.ImagePickerPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.BV.LinearGradient.LinearGradientPackage;
-
 import io.fabric.sdk.android.Fabric;
 import com.crashlytics.android.Crashlytics;
 import java.util.Arrays;
@@ -47,14 +43,13 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new RNFetchBlobPackage(),
             new RNViewOverflowPackage(),
+            new VectorIconsPackage(),
+            new LinearGradientPackage(),
+            new ImagePickerPackage(),
+            new FIRMessagingPackage(),
+            new ReactNativeConfigPackage(),
             new RNBranchPackage(),
-            BugsnagReactNative.getPackage(),
-            new RNFetchBlobPackage(),
-          new ReactNativeConfigPackage(),
-          new ImagePickerPackage(),
-          new VectorIconsPackage(),
-          new FIRMessagingPackage(),
-          new LinearGradientPackage()
+            BugsnagReactNative.getPackage()
       );
     }
 
