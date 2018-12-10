@@ -274,7 +274,7 @@ export default class Event extends Component {
 
           </Modal>
 
-          <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 0 : 110 }}>
+          <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 0 : 0 }}>
             {
               this.props.event && this.eventRouter()
             }

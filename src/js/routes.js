@@ -40,7 +40,7 @@ import Splash from './components/auth/splash';
 // import Modal from './components/modal';
 
 const NAVBAR_HEIGHT = Header.HEIGHT;
-const TABBAR_HEIGHT = verticalScale(NAVBAR_HEIGHT - STATUSBAR_HEIGHT) + 8;
+const TABBAR_HEIGHT = Platform.OS === 'ios' ? verticalScale(NAVBAR_HEIGHT - STATUSBAR_HEIGHT) + 8 : verticalScale(NAVBAR_HEIGHT) - 2;
 console.log('NAVBAR_HEIGHT', NAVBAR_HEIGHT);
 console.log('STATUSBAR_HEIGHT', STATUSBAR_HEIGHT);
 console.log('TABBAR_HEIGHT', TABBAR_HEIGHT);
