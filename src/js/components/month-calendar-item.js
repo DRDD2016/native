@@ -1,8 +1,10 @@
 /* eslint-disable react/forbid-prop-types */
 import React, { PureComponent } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import CardSection from './common/CardSection';
 import colours from '../../styles/colours';
+import { moderateScale, feedHorizPaddingScale, feedVertPaddingScale } from '../../styles/scaling';
+import { MonthText } from '../../styles/text';
 
 
 /***
@@ -18,9 +20,35 @@ class MonthCalendarItem extends PureComponent {
     const { month, firstMonth } = this.props;
 
     return (
-      <View style={{ marginLeft: 0, marginRight: 0, backgroundColor: colours.background }}>
+      <View style={{ marginLeft: 5, marginRight: 5, borderRadius: 15, backgroundColor: colours.background }}>
         <CardSection style={{ justifyContent: 'flex-start' }}>
-          <View style={{ flex: 1, marginLeft: 36, width: 3, height: 5, backgroundColor: firstMonth ? 'transparent' : colours.when }} />
+
+          <View
+            style={{
+              flex: 1,
+              paddingLeft: feedHorizPaddingScale(5),
+              marginRight: feedHorizPaddingScale(5),
+              flexDirection: 'row',
+              justifyContent: 'space-between'
+            }}
+          >
+            <View
+              style={{
+                width: moderateScale(55),
+                flexDirection: 'row',
+                justifyContent: 'center'
+              }}
+            >
+
+              <View style={{
+                width: moderateScale(3),
+                height: feedVertPaddingScale(5),
+                backgroundColor: firstMonth ? 'transparent' : colours.when }} />
+
+            </View>
+          </View>
+
+
           <View
             style={{
               flex: 1,
@@ -33,7 +61,7 @@ class MonthCalendarItem extends PureComponent {
           >
             <View style={{
 
-              height: 25,
+              height: moderateScale(25),
               width: '100%',
               alignItems: 'flex-start',
               justifyContent: 'center',
@@ -43,17 +71,37 @@ class MonthCalendarItem extends PureComponent {
               borderColor: colours.blue,
               borderWidth: 0 }}
             >
-              <Text
-                numberOfLines={1}
-                style={{ textAlign: 'left', fontSize: 14, color: colours.white, fontWeight: '600' }}
-              >
+              <MonthText numberOfLines={1}>
                 { month }
-              </Text>
+              </MonthText>
             </View>
 
 
           </View>
-          <View style={{ flex: 1, marginLeft: 36, width: 3, height: 5, backgroundColor: colours.when }} />
+          <View
+            style={{
+              flex: 1,
+              paddingLeft: feedHorizPaddingScale(5),
+              marginRight: feedHorizPaddingScale(5),
+              flexDirection: 'row',
+              justifyContent: 'space-between'
+            }}
+          >
+            <View
+              style={{
+                width: moderateScale(55),
+                flexDirection: 'row',
+                justifyContent: 'center'
+              }}
+            >
+
+              <View style={{
+                width: moderateScale(3),
+                height: feedVertPaddingScale(5),
+                backgroundColor: colours.when }} />
+
+            </View>
+          </View>
         </CardSection>
       </View>
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, KeyboardAvoidingView, Platform, Modal, TouchableHighlight } from 'react-native';
+import { View, TouchableOpacity, KeyboardAvoidingView, Modal } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -13,47 +13,13 @@ import BackIcon from '../common/back-icon';
 import Spinner from '../common/Spinner';
 import { loginValidator as validate } from './form-validation';
 import colours from '../../../styles/colours';
-import styles, { ConfirmButton, ConfirmButtonText, HeaderText } from '../../../styles';
+import { ConfirmButton, HeaderText, ModalView, ModalWrapper } from '../../../styles';
+import { GeneralText, MessageText, ConfirmButtonText, ForgotPasswordText, ModalGeneralText, ModalMessageText } from '../../../styles/text';
+import { feedVertPaddingScale, moderateScale, iconScale } from '../../../styles/scaling';
 // import { connectAlert } from '../Alert';
 
 const { Answers } = Fabric;
 
-const inlineStyles = {
-  inputWrap: {
-    maxWidth: '100%',
-    flexDirection: 'row',
-    marginVertical: 4,
-    // height: 70,
-    backgroundColor: 'transparent',
-    borderColor: 'red',
-    borderWidth: 1,
-    marginHorizontal: 4
-  },
-  iconWrap: {
-    width: 40,
-    height: 45,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colours.blue
-  },
-  button: {
-    backgroundColor: colours.blue,
-    paddingVertical: 15,
-    marginVertical: 15,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 0
-  },
-  buttonText: {
-    color: '#FFF',
-    fontSize: 18
-  },
-  forgotPasswordText: {
-    color: colours.blue,
-    textAlign: 'center',
-    fontSize: 18
-  }
-};
 
 class Login extends Component {
 
@@ -119,16 +85,12 @@ class Login extends Component {
         <View
           style={{
             flex: 1,
-            backgroundColor: colours.white,
-            borderBottomWidth: 1,
-            borderBottomColor: colours.lightgray }}
+            backgroundColor: colours.white }}
         >
           <KeyboardAvoidingView
-            style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 70 : 70 }}
+            style={{ flex: 1, borderColor: 'red', borderWidth: 1 }}
             behavior="padding"
           >
-
-            <View />
 
 
             <Modal
@@ -142,85 +104,100 @@ class Login extends Component {
               }}
             >
               {
-                <View style={styles.modalWrapper}>
+                <ModalWrapper>
 
                   {
                     !isLoggingIn && !serverError &&
 
 
-                    <View style={styles.modalConfirm}>
+                    <ModalView>
+                      <GeneralText style={[{ color: colours.white, paddingVertical: 12 }]}>Not Logging in</GeneralText>
+                      <MessageText style={[{ color: colours.lightgray, paddingVertical: 4 }]}>dont wait...</MessageText>
 
-                      <Text style={[styles.msg1, { flex: 1 }]}>Not Logging in</Text>
-                      <Text style={[styles.msg2, { flex: 1 }]}>dont wait...</Text>
                       <Spinner size="large" />
-                      <View style={{ flex: 1 }} />
 
-                    </View>
+
+                    </ModalView>
                   }
 
                   {
                     isLoggingIn && isConnected && !serverError &&
-                    <View style={styles.modalConfirm}>
+                    <ModalView>
 
-                      <Text style={[styles.msg1, { flex: 1 }]}>Logging in</Text>
-                      <Text style={[styles.msg2, { flex: 1 }]}>please wait...</Text>
+                      <GeneralText style={[{ color: colours.white, paddingVertical: 12 }]}>Logging in</GeneralText>
+                      <MessageText style={[{ color: colours.lightgray, paddingVertical: 4 }]}>please wait...</MessageText>
+
                       <Spinner size="large" />
-                      <View style={{ flex: 1 }} />
 
-                    </View>
+
+                    </ModalView>
                   }
 
                   {
                     isLoggingIn && !isConnected &&
-                    <View style={styles.modalConfirm}>
+                    <ModalView>
+                      <ModalGeneralText style={[{ color: colours.white, paddingVertical: 12 }]}>No internet connection</ModalGeneralText>
+                      <ModalMessageText style={[{ color: colours.lightgray, paddingVertical: 4 }]}
+                      >Make sure WiFi is turned on or try again later</ModalMessageText>
 
-                      <Text style={[styles.msg1, { flex: 1 }]}>No internet connection</Text>
-                      <Text style={[styles.msg2, { flex: 1 }]}>Make sure WiFi is turned on or try again later</Text>
-                      <View style={{ flex: 1 }}>
-                        <TouchableHighlight
-                          style={ [styles.confirmButton, { marginBottom: 20, marginTop: 20 }] }
-                          onPress={() => handleResetLogin()}
-                        >
-                          <Text style={styles.confirmButtonText}>OK</Text>
-                        </TouchableHighlight>
-                      </View>
+                      <ConfirmButton
+                        style={{ backgroundColor: colours.green, borderColor: colours.green, borderWidth: 3, height: 60 }}
+                        onPress={() => handleResetLogin()}
+                      >
 
-                    </View>
+                        <ConfirmButtonText>OK</ConfirmButtonText>
+
+                      </ConfirmButton>
+
+
+                    </ModalView>
                   }
 
                   {
 
                     !isLoggingIn && serverError &&
 
-                    <View style={styles.modalConfirm}>
+                    <ModalView>
+                      <ModalGeneralText style={[{ color: colours.white, paddingVertical: 12 }]}>{this.props.serverError}</ModalGeneralText>
+                      <ModalMessageText
+                        style={[{ color: colours.lightgray, paddingVertical: 4 }]}>Please enter correct login details</ModalMessageText>
+                      <ModalMessageText style={[{ color: colours.lightgray, paddingVertical: 4 }]}>or Signup to register an account</ModalMessageText>
 
-                      <Text style={[styles.msg1, { flex: 1, color: 'red' }]}>{this.props.serverError}</Text>
-                      <Text style={[styles.msg2, { flex: 1 }]}>Please enter correct login details</Text>
-                      <Text style={[styles.msg2, { flex: 1 }]}>or Signup to register an account</Text>
-                      <View style={{ flex: 1 }}>
-                        <TouchableHighlight
-                          style={ [styles.confirmButton, { marginBottom: 20, marginTop: 20 }] }
-                          onPress={() => handleResetLogin()}
-                        >
-                          <Text style={styles.confirmButtonText}>OK</Text>
-                        </TouchableHighlight>
-                      </View>
-                    </View>
+                      <ConfirmButton
+                        style={{ backgroundColor: colours.green, borderColor: colours.green, borderWidth: 3, height: 60 }}
+                        onPress={() => handleResetLogin()}
+                      >
+                        <ConfirmButtonText>OK</ConfirmButtonText>
+                      </ConfirmButton>
+
+                    </ModalView>
                   }
 
-                </View>
+                </ModalWrapper>
               }
 
 
             </Modal>
 
 
-            <View style={{ paddingHorizontal: 10, flex: 1, alignItems: 'center' }}>
-              <View style={inlineStyles.inputWrap}>
-                <View style={inlineStyles.iconWrap}>
-                  <Icon name="envelope-o" size={15} color="rgba(255, 255, 255, 0.76)" />
+            <View style={{ flexDirection: 'column', paddingHorizontal: 10, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+              <View style={{
+                flexDirection: 'row',
+                marginVertical: 20,
+                // height: 70,
+                backgroundColor: 'transparent'
+              }}>
+                <View style={{
+                  width: iconScale(40),
+                  height: iconScale(45),
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: colours.blue
+                }}>
+                  <Icon name="envelope-o" size={iconScale(15)} color="rgba(255, 255, 255, 0.76)" />
                 </View>
-                <View style={{ paddingVertical: 4, paddingHorizontal: 10 }}>
+                <View style={{
+                  paddingBottom: feedVertPaddingScale(4), paddingHorizontal: moderateScale(10), flexDirection: 'column' }}>
                   <Field
                     name="email"
                     labelText="Email"
@@ -234,11 +211,22 @@ class Login extends Component {
                 </View>
 
               </View>
-              <View style={inlineStyles.inputWrap}>
-                <View style={inlineStyles.iconWrap}>
-                  <Icon name="lock" size={20} color="rgba(255, 255, 255, 0.76)" />
+              <View style={{
+                flexDirection: 'row',
+                marginVertical: 20,
+                // height: 70,
+                backgroundColor: 'transparent'
+              }}>
+                <View style={{
+                  width: iconScale(40),
+                  height: iconScale(45),
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: colours.blue
+                }}>
+                  <Icon name="lock" size={iconScale(20)} color="rgba(255, 255, 255, 0.76)" />
                 </View>
-                <View style={{ paddingVertical: 4, paddingHorizontal: 10 }}>
+                <View style={{ paddingBottom: feedVertPaddingScale(4), paddingHorizontal: moderateScale(10) }}>
                   <Field
                     name="password"
                     labelText="Password"
@@ -252,7 +240,7 @@ class Login extends Component {
                 </View>
               </View>
 
-              <View style={{ alignItems: 'center', marginTop: 8 }}>
+              <View style={{ alignItems: 'center', marginTop: moderateScale(10) }}>
                 <ConfirmButton
                   accessibilityLabel="LOG IN Submit"
                   activeOpacity={ 0.5 }
@@ -262,18 +250,17 @@ class Login extends Component {
                   <ConfirmButtonText>LOG IN</ConfirmButtonText>
                 </ConfirmButton>
                 <TouchableOpacity
-                  style={{ marginTop: 10, paddingTop: 10 }}
+                  style={{ marginTop: moderateScale(10), paddingTop: moderateScale(10) }}
                   activeOpacity={ 0.5 }
                   onPress={() => navigation.navigate('confirmEmail')}
                 >
                   <View>
-                    <Text style={inlineStyles.forgotPasswordText}>Forgot Password?</Text>
+                    <ForgotPasswordText>Forgot Password?</ForgotPasswordText>
                   </View>
                 </TouchableOpacity>
               </View>
             </View>
-            <View style={inlineStyles.container} />
-            <View style={{ height: 30 }} />
+
           </KeyboardAvoidingView>
         </View>
       </View>

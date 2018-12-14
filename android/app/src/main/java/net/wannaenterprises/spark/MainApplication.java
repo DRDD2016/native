@@ -4,6 +4,7 @@ import com.smixx.fabric.FabricPackage;
 import android.app.Application;
 import android.util.Log;
 import com.facebook.react.ReactApplication;
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.entria.views.RNViewOverflowPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -41,6 +42,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new FabricPackage(),
           new MainReactPackage(),
+            new LinearGradientPackage(),
             new RNFetchBlobPackage(),
             new RNViewOverflowPackage(),
             new VectorIconsPackage(),

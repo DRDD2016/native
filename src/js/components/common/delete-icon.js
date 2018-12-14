@@ -10,8 +10,8 @@ export default class DeleteIcon extends Component {
       <Icon
         name="trash"
         style={{ paddingLeft: 15, paddingRight: 15 }}
-        size={ 24 }
-        color={ colours.gray }
+        size={ this.props.size || 24 }
+        color={ this.props.color || colours.gray }
       />
     );
   }

@@ -12,8 +12,9 @@ import colours from '../styles/colours';
 import MyStatusBar, { STATUSBAR_HEIGHT } from './components/common/StatusBar';
 import BannerBar from './components/common/BannerBar';
 import CreateButton from './components/common/createButton';
-import { AddCreateButton, TabBarText } from '../styles';
-import { moderateScale, verticalScale } from '../styles/scaling';
+import { AddCreateButton } from '../styles';
+import { TabBarText } from '../styles/text';
+import { scale, moderateScale, verticalScale } from '../styles/scaling';
 // import CustomTabBar from './components//general/customTabBar';
 import DrawerContainer from './containers/drawer';
 import Index from './components/auth';
@@ -40,7 +41,7 @@ import Splash from './components/auth/splash';
 // import Modal from './components/modal';
 
 const NAVBAR_HEIGHT = Header.HEIGHT;
-const TABBAR_HEIGHT = Platform.OS === 'ios' ? verticalScale(NAVBAR_HEIGHT - STATUSBAR_HEIGHT) + 8 : verticalScale(NAVBAR_HEIGHT) - 2;
+const TABBAR_HEIGHT = Platform.OS === 'ios' ? moderateScale(NAVBAR_HEIGHT - STATUSBAR_HEIGHT) + 8 : moderateScale(NAVBAR_HEIGHT) - 2;
 console.log('NAVBAR_HEIGHT', NAVBAR_HEIGHT);
 console.log('STATUSBAR_HEIGHT', STATUSBAR_HEIGHT);
 console.log('TABBAR_HEIGHT', TABBAR_HEIGHT);
@@ -93,7 +94,7 @@ export const AppNavigator = createStackNavigator({
                   <Icon
                     name="user"
                     color={tintColor}
-                    size={verticalScale(28)}
+                    size={moderateScale(28)}
                   />
                   <TabBarText color={tintColor} >Profile</TabBarText>
                 </View>
@@ -107,7 +108,7 @@ export const AppNavigator = createStackNavigator({
                   <Icon
                     name="calendar-o"
                     color={tintColor}
-                    size={verticalScale(28)}
+                    size={moderateScale(28)}
                   />
                   <TabBarText color={tintColor} >Calendar</TabBarText>
                 </View>
@@ -139,7 +140,7 @@ export const AppNavigator = createStackNavigator({
                   <Icon
                     name="envelope"
                     color={tintColor}
-                    size={verticalScale(28)}
+                    size={moderateScale(28)}
                   />
                   <TabBarText color={tintColor} >Feed</TabBarText>
                 </View>
@@ -153,7 +154,7 @@ export const AppNavigator = createStackNavigator({
                   <Icon
                     name="link"
                     color={tintColor}
-                    size={verticalScale(28)}
+                    size={moderateScale(28)}
                   />
                   <TabBarText color={tintColor} >RSVP</TabBarText>
                 </View>
@@ -293,7 +294,7 @@ export const AppNavigator = createStackNavigator({
             }, // has no effect
             labelStyle: {
               backgroundColor: 'red',
-              fontSize: Platform.OS === 'ios' ? moderateScale(12) : 14,
+              fontSize: Platform.OS === 'ios' ? scale(12) : 14,
               fontWeight: Platform.OS === 'ios' ? '400' : '400',
               marginTop: 3,
               flex: 1,

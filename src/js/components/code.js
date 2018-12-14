@@ -13,8 +13,9 @@ import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
 import OfflineIconContainer from '../containers/common/OfflineIconContainer';
 import Spinner from './common/Spinner';
-import styles, { ConfirmButton, ConfirmButtonText } from '../../styles';
+import { ConfirmButton, ConfirmButtonText } from '../../styles';
 import colours from '../../styles/colours';
+import { GeneralText, MessageText } from '../../styles/text';
 // import { connectAlert } from './Alert';
 
 const { Answers } = Fabric;
@@ -93,20 +94,14 @@ class Code extends Component {
       return <Spinner size="large" />;
     }
     return (
-      <View style={styles.row}>
-        <ConfirmButton
-          buttonStyle={[
-            styles.confirmButton,
-            { backgroundColor: colours.purple,
-              borderColor: colours.purple,
-              marginTop: 2,
-              flex: 1 }]}
-          textStyle={ styles.confirmButtonText }
-          onPress={handleSubmit(handleSubmitForm)}
-        >
-          <ConfirmButtonText>Join Event</ConfirmButtonText>
-        </ConfirmButton>
-      </View>
+
+      <ConfirmButton
+        style={{ marginTop: 20, backgroundColor: colours.main, borderColor: colours.main }}
+        onPress={handleSubmit(handleSubmitForm)}
+      >
+        <ConfirmButtonText>Join Event</ConfirmButtonText>
+      </ConfirmButton>
+
     );
   };
 
@@ -120,38 +115,42 @@ class Code extends Component {
       <View style={{ flex: 1 }}>
         <BannerBar />
         <KeyboardAwareScrollView
-          style={{ backgroundColor: colours.white }}
+          style={{ flex: 1, backgroundColor: colours.white }}
           enableOnAndroid
           extraHeight={80}
           resetScrollToCoords={{ x: 0, y: 0 }}
-          contentContainerStyle={{ }}
+          contentContainerStyle={{ flex: 1 }}
         >
 
           <View
-            style={{ backgroundColor: colours.transparent }}
+            style={{ flex: 1, backgroundColor: colours.transparent }}
           >
 
-            <View style={{ flexDirection: 'column', alignItems: 'center', marginHorizontal: 15 }}>
+            <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
 
-              <Text style={{ color: colours.main, fontSize: 16, marginTop: 50, marginHorizontal: 15 }}>
+              <GeneralText style={{ marginTop: 50, marginHorizontal: 15 }}>
                 RSVP to a friend
-              </Text>
+              </GeneralText>
 
-              <Text style={[styles.msg3, { fontWeight: '600', textAlign: 'center', paddingTop: 20, paddingBottom: 10, marginHorizontal: 15 }]} // eslint-disable-line max-len
+              <MessageText style={{ fontWeight: '600', textAlign: 'center', paddingTop: 20, paddingBottom: 10, marginHorizontal: 15 }} // eslint-disable-line max-len
               >
                 If your friend has sent you a code to join their event, enter the code below to respond to their invitation.
-              </Text>
+              </MessageText>
 
-              <View style={{ flexDirection: 'row' }}>
+              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <Field
-                  style={styles.input}
+
                   name="code"
                   component={ FormTextInput }
                   placeholder="eg. XXXXXXXX"
                   labelText="Enter code"
                   labelType="notPoll"
+                  focussedColor={ colours.main }
+                  unfocussedColor={ colours.lightgray }
 
                 />
+
+
               </View>
               <View>
 
