@@ -5,6 +5,7 @@ import moment from 'moment';
 import CardSection from './common/CardSection';
 import MonthCalendarItem from './month-calendar-item';
 import colours from '../../styles/colours';
+import { moderateScale, feedHorizPaddingScale } from '../../styles/scaling';
 
 
 /***
@@ -30,13 +31,13 @@ class FirstCalendarItem extends PureComponent {
         {
           !showMonth &&
 
-          <View style={{ marginLeft: 5, marginRight: 5, backgroundColor: colours.background }}>
+          <View style={{ marginLeft: feedHorizPaddingScale(5), marginRight: feedHorizPaddingScale(5), backgroundColor: colours.background }}>
             <CardSection style={{ justifyContent: 'flex-start' }}>
               <TouchableOpacity
                 style={{
                   flex: 1,
-                  paddingLeft: 5,
-                  marginRight: 5,
+                  paddingLeft: feedHorizPaddingScale(5),
+                  marginRight: feedHorizPaddingScale(5),
                   flexDirection: 'row',
                   justifyContent: 'space-around'
                 }}
@@ -44,7 +45,7 @@ class FirstCalendarItem extends PureComponent {
               >
                 <View
                   style={{
-                    width: 55,
+                    width: moderateScale(55),
                     flexDirection: 'row' }}
                 >
                   <View
@@ -54,13 +55,13 @@ class FirstCalendarItem extends PureComponent {
                       justifyContent: 'space-between',
                       alignItems: 'center' }}
                   >
-                    <View style={{ flex: 1, width: 3, backgroundColor: colours.when }} />
+                    <View style={{ flex: 1, width: moderateScale(3), backgroundColor: colours.when }} />
                     <View
                       style={{
                         marginLeft: 0,
                         padding: 0,
                         height: 35,
-                        width: 65,
+                        width: moderateScale(65),
                         alignItems: 'center',
                         justifyContent: 'center',
                         borderRadius: 10,
@@ -68,11 +69,11 @@ class FirstCalendarItem extends PureComponent {
                         borderColor: colours.when,
                         borderWidth: 0 }}
                     >
-                      <View style={{ flex: 1, width: 3, backgroundColor: 'transparent' }} />
+                      <View style={{ flex: 1, width: moderateScale(3), backgroundColor: 'transparent' }} />
                       <View style={{
 
                         height: 25,
-                        width: 55,
+                        width: moderateScale(55),
                         alignItems: 'center',
                         justifyContent: 'center',
                         borderRadius: 10,
@@ -87,19 +88,19 @@ class FirstCalendarItem extends PureComponent {
                           { moment().format('DD MMM') }
                         </Text>
                       </View>
-                      <View style={{ flex: 1, width: 3, backgroundColor: colours.when }} />
+                      <View style={{ flex: 1, width: moderateScale(3), backgroundColor: colours.when }} />
                     </View>
 
-                    <View style={{ flex: 1, width: 3, backgroundColor: colours.when }} />
+                    <View style={{ flex: 1, width: moderateScale(3), backgroundColor: colours.when }} />
                   </View>
                 </View>
                 <View
                   style={{ flex: 4,
                     paddingBottom: 5,
                     marginTop: 5,
-                    marginLeft: 5,
-                    marginRight: 2,
-                    paddingLeft: 5,
+                    marginLeft: feedHorizPaddingScale(5),
+                    marginRight: feedHorizPaddingScale(2),
+                    paddingLeft: feedHorizPaddingScale(5),
                     alignItems: 'flex-start',
                     justifyContent: 'center' }}
                 />

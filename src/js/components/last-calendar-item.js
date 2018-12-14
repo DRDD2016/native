@@ -1,9 +1,10 @@
 /* eslint-disable react/forbid-prop-types */
-import React, { PureComponent } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import CardSection from './common/CardSection';
 import colours from '../../styles/colours';
+import { moderateScale, scale, feedHorizPaddingScale } from '../../styles/scaling';
 
 
 /***
@@ -11,64 +12,43 @@ import colours from '../../styles/colours';
 to FeedItem.jsx for feed view
 ***/
 
-class LastCalendarItem extends PureComponent {
+const LastCalendarItem = () => {
 
-
-  render () {
-
-    return (
-      <View style={{ marginLeft: 5, marginRight: 5, backgroundColor: colours.background }}>
-        <CardSection style={{ justifyContent: 'flex-start' }}>
-          <TouchableOpacity
+  return (
+    <View style={{ marginLeft: 5, marginRight: 5, backgroundColor: colours.background }}>
+      <CardSection style={{ justifyContent: 'flex-start' }}>
+        <View
+          style={{
+            flex: 1,
+            paddingLeft: feedHorizPaddingScale(5),
+            marginRight: feedHorizPaddingScale(5),
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+          }}
+        >
+          <View
             style={{
-              flex: 1,
-              paddingLeft: 5,
-              marginRight: 5,
+              width: moderateScale(55),
               flexDirection: 'row',
-              justifyContent: 'space-around'
+              justifyContent: 'center'
             }}
-            onPress={this._onPress}
           >
-            <View
-              style={{
-                width: 55,
-                flexDirection: 'row' }}
-            >
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  alignItems: 'center' }}
-              >
-                <View style={{ flex: 1, width: 3, backgroundColor: colours.when }} />
+
+            <LinearGradient
+              start={{ x: 0, y: 0 }}
+              end={{ x: 0, y: 1 }}
+              colors={[colours.when, colours.white]}
+              style={{ height: scale(55), width: moderateScale(3) }} />
+
+          </View>
+        </View>
 
 
-                <LinearGradient
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 0, y: 1 }}
-                  colors={[colours.when, colours.white]}
-                  style={{ height: 55, width: 3 }} />
-              </View>
-            </View>
-            <View
-              style={{ flex: 4,
-                paddingBottom: 5,
-                marginTop: 5,
-                marginLeft: 5,
-                marginRight: 2,
-                paddingLeft: 5,
-                alignItems: 'flex-start',
-                justifyContent: 'center' }}
-            />
+      </CardSection>
+    </View>
 
-          </TouchableOpacity>
-        </CardSection>
-      </View>
-
-    );
-  }
-}
+  );
+};
 
 export default LastCalendarItem;
 

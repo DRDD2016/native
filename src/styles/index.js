@@ -1,8 +1,8 @@
 import { Dimensions, Platform } from 'react-native';
 import styled from 'styled-components';
 import colours from './colours';
-import { scale, moderateScale, verticalScale2, horizontalScale2 } from './scaling';
-
+import { scale, moderateScale, verticalScale2, buttonScale, feedVertPaddingScale } from './scaling';
+import { ms12, ms14, ms18 } from './text';
 
 // Buttons
 
@@ -23,7 +23,7 @@ export const BarButton = styled.TouchableOpacity`
 `;
 
 export const ConfirmButton = styled.TouchableOpacity`
-  width: ${horizontalScale2(360)};
+  width: ${buttonScale(360)};
   justifyContent: center;
   alignItems: center;
   backgroundColor: ${colours.confirm};
@@ -68,10 +68,11 @@ export const InviteSmallButton = styled.TouchableOpacity`
 `;
 
 export const ConfirmButtonText = styled.Text`
-  fontSize: ${moderateScale(18)};
+  fontSize: ${ms18};
   textAlign: center;
   color: ${colours.offWhite};
 `; // confirmButtonText
+
 
 export const AddButton = styled.TouchableOpacity.attrs({
   color: props => props.color || colours.gray
@@ -119,6 +120,32 @@ export const AddCreateButtonNoTab = styled.View`
 `;
 
 
+// modals
+
+export const ModalView = styled.View`
+
+  backgroundColor: ${'transparent'};
+  marginHorizontal: ${moderateScale(4)};
+  marginVertical: ${moderateScale(4)};
+  paddingVertical: ${feedVertPaddingScale(8)};
+  paddingHorizontal: ${moderateScale(4)};
+  alignItems: center;
+  justifyContent: center;
+  borderColor: ${colours.gray};
+  borderRadius: ${verticalScale2(3)};
+  elevation: 2;
+  box-shadow: 0px 1px 2px ${colours.shadowColour}; // width, height, radius, colour
+`;
+
+export const ModalWrapper = styled.View`
+  height: ${Dimensions.get('window').height * 1};
+  width: ${Dimensions.get('window').width * 1};
+  backgroundColor: ${colours.modalBackground};
+  alignItems: center;
+  justifyContent: center;
+
+`;
+
 export const ButText = styled.Text.attrs({
   color: props => props.color || colours.gray
 })`
@@ -126,14 +153,6 @@ export const ButText = styled.Text.attrs({
   color: ${props => props.color};
 `;
 
-export const TabBarText = styled.Text.attrs({
-  color: props => props.color || colours.gray
-})`
-  fontSize: ${moderateScale(12)};
-  color: ${props => props.color};
-  textAlign: center;
-
-`;
 
 export const RSVPButton = styled.TouchableOpacity`
   flex: 1;
@@ -751,9 +770,7 @@ export const styles = {
   //   flexDirection: 'column',
   //   margin: 15
   // },
-  containerFeed: {
 
-  },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -1010,14 +1027,6 @@ export const styles = {
   newViewedFeedItemStyle: {
     backgroundColor: colours.gray
   },
-  viewedFeedItemName: {
-    fontSize: 14,
-    color: colours.black,
-    fontWeight: '500'
-  },
-  viewedFeedItemAction: {
-    color: colours.black
-  },
   viewedFeedItemTimestamp: {
     color: colours.darkgray,
     fontWeight: '500'
@@ -1066,18 +1075,15 @@ export const styles = {
     paddingBottom: 5
   },
   subjectName: {
-    fontSize: 14,
+    fontSize: ms14,
     color: colours.darkgray,
     fontWeight: '500'
   },
-  subjectAction: {
-    fontSize: 12,
-    color: colours.gray
-  },
   eventName: {
-    // fontSize: 12,
+    fontSize: ms12,
+    fontWeight: '700',
     // fontWeight: 'bold',
-    color: colours.darkgray
+    color: colours.main
   },
   rightColumnFeed: {
     flex: 1,

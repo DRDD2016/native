@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import colours from '../../../styles/colours';
+import { iconScale, moderateScale } from '../../../styles/scaling';
 
 export default class OfflineIcon extends Component {
 
@@ -15,12 +16,16 @@ export default class OfflineIcon extends Component {
       return (
 
         <View
-          style={{ flexDirection: 'column', alignItems: 'center' }}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingHorizontal: iconScale(15)
+          }}
         >
           <Icon
             name="cloud-off" // Feather
-            style={{ paddingLeft: 5, paddingRight: 5 }}
-            size={ 20 }
+            style={{ }}
+            size={ moderateScale(24) }
             color={ colours.headerButtonColor }
           />
           <Text style={{ color: colours.headerButtonColor, fontSize: 10 }}>offline</Text>

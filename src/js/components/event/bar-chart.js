@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Dimensions } from 'react-native';
-// import styles from '../../../styles';
+import { feedHorizPaddingScale, moderateScale } from '../../../styles/scaling';
 import GrowingView from './grow-view';
 
 export default class BarChart extends Component {
@@ -24,7 +24,18 @@ export default class BarChart extends Component {
 
   getWidth (data, maxTally) {
     const deviceWidth = Dimensions.get('window').width;
-    const maxWidth = deviceWidth / 4;
+
+    const maximumWidth = () => {
+      if (maxTally === 1) {
+        return (deviceWidth - feedHorizPaddingScale(20) - moderateScale(5) - 1) / 2 / 3;
+      }
+      if (maxTally === 2) {
+        return (deviceWidth - feedHorizPaddingScale(20) - moderateScale(5) - 1) / 2 / (3 * 2);
+      }
+      return (deviceWidth - feedHorizPaddingScale(20) - moderateScale(5) - 1) / 2;
+    };
+
+    const maxWidth = maximumWidth();
     const multFactor = maxWidth / maxTally;
 
     let width = {};
@@ -48,9 +59,7 @@ export default class BarChart extends Component {
     return (
       <View
         style={{
-          flexDirection: 'column',
-          marginTop: 1,
-          marginBottom: 1 }}
+          flexDirection: 'column' }}
       >
         <View
           style={{ flex: 1 }}

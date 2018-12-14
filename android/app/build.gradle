@@ -194,6 +194,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-linear-gradient')
 
     implementation project(':rn-fetch-blob')
     implementation project(':react-native-view-overflow')

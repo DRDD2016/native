@@ -4,8 +4,12 @@ import { View, ScrollView } from 'react-native';
 import { Header } from 'react-navigation';
 import CategoryDetails from './category-details';
 import ButtonSmall from '../common/ButtonSmall';
-import { styles, Msg1, Msg3, Msg4, ConfirmButton, ConfirmButtonText } from '../../../styles';
+import ButtonWide from '../common/ButtonWide';
+// import DeleteIcon from '../common/delete-icon';
+import { styles, Msg1, Msg4, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
+import { MessageText } from '../../../styles/text';
+import { feedHorizPaddingScale, feedVertPaddingScale } from '../../../styles/scaling';
 import Spinner from '../common/Spinner';
 
 const headerHeight = Header.HEIGHT;
@@ -14,11 +18,11 @@ console.log('Header height: ', Header.HEIGHT);
 const inlineStyle = {
   row: {
     flexDirection: 'row',
-    marginTop: 5,
-    marginBottom: 5,
-    paddingLeft: 5,
-    paddingRight: 5,
-    minHeight: 40
+    marginTop: feedVertPaddingScale(5),
+    marginBottom: feedVertPaddingScale(5),
+    paddingLeft: feedHorizPaddingScale(10),
+    paddingRight: feedHorizPaddingScale(10)
+    // minHeight: 40
   }
 };
 
@@ -59,6 +63,7 @@ export default class HostPoll extends Component {
       voteCount,
       handleInviteMoreFriends,
       handleConfirmEvent,
+      // handleDeleteEvent,
       finalChoices,
       isFetching } = this.props;
     console.log('voteCount: ', voteCount);
@@ -87,7 +92,7 @@ export default class HostPoll extends Component {
         {
           !isFetching &&
 
-          <View style={{ flexDirection: 'column', borderWidth: 2, borderColor: 'red' }}>
+          <View style={{ flexDirection: 'column' }}>
             <View style={{ marginTop: 10, marginBottom: 10 }}>
 
               <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -119,12 +124,27 @@ export default class HostPoll extends Component {
                 </View>
 
               </View>
+              <View style={{ flexDirection: 'row', justifyContent: 'center', paddingTop: 20 }}>
+                <ButtonWide
+                  onPress={ () => handleInviteMoreFriends() }
+                  backgroundColor={colours.green}
+                  headerHeight={headerHeight}
 
-              <View style={{ marginTop: 20 }}>
-                <Msg3>
-                  You can review the responses and tap to select your final choices when ready
-                </Msg3>
+                >
+                  <View style={{ opacity: 0.9, justifyContent: 'center', alignSelf: 'center', flexDirection: 'row' }}>
+                    <ConfirmButtonText>Invite Friends</ConfirmButtonText>
+                    <View style={{ justifyContent: 'center', alignItems: 'center' }} >
+                      <Icon name="user-plus" size={20} color={colours.white} />
+                    </View>
+                  </View>
+
+                </ButtonWide>
               </View>
+
+              <MessageText style={{ marginTop: 20, textAlign: 'center' }}>
+                You can review the responses and tap to select your final choices when ready
+              </MessageText>
+
 
             </View>
 
@@ -172,13 +192,15 @@ export default class HostPoll extends Component {
               {
                 !allCategoriesSelected &&
                 <ConfirmButton
-                  style={{ marginBottom: 40, backgroundColor: colours.lightgray, borderColor: colours.lightgray }}
+                  style={{ marginBottom: 20, backgroundColor: colours.lightgray, borderColor: colours.lightgray }}
                   onPress={ () => { }}
                 >
                   <ConfirmButtonText>CONFIRM EVENT DETAILS</ConfirmButtonText>
                 </ConfirmButton>
               }
+
             </View>
+
 
           </View>
         }

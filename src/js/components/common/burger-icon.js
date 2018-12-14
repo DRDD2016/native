@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colours from '../../../styles/colours';
+import { moderateScale } from '../../../styles/scaling';
 
 export default class BurgerIcon extends Component {
 
@@ -10,9 +11,9 @@ export default class BurgerIcon extends Component {
     return (
       <Icon
         name="bars"
-        style={{ paddingLeft: 15, paddingRight: 15 }}
-        size={ 24 }
-        color={ colours.darkblue }
+        style={{ borderColor: 'green', borderWidth: 1 }}
+        size={ moderateScale(24) }
+        color={ colours.main }
       />
     );
   }

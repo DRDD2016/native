@@ -1,35 +1,19 @@
 import React, { Component } from 'react';
-import { TextInput, View, Text } from 'react-native';
+import { TextInput, View } from 'react-native';
 import colours from '../../../styles/colours';
+import { ms14, FormLabelText } from '../../../styles/text';
+import { iconScale } from '../../../styles/scaling';
 
-const labelStyle = {
-  color: colours.main
-};
-
-const optionalStyle = {
-  color: colours.gray
-};
-
-const containerStyle = {
-  flex: 1,
-  flexDirection: 'row',
-  // borderColor: 'red',
-  // borderWidth: 1,
-  alignItems: 'center',
-  justifyContent: 'center',
-  marginBottom: 0,
-  maxWidth: 700
-};
 
 const inputStyle = {
   color: colours.darkgray,
-  marginTop: 4,
-  marginBottom: 2,
-  paddingHorizontal: 10,
-  paddingBottom: 4,
-  fontSize: 16,
+  marginTop: iconScale(4),
+  marginBottom: iconScale(2),
+  paddingHorizontal: iconScale(10),
+  paddingBottom: iconScale(4),
+  fontSize: ms14,
   fontWeight: '400',
-  height: 45,
+  height: iconScale(45),
   width: '100%',
   flexDirection: 'row',
   // elevation: 1, // replaces shadow on Android, shadow props IOS only
@@ -81,9 +65,16 @@ class InputField extends Component {
     const labelText = labelType === 'poll' ? labelPoll : labelNotPoll;
 
     return (
-      <View style={containerStyle}>
+      <View
+        style={{ flexDirection: 'row',
+        // borderColor: 'green',
+        // borderWidth: 4,
+        alignItems: 'center',
+        justifyContent: 'center',
+        maxWidth: 600
+      }}>
         <View style={{
-          width: '100%',
+          width: '90%',
           // borderColor: 'green',
           // borderWidth: 1,
           flexDirection: 'column',
@@ -91,14 +82,14 @@ class InputField extends Component {
         }}>
           <View style={{ flexDirection: 'row', alignSelf: 'flex-start' }}>
             {
-              <Text style={labelStyle}>
+              <FormLabelText>
                 {labelText}
-              </Text>
+              </FormLabelText>
             }
             { optional &&
-              <Text style={optionalStyle}>
+              <FormLabelText style={{ color: colours.gray }}>
                 {' - Optional'}
-              </Text>
+              </FormLabelText>
             }
           </View>
           <TextInput

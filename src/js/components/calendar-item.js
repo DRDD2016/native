@@ -7,8 +7,9 @@ import Icon2 from 'react-native-vector-icons/Entypo';
 import formatDate from '../lib/format-date';
 import CardSection from './common/CardSection';
 import MonthCalendarItem from './month-calendar-item';
-import styles from '../../styles';
 import colours from '../../styles/colours';
+import { moderateScale, feedHorizPaddingScale, feedVertPaddingScale } from '../../styles/scaling';
+import { CalendarDateText, CalendarFromText, HostNameText, EventNameText } from '../../styles/text';
 
 const avatar = require('../../img/avatar.png');
 
@@ -27,7 +28,7 @@ class CalendarItem extends PureComponent {
   render () {
     // console.log('calendar-item props:', this.props);
 
-    const { name, where, when, rsvpStatus, userIsHost, isCancelled, host_photo_url, rsvps, showMonth, calendarMonth } = this.props;
+    const { name, where, when, rsvpStatus, userIsHost, isCancelled, host_photo_url, rsvps, showMonth, calendarMonth, host_firstname } = this.props;
 
     const array = rsvps;
     const rsvpsObject = Object.assign({}, ...array);
@@ -74,77 +75,79 @@ class CalendarItem extends PureComponent {
             <TouchableOpacity
               style={{
                 flex: 1,
-                paddingLeft: 5,
-                marginRight: 5,
+                paddingLeft: feedHorizPaddingScale(5),
+                marginRight: feedHorizPaddingScale(5),
                 flexDirection: 'row',
-                justifyContent: 'space-around'
+                justifyContent: 'space-between'
               }}
               onPress={this._onPress}
             >
               <View
                 style={{
-                  width: 55,
-                  flexDirection: 'row' }}
+                  width: moderateScale(55),
+                  flexDirection: 'row'
+                }}
               >
                 <View
                   style={{
                     flex: 1,
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    alignItems: 'center' }}
+                    alignItems: 'center'
+                  }}
                 >
-                  <View style={{ flex: 1, width: 3, backgroundColor: colours.when }} />
+                  <View style={{ flex: 1, width: moderateScale(3), backgroundColor: colours.when }} />
                   <View
                     style={{
                       marginLeft: 0,
                       padding: 0,
-                      height: 55,
-                      width: 65,
+                      height: moderateScale(55),
+                      width: moderateScale(65),
                       alignItems: 'center',
                       justifyContent: 'center',
                       borderRadius: 10,
                       backgroundColor: colours.white,
                       borderColor: colours.when,
-                      borderWidth: 3 }}
+                      borderWidth: moderateScale(3) }}
                   >
-                    {when[1] && <Text style={{ fontSize: 10, color: colours.darkgray }}>from</Text>}
-                    <Text
+                    {when[1] && <CalendarFromText>from</CalendarFromText>}
+                    <CalendarDateText
                       numberOfLines={1}
-                      style={{ fontSize: 14, color: colours.darkgray, fontWeight: '600' }}
+
                     >
                       {formatDate(when[0]).toUpperCase()}
-                    </Text>
+                    </CalendarDateText>
                   </View>
-                  <View style={{ flex: 1, width: 3, backgroundColor: colours.when }} />
+                  <View style={{ flex: 1, width: moderateScale(3), backgroundColor: colours.when }} />
                 </View>
               </View>
               <View
                 style={{ flex: 4,
-                  paddingBottom: 5,
-                  marginTop: 5,
-                  marginLeft: 5,
+                  paddingBottom: feedVertPaddingScale(5),
+                  marginTop: feedVertPaddingScale(5),
+                  marginLeft: feedHorizPaddingScale(5),
                   marginRight: 2,
-                  paddingLeft: 5,
+                  paddingLeft: moderateScale(5),
                   alignItems: 'flex-start',
                   justifyContent: 'center',
                   borderBottomWidth: 1,
                   borderColor: colours.sectionBorder }}
               >
 
-                <View style={{ alignItems: 'flex-start', marginBottom: 3 }}>
+                <View style={{ alignItems: 'flex-start', marginBottom: feedVertPaddingScale(3) }}>
 
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
                     {!isCancelled &&
-                      <Text style={{ alignItems: 'center', fontSize: 14, fontWeight: '700', color: colours.main, paddingLeft: 0 }}>
+                      <EventNameText style={{ alignItems: 'center', color: colours.main, paddingLeft: 0 }}>
                         {`${name}`}
-                      </Text>
+                      </EventNameText>
                     }
                     {isCancelled &&
                       <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                        <Text style={{ textDecorationLine: 'line-through', fontSize: 16, fontWeight: '700', color: colours.red, paddingLeft: 3 }}>
+                        <EventNameText style={{ textDecorationLine: 'line-through', color: colours.red, paddingLeft: 3 }}>
                           { `${name}` }
-                        </Text>
+                        </EventNameText>
 
                       </View>
                     }
@@ -156,61 +159,73 @@ class CalendarItem extends PureComponent {
 
                   { ((!isCancelled) && when[0] && when[1]) ?
                     <View style={{ flexDirection: 'row', marginRight: 5 }}>
-                      <View style={{ width: 14, justifyContent: 'center', alignItems: 'center' }}>
-                        <Icon name="calendar-o" size={14} color={colours.when} />
+                      <View style={{ width: moderateScale(14), justifyContent: 'center', alignItems: 'center' }}>
+                        <Icon name="calendar-o" size={moderateScale(14)} color={colours.when} />
                       </View>
                       <View>
-                        <Text style={{ fontSize: 12, marginLeft: 5, marginRight: 5, color: colours.when, fontWeight: '600' }}>
+                        <Text style={{ fontSize: moderateScale(12), marginLeft: 5, marginRight: 5, color: colours.when, fontWeight: '600' }}>
                           {whenText}
                         </Text>
                       </View>
                     </View>
                   :
-                    <View style={{ flexDirection: 'row', marginRight: 5 }}>
+                    <View style={{ flexDirection: 'row', marginRight: 5, alignItems: 'center' }}>
 
                       <View>
                         {(userIsHost || rsvpStatus === 'going') && !isCancelled &&
-                          <Icon name="check-circle" size={16} color={colours.green} />
+                          <Icon name="check-circle" size={moderateScale(16)} color={colours.green} />
                         }
                         {!userIsHost && rsvpStatus === 'maybe' && !isCancelled &&
-                          <Icon name="question-circle" size={16} color={colours.orange} />
+                          <Icon name="question-circle" size={moderateScale(16)} color={colours.orange} />
                         }
                         {!userIsHost && rsvpStatus === 'not_going' && !isCancelled &&
-                          <Icon name="times-circle" size={16} color={colours.red} />
+                          <Icon name="times-circle" size={moderateScale(16)} color={colours.red} />
                         }
                         {!userIsHost && rsvpStatus === 'not_responded' && !isCancelled &&
-                          <Icon name="exclamation-circle" size={16} color={colours.gray} />
+                          <Icon name="exclamation-circle" size={moderateScale(16)} color={colours.gray} />
                         }
                       </View>
                       <View>
 
                         {(userIsHost || rsvpStatus === 'going') && !isCancelled &&
-                          <Text numberOfLines={2} style={{ fontSize: 12, fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.green }}>
+                          <Text numberOfLines={2}
+                            style={{ fontSize: moderateScale(12), fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.green }} // eslint-disable-line max-len
+                          >
                             You are going
                           </Text>
                         }
                         {(!isCancelled && !userIsHost && rsvpStatus === 'maybe') &&
-                          <Text numberOfLines={2} style={{ fontSize: 12, fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.orange }}>
+                          <Text numberOfLines={2}
+                            style={{ fontSize: moderateScale(12), fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.orange }} // eslint-disable-line max-len
+                          >
                             You are a maybe
                           </Text>
                         }
                         {(!isCancelled && !userIsHost && rsvpStatus === 'not_going') &&
-                          <Text numberOfLines={2} style={{ fontSize: 12, fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.red }}>
+                          <Text numberOfLines={2}
+                            style={{ fontSize: moderateScale(12), fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.red }} // eslint-disable-line max-len
+                          >
                             You are not going
                           </Text>
                         }
                         {(!isCancelled && !userIsHost && rsvpStatus === 'not_responded') &&
-                          <Text numberOfLines={2} style={{ fontSize: 12, fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.green }}>
+                          <Text numberOfLines={2}
+                            style={{ fontSize: moderateScale(12), fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.green }} // eslint-disable-line max-len
+                          >
                             You have not responded
                           </Text>
                         }
                         {(isCancelled && !userIsHost) &&
-                          <Text numberOfLines={2} style={{ fontSize: 12, fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.red }}>
+                          <Text numberOfLines={2}
+                            style={{ fontSize: moderateScale(12), fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.red }} // eslint-disable-line max-len
+                          >
                             This event has been cancelled
                           </Text>
                         }
                         {(isCancelled && userIsHost) &&
-                          <Text numberOfLines={2} style={{ fontSize: 12, fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.red }}>
+                          <Text numberOfLines={2}
+                            style={{ fontSize: moderateScale(12), fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.red }} // eslint-disable-line max-len
+                          >
                             You cancelled this event
                           </Text>
                         }
@@ -222,14 +237,16 @@ class CalendarItem extends PureComponent {
 
 
                   { (!isCancelled) && whereText === 'POLLING' ?
-                    <View style={{ flexDirection: 'row', marginTop: 2 }}>
+                    <View style={{ flexDirection: 'row', marginTop: feedVertPaddingScale(4) }}>
 
-                      <View style={{ width: 14, justifyContent: 'flex-start', alignItems: 'center' }}>
-                        <Icon2 name="location" size={14} color={colours.where} />
+                      <View style={{ width: moderateScale(14), justifyContent: 'flex-start', alignItems: 'center' }}>
+                        <Icon2 name="location" size={moderateScale(14)} color={colours.where} />
                       </View>
                       <View>
 
-                        <Text numberOfLines={2} style={{ fontSize: 12, fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.where }}>
+                        <Text numberOfLines={2}
+                          style={{ fontSize: moderateScale(12), fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.where }}
+                          >
                           {`${whereText}`}
                         </Text>
 
@@ -238,14 +255,16 @@ class CalendarItem extends PureComponent {
                     </View>
                   :
                     (!isCancelled) &&
-                    <View style={{ flexDirection: 'row', marginTop: 2 }}>
+                    <View style={{ flexDirection: 'row', marginTop: feedVertPaddingScale(4) }}>
 
-                      <View style={{ width: 14, justifyContent: 'flex-start', alignItems: 'center' }}>
-                        <Icon2 name="location" size={16} color={colours.where} />
+                      <View style={{ width: moderateScale(14), justifyContent: 'flex-start', alignItems: 'center' }}>
+                        <Icon2 name="location" size={moderateScale(14)} color={colours.where} />
                       </View>
                       <View>
 
-                        <Text numberOfLines={2} style={{ fontSize: 12, fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.darkgray }}>
+                        <Text numberOfLines={2}
+                          style={{ fontSize: moderateScale(12), fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.darkgray }}
+                        >
                           {whereText}
                         </Text>
 
@@ -260,11 +279,11 @@ class CalendarItem extends PureComponent {
 
               <View
                 style={{
-                  flex: 2.5,
+                  flex: 3,
                   flexDirection: 'row',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  paddingLeft: 7,
+                  paddingLeft: 4,
                   paddingBottom: 5,
                   marginTop: 5,
                   borderBottomWidth: 1,
@@ -292,19 +311,31 @@ class CalendarItem extends PureComponent {
 
                 <View
                   style={{
-                    flex: 1,
+
+                    flex: 2,
                     flexDirection: 'column',
                     justifyContent: 'flex-start',
                     alignItems: 'center' }}
                 >
-                  <Text style={{ fontSize: 12, fontWeight: '500', marginLeft: 5, marginRight: 5, color: colours.main }}>
-                    {'Host'}
-                  </Text>
+                  <HostNameText style={{ fontSize: 10, textAlign: 'center', color: colours.gray, marginLeft: 5, marginRight: 5 }}>
+                    {'Hosted by'}
+                  </HostNameText>
+
                   <Image
                     source={{ uri: host_photo_url }}
                     defaultSource={avatar}
-                    style={[styles.uiProfilePhotoCircularImage, { borderRadius: 3, marginTop: 2, marginBottom: 2 }]}
+                    style={{
+                    width: '80%',
+                    aspectRatio: 1 / 1,
+                    alignSelf: 'center',
+                    borderRadius: 3,
+                    marginTop: 2,
+                    marginBottom: 2 }}
                   />
+
+                  <HostNameText style={{ fontSize: 10, marginLeft: 5, marginRight: 5 }}>
+                    {host_firstname}
+                  </HostNameText>
 
                 </View>
 

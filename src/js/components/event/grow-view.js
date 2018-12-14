@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Animated } from 'react-native';
 import colours from '../../../styles/colours';
+import { barScale } from '../../../styles/scaling';
 
 const barstyle = {
 
@@ -8,7 +9,7 @@ const barstyle = {
   borderTopLeftRadius: 0,
   borderBottomRightRadius: 15,
   borderTopRightRadius: 15,
-  height: 12,
+  height: barScale(12),
   elevation: 1,
   shadowColor: colours.shadowColour,
   shadowOffset: { width: 0, height: 2 },

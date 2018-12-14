@@ -20,7 +20,7 @@ const colours = {
   main: '#316AB3', // tabbar, card borders, etc
   transparent: 'transparent',
   background: '#ffffff',
-  modalBackground: 'rgba(52, 52, 52, 0.4)',
+  modalBackground: 'rgba(52, 52, 52, 0.9)',
   headerButtonColor: '#939598',
   headerTitleColor: '#939598',
   headerBackgroundColor: '#ffffff',

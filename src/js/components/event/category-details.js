@@ -8,7 +8,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import formatDate from '../../lib/format-date';
 import formatTime from '../../lib/format-time';
 import BarChart from '../../components/event/bar-chart';
-import { styles, BarButton } from '../../../styles';
+import { BarButton } from '../../../styles';
+import { VoteText, OptionText, CategoryTitleText } from '../../../styles/text';
+import { barScale, feedVertPaddingScale, moderateScale } from '../../../styles/scaling';
 import colours from '../../../styles/colours';
 
 const OFF_WHITE = colours.offWhite;
@@ -111,84 +113,95 @@ export default class CategoryDetails extends Component {
             const categoryTitleColour = colours.main; // colours[`${categoryTitle}`.toLowerCase()];
 
             return (
-              <View key={key} style={{ paddingBottom: 8, flexDirection: 'column' }}>
+              <View key={key} style={{ paddingBottom: 2, flexDirection: 'column' }}>
                 { index === 0 &&
-                  <View style={{ paddingBottom: 2, paddingTop: 4 }}>
-                    <Text style={{ color: categoryTitleColour }}>{ index === 0 && categoryTitle }</Text>
+                  <View style={{ paddingBottom: feedVertPaddingScale(4), paddingTop: feedVertPaddingScale(4) }}>
+                    <CategoryTitleText style={{ color: categoryTitleColour }}>{ index === 0 && categoryTitle }</CategoryTitleText>
                   </View>
                 }
-                <View style={{ flexDirection: 'row' }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
 
-                  <View style={{ flex: this.props.isHostPollView ? 5 : 1 }}>
-                    <View style={{
-                      marginTop: 0,
-                      marginBottom: 0,
-                      elevation: 1,
-                      shadowColor: colours.shadowColour,
-                      shadowOffset: { width: 0, height: 1 },
-                      shadowOpacity: 0.8,
-                      shadowRadius: 2
-                    }}>
-                      <Icon.Button
-                        name={this.icons[category]}
-                        size={16}
-                        borderRadius={5}
-                        style={{ paddingHorizontal: 10, paddingVertical: 8 }}
-                        color={(!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category]}
-                        backgroundColor={(!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index] ? colours[category] : OFF_WHITE}
-                        onPress={() => this._handleOnPress(category, datum, index)}
-                      >
-                        {
-                          <View style={{ flex: 4 }}>
-                            <Text style={{ color: (!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category] }}>
-                              {category !== 'when' && (datum || 'TBC')}
-                              {category === 'when' && `${formatDate(datum, 'half')}, ${formatTime(datum) || 'TBC'}`}
-                            </Text>
-                          </View>
-                        }
-                        {
-                          (!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index]
-                          ? <View style={{ flex: 1 }}><Icon name="check" size={20} style={{ paddingLeft: 5 }} color={colours.white} /></View>
-                          : <Text />
-                        }
+                  <View style={{ flex: this.props.isHostPollView ? 4 : 1, flexDirection: 'column', justifyContent: 'center' }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                      <View style={{
+                        flex: 1,
+                        marginTop: 0,
+                        marginBottom: 0,
+                        elevation: 1,
+                        shadowColor: colours.shadowColour,
+                        shadowOffset: { width: 0, height: 1 },
+                        shadowOpacity: 0.8,
+                        shadowRadius: 2
+                      }}>
+                        <Icon.Button
+                          name={this.icons[category]}
+                          size={moderateScale(16)}
+                          borderRadius={5}
+                          style={{ paddingHorizontal: 10, paddingVertical: 8 }}
+                          color={(!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category]}
+                          backgroundColor={(!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index] ? colours[category] : OFF_WHITE}
+                          onPress={() => this._handleOnPress(category, datum, index)}
+                        >
+                          {
+                            <View style={{ flex: 4 }}>
+                              <OptionText style={{ color: (!this.state.isToggleable && colours[category]) || this.state.selectedNodes[index] ? OFF_WHITE : colours[category] }}>
+                                {category !== 'when' && (datum || 'TBC')}
+                                {category === 'when' && `${formatDate(datum, 'half')}, ${formatTime(datum) || 'TBC'}`}
+                              </OptionText>
+                            </View>
+                          }
+                          {
+                            (!this.state.isToggleable && OFF_WHITE) || this.state.selectedNodes[index]
+                            ? <Icon name="check" size={20} style={{ textAlign: 'right', paddingLeft: 5 }} color={colours.white} />
+                            : <Text />
+                          }
 
 
-                      </Icon.Button>
+                        </Icon.Button>
 
+                      </View>
                     </View>
                   </View>
-                  <View style={{ flex: this.props.isHostPollView ? 3 : 0, paddingLeft: this.props.isHostPollView ? 5 : 0, justifyContent: 'center' }}>
+                  <View style={{ flex: this.props.isHostPollView ? 4 : 0, paddingLeft: this.props.isHostPollView ? moderateScale(5) : 0, justifyContent: 'center' }}>
 
                     {
                       this.props.isHostPollView &&
-                      <BarButton style={{ flex: 1, marginTop: 5, marginBottom: 5, flexDirection: 'row', alignItems: 'center', backgroundColor: 'white' }}>
+                      <BarButton style={{ flex: 1, flexDirection: 'row', alignItems: 'center', backgroundColor: 'white' }}>
 
                         {
-                          (totalVoteCount !== 0) && <View style={{ paddingLeft: 1, paddingVertical: 10, width: 1, backgroundColor: 'lightgray' }} />
+                          (totalVoteCount !== 0) && (tally !== 0) && <View style={{ paddingLeft: 1, paddingVertical: 10, width: 1, backgroundColor: colours.spacerColour }} />
                         }
 
-                        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
-                          <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
-                            <Text style={styles.msg4}>
-                              { (tally !== 0) && (tally !== undefined) && (tally !== 1) && `${tally} votes` }
-                              { (tally === 1) && `${tally} vote` }
-                              { this.state.isToggleable && (index === 0) && (totalVoteCount === 0) && 'No votes yet' }
-                              { this.state.isToggleable && (totalVoteCount !== 0) && (tally === 0) && 'No votes' }
-                            </Text>
+                        <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
+                          <View style={{ height: barScale(18), justifyContent: 'center', alignItems: 'center' }}>
+
+                            { (tally !== 0) && (tally !== undefined) && (tally !== 1) && <VoteText>{`${tally} votes`}</VoteText> }
+                            { (tally === 1) && <VoteText>{`${tally} vote`}</VoteText> }
+
+                            {
+                              ((tally === 0) || (tally === undefined)) &&
+                              <View style={{ flex: 1 }}>
+                                <VoteText>{' '}</VoteText>
+                              </View>
+                            }
                           </View>
 
-                          <View style={{ flex: 1, justifyContent: 'center' }}>
+                          <View style={{ height: barScale(18), justifyContent: 'center' }}>
 
                             {
                               (tally !== 0) && (tally !== undefined) &&
                               <BarChart tally={tally} allData={voteCount} chartColor={colours[category]} />
                             }
 
+                            { this.state.isToggleable && (index === 0) && (totalVoteCount === 0) && <VoteText>No votes yet</VoteText> }
+                            { this.state.isToggleable && (totalVoteCount !== 0) && (tally === 0) && <VoteText>No votes</VoteText> }
+
                           </View>
-                          <View style={{ flex: 1 }}>
-                            <Text style={styles.msg4} />
+                          <View style={{ height: barScale(18) }}>
+                            <VoteText>{' '}</VoteText>
                           </View>
+
                         </View>
 
                       </BarButton>
