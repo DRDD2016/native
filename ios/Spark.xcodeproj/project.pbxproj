@@ -543,7 +543,6 @@
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
-				5545F1742156EE65001D3FB8 /* libBVLinearGradient.a in Frameworks */,
 				55C0376420D7823500D8DF55 /* Protobuf.framework in Frameworks */,
 				55747EB51F0EF82C0095827B /* FirebaseMessaging.framework in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
@@ -572,6 +571,7 @@
 				90B7F6986DA74C3BAB4B13B7 /* libBugsnagReactNative.a in Frameworks */,
 				5245E449A36F49CCB33B1706 /* libz.tbd in Frameworks */,
 				316DF6E9DEE94061971E2C29 /* libreact-native-branch.a in Frameworks */,
+				5545F1742156EE65001D3FB8 /* libBVLinearGradient.a in Frameworks */,
 				295E5AFB97D941EB96933696 /* libRNViewOverflow.a in Frameworks */,
 				BFC0F351A0274D8DA13453A4 /* libRNFetchBlob.a in Frameworks */,
 			);
@@ -1706,7 +1706,16 @@
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-global-props/ios/ReactNativeGlobalProps/**",
 				);
-				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/../node_modules/react-native-fcm/ios";
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/bugsnag-react-native/cocoa/**",
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native-branch/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-branch/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-view-overflow/ios",
+					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-global-props/ios/ReactNativeGlobalProps/**",
+				);
 				INFOPLIST_FILE = Spark/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

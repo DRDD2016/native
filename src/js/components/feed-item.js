@@ -10,7 +10,9 @@ import formatDate from '../lib/format-date';
 import CardSection from './common/CardSection';
 import StatusFlag from './general/statusFlag';
 import styles from '../../styles';
+import { TimeText, SubjectNameText, SubjectActionText, EventNameText, FeedItemWhenText, FeedItemWhereText } from '../../styles/text';
 import colours from '../../styles/colours';
+import { verticalScale, feedHorizPaddingScale, feedVertPaddingScale, moderateScale } from '../../styles/scaling';
 
 moment.locale('en-gb');
 
@@ -31,9 +33,13 @@ class FeedItem extends PureComponent {
     // console.log('viewed: ', viewed);
     // console.log('action: ', action);
 
-    const unConfirmedItem =
+    const whenUnConfirmedItem =
           (when.length > 1) ||
           (when.length === 1 && when[0].date === '');
+
+    const whereUnConfirmedItem =
+          (where.length > 1) ||
+          (where.length === 1 && where[0] === '');
 
     const userIsSubject = subject_user_id === user_id;
     const avatar = require('../../img/avatar.png');
@@ -52,8 +58,8 @@ class FeedItem extends PureComponent {
       <View
         style={{
 
-          marginLeft: 2,
-          marginRight: 2,
+          marginLeft: feedHorizPaddingScale(2),
+          marginRight: feedHorizPaddingScale(2),
           backgroundColor: !viewed ? colours.white : colours.white,
           opacity: !viewed ? 1 : 1 }}
 
@@ -62,10 +68,10 @@ class FeedItem extends PureComponent {
           <TouchableOpacity
             style={{
               flex: 1,
-              marginLeft: 2,
-              marginRight: 2,
-              paddingTop: 4,
-              paddingBottom: 4,
+              marginLeft: feedHorizPaddingScale(2),
+              marginRight: feedHorizPaddingScale(2),
+              paddingTop: feedVertPaddingScale(4),
+              paddingBottom: feedVertPaddingScale(4),
               backgroundColor: colours.white,
               borderTopWidth: !viewed ? 0.0 : 0.0,
               borderBottomWidth: !viewed ? 1 : 1,
@@ -75,28 +81,34 @@ class FeedItem extends PureComponent {
             onPress={this._onPress}
           >
 
-            <View style={{ paddingLeft: 0, paddingRight: 0, flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+            <View style={{ flex: 1, maxWidth: 120, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
               <Image
                 source={{ uri: photo_url }}
                 defaultSource={avatar}
-                style={[styles.uiProfilePhotoCircularImage, { borderRadius: 3, marginTop: 2, marginBottom: 2 }]}
+                style={{
+                width: '100%',
+                aspectRatio: 1 / 1,
+                alignSelf: 'center',
+                borderRadius: 3,
+                marginTop: 2,
+                marginBottom: 2 }}
               />
             </View>
 
-            <View style={{ flex: 3, paddingBottom: 5, paddingLeft: 4, paddingRight: 4 }}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text style={{ fontWeight: '500', color: !viewed ? colours.gray : colours.gray, opacity: !viewed ? 1 : 1 }}>
+            <View style={{ flex: 3, paddingBottom: 5, paddingLeft: feedHorizPaddingScale(4), paddingRight: feedHorizPaddingScale(4) }}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingBottom: feedVertPaddingScale(4) }}>
+                <TimeText opacity={!viewed ? 1 : 0.8} >
                   { moment(timestamp).startOf().fromNow() }
-                </Text>
+                </TimeText>
 
               </View>
 
-              <Text>
-                <Text style={[styles.subjectName, !viewed && styles.viewedFeedItemName, { opacity: !viewed ? 1 : 0.6 }]}>
+              <Text style={{ paddingBottom: feedVertPaddingScale(4) }}>
+                <SubjectNameText opacity={ !viewed ? 1 : 0.4 }>
                   { userIsSubject && 'You'}
                   { !userIsSubject && `${firstname}  ${surname}` }
-                </Text>
-                <Text style={[styles.subjectAction, !viewed && styles.viewedFeedItemAction, { opacity: !viewed ? 1 : 0.6 }]}>
+                </SubjectNameText>
+                <SubjectActionText opacity={ !viewed ? 1 : 0.6 }>
                   { userIsSubject && is_poll && !isCancelled && (action === 'create') && ' have created a poll ' }
                   { userIsSubject && !is_poll && !edited && !isCancelled && (action === 'create') && ' have created an event ' }
                   { userIsSubject && userIsHost && !isCancelled && (action === 'finalised') && ' have confirmed an event' }
@@ -119,96 +131,102 @@ class FeedItem extends PureComponent {
                   { !userIsSubject && !userIsHost && !is_poll && edited && !isCancelled && (action === 'edited') && ' has edited an event' }
                   { !userIsSubject && !userIsHost && !is_poll && isCancelled && ' has cancelled an event' }
 
-                </Text>
+                </SubjectActionText>
               </Text>
-              <Text style={[styles.eventName, !viewed && styles.viewedFeedItemName, { fontWeight: '700', color: colours.main, opacity: !viewed ? 1 : 0.6 }]} // eslint-disable-line max-len
+              <EventNameText opacity={ !viewed ? 1 : 0.8 }
               >
                 { name }
-              </Text>
+              </EventNameText>
 
             </View>
 
             <View
               style={{
                 opacity: !viewed ? 1 : 1,
-                flex: 1.5,
+                flex: moderateScale(1.5),
                 backgroundColor: colours.verylightgray,
                 flexDirection: 'column',
                 borderLeftColor: colours.lightgray,
-                borderLeftWidth: 0.5 }}
+                borderLeftWidth: 0.5,
+                borderRadius: 3,
+                paddingHorizontal: feedHorizPaddingScale(2),
+                alignItems: 'center'
+              }}
             >
-              <View style={{ alignItems: 'center', backgroundColor: colours.verylightgray }}>
-                <StatusFlag isCancelled={isCancelled} is_poll={is_poll} />
-              </View>
-              <View style={[{ flex: 1, justifyContent: 'space-around' }, unConfirmedItem && styles.unConfirmedItemStyle]}>
 
-                <View style={{ flexDirection: 'row', marginBottom: 0, justifyContent: 'center', alignItems: 'center' }}>
+              <StatusFlag isCancelled={isCancelled} is_poll={is_poll} />
+
+              <View style={[{ flex: 1, justifyContent: 'space-around' }, whenUnConfirmedItem && styles.unConfirmedItemStyle]}>
+
+                <View style={{ flexDirection: 'row', marginBottom: 2, justifyContent: 'center', alignItems: 'center' }}>
 
                   {
                     (when.length > 1 &&
                       <View
-                        style={{ width: 14, marginLeft: 4, alignItems: 'center', justifyContent: 'center' }}
+                        style={{ width: verticalScale(12), marginLeft: feedHorizPaddingScale(2), alignItems: 'center', justifyContent: 'center' }}
                       >
-                        <Icon name="calendar-o" style={{ width: 14, textAlign: 'center' }} color={!viewed ? colours.when : colours.when} />
+                        <Icon name="calendar-o"
+                          style={{ fontSize: verticalScale(12), textAlign: 'center' }}
+                          color={!viewed ? colours.when : colours.when} />
                       </View>) ||
                     (when.length === 1 && when[0].date === '' &&
                       <View
-                        style={{ width: 14, marginLeft: 4, alignItems: 'center', justifyContent: 'center' }}
+                        style={{ fontSize: verticalScale(12), marginLeft: feedHorizPaddingScale(2), alignItems: 'center', justifyContent: 'center' }}
                       >
-                        <Icon name="calendar-o" style={{ width: 14, textAlign: 'center' }} color={!viewed ? colours.when : colours.when} />
+                        <Icon name="calendar-o"
+                          style={{ fontSize: verticalScale(12), textAlign: 'center' }}
+                          color={!viewed ? colours.when : colours.when}
+                        />
                       </View>
                     )
                   }
-
-                  <Text
-                    style={[{
-                      fontSize: unConfirmedItem ? 12 : 16,
-                      fontWeight: '500',
-                      marginLeft: 4,
-                      marginRight: 4,
-                      color: !viewed ? colours.darkgray : colours.darkgray }]}
-                  >
-                    {
-                      (when.length > 1 && 'VOTE') ||
-                      (when.length === 1 && when[0].date === '' && 'TBC') ||
-                      formatDate(when[0]).toUpperCase()
-                    }
-                  </Text>
+                  <View style={{ paddingHorizontal: feedHorizPaddingScale(2) }}>
+                    <FeedItemWhenText
+                      unConfirmedItem={whenUnConfirmedItem}
+                      viewed={viewed}
+                    >
+                      {
+                        (when.length > 1 && 'VOTE') ||
+                        (when.length === 1 && when[0].date === '' && 'TBC') ||
+                        formatDate(when[0]).toUpperCase()
+                      }
+                    </FeedItemWhenText>
+                  </View>
                 </View>
 
-                <View style={{ flexDirection: 'row', marginBottom: 4, justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ flexDirection: 'row', marginBottom: 2, justifyContent: 'center', alignItems: 'center' }}>
 
                   {
                     (where.length > 1 &&
                       <View
-                        style={{ width: 14, marginLeft: 4, justifyContent: 'center', alignItems: 'center' }}
+                        style={{ width: verticalScale(12), marginLeft: feedHorizPaddingScale(2), justifyContent: 'center', alignItems: 'center' }}
                       >
-                        <Icon2 name="location" style={{ width: 14, textAlign: 'center' }} color={!viewed ? colours.where : colours.where} />
+                        <Icon2 name="location"
+                          style={{ fontSize: verticalScale(12), textAlign: 'center' }}
+                          color={!viewed ? colours.where : colours.where} />
                       </View>) ||
                     (where.length === 1 && where[0] === '' &&
                       <View
-                        style={{ marginLeft: 4, alignItems: 'center', justifyContent: 'center' }}
+                        style={{ marginLeft: feedHorizPaddingScale(2), alignItems: 'center', justifyContent: 'center' }}
                       >
-                        <Icon2 name="location" style={{ width: 14, textAlign: 'center' }} color={!viewed ? colours.where : colours.where} />
+                        <Icon2 name="location"
+                          style={{ fontSize: verticalScale(12), textAlign: 'center' }}
+                          color={!viewed ? colours.where : colours.where} />
                       </View>)
                   }
-
-                  <Text
-                    numberOfLines={2}
-                    style={[{
-                      fontSize: unConfirmedItem ? 12 : 12,
-                      fontWeight: '500',
-                      textAlign: 'center',
-                      marginLeft: 4,
-                      marginRight: 4,
-                      color: !viewed ? colours.darkgray : colours.darkgray }]}
-                  >
-                    {
-                      (where.length > 1 && 'VOTE') ||
-                      (where.length === 1 && where[0] === '' && 'TBC') ||
-                      where[0]
-                    }
-                  </Text>
+                  <View style={{ paddingHorizontal: feedHorizPaddingScale(2) }}>
+                    <FeedItemWhereText
+                      numberOfLines={2}
+                      unConfirmedItem={whereUnConfirmedItem}
+                      viewed={viewed}
+                    >
+                      {
+                        (where.length > 1 && 'VOTE') ||
+                        (where.length === 1 && where[0] === '' && 'TBC') ||
+                        where[0]
+                      }
+                    </FeedItemWhereText>
+                  </View>
                 </View>
               </View>
 

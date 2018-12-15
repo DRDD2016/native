@@ -1,10 +1,13 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-import { View, Text, Modal, AsyncStorage } from 'react-native';
+import { View, Modal, AsyncStorage } from 'react-native';
 import Fabric from 'react-native-fabric';
 import { store } from '../../init-store';
 import { gotItWhatsNew } from '../../actions/profile';
-import { styles, ConfirmButton, ConfirmButtonText } from '../../../styles';
+import { ConfirmButton, ConfirmButtonText, ModalWrapper, ModalView } from '../../../styles';
+import { ModalGeneralText, ModalMessageText } from '../../../styles/text';
+import { feedVertPaddingScale } from '../../../styles/scaling';
+import colours from '../../../styles/colours';
 
 const { Answers } = Fabric;
 export const app_updateNo = 1;
@@ -48,75 +51,65 @@ export default class WhatsNew extends Component {
         onRequestClose={() => this.onGotItClick()}
       >
         {
-          <View style={styles.modalWrapper}>
+          <ModalWrapper>
 
             {
               (type === 'whats_new') &&
-              <View style={styles.modalConfirm}>
+              <ModalView>
 
-                <Text style={[styles.msg2, { flex: 1 }]}>Spark has been updated</Text>
+                <ModalGeneralText>Spark has been updated</ModalGeneralText>
 
-                <Text style={[styles.msg1, { flex: 1 }]}>{`${''}What's New${''}`}</Text>
+                <ModalGeneralText>{`${''}What's New?${''}`}</ModalGeneralText>
+                <View style={{ paddingVertical: feedVertPaddingScale(20) }}>
 
-                <View style={{ flex: 1 }}>
-                  <Text style={[styles.msg2, { flex: 1 }]}>
+                  <ModalMessageText style={{ color: colours.offWhite }}>
                     - bug fixes
-                  </Text>
-                  <Text style={[styles.msg2, { flex: 1 }]}>
-                    - whats new
-                  </Text>
-                  <Text style={[styles.msg2, { flex: 1 }]}>
-                    - on boarding
-                  </Text>
+                  </ModalMessageText>
+                  <ModalMessageText style={{ color: colours.offWhite }}>
+                    - improved UI
+                  </ModalMessageText>
+                  <ModalMessageText style={{ color: colours.offWhite }}>
+                    - speed improvements
+                  </ModalMessageText>
+
                 </View>
 
-                <View style={[styles.rowCentered, { flex: 1 }]}>
-                  <ConfirmButton
-                    style={{ width: 150, marginBottom: 20, marginTop: 20 }}
-                    onPress={this.onGotItClick}
 
-                  >
-                    <ConfirmButtonText>Got it</ConfirmButtonText>
-                  </ConfirmButton>
-                </View>
+                <ConfirmButton
+                  style={{ width: 150, marginBottom: 20, marginTop: 20 }}
+                  onPress={this.onGotItClick}
 
-              </View>
+                >
+                  <ConfirmButtonText>Got it</ConfirmButtonText>
+                </ConfirmButton>
+
+
+              </ModalView>
             }
 
             {
               (type === 'welcome') &&
-              <View style={styles.modalConfirm}>
+              <ModalView>
 
-                <Text style={[styles.msg2, { flex: 0.3 }]}>{' '}</Text>
+                <ModalGeneralText>{`${''}Welcome to Spark${''}`}</ModalGeneralText>
 
-                <Text style={[styles.msg1, { flex: 1 }]}>{`${''}Welcome to Spark${''}`}</Text>
+                <ModalMessageText>
+                  To get started, tap + to begin organising an event.
+                </ModalMessageText>
 
-                <View style={{ flex: 1.3 }}>
+                <ConfirmButton
+                  style={{ width: 150, marginBottom: 20, marginTop: 20 }}
+                  onPress={this.onGotItClick}
 
-                  <Text style={[styles.msg2, { flex: 1 }]}>
-                    To get started, tap + to begin organising an event.
-                  </Text>
-                </View>
-
-                <View style={{ flex: 0.2 }} />
-
-                <View style={[styles.rowCentered, { flex: 1 }]}>
-                  <ConfirmButton
-                    style={{ width: 150, marginBottom: 20, marginTop: 20 }}
-                    onPress={this.onGotItClick}
-
-                  >
-                    <ConfirmButtonText>Got it</ConfirmButtonText>
-                  </ConfirmButton>
-                </View>
-
-                <View style={{ flex: 0.2 }} />
+                >
+                  <ConfirmButtonText>Got it</ConfirmButtonText>
+                </ConfirmButton>
 
 
-              </View>
+              </ModalView>
             }
 
-          </View>
+          </ModalWrapper>
         }
 
       </Modal>

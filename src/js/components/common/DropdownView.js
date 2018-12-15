@@ -22,7 +22,7 @@ export default class DropdownView extends Component {
           flexDirection: 'row',
           alignItems: 'center',
           backgroundColor: colours.filterPanelBackgroundColor,
-          borderBottomWidth: 1,
+          borderBottomWidth: 0,
           borderBottomColor: colours.lightgray,
           opacity: navbarOpacity
           // shadowOpacity: 0.8,

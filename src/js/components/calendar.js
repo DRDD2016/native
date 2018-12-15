@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Header } from 'react-navigation';
-import { StatusBar, View, Text, FlatList, Dimensions, Platform, Image, Animated, InteractionManager } from 'react-native';
+import { StatusBar, View, FlatList, Dimensions, Platform, Image, Animated, InteractionManager } from 'react-native';
 import Fabric from 'react-native-fabric';
 import CalendarItem from './calendar-item';
 import LastCalendarItem from './last-calendar-item';
@@ -10,13 +10,14 @@ import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
 // import FeedHeader from './common/FeedHeader';
 import DropdownView from './common/DropdownView';
-import styles, { ConfirmButton, ConfirmButtonText } from '../../styles';
+import { ConfirmButton } from '../../styles';
 import colours from '../../styles/colours';
 // import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
 import BurgerIcon from './common/burger-icon';
 import OfflineIconContainer from '../containers/common/OfflineIconContainer';
-import { } from '../../styles/scaling';
+import { GeneralText, MessageText, ConfirmButtonText } from '../../styles/text';
+import { moderateScale } from '../../styles/scaling';
 
 const { Answers } = Fabric;
 const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.6 : Header.HEIGHT * 0.6;
@@ -264,6 +265,8 @@ class Calendar extends Component {
     }
 
     console.log('renderCalendarContent');
+    console.log('renderCalendarContent props', this.props);
+
 
     const timestamp = new Date();
     console.log('renderCalendar:', timestamp.getTime());
@@ -287,8 +290,12 @@ class Calendar extends Component {
 
     const { allEvents, calendarIsFetching, displaySome, displayAll, filterActive, selectedFilter, createNewEvent } = this.props;
 
-    Answers.logCustom('Calendar.js render'); // eslint-disable-line max-len
 
+    console.log('this.props.filteredEvents.length > 2', this.props.filteredEvents.length > 2);
+    console.log('!calendarIsFetching', !calendarIsFetching);
+    console.log('this.props.filteredEvents.length < 3', this.props.filteredEvents.length < 3);
+    Answers.logCustom('Calendar.js render'); // eslint-disable-line max-len
+    // console.log('this.props.filteredEvents', this.props.filteredEvents);
     return (
       <View style={{ flex: 1, backgroundColor: colours.background }}>
 
@@ -298,7 +305,7 @@ class Calendar extends Component {
             alignSelf: 'center',
             width: scaledWidth,
             backgroundColor: 'transparent',
-            borderBottomWidth: 1,
+            borderBottomWidth: 0,
             borderBottomColor: colours.lightgray }}
         >
           {
@@ -307,11 +314,13 @@ class Calendar extends Component {
               <Spinner />
             </View>
           }
+
+
           <View>
 
 
             {
-              !calendarIsFetching && this.dataSource && allEvents.length > 0 &&
+              !calendarIsFetching && this.dataSource && allEvents.length > 2 &&
               <View style={{ backgroundColor: 'transparent', height: '100%' }}>
                 <DropdownView
                   navbarHeight={FILTER_PANEL_HEIGHT}
@@ -319,7 +328,7 @@ class Calendar extends Component {
                   navbarTranslate={navbarTranslate}
                 >
                   {
-                    !calendarIsFetching && allEvents.length > 0 &&
+                    !calendarIsFetching && allEvents.length > 2 &&
                     <FilterPanel
                       displayAll={ displayAll }
                       displaySome={ displaySome }
@@ -330,48 +339,72 @@ class Calendar extends Component {
 
                 </DropdownView>
 
+                {
+                  (this.props.filteredEvents.length > 2) && !calendarIsFetching &&
+                  <AnimatedFlatList
+                    initialNumToRender={10}
+                    data={this.dataSource}
+                    extraData={this.state}
+                    renderItem={this.renderItem}
+                    keyExtractor={item => `${item.event_id.toString()}${item.when.toString()}`}
+                    scrollEventThrottle={1}
+                    onScroll={Animated.event(
+                      [{ nativeEvent: { contentOffset: { y: this.state.scrollAnim } } }],
+                      { useNativeDriver: true },
+                    )}
+                    onMomentumScrollBegin={this._onMomentumScrollBegin}
+                    onMomentumScrollEnd={this._onMomentumScrollEnd}
+                    onScrollEndDrag={this._onScrollEndDrag}
+                    contentContainerStyle={{ backgroundColor: 'transparent', paddingTop: FILTER_PANEL_HEIGHT }}
+                  />
+                }
 
-                <AnimatedFlatList
-                  initialNumToRender={10}
-                  data={this.dataSource}
-                  extraData={this.state}
-                  renderItem={this.renderItem}
-                  keyExtractor={item => `${item.event_id.toString()}${item.when.toString()}`}
-                  scrollEventThrottle={1}
-                  onScroll={Animated.event(
-                    [{ nativeEvent: { contentOffset: { y: this.state.scrollAnim } } }],
-                    { useNativeDriver: true },
-                  )}
-                  onMomentumScrollBegin={this._onMomentumScrollBegin}
-                  onMomentumScrollEnd={this._onMomentumScrollEnd}
-                  onScrollEndDrag={this._onScrollEndDrag}
-                  contentContainerStyle={{ backgroundColor: 'transparent', paddingTop: FILTER_PANEL_HEIGHT }}
-                />
+                {
+                  (this.props.filteredEvents.length < 3) && !calendarIsFetching &&
+                  <View style={{ height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                    <GeneralText style={{ marginHorizontal: 15 }}>
+                      You have no upcoming events.
+                    </GeneralText>
+                    <MessageText style={{ marginTop: moderateScale(20), marginHorizontal: 15 }}>
+                      Why not create one?
+                    </MessageText>
+                    <ConfirmButton
+                      onPress={ () => createNewEvent() }
+                      style={{ marginTop: moderateScale(20), backgroundColor: colours.orange, borderColor: colours.orange }}
+                    >
+                      <ConfirmButtonText>
+                        Get Started
+                      </ConfirmButtonText>
+                    </ConfirmButton>
+                  </View>
+                }
 
 
               </View>
 
             }
 
-            {
-              this.props.filteredEvents.length === 0 && !calendarIsFetching &&
-              <View style={[styles.containerFeed, { alignItems: 'center' }]}>
-                <Text style={{ color: colours.main, fontSize: 16, marginTop: 50, marginHorizontal: 15 }}>
+            { // all events < 3
+              !calendarIsFetching && this.dataSource && allEvents.length < 3 &&
+              <View style={{ height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                <GeneralText style={{ marginHorizontal: 15 }}>
                   You have no upcoming events.
-                </Text>
-                <Text style={[styles.msg3, { marginTop: 20, marginHorizontal: 15 }]}>
+                </GeneralText>
+                <MessageText style={{ marginTop: moderateScale(20), marginHorizontal: 15 }}>
                   Why not create one?
-                </Text>
+                </MessageText>
                 <ConfirmButton
                   onPress={ () => createNewEvent() }
-                  style={{ marginTop: 20, backgroundColor: colours.orange, borderColor: colours.orange }}
+                  style={{ marginTop: moderateScale(20), backgroundColor: colours.orange, borderColor: colours.orange }}
                 >
                   <ConfirmButtonText>
                     Get Started
                   </ConfirmButtonText>
                 </ConfirmButton>
               </View>
+
             }
+
 
           </View>
         </View>

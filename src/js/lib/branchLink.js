@@ -147,7 +147,7 @@ export async function composeLinkToShare (user, event, code) {
 
   const text = event === undefined
     ? `${user.firstname} ${user.surname} has invited you to use the Spark app to organise and plan social events. Click this link to download the app: ${url}` // eslint-disable-line max-len
-    : `${user.firstname} ${user.surname} has invited you to ${event.name} using Spark. Click this link to RSVP or download the app: ${Platform.OS === 'ios' ? '' : url}`; // eslint-disable-line max-len
+    : `${user.firstname} ${user.surname} has invited you to ${event.name} using Spark. Click this link to RSVP or download the app: ${Platform.OS === 'ios' ? '' : url} or enter the following code in the app: ${code}`; // eslint-disable-line max-len
 
   const dialogTitle = event === undefined
     ? 'Invite friends to use Spark'

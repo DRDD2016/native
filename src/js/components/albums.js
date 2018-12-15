@@ -171,7 +171,7 @@ class Albums extends Component {
 
               {
                 this.props.filteredEvents.length === 0 && !isFetching &&
-                <View style={[styles.containerFeed, { alignItems: 'center' }]}>
+                <View style={{ alignItems: 'center' }}>
                   <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
                     Albums are coming to Spark soon.
                   </Text>
@@ -180,7 +180,7 @@ class Albums extends Component {
 
               {
                 !isFetching && this.dataSource &&
-                <View style={styles.containerFeed}>
+                <View style={{}}>
                 <FlatList
                   initialNumToRender={10}
                   data={this.dataSource}

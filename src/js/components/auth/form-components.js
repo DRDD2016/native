@@ -16,7 +16,7 @@ export function FormTextInput ({
   console.log('error: ', error);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, alignItems: 'center' }}>
 
       <InputField
         // testDescription={testDescription}
@@ -46,7 +46,7 @@ export function FormTextInput ({
 
 export function FormPasswordInput ({ labelText, focussedColor, unfocussedColor, placeholder, input: { value, onChange, onBlur }, meta: { touched, error } }) { // eslint-disable-line max-len
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, alignItems: 'center' }}>
       <InputField
         // testDescription={testDescription}
         underlineColorAndroid="transparent"

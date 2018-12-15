@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { View, Text, Platform, TouchableHighlight, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Header } from 'react-navigation';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+// import { Header } from 'react-navigation';
 import InviteePoll from './invitee-poll';
 import HostPoll from './host-poll';
 import FinalisedEvent from './finalised-event';
-import styles from '../../../styles';
+import styles, { ModalWrapper, ConfirmButton, ModalView } from '../../../styles';
 import colours from '../../../styles/colours';
 // import Header from '../common/Header';
 import BackButton from '../common/BackButton';
-import Button from '../common/Button';
+import ButtonHeader from '../common/ButtonHeader';
 import DeleteIcon from '../common/delete-icon';
+import { GeneralText, MessageText, ForgotPasswordText, ConfirmButtonText } from '../../../styles/text';
+import { iconScale } from '../../../styles/scaling';
 import BannerBar from '../common/BannerBar';
 // import HeaderBack from '../common/CreateHeaderBackground';
 
@@ -21,14 +24,9 @@ export default class Event extends Component {
     title: (navigation.state.params.eventTitle === undefined) ? 'Sorry...' : navigation.state.params.eventTitle,
     headerStyle: { backgroundColor: colours.headerBackgroundColor, elevation: 0 },
     headerRight: (
-      navigation.state.params.userIsHost &&
-        <Button
-          buttonStyle={{ width: Header.HEIGHT, paddingLeft: 20, paddingRight: 20, flexDirection: 'row', alignSelf: 'center' }}
-          textStyle={{ color: colours.gray }}
-          onPress={ () => navigation.state.params.handleDelete(navigation.state.params.event, navigation.state.params.event.event_id) }
-        >
-          <DeleteIcon />
-        </Button>
+      <ButtonHeader
+
+      />
     ),
     headerLeft: <BackButton stack="Event" nav={navigation} />,
     headerTintColor: colours.headerButtonColor
@@ -180,6 +178,7 @@ export default class Event extends Component {
           event={ this.props.event }
           finalChoices={ this.props.finalChoices }
           handleConfirmEvent={ this.props.handleConfirmEvent }
+          handleDeleteEvent={ this.handleDelete }
           voteCount={ this.props.voteCount }
           handleInviteMoreFriends={ this.props.handleInviteMoreFriends }
           confirmedEvent={ this.props.confirmedEvent }
@@ -224,19 +223,19 @@ export default class Event extends Component {
 
           <Modal transparent animationType="slide" visible={this.state.isModalVisible} onRequestClose={() => { }}>
 
-            <View style={styles.modalWrapper}>
+            <ModalWrapper>
 
-              <View style={styles.modalConfirm}>
-                <View style={{ flex: 0.5 }}>
-                  <Icon name="warning" size={18} color={colours.orange} />
+              <ModalView>
+                <View style={{ paddingVertical: 4 }}>
+                  <Icon name="warning" size={iconScale(24)} color={colours.white} />
                 </View>
-                <Text style={[styles.msg1, { flex: 1 }]}>Please Confirm</Text>
-                <Text style={[styles.msg2, { flex: 0.4 }]}>Are you sure you want</Text>
-                <Text style={[styles.msg2, { flex: 0.4 }]}>to delete this event?</Text>
+                <GeneralText style={[{ color: colours.white, paddingVertical: 12 }]}>Please Confirm</GeneralText>
+                <MessageText style={[{ color: colours.lightgray, paddingVertical: 4 }]}>Are you sure you want</MessageText>
+                <MessageText style={[{ color: colours.lightgray, paddingVertical: 4 }]}>to delete this event?</MessageText>
 
-                <View style={{ justifyContent: 'space-between', marginTop: 40, flex: 2, flexDirection: 'row' }}>
-                  <TouchableHighlight
-                    style={ [styles.confirmButton, { flex: 1, marginHorizontal: 5, marginBottom: 20, marginTop: 20 }] }
+                <View style={{ justifyContent: 'space-between', marginTop: 40, flexDirection: 'row' }}>
+                  <ConfirmButton
+                    style={{ backgroundColor: colours.green, borderColor: colours.green, borderWidth: 3, height: 60 }}
                     onPress={ () => {
                       this.setState({
                         isModalVisible: false
@@ -245,12 +244,12 @@ export default class Event extends Component {
                     }}
                   >
                     <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                      <Icon name="times-circle" size={24} color={colours.red} />
-                      <Text style={styles.confirmButtonText}> KEEP</Text>
+                      <Icon2 name="restore" size={iconScale(24)} color={colours.offWhite} />
+                      <ConfirmButtonText> KEEP</ConfirmButtonText>
                     </View>
-                  </TouchableHighlight>
-                  <TouchableHighlight
-                    style={ [styles.confirmButton, { flex: 1, marginHorizontal: 5, marginBottom: 20, marginTop: 20 }] }
+                  </ConfirmButton>
+                  <ConfirmButton
+                    style={{ backgroundColor: colours.offWhite, borderColor: colours.red, borderWidth: 3, height: 60 }}
                     onPress={ () => {
                       this.setState({
                         isModalVisible: false
@@ -262,23 +261,37 @@ export default class Event extends Component {
                     }}
                   >
                     <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                      <Icon name="check-circle" size={24} color="green" />
-                      <Text style={styles.confirmButtonText}> DELETE</Text>
+                      <Icon name="trash" color={colours.red} size={iconScale(24)} />
+                      <ConfirmButtonText style={{ color: colours.red }}> DELETE</ConfirmButtonText>
                     </View>
-                  </TouchableHighlight>
+                  </ConfirmButton>
                 </View>
 
-              </View>
+              </ModalView>
 
-            </View>
+            </ModalWrapper>
 
           </Modal>
 
-          <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? 0 : 0 }}>
+          <View style={{ marginTop: Platform.OS === 'ios' ? 0 : 0 }}>
             {
               this.props.event && this.eventRouter()
             }
           </View>
+          <MessageText style={{ textAlign: 'center' }}>or</MessageText>
+          <TouchableHighlight
+            style={{ paddingVertical: 20, paddingHorizontal: 20, flexDirection: 'row', alignSelf: 'center' }}
+            onPress={ () => this.handleDelete(this.props.event, this.props.event.event_id) }
+          >
+            <View style={{ flexDirection: 'row' }}>
+
+              <DeleteIcon color={colours.main} />
+              <ForgotPasswordText>
+              Delete this event
+              </ForgotPasswordText>
+            </View>
+          </TouchableHighlight>
+
         </View>
       </View>
     );

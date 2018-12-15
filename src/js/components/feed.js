@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, InteractionManager, Animated, View, Text, FlatList, Image, Platform, Dimensions } from 'react-native';
+import { StatusBar, InteractionManager, Animated, View, FlatList, Image, Platform, Dimensions } from 'react-native';
 import Fabric from 'react-native-fabric';
 import _ from 'lodash';
 import { Header } from 'react-navigation';
@@ -7,7 +7,9 @@ import FeedItem from './feed-item';
 import FilterPanel from './general/filter-panel';
 import Spinner from './common/Spinner';
 // import ImageHeader from './common/ImageHeader';
-import styles, { ConfirmButton, ConfirmButtonText } from '../../styles';
+import { ConfirmButton } from '../../styles';
+import { GeneralText, MessageText, ConfirmButtonText } from '../../styles/text';
+import { } from '../../styles/scaling';
 import colours from '../../styles/colours';
 // import { connectAlert } from './Alert';
 import DropdownView from './common/DropdownView';
@@ -35,12 +37,13 @@ class Feed extends Component {
 
   static navigationOptions = ({ navigation }) => ({
     headerForceInset: { top: 'never', bottom: 'never' }, // workaround to remove padding at top of header
-    headerLeft: <View style={{ paddingLeft: 1, alignItems: 'center', flex: 1 }}>
+    headerLeft: <View style={{ paddingLeft: 3, alignItems: 'center', flex: 1 }}>
       <Image style={{ height: logoHeight, width: logoHeight * 3 }} source={ logo } resizeMode="contain" />
     </View>,
-    headerRight: <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+    headerRight: <View style={{ flexDirection: 'row' }}>
 
       <OfflineIconContainer />
+
       <ButtonHeader
         onPress={() => navigation.openDrawer()}
       >
@@ -449,13 +452,13 @@ class Feed extends Component {
 
           {
             allEvents.length === 0 && !isReceivingFeed &&
-              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
-                <Text style={{ color: colours.main, fontSize: 16, marginTop: 50, marginHorizontal: 15 }}>
+              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <GeneralText>
                   You have no events.
-                </Text>
-                <Text style={[styles.msg3, { marginTop: 20, marginHorizontal: 15 }]}>
+                </GeneralText>
+                <MessageText style={{ marginTop: 20, marginHorizontal: 15 }}>
                   Why not create one?
-                </Text>
+                </MessageText>
                 <ConfirmButton
                   onPress={ () => createNewEvent() }
                   style={{ marginTop: 20, backgroundColor: colours.orange, borderColor: colours.orange }}
@@ -470,13 +473,13 @@ class Feed extends Component {
           }
           {
             feed.length === 0 && selectedFilter === 'hosting' &&
-              <View style={{ alignItems: 'center' }}>
-                <Text style={{ color: colours.main, fontSize: 16, marginTop: 50, marginHorizontal: 15 }}>
+              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <GeneralText>
                   You are not hosting any events.
-                </Text>
-                <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
+                </GeneralText>
+                <MessageText style={{ marginTop: 20, marginHorizontal: 15 }}>
                   Why not create some?
-                </Text>
+                </MessageText>
                 <ConfirmButton
                   onPress={ () => createNewEvent() }
                   style={{ marginTop: 20, backgroundColor: colours.orange, borderColor: colours.orange }}
@@ -490,13 +493,13 @@ class Feed extends Component {
           }
           {
             feed.length === 0 && selectedFilter === 'received' &&
-              <View style={{ alignItems: 'center' }}>
-                <Text style={[styles.msg3, { marginTop: 80, marginHorizontal: 15 }]}>
+              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <GeneralText>
                   You have not been invited to any events.
-                </Text>
-                <Text style={[styles.msg3, { marginTop: 40, marginHorizontal: 15 }]}>
-                  Tap { '"Join"' } below to enter to join an event using an invite code.
-                </Text>
+                </GeneralText>
+                <MessageText style={{ marginTop: 20, marginHorizontal: 15 }}>
+                  Tap { '"RSVP"' } below to enter to join an event using an invite code.
+                </MessageText>
               </View>
           }
 

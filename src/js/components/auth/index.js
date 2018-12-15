@@ -2,8 +2,10 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 // import { Header } from 'react-navigation';
 import BannerBar from '../common/BannerBar';
-import { ConfirmButton, ConfirmButtonText } from '../../../styles';
+import { ConfirmButton } from '../../../styles';
 import colours from '../../../styles/colours';
+import { GeneralText, ConfirmButtonText } from '../../../styles/text';
+import { feedHorizPaddingScale, moderateScale } from '../../../styles/scaling';
 
 const logo = require('../../../img/sparkLoginLogo.png');
 
@@ -31,17 +33,17 @@ export default function Index ({ navigation }) {
       <BannerBar />
 
 
-      <View style={{ flex: 0.2 }} />
-      <View style={{ justifyContent: 'center', alignItems: 'center', flex: 0.2 }}>
-        <Image style={{ height: 100, width: 300 }} source={ logo } />
+      <View style={{ height: '20%' }} />
+      <View style={{ justifyContent: 'center', alignItems: 'center', height: '20%', width: '100%', paddingHorizontal: feedHorizPaddingScale(10) }}>
+        <Image style={{ width: '100%', height: '100%' }} source={ logo } />
       </View>
-      <View style={{ flex: 0.15, justifyContent: 'center', marginBottom: 25 }}>
-        <Text style={{ fontSize: 16, fontWeight: '600', color: '#a39b9b', textAlign: 'center', marginHorizontal: 10 }}>
+      <View style={{ height: '20%', justifyContent: 'center', marginBottom: 25 }}>
+        <GeneralText style={{ textAlign: 'center', marginHorizontal: feedHorizPaddingScale(10) }}>
           The easy way to organise parties, events,
           share pictures and memories with friends, family and groups.
-        </Text>
+        </GeneralText>
       </View>
-      <View style={{ flexDirection: 'row', flex: 0.3 }}>
+      <View style={{ flexDirection: 'row', height: '20%' }}>
         <View
           style={{ alignItems: 'center', justifyContent: 'center', flexDirection: 'column', flex: 1, marginBottom: 40 }}
         >
@@ -54,7 +56,7 @@ export default function Index ({ navigation }) {
               LOG IN
             </ConfirmButtonText>
           </ConfirmButton>
-          <View style={{ height: 60, alignItems: 'center', justifyContent: 'center' }}>
+          <View style={{ height: moderateScale(60), alignItems: 'center', justifyContent: 'center' }}>
             <Text style={{ fontSize: 16, fontWeight: '600', color: colours.darkgray }}>
               OR
             </Text>

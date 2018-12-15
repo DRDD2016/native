@@ -1,15 +1,18 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { View, Text, Image, Platform, ScrollView, TouchableHighlight, Dimensions } from 'react-native';
+import { View, Image, Platform, TouchableHighlight, Dimensions } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 // import { Header } from 'react-navigation';
 import Fabric from 'react-native-fabric';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BannerBar from './common/BannerBar';
 import Spinner from './common/Spinner';
 import InputField from './general/inputField';
 import styles, { ConfirmButton, ConfirmButtonText } from '../../styles';
 import colours from '../../styles/colours';
+import { FormLabelText } from '../../styles/text';
+import { moderateScale, feedHorizPaddingScale } from '../../styles/scaling';
 // import { connectAlert } from './Alert';
 import ButtonHeader from './common/ButtonHeader';
 import BackIcon from './common/back-icon';
@@ -126,22 +129,29 @@ class Settings extends Component {
             borderBottomWidth: 1,
             borderBottomColor: colours.lightgray }}
         >
-
-          <ScrollView style={{ flex: 1, marginTop: Platform.OS === 'ios' ? null : null }}>
+          <KeyboardAwareScrollView
+            style={{ flex: 1, backgroundColor: colours.white }}
+            enableOnAndroid
+            extraHeight={80}
+            resetScrollToCoords={{ x: 0, y: 0 }}
+            contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+          >
 
             <View
               style={{
+
                 flexDirection: 'column',
                 alignItems: 'center',
-                marginTop: 5 }}
+                justifyContent: 'center' }}
             >
 
-              <View style={{ flexDirection: 'row' }} >
-                <View style={{ flex: 1, flexDirection: 'column' }} >
-                  <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ paddingLeft: 4, textAlign: 'center', color: colours.main }}>
-                      Profile picture
-                    </Text>
+              <View style={{ width: '100%', flexDirection: 'row' }} >
+                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }} >
+                  <View style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: moderateScale(4), marginHorizontal: feedHorizPaddingScale(4) }} // eslint-disable-line max-len
+                  >
+                    <FormLabelText style={{ paddingLeft: 4, marginTop: 20, textAlign: 'center', color: colours.main }}>
+                      Profile Photo
+                    </FormLabelText>
                   </View>
                   <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 5 }}>
 
@@ -173,54 +183,54 @@ class Settings extends Component {
 
                 </View>
               </View>
+              <View style={{ flex: 1, flexDirection: 'row' }}>
+                <View style={{ flex: 1, flexDirection: 'column' // borderColor: 'yellow', borderWidth: 4
+                }}>
+                  <View style={{ marginTop: 20, flexDirection: 'row', justifyContent: 'center' }}>
+                    <InputField
+                      underlineColorAndroid="transparent"
+                      placeholder="First name"
+                      autoCorrect={ false }
+                      value={ firstname }
+                      labelType="notPoll"
+                      label="First name"
+                      onChangeText={ text => handleChangeName(text, 'firstname') }
+                      focussedColor={ colours.main }
+                      unfocussedColor={ colours.lightgray }
+                    />
+                  </View>
+                  <View style={{ marginTop: 20, flexDirection: 'row', justifyContent: 'center' }}>
+                    <InputField
+                      underlineColorAndroid="transparent"
+                      placeholder="Surname"
+                      autoCorrect={ false }
+                      value={ surname }
+                      labelType="notPoll"
+                      label="Surname"
+                      onChangeText={ text => handleChangeName(text, 'surname')}
+                      focussedColor={ colours.main }
+                      unfocussedColor={ colours.lightgray }
+                    />
+                  </View>
+                  <View style={{ marginTop: 20, flexDirection: 'row', justifyContent: 'center' }}>
+                    { this.props.isFetching ? <Spinner /> :
+                    <ConfirmButton
 
-              <View style={styles.row}>
+                      onPress={ () => this.saveChanges(firstname, surname) }
+                    >
+                      <ConfirmButtonText>
+                        Save changes
+                      </ConfirmButtonText>
+                    </ConfirmButton>}
 
-                <InputField
-                  underlineColorAndroid="transparent"
-                  placeholder="First name"
-                  autoCorrect={ false }
-                  value={ firstname }
-                  labelType="notPoll"
-                  label="First name"
-                  onChangeText={ text => handleChangeName(text, 'firstname') }
-                  focussedColor={ colours.main }
-                  unfocussedColor={ colours.lightgray }
-                />
+                  </View>
 
-              </View>
-
-              <View style={styles.row}>
-                <InputField
-                  underlineColorAndroid="transparent"
-                  placeholder="Surname"
-                  autoCorrect={ false }
-                  value={ surname }
-                  labelType="notPoll"
-                  label="Surname"
-                  onChangeText={ text => handleChangeName(text, 'surname')}
-                  focussedColor={ colours.main }
-                  unfocussedColor={ colours.lightgray }
-                />
-
-              </View>
-
-              <View style={styles.row}>
-                { this.props.isFetching ? <Spinner /> :
-                <ConfirmButton
-
-                  onPress={ () => this.saveChanges(firstname, surname) }
-                >
-                  <ConfirmButtonText>
-                    Save changes
-                  </ConfirmButtonText>
-                </ConfirmButton>}
-
+                </View>
               </View>
 
 
             </View>
-          </ScrollView>
+          </KeyboardAwareScrollView>
         </View>
       </View>
     );
