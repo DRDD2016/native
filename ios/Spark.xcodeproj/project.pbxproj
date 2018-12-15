@@ -279,14 +279,14 @@
 			remoteGlobalIDString = D8D9DB831C6D03DB009FBC0E;
 			remoteInfo = SMXCrashlytics;
 		};
-		555CDF7921BE918C00671410 /* PBXContainerItemProxy */ = {
+		555CDFFD21C46FB300671410 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 16B0973A79E84B0CB95BC45C /* ReactNativeGlobalProps.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 13B07F961A680F5B00A75B9A;
 			remoteInfo = ReactNativeGlobalProps;
 		};
-		555CDF7B21BE918C00671410 /* PBXContainerItemProxy */ = {
+		555CDFFF21C46FB300671410 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 16B0973A79E84B0CB95BC45C /* ReactNativeGlobalProps.xcodeproj */;
 			proxyType = 2;
@@ -757,11 +757,11 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		555CDF7521BE918B00671410 /* Products */ = {
+		555CDFF921C46FB300671410 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				555CDF7A21BE918C00671410 /* ReactNativeGlobalProps.app */,
-				555CDF7C21BE918C00671410 /* ReactNativeGlobalPropsTests.xctest */,
+				555CDFFE21C46FB300671410 /* ReactNativeGlobalProps.app */,
+				555CE00021C46FB300671410 /* ReactNativeGlobalPropsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1124,7 +1124,7 @@
 					ProjectRef = 531CC31C0613476A928E92FF /* ReactNativeConfig.xcodeproj */;
 				},
 				{
-					ProductGroup = 555CDF7521BE918B00671410 /* Products */;
+					ProductGroup = 555CDFF921C46FB300671410 /* Products */;
 					ProjectRef = 16B0973A79E84B0CB95BC45C /* ReactNativeGlobalProps.xcodeproj */;
 				},
 				{
@@ -1362,18 +1362,18 @@
 			remoteRef = 5552164F1EA7943B00F8C102 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		555CDF7A21BE918C00671410 /* ReactNativeGlobalProps.app */ = {
+		555CDFFE21C46FB300671410 /* ReactNativeGlobalProps.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = ReactNativeGlobalProps.app;
-			remoteRef = 555CDF7921BE918C00671410 /* PBXContainerItemProxy */;
+			remoteRef = 555CDFFD21C46FB300671410 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		555CDF7C21BE918C00671410 /* ReactNativeGlobalPropsTests.xctest */ = {
+		555CE00021C46FB300671410 /* ReactNativeGlobalPropsTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ReactNativeGlobalPropsTests.xctest;
-			remoteRef = 555CDF7B21BE918C00671410 /* PBXContainerItemProxy */;
+			remoteRef = 555CDFFF21C46FB300671410 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5563032920AE24220040F171 /* libfishhook.a */ = {
