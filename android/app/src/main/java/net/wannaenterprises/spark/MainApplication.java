@@ -4,6 +4,15 @@ import com.smixx.fabric.FabricPackage;
 import android.app.Application;
 import android.util.Log;
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.entria.views.RNViewOverflowPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.smixx.fabric.FabricPackage;
+import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
+import io.branch.rnbranch.RNBranchPackage;
+import com.bugsnag.BugsnagReactNative;
+import com.evollu.react.fcm.FIRMessagingPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.entria.views.RNViewOverflowPackage;
@@ -42,6 +51,15 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new FabricPackage(),
           new MainReactPackage(),
+            new RNFetchBlobPackage(),
+            new RNViewOverflowPackage(),
+            new VectorIconsPackage(),
+            new ImagePickerPackage(),
+            new FabricPackage(),
+            new ReactNativeConfigPackage(),
+            new RNBranchPackage(),
+            BugsnagReactNative.getPackage(),
+            new FIRMessagingPackage(),
             new LinearGradientPackage(),
             new RNFetchBlobPackage(),
             new RNViewOverflowPackage(),
