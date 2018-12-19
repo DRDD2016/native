@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { Client } from 'bugsnag-react-native';
-import { NetInfo, AsyncStorage } from 'react-native';
+import { NetInfo, AsyncStorage, YellowBox } from 'react-native';
 // , NativeModules
 // import {
 //   setCustomView,
@@ -72,8 +72,14 @@ console.log((require('react-native-config').default));
 // disable remote debugger warning in a simulator
 console.disableYellowBox = true;
 console.ignoredYellowBox = [
-  'Setting a timer'
+  'Setting a timer',
+  'Require cycle:'
 ];
+
+YellowBox.ignoreWarnings([
+  'Setting a timer',
+  'Require'
+]);
 
 let _unsubscribeFromBranch = null;
 
