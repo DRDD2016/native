@@ -8,5 +8,8 @@
         "transform-remove-console"
       ]
     }
-  }
+  },
+  "plugins": [
+    "@babel/plugin-proposal-class-properties"
+  ]
 }
