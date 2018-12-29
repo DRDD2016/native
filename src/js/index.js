@@ -71,10 +71,6 @@ const { Answers } = Fabric;
 console.log((require('react-native-config').default));
 // disable remote debugger warning in a simulator
 console.disableYellowBox = true;
-console.ignoredYellowBox = [
-  'Setting a timer',
-  'Require cycle:'
-];
 
 YellowBox.ignoreWarnings([
   'Setting a timer',

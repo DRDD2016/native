@@ -16,10 +16,15 @@ export const getCalendarSuccess = data => ({
   data
 });
 
-export const getCalendarFailure = error => ({
-  type: GET_CALENDAR_FAILURE,
-  error
-});
+export const getCalendarFailure = (error) => {
+  console.log('getCalendarFailure');
+  return (
+    {
+      type: GET_CALENDAR_FAILURE,
+      error
+    }
+  );
+};
 
 // export function getCalendarHostUserData (hostIDs) {
 //
@@ -77,8 +82,10 @@ export function getCalendar (token) {
       }
     })
       .then((res) => {
+        console.log('getCalendar res:', res);
         res.json()
           .then((data) => {
+            console.log('getCalendar data:', data);
             if (data) {
               dispatch(getCalendarSuccess(data));
               // const hostIDs = data.map(event => event.host_user_id);

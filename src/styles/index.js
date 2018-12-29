@@ -146,9 +146,9 @@ export const ModalWrapper = styled.View`
 
 `;
 
-export const ButText = styled.Text.attrs({
-  color: props => props.color || colours.gray
-})`
+export const ButText = styled.Text.attrs(props => ({
+  color: props.color || colours.gray
+}))`
   fontSize: ${moderateScale(12)};
   color: ${props => props.color};
 `;
@@ -192,9 +192,9 @@ export const Title2 = styled.Text`
   flex: 1;
 `; // title2
 
-export const Title3 = styled.Text.attrs({
-  color: props => props.color || colours.gray
-})`
+export const Title3 = styled.Text.attrs(props => ({
+  color: props.color || colours.gray
+}))`
   fontSize: ${scale(12)};
   fontWeight: 600;
   color: ${props => props.color};
@@ -215,9 +215,9 @@ export const Title6 = styled.Text`
   fontWeight: 500;
 `; // title6
 
-export const TitleCreate = styled.Text.attrs({
-  color: props => props.color || colours.gray
-})`
+export const TitleCreate = styled.Text.attrs(props => ({
+  color: props.color || colours.gray
+}))`
   fontSize: ${scale(14)};
   fontWeight: 600;
   color: ${props => props.color};

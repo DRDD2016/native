@@ -35,6 +35,7 @@ export function signupUser (firstname, surname, email, password, navigation) {
       body: JSON.stringify({ firstname, surname, email, password })
     })
     .then((response) => {
+      console.log('signupUser response:', response);
       response.json()
         .then((data) => {
           if (data.token && data.user_id) {

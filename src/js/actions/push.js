@@ -38,7 +38,7 @@ export function savePush (token, user_id, push_info) { //eslint-disable-line
       body: JSON.stringify({ user: { push_info } })
     })
     .then((response) => {
-      console.log('response', response);
+      console.log('savePush response', response);
       response.json()
       .then((data) => {
         if (data.error) {
