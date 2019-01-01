@@ -195,6 +195,8 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-firebase')
+    implementation project(':react-native-firebase')
     implementation project(':rn-fetch-blob')
     implementation project(':react-native-view-overflow')
     implementation project(':react-native-branch')
@@ -208,9 +210,12 @@ dependencies {
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.2@aar') {
         transitive = true;
     }
-    implementation 'com.google.firebase:firebase-messaging:11.0.2'
-    implementation 'com.google.firebase:firebase-core:11.0.2'
-    //this decides your firebase SDK version
+    
+    implementation "com.google.firebase:firebase-messaging:17.3.4"
+    implementation 'me.leolin:ShortcutBadger:1.1.21@aar' // <-- Add this line if you wish to use badge on Android
+    implementation "com.google.android.gms:play-services-base:16.0.1"
+    implementation "com.google.firebase:firebase-core:16.0.4"
+    //new Firebase
     androidTestImplementation 'tools.fastlane:screengrab:1.0.0'
     androidTestImplementation 'com.android.support:support-annotations:25.2.0'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
@@ -231,5 +236,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     into 'libs'
 }
 
-apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.bugsnag.android.gradle'
+apply plugin: 'com.google.gms.google-services'
