@@ -4,6 +4,8 @@ import com.smixx.fabric.FabricPackage;
 import android.app.Application;
 import android.util.Log;
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.RNFirebasePackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.entria.views.RNViewOverflowPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -41,6 +43,9 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new FabricPackage(),
           new MainReactPackage(),
+            new RNFirebasePackage(),
+          new RNFirebasePackage(),
+          new RNFirebaseMessagingPackage(),
           new RNFetchBlobPackage(),
           new RNViewOverflowPackage(),
           new VectorIconsPackage(),
@@ -48,7 +53,7 @@ public class MainApplication extends Application implements ReactApplication {
           new ReactNativeConfigPackage(),
           new RNBranchPackage(),
           BugsnagReactNative.getPackage(),
-          new FIRMessagingPackage(),
+          new FIRMessagingPackage(), // old Firebase?
           new LinearGradientPackage()
 
       );

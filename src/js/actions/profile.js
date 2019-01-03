@@ -116,6 +116,7 @@ export function getUserNoById (token, user_id) {
       }
     })
     .then((res) => {
+      console.log('profile res:', res);
       res.json()
       .then((data) => {
         console.log('getUserNos response data:', data);
@@ -154,7 +155,7 @@ export function gotItWhatsNew (token, user_id, user_update_no) {
       body: JSON.stringify({ user: { user_update_no } })
     })
     .then((response) => {
-      console.log('response', response);
+      console.log('goiItWhatsNew response', response);
       response.json()
       .then((data) => {
         if (data.error) {
@@ -184,10 +185,12 @@ export function updateOpenNo (token, user_id, open_no) {
       body: JSON.stringify({ user: { open_no } })
     })
     .then((response) => {
-      console.log('response', response);
+      console.log('updateOpenNo response', response);
       response.json()
       .then((data) => {
+        console.log('updateOpenNo data', data);
         if (data.error) {
+          console.log('updateOpenNo data.error');
           dispatch(UpdateOpenNoFailure(data.error));
         } else {
           console.log('successfully saved open_no to server');
@@ -196,6 +199,7 @@ export function updateOpenNo (token, user_id, open_no) {
       });
     })
     .catch((error) => {
+      console.log('updateOpenNo error');
       dispatch(UpdateOpenNoFailure(error.message));
     });
   };
@@ -214,6 +218,7 @@ export function editName (token, user_id, firstname, surname) {
       body: JSON.stringify({ user: { firstname, surname } })
     })
     .then((res) => {
+      console.log('editName res:', res);
       res.json()
       .then((data) => {
         dispatch(editNameSuccess(data));
@@ -242,7 +247,7 @@ export function uploadPhoto (token, formData) {
       body: formData
     })
     .then((res) => {
-      console.log('res', res);
+      console.log('uploadPhoto res', res);
       res.json()
       .then((data) => {
         console.log('Photo response data: ', data);

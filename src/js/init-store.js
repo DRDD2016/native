@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, YellowBox } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import logger from 'redux-logger';
@@ -7,6 +7,11 @@ import { persistStore, autoRehydrate } from 'redux-persist';
 import { createFilter } from 'redux-persist-transform-filter';
 import rootReducer from './reducers/';
 import { navMiddleware } from './routes';
+
+YellowBox.ignoreWarnings([
+  'Setting a timer',
+  'Require cycle:'
+]);
 
 export function initStore (initialState) {
   // if (Platform.OS === 'ios') {

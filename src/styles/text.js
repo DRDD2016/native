@@ -22,9 +22,9 @@ export const ms18 = moderateScale(18);
 
 
 // TabBar
-export const TabBarText = styled.Text.attrs({
-  color: props => props.color || colours.gray
-})`
+export const TabBarText = styled.Text.attrs(props => ({
+  color: props.color || colours.gray
+}))`
   fontSize: ${moderateScale(12)};
   color: ${props => props.color};
   textAlign: center;
@@ -33,9 +33,9 @@ export const TabBarText = styled.Text.attrs({
 
 // Feed
 
-export const TimeText = styled.Text.attrs({
-  opacity: props => props.opacity || 1
-})`
+export const TimeText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.gray};
   fontWeight: 500;
   fontSize: ${ms12};
@@ -43,9 +43,9 @@ export const TimeText = styled.Text.attrs({
 
 `;
 
-export const SubjectNameText = styled.Text.attrs({
-  opacity: props => props.opacity || 1
-})`
+export const SubjectNameText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.black};
   fontWeight: 600;
   fontSize: ${ms14};
@@ -53,9 +53,9 @@ export const SubjectNameText = styled.Text.attrs({
 
 `;
 
-export const SubjectActionText = styled.Text.attrs({
-  opacity: props => props.opacity || 1
-})`
+export const SubjectActionText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.gray};
   fontWeight: 500;
   fontSize: ${ms12};
@@ -63,9 +63,9 @@ export const SubjectActionText = styled.Text.attrs({
 
 `;
 
-export const EventNameText = styled.Text.attrs({
-  opacity: props => props.opacity || 1
-})`
+export const EventNameText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.main};
   fontWeight: 600;
   fontSize: ${ms14};
@@ -73,12 +73,12 @@ export const EventNameText = styled.Text.attrs({
 
 `;
 
-export const FeedItemWhenText = styled.Text.attrs({
-  opacity: props => props.opacity || 1,
-  unConfirmedItem: (props) => { return (props.unConfirmedItem ? ms14 : ms16); },
-  viewed: (props) => { return (props.viewed ? colours.darkgray : colours.darkgray); },
-  color: (props) => { return (props.unConfirmedItem ? colours.darkgray : colours.darkgray); }
-})`
+export const FeedItemWhenText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1,
+  unConfirmedItem: props.unConfirmedItem ? ms14 : ms16,
+  viewed: props.viewed ? colours.darkgray : colours.darkgray,
+  color: props.unConfirmedItem ? colours.darkgray : colours.darkgray
+}))`
   color: ${props => props.color};
   fontWeight: 500;
   fontSize: ${props => props.unConfirmedItem};
@@ -88,12 +88,12 @@ export const FeedItemWhenText = styled.Text.attrs({
 
 `;
 
-export const FeedItemWhereText = styled.Text.attrs({
-  opacity: props => props.opacity || 1,
-  unConfirmedItem: (props) => { return (props.unConfirmedItem ? ms14 : ms12); },
-  viewed: (props) => { return (props.viewed ? colours.darkgray : colours.darkgray); },
-  color: (props) => { return (props.unConfirmedItem ? colours.darkgray : colours.darkgray); }
-})`
+export const FeedItemWhereText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1,
+  unConfirmedItem: props.unConfirmedItem ? ms14 : ms12,
+  viewed: props.viewed ? colours.darkgray : colours.darkgray,
+  color: props.unConfirmedItem ? colours.darkgray : colours.darkgray
+}))`
   color: ${props => props.color};
   fontWeight: 500;
   fontSize: ${props => props.unConfirmedItem};
@@ -104,10 +104,10 @@ export const FeedItemWhereText = styled.Text.attrs({
 
 `;
 
-export const StatusFlagText = styled.Text.attrs({
-  opacity: props => props.opacity || 1,
-  color: props => props.color || colours.gray
-})`
+export const StatusFlagText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1,
+  color: props.color || colours.gray
+}))`
   color: ${props => props.color};
   fontWeight: 500;
   fontSize: ${ms12};
@@ -115,15 +115,14 @@ export const StatusFlagText = styled.Text.attrs({
   textAlign: center;
   marginLeft: 4;
   marginRight: 4;
-
 `;
 
 
 // Calendar
 
-export const CalendarFromText = styled.Text.attrs({
-  color: props => props.color || colours.darkgray
-})`
+export const CalendarFromText = styled.Text.attrs(props => ({
+  color: props.color || colours.darkgray
+}))`
   fontSize: ${moderateScale(10)};
   color: ${props => props.color};
   textAlign: center;
@@ -131,9 +130,9 @@ export const CalendarFromText = styled.Text.attrs({
 
 `;
 
-export const CalendarDateText = styled.Text.attrs({
-  color: props => props.color || colours.darkgray
-})`
+export const CalendarDateText = styled.Text.attrs(props => ({
+  color: props.color || colours.darkgray
+}))`
   fontSize: ${moderateScale(14)};
   color: ${props => props.color};
   textAlign: center;
@@ -141,9 +140,9 @@ export const CalendarDateText = styled.Text.attrs({
 
 `;
 
-export const HostNameText = styled.Text.attrs({
-  opacity: props => props.opacity || 1
-})`
+export const HostNameText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.main};
   fontWeight: 600;
   fontSize: ${ms12};
@@ -151,9 +150,9 @@ export const HostNameText = styled.Text.attrs({
 
 `;
 
-export const MonthText = styled.Text.attrs({
-  opacity: props => props.opacity || 1
-})`
+export const MonthText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.white};
   textAlign: left;
   fontWeight: 600;
@@ -162,9 +161,9 @@ export const MonthText = styled.Text.attrs({
 
 `;
 
-export const GeneralText = styled.Text.attrs({
-  opacity: props => props.opacity || 1
-})`
+export const GeneralText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.main};
   fontWeight: 600;
   fontSize: ${ms16};
@@ -172,9 +171,9 @@ export const GeneralText = styled.Text.attrs({
 
 `;
 
-export const FormLabelText = styled.Text.attrs({
-  opacity: props => props.opacity || 1
-})`
+export const FormLabelText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.main};
   fontWeight: 600;
   fontSize: ${ms14};
@@ -182,9 +181,9 @@ export const FormLabelText = styled.Text.attrs({
 
 `;
 
-export const MessageText = styled.Text.attrs({
-  opacity: props => props.opacity || 1
-})`
+export const MessageText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.gray};
   fontWeight: 600;
   fontSize: ${ms14};
@@ -192,9 +191,9 @@ export const MessageText = styled.Text.attrs({
 
 `;
 
-export const ConfirmButtonText = styled.Text.attrs({
-  opacity: props => props.opacity || 1
-})`
+export const ConfirmButtonText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.offWhite};
   fontWeight: 600;
   fontSize: ${ms18};
@@ -205,9 +204,9 @@ export const ConfirmButtonText = styled.Text.attrs({
 
 // Event poll
 
-export const VoteText = styled.Text.attrs({
-  opacity: props => props.opacity || 1
-})`
+export const VoteText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.gray};
   fontWeight: 500;
   fontSize: ${ms12};
@@ -215,9 +214,9 @@ export const VoteText = styled.Text.attrs({
 
 `;
 
-export const CategoryTitleText = styled.Text.attrs({
-  opacity: props => props.opacity || 1
-})`
+export const CategoryTitleText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.main};
   fontWeight: 600;
   fontSize: ${ms14};
@@ -225,11 +224,11 @@ export const CategoryTitleText = styled.Text.attrs({
 
 `;
 
-export const OptionText = styled.Text.attrs({
-  opacity: props => props.opacity || 1,
-  viewed: (props) => { return (props.viewed ? colours.darkgray : colours.darkgray); },
-  color: (props) => { return (props.unConfirmedItem ? colours.darkgray : colours.darkgray); }
-})`
+export const OptionText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1,
+  viewed: props.viewed ? colours.darkgray : colours.darkgray,
+  color: props.unConfirmedItem ? colours.darkgray : colours.darkgray
+}))`
   color: ${props => props.color};
   fontWeight: 500;
   fontSize: ${ms14};
@@ -239,20 +238,20 @@ export const OptionText = styled.Text.attrs({
 
 `;
 
-export const ForgotPasswordText = styled.Text.attrs({
-
-})`
+export const ForgotPasswordText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.main};
   fontWeight: 500;
   fontSize: ${ms14};
   textAlign: center;
-
+  opacity: ${props => props.opacity};
 `;
 
 // Modals
-export const ModalGeneralText = styled.Text.attrs({
-  opacity: props => props.opacity || 1
-})`
+export const ModalGeneralText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.white};
   fontWeight: 600;
   fontSize: ${ms16};
@@ -260,9 +259,9 @@ export const ModalGeneralText = styled.Text.attrs({
 
 `;
 
-export const ModalMessageText = styled.Text.attrs({
-  opacity: props => props.opacity || 1
-})`
+export const ModalMessageText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.gray};
   fontWeight: 600;
   fontSize: ${ms14};
@@ -273,9 +272,9 @@ export const ModalMessageText = styled.Text.attrs({
 
 // Drawer Menu
 
-export const DrawerItemText = styled.Text.attrs({
-  opacity: props => props.opacity || 1
-})`
+export const DrawerItemText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.main};
   fontWeight: 600;
   fontSize: ${ms14};
@@ -285,9 +284,9 @@ export const DrawerItemText = styled.Text.attrs({
 `;
 
 
-export const DrawerMessageText = styled.Text.attrs({
-  opacity: props => props.opacity || 1
-})`
+export const DrawerMessageText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.gray};
   fontWeight: 600;
   fontSize: ${ms14};
@@ -295,9 +294,9 @@ export const DrawerMessageText = styled.Text.attrs({
 
 `;
 
-export const DrawerLinkText = styled.Text.attrs({
-  opacity: props => props.opacity || 1
-})`
+export const DrawerLinkText = styled.Text.attrs(props => ({
+  opacity: props.opacity || 1
+}))`
   color: ${colours.gray};
   fontWeight: 600;
   fontSize: ${ms12};

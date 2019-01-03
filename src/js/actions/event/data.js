@@ -150,6 +150,7 @@ export function getUserById (token, user_id) {
       }
     })
     .then((res) => {
+      console.log('getUser res:', res);
       res.json()
       .then((data) => {
         console.log('getUser response data:', data);
@@ -189,6 +190,7 @@ export function getEvent (token, event_id, navigation) {
       }
     })
     .then((res) => {
+      console.log('getEvent res:', res);
       res.json()
       .then((data) => {
         const userIsHost = store.getState().user.user_id === data.host_user_id;
@@ -270,6 +272,7 @@ export function submitCode (token, code) {
       body: JSON.stringify({ code })
     })
     .then((res) => {
+      console.log('submitCode res:', res);
       res.json()
       .then((data) => {
         if (data.error) {
@@ -347,6 +350,7 @@ export function editEvent (token, event, event_id) {
       body: JSON.stringify({ event })
     })
     .then((res) => {
+      console.log('editEvent res:', res);
       res.json()
       .then((data) => {
         dispatch(editEventSuccess(data));

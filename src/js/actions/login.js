@@ -47,6 +47,7 @@ export function loginUser (email, password, navigation) {
       if (response.status === 401) {
         dispatch(loginUserFailure('Wrong email or password!'));
       }
+      console.log('loginUser response:', response);
       response.json()
         .then((data) => {
           if (data.token && data.user_id) {

@@ -1,11 +1,16 @@
 import Config from 'react-native-config';
 import io from 'socket.io-client';
 import _ from 'lodash';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, YellowBox } from 'react-native';
 import { store } from './init-store';
 import { getCalendar } from './actions/calendar';
 import { getFeedSuccess, getFeedFailure, getFeedRequest } from './actions/feed';
 import { storeSocket } from './actions/network';
+
+YellowBox.ignoreWarnings([
+  'Setting a timer',
+  'Require cycle:'
+]);
 
 // export function stopSocket () {
 //   const location = `${Config.URI}`;
