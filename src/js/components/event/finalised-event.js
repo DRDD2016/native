@@ -15,7 +15,8 @@ import colours from '../../../styles/colours';
 const NAVBAR_HEIGHT = Header.HEIGHT;
 const STATUS_BAR_HEIGHT = Platform.select({ ios: 5, android: StatusBar.currentHeight });
 const TITLE_PANEL_HEIGHT = Platform.select({ ios: (NAVBAR_HEIGHT - STATUS_BAR_HEIGHT) + 10, android: NAVBAR_HEIGHT });
-
+console.log('NAVBAR_HEIGHT: ', NAVBAR_HEIGHT);
+console.log('STATUS_BAR_HEIGHT: ', STATUS_BAR_HEIGHT);
 const STATUS_GOING = 'going';
 const STATUS_MAYBE = 'maybe';
 const STATUS_NOT_GOING = 'not_going';
@@ -78,9 +79,11 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID,
   const rsvpStatus = ({ going: goingIsSelected, maybe: maybeIsSelected, not_going: not_goingIsSelected, not_responded: not_respondedIsSelected });
   console.log('rsvpStatus', rsvpStatus);
 
+  // move icons and Host onto Header bar
+
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ paddingTop: 4, borderColor: 'red', borderWidth: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }} // eslint-disable-line max-len
+    <ScrollView style={{ height: '100%', borderColor: 'orange', borderWidth: 0 }}>
+      <View style={{ backgroundColor: colours.verylightgray, paddingVertical: 4, borderBottomColor: colours.sectionBorder, borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }} // eslint-disable-line max-len
       >
         <View style={{ height: TITLE_PANEL_HEIGHT, width: TITLE_PANEL_HEIGHT, padding: 0, paddingTop: 0, borderColor: 'blue', borderWidth: 0 }}>
           <ButText style={{ textAlign: 'center' }}>
@@ -103,7 +106,7 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID,
             />
           </View>
           <ButText style={{ textAlign: 'center' }}>
-            Dave
+            {event.firstname}
           </ButText>
         </View>
 
@@ -145,7 +148,7 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID,
 
       </View>
 
-      <ScrollView>
+      <View>
 
         <View style={{ flexDirection: 'row' }}>
           <View style={{ flex: 1, alignSelf: 'center' }}>
@@ -189,7 +192,7 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID,
             paddingTop: 4,
             marginHorizontal: 4,
             borderTopColor: colours.sectionBorder,
-            borderTopWidth: 1,
+            borderTopWidth: 0,
             alignItems: 'center' }}
         >
 
@@ -342,8 +345,8 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID,
         </View>
 
 
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
