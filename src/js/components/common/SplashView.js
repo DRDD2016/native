@@ -12,7 +12,7 @@ export default function SplashView () {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
       <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }} />
       <View style={{ justifyContent: 'center', alignItems: 'center', height: '20%', width: '100%', paddingHorizontal: feedHorizPaddingScale(10) }}>
-        <Image style={{ width: '100%', height: '100%' }} source={ logo } />
+        <Image style={{ width: '100%', height: '100%' }} source={ logo } resizeMode="contain" />
       </View>
       <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
         <Spinner />
