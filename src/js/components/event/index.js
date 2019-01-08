@@ -21,7 +21,7 @@ export default class Event extends Component {
 
   static navigationOptions = ({ navigation }) => ({
     headerForceInset: { top: 'never', bottom: 'never' }, // workaround to remove padding at top of header
-    title: (navigation.state.params.eventTitle === undefined) ? 'Sorry...' : navigation.state.params.eventTitle,
+    title: (navigation.state.params.eventTitle === undefined) ? '...' : navigation.state.params.eventTitle,
     headerStyle: { backgroundColor: colours.headerBackgroundColor, elevation: 0 },
     headerRight: (
       <ButtonHeader
