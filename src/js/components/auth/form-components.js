@@ -9,6 +9,7 @@ export function FormTextInput ({
   unfocussedColor,
   placeholder,
   isEmail,
+  iconName,
   input: { value, onChange, onBlur },
   meta: { touched, error } }) {
 
@@ -16,7 +17,7 @@ export function FormTextInput ({
   console.log('error: ', error);
 
   return (
-    <View style={{ flex: 1, alignItems: 'center' }}>
+    <View style={{ alignItems: 'center' }}>
 
       <InputField
         // testDescription={testDescription}
@@ -30,6 +31,7 @@ export function FormTextInput ({
         type="text"
         labelType="notPoll"
         label={ labelText }
+        iconName={ iconName }
         // inputKey= { inputKey }
         // onChangeText={ text => handleChange(text, inputKey) }
         focussedColor={ focussedColor }
@@ -44,9 +46,9 @@ export function FormTextInput ({
   );
 }
 
-export function FormPasswordInput ({ labelText, focussedColor, unfocussedColor, placeholder, input: { value, onChange, onBlur }, meta: { touched, error } }) { // eslint-disable-line max-len
+export function FormPasswordInput ({ labelText, focussedColor, unfocussedColor, iconName, placeholder, input: { value, onChange, onBlur }, meta: { touched, error } }) { // eslint-disable-line max-len
   return (
-    <View style={{ flex: 1, alignItems: 'center' }}>
+    <View style={{ alignItems: 'center' }}>
       <InputField
         // testDescription={testDescription}
         underlineColorAndroid="transparent"
@@ -59,6 +61,7 @@ export function FormPasswordInput ({ labelText, focussedColor, unfocussedColor, 
         type="password"
         labelType="notPoll"
         label={ labelText }
+        iconName={ iconName }
         // inputKey= { inputKey }
         // onChangeText={ text => handleChange(text, inputKey) }
         focussedColor={ focussedColor }
