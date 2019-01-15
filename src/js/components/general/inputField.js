@@ -55,7 +55,7 @@ class InputField extends Component {
     const {
       multiline, numberOfLines, labelType, value, placeholder,
       onChangeText, testDescription, label, inputKey, optional,
-      focussedColor, unfocussedColor, autoCapitalize, iconName
+      focussedColor, unfocussedColor, autoCapitalize, iconName, secureTextEntry
     } = this.props;
     const focusedColor = !focussedColor ? colours.main : focussedColor;
     const unfocusedColor = !unfocussedColor ? colours.lightgray : unfocussedColor;
@@ -107,6 +107,7 @@ class InputField extends Component {
                 }]}
                 multiline={multiline}
                 numberOfLines={numberOfLines} // check if does anything on android, else delete
+                secureTextEntry={secureTextEntry}
               />
             </View>
             {
