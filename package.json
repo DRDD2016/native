@@ -12,7 +12,11 @@
     "prepush": "npm test",
     "postmerge": "npm install",
     "test-ios": "detox build --configuration ios.sim.debug && detox test --configuration ios.sim.debug",
-    "test-android": "detox build --configuration android.emu.debug && detox test --configuration android.emu.debug -l verbose"
+    "test-android": "detox build --configuration android.emu.debug && detox test --configuration android.emu.debug -l verbose",
+    "create-ios-release-bundle": "rm -rf sourcemaps; mkdir sourcemaps; react-native bundle --platform ios --dev false --entry-file index.js --bundle-output sourcemaps/ios-release.bundle --sourcemap-output sourcemaps/ios-release.bundle.map --assets-dest build",
+    "bugsnag-ios-sourcemaps-to-bugsnag": "npm run create-ios-release-bundle; ./bugsnag-ios.sh",
+    "create-android-release-bundle": "rm -rf sourcemaps; mkdir sourcemaps; react-native bundle --platform android --dev false --entry-file index.js --bundle-output sourcemaps/android-release.bundle --sourcemap-output sourcemaps/android-release.bundle.map --assets-dest build",
+    "bugsnag-android-sourcemaps-to-bugsnag": "npm run create-android-release-bundle; ./bugsnag-android.sh"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",
@@ -20,6 +24,7 @@
     "@redux-offline/redux-offline": "^2.2.1",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "bugsnag-react-native": "^2.10.0",
+    "env-cmd": "^8.0.2",
     "hoist-non-react-statics": "^3.2.1",
     "immutability-helper": "^2.1.1",
     "lodash": "^4.17.10",
