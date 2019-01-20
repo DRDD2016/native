@@ -1,6 +1,6 @@
 {
   "name": "Spark",
-  "version": "0.0.1",
+  "version": "1.0.105",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -16,7 +16,10 @@
     "create-ios-release-bundle": "rm -rf sourcemaps; mkdir sourcemaps; react-native bundle --platform ios --dev false --entry-file index.js --bundle-output sourcemaps/ios-release.bundle --sourcemap-output sourcemaps/ios-release.bundle.map --assets-dest build",
     "bugsnag-ios-sourcemaps-to-bugsnag": "npm run create-ios-release-bundle; ./bugsnag-ios.sh",
     "create-android-release-bundle": "rm -rf sourcemaps; mkdir sourcemaps; react-native bundle --platform android --dev false --entry-file index.js --bundle-output sourcemaps/android-release.bundle --sourcemap-output sourcemaps/android-release.bundle.map --assets-dest build",
-    "bugsnag-android-sourcemaps-to-bugsnag": "npm run create-android-release-bundle; ./bugsnag-android.sh"
+    "bugsnag-android-sourcemaps-to-bugsnag": "npm run create-android-release-bundle; ./bugsnag-android.sh",
+    "version": "npm --no-git-tag-version version patch",
+    "ios:beta": "ios/bundle exec fastlane beta",
+    "android:alpha": "android/bundle exec fastlane alpha; npm run bugsnag-android-sourcemaps-to-bugsnag"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",

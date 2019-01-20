@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BugsnagAPIKey</key>
+	<string>899465e8e5166f09f584f57cf5282edd</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -30,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>61</string>
+	<string>103</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -63,7 +65,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Our custom Camera message</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Our custom Mic message</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -113,7 +115,5 @@
 		<key>test</key>
 		<string>key_test_gozDB6oc4opRT89o76zBJnmhACezJxiH</string>
 	</dict>
-	<key>BugsnagAPIKey</key>
-	<string>899465e8e5166f09f584f57cf5282edd</string>
 </dict>
 </plist>

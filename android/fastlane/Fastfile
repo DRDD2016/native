@@ -81,6 +81,8 @@ platform :android do
 
     supply(track: 'alpha')
 
+    sh("cd .. && npm run bugsnag-android-sourcemaps-to-bugsnag")
+
     # sh "your_script.sh"
     # You can also use other beta testing services here
   end
