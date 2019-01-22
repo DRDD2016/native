@@ -139,8 +139,9 @@ android {
         applicationId "net.wannaenterprises.spark"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode project.hasProperty('versionCode') ? project.property('versionCode') as int : 1
-        versionName "1.0.${project.hasProperty('versionCode') ? project.property('versionCode') as int : 1}"
+        versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -170,13 +171,13 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
-            debuggable true
+            debuggable false
         }
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
-            debuggable true
+            debuggable false
         }
     }
     // applicationVariants are e.g. debug, release

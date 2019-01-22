@@ -20,12 +20,16 @@ Index.navigationOptions = () => {
 export default function Index ({ navigation }) {
 
   const goToLogin = () => {
+
+    console.log('go to login');
     navigation.navigate('login');
   };
 
   const goToSignup = () => {
     navigation.navigate('signup');
   };
+
+  console.log('auth index render');
 
   return (
     <View testID="welcome" style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>

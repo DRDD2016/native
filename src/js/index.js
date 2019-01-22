@@ -30,9 +30,9 @@ import SpinnerContainer from './containers/common/SpinnerContainer';
 // }
 
 const bugsnag = new Client();
-// bugsnag.leaveBreadcrumb('index.js starting', {
-//                   type: 'user'
-//                 });
+bugsnag.leaveBreadcrumb('index.js starting', {
+                  type: 'user'
+                });
 console.log(bugsnag);
 
 crashlytics.init();

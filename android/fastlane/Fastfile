@@ -57,6 +57,9 @@ platform :android do
   desc "Submit a new Alpha Build to GooglePlay Alpha"
   lane :alpha do
 
+
+    sh("cd .. && npm run version-bump") # updates version in package.json and ios info.plist
+
     # Get the last version code and increment it.
     versionCode = File.read("metadata/versionCode").to_i
     versionCode = versionCode +1
