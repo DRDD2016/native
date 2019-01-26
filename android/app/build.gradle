@@ -52,7 +52,7 @@ def getPassword(String currentUser, String keyChain) {
  *   bundleAssetName: "index.android.bundle",
  *
  *   // the entry file for bundle generation
- *   entryFile: "index.android.js",
+ *   entryFile: "index.js",
  *
  *   // whether to bundle JS and assets in debug mode
  *   bundleInDebug: false,
@@ -143,7 +143,10 @@ android {
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
 
         ndk {
-            abiFilters "armeabi-v7a", "x86"
+            abiFilters "armeabi-v7a", "x86", 'armeabi', 'arm64-v8a'
+        }
+        packagingOptions {
+            exclude "lib/arm64-v8a/libgnustl_shared.so"
         }
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
@@ -171,7 +174,7 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
-            debuggable false
+            debuggable true
         }
         release {
             minifyEnabled enableProguardInReleaseBuilds
@@ -213,7 +216,7 @@ dependencies {
     implementation "com.google.firebase:firebase-messaging:17.3.0"
     implementation 'me.leolin:ShortcutBadger:1.1.21@aar' // <-- Add this line if you wish to use badge on Android
     implementation "com.google.firebase:firebase-core:16.0.3"
-    //new Firebase
+
     androidTestImplementation 'tools.fastlane:screengrab:1.0.0'
     androidTestImplementation 'com.android.support:support-annotations:25.2.0'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'

@@ -96,12 +96,17 @@
       <meta-data
             android:name="io.fabric.ApiKey"
             android:value="9393d3a2a675faac3cac9e9dfe415cab4455b1f1" />
-      <meta-data
+            <!-- Branch init -->
+              <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_pkvEE0oiYjjNH4Wp7ZCCGhmeECeDUqav" />
+              <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_gozDB6oc4opRT89o76zBJnmhACezJxiH" />
+              <meta-data android:name="io.branch.sdk.TestMode" android:value="false" />
+
+      <!-- <meta-data
             android:name="io.branch.sdk.BranchKey"
             android:value="key_live_pkvEE0oiYjjNH4Wp7ZCCGhmeECeDUqav" />
       <meta-data
             android:name="io.branch.sdk.BranchKey.test"
-            android:value="key_test_gozDB6oc4opRT89o76zBJnmhACezJxiH" />
+            android:value="key_test_gozDB6oc4opRT89o76zBJnmhACezJxiH" /> -->
 
       <meta-data android:name="com.bugsnag.android.API_KEY"
             android:value="899465e8e5166f09f584f57cf5282edd"/>

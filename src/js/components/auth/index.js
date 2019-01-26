@@ -39,7 +39,7 @@ export default function Index ({ navigation }) {
 
       <View style={{ height: '20%' }} />
       <View style={{ justifyContent: 'center', alignItems: 'center', height: '20%', width: '100%', paddingHorizontal: feedHorizPaddingScale(10) }}>
-        <Image style={{ width: '100%', height: '100%' }} source={ logo } />
+        <Image style={{ width: '100%', height: '100%' }} source={ logo } resizeMode="contain" />
       </View>
       <View style={{ height: '20%', justifyContent: 'center', marginBottom: 25 }}>
         <GeneralText style={{ textAlign: 'center', marginHorizontal: feedHorizPaddingScale(10) }}>

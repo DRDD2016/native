@@ -33,7 +33,7 @@ const bugsnag = new Client();
 bugsnag.leaveBreadcrumb('index.js starting', {
                   type: 'user'
                 });
-console.log(bugsnag);
+console.log('bugsnag');
 
 crashlytics.init();
 
@@ -92,6 +92,7 @@ class App extends Component {
 
   componentWillMount () {
 
+    console.log('index.js CompWillMount:');
     persistStore(store,
       {
         storage: AsyncStorage,
@@ -105,6 +106,7 @@ class App extends Component {
 
   componentDidMount () {
 
+    console.log('index.js CompDidMount starting:');
     NetInfo.isConnected.fetch().then().done(() => {
       NetInfo.isConnected.addEventListener('connectionChange', this._handleConnectionChange);
     });
@@ -214,6 +216,7 @@ class App extends Component {
     }, 2000);
     console.log('end: ');
 
+    console.log('index.js CompDidMount finishing:');
   }
 
   componentWillUnmount () {

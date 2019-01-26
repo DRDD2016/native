@@ -19,7 +19,7 @@ export default class Splash extends Component {
 
   componentWillMount () {
 
-    console.log('SplashWillMount', this.props);
+    console.log('SplashWillMount: ', this.props);
 
     setTimeout(() => {
       AsyncStorage.getItem('spark_token')
@@ -87,14 +87,24 @@ export default class Splash extends Component {
         } else {
           console.log('No Token, so navigating to login/signup-index');
           // if no token, go to login/signup
+
           this.props.navigation.navigate('auth');
+          
         }
       });
     }, 1000);
   }
 
+
   componentDidMount () {
     Answers.logCustom('Splash.js Mounted', { additionalData: 'nothing' });
+    console.log('SplashDidMount: ', this.props);
+  }
+
+  componentWillReceiveProps (nextProps) {
+    console.log('splash will rec props:');
+    console.log('splash this props:', this.props);
+    console.log('splash next props:', nextProps);
   }
 
   render () {

@@ -17,3 +17,4 @@
 #}
 -keep class io.invertase.firebase.** { *; }
 -dontwarn io.invertase.firebase.**
+-dontwarn io.branch.**

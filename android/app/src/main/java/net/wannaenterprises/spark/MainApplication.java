@@ -15,7 +15,6 @@ import io.branch.rnbranch.RNBranchPackage;
 import com.bugsnag.BugsnagReactNative;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
-import io.branch.rnbranch.*;
 import io.branch.referral.Branch;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
