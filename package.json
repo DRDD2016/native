@@ -19,7 +19,8 @@
     "bugsnag-android-sourcemaps-to-bugsnag": "npm run create-android-release-bundle; ./bugsnag-android.sh",
     "version-bump": "npm --no-git-tag-version version patch",
     "ios:beta": "ios/bundle exec fastlane beta",
-    "android:alpha": "android/bundle exec fastlane alpha; npm run bugsnag-android-sourcemaps-to-bugsnag"
+    "android:alpha": "android/bundle exec fastlane alpha; npm run bugsnag-android-sourcemaps-to-bugsnag",
+    "android-release": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ && react-native run-android"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",

@@ -18,7 +18,6 @@ repositories {
 }
 
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
-import com.android.build.OutputFile
 
 def getPassword(String currentUser, String keyChain) {
    def stdout = new ByteArrayOutputStream()

@@ -33,7 +33,6 @@ const bugsnag = new Client();
 bugsnag.leaveBreadcrumb('index.js starting', {
                   type: 'user'
                 });
-console.log('bugsnag');
 
 crashlytics.init();
 
@@ -68,7 +67,7 @@ const { Answers } = Fabric;
 // setCustomView(customViewProps);
 // setCustomTextInput(customTextInputProps);
 
-console.log((require('react-native-config').default));
+// console.log((require('react-native-config').default));
 // disable remote debugger warning in a simulator
 console.disableYellowBox = true;
 
@@ -244,13 +243,11 @@ class App extends Component {
     return (
       <Provider store={ store }>
 
-
         <PushController>
           <SpinnerContainer>
             <AppWithNavigationState />
           </SpinnerContainer>
         </PushController>
-
 
       </Provider>
     );

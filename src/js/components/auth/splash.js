@@ -39,7 +39,7 @@ export default class Splash extends Component {
             }
           });
 
-          console.log('this.props', this.props);
+          console.log('splash this.props', this.props);
           console.log('this.props.isFetchingBranch', this.props.isFetchingBranch);
 
 
@@ -89,7 +89,7 @@ export default class Splash extends Component {
           // if no token, go to login/signup
 
           this.props.navigation.navigate('auth');
-          
+
         }
       });
     }, 1000);
