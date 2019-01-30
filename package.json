@@ -1,6 +1,6 @@
 {
   "name": "Spark",
-  "version": "1.0.109",
+  "version": "1.0.119",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -19,8 +19,10 @@
     "bugsnag-android-sourcemaps-to-bugsnag": "npm run create-android-release-bundle; ./bugsnag-android.sh",
     "version-bump": "npm --no-git-tag-version version patch",
     "ios:beta": "ios/bundle exec fastlane beta",
-    "android:alpha": "android/bundle exec fastlane alpha; npm run bugsnag-android-sourcemaps-to-bugsnag",
-    "android-release": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ && react-native run-android"
+    "android:alpha": "cd android && bundle exec fastlane alpha",
+    "android-release": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ && react-native run-android",
+    "native-log-android": "adb logcat *:S ReactNative:V ReactNativeJS:V",
+    "build-release-android": "cd android && ./gradlew assembleRelease && cd .. && react-native run-android --variant=release"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",

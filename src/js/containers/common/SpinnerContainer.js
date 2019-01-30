@@ -5,6 +5,13 @@ import SpinnerProvider from '../../components/common/SpinnerProvider';
 
 const mapStateToProps = ({ feed, user, network, create, event }) => {
 
+  console.log('Spinner mapState state:');
+  console.log('feed:', feed);
+  console.log('user:', user);
+  console.log('network:', network);
+  console.log('create:', create);
+  console.log('event:', event);
+
   return {
     user_id: user.user_id,
     user_update: user.user_update,
@@ -29,6 +36,7 @@ const mapStateToProps = ({ feed, user, network, create, event }) => {
 
 const mapDispatchToProps = (dispatch) => {
   // const { navigation } = props;
+  console.log('Spinner mapDispatch');
 
   return {
 
