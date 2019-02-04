@@ -38,10 +38,13 @@
 
   NSURL *jsCodeLocation;
 
-  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil]; // use this for debugging on simulator
+  #ifdef DEBUG
+    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+  #else
+    jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  #endif
 
-  // jsCodeLocation = [NSURL URLWithString:@"http://192.168.1.74:8081/index.ios.bundle?platform=ios&dev=true&minify=false"];  // use this for debugging on device
-
+  
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"Spark"
                                                initialProperties:nil
@@ -60,11 +63,11 @@
 }
 
 // Respond to URI scheme links
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-  if (![RNBranch handleDeepLink:url]) {
-    // do other deep link routing for the Facebook SDK, Pinterest SDK, etc
-  }
-  return YES;
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    if (![RNBranch.branch application:app openURL:url options:options]) {
+        // do other deep link routing for the Facebook SDK, Pinterest SDK, etc
+    }
+    return YES;
 }
 
 // Respond to Universal Links
