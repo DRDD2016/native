@@ -202,6 +202,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-branch')
     implementation project(':react-native-firebase')
     implementation project(':rn-fetch-blob')
     implementation project(':react-native-view-overflow')
@@ -229,7 +230,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:0.5'
     androidTestImplementation 'com.google.code.findbugs:jsr305:3.0.0'
     androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
-    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "io.branch.sdk.android:library:3.0.4"
+    // implementation fileTree(dir: "libs", include: ["*.jar"]) // remove from new branch version 3
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
 

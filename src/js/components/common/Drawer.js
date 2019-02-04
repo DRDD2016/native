@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, Platform, Linking, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Image, Linking, TouchableOpacity } from 'react-native';
 import { Header, DrawerActions } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 // import { menuWidth } from '../../../styles';
@@ -10,8 +10,8 @@ import { DrawerItemText, DrawerLinkText } from '../../../styles/text';
 import { composeLinkToShare } from '../../lib/branchLink';
 import { store } from '../../init-store';
 
-// const NAVBAR_HEIGHT = Header.HEIGHT;
-const logoHeight = Platform.OS === 'ios' ? Header.HEIGHT * 0.8 : Header.HEIGHT * 1.25;
+const DRAWER_HEADER_HEIGHT = Header.HEIGHT;
+
 const logo = require('../../../img/sparkLoginLogo.png');
 
 const inlineStyles = StyleSheet.create({
@@ -40,7 +40,8 @@ export default class Drawer extends Component {
   }
 
   render () {
-    console.log(this.props);
+    console.log('Header.HEIGHT Drawer :', DRAWER_HEADER_HEIGHT);
+    console.log('drawer props', this.props);
     const { handleLogOut, navigation } = this.props;
 
     const aboutURL = 'http://www.spark-app.net';
@@ -56,7 +57,7 @@ export default class Drawer extends Component {
         <TouchableOpacity
           style={{
             flexDirection: 'row',
-            // borderColor: 'red',
+            // borderColor: 'blue',
             // borderWidth: 1,
             justifyContent: 'space-between' }}
           onPress={() => navigation.dispatch(DrawerActions.closeDrawer())}>
@@ -64,19 +65,15 @@ export default class Drawer extends Component {
           <View style={{
             paddingHorizontal: moderateScale(10),
             justifyContent: 'flex-start',
-            flexDirection: 'row'
+            flexDirection: 'row',
             // borderColor: 'red',
-            // borderWidth: 1
+            // borderWidth: 1,
+            flex: 1,
+            height: DRAWER_HEADER_HEIGHT
           }}
           >
             <Image
-              style={{
-                // borderColor: 'blue',
-                // borderWidth: 1,
-                height: '100%',
-                width: logoHeight * 3
-
-              }}
+              style={{ height: '100%', width: '100%', padding: 10 }}
               source={ logo }
               resizeMode="contain"
             />
@@ -85,10 +82,10 @@ export default class Drawer extends Component {
           <View
             style={{
               justifyContent: 'center',
-              alignItems: 'center',
-              paddingHorizontal: iconScale(15),
-              borderColor: 'red',
-              borderWidth: 1
+              alignItems: 'flex-end',
+              paddingHorizontal: iconScale(15)
+              // borderColor: 'red',
+              // borderWidth: 1
             }}
           >
             <BurgerIcon />

@@ -1,8 +1,8 @@
 package net.wannaenterprises.spark;
 
 import com.facebook.react.ReactActivity;
-import android.content.Intent;
 import io.branch.rnbranch.*;
+import android.content.Intent;
 
 public class MainActivity extends ReactActivity {
 
@@ -19,7 +19,7 @@ public class MainActivity extends ReactActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        RNBranchModule.initSession(this.getIntent().getData(), this);
+        RNBranchModule.initSession(getIntent().getData(), this);
     }
 
     @Override

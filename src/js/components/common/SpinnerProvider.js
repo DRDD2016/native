@@ -6,7 +6,7 @@ import SpinnerModal from './SpinnerModal';
 export default class SpinnerProvider extends Component {
 
   componentWillMount () {
-    // console.log('Spinner props mount: ', this.props);
+    console.log('Spinner props mount: ', this.props);
   }
 
   componentWillReceiveProps (nextProps) {
@@ -50,6 +50,7 @@ export default class SpinnerProvider extends Component {
     console.log('isEventConfirmed:', isEventConfirmed);
     console.log('finalChoices:', finalChoices);
     console.log('isLoading:', isLoading);
+    console.log('isFetchingBranch:', isFetchingBranch);
     // console.log('this.props.children:', this.props.children);
 
     return (

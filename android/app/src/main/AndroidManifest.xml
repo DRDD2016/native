@@ -62,7 +62,7 @@
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
-        android:launchMode="singleTop"
+        android:launchMode="singleTask"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
         android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
         <intent-filter>
@@ -71,16 +71,16 @@
             <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
 
         </intent-filter>
-        <intent-filter>
-          <action android:name="fcm.ACTION.HELLO" />
-          <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
+
+        <!-- Branch URI Scheme -->
         <intent-filter>
             <data android:scheme="sparksocial://" />
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
         </intent-filter>
+
+        <!-- Branch App Links (optional) -->
         <intent-filter android:autoVerify="true">
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
@@ -90,31 +90,32 @@
             <data android:scheme="https" android:host="spark.test-app.link" />
             <data android:scheme="https" android:host="spark-alternate.test-app.link" />
         </intent-filter>
+
+        <intent-filter>
+          <action android:name="fcm.ACTION.HELLO" />
+          <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+
+      <!-- Branch init -->
+      <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_pkvEE0oiYjjNH4Wp7ZCCGhmeECeDUqav" />
+      <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_gozDB6oc4opRT89o76zBJnmhACezJxiH" />
+      <meta-data android:name="io.branch.sdk.TestMode" android:value="false" />
 
       <meta-data
             android:name="io.fabric.ApiKey"
             android:value="9393d3a2a675faac3cac9e9dfe415cab4455b1f1" />
-            <!-- Branch init -->
-              <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_pkvEE0oiYjjNH4Wp7ZCCGhmeECeDUqav" />
-              <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_gozDB6oc4opRT89o76zBJnmhACezJxiH" />
-              <meta-data android:name="io.branch.sdk.TestMode" android:value="false" />
-
-      <!-- <meta-data
-            android:name="io.branch.sdk.BranchKey"
-            android:value="key_live_pkvEE0oiYjjNH4Wp7ZCCGhmeECeDUqav" />
-      <meta-data
-            android:name="io.branch.sdk.BranchKey.test"
-            android:value="key_test_gozDB6oc4opRT89o76zBJnmhACezJxiH" /> -->
 
       <meta-data android:name="com.bugsnag.android.API_KEY"
             android:value="899465e8e5166f09f584f57cf5282edd"/>
 
+      <!-- Branch install referrer tracking (optional) -->
       <receiver android:name="io.branch.referral.InstallListener" android:exported="true">
-        <intent-filter>
-          <action android:name="com.android.vending.INSTALL_REFERRER" />
-        </intent-filter>
+          <intent-filter>
+              <action android:name="com.android.vending.INSTALL_REFERRER" />
+          </intent-filter>
       </receiver>
 
     </application>

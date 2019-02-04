@@ -11,7 +11,9 @@ export default class BurgerIcon extends Component {
     return (
       <Icon
         name="bars"
-        style={{ borderColor: 'green', borderWidth: 1 }}
+        style={{
+          // borderColor: 'green', borderWidth: 1
+        }}
         size={ moderateScale(24) }
         color={ colours.main }
       />

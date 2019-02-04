@@ -14,13 +14,14 @@ const styles = {
 
 export default function Spinner ({ size }) {
   console.log('size', size);
-  const newSize = 'large';
+  const newSize = size || 'large';
+  console.log('newSize', newSize);
   // const scaledSize = moderateScale(newSize);
   const color = colours.main;
 
   return (
     <View style={styles.spinnerStyle}>
-      <ActivityIndicator animating style={{ opacity: 1 }} size={newSize || 'large'} color={color} />
+      <ActivityIndicator animating style={{ opacity: 1 }} size={newSize} color={color} />
     </View>
   );
 }

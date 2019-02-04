@@ -116,7 +116,7 @@ class App extends Component {
       //
       // console.log('this.state: ', this.state);
       //
-      // console.info('Subscribing to Branch links');
+      console.log('Subscribing to Branch links');
 
       _unsubscribeFromBranch = branch.subscribe(({ error, params }) => {
 
@@ -125,7 +125,7 @@ class App extends Component {
 
         let linkData = 'none';
 
-        console.info('Branch initialised');
+        console.log('Branch initialised');
 
         console.log('Branch params: ', JSON.stringify(params));
 
