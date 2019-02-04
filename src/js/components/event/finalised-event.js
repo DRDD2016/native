@@ -3,13 +3,14 @@ import React from 'react';
 import { View, Image, Text, ScrollView, TouchableHighlight, Platform, StatusBar } from 'react-native';
 import { Header } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import DeleteIcon from '../common/delete-icon';
 import FinalisedWhat from '../create/confirm-what';
 import FinalisedWhere from '../create/confirm-where';
 import FinalisedWhen from '../create/confirm-when';
 import EditIcon from '../common/edit-icon';
 import MessageBubble from '../common/messageBubble';
 import InviteeCard from './invitee-card';
-import { styles, Msg1, ButText, ConfirmButton, ConfirmButtonText, RSVPButton, RSVPButtonText } from '../../../styles';
+import { styles, Msg1, ButText, ConfirmButton, ConfirmButtonText, RSVPButton, RSVPButtonText, ForgotPasswordText } from '../../../styles';
 import colours from '../../../styles/colours';
 
 const NAVBAR_HEIGHT = Header.HEIGHT;
@@ -56,7 +57,7 @@ const inlineStyle = {
   }
 };
 
-const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID, handleEdit, handleInviteMoreFriends }) => {
+const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID, handleEdit, handleInviteMoreFriends, handleDeleteEvent }) => {
   console.log('wooo event:', event);
   console.log('wooo rsvpToEvent:', rsvpToEvent);
   console.log('wooo rsvps:', rsvps);
@@ -343,6 +344,19 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID,
             })
           }
         </View>
+
+        <TouchableHighlight
+          style={{ paddingVertical: 20, paddingHorizontal: 20, flexDirection: 'row', alignSelf: 'center' }}
+          onPress={ () => handleDeleteEvent(event, event.event_id) }
+        >
+          <View style={{ flexDirection: 'row' }}>
+
+            <DeleteIcon color={colours.main} />
+            <ForgotPasswordText>
+            Delete this event
+            </ForgotPasswordText>
+          </View>
+        </TouchableHighlight>
 
 
       </View>

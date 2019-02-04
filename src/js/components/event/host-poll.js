@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, TouchableHighlight } from 'react-native';
 import { Header } from 'react-navigation';
 import CategoryDetails from './category-details';
 import ButtonSmall from '../common/ButtonSmall';
+import DeleteIcon from '../common/delete-icon';
 import ButtonWide from '../common/ButtonWide';
 // import DeleteIcon from '../common/delete-icon';
 import { styles, Msg1, Msg4, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
-import { MessageText } from '../../../styles/text';
+import { MessageText, ForgotPasswordText } from '../../../styles/text';
 import { feedHorizPaddingScale, feedVertPaddingScale } from '../../../styles/scaling';
 import Spinner from '../common/Spinner';
 
@@ -63,7 +64,7 @@ export default class HostPoll extends Component {
       voteCount,
       handleInviteMoreFriends,
       handleConfirmEvent,
-      // handleDeleteEvent,
+      handleDeleteEvent,
       finalChoices,
       isFetching } = this.props;
     console.log('voteCount: ', voteCount);
@@ -200,6 +201,20 @@ export default class HostPoll extends Component {
               }
 
             </View>
+
+            <MessageText style={{ textAlign: 'center' }}>or</MessageText>
+            <TouchableHighlight
+              style={{ paddingVertical: 20, paddingHorizontal: 20, flexDirection: 'row', alignSelf: 'center' }}
+              onPress={ () => handleDeleteEvent(event, event.event_id) }
+            >
+              <View style={{ flexDirection: 'row' }}>
+
+                <DeleteIcon color={colours.main} />
+                <ForgotPasswordText>
+                Delete this event
+                </ForgotPasswordText>
+              </View>
+            </TouchableHighlight>
 
 
           </View>

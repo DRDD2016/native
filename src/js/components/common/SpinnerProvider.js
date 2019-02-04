@@ -55,11 +55,11 @@ export default class SpinnerProvider extends Component {
 
     return (
       <View style={{ flex: 1, borderColor: 'pink', borderWidth: 0 }}>
-        {React.Children.only(this.props.children)}
+
         {
           (isConfirmingEvent) &&
 
-            <View style={{ flex: 1, borderColor: 'purple', borderWidth: 2 }}>
+            <View style={{ borderColor: 'purple', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isConfirmingEvent}
                 type="confirming_event"
@@ -73,7 +73,7 @@ export default class SpinnerProvider extends Component {
         {
           (isEventConfirmed) &&
 
-            <View style={{ flex: 1, borderColor: 'blue', borderWidth: 2 }}>
+            <View style={{ borderColor: 'blue', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isEventConfirmed}
                 type="event_confirmed"
@@ -88,7 +88,7 @@ export default class SpinnerProvider extends Component {
         {
           (isFinishedUpdatingRsvp) &&
 
-            <View style={{ flex: 1, borderColor: 'lightblue', borderWidth: 2 }}>
+            <View style={{ borderColor: 'lightblue', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isFinishedUpdatingRsvp}
                 type="rsvp_finished"
@@ -103,7 +103,7 @@ export default class SpinnerProvider extends Component {
         {
           (saveEventStatus === 'Started') &&
 
-            <View style={{ flex: 1, borderColor: 'orange', borderWidth: 2 }}>
+            <View style={{ borderColor: 'orange', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isLoading}
                 type="share_invite"
@@ -117,7 +117,7 @@ export default class SpinnerProvider extends Component {
         {
           (isLoading) &&
 
-            <View style={{ flex: 1, borderColor: 'blue', borderWidth: 2 }}>
+            <View style={{ borderColor: 'blue', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isLoading}
                 type="loading"
@@ -131,7 +131,7 @@ export default class SpinnerProvider extends Component {
         {
           (eventCodeError) &&
 
-            <View style={{ flex: 1, borderColor: 'yellow', borderWidth: 2 }}>
+            <View style={{ borderColor: 'yellow', borderWidth: 2 }}>
 
               <SpinnerModal
                 visible={errorModalVisible}
@@ -144,6 +144,7 @@ export default class SpinnerProvider extends Component {
 
             </View>
         }
+        {React.Children.only(this.props.children)}
 
       </View>
     );
