@@ -18,7 +18,7 @@
     "create-android-release-bundle": "rm -rf sourcemaps; mkdir sourcemaps; react-native bundle --platform android --dev false --entry-file index.js --bundle-output sourcemaps/android-release.bundle --sourcemap-output sourcemaps/android-release.bundle.map --assets-dest build",
     "bugsnag-android-sourcemaps-to-bugsnag": "npm run create-android-release-bundle; ./bugsnag-android.sh",
     "version-bump": "npm --no-git-tag-version version patch",
-    "ios:beta": "ios/bundle exec fastlane beta",
+    "ios:beta": "cd ios && bundle exec fastlane beta",
     "android:alpha": "cd android && bundle exec fastlane alpha",
     "android-release": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ && react-native run-android",
     "native-log-android": "adb logcat *:S ReactNative:V ReactNativeJS:V",
