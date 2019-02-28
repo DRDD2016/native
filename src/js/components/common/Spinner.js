@@ -13,9 +13,9 @@ const styles = {
 };
 
 export default function Spinner ({ size }) {
-  console.log('size', size);
+  // console.log('size', size);
   const newSize = size || 'large';
-  console.log('newSize', newSize);
+  // console.log('newSize', newSize);
   // const scaledSize = moderateScale(newSize);
   const color = colours.main;
 

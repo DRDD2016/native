@@ -5,12 +5,12 @@ import SpinnerProvider from '../../components/common/SpinnerProvider';
 
 const mapStateToProps = ({ feed, user, network, create, event }) => {
 
-  console.log('Spinner mapState state:');
-  console.log('feed:', feed);
-  console.log('user:', user);
-  console.log('network:', network);
-  console.log('create:', create);
-  console.log('event:', event);
+  // console.log('Spinner mapState state:');
+  // console.log('feed:', feed);
+  // console.log('user:', user);
+  // console.log('network:', network);
+  // console.log('dispatch create:', create);
+  // console.log('event:', event);
 
   return {
     user_id: user.user_id,
@@ -21,7 +21,7 @@ const mapStateToProps = ({ feed, user, network, create, event }) => {
     isTouchedFetching: feed.isTouchedFetching,
     isFetchingEvent: feed.isFetchingEvent,
     isFetchingBranch: network.isFetchingBranch,
-    networkIsFetching: network.isFetching,
+    // networkIsFetching: network.isFetching, // remove as not used and may cause unnecessary updates
     push_info: user.push_info,
     eventCode: network.inComingLinkCode,
     eventCodeError: network.inComingLinkError,

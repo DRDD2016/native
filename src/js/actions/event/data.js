@@ -150,10 +150,10 @@ export function getUserById (token, user_id) {
       }
     })
     .then((res) => {
-      console.log('getUser res:', res);
+      // console.log('getUser res:', res);
       res.json()
       .then((data) => {
-        console.log('getUser response data:', data);
+        // console.log('getUser response data:', data);
         const eventData = {
           firstname: data.firstname,
           surname: data.surname,

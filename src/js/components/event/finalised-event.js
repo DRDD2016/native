@@ -10,8 +10,10 @@ import FinalisedWhen from '../create/confirm-when';
 import EditIcon from '../common/edit-icon';
 import MessageBubble from '../common/messageBubble';
 import InviteeCard from './invitee-card';
-import { styles, Msg1, ButText, ConfirmButton, ConfirmButtonText, RSVPButton, RSVPButtonText, ForgotPasswordText } from '../../../styles';
+import { styles, Msg1, ButText, ConfirmButton, ConfirmButtonText, RSVPButton, RSVPButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
+import { ForgotPasswordText } from '../../../styles/text';
+
 
 const NAVBAR_HEIGHT = Header.HEIGHT;
 const STATUS_BAR_HEIGHT = Platform.select({ ios: 5, android: StatusBar.currentHeight });

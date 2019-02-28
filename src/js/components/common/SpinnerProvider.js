@@ -6,13 +6,13 @@ import SpinnerModal from './SpinnerModal';
 export default class SpinnerProvider extends Component {
 
   componentWillMount () {
-    console.log('Spinner props mount: ', this.props);
+    // console.log('Spinner props mount: ', this.props);
   }
 
-  componentWillReceiveProps (nextProps) {
-    console.log('Spinner props this props: ', this.props);
-    console.log('Spinner props nextProps: ', nextProps);
-  }
+  // componentWillReceiveProps (nextProps) {
+  //   // console.log('Spinner props this props: ', this.props);
+  //   // console.log('Spinner props nextProps: ', nextProps);
+  // }
 
   render () {
     console.log('Spinner render: ', this.props);

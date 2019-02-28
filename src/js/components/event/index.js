@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Platform, TouchableHighlight, Modal } from 'react-native';
+import { View, Text, Platform, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 // import { Header } from 'react-navigation';
@@ -11,8 +11,7 @@ import colours from '../../../styles/colours';
 // import Header from '../common/Header';
 import BackButton from '../common/BackButton';
 import ButtonHeader from '../common/ButtonHeader';
-import DeleteIcon from '../common/delete-icon';
-import { GeneralText, MessageText, ForgotPasswordText, ConfirmButtonText } from '../../../styles/text';
+import { GeneralText, MessageText, ConfirmButtonText } from '../../../styles/text';
 import { iconScale } from '../../../styles/scaling';
 import BannerBar from '../common/BannerBar';
 // import HeaderBack from '../common/CreateHeaderBackground';
@@ -93,15 +92,15 @@ export default class Event extends Component {
   }
 
   componentDidMount () {
+    console.log('Event Index DidMount: ', this.props);
     this.props.navigation.setParams({
-      handleDelete: this.handleDelete.bind(this)
+      handleDelete: this.handleDelete.bind(this) // not sure if still need this?
     });
   }
 
   componentWillReceiveProps (nextProps) {
 
-    console.log('Event Thisprops: ', this.props);
-    console.log('Event Nextprops: ', nextProps);
+    console.log('Event Index Nextprops: ', nextProps);
 
 
     // created on: XX/XX/XXXX
@@ -126,7 +125,7 @@ export default class Event extends Component {
 
   componentWillUpdate (nextProps) {
 
-    console.log('Event index will update thisProps: ', this.props);
+    console.log('Event index willUpdate thisProps: ', this.props);
 
     if (nextProps.event.name !== this.props.event.name) {
       this.props.navigation.setParams({
@@ -136,8 +135,7 @@ export default class Event extends Component {
 
     }
 
-    console.log('Event index will update nextProps: ', nextProps);
-    console.log('ThisPropsNavigation: ', this.props.navigation);
+    console.log('Event index willUpdate nextProps: ', nextProps);
 
   }
 
@@ -278,19 +276,7 @@ export default class Event extends Component {
               this.props.event && this.eventRouter()
             }
           </View>
-          <MessageText style={{ textAlign: 'center' }}>or</MessageText>
-          <TouchableHighlight
-            style={{ paddingVertical: 20, paddingHorizontal: 20, flexDirection: 'row', alignSelf: 'center' }}
-            onPress={ () => this.handleDelete(this.props.event, this.props.event.event_id) }
-          >
-            <View style={{ flexDirection: 'row' }}>
 
-              <DeleteIcon color={colours.main} />
-              <ForgotPasswordText>
-              Delete this event
-              </ForgotPasswordText>
-            </View>
-          </TouchableHighlight>
 
         </View>
       </View>

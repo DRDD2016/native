@@ -34,7 +34,7 @@ const mapStateToProps = ({ nav, feed, user, network, create }) => {
     isTouchedFetching: feed.isTouchedFetching,
     isFetchingEvent: feed.isFetchingEvent,
     isFetchingBranch: network.isFetchingBranch,
-    networkIsFetching: network.isFetching,
+    // networkIsFetching: network.isFetching, // remove as not used and may cause unnecessary updates
     push_info: user.push_info,
     eventCode: network.inComingLinkCode,
     eventCodeError: network.inComingLinkError,

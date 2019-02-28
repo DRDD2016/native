@@ -19,8 +19,8 @@ import { shareLink, composeLinkToShare } from '../lib/branchLink';
 
 
 const mapStateToProps = ({ event, user, network, create }) => {
+  console.log('event Dispatch to props in state update');
 
-  
   return {
     isPoll: event.data.is_poll,
     event: event.data,

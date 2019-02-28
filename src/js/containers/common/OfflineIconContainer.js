@@ -3,7 +3,7 @@ import OfflineIcon from '../../components/common/offline-icon';
 
 
 const mapStateToProps = ({ network }) => {
-  console.log('network', network);
+  // console.log('network', network);
 
   return {
     isConnected: network.isConnected

@@ -19,8 +19,9 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
 
   console.log('SpinnerModal visible:', visible);
   console.log('SpinnerModal type:', type);
-  console.log('SpinnerModal isConnected:', isConnected);
-  console.log('SpinnerModal additionalInfo:', additionalInfo);
+  console.log('type === event_confirmed', type === 'event_confirmed');
+  // console.log('SpinnerModal isConnected:', isConnected);
+  // console.log('SpinnerModal additionalInfo:', additionalInfo);
   console.log('eventCodeError', eventCodeError);
   Answers.logCustom('Spinner activated', { additionalData: additionalInfo });
 
@@ -72,7 +73,7 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
                   testDescription="EVENT CONFIRMED OK"
                   style={{ backgroundColor: colours.green }}
                   onPress={ () => {
-                    console.log('OK clicked');
+
                     store.dispatch(eventConfirmedSuccess());
 
                     goBack();

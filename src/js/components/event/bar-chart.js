@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Dimensions } from 'react-native';
-import { feedHorizPaddingScale, moderateScale } from '../../../styles/scaling';
+import { barScale, feedHorizPaddingScale, moderateScale } from '../../../styles/scaling';
 import GrowingView from './grow-view';
 
 export default class BarChart extends Component {
@@ -21,6 +21,22 @@ export default class BarChart extends Component {
    * Calculate width of each bar
   */
 
+  componentDidMount () {
+    console.log('bar Chart Did Mount');
+  }
+
+
+  shouldComponentUpdate (nextProps) {
+
+    console.log('should?', this.props.tally === nextProps.tally);
+    if (this.props.tally === nextProps.tally) {
+
+      return false;
+    }
+      return true;
+
+
+  }
 
   getWidth (data, maxTally) {
     const deviceWidth = Dimensions.get('window').width;
@@ -52,14 +68,14 @@ export default class BarChart extends Component {
 
   render () {
     const { barWidth } = this.state;
-    const { chartColor } = this.props;
+    const { chartColor, tally, previousTally } = this.props;
 
-    console.log('barWidth', barWidth);
+    // console.log('barWidth', barWidth);
 
     return (
       <View
         style={{
-          flexDirection: 'column' }}
+          flexDirection: 'column', height: barScale(16) }}
       >
         <View
           style={{ flex: 1 }}
@@ -68,10 +84,12 @@ export default class BarChart extends Component {
             style={{
               flex: 1,
               flexDirection: 'row',
-              alignItems: 'center' }}
+              alignItems: 'center',
+              height: '100%'
+            }}
           >
             {barWidth &&
-              <GrowingView barColor={chartColor} barWidth={barWidth} />
+              <GrowingView barColor={chartColor} barWidth={barWidth} tally={tally} previousTally={previousTally} />
             }
           </View>
         </View>

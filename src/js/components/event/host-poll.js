@@ -31,9 +31,7 @@ export default class HostPoll extends Component {
 
   constructor (props) {
     super(props);
-    console.log('this.props.event: ', this.props.event);
     const { what, where, when } = this.props.event;
-    console.log('what: ', what);
     this.state = {
       what: what.length === 1 ? what : [],
       where: where.length === 1 ? where : [],
@@ -41,6 +39,39 @@ export default class HostPoll extends Component {
     };
     this.toggleSelection = this.toggleSelection.bind(this);
   }
+
+  componentDidMount () {
+    console.log('HostPoll DidMount: ', this.props);
+  }
+
+  componentWillReceiveProps (nextProps) {
+
+    console.log('HostPoll nextProps: ', nextProps);
+
+  }
+
+  componentWillUpdate (nextProps, nextState) {
+    console.log('HostPoll willUpdate: ', nextProps);
+
+// v test code
+    if (nextState !== this.state) {
+      console.log('HostPoll thisState:', this.state);
+      console.log('HostPoll nextState:', nextState);
+    }
+    if (nextProps !== this.props) {
+      console.log('HostPoll thisProps:', this.props);
+      console.log('HostPoll nextProps:', nextProps);
+    }
+    if ((nextProps === this.props) && (nextState === this.state)) {
+      console.log('HostPoll componentUpdatingAnyway');
+    }
+
+// ^ test code
+    if (nextProps.finalChoices) {
+      this.props.confirmedEvent();
+    }
+  }
+
 
   toggleSelection (category, selection) {
 
@@ -57,7 +88,6 @@ export default class HostPoll extends Component {
     }
   }
 
-
   render () {
 
     const { event,
@@ -65,23 +95,18 @@ export default class HostPoll extends Component {
       handleInviteMoreFriends,
       handleConfirmEvent,
       handleDeleteEvent,
-      finalChoices,
       isFetching } = this.props;
-    console.log('voteCount: ', voteCount);
+
     const allCategoriesSelected = Object.keys(this.state)
       .map(category => this.state[category].length)
       .every(length => length === 1);
 
-    console.log('finalChoices: ', finalChoices);
-    console.log('this.state: ', this.state);
-
-
     // if (!finalChoices && isConfirming) {
     //
     // }
-    if (finalChoices) {
-      this.props.confirmedEvent();
-    }
+
+    // rethink what should happen to state and dialog
+
 
     return (
       <ScrollView>

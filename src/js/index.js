@@ -194,6 +194,7 @@ class App extends Component {
           store.dispatch(saveIncomingLink(linkData));
           Answers.logCustom(`Index.js CompDidMount branch eventCode: ${params}`, { additionalData: 'nothing' });
 
+
           // store.dispatch(linkDatafromBranch()); // dont do this until loading finished on Feed
           // return linkData;
 
