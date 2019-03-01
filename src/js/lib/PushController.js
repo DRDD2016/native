@@ -18,12 +18,14 @@ export default class PushController extends Component {
       .then((enabled) => {
         if (enabled) {
           // user has permissions
+          console.log('PushController - user has permissions');
         } else {
           // user doesn't have permission
           console.log('requesting permissions');
           firebase.messaging().requestPermission()
             .then(() => {
               // User has authorised
+              console.log('PushController - User has authorised:');
             })
             .catch((error) => {
               // User has rejected permissions
@@ -33,6 +35,9 @@ export default class PushController extends Component {
       });
 
 
+    console.log('does it get here?');
+
+
     // console.log('requesting permissions');
     // FCM.requestPermissions();
 
@@ -40,6 +45,7 @@ export default class PushController extends Component {
       .then((fcmToken) => {
         if (fcmToken) {
           // user has a device token
+          console.log('got fcmToken:', fcmToken);
           AsyncStorage.getItem('spark_token')
           .then((token) => {
             console.log('got Spark token:', token);
@@ -143,6 +149,7 @@ export default class PushController extends Component {
   }
 
   render () {
+    console.log('renderPushController');
     return (
       <View style={{ flex: 1 }}>
         {React.Children.only(this.props.children)}

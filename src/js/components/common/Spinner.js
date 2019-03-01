@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, ActivityIndicator } from 'react-native';
 // import { moderateScale } from '../../../styles/scaling';
+import colours from '../../../styles/colours';
 
 const styles = {
   spinnerStyle: {
@@ -12,13 +13,15 @@ const styles = {
 };
 
 export default function Spinner ({ size }) {
-  console.log('size', size);
-  const newSize = 'large';
+  // console.log('size', size);
+  const newSize = size || 'large';
+  // console.log('newSize', newSize);
   // const scaledSize = moderateScale(newSize);
+  const color = colours.main;
 
   return (
     <View style={styles.spinnerStyle}>
-      <ActivityIndicator animating style={{ opacity: 1 }} size={newSize || 'large'} />
+      <ActivityIndicator animating style={{ opacity: 1 }} size={newSize} color={color} />
     </View>
   );
 }

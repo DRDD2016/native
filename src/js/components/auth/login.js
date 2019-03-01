@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, TouchableOpacity, KeyboardAvoidingView, Modal } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import hoistNonReactStatic from 'hoist-non-react-statics';
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 import Fabric from 'react-native-fabric';
 import { persistor } from '../../init-store';
 import { FormTextInput, FormPasswordInput } from './form-components';
@@ -15,7 +15,7 @@ import { loginValidator as validate } from './form-validation';
 import colours from '../../../styles/colours';
 import { ConfirmButton, HeaderText, ModalView, ModalWrapper } from '../../../styles';
 import { GeneralText, MessageText, ConfirmButtonText, ForgotPasswordText, ModalGeneralText, ModalMessageText } from '../../../styles/text';
-import { feedVertPaddingScale, moderateScale, iconScale } from '../../../styles/scaling';
+import { feedVertPaddingScale, moderateScale } from '../../../styles/scaling';
 // import { connectAlert } from '../Alert';
 
 const { Answers } = Fabric;
@@ -57,7 +57,8 @@ class Login extends Component {
   }
 
   componentWillUpdate (nextProps) {
-    console.log('nextProps', nextProps);
+    console.log('login WillUpdate');
+    // console.log('nextProps', nextProps);
     const { isLoggingIn, serverError } = nextProps;
 
     if (!isLoggingIn && !serverError && this.state.isModalVisible) {
@@ -88,7 +89,7 @@ class Login extends Component {
             backgroundColor: colours.white }}
         >
           <KeyboardAvoidingView
-            style={{ flex: 1, borderColor: 'red', borderWidth: 1 }}
+            style={{ flex: 1, borderColor: 'red', borderWidth: 0 }}
             behavior="padding"
           >
 
@@ -180,22 +181,15 @@ class Login extends Component {
             </Modal>
 
 
-            <View style={{ flexDirection: 'column', paddingHorizontal: 10, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ flexDirection: 'column', paddingHorizontal: 10, flex: 1, alignItems: 'center', justifyContent: 'center' }}
+            >
               <View style={{
                 flexDirection: 'row',
                 marginVertical: 20,
                 // height: 70,
                 backgroundColor: 'transparent'
               }}>
-                <View style={{
-                  width: iconScale(40),
-                  height: iconScale(45),
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: colours.blue
-                }}>
-                  <Icon name="envelope-o" size={iconScale(15)} color="rgba(255, 255, 255, 0.76)" />
-                </View>
+
                 <View style={{
                   paddingBottom: feedVertPaddingScale(4), paddingHorizontal: moderateScale(10), flexDirection: 'column' }}>
                   <Field
@@ -205,10 +199,12 @@ class Login extends Component {
                     isEmail
                     isLoginView
                     placeholder="joe.bloggs@example.com"
+                    iconName="envelope-o"
                     focussedColor={ colours.main }
                     unfocussedColor={ colours.lightgray }
                   />
                 </View>
+
 
               </View>
               <View style={{
@@ -217,22 +213,15 @@ class Login extends Component {
                 // height: 70,
                 backgroundColor: 'transparent'
               }}>
-                <View style={{
-                  width: iconScale(40),
-                  height: iconScale(45),
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: colours.blue
-                }}>
-                  <Icon name="lock" size={iconScale(20)} color="rgba(255, 255, 255, 0.76)" />
-                </View>
-                <View style={{ paddingBottom: feedVertPaddingScale(4), paddingHorizontal: moderateScale(10) }}>
+
+                <View style={{ paddingBottom: feedVertPaddingScale(4), paddingHorizontal: moderateScale(10), flexDirection: 'column' }}>
                   <Field
                     name="password"
                     labelText="Password"
                     component={ FormPasswordInput }
                     isLoginView
                     placeholder="password"
+                    iconName="lock"
                     focussedColor={ colours.main }
                     unfocussedColor={ colours.lightgray }
                   />
@@ -240,7 +229,7 @@ class Login extends Component {
                 </View>
               </View>
 
-              <View style={{ alignItems: 'center', marginTop: moderateScale(10) }}>
+              <View style={{ alignItems: 'center', marginTop: moderateScale(10), flexDirection: 'column' }}>
                 <ConfirmButton
                   accessibilityLabel="LOG IN Submit"
                   activeOpacity={ 0.5 }

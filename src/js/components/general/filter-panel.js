@@ -7,8 +7,8 @@ import colours from '../../../styles/colours';
 import { moderateScale } from '../../../styles/scaling';
 import { TabBarText } from '../../../styles/text';
 
-console.log('STATUSBAR_HEIGHT', StatusBar.currentHeight);
-console.log('NAVBAR_HEIGHT', Header.HEIGHT);
+// console.log('STATUSBAR_HEIGHT', StatusBar.currentHeight);
+// console.log('NAVBAR_HEIGHT', Header.HEIGHT);
 
 const NAVBAR_HEIGHT = Header.HEIGHT;
 const STATUS_BAR_HEIGHT = Platform.select({ ios: 5, android: StatusBar.currentHeight });

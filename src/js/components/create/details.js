@@ -35,7 +35,8 @@ export default class Details extends Component {
 
   componentWillMount () {
     store.dispatch(clearCreateEvent());
-    console.log('this.props: ', this.props);
+    console.log('create Details willMount: ');
+    // console.log('create Details willMount props: ', this.props);
 
   }
 
@@ -48,7 +49,8 @@ export default class Details extends Component {
   }
 
   render () {
-    console.log('render this.props: ', this.props);
+    console.log('create Details render: ');
+    // console.log('create Details render this.props: ', this.props);
     const { name, description, handleChange } = this.props;
     const hideNext = name === '' || description === '';
     return (

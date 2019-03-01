@@ -100,10 +100,10 @@ class Feed extends Component {
     onAppLoad(user_openNo);
 
     haveFeedRequest();
-
-    console.log('FeedWillMountprops: ', this.props);
-    const timestamp = new Date();
-    console.log('Feed WillMount:', timestamp.getTime());
+    console.log('FeedWillMount: ');
+    // console.log('FeedWillMountprops: ', this.props);
+    // const timestamp = new Date();
+    // console.log('Feed WillMount:', timestamp.getTime());
 
 
     // console.log('eventCode FeedMount:', eventCode);
@@ -170,19 +170,15 @@ class Feed extends Component {
   componentWillReceiveProps (nextProps) {
 
     const { handleSubmitCode } = this.props;
-    const { eventCode, saveEventStatus } = nextProps;
+    const { eventCode } = nextProps;
 
-
-    console.log('feed WillReceiveProps:', nextProps);
+    console.log('feed WillReceiveProps:');
+    // console.log('feed WillReceiveProps:', nextProps);
 
     this.setState({
        isReady: false
     });
 
-
-    console.log('saveEventStatus thisprops: ', this.props.saveEventStatus);
-
-    console.log('saveEventStatus Nextprops: ', saveEventStatus);
 
     console.log('eventCode FeedNextProps:', eventCode);
 
@@ -210,14 +206,14 @@ class Feed extends Component {
 
       // expensive code starting after interactions finished
 
-      console.log('Feed Receives NextProps');
-      console.log('thisProps', this.props);
-      console.log('NextProps', nextProps);
+      console.log('Feed Receives NextProps after interactions');
+      // console.log('thisProps', this.props);
+      // console.log('NextProps', nextProps);
 
 
       const { feed } = nextProps;
       const newData = [].concat(feed).reverse();
-      console.log('newData', newData);
+      // console.log('newData', newData);
 
       const uniqueFeedData = _.uniqBy(newData, 'feed_item.feed_tag');
         // const itemTag = `Tag_${item.event_id}_${item.subject_user_id}`;
@@ -239,10 +235,24 @@ class Feed extends Component {
 
   }
 
+  componentWillUpdate (nextProps, nextState) {
+    console.log('feed willUpdate: ');
+    if (this.props !== nextProps) {
+        console.log('feed props changed: ');
+    }
+    // console.log('feed thisProps: ', this.props);
+    // console.log('feed nextProps: ', nextProps);
+    if (this.state !== nextState) {
+        console.log('feed state changed: ');
+    }
+    // console.log('feed thisState: ', this.state);
+    // console.log('feed nextState: ', nextState);
+  }
+
   componentDidUpdate () {
     const { isFetchingFeed, allEvents, haveFeedSuccess, haveFeedFailure } = this.props;
     console.log('feed didUpdate isFetchingFeed: ', isFetchingFeed);
-    console.log('allEvents: ', allEvents);
+    // console.log('allEvents: ', allEvents);
     if (isFetchingFeed) {
       if (allEvents.length > 0) {
         console.log('fetchFeedSuccess');
@@ -341,9 +351,10 @@ class Feed extends Component {
 
     console.log('renderFeedContent');
 
-    const timestamp = new Date();
-    console.log('Feed render:', timestamp.getTime());
-    console.log('Feed render props:', this.props);
+    // const timestamp = new Date();
+    // console.log('Feed render:', timestamp.getTime());
+
+    // console.log('Feed render props:', this.props);
 
     const { width } = Dimensions.get('window'); // inline style to force render on screen rotation
     const scaledWidth = width > 700 ? (width * 1) : (width * 1);

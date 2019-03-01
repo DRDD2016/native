@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, TouchableHighlight } from 'react-native';
 import { Header } from 'react-navigation';
 import CategoryDetails from './category-details';
 import ButtonSmall from '../common/ButtonSmall';
+import DeleteIcon from '../common/delete-icon';
 import ButtonWide from '../common/ButtonWide';
 // import DeleteIcon from '../common/delete-icon';
 import { styles, Msg1, Msg4, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import colours from '../../../styles/colours';
-import { MessageText } from '../../../styles/text';
+import { MessageText, ForgotPasswordText } from '../../../styles/text';
 import { feedHorizPaddingScale, feedVertPaddingScale } from '../../../styles/scaling';
 import Spinner from '../common/Spinner';
 
 const headerHeight = Header.HEIGHT;
-console.log('Header height: ', Header.HEIGHT);
+// console.log('Header height: ', Header.HEIGHT);
 
 const inlineStyle = {
   row: {
@@ -30,9 +31,7 @@ export default class HostPoll extends Component {
 
   constructor (props) {
     super(props);
-    console.log('this.props.event: ', this.props.event);
     const { what, where, when } = this.props.event;
-    console.log('what: ', what);
     this.state = {
       what: what.length === 1 ? what : [],
       where: where.length === 1 ? where : [],
@@ -40,6 +39,39 @@ export default class HostPoll extends Component {
     };
     this.toggleSelection = this.toggleSelection.bind(this);
   }
+
+  componentDidMount () {
+    console.log('HostPoll DidMount: ', this.props);
+  }
+
+  componentWillReceiveProps (nextProps) {
+
+    console.log('HostPoll nextProps: ', nextProps);
+
+  }
+
+  componentWillUpdate (nextProps, nextState) {
+    console.log('HostPoll willUpdate: ', nextProps);
+
+// v test code
+    if (nextState !== this.state) {
+      console.log('HostPoll thisState:', this.state);
+      console.log('HostPoll nextState:', nextState);
+    }
+    if (nextProps !== this.props) {
+      console.log('HostPoll thisProps:', this.props);
+      console.log('HostPoll nextProps:', nextProps);
+    }
+    if ((nextProps === this.props) && (nextState === this.state)) {
+      console.log('HostPoll componentUpdatingAnyway');
+    }
+
+// ^ test code
+    if (nextProps.finalChoices) {
+      this.props.confirmedEvent();
+    }
+  }
+
 
   toggleSelection (category, selection) {
 
@@ -56,31 +88,25 @@ export default class HostPoll extends Component {
     }
   }
 
-
   render () {
 
     const { event,
       voteCount,
       handleInviteMoreFriends,
       handleConfirmEvent,
-      // handleDeleteEvent,
-      finalChoices,
+      handleDeleteEvent,
       isFetching } = this.props;
-    console.log('voteCount: ', voteCount);
+
     const allCategoriesSelected = Object.keys(this.state)
       .map(category => this.state[category].length)
       .every(length => length === 1);
 
-    console.log('finalChoices: ', finalChoices);
-    console.log('this.state: ', this.state);
-
-
     // if (!finalChoices && isConfirming) {
     //
     // }
-    if (finalChoices) {
-      this.props.confirmedEvent();
-    }
+
+    // rethink what should happen to state and dialog
+
 
     return (
       <ScrollView>
@@ -200,6 +226,20 @@ export default class HostPoll extends Component {
               }
 
             </View>
+
+            <MessageText style={{ textAlign: 'center' }}>or</MessageText>
+            <TouchableHighlight
+              style={{ paddingVertical: 20, paddingHorizontal: 20, flexDirection: 'row', alignSelf: 'center' }}
+              onPress={ () => handleDeleteEvent(event, event.event_id) }
+            >
+              <View style={{ flexDirection: 'row' }}>
+
+                <DeleteIcon color={colours.main} />
+                <ForgotPasswordText>
+                Delete this event
+                </ForgotPasswordText>
+              </View>
+            </TouchableHighlight>
 
 
           </View>

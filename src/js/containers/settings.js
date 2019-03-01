@@ -5,18 +5,17 @@ import { persistor, store } from '../init-store';
 import Settings from '../components/settings';
 import { changeName, editName, uploadPhoto, logout } from '../actions/profile';
 
-const mapStateToProps = ({ nav, user, network }) => ({
-  nav,
+const mapStateToProps = ({ user }) => ({
   photo_url: user.photo_url,
-  user_id: user.user_id,
-  email: user.email,
+  // user_id: user.user_id,
+  // email: user.email,
   firstname: user.firstname,
   surname: user.surname,
-  isFetching: user.isFetching,
-  errorUpdate: user.errorUpdate,
-  isFetchingUpload: user.isFetchingUpload,
-  errorUpload: user.errorUpload,
-  isConnected: network.isConnected
+  profileUserIsFetching: user.isFetching
+  // errorUpdate: user.errorUpdate,
+  // isFetchingUpload: user.isFetchingUpload,
+  // errorUpload: user.errorUpload,
+  // isConnected: network.isConnected
 });
 
 const mapDispatchToProps = dispatch => ({

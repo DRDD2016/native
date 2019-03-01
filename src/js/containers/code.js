@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import Code from '../components/code';
 import { submitCode } from '../actions/event/data';
 
-const mapStateToProps = ({ event, network }) => {
+const mapStateToProps = ({ event }) => {
   return {
     codeError: event.data.error,
-    isFetching: event.data.isFetching,
-    isConnected: network.isConnected,
-    eventCode: network.inComingLinkCode
+    isFetching: event.data.isFetching
+    // isConnected: network.isConnected,
+    // eventCode: network.inComingLinkCode
   };
 };
 

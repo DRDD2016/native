@@ -52,7 +52,8 @@ class Albums extends Component {
   }
 
   componentWillMount () {
-    console.log('albums compWillMount', this.props);
+    console.log('albums compWillMount');
+    // console.log('albums compWillMount props', this.props);
     const sortedData = this.props.filteredEvents.sort((a, b) => {
       return a.when[0] > b.when[0];
     });
@@ -99,7 +100,8 @@ class Albums extends Component {
 
       // expensive code starting
 
-      console.log('albums compWillReceiveNextprops', nextProps);
+
+      // console.log('albums compWillReceiveNextprops', nextProps);
       const sortedData = nextProps.filteredEvents.sort((a, b) => {
         return a.when[0] > b.when[0];
       });

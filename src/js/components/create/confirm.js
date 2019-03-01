@@ -35,8 +35,8 @@ class Confirm extends Component {
 
 
   render () {
-
-    console.log('confirm Props', this.props);
+    console.log('confirm Render');
+    // console.log('confirm Props', this.props);
     const { name, firstname, what, where, when, description, note, handleOnPress, photo_url, isFetching } = this.props;
 
     const iSODates = mapToISOString(when);

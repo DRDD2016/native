@@ -1,6 +1,6 @@
 {
   "name": "Spark",
-  "version": "0.0.1",
+  "version": "1.0.133",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -12,7 +12,17 @@
     "prepush": "npm test",
     "postmerge": "npm install",
     "test-ios": "detox build --configuration ios.sim.debug && detox test --configuration ios.sim.debug",
-    "test-android": "detox build --configuration android.emu.debug && detox test --configuration android.emu.debug -l verbose"
+    "test-android": "detox build --configuration android.emu.debug && detox test --configuration android.emu.debug -l verbose",
+    "create-ios-release-bundle": "rm -rf sourcemaps; mkdir sourcemaps; react-native bundle --platform ios --dev false --entry-file index.js --bundle-output sourcemaps/ios-release.bundle --sourcemap-output sourcemaps/ios-release.bundle.map --assets-dest build",
+    "bugsnag-ios-sourcemaps-to-bugsnag": "npm run create-ios-release-bundle; ./bugsnag-ios.sh",
+    "create-android-release-bundle": "rm -rf sourcemaps; mkdir sourcemaps; react-native bundle --platform android --dev false --entry-file index.js --bundle-output sourcemaps/android-release.bundle --sourcemap-output sourcemaps/android-release.bundle.map --assets-dest build",
+    "bugsnag-android-sourcemaps-to-bugsnag": "npm run create-android-release-bundle; ./bugsnag-android.sh",
+    "version-bump": "npm --no-git-tag-version version patch",
+    "ios:beta": "cd ios && bundle exec fastlane beta",
+    "android:alpha": "cd android && bundle exec fastlane alpha",
+    "android-release": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ && react-native run-android",
+    "native-log-android": "adb logcat *:S ReactNative:V ReactNativeJS:V",
+    "build-release-android": "cd android && ./gradlew assembleRelease && cd .. && react-native run-android --variant=release"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",
@@ -20,6 +30,7 @@
     "@redux-offline/redux-offline": "^2.2.1",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "bugsnag-react-native": "^2.10.0",
+    "env-cmd": "^8.0.2",
     "hoist-non-react-statics": "^3.2.1",
     "immutability-helper": "^2.1.1",
     "lodash": "^4.17.10",
@@ -27,15 +38,15 @@
     "prop-types": "^15.5.10",
     "react": "^16.6.3",
     "react-native": "^0.57.8",
-    "react-native-branch": "^2.3.0",
+    "react-native-branch": "^3.0.0-beta.2",
     "react-native-config": "^0.11.5",
     "react-native-datepicker": "^1.4.4",
-    "react-native-elements": "^0.19.1",
+    "react-native-elements": "^1.0.0",
     "react-native-fabric": "^0.5.1",
     "react-native-fabric-crashlytics": "^0.1.8",
     "react-native-firebase": "^5.1.1",
     "react-native-global-props": "^1.1.3",
-    "react-native-google-places-autocomplete": "^1.3.5",
+    "react-native-google-places-autocomplete": "^1.3.9",
     "react-native-image-picker": "^0.27.2",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-linear-gradient": "^2.5.3",
@@ -55,7 +66,7 @@
     "redux-persist-transform-filter": "0.0.18",
     "redux-thunk": "^2.3.0",
     "rn-fetch-blob": "^0.10.13",
-    "socket.io-client": "^2.1.1",
+    "socket.io-client": "^2.2.0",
     "styled-components": "^4.1.3"
   },
   "devDependencies": {

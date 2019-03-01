@@ -17,3 +17,6 @@
 #}
 -keep class io.invertase.firebase.** { *; }
 -dontwarn io.invertase.firebase.**
+-dontwarn io.branch.**
+-dontwarn com.crashlytics.android.answers.shim.**
+-dontwarn com.google.firebase.appindexing.**

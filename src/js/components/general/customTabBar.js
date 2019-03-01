@@ -21,7 +21,8 @@ export default class CustomTabBar extends Component {
   }
 
   render () {
-      console.log('this.props tabbar', this.props);
+      console.log('render CustomTabBar');
+      // console.log('this.props tabbar', this.props);
       return (
         <View style={{ flexDirection: 'row', height: TABBAR_HEIGHT, backgroundColor: colours.background }}>
           <TouchableOpacity style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

@@ -30,10 +30,9 @@ import SpinnerContainer from './containers/common/SpinnerContainer';
 // }
 
 const bugsnag = new Client();
-// bugsnag.leaveBreadcrumb('index.js starting', {
-//                   type: 'user'
-//                 });
-console.log(bugsnag);
+bugsnag.leaveBreadcrumb('index.js starting', {
+                  type: 'user'
+                });
 
 crashlytics.init();
 
@@ -68,7 +67,7 @@ const { Answers } = Fabric;
 // setCustomView(customViewProps);
 // setCustomTextInput(customTextInputProps);
 
-console.log((require('react-native-config').default));
+// console.log((require('react-native-config').default));
 // disable remote debugger warning in a simulator
 console.disableYellowBox = true;
 
@@ -92,6 +91,7 @@ class App extends Component {
 
   componentWillMount () {
 
+    console.log('index.js CompWillMount:');
     persistStore(store,
       {
         storage: AsyncStorage,
@@ -105,6 +105,7 @@ class App extends Component {
 
   componentDidMount () {
 
+    console.log('index.js CompDidMount starting:');
     NetInfo.isConnected.fetch().then().done(() => {
       NetInfo.isConnected.addEventListener('connectionChange', this._handleConnectionChange);
     });
@@ -115,7 +116,7 @@ class App extends Component {
       //
       // console.log('this.state: ', this.state);
       //
-      // console.info('Subscribing to Branch links');
+      console.log('Subscribing to Branch links');
 
       _unsubscribeFromBranch = branch.subscribe(({ error, params }) => {
 
@@ -124,7 +125,7 @@ class App extends Component {
 
         let linkData = 'none';
 
-        console.info('Branch initialised');
+        console.log('Branch initialised');
 
         console.log('Branch params: ', JSON.stringify(params));
 
@@ -159,18 +160,18 @@ class App extends Component {
           // No link was opened.
 
           //
-          const lstore = store.getState();
-          console.log('store: ', lstore);
+          // const lstore = store.getState();
+          // console.log('store: ', lstore);
           //
 
           linkData = 'none';
-          console.log('No link opened, linkData: ', linkData);
+          // console.log('No link opened, linkData: ', linkData);
           store.dispatch(saveIncomingLink(linkData));
           store.dispatch(linkDatafromBranch());
 
           //
-          const lstore2 = store.getState();
-          console.log('store2: ', lstore2);
+          // const lstore2 = store.getState();
+          // console.log('store2: ', lstore2);
           Answers.logCustom('Index.js CompDidMount clicked_branch_link params: none', { additionalData: 'nothing' });
 
           //
@@ -193,6 +194,7 @@ class App extends Component {
           store.dispatch(saveIncomingLink(linkData));
           Answers.logCustom(`Index.js CompDidMount branch eventCode: ${params}`, { additionalData: 'nothing' });
 
+
           // store.dispatch(linkDatafromBranch()); // dont do this until loading finished on Feed
           // return linkData;
 
@@ -212,8 +214,9 @@ class App extends Component {
 
       });
     }, 2000);
-    console.log('end: ');
+    // console.log('end: ');
 
+    console.log('index.js CompDidMount finishing:');
   }
 
   componentWillUnmount () {
@@ -228,12 +231,13 @@ class App extends Component {
   }
 
   _handleConnectionChange = (isConnected) => {
-    console.log('isConnected changed to: ', isConnected);
+    // console.log('isConnected changed to: ', isConnected);
     store.dispatch(setIsConnected(isConnected));
   };
 
   render () {
-    console.log('render index', this.state);
+    console.log('render index');
+    // console.log('render index', this.state);
     if (!this.state) return <SplashView />;
     if (!this.state.rehydrated) return <SplashView />;
     console.log('statecheckdone');
@@ -241,13 +245,11 @@ class App extends Component {
     return (
       <Provider store={ store }>
 
-
         <PushController>
           <SpinnerContainer>
             <AppWithNavigationState />
           </SpinnerContainer>
         </PushController>
-
 
       </Provider>
     );

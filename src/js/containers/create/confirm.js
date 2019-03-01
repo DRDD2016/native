@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleOnPress: (navigation) => {
       dispatch(shareInviteRequest());
-      console.log('handleOnPress storecreate: ', store.getState().create);
+      // console.log('handleOnPress storecreate: ', store.getState().create);
       const event = store.getState().create;
 
       // sort the event.When dates

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-import { Header } from 'react-navigation';
+// import { Header } from 'react-navigation';
 import colours from '../../../styles/colours';
 import { iconScale } from '../../../styles/scaling';
 
-console.log('Header Button height: ', Header.HEIGHT);
+// console.log('Header Button height: ', Header.HEIGHT);
 
 export default function ButtonHeader ({ onPress, children, testDescription }) {
 

@@ -15,6 +15,7 @@
       android:name=".MainApplication"
       android:label="@string/app_name"
       android:icon="@mipmap/ic_launcher"
+      android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
       android:theme="@style/AppTheme">
 
@@ -30,6 +31,20 @@
         </intent-filter>
       </service> -->
 
+      <!-- Notification icons and default color. Set custom default icon. This is used when no icon is set for incoming notification messages.
+           See README(https://goo.gl/l4GJaQ) for more. -->
+      <meta-data
+        android:name="com.google.firebase.messaging.default_notification_icon"
+        android:resource="@drawable/ic_stat_name" />
+      <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+           notification message. See README(https://goo.gl/6BKBk7) for more. old value "@drawable/ic_stat_ic_notification" -->
+      <!-- <meta-data
+        android:name="com.google.firebase.messaging.default_notification_color"
+        android:resource="@color/colorAccent" /> -->
+
+      <!-- <meta-data
+        android:name="com.google.firebase.messaging.default_notification_channel_id"
+        android:value="@string/default_notification_channel_id"/> -->
 
       <service android:name="io.invertase.firebase.messaging.RNFirebaseMessagingService">
         <intent-filter>
@@ -42,7 +57,7 @@
         </intent-filter>
       </service>
 
-      <service android:name="io.invertase.firebase.messaging.RNFirebaseBackgroundMessagingService" />
+      <!-- <service android:name="io.invertase.firebase.messaging.RNFirebaseBackgroundMessagingService" /> -->
 
       <activity
         android:name=".MainActivity"
@@ -56,16 +71,16 @@
             <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
 
         </intent-filter>
-        <intent-filter>
-          <action android:name="fcm.ACTION.HELLO" />
-          <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
+
+        <!-- Branch URI Scheme -->
         <intent-filter>
             <data android:scheme="sparksocial://" />
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
         </intent-filter>
+
+        <!-- Branch App Links (optional) -->
         <intent-filter android:autoVerify="true">
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
@@ -75,35 +90,31 @@
             <data android:scheme="https" android:host="spark.test-app.link" />
             <data android:scheme="https" android:host="spark-alternate.test-app.link" />
         </intent-filter>
+
+        <intent-filter>
+          <action android:name="fcm.ACTION.HELLO" />
+          <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+
+      <!-- Branch init -->
+      <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_pkvEE0oiYjjNH4Wp7ZCCGhmeECeDUqav" />
+      <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_gozDB6oc4opRT89o76zBJnmhACezJxiH" />
+      <meta-data android:name="io.branch.sdk.TestMode" android:value="false" />
 
       <meta-data
             android:name="io.fabric.ApiKey"
             android:value="9393d3a2a675faac3cac9e9dfe415cab4455b1f1" />
-      <meta-data
-            android:name="io.branch.sdk.BranchKey"
-            android:value="key_live_pkvEE0oiYjjNH4Wp7ZCCGhmeECeDUqav" />
-      <meta-data
-            android:name="io.branch.sdk.BranchKey.test"
-            android:value="key_test_gozDB6oc4opRT89o76zBJnmhACezJxiH" />
 
       <meta-data android:name="com.bugsnag.android.API_KEY"
             android:value="899465e8e5166f09f584f57cf5282edd"/>
 
+      <!-- Branch install referrer tracking (optional) -->
       <receiver android:name="io.branch.referral.InstallListener" android:exported="true">
-        <intent-filter>
-          <action android:name="com.android.vending.INSTALL_REFERRER" />
-        </intent-filter>
-      </receiver>
-
-      <receiver android:name="com.evollu.react.fcm.FIRLocalMessagingPublisher"/>
-      <receiver android:enabled="true" android:exported="true"  android:name="com.evollu.react.fcm.FIRSystemBootEventReceiver">
           <intent-filter>
-              <action android:name="android.intent.action.BOOT_COMPLETED"/>
-              <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
-              <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
-              <category android:name="android.intent.category.DEFAULT" />
+              <action android:name="com.android.vending.INSTALL_REFERRER" />
           </intent-filter>
       </receiver>
 

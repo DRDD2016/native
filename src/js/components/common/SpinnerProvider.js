@@ -4,17 +4,19 @@ import SpinnerModal from './SpinnerModal';
 
 
 export default class SpinnerProvider extends Component {
-  // componentWillMount () {
-  //   console.log('Spinner props mount: ', this.props);
-  // }
-  //
-  componentWillReceiveProps (nextProps) {
-    console.log('Spinner props this props: ', this.props);
-    console.log('Spinner props nextProps: ', nextProps);
+
+  componentWillMount () {
+    // console.log('Spinner props mount: ', this.props);
   }
 
-  render () {
+  // componentWillReceiveProps (nextProps) {
+  //   // console.log('Spinner props this props: ', this.props);
+  //   // console.log('Spinner props nextProps: ', nextProps);
+  // }
 
+  render () {
+    console.log('Spinner render: ');
+    // console.log('Spinner render: ', this.props);
     const {
       isReceivingFeed,
       isFetchingFeed,
@@ -32,32 +34,27 @@ export default class SpinnerProvider extends Component {
 
     const isLoading = isFetchingBranch || isReceivingFeed || isFetchingFeed || isFetchingEvent || isFetchingCreate;
 
-    const errorModalVisible = () => {
-      if (eventCodeError) {
-        return true;
-      }
-
+    const isErrorModalVisible = () => {
       if (!eventCodeError) {
         return false;
       }
+      return true;
     };
 
+    const errorModalVisible = isErrorModalVisible();
+
+
     console.log('errorModalVisible', errorModalVisible);
-    console.log('isFetchingCreate:', isFetchingCreate);
-    console.log('isReceivingFeed:', isReceivingFeed);
-    console.log('isConfirmingEvent:', isConfirmingEvent);
-    console.log('isEventConfirmed:', isEventConfirmed);
-    console.log('finalChoices:', finalChoices);
     console.log('isLoading:', isLoading);
     // console.log('this.props.children:', this.props.children);
 
     return (
       <View style={{ flex: 1, borderColor: 'pink', borderWidth: 0 }}>
-        {React.Children.only(this.props.children)}
+
         {
           (isConfirmingEvent) &&
 
-            <View style={{ flex: 1, borderColor: 'purple', borderWidth: 2 }}>
+            <View style={{ borderColor: 'purple', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isConfirmingEvent}
                 type="confirming_event"
@@ -71,7 +68,7 @@ export default class SpinnerProvider extends Component {
         {
           (isEventConfirmed) &&
 
-            <View style={{ flex: 1, borderColor: 'blue', borderWidth: 2 }}>
+            <View style={{ borderColor: 'blue', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isEventConfirmed}
                 type="event_confirmed"
@@ -86,7 +83,7 @@ export default class SpinnerProvider extends Component {
         {
           (isFinishedUpdatingRsvp) &&
 
-            <View style={{ flex: 1, borderColor: 'lightblue', borderWidth: 2 }}>
+            <View style={{ borderColor: 'lightblue', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isFinishedUpdatingRsvp}
                 type="rsvp_finished"
@@ -101,7 +98,7 @@ export default class SpinnerProvider extends Component {
         {
           (saveEventStatus === 'Started') &&
 
-            <View style={{ flex: 1, borderColor: 'orange', borderWidth: 2 }}>
+            <View style={{ borderColor: 'orange', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isLoading}
                 type="share_invite"
@@ -115,7 +112,7 @@ export default class SpinnerProvider extends Component {
         {
           (isLoading) &&
 
-            <View style={{ flex: 1, borderColor: 'blue', borderWidth: 2 }}>
+            <View style={{ borderColor: 'blue', borderWidth: 2 }}>
               <SpinnerModal
                 visible={isLoading}
                 type="loading"
@@ -129,7 +126,7 @@ export default class SpinnerProvider extends Component {
         {
           (eventCodeError) &&
 
-            <View style={{ flex: 1, borderColor: 'yellow', borderWidth: 2 }}>
+            <View style={{ borderColor: 'yellow', borderWidth: 2 }}>
 
               <SpinnerModal
                 visible={errorModalVisible}
@@ -142,6 +139,7 @@ export default class SpinnerProvider extends Component {
 
             </View>
         }
+        {React.Children.only(this.props.children)}
 
       </View>
     );

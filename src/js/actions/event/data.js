@@ -150,10 +150,10 @@ export function getUserById (token, user_id) {
       }
     })
     .then((res) => {
-      console.log('getUser res:', res);
+      // console.log('getUser res:', res);
       res.json()
       .then((data) => {
-        console.log('getUser response data:', data);
+        // console.log('getUser response data:', data);
         const eventData = {
           firstname: data.firstname,
           surname: data.surname,
@@ -287,7 +287,7 @@ export function submitCode (token, code) {
           dispatch(submitCodeSuccess(data));
           dispatch(clearPollState());
           dispatch(getCalendar(token));
-          console.log('store.getState()', store.getState());
+          // console.log('store.getState()', store.getState());
           const params = {
             userIsHost: store.getState().user.user_id === data.host_user_id,
             isPoll: data.is_poll,
