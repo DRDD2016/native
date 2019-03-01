@@ -1,6 +1,6 @@
 {
   "name": "Spark",
-  "version": "1.0.133",
+  "version": "1.0.134",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
