@@ -4,7 +4,6 @@ import com.smixx.fabric.FabricPackage;
 import android.app.Application;
 import android.util.Log;
 import com.facebook.react.ReactApplication;
-import io.branch.rnbranch.RNBranchPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
@@ -25,6 +24,7 @@ import com.crashlytics.android.Crashlytics;
 import java.util.Arrays;
 import java.util.List;
 // import Branch and RNBranch
+import io.branch.rnbranch.RNBranchPackage;
 import io.branch.referral.Branch;
 
 
@@ -43,7 +43,6 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new FabricPackage(),
           new MainReactPackage(),
-            new RNBranchPackage(),
           new RNFirebasePackage(),
           new RNFirebaseMessagingPackage(),
           new RNFirebaseNotificationsPackage(),
@@ -77,7 +76,7 @@ public class MainApplication extends Application implements ReactApplication {
     Fabric.with(this, new Crashlytics());
     BugsnagReactNative.start(this);
     SoLoader.init(this, /* native exopackage */ false);
-    Branch.getAutoInstance(this);
+    RNBranchModule.getAutoInstance(this);
   }
 
 }
