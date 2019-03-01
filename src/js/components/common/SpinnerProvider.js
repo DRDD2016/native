@@ -16,7 +16,7 @@ export default class SpinnerProvider extends Component {
 
   render () {
     console.log('Spinner render: ');
-    console.log('Spinner render: ', this.props);
+    // console.log('Spinner render: ', this.props);
     const {
       isReceivingFeed,
       isFetchingFeed,

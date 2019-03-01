@@ -5,49 +5,49 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: Verifying fastlane version" time="0.011343">
+      <testcase classname="fastlane.lanes" name="0: Verifying fastlane version" time="0.011345">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.003425">
+      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.00448">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: match" time="8.450013">
+      <testcase classname="fastlane.lanes" name="2: match" time="9.380561">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: sigh" time="5.423657">
+      <testcase classname="fastlane.lanes" name="3: sigh" time="7.25697">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: increment_version_number" time="1.61895">
+      <testcase classname="fastlane.lanes" name="4: increment_version_number" time="1.501343">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: increment_build_number" time="1.318478">
+      <testcase classname="fastlane.lanes" name="5: increment_build_number" time="1.256446">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: gym" time="178.827892">
+      <testcase classname="fastlane.lanes" name="6: gym" time="168.016575">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="7: pilot" time="596.358959">
+      <testcase classname="fastlane.lanes" name="7: pilot" time="354.533335">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="8: cd .. &amp;&amp; npm run bugsnag-ios-sourcemaps-to-bugsnag" time="5.910171">
+      <testcase classname="fastlane.lanes" name="8: cd .. &amp;&amp; npm run bugsnag-ios-sourcemaps-to-bugsnag" time="74.047245">
         
-          <failure message="/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.99.1/fastlane/lib/fastlane/actions/actions_helper.rb:48:in `execute_action'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.99.1/fastlane/lib/fastlane/fast_file.rb:186:in `sh'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.99.1/fastlane/lib/fastlane/fast_file.rb:181:in `sh'&#10;Fastfile:68:in `block (2 levels) in parsing_binding'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.99.1/fastlane/lib/fastlane/lane.rb:33:in `call'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.99.1/fastlane/lib/fastlane/lane.rb:33:in `call'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.99.1/fastlane/lib/fastlane/runner.rb:49:in `block in execute'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.99.1/fastlane/lib/fastlane/runner.rb:45:in `chdir'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.99.1/fastlane/lib/fastlane/runner.rb:45:in `execute'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.99.1/fastlane/lib/fastlane/lane_manager.rb:56:in `cruise_lane'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.99.1/fastlane/lib/fastlane/command_line_handler.rb:36:in `handle'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.99.1/fastlane/lib/fastlane/commands_generator.rb:108:in `block (2 levels) in run'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/commander-fastlane-4.4.6/lib/commander/command.rb:178:in `call'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/commander-fastlane-4.4.6/lib/commander/command.rb:178:in `call'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/commander-fastlane-4.4.6/lib/commander/command.rb:153:in `run'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/commander-fastlane-4.4.6/lib/commander/runner.rb:476:in `run_active_command'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.99.1/fastlane_core/lib/fastlane_core/ui/fastlane_runner.rb:74:in `run!'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/commander-fastlane-4.4.6/lib/commander/delegates.rb:15:in `run!'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.99.1/fastlane/lib/fastlane/commands_generator.rb:333:in `run'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.99.1/fastlane/lib/fastlane/commands_generator.rb:41:in `start'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.99.1/fastlane/lib/fastlane/cli_tools_distributor.rb:108:in `take_off'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.99.1/bin/fastlane:20:in `&lt;top (required)&gt;'&#10;/Users/dave/.fastlane/bin/bundle/bin/fastlane:22:in `load'&#10;/Users/dave/.fastlane/bin/bundle/bin/fastlane:22:in `&lt;main&gt;'&#10;&#10;Exit status of command 'cd .. &amp;&amp; npm run bugsnag-ios-sourcemaps-to-bugsnag' was 1 instead of 0.&#10;&#10;&gt; Spark@1.0.127 bugsnag-ios-sourcemaps-to-bugsnag /Users/dave/davedev/native&#10;&gt; npm run create-ios-release-bundle; ./bugsnag-ios.sh&#10;&#10;&#10;&gt; Spark@1.0.127 create-ios-release-bundle /Users/dave/davedev/native&#10;&gt; rm -rf sourcemaps; mkdir sourcemaps; react-native bundle --platform ios --dev false --entry-file index.js --bundle-output sourcemaps/ios-release.bundle --sourcemap-output sourcemaps/ios-release.bundle.map --assets-dest build&#10;&#10;(node:48238) ExperimentalWarning: The fs.promises API is experimental&#10;Loading dependency graph, done.&#10;bundle: Writing bundle output to: sourcemaps/ios-release.bundle&#10;bundle: Writing sourcemap output to: sourcemaps/ios-release.bundle.map&#10;bundle: Done writing bundle output&#10;bundle: Done writing sourcemap output&#10;bundle: Copying 10 asset files&#10;bundle: Done copying assets&#10;sh: ./bugsnag-ios.sh: No such file or directory&#10;npm ERR! file sh&#10;npm ERR! code ELIFECYCLE&#10;npm ERR! errno ENOENT&#10;npm ERR! syscall spawn&#10;npm ERR! Spark@1.0.127 bugsnag-ios-sourcemaps-to-bugsnag: `npm run create-ios-release-bundle; ./bugsnag-ios.sh`&#10;npm ERR! spawn ENOENT&#10;npm ERR! &#10;npm ERR! Failed at the Spark@1.0.127 bugsnag-ios-sourcemaps-to-bugsnag script.&#10;npm ERR! This is probably not a problem with npm. There is likely additional logging output above.&#10;&#10;npm ERR! A complete log of this run can be found in:&#10;npm ERR!     /Users/dave/.npm/_logs/2019-03-01T00_25_51_357Z-debug.log&#10;" />
+          <failure message="/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.117.0/fastlane/lib/fastlane/actions/actions_helper.rb:48:in `execute_action'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.117.0/fastlane/lib/fastlane/fast_file.rb:191:in `sh'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.117.0/fastlane/lib/fastlane/fast_file.rb:186:in `sh'&#10;Fastfile:68:in `block (2 levels) in parsing_binding'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.117.0/fastlane/lib/fastlane/lane.rb:33:in `call'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.117.0/fastlane/lib/fastlane/lane.rb:33:in `call'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.117.0/fastlane/lib/fastlane/runner.rb:49:in `block in execute'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.117.0/fastlane/lib/fastlane/runner.rb:45:in `chdir'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.117.0/fastlane/lib/fastlane/runner.rb:45:in `execute'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.117.0/fastlane/lib/fastlane/lane_manager.rb:56:in `cruise_lane'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.117.0/fastlane/lib/fastlane/command_line_handler.rb:36:in `handle'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.117.0/fastlane/lib/fastlane/commands_generator.rb:108:in `block (2 levels) in run'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/commander-fastlane-4.4.6/lib/commander/command.rb:178:in `call'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/commander-fastlane-4.4.6/lib/commander/command.rb:178:in `call'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/commander-fastlane-4.4.6/lib/commander/command.rb:153:in `run'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/commander-fastlane-4.4.6/lib/commander/runner.rb:476:in `run_active_command'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.117.0/fastlane_core/lib/fastlane_core/ui/fastlane_runner.rb:76:in `run!'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/commander-fastlane-4.4.6/lib/commander/delegates.rb:15:in `run!'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.117.0/fastlane/lib/fastlane/commands_generator.rb:333:in `run'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.117.0/fastlane/lib/fastlane/commands_generator.rb:41:in `start'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.117.0/fastlane/lib/fastlane/cli_tools_distributor.rb:119:in `take_off'&#10;/Users/dave/.fastlane/bin/bundle/lib/ruby/gems/2.2.0/gems/fastlane-2.117.0/bin/fastlane:23:in `&lt;top (required)&gt;'&#10;/Users/dave/.fastlane/bin/bundle/bin/fastlane:22:in `load'&#10;/Users/dave/.fastlane/bin/bundle/bin/fastlane:22:in `&lt;main&gt;'&#10;&#10;Exit status of command 'cd .. &amp;&amp; npm run bugsnag-ios-sourcemaps-to-bugsnag' was 1 instead of 0.&#10;&#10;&gt; Spark@1.0.129 bugsnag-ios-sourcemaps-to-bugsnag /Users/dave/davedev/native&#10;&gt; npm run create-ios-release-bundle; ./bugsnag-ios.sh&#10;&#10;&#10;&gt; Spark@1.0.129 create-ios-release-bundle /Users/dave/davedev/native&#10;&gt; rm -rf sourcemaps; mkdir sourcemaps; react-native bundle --platform ios --dev false --entry-file index.js --bundle-output sourcemaps/ios-release.bundle --sourcemap-output sourcemaps/ios-release.bundle.map --assets-dest build&#10;&#10;(node:83653) ExperimentalWarning: The fs.promises API is experimental&#10;Loading dependency graph, done.&#10;bundle: Writing bundle output to: sourcemaps/ios-release.bundle&#10;bundle: Writing sourcemap output to: sourcemaps/ios-release.bundle.map&#10;bundle: Done writing bundle output&#10;bundle: Done writing sourcemap output&#10;bundle: Copying 10 asset files&#10;bundle: Done copying assets&#10;sh: ./bugsnag-ios.sh: No such file or directory&#10;npm ERR! file sh&#10;npm ERR! code ELIFECYCLE&#10;npm ERR! errno ENOENT&#10;npm ERR! syscall spawn&#10;npm ERR! Spark@1.0.129 bugsnag-ios-sourcemaps-to-bugsnag: `npm run create-ios-release-bundle; ./bugsnag-ios.sh`&#10;npm ERR! spawn ENOENT&#10;npm ERR! &#10;npm ERR! Failed at the Spark@1.0.129 bugsnag-ios-sourcemaps-to-bugsnag script.&#10;npm ERR! This is probably not a problem with npm. There is likely additional logging output above.&#10;&#10;npm ERR! A complete log of this run can be found in:&#10;npm ERR!     /Users/dave/.npm/_logs/2019-03-01T14_09_07_167Z-debug.log&#10;" />
         
       </testcase>
     
