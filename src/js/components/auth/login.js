@@ -57,7 +57,8 @@ class Login extends Component {
   }
 
   componentWillUpdate (nextProps) {
-    console.log('nextProps', nextProps);
+    console.log('login WillUpdate');
+    // console.log('nextProps', nextProps);
     const { isLoggingIn, serverError } = nextProps;
 
     if (!isLoggingIn && !serverError && this.state.isModalVisible) {

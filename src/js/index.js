@@ -160,18 +160,18 @@ class App extends Component {
           // No link was opened.
 
           //
-          const lstore = store.getState();
-          console.log('store: ', lstore);
+          // const lstore = store.getState();
+          // console.log('store: ', lstore);
           //
 
           linkData = 'none';
-          console.log('No link opened, linkData: ', linkData);
+          // console.log('No link opened, linkData: ', linkData);
           store.dispatch(saveIncomingLink(linkData));
           store.dispatch(linkDatafromBranch());
 
           //
-          const lstore2 = store.getState();
-          console.log('store2: ', lstore2);
+          // const lstore2 = store.getState();
+          // console.log('store2: ', lstore2);
           Answers.logCustom('Index.js CompDidMount clicked_branch_link params: none', { additionalData: 'nothing' });
 
           //
@@ -214,7 +214,7 @@ class App extends Component {
 
       });
     }, 2000);
-    console.log('end: ');
+    // console.log('end: ');
 
     console.log('index.js CompDidMount finishing:');
   }
@@ -231,12 +231,13 @@ class App extends Component {
   }
 
   _handleConnectionChange = (isConnected) => {
-    console.log('isConnected changed to: ', isConnected);
+    // console.log('isConnected changed to: ', isConnected);
     store.dispatch(setIsConnected(isConnected));
   };
 
   render () {
-    console.log('render index', this.state);
+    console.log('render index');
+    // console.log('render index', this.state);
     if (!this.state) return <SplashView />;
     if (!this.state.rehydrated) return <SplashView />;
     console.log('statecheckdone');

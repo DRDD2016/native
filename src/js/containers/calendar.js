@@ -10,7 +10,7 @@ import getFutureEvents from '../lib/get-future-events';
 import formatMonth from '../lib/format-month';
 
 
-const mapStateToProps = ({ nav, feed, calendar, user, network }) => {
+const mapStateToProps = ({ calendar, user }) => {
 
   const futureEvents = calendar.data.filter(getFutureEvents);
   const data = calendar.data;
@@ -52,19 +52,19 @@ const mapStateToProps = ({ nav, feed, calendar, user, network }) => {
     return x;
   });
 
-  console.log('newFilteredEvents', filteredEvents);
+  // console.log('newFilteredEvents', filteredEvents);
 
 
   return {
-    nav,
+    // nav,
     allEvents: data,
     filteredEvents,
     calendarIsFetching: calendar.isFetching,
-    isFetchingEvent: feed.isFetchingEvent,
+    // isFetchingEvent: feed.isFetchingEvent,
     filterActive,
     selectedFilter,
-    user_id: user.user_id,
-    isConnected: network.isConnected
+    user_id: user.user_id
+    // isConnected: network.isConnected
   };
 };
 

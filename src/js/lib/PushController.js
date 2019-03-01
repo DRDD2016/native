@@ -35,6 +35,9 @@ export default class PushController extends Component {
       });
 
 
+    console.log('does it get here?');
+
+
     // console.log('requesting permissions');
     // FCM.requestPermissions();
 

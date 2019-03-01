@@ -9,7 +9,8 @@ export default class OfflineIcon extends Component {
 
 
   render () {
-    console.log('offlineIcon:', this.props);
+    console.log('render offlineIcon:');
+    // console.log('offlineIcon:', this.props);
     const { isConnected } = this.props;
     console.log('isConnected:', isConnected);
     if (!isConnected) {

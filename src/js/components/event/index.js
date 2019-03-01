@@ -99,8 +99,8 @@ export default class Event extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-
-    console.log('Event Index Nextprops: ', nextProps);
+    console.log('Event Index Will Rec Nextprops: ');
+    // console.log('Event Index Nextprops: ', nextProps);
 
 
     // created on: XX/XX/XXXX
@@ -124,8 +124,9 @@ export default class Event extends Component {
   }
 
   componentWillUpdate (nextProps) {
-
-    console.log('Event index willUpdate thisProps: ', this.props);
+    console.log('Event index willUpdate: ');
+    // console.log('Event index willUpdate thisProps: ', this.props);
+    // console.log('Event index willUpdate nextProps: ', nextProps);
 
     if (nextProps.event.name !== this.props.event.name) {
       this.props.navigation.setParams({
@@ -135,8 +136,7 @@ export default class Event extends Component {
 
     }
 
-    console.log('Event index willUpdate nextProps: ', nextProps);
-
+    
   }
 
   handleDelete (event, event_id) {

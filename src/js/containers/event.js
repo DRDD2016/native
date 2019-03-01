@@ -32,7 +32,7 @@ const mapStateToProps = ({ event, user, network, create }) => {
     finalChoices: event.poll.finalChoices,
     voteCount: event.poll.voteCount,
     error: event.data.error,
-    isConnected: network.isConnected,
+    // isConnected: network.isConnected,
     cancelled: event.data.cancelled,
     isConfirmingEvent: event.poll.isConfirmingEvent,
     isEventConfirmed: create.isEventConfirmed,

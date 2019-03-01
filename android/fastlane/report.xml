@@ -5,37 +5,37 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: Verifying fastlane version" time="0.011954">
+      <testcase classname="fastlane.lanes" name="0: Verifying fastlane version" time="0.012857">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.003569">
+      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.003599">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: cd .. &amp;&amp; npm run version-bump" time="0.937927">
+      <testcase classname="fastlane.lanes" name="2: cd .. &amp;&amp; npm run version-bump" time="0.742174">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: gradle" time="6.113763">
+      <testcase classname="fastlane.lanes" name="3: gradle" time="14.904339">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: gradle" time="93.444408">
+      <testcase classname="fastlane.lanes" name="4: gradle" time="113.054061">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: supply" time="168.848846">
+      <testcase classname="fastlane.lanes" name="5: supply" time="164.198866">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: cd .. &amp;&amp; npm run bugsnag-android-sourcemaps-to-bugsnag" time="169.546141">
+      <testcase classname="fastlane.lanes" name="6: cd .. &amp;&amp; npm run bugsnag-android-sourcemaps-to-bugsnag" time="118.704715">
         
       </testcase>
     

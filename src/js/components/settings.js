@@ -47,8 +47,8 @@ class Settings extends Component {
 
   componentWillMount () {
 
-    console.log('ProfileWillMount');
-    console.log('ProfileWillMountThisProps: ', this.props);
+    console.log('Profile/Setting WillMount');
+    // console.log('ProfileWillMountThisProps: ', this.props);
 
   }
 
@@ -56,9 +56,10 @@ class Settings extends Component {
     Answers.logCustom('Profile.js Mounted', { additionalData: 'nothing' });
   }
 
-  componentWillReceiveProps (nextProps) {
-    console.log('ProfileWillReceiveThisProps: ', this.props);
-    console.log('ProfileWillReceiveNextProps: ', nextProps);
+  componentWillReceiveProps () {
+    console.log('Profile WillRec Props');
+    // console.log('ProfileWillReceiveThisProps: ', this.props);
+    // console.log('ProfileWillReceiveNextProps: ', nextProps);
 
   }
 
@@ -114,6 +115,8 @@ class Settings extends Component {
 
 
   render () {
+
+    console.log('Profile/Settings render');
 
     const { photo_url, firstname, surname, handleChangeName } = this.props;
     const hideEditButton = (firstname === '' ? styles.hideEditButton : [{ backgroundColor: 'green' }]);
@@ -213,7 +216,7 @@ class Settings extends Component {
                     />
                   </View>
                   <View style={{ marginTop: 20, flexDirection: 'row', justifyContent: 'center' }}>
-                    { this.props.isFetching ? <Spinner /> :
+                    { this.props.profileUserIsFetching ? <Spinner /> :
                     <ConfirmButton
 
                       onPress={ () => this.saveChanges(firstname, surname) }

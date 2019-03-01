@@ -15,6 +15,7 @@ export default class SpinnerProvider extends Component {
   // }
 
   render () {
+    console.log('Spinner render: ');
     console.log('Spinner render: ', this.props);
     const {
       isReceivingFeed,
@@ -44,13 +45,7 @@ export default class SpinnerProvider extends Component {
 
 
     console.log('errorModalVisible', errorModalVisible);
-    console.log('isFetchingCreate:', isFetchingCreate);
-    console.log('isReceivingFeed:', isReceivingFeed);
-    console.log('isConfirmingEvent:', isConfirmingEvent);
-    console.log('isEventConfirmed:', isEventConfirmed);
-    console.log('finalChoices:', finalChoices);
     console.log('isLoading:', isLoading);
-    console.log('isFetchingBranch:', isFetchingBranch);
     // console.log('this.props.children:', this.props.children);
 
     return (

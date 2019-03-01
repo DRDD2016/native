@@ -15,30 +15,30 @@ import { deleteIncomingLink, linkDatafromBranch, saveIncomingLinkError } from '.
 import filterFeed from '../lib/filter-feed';
 
 
-const mapStateToProps = ({ nav, feed, user, network, create }) => {
+const mapStateToProps = ({ feed, user, network }) => {
 
   const data = feed.data;
   const filterActive = feed.filterActive;
   const selectedFilter = feed.selectedFilter;
   const feedData = filterFeed(data, filterActive, selectedFilter);
   return {
-    nav,
+    // nav,
     filterActive,
     selectedFilter,
     user_id: user.user_id,
-    isConnected: network.isConnected,
+    // isConnected: network.isConnected,
     allEvents: data,
     feed: feedData,
     isFetchingFeed: feed.isFetchingFeed,
     isReceivingFeed: feed.isReceivingFeed,
-    isTouchedFetching: feed.isTouchedFetching,
-    isFetchingEvent: feed.isFetchingEvent,
-    isFetchingBranch: network.isFetchingBranch,
+    // isTouchedFetching: feed.isTouchedFetching,
+    // isFetchingEvent: feed.isFetchingEvent,
+    // isFetchingBranch: network.isFetchingBranch,
     // networkIsFetching: network.isFetching, // remove as not used and may cause unnecessary updates
-    push_info: user.push_info,
+    // push_info: user.push_info,
     eventCode: network.inComingLinkCode,
     eventCodeError: network.inComingLinkError,
-    saveEventStatus: create.saveEventStatus,
+    // saveEventStatus: create.saveEventStatus,
     user_updateNo: user.user_update_no,
     user_openNo: user.user_open_no
   };

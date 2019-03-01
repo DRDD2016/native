@@ -137,9 +137,12 @@ class Calendar extends Component {
 
   }
 
+
   componentWillReceiveProps (nextProps) {
 
     console.log('calendar WillReceiveProps');
+    console.log('calendar WillReceiveProps old:', this.props);
+    console.log('calendar WillReceiveProps new:', nextProps);
     this.setState({
        isReady: false
     });
@@ -166,6 +169,23 @@ class Calendar extends Component {
     });
 
   }
+
+  // shouldComponentUpdate (nextProps, nextState) {
+  //   if (
+  //     this.props.allEvents !== nextProps.allEvents ||
+  //     this.props.calendarIsFetching !== nextProps.calendarIsFetching ||
+  //     this.props.filterActive !== nextProps.filterActive ||
+  //     this.props.filteredEvents !== nextProps.filteredEvents ||
+  //     this.props.selectedFilter !== nextProps.selectedFilter ||
+  //     this.props.user_id !== nextProps.user_id ||
+  //     this.state.isReady !== nextState.isReady
+  //   ) {
+  //     return true;
+  //   }
+  //
+  //   return false;
+  // }
+
 
   componentWillUnmount () {
     // Don't forget to remove the listeners!
@@ -265,11 +285,11 @@ class Calendar extends Component {
     }
 
     console.log('renderCalendarContent');
-    console.log('renderCalendarContent props', this.props);
+    // console.log('renderCalendarContent props', this.props);
 
 
-    const timestamp = new Date();
-    console.log('renderCalendar:', timestamp.getTime());
+    // const timestamp = new Date();
+    // console.log('renderCalendar:', timestamp.getTime());
 
     const { width } = Dimensions.get('window'); // inline style to force render on screen rotation
     const scaledWidth = width > 700 ? (width * 1) : (width * 1);

@@ -19,7 +19,8 @@ export default class Splash extends Component {
 
   componentWillMount () {
 
-    console.log('SplashWillMount: ', this.props);
+    console.log('SplashWillMount: ');
+    // console.log('SplashWillMount: ', this.props);
 
     setTimeout(() => {
       AsyncStorage.getItem('spark_token')
@@ -39,12 +40,12 @@ export default class Splash extends Component {
             }
           });
 
-          console.log('splash this.props', this.props);
+          // console.log('splash this.props', this.props);
           console.log('this.props.isFetchingBranch', this.props.isFetchingBranch);
 
 
           const splashStore = store.getState();
-          console.log('splashStore: ', splashStore);
+          // console.log('splashStore: ', splashStore);
           // could add container to bring this prop in.
 
 
@@ -98,13 +99,14 @@ export default class Splash extends Component {
 
   componentDidMount () {
     Answers.logCustom('Splash.js Mounted', { additionalData: 'nothing' });
-    console.log('SplashDidMount: ', this.props);
+    console.log('SplashDidMount: ');
+    // console.log('SplashDidMount: ', this.props);
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps () {
     console.log('splash will rec props:');
-    console.log('splash this props:', this.props);
-    console.log('splash next props:', nextProps);
+    // console.log('splash this props:', this.props);
+    // console.log('splash next props:', nextProps);
   }
 
   render () {

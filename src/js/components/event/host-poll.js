@@ -14,7 +14,7 @@ import { feedHorizPaddingScale, feedVertPaddingScale } from '../../../styles/sca
 import Spinner from '../common/Spinner';
 
 const headerHeight = Header.HEIGHT;
-console.log('Header height: ', Header.HEIGHT);
+// console.log('Header height: ', Header.HEIGHT);
 
 const inlineStyle = {
   row: {

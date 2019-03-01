@@ -40,8 +40,9 @@ export default class Drawer extends Component {
   }
 
   render () {
-    console.log('Header.HEIGHT Drawer :', DRAWER_HEADER_HEIGHT);
-    console.log('drawer props', this.props);
+    // console.log('Header.HEIGHT Drawer :', DRAWER_HEADER_HEIGHT);
+    console.log('drawer render');
+    // console.log('drawer props', this.props);
     const { handleLogOut, navigation } = this.props;
 
     const aboutURL = 'http://www.spark-app.net';

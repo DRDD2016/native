@@ -287,7 +287,7 @@ export function submitCode (token, code) {
           dispatch(submitCodeSuccess(data));
           dispatch(clearPollState());
           dispatch(getCalendar(token));
-          console.log('store.getState()', store.getState());
+          // console.log('store.getState()', store.getState());
           const params = {
             userIsHost: store.getState().user.user_id === data.host_user_id,
             isPoll: data.is_poll,

@@ -60,7 +60,7 @@ class InputField extends Component {
     const focusedColor = !focussedColor ? colours.main : focussedColor;
     const unfocusedColor = !unfocussedColor ? colours.lightgray : unfocussedColor;
     console.log('labelType', labelType);
-    console.log('this.props', this.props);
+    // console.log('this.props', this.props);
     const labelPoll = `${label} - Option ${inputKey + 1}`;
     const labelNotPoll = `${label}`;
     const labelText = labelType === 'poll' ? labelPoll : labelNotPoll;

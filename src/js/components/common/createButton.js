@@ -43,8 +43,8 @@ export default class CreateButton extends Component {
   render () {
     const { tipsVisible } = this.state;
     const { children, onPress } = this.props;
-
-    console.log('createButton props', this.props);
+    console.log('createButton render');
+    // console.log('createButton props', this.props);
 
     return (
 
