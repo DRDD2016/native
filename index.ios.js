@@ -1,6 +1,7 @@
 import { AppRegistry, YellowBox } from 'react-native';
 import App from './src/js/index';
 
+console.ignoredYellowBox = ['Remote debugger'];
 YellowBox.ignoreWarnings([
   'Setting a timer',
   'Require cycle',

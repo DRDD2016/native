@@ -202,11 +202,12 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-branch')
+    implementation project(':react-native-branch')
+
+
     implementation project(':react-native-firebase')
     implementation project(':rn-fetch-blob')
     implementation project(':react-native-view-overflow')
-    implementation project(':react-native-branch')
     implementation project(':bugsnag-react-native')
     implementation project(':react-native-config')
     implementation project(':react-native-image-picker')

@@ -24,7 +24,8 @@ import com.crashlytics.android.Crashlytics;
 import java.util.Arrays;
 import java.util.List;
 // import Branch and RNBranch
-import io.branch.rnbranch.RNBranchPackage;
+// import io.branch.rnbranch.RNBranchPackage;
+import io.branch.rnbranch.*;
 import io.branch.referral.Branch;
 
 
