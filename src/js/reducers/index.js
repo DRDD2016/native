@@ -3,6 +3,7 @@ import {
   createNavigationReducer
 } from 'react-navigation-redux-helpers';
 import { reducer as form } from 'redux-form';
+import { reducer as connectivity } from 'react-native-offline';
 import calendar from './calendar';
 import event from './event/index';
 import feed from './feed';
@@ -23,6 +24,7 @@ const appReducer = combineReducers({
   user,
   confirmUserEmail,
   network,
+  connectivity,
   form
 });
 

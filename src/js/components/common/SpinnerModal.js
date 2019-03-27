@@ -7,7 +7,8 @@ import { saveIncomingLinkError } from '../../actions/network';
 import { eventConfirmedSuccess } from '../../actions/create';
 import { finishedUpdateRsvpSuccess } from '../../actions/event/data';
 import Spinner from '../common/Spinner';
-import styles, { ConfirmButton, ConfirmButtonText } from '../../../styles';
+import styles, { ConfirmButton, ModalWrapper, ModalView } from '../../../styles';
+import { ConfirmButtonText, GeneralText, MessageText } from '../../../styles/text';
 import colours from '../../../styles/colours';
 import formatDate from '../../lib/format-date';
 import formatTime from '../../lib/format-time';
@@ -34,10 +35,10 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
       onRequestClose={onClose}
     >
       {
-        <View style={styles.modalWrapper}>
+        <ModalWrapper>
           {
             (type === 'confirming_event') &&
-            <View style={styles.modalConfirm}>
+            <ModalView>
 
               <Text style={[styles.msg1, { flex: 1 }]}>Confirming event</Text>
               <Text style={[styles.msg2, { flex: 1 }]}>please wait...</Text>
@@ -49,55 +50,57 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
               }
               <View style={{ flex: 1 }} />
 
-            </View>
+            </ModalView>
           }
 
           {
 
             (type === 'event_confirmed') &&
-            <View style={styles.modalConfirm}>
+            <ModalView>
+              <View style={styles.modalConfirm}>
 
-              <Text style={[styles.msg1, { flex: 1 }]}>Event confirmed</Text>
-              <Text style={[styles.msg2, { flex: 1 }]}>Your event is now confirmed:</Text>
-              <View style={{ flex: 1 }}>
+                <Text style={[styles.msg1, { flex: 1 }]}>Event confirmed</Text>
+                <Text style={[styles.msg2, { flex: 1 }]}>Your event is now confirmed:</Text>
+                <View style={{ flex: 1 }}>
 
-                <Text style={styles.msg3}>{additionalInfo.what[0] !== '' ? `What: ${additionalInfo.what[0]}` : ''}</Text>
-                <Text style={styles.msg3}>{additionalInfo.where[0] !== '' ? `Where: ${additionalInfo.where[0]}` : ''}</Text>
-                <Text style={styles.msg3}>
-                  When: {formatDate(additionalInfo.when[0])} {formatTime(additionalInfo.when[0])}
-                </Text>
+                  <Text style={styles.msg3}>{additionalInfo.what[0] !== '' ? `What: ${additionalInfo.what[0]}` : ''}</Text>
+                  <Text style={styles.msg3}>{additionalInfo.where[0] !== '' ? `Where: ${additionalInfo.where[0]}` : ''}</Text>
+                  <Text style={styles.msg3}>
+                    When: {formatDate(additionalInfo.when[0])} {formatTime(additionalInfo.when[0])}
+                  </Text>
+
+                </View>
+                <View style={{ flex: 1 }}>
+                  <ConfirmButton
+                    testDescription="EVENT CONFIRMED OK"
+                    style={{ backgroundColor: colours.green }}
+                    onPress={ () => {
+
+                      store.dispatch(eventConfirmedSuccess());
+
+                      goBack();
+
+                    }}
+                  >
+                    <ConfirmButtonText>
+                      OK
+                    </ConfirmButtonText>
+                  </ConfirmButton>
+                </View>
+
+                {
+                  // additionalInfo && <Text style={[styles.msg2, { flex: 1 }]}>{additionalInfo}</Text>
+                }
+                <View style={{ flex: 1 }} />
 
               </View>
-              <View style={{ flex: 1 }}>
-                <ConfirmButton
-                  testDescription="EVENT CONFIRMED OK"
-                  style={{ backgroundColor: colours.green }}
-                  onPress={ () => {
-
-                    store.dispatch(eventConfirmedSuccess());
-
-                    goBack();
-
-                  }}
-                >
-                  <ConfirmButtonText>
-                    OK
-                  </ConfirmButtonText>
-                </ConfirmButton>
-              </View>
-
-              {
-                // additionalInfo && <Text style={[styles.msg2, { flex: 1 }]}>{additionalInfo}</Text>
-              }
-              <View style={{ flex: 1 }} />
-
-            </View>
+            </ModalView>
           }
 
           {
 
             (type === 'rsvp_finished') &&
-            <View style={styles.modalConfirm}>
+            <ModalView>
 
               <Text style={[styles.msg1, { flex: 1 }]}>Response sent</Text>
               <Text style={[styles.msg2, { flex: 1 }]}>Your response has been sent</Text>
@@ -127,13 +130,13 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
               }
               <View style={{ flex: 1 }} />
 
-            </View>
+            </ModalView>
           }
 
 
           {
             (type === 'share_invite') &&
-            <View style={styles.modalConfirm}>
+            <ModalView>
 
               <Text style={[styles.msg1, { flex: 1 }]}>Sharing invite</Text>
               <Text style={[styles.msg2, { flex: 1 }]}>please wait...</Text>
@@ -145,15 +148,15 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
               }
               <View style={{ flex: 1 }} />
 
-            </View>
+            </ModalView>
           }
 
           {
             (type === 'loading') &&
-            <View style={styles.modalConfirm}>
+            <ModalView>
 
-              <Text style={[styles.msg1, { flex: 1 }]}>Loading</Text>
-              <Text style={[styles.msg2, { flex: 1 }]}>please wait...</Text>
+              <GeneralText style={[{ color: colours.white, paddingVertical: 12 }]}>Loading</GeneralText>
+              <MessageText style={[{ color: colours.lightgray, paddingVertical: 4 }]}>please wait...</MessageText>
               <View style={{ flex: 1 }}>
                 <Spinner size="large" />
               </View>
@@ -165,17 +168,17 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
                 // isFetching && <Text style={[styles.msg2, { flex: 1 }]}>{`isFetching: ${isFetching}`}</Text>
               }
               {
-                additionalInfo && <Text style={[styles.msg2, { flex: 1 }]}>{additionalInfo}</Text>
+                additionalInfo && <MessageText style={{ flex: 1 }}>{additionalInfo}</MessageText>
               }
 
               <View style={{ flex: 1 }} />
 
-            </View>
+            </ModalView>
           }
 
           {
             (type === 'event_code_error') &&
-            <View style={styles.modalConfirm}>
+            <ModalView>
               <Text style={[styles.msg1, { flex: 1 }]}>Poor connectivity</Text>
               <Text style={[styles.msg2, { flex: 1 }]}>please check your internet connection</Text>
               {
@@ -204,10 +207,10 @@ export default function SpinnerModal ({ visible, type, isConnected, onClose, eve
                 </ConfirmButton>
               </View>
 
-            </View>
+            </ModalView>
           }
 
-        </View>
+        </ModalWrapper>
       }
 
     </Modal>

@@ -2,11 +2,11 @@ import { connect } from 'react-redux';
 import OfflineIcon from '../../components/common/offline-icon';
 
 
-const mapStateToProps = ({ network }) => {
-  // console.log('network', network);
+const mapStateToProps = ({ connectivity }) => {
+  console.log('connectivity.isConnected:', connectivity.isConnected);
 
   return {
-    isConnected: network.isConnected
+    isConnected: connectivity.isConnected
   };
 
 };

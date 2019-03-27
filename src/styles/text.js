@@ -202,7 +202,53 @@ export const ConfirmButtonText = styled.Text.attrs(props => ({
 
 `;
 
+
 // Event poll
+
+export const Msg1 = styled.Text`
+  fontSize: ${moderateScale(16)};
+  fontWeight: 600;
+  color: ${colours.main};
+`; // msg1
+
+export const Msg2 = styled.Text`
+  fontSize: ${moderateScale(16)};
+  fontWeight: 400;
+  color: ${colours.gray};
+`; // msg2
+
+export const Msg3 = styled.Text`
+  fontSize: ${moderateScale(14)};
+  fontWeight: 600;
+  color: ${colours.gray};
+  textAlign: center;
+`; // msg3
+
+export const Msg4 = styled.Text`
+  fontSize: ${moderateScale(12)};
+  fontWeight: 600;
+  color: ${colours.gray};
+`; // msg4
+
+export const SmMsg = styled.Text`
+  fontSize: ${scale(12)};
+  fontWeight: 300;
+  color: ${colours.gray};
+  paddingTop: 10;
+  paddingBottom: 10;
+`; // smallMessageText
+
+export const RSVPButtonText = styled.Text`
+  fontSize: ${moderateScale(16)};
+  color: ${colours.white};
+`; // RSVPButtonText
+
+export const ButText = styled.Text.attrs(props => ({
+  color: props.color || colours.gray
+}))`
+  fontSize: ${moderateScale(12)};
+  color: ${props => props.color};
+`;
 
 export const VoteText = styled.Text.attrs(props => ({
   opacity: props.opacity || 1

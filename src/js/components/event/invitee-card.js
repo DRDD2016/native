@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Text, View, Image, Dimensions } from 'react-native';
+import { View, Image, Dimensions } from 'react-native';
 import colours from '../../../styles/colours';
+import { ButText } from '../../../styles/text';
+import { moderateScale } from '../../../styles/scaling';
 
 const windowWidth = Dimensions.get('window').width;
+console.log('windowWidth:', windowWidth);
 
 const cardStyle = {
-  height: 30,
+  height: (windowWidth > 600) ? moderateScale(40) : moderateScale(30),
   paddingVertical: 5,
   paddingRight: 5,
   borderRadius: 3,
@@ -20,13 +23,13 @@ const cardStyle = {
   maxWidth: windowWidth * 0.33
 };
 const imageStyle = {
-  width: 30,
-  height: 30,
+  width: (windowWidth > 600) ? moderateScale(40) : moderateScale(30), // 30 for iphone5s
+  height: (windowWidth > 600) ? moderateScale(40) : moderateScale(30), // 40 for iPAD
   borderRadius: 3,
   marginRight: 4
 };
 const textStyle = {
-  fontSize: 12,
+
   flex: 2,
   color: colours.main
 };
@@ -35,7 +38,7 @@ export default function InviteeCard ({ firstname, photo_url }) {
   return (
     <View style={cardStyle}>
       <Image source={{ uri: photo_url }} style={imageStyle} />
-      <Text numberOfLines={1} style={textStyle}>{firstname}</Text>
+      <ButText numberOfLines={1} style={textStyle}>{firstname}</ButText>
     </View>
   );
 }

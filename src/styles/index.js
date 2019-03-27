@@ -1,11 +1,11 @@
 import { Dimensions, Platform } from 'react-native';
 import styled from 'styled-components';
 import colours from './colours';
-import { scale, moderateScale, verticalScale2, buttonScale, feedVertPaddingScale } from './scaling';
+import { scale, moderateScale, verticalScale2, buttonScale } from './scaling';
 import { ms12, ms14, ms18 } from './text';
 
 // Buttons
-
+export const PaddingMain = 2;
 
 export const Button = styled.TouchableOpacity`
   paddingTop: 4;
@@ -127,7 +127,8 @@ export const ModalView = styled.View`
   backgroundColor: ${'transparent'};
   marginHorizontal: ${moderateScale(4)};
   marginVertical: ${moderateScale(4)};
-  paddingVertical: ${feedVertPaddingScale(8)};
+  paddingVertical: ${moderateScale(4)};
+  paddingTop: ${moderateScale(60)};
   paddingHorizontal: ${moderateScale(4)};
   alignItems: center;
   justifyContent: center;

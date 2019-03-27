@@ -1,6 +1,6 @@
 /* eslint-disable arrow-body-style */
 import React from 'react';
-import { View, Image, Text, ScrollView, TouchableHighlight, Platform, StatusBar } from 'react-native';
+import { View, Image, ScrollView, TouchableHighlight, Platform, StatusBar, Dimensions } from 'react-native';
 import { Header } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DeleteIcon from '../common/delete-icon';
@@ -10,10 +10,12 @@ import FinalisedWhen from '../create/confirm-when';
 import EditIcon from '../common/edit-icon';
 import MessageBubble from '../common/messageBubble';
 import InviteeCard from './invitee-card';
-import { styles, Msg1, ButText, ConfirmButton, ConfirmButtonText, RSVPButton, RSVPButtonText } from '../../../styles';
+import { styles, PaddingMain, ConfirmButton, RSVPButton } from '../../../styles';
 import colours from '../../../styles/colours';
-import { ForgotPasswordText } from '../../../styles/text';
+import { ForgotPasswordText, RSVPButtonText, Msg1, ButText, ConfirmButtonText } from '../../../styles/text';
+import { moderateScale } from '../../../styles/scaling';
 
+const windowWidth = Dimensions.get('window').width;
 
 const NAVBAR_HEIGHT = Header.HEIGHT;
 const STATUS_BAR_HEIGHT = Platform.select({ ios: 5, android: StatusBar.currentHeight });
@@ -29,6 +31,7 @@ const inlineStyle = {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
     paddingVertical: 5,
     paddingHorizontal: 2,
     marginHorizontal: 5
@@ -36,11 +39,6 @@ const inlineStyle = {
   RSVPButtonText: {
     fontSize: 16,
     color: colours.white
-  },
-  RSVPTitleText: {
-    fontSize: 12,
-    fontWeight: '600',
-    textAlign: 'center'
   },
   orangeButton: {
     backgroundColor: colours.orange,
@@ -52,7 +50,8 @@ const inlineStyle = {
   },
   column: {
     flex: 1,
-    padding: 2,
+    padding: 4,
+    paddingTop: 8,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'stretch'
@@ -64,7 +63,9 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID,
   console.log('wooo rsvpToEvent:', rsvpToEvent);
   console.log('wooo rsvps:', rsvps);
   console.log('userID', userID);
-
+  console.log('rsvps not length:', rsvps.not_responded.length);
+  console.log('rsvps not:', rsvps.not_responded);
+  console.log('host_user_id:', event.host_user_id);
 
   const goingIsSelected = rsvps.going.some((invitee) => {
     return invitee.user_id === userID;
@@ -88,16 +89,22 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID,
     <ScrollView style={{ height: '100%', borderColor: 'orange', borderWidth: 0 }}>
       <View style={{ backgroundColor: colours.verylightgray, paddingVertical: 4, borderBottomColor: colours.sectionBorder, borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }} // eslint-disable-line max-len
       >
-        <View style={{ height: TITLE_PANEL_HEIGHT, width: TITLE_PANEL_HEIGHT, padding: 0, paddingTop: 0, borderColor: 'blue', borderWidth: 0 }}>
+        <View style={{
+          justifyContent: 'flex-start',
+          padding: PaddingMain,
+          paddingTop: 0,
+          borderColor: 'blue',
+          borderWidth: 0 }}>
           <ButText style={{ textAlign: 'center' }}>
             Hosted by
           </ButText>
-          <View style={{ flex: 1, padding: 0, borderColor: 'red', borderWidth: 0 }}>
+          <View style={{ borderColor: 'red', borderWidth: 0 }}>
             <Image
               source={{ uri: event.host_photo_url }}
-              style={[styles.uiProfilePhotoMessage, { height: '100%',
+              style={[styles.uiProfilePhotoMessage, {
+                padding: PaddingMain,
                 aspectRatio: 1 / 1,
-                // height: 40,
+                height: (windowWidth > 600) ? moderateScale(40) : moderateScale(30), // 40 on iPAD
                 alignSelf: 'center',
                 borderRadius: 3
               // style={{ borderRadius: 15,
@@ -115,7 +122,7 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID,
 
         { userIsHost ?
           <View style={{ flex: 1 }}>
-            <Msg1 style={{ alignSelf: 'center' }}>{event.name}</Msg1>
+            <Msg1 style={{ alignSelf: 'center', textAlign: 'center' }}>{event.name}</Msg1>
           </View>
           :
           <View style={{ borderColor: 'red', borderWidth: 0 }}>
@@ -214,7 +221,7 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID,
 
         { !userIsHost &&
         <View style={{ flex: 1, flexDirection: 'column' }}>
-          <Text style={{ marginLeft: 4, marginBottom: 4, color: colours.main }}>Your status</Text>
+          <ButText style={{ marginLeft: 4, marginBottom: 4, color: colours.main }}>Your status</ButText>
 
 
           <View style={{ flexDirection: 'row' }}>
@@ -222,7 +229,7 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID,
               style={inlineStyle.greenButton}
               onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_GOING) }
             >
-              <View style={{ flexDirection: 'row' }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <RSVPButtonText>
                   Going
                 </RSVPButtonText>
@@ -235,7 +242,7 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID,
               style={inlineStyle.orangeButton}
               onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_MAYBE) }
             >
-              <View style={{ flexDirection: 'row' }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <RSVPButtonText>
                   Maybe
                 </RSVPButtonText>
@@ -248,7 +255,7 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID,
               style={inlineStyle.redButton}
               onPress={ () => !userIsHost && rsvpToEvent(event.event_id, STATUS_NOT_GOING) }
             >
-              <View style={{ flexDirection: 'row' }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <RSVPButtonText>
                   Not Going
                 </RSVPButtonText>
@@ -262,25 +269,25 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID,
         </View>
         }
         <View style={{ marginTop: 8, marginHorizontal: 4, borderTopColor: '#efefef', borderTopWidth: 1, alignItems: 'center' }} />
-        {(rsvps.not_responded.length > 1) && <Text style={{ color: colours.main, paddingLeft: 4, paddingVertical: 4 }}>Invitees</Text>}
-        <View style={{ flexDirection: 'row', backgroundColor: '#efefef', paddingVertical: 3, justifyContent: 'space-around' }}>
+        {(rsvps.not_responded.length > 0) && <ButText style={{ color: colours.main, paddingLeft: 4, paddingVertical: 4 }}>Invitees</ButText>}
+        <View style={{ flexDirection: 'row', backgroundColor: colours.offWhite, paddingVertical: 3, justifyContent: 'space-around' }}>
           <View style={[inlineStyle.RSVPTitle]}>
-            <Text style={[{ color: colours.green }, inlineStyle.RSVPTitleText]}>
-              <Icon name="check-circle" size={16} color={colours.green} />
+            <Icon name="check-circle" size={16} color={colours.green} />
+            <ButText style={{ color: colours.green, textAlign: 'center' }}>
               {` GOING (${rsvps.going.length})`}
-            </Text>
+            </ButText>
           </View>
           <View style={[inlineStyle.RSVPTitle]}>
-            <Text style={[{ color: colours.orange }, inlineStyle.RSVPTitleText]}>
-              <Icon name="question-circle" size={16} color={colours.orange} />
+            <Icon name="question-circle" size={16} color={colours.orange} />
+            <ButText style={{ color: colours.orange, textAlign: 'center' }}>
               {` MAYBE (${rsvps.maybe.length})`}
-            </Text>
+            </ButText>
           </View>
           <View style={[inlineStyle.RSVPTitle]}>
-            <Text style={[{ color: colours.red }, inlineStyle.RSVPTitleText]}>
-              <Icon name="times-circle" size={16} color={colours.red} />
+            <Icon name="times-circle" size={16} color={colours.red} />
+            <ButText style={{ color: colours.red, textAlign: 'center' }}>
               {` NOT GOING (${rsvps.not_going.length})`}
-            </Text>
+            </ButText>
           </View>
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingTop: 2 }}>
@@ -328,9 +335,9 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID,
           </View>
         </View>
         <View style={{ marginTop: 10, marginBottom: 10, borderTopWidth: 1, borderTopColor: colours.sectionBorder }}>
-          {(rsvps.not_responded.length > 0) && <Text style={{ color: colours.main, paddingLeft: 4, paddingTop: 4 }}>Yet to respond:</Text>}
+          {(rsvps.not_responded.length > 0) && <ButText style={{ color: colours.main, paddingLeft: 4, paddingTop: 4 }}>Yet to respond:</ButText>}
         </View>
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+        <View style={{ paddingLeft: 4, flexDirection: 'row', flexWrap: 'wrap' }}>
           {
             rsvps.not_responded.map((invitee) => {
               if (invitee.user_id === event.host_user_id) {
@@ -347,18 +354,26 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID,
           }
         </View>
 
-        <TouchableHighlight
-          style={{ paddingVertical: 20, paddingHorizontal: 20, flexDirection: 'row', alignSelf: 'center' }}
+        <ConfirmButton
+          style={{
+            width: undefined,
+            borderColor: colours.offWhite,
+            backgroundColor: colours.offWhite,
+            marginVertical: 20,
+            paddingVertical: 10,
+            paddingHorizontal: 20,
+            flexDirection: 'row',
+            alignSelf: 'center' }}
           onPress={ () => handleDeleteEvent(event, event.event_id) }
         >
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
             <DeleteIcon color={colours.main} />
             <ForgotPasswordText>
             Delete this event
             </ForgotPasswordText>
           </View>
-        </TouchableHighlight>
+        </ConfirmButton>
 
 
       </View>

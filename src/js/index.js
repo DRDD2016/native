@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { Client } from 'bugsnag-react-native';
 import { NetInfo, AsyncStorage, YellowBox } from 'react-native';
+import { ReduxNetworkProvider } from 'react-native-offline';
 // , NativeModules
 // import {
 //   setCustomView,
@@ -245,11 +246,13 @@ class App extends Component {
     return (
       <Provider store={ store }>
 
-        <PushController>
-          <SpinnerContainer>
-            <AppWithNavigationState />
-          </SpinnerContainer>
-        </PushController>
+        <ReduxNetworkProvider>
+          <PushController>
+            <SpinnerContainer>
+              <AppWithNavigationState />
+            </SpinnerContainer>
+          </PushController>
+        </ReduxNetworkProvider>
 
       </Provider>
     );
