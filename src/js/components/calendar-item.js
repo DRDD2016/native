@@ -9,7 +9,7 @@ import CardSection from './common/CardSection';
 import MonthCalendarItem from './month-calendar-item';
 import colours from '../../styles/colours';
 import { moderateScale, feedHorizPaddingScale, feedVertPaddingScale } from '../../styles/scaling';
-import { CalendarDateText, CalendarFromText, HostNameText, EventNameText } from '../../styles/text';
+import { CalendarDateText, CalendarFromText, HostNameText, EventNameText, ButText } from '../../styles/text';
 
 const avatar = require('../../img/avatar.png');
 
@@ -210,7 +210,7 @@ class CalendarItem extends PureComponent {
                         }
                         {(!isCancelled && !userIsHost && rsvpStatus === 'not_responded') &&
                           <Text numberOfLines={2}
-                            style={{ fontSize: moderateScale(12), fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.green }} // eslint-disable-line max-len
+                            style={{ fontSize: moderateScale(12), fontWeight: '600', marginLeft: 5, marginRight: 5, color: colours.gray }} // eslint-disable-line max-len
                           >
                             You have not responded
                           </Text>
@@ -292,20 +292,20 @@ class CalendarItem extends PureComponent {
               >
                 {
                   (going + maybe === 0) &&
-                  <View style={{ flex: 1, marginHorizontal: 2, alignItems: 'center' }} />
+                  <View style={{ flex: 1.5, marginHorizontal: 2, alignItems: 'center' }} />
                 }
                 {
                   (going !== 0) &&
-                  <View style={{ flex: 1, marginHorizontal: 2, alignItems: 'center' }}>
-                    <Text style={{ fontSize: 12, color: colours.green }}>{!going ? '-' : going}</Text>
-                    <Text style={{ fontSize: 12, color: colours.green }}>going</Text>
+                  <View style={{ flex: 1.5, marginHorizontal: 2, alignItems: 'center' }}>
+                    <Text style={{ fontSize: 10, color: colours.green }}>{!going ? '-' : going}</Text>
+                    <Text style={{ fontSize: 10, color: colours.green }}>Going</Text>
                   </View>
                 }
                 {
                   (maybe !== 0) &&
-                  <View style={{ flex: 1, marginHorizontal: 2, alignItems: 'center' }}>
-                    <Text style={{ fontSize: 12, color: colours.orange }}>{!maybe ? '-' : maybe}</Text>
-                    <Text style={{ fontSize: 12, color: colours.orange }}>maybe</Text>
+                  <View style={{ flex: 1.5, marginHorizontal: 2, alignItems: 'center' }}>
+                    <ButText style={{ fontSize: 10, color: colours.orange }}>{!maybe ? '-' : maybe}</ButText>
+                    <ButText style={{ fontSize: 10, color: colours.orange }}>Maybe</ButText>
                   </View>
                 }
 

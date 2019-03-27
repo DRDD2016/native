@@ -354,27 +354,28 @@ const FinalisedEvent = ({ event, userIsHost, isPoll, rsvpToEvent, rsvps, userID,
           }
         </View>
 
-        <ConfirmButton
-          style={{
-            width: undefined,
-            borderColor: colours.offWhite,
-            backgroundColor: colours.offWhite,
-            marginVertical: 20,
-            paddingVertical: 10,
-            paddingHorizontal: 20,
-            flexDirection: 'row',
-            alignSelf: 'center' }}
-          onPress={ () => handleDeleteEvent(event, event.event_id) }
-        >
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        {
+          userIsHost && <ConfirmButton
+            style={{
+              width: undefined,
+              borderColor: colours.offWhite,
+              backgroundColor: colours.offWhite,
+              marginVertical: 20,
+              paddingVertical: 10,
+              paddingHorizontal: 20,
+              flexDirection: 'row',
+              alignSelf: 'center' }}
+            onPress={ () => handleDeleteEvent(event, event.event_id) }
+          >
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
-            <DeleteIcon color={colours.main} />
-            <ForgotPasswordText>
-            Delete this event
-            </ForgotPasswordText>
-          </View>
-        </ConfirmButton>
-
+              <DeleteIcon color={colours.main} />
+              <ForgotPasswordText>
+              Delete this event
+              </ForgotPasswordText>
+            </View>
+          </ConfirmButton>
+        }
 
       </View>
     </ScrollView>
