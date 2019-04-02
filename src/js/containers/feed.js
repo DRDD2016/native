@@ -15,7 +15,7 @@ import { deleteIncomingLink, linkDatafromBranch, saveIncomingLinkError } from '.
 import filterFeed from '../lib/filter-feed';
 
 
-const mapStateToProps = ({ feed, user, network }) => {
+const mapStateToProps = ({ feed, user, network, app_meta }) => {
 
   const data = feed.data;
   const filterActive = feed.filterActive;
@@ -39,6 +39,7 @@ const mapStateToProps = ({ feed, user, network }) => {
     eventCode: network.inComingLinkCode,
     eventCodeError: network.inComingLinkError,
     // saveEventStatus: create.saveEventStatus,
+    app_updateNo: app_meta.app_updateNo,
     user_updateNo: user.user_update_no,
     user_openNo: user.user_open_no
   };

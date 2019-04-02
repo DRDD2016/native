@@ -14,8 +14,11 @@ class CreateButton extends Component {
 
   render () {
 
-    const { children, onPress, tipsNo, handleNextTips } = this.props;
+    const { children, onPress, tipsNo, handleNextTips, user_updateNo, app_updateNo } = this.props;
 
+    console.log('createButton user_updateNo', user_updateNo);
+    console.log('createButton app_updateNo', app_updateNo);
+    const visible = (user_updateNo === app_updateNo) && (tipsNo === 0)
     return (
 
       <View style={{
@@ -25,7 +28,7 @@ class CreateButton extends Component {
         <Tips
 
           childrenStyle={{ justifyContent: 'center', alignItems: 'center' }}
-          visible={tipsNo === 0}
+          visible={visible}
           onRequestClose={() => handleNextTips()}
           delay={500}
           text={`You have no events ${'\n'}${'\n'}Tap this icon to get started`}
@@ -46,7 +49,10 @@ class CreateButton extends Component {
 }
 
 const mapStateToProps = state => ({
-  tipsNo: state.tips.tipsNo
+  tipsNo: state.tips.tipsNo,
+  user_updateNo: state.user.user_update_no,
+  app_updateNo: state.app_meta.app_update_no,
+  eventCode: state.network.inComingLinkCode
 });
 
 const mapDispatchToProps = dispatch => ({

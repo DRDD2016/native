@@ -154,14 +154,21 @@ export const AppNavigator = createStackNavigator({
             navigationOptions: ({ screenProps }) => ({
               tabBarIcon: ({ tintColor }) => {
 
-                const { tipsNo, handleNextTips } = screenProps;
+                const { tipsNo, handleNextTips, user_updateNo, app_updateNo } = screenProps;
+
+                console.log('user_updateNo: ', user_updateNo);
+                console.log('app_updateNo: ', app_updateNo);
+
+                const tipsVisible = (user_updateNo === app_updateNo) && (tipsNo === 1);
+                console.log('tipsVisible: ', tipsVisible);
+
                 return (
                   <View style={{ height: TABBAR_HEIGHT, alignItems: 'center', justifyContent: 'center' }}>
                     <Tips
                       tooltipContainerStyle={{ left: -TABBAR_HEIGHT * 6, borderWidth: 1, borderColor: 'red' }}
                       contentStyle={{ borderWidth: 0, borderColor: 'blue' }}
                       childrenStyle={{ borderWidth: 0, borderColor: 'yellow' }}
-                      visible={ tipsNo === 1 }
+                      visible={tipsVisible}
                       position="left"
                       // offsetLeft={280}
                       onRequestClose={() => handleNextTips()}
@@ -460,7 +467,7 @@ class AppWithNavigationState extends Component {
 
   render () {
     const { showCreateButton } = this.state;
-    const { dispatch, nav, tipsNo } = this.props;
+    const { dispatch, nav, tipsNo, user_updateNo, app_updateNo } = this.props;
     console.log('screenPropstips:', this.props.tipsNo); // forces this component to update when change of state, necessary to fire getCurrentRoute
 
 
@@ -471,7 +478,7 @@ class AppWithNavigationState extends Component {
           ref={(navigatorRef) => {
             NavigationService.setTopLevelNavigator(navigatorRef);
           }}
-          screenProps={{ tipsNo, handleNextTips: this.handleNextTips }}
+          screenProps={{ tipsNo, handleNextTips: this.handleNextTips, user_updateNo, app_updateNo }}
           navigation = {{
             dispatch,
             state: nav,
@@ -506,7 +513,9 @@ class AppWithNavigationState extends Component {
 
 const mapStateToProps = state => ({
   nav: state.nav,
-  tipsNo: state.tips.tipsNo
+  tipsNo: state.tips.tipsNo,
+  user_updateNo: state.user.user_update_no,
+  app_updateNo: state.app_meta.app_update_no
 });
 
 // const mapDispatchToProps = dispatch => ({
