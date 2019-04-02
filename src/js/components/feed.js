@@ -129,6 +129,7 @@ class Feed extends Component {
 
     console.log('feed DidMount');
 
+
     // 1: Component is mounted off-screen
     InteractionManager.runAfterInteractions(() => {
       // 2: Component is done animating
@@ -341,6 +342,8 @@ class Feed extends Component {
   render () {
 
     console.log('renderFeed');
+
+    console.log('screenPropsFeed', this.props.screenProps);
 
     if (!this.state.isReady) {
       console.log('renderFeedActivityIndicator');

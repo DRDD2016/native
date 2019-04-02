@@ -11,6 +11,7 @@ import create from './create';
 import user from './user';
 import confirmUserEmail from './confirm-email';
 import network from './network';
+import tips from './tips';
 import { AppNavigator } from '../routes';
 
 const navReducer = createNavigationReducer(AppNavigator);
@@ -25,7 +26,8 @@ const appReducer = combineReducers({
   confirmUserEmail,
   network,
   connectivity,
-  form
+  form,
+  tips
 });
 
 const rootReducer = (state, action) => {
