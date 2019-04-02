@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
-import { Dimensions, Platform, BackHandler, TouchableWithoutFeedback, View } from 'react-native';
+import { Dimensions, Platform, BackHandler, TouchableOpacity, View, SafeAreaView } from 'react-native';
 import { connect } from 'react-redux';
 import ViewOverflow from 'react-native-view-overflow';
+import Tips from 'react-native-tips';
 import { Header, createStackNavigator, createBottomTabNavigator, createDrawerNavigator, NavigationActions } from 'react-navigation';
 // import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { createReduxBoundAddListener, createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import NavigationService from './navigationService';
+// import IconN from './components/general/icon';
 // import Icon2 from 'react-native-vector-icons/Entypo';
 // import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons';
 import colours from '../styles/colours';
 import MyStatusBar, { STATUSBAR_HEIGHT } from './components/common/StatusBar';
 import BannerBar from './components/common/BannerBar';
 import CreateButton from './components/common/createButton';
-import { AddCreateButton } from '../styles';
+// import { AddCreateButton } from '../styles';
 import { TabBarText } from '../styles/text';
-import { scale, moderateScale, verticalScale } from '../styles/scaling';
+import { scale, moderateScale } from '../styles/scaling';
 // import CustomTabBar from './components//general/customTabBar';
 import DrawerContainer from './containers/drawer';
 import Index from './components/auth';
@@ -37,6 +40,8 @@ import ConfirmEmailContainer from './containers/auth/confirm-email';
 import EditContainer from './containers/edit';
 import CodeContainer from './containers/code';
 import Splash from './components/auth/splash';
+import { nextTips } from './actions/tips';
+import { store } from './init-store';
 // import CreateButton from './components/general/create-button';
 // import Modal from './components/modal';
 
@@ -126,9 +131,7 @@ export const AppNavigator = createStackNavigator({
               tabBarLabel: 'Create',
               tabBarVisible: false,
               tabBarIcon: () => (
-                <AddCreateButton style={{ position: 'absolute', alignItems: 'center', zIndex: 97 }}>
-                  <Icon name="plus" size={verticalScale(28)} color={colours.white} />
-                </AddCreateButton>
+                <View />
               )
 
             }
@@ -148,17 +151,45 @@ export const AppNavigator = createStackNavigator({
             })
           },
           Code: { screen: createStackNavigator({ ScreenRsvp: { screen: CodeContainer } }),
-            navigationOptions: () => ({
-              tabBarIcon: ({ tintColor }) => (
-                <View style={{ height: TABBAR_HEIGHT, alignItems: 'center', justifyContent: 'center' }}>
-                  <Icon
-                    name="link"
-                    color={tintColor}
-                    size={moderateScale(28)}
-                  />
-                  <TabBarText color={tintColor} >RSVP</TabBarText>
-                </View>
-              )
+            navigationOptions: ({ screenProps }) => ({
+              tabBarIcon: ({ tintColor }) => {
+
+                const { tipsNo, handleNextTips, user_updateNo, app_updateNo } = screenProps;
+
+                console.log('user_updateNo: ', user_updateNo);
+                console.log('app_updateNo: ', app_updateNo);
+
+                const tipsVisible = (user_updateNo === app_updateNo) && (tipsNo === 1);
+                console.log('tipsVisible: ', tipsVisible);
+
+                return (
+                  <View style={{ height: TABBAR_HEIGHT, alignItems: 'center', justifyContent: 'center' }}>
+                    <Tips
+                      tooltipContainerStyle={{ left: -TABBAR_HEIGHT * 6, borderWidth: 1, borderColor: 'red' }}
+                      contentStyle={{ borderWidth: 0, borderColor: 'blue' }}
+                      childrenStyle={{ borderWidth: 0, borderColor: 'yellow' }}
+                      visible={tipsVisible}
+                      position="left"
+                      // offsetLeft={280}
+                      onRequestClose={() => handleNextTips()}
+                      delay={500}
+
+                      text="or tap RSVP to respond to a friend's event."
+                    >
+
+
+                      <Icon
+                        name="link"
+                        color={tintColor}
+                        size={moderateScale(28)}
+                      />
+                      <TabBarText color={tintColor} >RSVP</TabBarText>
+                    </Tips>
+                  </View>
+
+
+                );
+              }
             })
           }
 
@@ -176,9 +207,12 @@ export const AppNavigator = createStackNavigator({
                 activeTintColor,
                 inactiveTintColor,
                 renderIcon,
-                jumpTo
+                jumpTo,
+                screenProps
             } = props;
 
+            // const { tipsNo } = screenProps;
+            console.log('TabBarProps.screenProps:', screenProps);
             return (
               <ViewOverflow style={{
                   ...style,
@@ -234,7 +268,7 @@ export const AppNavigator = createStackNavigator({
 
                             }}
                           >
-                            <TouchableWithoutFeedback
+                            <TouchableOpacity
                               style={{ }}
                               onPress={() => jumpTo(route.key)}
                             >
@@ -244,7 +278,7 @@ export const AppNavigator = createStackNavigator({
                                 tintColor: index === idx ? activeTintColor : inactiveTintColor
                               })}
 
-                            </TouchableWithoutFeedback>
+                            </TouchableOpacity>
 
 
                           </ViewOverflow>
@@ -344,18 +378,62 @@ export const AppNavigator = createStackNavigator({
 export const navMiddleware = createReactNavigationReduxMiddleware(
   'root',
   state => state.nav
-);
+); // not sure if this is still used?
 
 export const addListener = createReduxBoundAddListener('root');
 
+
 class AppWithNavigationState extends Component {
+
+
+  constructor (props) {
+    super(props);
+
+    // 1st step - Create your helper with keys that will represent your tips
+    // this.waterfallTips = new Tips.Waterfall([
+    //   'myTipsA',
+    //   'myTipsB'
+    // ]);
+    //
+    // this.state = {
+    //
+    // };
+    //
+    // // This method will trigger the changement of tips
+    // this.handleNextTips = this.handleNextTips.bind(this);
+
+    this.state = {
+      showCreateButton: false
+    };
+
+  }
+
 
   componentDidMount () {
     BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+
   }
+
+  componentWillReceiveProps (nextProps) {
+    console.log(nextProps);
+    const currentRouteName = NavigationService.getRouteName(nextProps.nav);
+    if ((currentRouteName === 'ScreenFeed')
+      || (currentRouteName === 'ScreenCalendar')
+      || (currentRouteName === 'ScreenSettings')
+      || (currentRouteName === 'ScreenRsvp')
+      ) {
+      this.setState({ showCreateButton: true });
+    } else {
+      this.setState({ showCreateButton: false });
+    }
+
+    console.log('NavigationService.getCurrentRoute', currentRouteName);
+  }
+
   componentWillUnmount () {
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
+
   onBackPress = () => {
     const { dispatch, nav } = this.props;
     console.log('nav routes', nav.routes[0]);
@@ -369,26 +447,82 @@ class AppWithNavigationState extends Component {
     return true;
   };
 
+
+  onCreatePress = () => {
+    // const { dispatch } = this.props;
+    NavigationService.navigate('Create');
+    // dispatch(NavigationActions.navigate('Create'));
+    // dispatch(NavigationActions.back());
+    console.log('clicked:');
+  };
+
+  handleNextTips = () => {
+    store.dispatch(nextTips());
+  }
+
+  // handleNavigationStateChange = (prevState, newState) => {
+  //   console.log('newState:', newState);
+  //   // this.props.setRoute(getCurrentRoute(newState));
+  // };
+
   render () {
-    const { dispatch, nav } = this.props;
+    const { showCreateButton } = this.state;
+    const { dispatch, nav, tipsNo, user_updateNo, app_updateNo } = this.props;
+    console.log('screenPropstips:', this.props.tipsNo); // forces this component to update when change of state, necessary to fire getCurrentRoute
+
 
     return (
-      <View style={{ flex: 1 }}>
+      <SafeAreaView style={{ backgroundColor: colours.main, flex: 1 }}>
         <MyStatusBar backgroundColor={colours.main} barStyle="light-content" />
-        <AppNavigator navigation = {{
-          dispatch,
-          state: nav,
-          addListener
-        }} />
-      </View>
+        <AppNavigator
+          ref={(navigatorRef) => {
+            NavigationService.setTopLevelNavigator(navigatorRef);
+          }}
+          screenProps={{ tipsNo, handleNextTips: this.handleNextTips, user_updateNo, app_updateNo }}
+          navigation = {{
+            dispatch,
+            state: nav,
+            addListener
+          }} />
+        {
+          (showCreateButton === true) &&
+          <View style={{
+            position: 'absolute',
+            width: 60,
+            height: 60,
+            alignItems: 'center',
+            justifyContent: 'center',
+            alignSelf: 'center',
+            bottom: 50,
+            borderRadius: 30,
+            backgroundColor: colours.main }}
+          >
+            <CreateButton
+              tips={tipsNo}
+              onPress={() => this.onCreatePress()}
+              style={{ position: 'absolute', alignItems: 'center', zIndex: 97 }}
+            />
+
+          </View>
+        }
+      </SafeAreaView>
 
     );
   }
 }
 
 const mapStateToProps = state => ({
-  nav: state.nav
+  nav: state.nav,
+  tipsNo: state.tips.tipsNo,
+  user_updateNo: state.user.user_update_no,
+  app_updateNo: state.app_meta.app_update_no
 });
 
+// const mapDispatchToProps = dispatch => ({
+//
+//   handleNextTips: () => {
+//     dispatch(nextTips());
+//   }
+// });
 
 export default connect(mapStateToProps)(AppWithNavigationState);

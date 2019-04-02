@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 import styles, { AddButton } from '../../../styles';
 import colours from '../../../styles/colours';
+import IconN from './../../components/general/icon';
+
 
 const AddInput = ({ data, handler, testDescription, colour }) => {
 
@@ -20,7 +22,7 @@ const AddInput = ({ data, handler, testDescription, colour }) => {
             onPress={ () => handler(data.length) }
             color={colour}
           >
-            <Icon name="plus" size={16} color={colours.offWhite} />
+            <IconN name="add" size={16} color={colours.offWhite} />
           </AddButton>
 
           <View style={{ flex: 1 }}>

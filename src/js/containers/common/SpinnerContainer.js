@@ -3,7 +3,7 @@ import { NavigationActions } from 'react-navigation';
 import SpinnerProvider from '../../components/common/SpinnerProvider';
 
 
-const mapStateToProps = ({ feed, user, network, create, event }) => {
+const mapStateToProps = ({ feed, user, network, connectivity, create, event }) => {
 
   console.log('Spinner mapState state:');
   // console.log('feed:', feed);
@@ -15,7 +15,7 @@ const mapStateToProps = ({ feed, user, network, create, event }) => {
   return {
     user_id: user.user_id,
     user_update: user.user_update,
-    isConnected: network.isConnected,
+    isConnected: connectivity.isConnected,
     isFetchingFeed: feed.isFetchingFeed,
     isReceivingFeed: feed.isReceivingFeed,
     isTouchedFetching: feed.isTouchedFetching,

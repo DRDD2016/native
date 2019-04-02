@@ -28,7 +28,7 @@ const colours = {
   sectionBorder: '#efefef',
   spacerColour: 'lightgray',
   shadowColour: 'rgba(128,128,128,0.8)',
-  messageColor: '#efefef'
+  messageColor: '#DAF7A6'
 };
 
 export default colours;

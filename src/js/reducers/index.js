@@ -3,6 +3,7 @@ import {
   createNavigationReducer
 } from 'react-navigation-redux-helpers';
 import { reducer as form } from 'redux-form';
+import { reducer as connectivity } from 'react-native-offline';
 import calendar from './calendar';
 import event from './event/index';
 import feed from './feed';
@@ -10,6 +11,8 @@ import create from './create';
 import user from './user';
 import confirmUserEmail from './confirm-email';
 import network from './network';
+import tips from './tips';
+import app_meta from './app_meta';
 import { AppNavigator } from '../routes';
 
 const navReducer = createNavigationReducer(AppNavigator);
@@ -23,7 +26,10 @@ const appReducer = combineReducers({
   user,
   confirmUserEmail,
   network,
-  form
+  connectivity,
+  form,
+  tips,
+  app_meta
 });
 
 const rootReducer = (state, action) => {

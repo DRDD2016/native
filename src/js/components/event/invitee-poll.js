@@ -1,11 +1,15 @@
 
 /* eslint-disable no-else-return */
 import React, { Component } from 'react';
-import { Text, Image, View, ScrollView, Modal } from 'react-native';
+import { Text, Image, View, ScrollView, Modal, Dimensions } from 'react-native';
 import update from 'immutability-helper';
 import CategoryDetails from './category-details';
 import styles, { Msg1, Msg4, ConfirmButton, ConfirmButtonText } from '../../../styles';
 import Spinner from '../common/Spinner';
+
+const windowWidth = Dimensions.get('window').width;
+console.log('windowWidth:', windowWidth);
+
 
 export default class InviteePoll extends Component {
 
@@ -159,7 +163,11 @@ export default class InviteePoll extends Component {
             flexDirection: 'row',
             justifyContent: 'space-between',
             paddingLeft: 4,
-            paddingRight: 4 }}
+            paddingRight: 4,
+            paddingVertical: 2,
+            marginLeft: (windowWidth > 600) ? 60 : 0,
+            marginRight: (windowWidth > 600) ? 60 : 0
+           }}
         >
 
           <CategoryDetails
@@ -175,7 +183,10 @@ export default class InviteePoll extends Component {
             flexDirection: 'row',
             justifyContent: 'space-between',
             paddingLeft: 4,
-            paddingRight: 4 }}
+            paddingRight: 4,
+            marginLeft: (windowWidth > 600) ? 60 : 0,
+            marginRight: (windowWidth > 600) ? 60 : 0
+          }}
         >
           <CategoryDetails
             category="where"
@@ -190,7 +201,11 @@ export default class InviteePoll extends Component {
             flexDirection: 'row',
             justifyContent: 'space-between',
             paddingLeft: 4,
-            paddingRight: 4 }}
+            paddingRight: 4,
+            paddingVertical: 2,
+            marginLeft: (windowWidth > 600) ? 60 : 0,
+            marginRight: (windowWidth > 600) ? 60 : 0
+          }}
         >
           <CategoryDetails
             category="when"
@@ -220,7 +235,7 @@ export default class InviteePoll extends Component {
                 );
               }}
             >
-              <ConfirmButtonText style={styles.confirmButtonText}>SEND VOTE</ConfirmButtonText>
+              <ConfirmButtonText>SEND VOTE</ConfirmButtonText>
             </ConfirmButton>
           }
         </View>

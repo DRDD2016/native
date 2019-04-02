@@ -1,8 +1,12 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Image, Dimensions } from 'react-native';
 import { styles, ButText } from '../../../styles';
 import colours from '../../../styles/colours';
+import { moderateScale } from '../../../styles/scaling';
+
+const windowWidth = Dimensions.get('window').width;
+console.log('windowWidth:', windowWidth);
 
 const avatar = require('../../../img/avatar.png');
 
@@ -14,6 +18,8 @@ export default class MessageBubble extends Component {
     return (
       <View
         style={{
+          marginLeft: 2,
+          marginRight: 2,
           flexDirection: 'row',
           paddingVertical: 5,
           marginTop: 5,
@@ -25,21 +31,21 @@ export default class MessageBubble extends Component {
         {
           messageDirection === 'right' &&
 
-          <View style={{ width: '20%', backgroundColor: colours.white, borderRadius: 3, paddingHorizontal: 4 }}>
+          <View style={{ backgroundColor: colours.white, borderRadius: 3, paddingHorizontal: 4 }}>
 
             <Image
               source={{ uri: photo_url }}
               defaultSource={avatar}
-              style={[styles.uiProfilePhotoMessage, { width: '100%',
+              style={[styles.uiProfilePhotoMessage, { width: (windowWidth > 600) ? moderateScale(40) : moderateScale(30),
                 aspectRatio: 1 / 1,
-                // height: 40,
+                // height: (windowWidth > 600) ? moderateScale(40) : moderateScale(30),
                 alignSelf: 'center',
                 borderRadius: 3
               }]}
             />
-            <Text style={{ textAlign: 'center', color: colours.main }}>
+            <ButText style={{ textAlign: 'center', color: colours.main }}>
               {sender}
-            </Text>
+            </ButText>
             <ButText style={{ textAlign: 'center' }} color={colours.gray}>
               {messageDate}
             </ButText>
@@ -47,7 +53,7 @@ export default class MessageBubble extends Component {
         }
         <View
           style={{ // bubble container
-            width: '80%',
+            flex: 1,
             flexDirection: 'row',
             paddingRight: messageDirection === 'left' ? 8 : 0,
             paddingLeft: messageDirection === 'right' ? 8 : 0,
@@ -117,21 +123,21 @@ export default class MessageBubble extends Component {
         {
           messageDirection === 'left' &&
 
-          <View style={{ width: '20%', backgroundColor: colours.white, borderRadius: 3, paddingHorizontal: 4 }}>
+          <View style={{ backgroundColor: colours.white, borderRadius: 3, paddingHorizontal: 4 }}>
 
             <Image
               source={{ uri: photo_url }}
               defaultSource={avatar}
-              style={[styles.uiProfilePhotoMessage, { width: '100%',
+              style={[styles.uiProfilePhotoMessage, { width: (windowWidth > 600) ? moderateScale(40) : moderateScale(30),
                 aspectRatio: 1 / 1,
                 // height: 40,
                 alignSelf: 'center',
                 borderRadius: 3
               }]}
             />
-            <Text style={{ fontSize: 12, paddingTop: 2, textAlign: 'center', color: colours.main }}>
+            <ButText style={{ fontSize: 12, paddingTop: 2, textAlign: 'center', color: colours.main }}>
               {sender}
-            </Text>
+            </ButText>
             <ButText style={{ fontSize: 12, textAlign: 'center' }} color={colours.gray}>
               {messageDate}
             </ButText>

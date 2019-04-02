@@ -18,7 +18,7 @@ import BurgerIcon from './common/burger-icon';
 import OfflineIconContainer from '../containers/common/OfflineIconContainer';
 import { store } from '../init-store';
 import { getFeedFailure } from '../actions/feed';
-import WhatsNew, { app_updateNo } from './onboarding/whatsnew';
+import WhatsNew from './onboarding/whatsnew';
 // import { verticalScale } from '../../styles/scaling';
 
 const { Answers } = Fabric;
@@ -128,6 +128,7 @@ class Feed extends Component {
   componentDidMount () {
 
     console.log('feed DidMount');
+
 
     // 1: Component is mounted off-screen
     InteractionManager.runAfterInteractions(() => {
@@ -342,6 +343,8 @@ class Feed extends Component {
 
     console.log('renderFeed');
 
+    console.log('screenPropsFeed', this.props.screenProps);
+
     if (!this.state.isReady) {
       console.log('renderFeedActivityIndicator');
       return (
@@ -381,69 +384,73 @@ class Feed extends Component {
       filterActive,
       selectedFilter,
       createNewEvent,
+      app_updateNo,
       user_updateNo,
       user_openNo,
       eventCode
       // isConnected
     } = this.props;
 
-    let showWhatsNew = false;
-
-    if ((eventCode === 'none') || (!eventCode)) {
-      if (user_updateNo !== undefined) {
-        if (user_updateNo < app_updateNo) {
-          // if an old updateNo, then show whatsnew
-          showWhatsNew = true;
-        } else {
-          showWhatsNew = false;
-        }
-      } else {
-        showWhatsNew = false;
-      }
-    } else {
-      showWhatsNew = false;
-    }
-
-    let showWelcome = false;
-
-    if ((eventCode === 'none') || (!eventCode)) {
-      if (user_updateNo === undefined) {
-        // if no updateNo, then its a new user, so show welcome (in whatsnew for now)
-        showWelcome = true;
-      } else {
-        showWelcome = false;
-      }
-    } else {
-      showWelcome = false;
-    }
+    // let showWhatsNew = false;
+    //
+    // if ((eventCode === 'none') || (!eventCode)) {
+    //   if (user_updateNo !== undefined) {
+    //     if (user_updateNo < app_updateNo) {
+    //       // if an old updateNo, then show whatsnew
+    //       showWhatsNew = true;
+    //     } else {
+    //       showWhatsNew = false;
+    //     }
+    //   } else {
+    //     showWhatsNew = false;
+    //   }
+    // } else {
+    //   showWhatsNew = false;
+    // }
+    //
+    // let showWelcome = false;
+    //
+    // if ((eventCode === 'none') || (!eventCode)) {
+    //   if (user_updateNo === undefined) {
+    //     // if no updateNo, then its a new user, so show welcome (in whatsnew for now)
+    //     showWelcome = true;
+    //   } else {
+    //     showWelcome = false;
+    //   }
+    // } else {
+    //   showWelcome = false;
+    // }
     // console.log('showWelcome', showWelcome);
 
-    let showFeedback = false;
-
-    if ((eventCode === 'none') || (!eventCode)) {
-      if (user_updateNo !== undefined) {
-        if (user_openNo === 3 || 15) {
-          // if openNo is 3rd or 15th time, show feedback modal
-          showFeedback = true;
-        } else {
-          showFeedback = false;
-        }
-      } else {
-        showFeedback = false;
-      }
-    } else {
-      showFeedback = false;
-    }
-    console.log('showFeedback', showFeedback);
+    // let showFeedback = false;
+    //
+    // if ((eventCode === 'none') || (!eventCode)) {
+    //   if (user_updateNo !== undefined) {
+    //     if (user_openNo === 3 || 15) {
+    //       // if openNo is 3rd or 15th time, show feedback modal
+    //       showFeedback = true;
+    //     } else {
+    //       showFeedback = false;
+    //     }
+    //   } else {
+    //     showFeedback = false;
+    //   }
+    // } else {
+    //   showFeedback = false;
+    // }
+    // console.log('showFeedback', showFeedback);
 
     Answers.logCustom('Feed.js render'); // eslint-disable-line max-len
+    console.log('feed app_updateNo', app_updateNo);
+    console.log('feed user_updateNo', user_updateNo);
+    console.log('feed user_openNo', user_openNo);
+    console.log('feed eventCode', eventCode);
 
     return (
       <View testID="feed" style={{ flex: 1, backgroundColor: colours.white }}>
 
 
-        <WhatsNew visible={showWhatsNew} type="whats_new" user_updateNo={user_updateNo} app_updateNo={app_updateNo} />
-        <WhatsNew visible={showWelcome} type="welcome" user_updateNo={user_updateNo} app_updateNo={app_updateNo} />
+        <WhatsNew type="whats_new" user_updateNo={user_updateNo} app_updateNo={app_updateNo} />
 
 
         <View

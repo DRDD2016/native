@@ -1,6 +1,6 @@
 {
   "name": "Spark",
-  "version": "1.0.134",
+  "version": "1.0.136",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -51,6 +51,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-linear-gradient": "^2.5.3",
     "react-native-modal": "^7.0.2",
+    "react-native-offline": "^4.3.0",
     "react-native-tips": "0.0.12",
     "react-native-vector-icons": "^6.1.0",
     "react-native-view-overflow": "0.0.3",

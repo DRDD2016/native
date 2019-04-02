@@ -5,7 +5,7 @@ import Confirm from '../../components/create/confirm';
 import mapToISOString from '../../lib/map-to-iso-string';
 import { store } from '../../init-store';
 
-const mapStateToProps = ({ nav, create, network, user }) => {
+const mapStateToProps = ({ nav, create, connectivity, user }) => {
   return {
     nav,
     name: create.name,
@@ -16,7 +16,7 @@ const mapStateToProps = ({ nav, create, network, user }) => {
     when: create.when,
     photo_url: user.photo_url,
     isFetching: create.isFetching,
-    isConnected: network.isConnected,
+    isConnected: connectivity.isConnected,
     firstname: user.firstname
   };
 };

@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import Signup from '../../components/auth/signup';
 import { signupUser } from '../../actions/signup';
 
-const mapStateToProps = ({ user, network }) => ({
+const mapStateToProps = ({ user, connectivity }) => ({
   isSigningUp: user.isSigningUp,
-  isConnected: network.isConnected,
+  isConnected: connectivity.isConnected,
   serverError: user.error
 });
 

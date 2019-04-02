@@ -1,5 +1,3 @@
-
-
 #!/usr/bin/env bash
 
 # filename: bugsnag.sh
